@@ -1,0 +1,476 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<html>
+<head><title>120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz FastQC Report</title>
+
+<style type="text/css">
+
+ @media screen {
+  div.summary {
+    width: 18em;
+    position:fixed;
+    top: 3em;
+    margin:1em 0 0 1em;
+  }
+  
+  div.main {
+    display:block;
+    position:absolute;
+    overflow:auto;
+    height:auto;
+    width:auto;
+    top:4.5em;
+    bottom:2.3em;
+    left:18em;
+    right:0;
+    border-left: 1px solid #CCC;
+    padding:0 0 0 1em;
+    background-color: white;
+    z-index:1;
+  }
+  
+  div.header {
+    background-color: #EEE;
+    border:0;
+    margin:0;
+    padding: 0.5em;
+    font-size: 200%;
+    font-weight: bold;
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+    z-index:2;
+  }
+
+  div.footer {
+    background-color: #EEE;
+    border:0;
+    margin:0;
+	padding:0.5em;
+    height: 1.3em;
+	overflow:hidden;
+    font-size: 100%;
+    font-weight: bold;
+    position:fixed;
+    bottom:0;
+    width:100%;
+    z-index:2;
+  }
+  
+  img.indented {
+    margin-left: 3em;
+  }
+ }
+ 
+ @media print {
+	img {
+		max-width:100% !important;
+		page-break-inside: avoid;
+	}
+	h2, h3 {
+		page-break-after: avoid;
+	}
+	div.header {
+      background-color: #FFF;
+    }
+	
+ }
+ 
+ body {    
+  font-family: sans-serif;   
+  color: #000;   
+  background-color: #FFF;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  }
+  
+  div.header {
+  border:0;
+  margin:0;
+  padding: 0.5em;
+  font-size: 200%;
+  font-weight: bold;
+  width:100%;
+  }    
+  
+  #header_title {
+  display:inline-block;
+  float:left;
+  clear:left;
+  }
+  #header_filename {
+  display:inline-block;
+  float:right;
+  clear:right;
+  font-size: 50%;
+  margin-right:2em;
+  text-align: right;
+  }
+
+  div.header h3 {
+  font-size: 50%;
+  margin-bottom: 0;
+  }
+  
+  div.summary ul {
+  padding-left:0;
+  list-style-type:none;
+  }
+  
+  div.summary ul li img {
+  margin-bottom:-0.5em;
+  margin-top:0.5em;
+  }
+	  
+  div.main {
+  background-color: white;
+  }
+      
+  div.module {
+  padding-bottom:1.5em;
+  padding-top:1.5em;
+  }
+	  
+  div.footer {
+  background-color: #EEE;
+  border:0;
+  margin:0;
+  padding: 0.5em;
+  font-size: 100%;
+  font-weight: bold;
+  width:100%;
+  }
+
+
+  a {
+  color: #000080;
+  }
+
+  a:hover {
+  color: #800000;
+  }
+      
+  h2 {
+  color: #800000;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  clear:left;
+  }
+
+  table { 
+  margin-left: 3em;
+  text-align: center;
+  }
+  
+  th { 
+  text-align: center;
+  background-color: #000080;
+  color: #FFF;
+  padding: 0.4em;
+  }      
+  
+  td { 
+  font-family: monospace; 
+  text-align: left;
+  background-color: #EEE;
+  color: #000;
+  padding: 0.4em;
+  }
+
+  img {
+  padding-top: 0;
+  margin-top: 0;
+  border-top: 0;
+  }
+
+  
+  p {
+  padding-top: 0;
+  margin-top: 0;
+  }
+  
+</style>
+
+</head>
+<body>
+<div class="header">
+<div id="header_title"><img src="Icons/fastqc_icon.png" alt="FastQC">FastQC Report</div>
+<div id="header_filename">
+Fri 20 Apr 2012<br />
+120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz
+</div>
+</div>
+<div class="summary">
+<h2>Summary</h2>
+<ul>
+<li><img src="Icons/tick.png" alt="[PASS]"> <a href="#M0">Basic Statistics</a></li>
+<li><img src="Icons/tick.png" alt="[PASS]"> <a href="#M1">Per base sequence quality</a></li>
+<li><img src="Icons/tick.png" alt="[PASS]"> <a href="#M2">Per sequence quality scores</a></li>
+<li><img src="Icons/warning.png" alt="[WARNING]"> <a href="#M3">Per base sequence content</a></li>
+<li><img src="Icons/tick.png" alt="[PASS]"> <a href="#M4">Per base GC content</a></li>
+<li><img src="Icons/error.png" alt="[FAIL]"> <a href="#M5">Per sequence GC content</a></li>
+<li><img src="Icons/tick.png" alt="[PASS]"> <a href="#M6">Per base N content</a></li>
+<li><img src="Icons/tick.png" alt="[PASS]"> <a href="#M7">Sequence Length Distribution</a></li>
+<li><img src="Icons/error.png" alt="[FAIL]"> <a href="#M8">Sequence Duplication Levels</a></li>
+<li><img src="Icons/warning.png" alt="[WARNING]"> <a href="#M9">Overrepresented sequences</a></li>
+<li><img src="Icons/warning.png" alt="[WARNING]"> <a href="#M10">Kmer Content</a></li>
+</ul>
+</div>
+<div class="main">
+<div class="module"><h2 id="M0"><img src="Icons/tick.png" alt="[OK]"> Basic Statistics</h2>
+<table>
+<tr>
+<th>Measure</th>
+<th>Value</th>
+</tr>
+<tr>
+<td>Filename</td>
+<td>120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz</td>
+</tr>
+<tr>
+<td>File type</td>
+<td>Conventional base calls</td>
+</tr>
+<tr>
+<td>Encoding</td>
+<td>Sanger / Illumina 1.9</td>
+</tr>
+<tr>
+<td>Total Sequences</td>
+<td>142236890</td>
+</tr>
+<tr>
+<td>Filtered Sequences</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Sequence length</td>
+<td>101</td>
+</tr>
+<tr>
+<td>%GC</td>
+<td>45</td>
+</tr>
+</table>
+</div>
+<div class="module"><h2 id="M1"><img src="Icons/tick.png" alt="[OK]"> Per base sequence quality</h2>
+<p><img class="indented" src="Images/per_base_quality.png" alt="Per base quality graph"></p>
+</div>
+<div class="module"><h2 id="M2"><img src="Icons/tick.png" alt="[OK]"> Per sequence quality scores</h2>
+<p><img class="indented" src="Images/per_sequence_quality.png" alt="Per Sequence quality graph"></p>
+</div>
+<div class="module"><h2 id="M3"><img src="Icons/warning.png" alt="[WARN]"> Per base sequence content</h2>
+<p><img class="indented" src="Images/per_base_sequence_content.png" alt="Per base sequence content"></p>
+</div>
+<div class="module"><h2 id="M4"><img src="Icons/tick.png" alt="[OK]"> Per base GC content</h2>
+<p><img class="indented" src="Images/per_base_gc_content.png" alt="Per base GC content graph"></p>
+</div>
+<div class="module"><h2 id="M5"><img src="Icons/error.png" alt="[FAIL]"> Per sequence GC content</h2>
+<p><img class="indented" src="Images/per_sequence_gc_content.png" alt="Per sequence GC content graph"></p>
+</div>
+<div class="module"><h2 id="M6"><img src="Icons/tick.png" alt="[OK]"> Per base N content</h2>
+<p><img class="indented" src="Images/per_base_n_content.png" alt="N content graph"></p>
+</div>
+<div class="module"><h2 id="M7"><img src="Icons/tick.png" alt="[OK]"> Sequence Length Distribution</h2>
+<p><img class="indented" src="Images/sequence_length_distribution.png" alt="Sequence length distribution"></p>
+</div>
+<div class="module"><h2 id="M8"><img src="Icons/error.png" alt="[FAIL]"> Sequence Duplication Levels</h2>
+<p><img class="indented" src="Images/duplication_levels.png" alt="Duplication level graph"></p>
+</div>
+<div class="module"><h2 id="M9"><img src="Icons/warning.png" alt="[WARN]"> Overrepresented sequences</h2>
+<table>
+<tr>
+<th>Sequence</th>
+<th>Count</th>
+<th>Percentage</th>
+<th>Possible Source</th>
+</tr>
+<tr>
+<td>AGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTT</td>
+<td>785288</td>
+<td>0.5520986855097858</td>
+<td>No Hit</td>
+</tr>
+<tr>
+<td>TAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGT</td>
+<td>766376</td>
+<td>0.5388025567769374</td>
+<td>No Hit</td>
+</tr>
+<tr>
+<td>GTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAG</td>
+<td>680946</td>
+<td>0.47874078236665607</td>
+<td>No Hit</td>
+</tr>
+<tr>
+<td>GGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTA</td>
+<td>657419</td>
+<td>0.46220006638221633</td>
+<td>No Hit</td>
+</tr>
+<tr>
+<td>AACCTAACCTAACCTAACCTAACCTAACCTAACCTAACCTAACCTAACCT</td>
+<td>586697</td>
+<td>0.4124787880274941</td>
+<td>No Hit</td>
+</tr>
+<tr>
+<td>CTAACCTAACCTAACCTAACCTAACCTAACCTAACCTAACCTAACCTAAC</td>
+<td>582419</td>
+<td>0.4094711294657807</td>
+<td>No Hit</td>
+</tr>
+<tr>
+<td>TTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGGTTAGG</td>
+<td>558079</td>
+<td>0.39235883180516673</td>
+<td>No Hit</td>
+</tr>
+<tr>
+<td>ACCTAACCTAACCTAACCTAACCTAACCTAACCTAACCTAACCTAACCTA</td>
+<td>467995</td>
+<td>0.32902505109609753</td>
+<td>No Hit</td>
+</tr>
+<tr>
+<td>CCTAACCTAACCTAACCTAACCTAACCTAACCTAACCTAACCTAACCTAA</td>
+<td>456997</td>
+<td>0.32129287978667137</td>
+<td>No Hit</td>
+</tr>
+<tr>
+<td>TAACCTAACCTAACCTAACCTAACCTAACCTAACCTAACCTAACCTAACC</td>
+<td>453900</td>
+<td>0.31911552621826866</td>
+<td>No Hit</td>
+</tr>
+</table>
+</div>
+<div class="module"><h2 id="M10"><img src="Icons/warning.png" alt="[WARN]"> Kmer Content</h2>
+<p><img class="indented" src="Images/kmer_profiles.png" alt="Kmer graph"></p>
+<table>
+<tr>
+<th>Sequence</th>
+<th>Count</th>
+<th>Obs/Exp Overall</th>
+<th>Obs/Exp Max</th>
+<th>Max Obs/Exp Position</th>
+</tr>
+<tr>
+<td>GTTAG</td>
+<td>82912065</td>
+<td>5.548716</td>
+<td>6.52855</td>
+<td>3</td>
+</tr>
+<tr>
+<td>TAGGT</td>
+<td>82566225</td>
+<td>5.525572</td>
+<td>6.5198855</td>
+<td>5</td>
+</tr>
+<tr>
+<td>AGGTT</td>
+<td>80024825</td>
+<td>5.355494</td>
+<td>6.375812</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TTAGG</td>
+<td>79880265</td>
+<td>5.3458195</td>
+<td>6.2664685</td>
+<td>4</td>
+</tr>
+<tr>
+<td>GGTTA</td>
+<td>78643295</td>
+<td>5.263038</td>
+<td>6.2148967</td>
+<td>7</td>
+</tr>
+<tr>
+<td>ACCTA</td>
+<td>62841815</td>
+<td>4.4771767</td>
+<td>5.1927676</td>
+<td>2</td>
+</tr>
+<tr>
+<td>CTAAC</td>
+<td>62526945</td>
+<td>4.4547434</td>
+<td>5.073057</td>
+<td>51</td>
+</tr>
+<tr>
+<td>CATCA</td>
+<td>62027900</td>
+<td>4.419189</td>
+<td>5.2526493</td>
+<td>90</td>
+</tr>
+<tr>
+<td>TCATC</td>
+<td>61538720</td>
+<td>4.3560987</td>
+<td>5.270902</td>
+<td>68</td>
+</tr>
+<tr>
+<td>AACCT</td>
+<td>60247660</td>
+<td>4.2923555</td>
+<td>5.1228437</td>
+<td>1</td>
+</tr>
+<tr>
+<td>CCTAA</td>
+<td>59226575</td>
+<td>4.2196083</td>
+<td>4.8636813</td>
+<td>28</td>
+</tr>
+<tr>
+<td>TAACC</td>
+<td>58917655</td>
+<td>4.1975994</td>
+<td>4.854545</td>
+<td>5</td>
+</tr>
+<tr>
+<td>TGATG</td>
+<td>62563000</td>
+<td>4.1868978</td>
+<td>4.5610046</td>
+<td>95</td>
+</tr>
+<tr>
+<td>GATGA</td>
+<td>60879070</td>
+<td>4.1006155</td>
+<td>4.556501</td>
+<td>84</td>
+</tr>
+<tr>
+<td>ATCAT</td>
+<td>57431800</td>
+<td>3.3257403</td>
+<td>3.9116035</td>
+<td>79</td>
+</tr>
+<tr>
+<td>ATGAT</td>
+<td>55863080</td>
+<td>3.1453834</td>
+<td>3.48422</td>
+<td>94</td>
+</tr>
+</table>
+</div>
+</div><div class="footer">Produced by <a href="http://www.bioinformatics.bbsrc.ac.uk/projects/fastqc/">FastQC</a> (version 0.10.0)</div>
+</body></html>
