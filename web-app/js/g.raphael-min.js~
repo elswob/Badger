@@ -1,0 +1,752 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# githubog: http://ogp.me/ns/fb/githubog#">
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AfterParty2/web-app/js/g.raphael-min.js at master · mojones/AfterParty2 · GitHub</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub" />
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    
+    
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="gOX9pFd2kSQMQ4oZ/kFqe8nUHDbIYpQlOA0lZ2GeeVs=" name="csrf-token" />
+
+    <link href="https://a248.e.akamai.net/assets.github.com/stylesheets/bundles/github-28f4e6c4558b18b8da0c46ded21ba2ca0aaea0d0.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="https://a248.e.akamai.net/assets.github.com/stylesheets/bundles/github2-91edb26eeecbdea76badb0303870401293b53de1.css" media="screen" rel="stylesheet" type="text/css" />
+    
+
+    <script src="https://a248.e.akamai.net/assets.github.com/javascripts/bundles/jquery-cd3aa6c909bc9018f484738538d9d29876972a67.js" type="text/javascript"></script>
+    <script src="https://a248.e.akamai.net/assets.github.com/javascripts/bundles/github-0a64955c2945e25654a16c57f3566463769a69b8.js" type="text/javascript"></script>
+    
+
+      <link rel='permalink' href='/mojones/AfterParty2/blob/568988191a8c7f5d99a1e4cf9de1679c7234f8e4/web-app/js/g.raphael-min.js'>
+    <meta property="og:title" content="AfterParty2"/>
+    <meta property="og:type" content="githubog:gitrepository"/>
+    <meta property="og:url" content="https://github.com/mojones/AfterParty2"/>
+    <meta property="og:image" content="https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-140.png?1329275881"/>
+    <meta property="og:site_name" content="GitHub"/>
+    <meta property="og:description" content="AfterParty2 hosted on GitHub"/>
+
+    <meta name="description" content="AfterParty2 hosted on GitHub" />
+  <link href="https://github.com/mojones/AfterParty2/commits/master.atom" rel="alternate" title="Recent Commits to AfterParty2:master" type="application/atom+xml" />
+
+  </head>
+
+
+  <body class="logged_out page-blob  vis-public env-production " data-blob-contribs-enabled="yes">
+    
+    
+    
+
+      <div id="header" class="true clearfix">
+        <div class="container clearfix">
+          <a class="site-logo" href="https://github.com">
+            <!--[if IE]>
+            <img alt="GitHub" class="github-logo" src="https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7.png?1323882728" />
+            <img alt="GitHub" class="github-logo-hover" src="https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7-hover.png?1324325369" />
+            <![endif]-->
+            <img alt="GitHub" class="github-logo-4x" height="30" src="https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x.png?1323882728" />
+            <img alt="GitHub" class="github-logo-4x-hover" height="30" src="https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x-hover.png?1324325369" />
+          </a>
+
+                  <!--
+      make sure to use fully qualified URLs here since this nav
+      is used on error pages on other domains
+    -->
+    <ul class="top-nav logged_out">
+        <li class="pricing"><a href="https://github.com/plans">Signup and Pricing</a></li>
+        <li class="explore"><a href="https://github.com/explore">Explore GitHub</a></li>
+      <li class="features"><a href="https://github.com/features">Features</a></li>
+        <li class="blog"><a href="https://github.com/blog">Blog</a></li>
+      <li class="login"><a href="https://github.com/login?return_to=%2Fmojones%2FAfterParty2%2Fblob%2Fmaster%2Fweb-app%2Fjs%2Fg.raphael-min.js">Login</a></li>
+    </ul>
+
+
+
+          
+        </div>
+      </div>
+
+      
+
+            <div class="site" itemscope itemtype="http://schema.org/WebPage">
+      <div class="container">
+        <div class="pagehead repohead instapaper_ignore readability-menu">
+        <div class="title-actions-bar">
+          <h1 itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+            <span class="mini-icon public-repo"></span>
+<a href="/mojones" itemprop="url">            <span itemprop="title">mojones</span>
+            </a> /
+            <strong><a href="/mojones/AfterParty2" class="js-current-repository">AfterParty2</a></strong>
+          </h1>
+          
+
+
+
+              <ul class="pagehead-actions">
+
+
+          <li><a href="/login?return_to=%2Fmojones%2FAfterParty2" class="minibutton btn-watch watch-button entice tooltipped leftwards" rel="nofollow" title="You must be logged in to use this feature"><span><span class="icon"></span>Watch</span></a></li>
+          <li><a href="/login?return_to=%2Fmojones%2FAfterParty2" class="minibutton btn-fork fork-button entice tooltipped leftwards" rel="nofollow" title="You must be logged in to use this feature"><span><span class="icon"></span>Fork</span></a></li>
+
+
+      <li class="repostats">
+        <ul class="repo-stats">
+          <li class="watchers ">
+            <a href="/mojones/AfterParty2/watchers" title="Watchers" class="tooltipped downwards">
+              1
+            </a>
+          </li>
+          <li class="forks">
+            <a href="/mojones/AfterParty2/network" title="Forks" class="tooltipped downwards">
+              1
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+        </div>
+
+          
+
+  <ul class="tabs">
+    <li><a href="/mojones/AfterParty2" class="selected" highlight="repo_sourcerepo_downloadsrepo_commitsrepo_tagsrepo_branches">Code</a></li>
+    <li><a href="/mojones/AfterParty2/network" highlight="repo_networkrepo_fork_queue">Network</a>
+    <li><a href="/mojones/AfterParty2/pulls" highlight="repo_pulls">Pull Requests <span class='counter'>0</span></a></li>
+
+      <li><a href="/mojones/AfterParty2/issues" highlight="repo_issues">Issues <span class='counter'>0</span></a></li>
+
+
+    <li><a href="/mojones/AfterParty2/graphs" highlight="repo_graphsrepo_contributors">Stats &amp; Graphs</a></li>
+
+  </ul>
+
+  
+<div class="frame frame-center tree-finder" style="display:none"
+      data-tree-list-url="/mojones/AfterParty2/tree-list/568988191a8c7f5d99a1e4cf9de1679c7234f8e4"
+      data-blob-url-prefix="/mojones/AfterParty2/blob/568988191a8c7f5d99a1e4cf9de1679c7234f8e4"
+    >
+
+  <div class="breadcrumb">
+    <span class="bold"><a href="/mojones/AfterParty2">AfterParty2</a></span> /
+    <input class="tree-finder-input js-navigation-enable" type="text" name="query" autocomplete="off" spellcheck="false">
+  </div>
+
+    <div class="octotip">
+      <p>
+        <a href="/mojones/AfterParty2/dismiss-tree-finder-help" class="dismiss js-dismiss-tree-list-help" title="Hide this notice forever" rel="nofollow">Dismiss</a>
+        <span class="bold">Octotip:</span> You've activated the <em>file finder</em>
+        by pressing <span class="kbd">t</span> Start typing to filter the
+        file list. Use <span class="kbd badmono">↑</span> and
+        <span class="kbd badmono">↓</span> to navigate,
+        <span class="kbd">enter</span> to view files.
+      </p>
+    </div>
+
+  <table class="tree-browser" cellpadding="0" cellspacing="0">
+    <tr class="js-header"><th>&nbsp;</th><th>name</th></tr>
+    <tr class="js-no-results no-results" style="display: none">
+      <th colspan="2">No matching files</th>
+    </tr>
+    <tbody class="js-results-list js-navigation-container">
+    </tbody>
+  </table>
+</div>
+
+<div id="jump-to-line" style="display:none">
+  <h2>Jump to Line</h2>
+  <form accept-charset="UTF-8">
+    <input name="utf8" type="hidden" value="&#x2713;" />
+    <input class="textfield" type="text">
+    <div class="full-button">
+      <button type="submit" class="classy">
+        <span>Go</span>
+      </button>
+    </div>
+  </form>
+</div>
+
+
+<div class="subnav-bar">
+
+  <ul class="actions subnav">
+    <li><a href="/mojones/AfterParty2/tags" class="blank" highlight="repo_tags">Tags <span class="counter">0</span></a></li>
+    <li><a href="/mojones/AfterParty2/downloads" class="blank downloads-blank" highlight="repo_downloads">Downloads <span class="counter">0</span></a></li>
+    
+  </ul>
+
+  <ul class="scope">
+    <li class="switcher">
+
+      <div class="context-menu-container js-menu-container">
+        <a href="#"
+           class="minibutton bigger switcher js-menu-target js-commitish-button btn-branch repo-tree"
+           data-master-branch="master"
+           data-ref="master">
+          <span><span class="icon"></span><i>branch:</i> master</span>
+        </a>
+
+        <div class="context-pane commitish-context js-menu-content">
+          <a href="javascript:;" class="close js-menu-close"></a>
+          <div class="context-title">Switch Branches/Tags</div>
+          <div class="context-body pane-selector commitish-selector js-filterable-commitishes">
+            <div class="filterbar">
+              <div class="placeholder-field js-placeholder-field">
+                <label class="placeholder" for="context-commitish-filter-field" data-placeholder-mode="sticky">Filter branches/tags</label>
+                <input type="text" id="context-commitish-filter-field" class="commitish-filter" />
+              </div>
+
+              <ul class="tabs">
+                <li><a href="#" data-filter="branches" class="selected">Branches</a></li>
+                <li><a href="#" data-filter="tags">Tags</a></li>
+              </ul>
+            </div>
+
+              <div class="commitish-item branch-commitish selector-item">
+                <h4>
+                    <a href="/mojones/AfterParty2/blob/master/web-app/js/g.raphael-min.js" data-name="master" rel="nofollow">master</a>
+                </h4>
+              </div>
+
+
+            <div class="no-results" style="display:none">Nothing to show</div>
+          </div>
+        </div><!-- /.commitish-context-context -->
+      </div>
+
+    </li>
+  </ul>
+
+  <ul class="subnav with-scope">
+
+    <li><a href="/mojones/AfterParty2" class="selected" highlight="repo_source">Files</a></li>
+    <li><a href="/mojones/AfterParty2/commits/master" highlight="repo_commits">Commits</a></li>
+    <li><a href="/mojones/AfterParty2/branches" class="" highlight="repo_branches" rel="nofollow">Branches <span class="counter">1</span></a></li>
+  </ul>
+
+</div>
+
+  
+  
+  
+
+
+          
+
+        </div><!-- /.repohead -->
+
+        
+
+
+
+
+
+<!-- block_view_fragment_key: views7/v8/blob:v19:89aa375713b2677de3681ced2f4801b5 -->
+  <div id="slider">
+
+    <div class="breadcrumb" data-path="web-app/js/g.raphael-min.js/">
+      <b itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/mojones/AfterParty2/tree/568988191a8c7f5d99a1e4cf9de1679c7234f8e4" class="js-rewrite-sha" itemprop="url"><span itemprop="title">AfterParty2</span></a></b> / <span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/mojones/AfterParty2/tree/568988191a8c7f5d99a1e4cf9de1679c7234f8e4/web-app" class="js-rewrite-sha" itemscope="url"><span itemprop="title">web-app</span></a></span> / <span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/mojones/AfterParty2/tree/568988191a8c7f5d99a1e4cf9de1679c7234f8e4/web-app/js" class="js-rewrite-sha" itemscope="url"><span itemprop="title">js</span></a></span> / <strong class="final-path">g.raphael-min.js</strong> <span class="js-clippy mini-icon clippy " data-clipboard-text="web-app/js/g.raphael-min.js" data-copied-hint="copied!" data-copy-hint="copy to clipboard"></span>
+    </div>
+
+
+      <div class="commit file-history-tease" data-path="web-app/js/g.raphael-min.js/">
+        <img class="main-avatar" height="24" src="https://secure.gravatar.com/avatar/7d66c1a8ec1f4fc2771fb7ae0b9b864e?s=140&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png" width="24" />
+        <span class="author">martin</span>
+        <time class="js-relative-date" datetime="2011-10-05T09:09:28-07:00" title="2011-10-05 09:09:28">October 05, 2011</time>
+        <div class="commit-title">
+            <a href="/mojones/AfterParty2/commit/acbaadbfcd490e0d270d5f533d21b631a6fc1126" class="message">First commit</a>
+        </div>
+
+        <div class="participation">
+          <p class="quickstat"><a href="#blob_contributors_box" rel="facebox"><strong>0</strong> contributors</a></p>
+          
+        </div>
+        <div id="blob_contributors_box" style="display:none">
+          <h2>Users on GitHub who have contributed to this file</h2>
+          <ul class="facebox-user-list">
+          </ul>
+        </div>
+      </div>
+
+    <div class="frames">
+      <div class="frame frame-center" data-path="web-app/js/g.raphael-min.js/" data-permalink-url="/mojones/AfterParty2/blob/568988191a8c7f5d99a1e4cf9de1679c7234f8e4/web-app/js/g.raphael-min.js" data-title="AfterParty2/web-app/js/g.raphael-min.js at master · mojones/AfterParty2 · GitHub" data-type="blob">
+
+        <div id="files" class="bubble">
+          <div class="file">
+            <div class="meta">
+              <div class="info">
+                <span class="icon"><b class="mini-icon text-file"></b></span>
+                <span class="mode" title="File Mode">100644</span>
+                  <span>7 lines (7 sloc)</span>
+                <span>11.723 kb</span>
+              </div>
+              <ul class="button-group actions">
+                  <li>
+                    <a class="grouped-button file-edit-link minibutton bigger lighter js-rewrite-sha" href="/mojones/AfterParty2/edit/568988191a8c7f5d99a1e4cf9de1679c7234f8e4/web-app/js/g.raphael-min.js" data-method="post" rel="nofollow"><span>Edit this file</span></a>
+                  </li>
+
+                <li>
+                  <a href="/mojones/AfterParty2/raw/master/web-app/js/g.raphael-min.js" class="minibutton btn-raw grouped-button bigger lighter" id="raw-url"><span><span class="icon"></span>Raw</span></a>
+                </li>
+                  <li>
+                    <a href="/mojones/AfterParty2/blame/master/web-app/js/g.raphael-min.js" class="minibutton btn-blame grouped-button bigger lighter"><span><span class="icon"></span>Blame</span></a>
+                  </li>
+                <li>
+                  <a href="/mojones/AfterParty2/commits/master/web-app/js/g.raphael-min.js" class="minibutton btn-history grouped-button bigger lighter" rel="nofollow"><span><span class="icon"></span>History</span></a>
+                </li>
+              </ul>
+            </div>
+              <div class="data type-javascript">
+      <table cellpadding="0" cellspacing="0" class="lines">
+        <tr>
+          <td>
+            <pre class="line_numbers"><span id="L1" rel="#L1">1</span>
+<span id="L2" rel="#L2">2</span>
+<span id="L3" rel="#L3">3</span>
+<span id="L4" rel="#L4">4</span>
+<span id="L5" rel="#L5">5</span>
+<span id="L6" rel="#L6">6</span>
+<span id="L7" rel="#L7">7</span>
+</pre>
+          </td>
+          <td width="100%">
+                <div class="highlight"><pre><div class='line' id='LC1'>/*</div><div class='line' id='LC2'>&nbsp;* g.Raphael 0.4.1 - Charting library, based on Raphaël</div><div class='line' id='LC3'>&nbsp;*</div><div class='line' id='LC4'>&nbsp;* Copyright (c) 2009 Dmitry Baranovskiy (http://g.raphaeljs.com)</div><div class='line' id='LC5'>&nbsp;* Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.</div><div class='line' id='LC6'>&nbsp;*/</div><div class='line' id='LC7'>(function(){var a=Math.max,c=Math.min;Raphael.fn.g=Raphael.fn.g||{};Raphael.fn.g.markers={disc:&quot;disc&quot;,o:&quot;disc&quot;,flower:&quot;flower&quot;,f:&quot;flower&quot;,diamond:&quot;diamond&quot;,d:&quot;diamond&quot;,square:&quot;square&quot;,s:&quot;square&quot;,triangle:&quot;triangle&quot;,t:&quot;triangle&quot;,star:&quot;star&quot;,&quot;*&quot;:&quot;star&quot;,cross:&quot;cross&quot;,x:&quot;cross&quot;,plus:&quot;plus&quot;,&quot;+&quot;:&quot;plus&quot;,arrow:&quot;arrow&quot;,&quot;-&gt;&quot;:&quot;arrow&quot;};Raphael.fn.g.shim={stroke:&quot;none&quot;,fill:&quot;#000&quot;,&quot;fill-opacity&quot;:0};Raphael.fn.g.txtattr={font:&quot;12px Arial, sans-serif&quot;};Raphael.fn.g.colors=[];var e=[0.6,0.2,0.05,0.1333,0.75,0];for(var b=0;b&lt;10;b++){if(b&lt;e.length){Raphael.fn.g.colors.push(&quot;hsb(&quot;+e[b]+&quot;, .75, .75)&quot;);}else{Raphael.fn.g.colors.push(&quot;hsb(&quot;+e[b-e.length]+&quot;, 1, .5)&quot;);}}Raphael.fn.g.text=function(f,h,g){return this.text(f,h,g).attr(this.g.txtattr);};Raphael.fn.g.labelise=function(f,h,g){if(f){return(f+&quot;&quot;).replace(/(##+(?:\.#+)?)|(%%+(?:\.%+)?)/g,function(i,k,j){if(k){return(+h).toFixed(k.replace(/^#+\.?/g,&quot;&quot;).length);}if(j){return(h*100/g).toFixed(j.replace(/^%+\.?/g,&quot;&quot;).length)+&quot;%&quot;;}});}else{return(+h).toFixed(0);}};Raphael.fn.g.finger=function(l,k,g,m,h,i,j){if((h&amp;&amp;!m)||(!h&amp;&amp;!g)){return j?&quot;&quot;:this.path();}i={square:&quot;square&quot;,sharp:&quot;sharp&quot;,soft:&quot;soft&quot;}[i]||&quot;round&quot;;var o;m=Math.round(m);g=Math.round(g);l=Math.round(l);k=Math.round(k);switch(i){case&quot;round&quot;:if(!h){var f=~~(m/2);if(g&lt;f){f=g;o=[&quot;M&quot;,l+0.5,k+0.5-~~(m/2),&quot;l&quot;,0,0,&quot;a&quot;,f,~~(m/2),0,0,1,0,m,&quot;l&quot;,0,0,&quot;z&quot;];}else{o=[&quot;M&quot;,l+0.5,k+0.5-f,&quot;l&quot;,g-f,0,&quot;a&quot;,f,f,0,1,1,0,m,&quot;l&quot;,f-g,0,&quot;z&quot;];}}else{f=~~(g/2);if(m&lt;f){f=m;o=[&quot;M&quot;,l-~~(g/2),k,&quot;l&quot;,0,0,&quot;a&quot;,~~(g/2),f,0,0,1,g,0,&quot;l&quot;,0,0,&quot;z&quot;];}else{o=[&quot;M&quot;,l-f,k,&quot;l&quot;,0,f-m,&quot;a&quot;,f,f,0,1,1,g,0,&quot;l&quot;,0,m-f,&quot;z&quot;];}}break;case&quot;sharp&quot;:if(!h){var n=~~(m/2);o=[&quot;M&quot;,l,k+n,&quot;l&quot;,0,-m,a(g-n,0),0,c(n,g),n,-c(n,g),n+(n*2&lt;m),&quot;z&quot;];}else{n=~~(g/2);o=[&quot;M&quot;,l+n,k,&quot;l&quot;,-g,0,0,-a(m-n,0),n,-c(n,m),n,c(n,m),n,&quot;z&quot;];}break;case&quot;square&quot;:if(!h){o=[&quot;M&quot;,l,k+~~(m/2),&quot;l&quot;,0,-m,g,0,0,m,&quot;z&quot;];}else{o=[&quot;M&quot;,l+~~(g/2),k,&quot;l&quot;,1-g,0,0,-m,g-1,0,&quot;z&quot;];}break;case&quot;soft&quot;:if(!h){f=c(g,Math.round(m/5));o=[&quot;M&quot;,l+0.5,k+0.5-~~(m/2),&quot;l&quot;,g-f,0,&quot;a&quot;,f,f,0,0,1,f,f,&quot;l&quot;,0,m-f*2,&quot;a&quot;,f,f,0,0,1,-f,f,&quot;l&quot;,f-g,0,&quot;z&quot;];}else{f=c(Math.round(g/5),m);o=[&quot;M&quot;,l-~~(g/2),k,&quot;l&quot;,0,f-m,&quot;a&quot;,f,f,0,0,1,f,-f,&quot;l&quot;,g-2*f,0,&quot;a&quot;,f,f,0,0,1,f,f,&quot;l&quot;,0,m-f,&quot;z&quot;];}}if(j){return o.join(&quot;,&quot;);}else{return this.path(o);}};Raphael.fn.g.disc=function(f,h,g){return this.circle(f,h,g);};Raphael.fn.g.line=function(f,h,g){return this.rect(f-g,h-g/5,2*g,2*g/5);};Raphael.fn.g.square=function(f,h,g){g=g*0.7;return this.rect(f-g,h-g,2*g,2*g);};Raphael.fn.g.triangle=function(f,h,g){g*=1.75;return this.path(&quot;M&quot;.concat(f,&quot;,&quot;,h,&quot;m0-&quot;,g*0.58,&quot;l&quot;,g*0.5,&quot;,&quot;,g*0.87,&quot;-&quot;,g,&quot;,0z&quot;));};Raphael.fn.g.diamond=function(f,h,g){return this.path([&quot;M&quot;,f,h-g,&quot;l&quot;,g,g,-g,g,-g,-g,g,-g,&quot;z&quot;]);};Raphael.fn.g.flower=function(j,h,f,g){f=f*1.25;var o=f,m=o*0.5;g=+g&lt;3||!g?5:g;var p=[&quot;M&quot;,j,h+m,&quot;Q&quot;],l;for(var k=1;k&lt;g*2+1;k++){l=k%2?o:m;p=p.concat([+(j+l*Math.sin(k*Math.PI/g)).toFixed(3),+(h+l*Math.cos(k*Math.PI/g)).toFixed(3)]);}p.push(&quot;z&quot;);return this.path(p.join(&quot;,&quot;));};Raphael.fn.g.star=function(f,n,m,h,g){h=h||m*0.382;g=g||5;var l=[&quot;M&quot;,f,n+h,&quot;L&quot;],k;for(var j=1;j&lt;g*2;j++){k=j%2?m:h;l=l.concat([(f+k*Math.sin(j*Math.PI/g)),(n+k*Math.cos(j*Math.PI/g))]);}l.push(&quot;z&quot;);return this.path(l.join(&quot;,&quot;));};Raphael.fn.g.cross=function(f,h,g){g=g/2.5;return this.path(&quot;M&quot;.concat(f-g,&quot;,&quot;,h,&quot;l&quot;,[-g,-g,g,-g,g,g,g,-g,g,g,-g,g,g,g,-g,g,-g,-g,-g,g,-g,-g,&quot;z&quot;]));};Raphael.fn.g.plus=function(f,h,g){g=g/2;return this.path(&quot;M&quot;.concat(f-g/2,&quot;,&quot;,h-g/2,&quot;l&quot;,[0,-g,g,0,0,g,g,0,0,g,-g,0,0,g,-g,0,0,-g,-g,0,0,-g,&quot;z&quot;]));};Raphael.fn.g.arrow=function(f,h,g){return this.path(&quot;M&quot;.concat(f-g*0.7,&quot;,&quot;,h-g*0.4,&quot;l&quot;,[g*0.6,0,0,-g*0.4,g,g*0.8,-g,g*0.8,0,-g*0.4,-g*0.6,0],&quot;z&quot;));};Raphael.fn.g.tag=function(f,m,l,k,i){k=k||0;i=i==null?5:i;l=l==null?&quot;$9.99&quot;:l;var h=0.5522*i,g=this.set(),j=3;g.push(this.path().attr({fill:&quot;#000&quot;,stroke:&quot;#000&quot;}));g.push(this.text(f,m,l).attr(this.g.txtattr).attr({fill:&quot;#fff&quot;,&quot;font-family&quot;:&quot;Helvetica, Arial&quot;}));g.update=function(){this.rotate(0,f,m);var o=this[1].getBBox();if(o.height&gt;=i*2){this[0].attr({path:[&quot;M&quot;,f,m+i,&quot;a&quot;,i,i,0,1,1,0,-i*2,i,i,0,1,1,0,i*2,&quot;m&quot;,0,-i*2-j,&quot;a&quot;,i+j,i+j,0,1,0,0,(i+j)*2,&quot;L&quot;,f+i+j,m+o.height/2+j,&quot;l&quot;,o.width+2*j,0,0,-o.height-2*j,-o.width-2*j,0,&quot;L&quot;,f,m-i-j].join(&quot;,&quot;)});}else{var n=Math.sqrt(Math.pow(i+j,2)-Math.pow(o.height/2+j,2));this[0].attr({path:[&quot;M&quot;,f,m+i,&quot;c&quot;,-h,0,-i,h-i,-i,-i,0,-h,i-h,-i,i,-i,h,0,i,i-h,i,i,0,h,h-i,i,-i,i,&quot;M&quot;,f+n,m-o.height/2-j,&quot;a&quot;,i+j,i+j,0,1,0,0,o.height+2*j,&quot;l&quot;,i+j-n+o.width+2*j,0,0,-o.height-2*j,&quot;L&quot;,f+n,m-o.height/2-j].join(&quot;,&quot;)});}this[1].attr({x:f+i+j+o.width/2,y:m});k=(360-k)%360;this.rotate(k,f,m);k&gt;90&amp;&amp;k&lt;270&amp;&amp;this[1].attr({x:f-i-j-o.width/2,y:m,rotation:[180+k,f,m]});return this;};g.update();return g;};Raphael.fn.g.popupit=function(l,k,m,g,t){g=g==null?2:g;t=t||5;l=Math.round(l);k=Math.round(k);var j=m.getBBox(),n=Math.round(j.width/2),i=Math.round(j.height/2),s=[0,n+t*2,0,-n-t*2],o=[-i*2-t*3,-i-t,0,-i-t],f=[&quot;M&quot;,l-s[g],k-o[g],&quot;l&quot;,-t,(g==2)*-t,-a(n-t,0),0,&quot;a&quot;,t,t,0,0,1,-t,-t,&quot;l&quot;,0,-a(i-t,0),(g==3)*-t,-t,(g==3)*t,-t,0,-a(i-t,0),&quot;a&quot;,t,t,0,0,1,t,-t,&quot;l&quot;,a(n-t,0),0,t,!g*-t,t,!g*t,a(n-t,0),0,&quot;a&quot;,t,t,0,0,1,t,t,&quot;l&quot;,0,a(i-t,0),(g==1)*t,t,(g==1)*-t,t,0,a(i-t,0),&quot;a&quot;,t,t,0,0,1,-t,t,&quot;l&quot;,-a(n-t,0),0,&quot;z&quot;].join(&quot;,&quot;),q=[{x:l,y:k+t*2+i},{x:l-t*2-n,y:k},{x:l,y:k-t*2-i},{x:l+t*2+n,y:k}][g];m.translate(q.x-n-j.x,q.y-i-j.y);return this.path(f).attr({fill:&quot;#000&quot;,stroke:&quot;none&quot;}).insertBefore(m.node?m:m[0]);};Raphael.fn.g.popup=function(f,l,k,g,i){g=g==null?2:g&gt;3?3:g;i=i||5;k=k||&quot;$9.99&quot;;var h=this.set(),j=3;h.push(this.path().attr({fill:&quot;#000&quot;,stroke:&quot;#000&quot;}));h.push(this.text(f,l,k).attr(this.g.txtattr).attr({fill:&quot;#fff&quot;,&quot;font-family&quot;:&quot;Helvetica, Arial&quot;}));h.update=function(o,n,q){o=o||f;n=n||l;var t=this[1].getBBox(),u=t.width/2,s=t.height/2,y=[0,u+i*2,0,-u-i*2],v=[-s*2-i*3,-s-i,0,-s-i],m=[&quot;M&quot;,o-y[g],n-v[g],&quot;l&quot;,-i,(g==2)*-i,-a(u-i,0),0,&quot;a&quot;,i,i,0,0,1,-i,-i,&quot;l&quot;,0,-a(s-i,0),(g==3)*-i,-i,(g==3)*i,-i,0,-a(s-i,0),&quot;a&quot;,i,i,0,0,1,i,-i,&quot;l&quot;,a(u-i,0),0,i,!g*-i,i,!g*i,a(u-i,0),0,&quot;a&quot;,i,i,0,0,1,i,i,&quot;l&quot;,0,a(s-i,0),(g==1)*i,i,(g==1)*-i,i,0,a(s-i,0),&quot;a&quot;,i,i,0,0,1,-i,i,&quot;l&quot;,-a(u-i,0),0,&quot;z&quot;].join(&quot;,&quot;),x=[{x:o,y:n+i*2+s},{x:o-i*2-u,y:n},{x:o,y:n-i*2-s},{x:o+i*2+u,y:n}][g];x.path=m;if(q){this.animate(x,500,&quot;&gt;&quot;);}else{this.attr(x);}return this;};return h.update(f,l);};Raphael.fn.g.flag=function(f,k,j,i){i=i||0;j=j||&quot;$9.99&quot;;var g=this.set(),h=3;g.push(this.path().attr({fill:&quot;#000&quot;,stroke:&quot;#000&quot;}));g.push(this.text(f,k,j).attr(this.g.txtattr).attr({fill:&quot;#fff&quot;,&quot;font-family&quot;:&quot;Helvetica, Arial&quot;}));g.update=function(l,o){this.rotate(0,l,o);var n=this[1].getBBox(),m=n.height/2;this[0].attr({path:[&quot;M&quot;,l,o,&quot;l&quot;,m+h,-m-h,n.width+2*h,0,0,n.height+2*h,-n.width-2*h,0,&quot;z&quot;].join(&quot;,&quot;)});this[1].attr({x:l+m+h+n.width/2,y:o});i=360-i;this.rotate(i,l,o);i&gt;90&amp;&amp;i&lt;270&amp;&amp;this[1].attr({x:l-r-h-n.width/2,y:o,rotation:[180+i,l,o]});return this;};return g.update(f,k);};Raphael.fn.g.label=function(f,i,h){var g=this.set();g.push(this.rect(f,i,10,10).attr({stroke:&quot;none&quot;,fill:&quot;#000&quot;}));g.push(this.text(f,i,h).attr(this.g.txtattr).attr({fill:&quot;#fff&quot;}));g.update=function(){var k=this[1].getBBox(),j=c(k.width+10,k.height+10)/2;this[0].attr({x:k.x-j/2,y:k.y-j/2,width:k.width+j,height:k.height+j,r:j});};g.update();return g;};Raphael.fn.g.labelit=function(h){var g=h.getBBox(),f=c(20,g.width+10,g.height+10)/2;return this.rect(g.x-f/2,g.y-f/2,g.width+f,g.height+f,f).attr({stroke:&quot;none&quot;,fill:&quot;#000&quot;}).insertBefore(h.node?h:h[0]);};Raphael.fn.g.drop=function(f,k,j,h,i){h=h||30;i=i||0;var g=this.set();g.push(this.path([&quot;M&quot;,f,k,&quot;l&quot;,h,0,&quot;A&quot;,h*0.4,h*0.4,0,1,0,f+h*0.7,k-h*0.7,&quot;z&quot;]).attr({fill:&quot;#000&quot;,stroke:&quot;none&quot;,rotation:[22.5-i,f,k]}));i=(i+90)*Math.PI/180;g.push(this.text(f+h*Math.sin(i),k+h*Math.cos(i),j).attr(this.g.txtattr).attr({&quot;font-size&quot;:h*12/30,fill:&quot;#fff&quot;}));g.drop=g[0];g.text=g[1];return g;};Raphael.fn.g.blob=function(g,m,l,k,i){k=(+k+1?k:45)+90;i=i||12;var f=Math.PI/180,j=i*12/12;var h=this.set();h.push(this.path().attr({fill:&quot;#000&quot;,stroke:&quot;none&quot;}));h.push(this.text(g+i*Math.sin((k)*f),m+i*Math.cos((k)*f)-j/2,l).attr(this.g.txtattr).attr({&quot;font-size&quot;:j,fill:&quot;#fff&quot;}));h.update=function(t,s,y){t=t||g;s=s||m;var A=this[1].getBBox(),D=a(A.width+j,i*25/12),z=a(A.height+j,i*25/12),o=t+i*Math.sin((k-22.5)*f),B=s+i*Math.cos((k-22.5)*f),q=t+i*Math.sin((k+22.5)*f),C=s+i*Math.cos((k+22.5)*f),F=(q-o)/2,E=(C-B)/2,p=D/2,n=z/2,x=-Math.sqrt(Math.abs(p*p*n*n-p*p*E*E-n*n*F*F)/(p*p*E*E+n*n*F*F)),v=x*p*E/n+(q+o)/2,u=x*-n*F/p+(C+B)/2;if(y){this.animate({x:v,y:u,path:[&quot;M&quot;,g,m,&quot;L&quot;,q,C,&quot;A&quot;,p,n,0,1,1,o,B,&quot;z&quot;].join(&quot;,&quot;)},500,&quot;&gt;&quot;);}else{this.attr({x:v,y:u,path:[&quot;M&quot;,g,m,&quot;L&quot;,q,C,&quot;A&quot;,p,n,0,1,1,o,B,&quot;z&quot;].join(&quot;,&quot;)});}return this;};h.update(g,m);return h;};Raphael.fn.g.colorValue=function(i,h,g,f){return&quot;hsb(&quot;+[c((1-i/h)*0.4,1),g||0.75,f||0.75]+&quot;)&quot;;};Raphael.fn.g.snapEnds=function(n,o,m){var k=n,p=o;if(k==p){return{from:k,to:p,power:0};}function q(f){return Math.abs(f-0.5)&lt;0.25?~~(f)+0.5:Math.round(f);}var l=(p-k)/m,g=~~(l),j=g,h=0;if(g){while(j){h--;j=~~(l*Math.pow(10,h))/Math.pow(10,h);}h++;}else{while(!g){h=h||1;g=~~(l*Math.pow(10,h))/Math.pow(10,h);h++;}h&amp;&amp;h--;}p=q(o*Math.pow(10,h))/Math.pow(10,h);if(p&lt;o){p=q((o+0.5)*Math.pow(10,h))/Math.pow(10,h);}k=q((n-(h&gt;0?0:0.5))*Math.pow(10,h))/Math.pow(10,h);return{from:k,to:p,power:h};};Raphael.fn.g.axis=function(v,u,o,G,l,J,m,L,n,g){g=g==null?2:g;n=n||&quot;t&quot;;J=J||10;var F=n==&quot;|&quot;||n==&quot; &quot;?[&quot;M&quot;,v+0.5,u,&quot;l&quot;,0,0.001]:m==1||m==3?[&quot;M&quot;,v+0.5,u,&quot;l&quot;,0,-o]:[&quot;M&quot;,v,u+0.5,&quot;l&quot;,o,0],z=this.g.snapEnds(G,l,J),K=z.from,B=z.to,I=z.power,H=0,C=this.set();d=(B-K)/J;var s=K,q=I&gt;0?I:0;w=o/J;if(+m==1||+m==3){var h=u,A=(m-1?1:-1)*(g+3+!!(m-1));while(h&gt;=u-o){n!=&quot;-&quot;&amp;&amp;n!=&quot; &quot;&amp;&amp;(F=F.concat([&quot;M&quot;,v-(n==&quot;+&quot;||n==&quot;|&quot;?g:!(m-1)*g*2),h+0.5,&quot;l&quot;,g*2+1,0]));C.push(this.text(v+A,h,(L&amp;&amp;L[H++])||(Math.round(s)==s?s:+s.toFixed(q))).attr(this.g.txtattr).attr({&quot;text-anchor&quot;:m-1?&quot;start&quot;:&quot;end&quot;}));s+=d;h-=w;}if(Math.round(h+w-(u-o))){n!=&quot;-&quot;&amp;&amp;n!=&quot; &quot;&amp;&amp;(F=F.concat([&quot;M&quot;,v-(n==&quot;+&quot;||n==&quot;|&quot;?g:!(m-1)*g*2),u-o+0.5,&quot;l&quot;,g*2+1,0]));C.push(this.text(v+A,u-o,(L&amp;&amp;L[H])||(Math.round(s)==s?s:+s.toFixed(q))).attr(this.g.txtattr).attr({&quot;text-anchor&quot;:m-1?&quot;start&quot;:&quot;end&quot;}));}}else{s=K;q=(I&gt;0)*I;A=(m?-1:1)*(g+9+!m);var k=v,w=o/J,D=0,E=0;while(k&lt;=v+o){n!=&quot;-&quot;&amp;&amp;n!=&quot; &quot;&amp;&amp;(F=F.concat([&quot;M&quot;,k+0.5,u-(n==&quot;+&quot;?g:!!m*g*2),&quot;l&quot;,0,g*2+1]));C.push(D=this.text(k,u+A,(L&amp;&amp;L[H++])||(Math.round(s)==s?s:+s.toFixed(q))).attr(this.g.txtattr));var p=D.getBBox();if(E&gt;=p.x-5){C.pop(C.length-1).remove();}else{E=p.x+p.width;}s+=d;k+=w;}if(Math.round(k-w-v-o)){n!=&quot;-&quot;&amp;&amp;n!=&quot; &quot;&amp;&amp;(F=F.concat([&quot;M&quot;,v+o+0.5,u-(n==&quot;+&quot;?g:!!m*g*2),&quot;l&quot;,0,g*2+1]));C.push(this.text(v+o,u+A,(L&amp;&amp;L[H])||(Math.round(s)==s?s:+s.toFixed(q))).attr(this.g.txtattr));}}var M=this.path(F);M.text=C;M.all=this.set([M,C]);M.remove=function(){this.text.remove();this.constructor.prototype.remove.call(this);};return M;};Raphael.el.lighter=function(g){g=g||2;var f=[this.attrs.fill,this.attrs.stroke];this.fs=this.fs||[f[0],f[1]];f[0]=Raphael.rgb2hsb(Raphael.getRGB(f[0]).hex);f[1]=Raphael.rgb2hsb(Raphael.getRGB(f[1]).hex);f[0].b=c(f[0].b*g,1);f[0].s=f[0].s/g;f[1].b=c(f[1].b*g,1);f[1].s=f[1].s/g;this.attr({fill:&quot;hsb(&quot;+[f[0].h,f[0].s,f[0].b]+&quot;)&quot;,stroke:&quot;hsb(&quot;+[f[1].h,f[1].s,f[1].b]+&quot;)&quot;});};Raphael.el.darker=function(g){g=g||2;var f=[this.attrs.fill,this.attrs.stroke];this.fs=this.fs||[f[0],f[1]];f[0]=Raphael.rgb2hsb(Raphael.getRGB(f[0]).hex);f[1]=Raphael.rgb2hsb(Raphael.getRGB(f[1]).hex);f[0].s=c(f[0].s*g,1);f[0].b=f[0].b/g;f[1].s=c(f[1].s*g,1);f[1].b=f[1].b/g;this.attr({fill:&quot;hsb(&quot;+[f[0].h,f[0].s,f[0].b]+&quot;)&quot;,stroke:&quot;hsb(&quot;+[f[1].h,f[1].s,f[1].b]+&quot;)&quot;});};Raphael.el.original=function(){if(this.fs){this.attr({fill:this.fs[0],stroke:this.fs[1]});delete this.fs;}};})();</div></pre></div>
+          </td>
+        </tr>
+      </table>
+  </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<div class="frame frame-loading large-loading-area" style="display:none;" data-tree-list-url="/mojones/AfterParty2/tree-list/568988191a8c7f5d99a1e4cf9de1679c7234f8e4" data-blob-url-prefix="/mojones/AfterParty2/blob/568988191a8c7f5d99a1e4cf9de1679c7234f8e4">
+  <img src="https://a248.e.akamai.net/assets.github.com/images/spinners/octocat-spinner-64.gif?1329872004" height="64" width="64">
+</div>
+
+      </div>
+      <div class="context-overlay"></div>
+    </div>
+
+
+      <!-- footer -->
+      <div id="footer" >
+        
+  <div class="upper_footer">
+     <div class="container clearfix">
+
+       <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+       <![if !IE]><h4 id="blacktocat">GitHub Links</h4><![endif]>
+
+       <ul class="footer_nav">
+         <h4>GitHub</h4>
+         <li><a href="https://github.com/about">About</a></li>
+         <li><a href="https://github.com/blog">Blog</a></li>
+         <li><a href="https://github.com/features">Features</a></li>
+         <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+         <li><a href="https://github.com/training">Training</a></li>
+         <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+         <li><a href="http://status.github.com/">Site Status</a></li>
+       </ul>
+
+       <ul class="footer_nav">
+         <h4>Tools</h4>
+         <li><a href="http://get.gaug.es/">Gauges: Analyze web traffic</a></li>
+         <li><a href="http://speakerdeck.com">Speaker Deck: Presentations</a></li>
+         <li><a href="https://gist.github.com">Gist: Code snippets</a></li>
+         <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+         <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+         <li><a href="http://jobs.github.com/">Job Board</a></li>
+       </ul>
+
+       <ul class="footer_nav">
+         <h4>Extras</h4>
+         <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+         <li><a href="http://octodex.github.com/">The Octodex</a></li>
+       </ul>
+
+       <ul class="footer_nav">
+         <h4>Documentation</h4>
+         <li><a href="http://help.github.com/">GitHub Help</a></li>
+         <li><a href="http://developer.github.com/">Developer API</a></li>
+         <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+         <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+       </ul>
+
+     </div><!-- /.site -->
+  </div><!-- /.upper_footer -->
+
+<div class="lower_footer">
+  <div class="container clearfix">
+    <!--[if IE]><div id="legal_ie"><![endif]-->
+    <![if !IE]><div id="legal"><![endif]>
+      <ul>
+          <li><a href="https://github.com/site/terms">Terms of Service</a></li>
+          <li><a href="https://github.com/site/privacy">Privacy</a></li>
+          <li><a href="https://github.com/security">Security</a></li>
+      </ul>
+
+      <p>&copy; 2012 <span title="0.13223s from fe7.rs.github.com">GitHub</span> Inc. All rights reserved.</p>
+    </div><!-- /#legal or /#legal_ie-->
+
+      <div class="sponsor">
+        <a href="http://www.rackspace.com" class="logo">
+          <img alt="Dedicated Server" height="36" src="https://a248.e.akamai.net/assets.github.com/images/modules/footer/rackspaces_logo.png?1329521039" width="38" />
+        </a>
+        Powered by the <a href="http://www.rackspace.com ">Dedicated
+        Servers</a> and<br/> <a href="http://www.rackspacecloud.com">Cloud
+        Computing</a> of Rackspace Hosting<span>&reg;</span>
+      </div>
+  </div><!-- /.site -->
+</div><!-- /.lower_footer -->
+
+      </div><!-- /#footer -->
+
+    
+
+<div id="keyboard_shortcuts_pane" class="instapaper_ignore readability-extra" style="display:none">
+  <h2>Keyboard Shortcuts <small><a href="#" class="js-see-all-keyboard-shortcuts">(see all)</a></small></h2>
+
+  <div class="columns threecols">
+    <div class="column first">
+      <h3>Site wide shortcuts</h3>
+      <dl class="keyboard-mappings">
+        <dt>s</dt>
+        <dd>Focus site search</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>?</dt>
+        <dd>Bring up this help dialog</dd>
+      </dl>
+    </div><!-- /.column.first -->
+
+    <div class="column middle" style='display:none'>
+      <h3>Commit list</h3>
+      <dl class="keyboard-mappings">
+        <dt>j</dt>
+        <dd>Move selection down</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>k</dt>
+        <dd>Move selection up</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>c <em>or</em> o <em>or</em> enter</dt>
+        <dd>Open commit</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>y</dt>
+        <dd>Expand URL to its canonical form</dd>
+      </dl>
+    </div><!-- /.column.first -->
+
+    <div class="column last" style='display:none'>
+      <h3>Pull request list</h3>
+      <dl class="keyboard-mappings">
+        <dt>j</dt>
+        <dd>Move selection down</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>k</dt>
+        <dd>Move selection up</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>o <em>or</em> enter</dt>
+        <dd>Open issue</dd>
+      </dl>
+    </div><!-- /.columns.last -->
+
+  </div><!-- /.columns.equacols -->
+
+  <div style='display:none'>
+    <div class="rule"></div>
+
+    <h3>Issues</h3>
+
+    <div class="columns threecols">
+      <div class="column first">
+        <dl class="keyboard-mappings">
+          <dt>j</dt>
+          <dd>Move selection down</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>k</dt>
+          <dd>Move selection up</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>x</dt>
+          <dd>Toggle selection</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>o <em>or</em> enter</dt>
+          <dd>Open issue</dd>
+        </dl>
+      </div><!-- /.column.first -->
+      <div class="column middle">
+        <dl class="keyboard-mappings">
+          <dt>I</dt>
+          <dd>Mark selection as read</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>U</dt>
+          <dd>Mark selection as unread</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>y</dt>
+          <dd>Remove selection from view</dd>
+        </dl>
+      </div><!-- /.column.middle -->
+      <div class="column last">
+        <dl class="keyboard-mappings">
+          <dt>c</dt>
+          <dd>Create issue</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>l</dt>
+          <dd>Create label</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>i</dt>
+          <dd>Back to inbox</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>u</dt>
+          <dd>Back to issues</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>/</dt>
+          <dd>Focus issues search</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div style='display:none'>
+    <div class="rule"></div>
+
+    <h3>Issues Dashboard</h3>
+
+    <div class="columns threecols">
+      <div class="column first">
+        <dl class="keyboard-mappings">
+          <dt>j</dt>
+          <dd>Move selection down</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>k</dt>
+          <dd>Move selection up</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>o <em>or</em> enter</dt>
+          <dd>Open issue</dd>
+        </dl>
+      </div><!-- /.column.first -->
+    </div>
+  </div>
+
+  <div style='display:none'>
+    <div class="rule"></div>
+
+    <h3>Network Graph</h3>
+    <div class="columns equacols">
+      <div class="column first">
+        <dl class="keyboard-mappings">
+          <dt><span class="badmono">←</span> <em>or</em> h</dt>
+          <dd>Scroll left</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt><span class="badmono">→</span> <em>or</em> l</dt>
+          <dd>Scroll right</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt><span class="badmono">↑</span> <em>or</em> k</dt>
+          <dd>Scroll up</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt><span class="badmono">↓</span> <em>or</em> j</dt>
+          <dd>Scroll down</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>t</dt>
+          <dd>Toggle visibility of head labels</dd>
+        </dl>
+      </div><!-- /.column.first -->
+      <div class="column last">
+        <dl class="keyboard-mappings">
+          <dt>shift <span class="badmono">←</span> <em>or</em> shift h</dt>
+          <dd>Scroll all the way left</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>shift <span class="badmono">→</span> <em>or</em> shift l</dt>
+          <dd>Scroll all the way right</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>shift <span class="badmono">↑</span> <em>or</em> shift k</dt>
+          <dd>Scroll all the way up</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>shift <span class="badmono">↓</span> <em>or</em> shift j</dt>
+          <dd>Scroll all the way down</dd>
+        </dl>
+      </div><!-- /.column.last -->
+    </div>
+  </div>
+
+  <div >
+    <div class="rule"></div>
+    <div class="columns threecols">
+      <div class="column first" >
+        <h3>Source Code Browsing</h3>
+        <dl class="keyboard-mappings">
+          <dt>t</dt>
+          <dd>Activates the file finder</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>l</dt>
+          <dd>Jump to line</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>w</dt>
+          <dd>Switch branch/tag</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>y</dt>
+          <dd>Expand URL to its canonical form</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div id="markdown-help" class="instapaper_ignore readability-extra">
+  <h2>Markdown Cheat Sheet</h2>
+
+  <div class="cheatsheet-content">
+
+  <div class="mod">
+    <div class="col">
+      <h3>Format Text</h3>
+      <p>Headers</p>
+      <pre>
+# This is an &lt;h1&gt; tag
+## This is an &lt;h2&gt; tag
+###### This is an &lt;h6&gt; tag</pre>
+     <p>Text styles</p>
+     <pre>
+*This text will be italic*
+_This will also be italic_
+**This text will be bold**
+__This will also be bold__
+
+*You **can** combine them*
+</pre>
+    </div>
+    <div class="col">
+      <h3>Lists</h3>
+      <p>Unordered</p>
+      <pre>
+* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b</pre>
+     <p>Ordered</p>
+     <pre>
+1. Item 1
+2. Item 2
+3. Item 3
+   * Item 3a
+   * Item 3b</pre>
+    </div>
+    <div class="col">
+      <h3>Miscellaneous</h3>
+      <p>Images</p>
+      <pre>
+![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](url)
+</pre>
+     <p>Links</p>
+     <pre>
+http://github.com - automatic!
+[GitHub](http://github.com)</pre>
+<p>Blockquotes</p>
+     <pre>
+As Kanye West said:
+
+> We're living the future so
+> the present is our past.
+</pre>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <h3>Code Examples in Markdown</h3>
+  <div class="col">
+      <p>Syntax highlighting with <a href="http://github.github.com/github-flavored-markdown/" title="GitHub Flavored Markdown" target="_blank">GFM</a></p>
+      <pre>
+```javascript
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+```</pre>
+    </div>
+    <div class="col">
+      <p>Or, indent your code 4 spaces</p>
+      <pre>
+Here is a Python code example
+without syntax highlighting:
+
+    def foo:
+      if not bar:
+        return true</pre>
+    </div>
+    <div class="col">
+      <p>Inline code for comments</p>
+      <pre>
+I think you should use an
+`&lt;addr&gt;` element here instead.</pre>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+
+    <div class="ajax-error-message">
+      <p><span class="icon"></span> Something went wrong with that request. Please try again. <a href="javascript:;" class="ajax-error-dismiss">Dismiss</a></p>
+    </div>
+
+    <div id="logo-popup">
+      <h2>Looking for the GitHub logo?</h2>
+      <ul>
+        <li>
+          <h4>GitHub Logo</h4>
+          <a href="http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip"><img alt="Github_logo" src="https://a248.e.akamai.net/assets.github.com/images/modules/about_page/github_logo.png?1310086001" /></a>
+          <a href="http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip" class="minibutton btn-download download"><span><span class="icon"></span>Download</span></a>
+        </li>
+        <li>
+          <h4>The Octocat</h4>
+          <a href="http://github-media-downloads.s3.amazonaws.com/Octocats.zip"><img alt="Octocat" src="https://a248.e.akamai.net/assets.github.com/images/modules/about_page/octocat.png?1310086001" /></a>
+          <a href="http://github-media-downloads.s3.amazonaws.com/Octocats.zip" class="minibutton btn-download download"><span><span class="icon"></span>Download</span></a>
+        </li>
+      </ul>
+    </div>
+
+    
+    
+    
+    <span id='server_response_time' data-time='0.13389' data-host='fe7'></span>
+  </body>
+</html>
+

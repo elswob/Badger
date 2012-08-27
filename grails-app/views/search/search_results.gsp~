@@ -1,0 +1,163 @@
+<!--
+  To change this template, choose Tools | Templates
+  and open the template in the editor.
+-->
+
+<%@ page contentType="text/html;charset=UTF-8" %>
+
+<html>
+  <head>
+    <meta name='layout' content='main'/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Search results</title>
+    <parameter name="search" value="selected"></parameter>
+  </head>
+  <body>
+    
+  <!-- check for empty searches -->
+  <g:if test="${empty}">
+    <h1>Please enter a search term</h1>
+    <g:link action=''>Search Again</g:link>
+  </g:if>
+  <!-- check for gene annotation searches -->
+  <% 
+  def next = ">>" 
+  def pre = "<<"
+  %>
+  <g:if test="${anno}">
+            <h1>Results for gene annotation description matching '<em>${term}</em>'.</h1> 
+            <p>Searched ${bicyclus_anynana.GeneAnno.count()} records in ${search_time}</p>
+            <g:if test="${results}">
+            <div class="midtable">
+            <table><tr>
+            <td>Found <strong>${resCount}</strong> hits.</td>
+            <td>Display 
+            <g:link action="search_results" params="${[search: "gene",searchId:term, max:10]}">10</g:link>|
+            <g:link action="search_results" params="${[search: "gene",searchId:term, max:20]}">20</g:link>|
+            <g:link action="search_results" params="${[search: "gene",searchId:term, max:50]}">50</g:link>|
+            <g:link action="search_results" params="${[search: "gene",searchId:term, max:100]}">100</g:link>
+            hits per page</td>
+            <td>Showing results ${offint} - ${sum}</td> 
+            
+            <td><div class="page_num"><g:paginate next="${next}" prev="${pre}" maxsteps="10" controller="search" action="search_results" total="${resCount}" params="${[search: "gene",searchId:term]}"/></div></td>
+            </tr></table>
+            </div>
+            <g:link action=''>Search Again</g:link>           
+            <g:link controller="FileDownload" action="contig_download" params="${[fileId: csvOut, fileName: term+'.search_results.txt']}">Download results</g:link>           
+              <table>
+                <tr>
+                  <td><b>Gene ID</b></td>
+                  <td><b>Database</b></td>
+                  <td><b>Hit ID</b></td>
+                  <td><b>Description</b></td>
+                  <td><b>Start</b></td>
+                  <td><b>Stop</b></td>
+                  <td><b>Score</b></td>
+                </tr>
+                  <g:each var="res" in="${results}">
+                  <tr>  
+                    <td><g:link action="gene_info" params="${[gene_id: res.gene_id]}"> ${res.gene_id}</g:link></td>
+                    <td>${res.anno_db}</td>
+                    <%res.anno_id = res.anno_id.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
+                    <td>${res.anno_id}</td>
+                    <%res.descr = res.descr.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
+                    <td>${res.descr}</td>
+                    <td>${res.anno_start}</td>
+                    <td>${res.anno_stop}</td>
+                    <td>${res.score}</td>
+                  </tr>  
+                </g:each>
+              </table>
+          </g:if>
+          <g:else>
+          	<p>Found <strong>${resCount}</strong> hits.</p>
+          	<g:link action=''>Search Again</g:link>
+          </g:else>
+  </g:if>
+  <!-- check for unigene annotation searches -->
+  <g:if test="${uni}">
+            <h1>Results for UniGene annotation descriptions matching '<em>${term}</em>'.</h1>
+            <p>Searched ${bicyclus_anynana.UnigeneAnno.count()} records in ${search_time}.<br>
+            <g:if test="${results}">
+            <div class="midtable">
+            <table><tr>
+            <td>Found <strong>${resCount}</strong> hits.</td>
+            <td>Display 
+            <g:link action="search_results" params="${[search: "uni",searchId:term, max:10]}">10</g:link>|
+            <g:link action="search_results" params="${[search: "uni",searchId:term, max:20]}">20</g:link>|
+            <g:link action="search_results" params="${[search: "uni",searchId:term, max:50]}">50</g:link>|
+            <g:link action="search_results" params="${[search: "uni",searchId:term, max:100]}">100</g:link>
+            hits per page</td>
+            <td>Showing results ${offint} - ${sum}</td> 
+            <td><div class="page_num"><g:paginate next="${next}" prev="${pre}" maxsteps="10" controller="search" action="search_results" total="${resCount}" params="${[search: "uni",searchId:term]}"/></div></td>
+             </tr></table>
+            </div>
+            <g:link action=''>Search Again</g:link>
+              <p><g:link controller="FileDownload" action="contig_download" params="${[fileId : csvOut, fileName: term+'.search_results.txt']}">Download results</g:link></p>
+              <table>
+                <tr>
+                  <td><b>UniGene ID</b></td>
+                  <td><b>Database</b></td>
+                  <td><b>Hit ID</b></td>
+                  <td><b>Description</b></td>
+                  <td><b>Start</b></td>
+                  <td><b>Stop</b></td>
+                  <td><b>Score</b></td>
+                </tr>
+                  <g:each var="res" in="${results}">
+                  <tr>  
+                    <td><g:link action="unigene_info" params="${[contig_id: res.contig_id]}"> ${res.contig_id}</g:link></td>
+                    <td>${res.anno_db}</td>
+                    <%res.anno_id = res.anno_id.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
+                    <td>${res.anno_id}</td>
+                    <%res.descr = res.descr.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
+                    <td>${res.descr}</td>
+                    <td>${res.anno_start}</td>
+                    <td>${res.anno_stop}</td>
+                    <td>${res.score}</td>
+                  </tr>  
+                </g:each>
+              </table>
+          </g:if>
+          <g:else>
+          	<p>Found <strong>${resCount}</strong> hits.</p>
+          	<g:link action=''>Search Again</g:link>
+          </g:else>
+  </g:if>
+   <!-- check for scaffold searches -->
+  <g:if test="${contig}">
+      <g:if test = "${contigs.size()}">
+    <h1>Information for <em>${term}</em></h1>
+      <table>
+        <tr>
+          <td><b>Stats</b></td>
+          <td><b>Genes</b></td>
+          <td><b>Links</b></td>
+          <td><b>Data</b></td>
+        </tr>
+        <g:each var="contig" in="${contigs}">
+          <tr>
+            <td>
+              Contig length = ${contig.sequence.length()}<br>
+              GC = ${contig.gc}<br>
+              Estimated coverage = ${contig.coverage}<br>
+            </td>
+            <td>Number of genes = ${genes.size()}</td>
+            <td><a href ="">Browse</a></td>
+            <td><g:link controller="FileDownload" action="contig_download" params="${[fileId : fasta, fileName: term+'.txt']}">Contigs</g:link></td>
+          </tr>
+      </g:each>
+      </table>
+  </g:if>
+  <g:elseif test ="${term == ''}" >
+    <h1>Please enter a search term!</h1>
+  </g:elseif>
+  <g:else>
+    <h1>There is no contig with the ID <em>${term}</em>.</h1> 
+    <g:link action=''>Search Again</g:link>
+  </g:else> 
+  </g:if>
+</body>
+</html>
+
+

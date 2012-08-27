@@ -1,0 +1,11 @@
+PASS	Basic Statistics	120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz
+PASS	Per base sequence quality	120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz
+PASS	Per sequence quality scores	120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz
+WARN	Per base sequence content	120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz
+PASS	Per base GC content	120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz
+FAIL	Per sequence GC content	120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz
+PASS	Per base N content	120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz
+PASS	Sequence Length Distribution	120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz
+FAIL	Sequence Duplication Levels	120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz
+WARN	Overrepresented sequences	120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz
+WARN	Kmer Content	120406_0171_AD0T2DACXX_1_SA-PE-041_1.sanfastq.gz

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name='layout' content='main'/>
+    <title>BLAST</title>
+    <parameter name="blast" value="selected"></parameter>
+    <script src="${resource(dir: 'js', file: 'jquery.loadmask.min.js')}" type="text/javascript"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>   
+    <link rel="stylesheet" href="${resource(dir: 'js', file: 'jquery.loadmask.css')}" type="text/css"></link>
+</head>
+
+<body>
+
+  <div id="content">
+    <g:form controller="blast" action="runBlast" id="submitBlast">
+      <br>
+    <p align="center"><g:link controller="blast" action="info" fragment="program">Program</g:link>
+    <select name = "PROGRAM">
+    <option>blastn</option>
+    <option>tblastx</option>
+    <option>tblastn</option>
+    <option>blastx</option>
+    <option>blastp</option>
+    </select>
+    <g:link controller="blast" action="info" fragment="db">Database</g:link>
+    <select name = "DATALIB">
+    <option value="sequence.fasta.cap.contigs_and_singlets_renamed.fa">UniGenes&nbsp;</option>
+    
+    </select>
+    <input TYPE="checkbox" NAME="UNGAPPED_ALIGNMENT" VALUE="is_set">
+    Perform ungapped alignment
+    <br>&nbsp;
+    <p align="center">The query sequence is&nbsp;<input TYPE="checkbox" NAME="FILTER" VALUE="L" CHECKED>
+    <g:link controller="blast" action="info" fragment="filt">filtered</g:link>
+    for low complexity regions by default.
+    <br>Enter here your input data as sequence in <g:link controller="blast" action="info" fragment="fasta">FASTA</g:link> format<br>
+    <g:textArea name="blastId" style='width: 90%; height: 200px'/><br>
+    <p align="center">
+
+    <br>Alignment view
+    <select name = "ALIGNMENT_VIEW">
+    <option value=0 selected> Full
+    <option value=6> Tabular
+    </select>
+    <br><g:link controller="blast" action="info" fragment="exp">Expect</g:link>
+    <select name = "EXPECT">
+    <option> 1e-50 
+    <option> 1e-20 
+    <option> 1e-10 
+    <option selected> 1e-5 
+    <option> 0.001 
+    <option> 1
+    </select>
+    <g:link controller="blast" action="info" fragment="desc">Descriptions</g:link>
+    <select name = "DESCRIPTIONS">
+    <option>0
+    <option>10
+    <option selected>20
+    <option>50
+    <option>100
+    <option>250
+    <option>500
+    </select>
+    <g:link controller="blast" action="info" fragment="ali">Alignments</g:link>
+    <select name = "ALIGNMENTS">
+    <option>0
+    <option>10
+    <option selected>20
+    <option>50
+    <option>100
+    <option>250
+    <option>500
+    </select>
+    <br>
+    <!--input TYPE="submit" VALUE="Search" id="button"-->
+    <!--input TYPE="RESET" VALUE="Reset" id="button"-->
+    <div id="buttons" align="center">
+      <input type="button" value="Search" id="process" onclick="submit()" >
+      <!--input type="reset" value="Cancel" id="cancel"-->
+    </div>
+  </g:form>
+</div>
+  <script>
+          $(document).ready(function(){
+            $("#process").bind("click", function () {
+              $("#content").mask("Waiting for BLAST...");
+            });
+				
+            $("#cancel").bind("click", function () {
+		$("#content").unmask();
+            });
+          });
+   </script>
+</body>
+</html>
