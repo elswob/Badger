@@ -25,5 +25,7 @@ class Publication {
     }
     static mapping = {
         abstractText type: "text"
+        title type: "text"
+        authors type: "text"
     }
 }

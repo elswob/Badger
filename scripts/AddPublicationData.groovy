@@ -1,15 +1,16 @@
 package GDB
 
 import groovy.sql.Sql
-def grailsApplication
-javax.sql.DataSource dataSource
 
+def grailsApplication
 def matcher
 def idlist = new File("/tmp/idlist.txt")
 def pubdata = new File("/tmp/pubdata.txt")
+if (idlist.exists()){idlist.delete()}
+if (pubdata.exists()){pubdata.delete()}
+
 getPub()
 def getPub(){
-	def sql = new Sql(dataSource)
 	//get the pubmed data
 	def utils = "http://www.ncbi.nlm.nih.gov/entrez/eutils";
 	def db = 'PubMed';
@@ -17,7 +18,7 @@ def getPub(){
 	//make sure all words are used in search
 	query = query.replace(" ","+AND+")
 	def esearch = "$utils/esearch.fcgi?db=$db&retmax=100000&term=$query";
-	println "Searching PubMed for all articles containing '"+grailsApplication.config.species
+	println "Searching PubMed for all articles containing '"+grailsApplication.config.species+"'"
 	println "Getting IDs...";
 	println esearch
 	def idlist = new File("/tmp/idlist.txt")
@@ -49,6 +50,7 @@ def getPub(){
 }
 //add info
 def addPub(pubFile){
+	def dataSource = ctx.getBean("dataSource")
 	def sql = new Sql(dataSource)
 	println "Deleting data..."
 	def delsql = "delete from Publication;";
