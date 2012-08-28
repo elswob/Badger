@@ -20,7 +20,7 @@ class BlastController {
         def program = grailsApplication.config.blastPath+params.PROGRAM
         def eval = params.EXPECT
         def blastSeq = params.blastId
-        println "here - " + params.myFile
+
         //check if file has been uploaded
         def upload = request.getFile('myFile')
 		if (!upload.empty) {

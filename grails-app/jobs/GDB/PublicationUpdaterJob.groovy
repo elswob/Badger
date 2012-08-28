@@ -1,4 +1,4 @@
-package bicyclus_anynana
+package GDB
 
 class PublicationUpdaterJob {
 	def pubService
