@@ -293,7 +293,7 @@
 			    	
 		    		<table class="table_border" width='100%'>
 			    	<tr><td>
-		    			Searched ${printf("%,d\n",bicyclus_anynana.UnigeneAnno.count())} records in ${search_time}.<br>
+		    			Searched ${printf("%,d\n",GDB.UnigeneAnno.count())} records in ${search_time}.<br>
 		    			Found ${uniques} contigs with ${results.size()} top hits from distinct databases
 		    		</td></tr>
 		    		</table>
@@ -316,7 +316,7 @@
 	
 		    		<table class="table_border" width='100%'>
 		    		<tr><td>
-		    			Searched ${printf("%,d\n",bicyclus_anynana.UnigeneAnno.count())} records in ${search_time}.<br>
+		    			Searched ${printf("%,d\n",GDB.UnigeneAnno.count())} records in ${search_time}.<br>
 		    			Found ${uniques} contigs with ${results.size()} top hits from distinct databases
 		    		</td><td><center>
 		    		<!-- download contigs form gets fileName value from get_table_data() -->

@@ -4,18 +4,22 @@ import groovy.time.*
 import groovy.sql.Sql
 
 class HomeController {
- def sql = new Sql(dataSource) 
+ def grailsApplication
+ javax.sql.DataSource dataSource
+
  //@Secured(['ROLE_'])
  def index() {
  }
  def blog() {}
- def publications = {
- 	 //def results = Publication.findAll(sort:"dateString",order:"desc")
+ 
+ def publications = { 
+ 	 def sql = new Sql(dataSource)
  	 def yearsql = "select count(*),date_part('year',date_string) from publication group by date_part('year',date_string) order by date_part('year',date_string);"
  	 def yearData = sql.rows(yearsql)
  	 return [yearData: yearData]
  }
  def publication_search = {
+ 	def sql = new Sql(dataSource)
  	//get the year from the bar chart 
  	if (params.year){
  		def yearbefore = params.year-1

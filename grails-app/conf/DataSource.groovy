@@ -1,8 +1,9 @@
 dataSource {
 	pooled = true
-	driverClassName = "org.postgresql.Driver"
+	driverClassName = ""
 	username = ""
 	password = ""
+	url = ""
 }
 hibernate {
     cache.use_second_level_cache=true

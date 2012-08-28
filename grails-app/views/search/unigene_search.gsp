@@ -277,7 +277,7 @@
   <div id="content">
   <br>
      <p>The <a href="http://www.ncbi.nlm.nih.gov.ezproxy.webfeat.lib.ed.ac.uk/nucest/?term=Bicyclus%20anynana" target="_blank">
-     public <i>B. anynana</i> ESTs</a> were assembled with <a href="http://seq.cs.iastate.edu/" target="_blank">CAP3</a> to produce ${printf("%,d\n",bicyclus_anynana.UnigeneInfo.count())} UniGenes. 
+     public <i>B. anynana</i> ESTs</a> were assembled with <a href="http://seq.cs.iastate.edu/" target="_blank">CAP3</a> to produce ${printf("%,d\n",GDB.UnigeneInfo.count())} UniGenes. 
      Functional annotations were then assigned using BLAST, <a href="http://www.nematodes.org/bioinformatics/annot8r/" style="text-decoration:none" target="_blank">annot8r</a> 
      and <a href="http://www.ebi.ac.uk/interpro/index.html" style="text-decoration:none" target="_blank">InterProScan</a>.<br><br>
      <p>There are two search methods:<br>

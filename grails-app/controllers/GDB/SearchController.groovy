@@ -4,13 +4,12 @@ import groovy.time.*
 import groovy.sql.Sql
 
 class SearchController {
-	//println "username = "+user
-    //def scaffold = true
-    def sql = new Sql(dataSource)
+	javax.sql.DataSource dataSource
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def index() {
     }
-    def unigene_search = {    	 
+    def unigene_search = {   
+    	 def sql = new Sql(dataSource)
      	 def sqlsearch = "select contig_id,gc,length,coverage from unigene_info order by length desc;"
      	 def funsearch = "select unigene_anno.contig_id,gc,length,coverage,anno_db,anno_id from unigene_info,unigene_anno where (anno_db = 'EC' or anno_db = 'KEGG' or anno_db = 'GO' or anno_id ~ '^IPR') and unigene_anno.contig_id = unigene_info.contig_id order by length desc;"
      	 def results = sql.rows(sqlsearch)
@@ -19,6 +18,7 @@ class SearchController {
     }
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def gene_search = {
+    	 def sql = new Sql(dataSource)
      	 def sqlsearch = "select contig_id,gc,length,coverage from unigene_info order by length desc;"
      	 //def funsearch = "select unigene_anno.contig_id,gc,length,coverage,anno_db,anno_id from unigene_info,unigene_anno where unigene_anno.contig_id = unigene_info.contig_id order by length desc;"
      	 def funsearch = "select unigene_anno.contig_id,gc,length,coverage,anno_db,anno_id from unigene_info,unigene_anno where (anno_db = 'EC' or anno_db = 'KEGG' or anno_db = 'GO' or anno_id ~ '^IPR') and unigene_anno.contig_id = unigene_info.contig_id order by length desc;"
@@ -30,6 +30,7 @@ class SearchController {
     }
     //@Secured(['ROLE_USER','ROLE_ADMIN'])
     def search_results = {
+    	def sql = new Sql(dataSource)
     	//set up some global search things
     	def timeStart = new Date()
         def table = params.dataSet
@@ -160,6 +161,7 @@ class SearchController {
         return [ info_results: info_results, anno_results: anno_results, nuc_fasta: nuc_fasta, pep_fasta: pep_fasta]
     }
     def unigene_info = {
+    	def sql = new Sql(dataSource)
     	def iprsql = "select * from unigene_anno where anno_id ~ '^IPR' and contig_id = '"+params.contig_id+"' order by score;";
     	def ipr_results = sql.rows(iprsql)
     	def blastsql = "select * from unigene_anno where (anno_db = 'SwissProt' or anno_db = 'EST others' or anno_db = 'UniRef90') and contig_id = '"+params.contig_id+"' order by score desc;";
