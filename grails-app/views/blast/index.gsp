@@ -23,17 +23,25 @@
     <option>blastn</option>
     <option>tblastx</option>
     <option>tblastn</option>
-    <!--option>blastx</option>
-    <option>blastp</option-->
+    <option>blastx</option>
+    <option>blastp</option>
     </select>
+
     <g:link controller="blast" action="info" fragment="db">Database</g:link>
     <select name = "datalib">
     <sec:ifLoggedIn>
-    	<option value="genome">Genome contigs&nbsp;</option>
-    	<option value="bacs">Public BACs&nbsp;</option>
+    	 <g:if test="${grailsApplication.config.priv.Transcripts.size() > 0}"><option value="trans">Transcripts</option></g:if>
+    	 <g:if test="${grailsApplication.config.priv.BACs.size() > 0}"><option value="bacs">BACs</option></g:if>
+    	 <g:if test="${grailsApplication.config.priv.Genome.size() > 0}"><option value="genome">Genome contigs</option></g:if>
+    	 <g:if test="${grailsApplication.config.priv.Genes.size() > 0}"><option value="genes">Genes</option></g:if>
     </sec:ifLoggedIn>
-    <option value="unigenes">UniGenes&nbsp;</option>
+    
+    <g:if test="${grailsApplication.config.pub.Transcripts.size() > 0}"><option value="trans">Transcripts</option></g:if>
+    <g:if test="${grailsApplication.config.pub.BACs.size() > 0}"><option value="bacs">BACs</option></g:if>
+    <g:if test="${grailsApplication.config.pub.Genome.size() > 0}"><option value="genome">Genome contigs</option></g:if>
+    <g:if test="${grailsApplication.config.pub.Genes.size() > 0}"><option value="genes">Genes</option></g:if>
     </select>
+    
     <input TYPE="checkbox" NAME="UNGAPPED_ALIGNMENT" VALUE="is_set">
     Perform ungapped alignment
     <br>&nbsp;

@@ -98,7 +98,7 @@
 		    $('#chart').bind('jqplotDataClick',
 		    function (ev, seriesIndex, pointIndex, data) {
 			//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-			window.open("/search/unigene_info?contig_id=" + data[3]);
+			window.open("/search/trans_info?contig_id=" + data[3]);
 			}
 		    );
 	     }
@@ -282,9 +282,9 @@
           	<g:link action=''>Search Again</g:link>
           </g:else>
   </g:if>
-  <!-- check for unigene annotation searches -->
+  <!-- check for trans annotation searches -->
   <g:if test="${uni}">
-            <h1>Results for UniGene annotation descriptions matching '<em>${term}</em>'.</h1>
+            <h1>Results for transcriptome annotation descriptions matching '<em>${term}</em>'.</h1>
 		<g:if test="${results}">
 		
 			<div id="showChart" style="display:none">
@@ -293,7 +293,7 @@
 			    	
 		    		<table class="table_border" width='100%'>
 			    	<tr><td>
-		    			Searched ${printf("%,d\n",GDB.UnigeneAnno.count())} records in ${search_time}.<br>
+		    			Searched ${printf("%,d\n",GDB.TransAnno.count())} records in ${search_time}.<br>
 		    			Found ${uniques} contigs with ${results.size()} top hits from distinct databases
 		    		</td></tr>
 		    		</table>
@@ -316,11 +316,11 @@
 	
 		    		<table class="table_border" width='100%'>
 		    		<tr><td>
-		    			Searched ${printf("%,d\n",GDB.UnigeneAnno.count())} records in ${search_time}.<br>
+		    			Searched ${printf("%,d\n",GDB.TransAnno.count())} records in ${search_time}.<br>
 		    			Found ${uniques} contigs with ${results.size()} top hits from distinct databases
 		    		</td><td><center>
 		    		<!-- download contigs form gets fileName value from get_table_data() -->
-		    		<g:form name="fileDownload" url="[controller:'FileDownload', action:'unigene_contig_download']">
+		    		<g:form name="fileDownload" url="[controller:'FileDownload', action:trans_contig_download']">
 		    			<g:hiddenField name="fileId" value=""/>
 		    			<g:hiddenField name="fileName" value="${term}"/>
 		    			<input align="right" type="submit" value="Download contigs in table" class="mybuttons" onclick="get_table_data()"/>
@@ -332,7 +332,7 @@
 			    <% if (annoType == '3'){ %><table id='ipr_table_data' class="display">  <% }else{ %><table id="table_data" class="display"> <% } %>    
 			      <thead>
 				<tr>
-				  <th><b>UniGene ID</b></th>
+				  <th><b>Transcript ID</b></th>
 				  <th><b>Database</b></th>
 				  <th><b>Hit ID</b></th>
 				  <th><b>Description</b></th>
@@ -345,7 +345,7 @@
 				  <% if (res.anno_db == 'UniRef90'){ %> <tr class='gradeB'>  <% } %>
 				  <% if (res.anno_db == 'EST others'){ %> <tr class='gradeC'>  <% } %>
 				  <% if (res.anno_db == 'GO' || res.anno_db == 'EC' || res.anno_db == 'KEGG'){ %> <tr class='gradeD'>  <% } %>
-				    <td><g:link action="unigene_info" params="${[contig_id: res.contig_id]}"> ${res.contig_id}</g:link></td>
+				    <td><g:link action="trans_info" params="${[contig_id: res.contig_id]}"> ${res.contig_id}</g:link></td>
 				    <td>${res.anno_db}</td>
 				    <%
 				    res.anno_id = res.anno_id.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")

@@ -104,7 +104,7 @@
 			    <input align="right" type="submit" value="Download BLAST result" class="mybuttons"/>
 	  </g:form>
 	  </td>
-      <% if (blast_file == 'genome' || blast_file == 'unigenes'){ %>
+      <% if (blast_file == 'genome' || blast_file == 'trans'){ %>
       	<td>
       		<g:form name="blastDownload" url="[controller:'FileDownload', action:'blast_contig_download']">
 			    <g:hiddenField name="fileId" value=""/>

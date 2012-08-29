@@ -35,7 +35,7 @@
 
   <body>
 <g:if test="${pub_results}">
-	<h1>A search of <i>Bicyclus anynana</i> publications for the term '<b>${searchId}</b>' returned ${pub_results.size()} results:</h1>
+	<h1>A search of <i>${grailsApplication.config.species}</i> publications for the term '<b>${searchId}</b>' returned ${pub_results.size()} results:</h1>
 	<table id="table_data" class="display">
 	<thead>
 		<tr>

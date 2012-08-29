@@ -4,29 +4,36 @@ import groovy.time.*
 import groovy.sql.Sql
 
 class SearchController {
+	def matcher
 	javax.sql.DataSource dataSource
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def index() {
     }
-    def unigene_search = {   
+    def trans_search = {   
     	 def sql = new Sql(dataSource)
-     	 def sqlsearch = "select contig_id,gc,length,coverage from unigene_info order by length desc;"
-     	 def funsearch = "select unigene_anno.contig_id,gc,length,coverage,anno_db,anno_id from unigene_info,unigene_anno where (anno_db = 'EC' or anno_db = 'KEGG' or anno_db = 'GO' or anno_id ~ '^IPR') and unigene_anno.contig_id = unigene_info.contig_id order by length desc;"
+     	 def sqlsearch = "select contig_id,gc,length,coverage from trans_info order by length desc;"
+     	 def funsearch = "select trans_anno.contig_id,gc,length,coverage,anno_db,anno_id from trans_info,trans_anno where (anno_db = 'EC' or anno_db = 'KEGG' or anno_db = 'GO' or anno_id ~ '^IPR') and trans_anno.contig_id = trans_info.contig_id order by length desc;"
      	 def results = sql.rows(sqlsearch)
      	 def funresults = sql.rows(funsearch)
-     	 return [ uniGeneData: results, funData: funresults]
+     	 def blastMap = [:]
+     	 def a8rMap = [:]
+     	 if (grailsApplication.config.t.blast.size()>0){
+     	 	for(item in grailsApplication.config.t.blast){
+     	 		item = item.toString()
+     	 		def splitter = item.split("=")
+     	 		blastMap[splitter[0]] = splitter[1]
+     	 	}
+     	 }
+     	 return [ transData: results, funData: funresults, blastMap: blastMap]
     }
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def gene_search = {
     	 def sql = new Sql(dataSource)
-     	 def sqlsearch = "select contig_id,gc,length,coverage from unigene_info order by length desc;"
-     	 //def funsearch = "select unigene_anno.contig_id,gc,length,coverage,anno_db,anno_id from unigene_info,unigene_anno where unigene_anno.contig_id = unigene_info.contig_id order by length desc;"
-     	 def funsearch = "select unigene_anno.contig_id,gc,length,coverage,anno_db,anno_id from unigene_info,unigene_anno where (anno_db = 'EC' or anno_db = 'KEGG' or anno_db = 'GO' or anno_id ~ '^IPR') and unigene_anno.contig_id = unigene_info.contig_id order by length desc;"
-     	 //println sqlsearch
+     	 def sqlsearch = "select contig_id,gc,length,coverage from trans_info order by length desc;"
+     	 def funsearch = "select trans_anno.contig_id,gc,length,coverage,anno_db,anno_id from trans_info,trans_anno where (anno_db = 'EC' or anno_db = 'KEGG' or anno_db = 'GO' or anno_id ~ '^IPR') and trans_anno.contig_id = trans_info.contig_id order by length desc;"
      	 def results = sql.rows(sqlsearch)
      	 def funresults = sql.rows(funsearch)
-     	 //def results = UnigeneInfo.findAll()
-     	 return [ uniGeneData: results, funData: funresults]
+     	 return [ transData: results, funData: funresults]
     }
     //@Secured(['ROLE_USER','ROLE_ADMIN'])
     def search_results = {
@@ -103,10 +110,10 @@ class SearchController {
 			def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
 			return [ anno: "yes", results: results, term : searchId , search_time: duration ]
 			
-        //check for unigene annotation data
-        }else if (table == 'UniGenes' || params.search =='uni'){
-        	def sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score from unigene_anno where "+annoSearch+" and "+whatSearch+ "'${searchId}';"
-        	def chartsearch = "select distinct on (unigene_anno.contig_id,gc,length,coverage,score) unigene_anno.contig_id,gc,length,coverage,score from unigene_anno,unigene_info where "+annoSearch+" and "+whatSearch+ "'${searchId}' and unigene_info.contig_id = unigene_anno.contig_id;"
+        //check for transciptome annotation data
+        }else if (table == 'Trans' || params.search =='uni'){
+        	def sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score from trans_anno where "+annoSearch+" and "+whatSearch+ "'${searchId}';"
+        	def chartsearch = "select distinct on (trans_anno.contig_id,gc,length,coverage,score) trans_anno.contig_id,gc,length,coverage,score from trans_anno,trans_info where "+annoSearch+" and "+whatSearch+ "'${searchId}' and trans_info.contig_id = trans_anno.contig_id;"
         	println sqlsearch
         	println chartsearch
         	def results_all = sql.rows(sqlsearch)
@@ -160,15 +167,15 @@ class SearchController {
         def pep_fasta = ">"+info_results.gene_id[0]+"\n"+info_results.pep[0]+"\n"
         return [ info_results: info_results, anno_results: anno_results, nuc_fasta: nuc_fasta, pep_fasta: pep_fasta]
     }
-    def unigene_info = {
+    def trans_info = {
     	def sql = new Sql(dataSource)
-    	def iprsql = "select * from unigene_anno where anno_id ~ '^IPR' and contig_id = '"+params.contig_id+"' order by score;";
+    	def iprsql = "select * from trans_anno where anno_id ~ '^IPR' and contig_id = '"+params.contig_id+"' order by score;";
     	def ipr_results = sql.rows(iprsql)
-    	def blastsql = "select * from unigene_anno where (anno_db = 'SwissProt' or anno_db = 'EST others' or anno_db = 'UniRef90') and contig_id = '"+params.contig_id+"' order by score desc;";
+    	def blastsql = "select * from trans_anno where (anno_db = 'SwissProt' or anno_db = 'EST others' or anno_db = 'UniRef90') and contig_id = '"+params.contig_id+"' order by score desc;";
     	def blast_results = sql.rows(blastsql)
-    	def a8rsql = "select * from unigene_anno where (anno_db = 'EC' or anno_db = 'GO' or anno_db = 'KEGG') and contig_id = '"+params.contig_id+"' order by score desc;";
+    	def a8rsql = "select * from trans_anno where (anno_db = 'EC' or anno_db = 'GO' or anno_db = 'KEGG') and contig_id = '"+params.contig_id+"' order by score desc;";
     	def a8r_results = sql.rows(a8rsql)
-        def info_results = UnigeneInfo.findAllByContig_id(params.contig_id)
+        def info_results = TransInfo.findAllByContig_id(params.contig_id)
         def nuc_fasta = ">"+info_results.contig_id[0]+"\n"+info_results.sequence[0]+"\n"
         return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, a8r_results: a8r_results, nuc_fasta: nuc_fasta]
     }

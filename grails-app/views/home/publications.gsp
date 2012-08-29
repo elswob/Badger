@@ -40,7 +40,7 @@
             rendererOptions: {
 		fillToZero: true,
 		shadowDepth: 5,
-            	barMargin: 7,
+            	barMargin: 4,
 	    }
         },
         seriesColors: [ "green"],
@@ -82,7 +82,7 @@
 
   <body>
  <h1>Publication search</h1>
- <p>Search the <i>Bicyclus anynana</i> publications from PubMed (updated weekly):</p>
+ <p>Search the <i>${grailsApplication.config.species}</i> publications from PubMed (updated weekly):</p>
  - To search by year click on a bar in the chart below<br>
  - To search by keyword use the search box beneath the chart.<br>
  

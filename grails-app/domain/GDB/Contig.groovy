@@ -7,7 +7,7 @@ class Contig {
     Float coverage
     int length
     static constraints = {
-        contig_id(blank:false)
+        contig_id(blank:false, unique: true)
         sequence(blank:false)
         gc(blank:false)
         coverage(blank:false)

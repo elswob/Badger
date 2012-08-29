@@ -9,34 +9,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><g:layoutTitle default="Grails"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="${resource(dir: 'images', file: 'ba_favicon.ico')}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
-    <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
+    <link rel="shortcut icon" href="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" type="image/x-icon">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>   
 
   <g:layoutHead/>
   <r:layoutResources />
-  <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-29484818-1']);
-  _gaq.push(['_setDomainName', 'bicyclus.org']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
 </head>
 <body>
   <div class="header" role="banner">
-      <a href="/"><img src="${resource(dir: 'images', file: 'b_anynana.jpg')}" style="padding:10px;" "alt="b_anynana" height="105" width="105" align="left"/></a>
-      <font size="6"><br>The <font size="7"><i>Bicyclus anynana</i></font> genome project</font>
+      <a href="/"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="padding:10px;" alt="b_anynana" align="left"/></a>
+      <font size="6"><br>The <font size="7"><i>${grailsApplication.config.projectID}</i></font> genome project</font>
   </div>
   <div class="footer" role="contentinfo">
     <div class="navbar">
@@ -44,7 +29,7 @@
 	   <sec:ifNotLoggedIn>
 		<li><g:link controller="home" class="${pageProperty(name:'page.home')}">Home</g:link></li>
 		<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>
-		<li><g:link controller="search" action="unigene_search" class="${pageProperty(name:'page.search')}">Search</g:link></li>
+		<li><g:link controller="search" action="trans_search" class="${pageProperty(name:'page.search')}">Search</g:link></li>
 		<li><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link></li>
 		<li><g:link controller="login" class="${pageProperty(name:'page.login')}">Log in</g:link></li>
 	   </sec:ifNotLoggedIn>
@@ -55,7 +40,7 @@
 		<li><g:link controller="search" class="${pageProperty(name:'page.search')}">Search</g:link>
 			<ul>
 				<%-- <li><g:link controller="search" action="gene_search" class="${pageProperty(name:'page.search')}">Genes</g:link></li> --%>
-				<li><g:link controller="search" action="unigene_search" class="${pageProperty(name:'page.search')}">UniGenes</g:link></li>
+				<li><g:link controller="search" action="trans_search" class="${pageProperty(name:'page.search')}">Transcripts</g:link></li>
 				<%-- li><g:link controller="search" action="ncrna_search" class="${pageProperty(name:'page.search')}">ncRNA</g:link></li --%>
 				<%-- li><g:link controller="search" action="trans_search" class="${pageProperty(name:'page.search')}">Transposons</g:link></li --%>
 			</ul>

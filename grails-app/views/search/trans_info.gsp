@@ -9,7 +9,7 @@
   <head>
     <meta name='layout' content='main'/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${grailsApplication.config.projectID} UniGene info</title>
+    <title>${grailsApplication.config.projectID} transcript info</title>
     <parameter name="search" value="selected"></parameter>
     <script src="${resource(dir: 'js', file: 'DataTables-1.9.0/media/js/jquery.js')}" type="text/javascript"></script> 
     <script src="${resource(dir: 'js', file: 'DataTables-1.9.0/media/js/jquery.dataTables.js')}" type="text/javascript"></script>
@@ -105,7 +105,7 @@
   </head>
   <body>
   <g:if test="${info_results}">
-    <h1>Stats for UniGene <b>${info_results.contig_id[0]}</b>:</h1>
+    <h1>Stats for transcript <b>${info_results.contig_id[0]}</b>:</h1>
     <table>
       <tr>
         <td><b>Length:</b> ${printf("%,d\n",info_results.sequence[0].length())}</td>
@@ -119,10 +119,10 @@
     <g:if test="${blast_results}">
         <hr size = 5 color="green" width="100%" style="margin-top:10px">  
     <g:if test="${params.top != "10"}">
-    	<h1>Top annotations  / <g:link action="unigene_info" params="${[contig_id : info_results.contig_id[0], top: 10]}"> Top 10 annotations</g:link> from each database</h1>  
+    	<h1>Top annotations  / <g:link action="trans_info" params="${[contig_id : info_results.contig_id[0], top: 10]}"> Top 10 annotations</g:link> from each database</h1>  
     </g:if>
     <g:else>    	    
-    	<h1><g:link action="unigene_info" params="${[contig_id : info_results.contig_id[0], top: 1]}">Top annotations </g:link> /  Top 10 annotations  from each database</h1>  
+    	<h1><g:link action="trans_info" params="${[contig_id : info_results.contig_id[0], top: 1]}">Top annotations </g:link> /  Top 10 annotations  from each database</h1>  
     </g:else>
       <% 
       def iprjsonData = ipr_results.encodeAsJSON();

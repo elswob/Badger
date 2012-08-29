@@ -19,7 +19,7 @@ class FileDownloadController {
         response.outputStream.flush()
     }
     
-    def unigene_contig_download = {
+    def trans_contig_download = {
      	 def object_array = params.fileId
      	 object_array = object_array.replaceAll(/\[/, '')
      	 object_array = object_array.replaceAll(/\]/, '')
@@ -29,7 +29,7 @@ class FileDownloadController {
      	 	 object_list.add(it)
      	 }
      	 //println "object_list = "+object_list
-     	 def results = UnigeneInfo.findAllByContig_idInList(object_list)
+     	 def results = TransInfo.findAllByContig_idInList(object_list)
 		 def file_builder=""
      	 results.each {
      	 	//println "contig_id = "+it.contig_id
@@ -81,7 +81,7 @@ class FileDownloadController {
      	 println "object_list = "+object_list
      	 def results
      	 if (table == 'genome'){ results = Contig.findAllByContig_idInList(object_list)}
-     	 if (table == 'unigenes'){ println "in unigenes"; results = UnigeneInfo.findAllByContig_idInList(object_list)}
+     	 if (table == 'trans'){ println "in trans"; results = TransInfo.findAllByContig_idInList(object_list)}
      	 //def results = Contig.findAllByContig_idInList(object_list)
 		 def file_builder=""
      	 results.each {

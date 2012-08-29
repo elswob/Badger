@@ -219,7 +219,7 @@
       <td>  
     <h1>Choose a data set:</h1>
     <select name = dataSet>
-      <option value="UniGenes">EST UniGenes</option>
+      <option value="Transcripts">Transcripts</option>
       <%--
       <option value="Genes">Gene annotations</option>    
       <option value="ncRNA">ncRNA</option>
@@ -319,7 +319,7 @@
   </div>
 
   <% 
-  def jsonData = uniGeneData.encodeAsJSON(); 
+  def jsonData = transData.encodeAsJSON(); 
   def funjsonData = funData.encodeAsJSON(); 
   //println jsonData;
   //println ecjsonData;
@@ -386,7 +386,7 @@
             $('#chart').bind('jqplotDataClick',
 	    function (ev, seriesIndex, pointIndex, data) {
 		//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-		window.open("/search/unigene_info?contig_id=" + data[2]);
+		window.open("/search/trans_info?contig_id=" + data[2]);
 	    	}
 	    );      
                     

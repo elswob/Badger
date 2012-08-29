@@ -11,6 +11,7 @@ if (pubdata.exists()){pubdata.delete()}
 
 getPub()
 def getPub(){
+	println "Adding publication data..."
 	//get the pubmed data
 	def utils = "http://www.ncbi.nlm.nih.gov/entrez/eutils";
 	def db = 'PubMed';

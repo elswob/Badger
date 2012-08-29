@@ -12,16 +12,16 @@ class BlastController {
     	// set the database files
     	def dbfile
     	println "datalib = "+params.datalib
-    	if (params.datalib == "genome"){ dbfile = "velvet_khmer_k41.fa"}
-    	if (params.datalib == "bacs"){ dbfile = "bacs_renamed.fa"}
-    	if (params.datalib == "unigenes"){ dbfile = "sequence.fasta.cap.contigs_and_singlets_renamed.fa"}
+    	if (params.datalib == "genome"){ dbfile = grailsApplication.config.Genome}
+    	else if (params.datalib == "bacs"){ dbfile = grailsApplication.config.BACs}
+    	else if (params.datalib == "trans"){ dbfile = grailsApplication.config.Transcripts}
         def db = "data/"+dbfile
         def blast_file = dbfile
         def program = grailsApplication.config.blastPath+params.PROGRAM
         def eval = params.EXPECT
         def blastSeq = params.blastId
 
-        //check if file has been uploaded
+        //check if a file has been uploaded
         def upload = request.getFile('myFile')
 		if (!upload.empty) {
 				println "Uploaded file for BLAST"
@@ -43,8 +43,7 @@ class BlastController {
             unGap = ""
         }
         println "seq size = "+blastSeq.size()
-
-        	
+       	
         //remove any whitespace in user input fasta file
         def blastSeqTrim = blastSeq.trim()
         List li=new ArrayList();
@@ -116,8 +115,8 @@ class BlastController {
 								//it = it.replaceAll(/$linker/,"<a name=\"$linker\">$linker</a>")
 								it = "<a name=\"$linker\"></a>" + it
 								//add links
-								if (params.datalib == "unigenes"){
-									it = it.replaceAll(/\s(contig_\d+)/, "<a href=\"/search/unigene_info?contig_id=\$1\">\$1</a>") 
+								if (params.datalib == "trans"){
+									it = it.replaceAll(/\s(contig_\d+)/, "<a href=\"/search/trans_info?contig_id=\$1\">\$1</a>") 
 								}
 								if (params.datalib == "genome"){
 									it = it.replaceAll(/\s(contig_.*?)/, "<a href=\"/search/contig_info?contig_id=\$1\">\$1</a>") 
@@ -162,8 +161,8 @@ class BlastController {
 								it = it.replaceAll(/>/,"<a name=\"$linker\">></a>")                       
 								//transform IDs to links but not before the first alignment
 									//add links
-								if (params.datalib == "unigenes"){
-									it = it.replaceAll(/\s(contig_\d+)/, "<a href=\"/search/unigene_info?contig_id=\$1\">\$1</a>") 
+								if (params.datalib == "trans"){
+									it = it.replaceAll(/\s(contig_\d+)/, "<a href=\"/search/trans_info?contig_id=\$1\">\$1</a>") 
 								}
 								if (params.datalib == "genome"){
 									it = it.replaceAll(/\s(contig_\d+)/, "<a href=\"/search/contig_info?contig_id=\$1\">\$1</a>") 

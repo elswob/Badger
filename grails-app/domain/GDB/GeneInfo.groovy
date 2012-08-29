@@ -13,7 +13,7 @@ class GeneInfo {
     Float coverage
     int rep
     static constraints = {
-        gene_id(blank:false)
+        gene_id(blank:false, unique: true)
         source(blank:false)
         contig_id(blank:false)
         start(blank:false)

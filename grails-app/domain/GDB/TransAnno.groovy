@@ -1,6 +1,6 @@
 package GDB
 
-class UnigeneAnno {
+class TransAnno {
     String contig_id
     String anno_db
     String anno_id

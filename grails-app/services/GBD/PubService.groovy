@@ -20,7 +20,7 @@ class PubService {
 		//make sure all words are used in search
 		query = query.replace(" ","+AND+")
 		def esearch = "$utils/esearch.fcgi?db=$db&retmax=100000&term=$query";
-		println "Searching PubMed for all articles containing '"+grailsApplication.config.species+"'"
+		println "Searching PubMed for all articles containing $query"
 		println "Getting IDs...";
 		println esearch
 		def idlist = new File("/tmp/idlist.txt")
