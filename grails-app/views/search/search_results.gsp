@@ -320,7 +320,7 @@
 		    			Found ${uniques} contigs with ${results.size()} top hits from distinct databases
 		    		</td><td><center>
 		    		<!-- download contigs form gets fileName value from get_table_data() -->
-		    		<g:form name="fileDownload" url="[controller:'FileDownload', action:trans_contig_download']">
+		    		<g:form name="fileDownload" url="[controller:'FileDownload', action:'trans_contig_download']">
 		    			<g:hiddenField name="fileId" value=""/>
 		    			<g:hiddenField name="fileName" value="${term}"/>
 		    			<input align="right" type="submit" value="Download contigs in table" class="mybuttons" onclick="get_table_data()"/>

@@ -53,7 +53,7 @@ def getPub(){
 def addPub(pubFile){
 	def dataSource = ctx.getBean("dataSource")
 	def sql = new Sql(dataSource)
-	println "Deleting data..."
+	println "Deleting old data..."
 	def delsql = "delete from Publication;";
 	sql.execute(delsql)
 	println "Adding data to db..."

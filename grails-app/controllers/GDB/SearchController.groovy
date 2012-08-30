@@ -5,6 +5,7 @@ import groovy.sql.Sql
 
 class SearchController {
 	def matcher
+	def grailsApplication
 	javax.sql.DataSource dataSource
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def index() {
@@ -16,7 +17,6 @@ class SearchController {
      	 def results = sql.rows(sqlsearch)
      	 def funresults = sql.rows(funsearch)
      	 def blastMap = [:]
-     	 def a8rMap = [:]
      	 if (grailsApplication.config.t.blast.size()>0){
      	 	for(item in grailsApplication.config.t.blast){
      	 		item = item.toString()
@@ -24,6 +24,7 @@ class SearchController {
      	 		blastMap[splitter[0]] = splitter[1]
      	 	}
      	 }
+     	 println "blastMap = "+blastMap
      	 return [ transData: results, funData: funresults, blastMap: blastMap]
     }
     @Secured(['ROLE_USER','ROLE_ADMIN'])
@@ -111,7 +112,7 @@ class SearchController {
 			return [ anno: "yes", results: results, term : searchId , search_time: duration ]
 			
         //check for transciptome annotation data
-        }else if (table == 'Trans' || params.search =='uni'){
+        }else if (table == 'Transcripts' || params.search =='trans'){
         	def sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score from trans_anno where "+annoSearch+" and "+whatSearch+ "'${searchId}';"
         	def chartsearch = "select distinct on (trans_anno.contig_id,gc,length,coverage,score) trans_anno.contig_id,gc,length,coverage,score from trans_anno,trans_info where "+annoSearch+" and "+whatSearch+ "'${searchId}' and trans_info.contig_id = trans_anno.contig_id;"
         	println sqlsearch
@@ -169,10 +170,21 @@ class SearchController {
     }
     def trans_info = {
     	def sql = new Sql(dataSource)
+    	def blastDBs = "anno_db = "
+     	if (grailsApplication.config.t.blast.size()>0){
+     		for(item in grailsApplication.config.t.blast){
+     		item = item.toString()
+     			def splitter = item.split("=")
+     			blastDBs += "'"+splitter[0]+"' or anno_db = "
+     			println "adding "+splitter[0]
+     		}
+     	}
+     	blastDBs = blastDBs[0..-15]
+     	def blastsql = "select * from trans_anno where ("+blastDBs+") and contig_id = '"+params.contig_id+"' order by score desc;";
+    	println blastsql
+     	def blast_results = sql.rows(blastsql)
     	def iprsql = "select * from trans_anno where anno_id ~ '^IPR' and contig_id = '"+params.contig_id+"' order by score;";
     	def ipr_results = sql.rows(iprsql)
-    	def blastsql = "select * from trans_anno where (anno_db = 'SwissProt' or anno_db = 'EST others' or anno_db = 'UniRef90') and contig_id = '"+params.contig_id+"' order by score desc;";
-    	def blast_results = sql.rows(blastsql)
     	def a8rsql = "select * from trans_anno where (anno_db = 'EC' or anno_db = 'GO' or anno_db = 'KEGG') and contig_id = '"+params.contig_id+"' order by score desc;";
     	def a8r_results = sql.rows(a8rsql)
         def info_results = TransInfo.findAllByContig_id(params.contig_id)

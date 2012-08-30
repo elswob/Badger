@@ -11,10 +11,14 @@ class BlastController {
     def runBlast = {
     	// set the database files
     	def dbfile
-    	println "datalib = "+params.datalib
-    	if (params.datalib == "genome"){ dbfile = grailsApplication.config.Genome}
-    	else if (params.datalib == "bacs"){ dbfile = grailsApplication.config.BACs}
-    	else if (params.datalib == "trans"){ dbfile = grailsApplication.config.Transcripts}
+    	def dataSplit 
+    	println "test = "+dataSplit[2]
+    	if (isLoggedIn()) {
+    		dataSplit = grailsApplication.config.pub."${params.datalib}".split(",")
+     	}else{
+     		dataSplit = grailsApplication.config.pub."${params.datalib}".split(",")
+     	}
+     	println "blastDB = "+params.datalib+" file = "+dbfile
         def db = "data/"+dbfile
         def blast_file = dbfile
         def program = grailsApplication.config.blastPath+params.PROGRAM
@@ -160,16 +164,19 @@ class BlastController {
 								def linker = matcher[0][1]
 								it = it.replaceAll(/>/,"<a name=\"$linker\">></a>")                       
 								//transform IDs to links but not before the first alignment
-									//add links
-								if (params.datalib == "trans"){
-									it = it.replaceAll(/\s(contig_\d+)/, "<a href=\"/search/trans_info?contig_id=\$1\">\$1</a>") 
-								}
-								if (params.datalib == "genome"){
-									it = it.replaceAll(/\s(contig_\d+)/, "<a href=\"/search/contig_info?contig_id=\$1\">\$1</a>") 
-								}
-								if (params.datalib == "bacs"){
-									it = it.replaceAll(/\sgi_(\d+)_.*/, "<a href=\"http://www.ncbi.nlm.nih.gov/nuccore/\$1\">\$1</a>") 
-								}	
+								//add links
+								def regex = grailsApplication.config.priv.file"${params.datalib}".header
+								def link = grailsApplication.config.priv.file"${params.datalib}".link
+								it.replaceAll(/\s(regex)/, "<a href=\""+link+"\$1\">\$1</a>")
+								//if (params.datalib == "trans"){
+								//	it = it.replaceAll(/\s(contig_\d+)/, "<a href=\"/search/trans_info?contig_id=\$1\">\$1</a>") 
+								//}
+								//if (params.datalib == "genome"){
+								//	it = it.replaceAll(/\s(contig_\d+)/, "<a href=\"/search/contig_info?contig_id=\$1\">\$1</a>") 
+								//}
+								//if (params.datalib == "bacs"){
+								//	it = it.replaceAll(/\sgi_(\d+)_.*/, "<a href=\"http://www.ncbi.nlm.nih.gov/nuccore/\$1\">\$1</a>") 
+								//}	
 								oldId = newId
 								newId = matcher[0][1]                    
 							}
