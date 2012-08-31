@@ -5,19 +5,41 @@ import grails.plugins.springsecurity.Secured
 class BlastController { 
 	def grailsApplication
     def info = {}
-    def index() { }
+    def index() { 
+    	def pubBlastFiles = [:]
+    	def privBlastFiles = [:]
+    	if (grailsApplication.config.pub){
+    		def pubLocations = grailsApplication.config.pub
+    		pubLocations.each {
+    			if (it.value.size() >0){
+    				pubBlastFiles."${it.key}" = it.value 
+    			}
+    		}
+    	}
+    	if (grailsApplication.config.priv){
+    		def privLocations = grailsApplication.config.priv
+    		privLocations.each {
+    			if (it.value.size() >0){
+    				privBlastFiles."${it.key}" = it.value 
+    			}
+    		}
+    	}
+    	println "public blastFiles = "+pubBlastFiles
+    	println "private blastFiles = "+privBlastFiles
+    	return[pubBlastFiles: pubBlastFiles, privBlastFiles: privBlastFiles]
+    }
     def blastError = {
     }
     def runBlast = {
     	// set the database files
     	def dbfile
     	def dataSplit 
-    	println "test = "+dataSplit[2]
     	if (isLoggedIn()) {
-    		dataSplit = grailsApplication.config.pub."${params.datalib}".split(",")
+    		dataSplit = grailsApplication.config.priv."${params.datalib}".split(",")
      	}else{
      		dataSplit = grailsApplication.config.pub."${params.datalib}".split(",")
      	}
+     	dbfile = dataSplit[0]
      	println "blastDB = "+params.datalib+" file = "+dbfile
         def db = "data/"+dbfile
         def blast_file = dbfile
@@ -115,19 +137,11 @@ class BlastController {
 							if ((matcher = it =~ /(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*)/)){
 								//define link
 								def linker = matcher[0][2]
-								def marker = matcher[0][3]
-								//it = it.replaceAll(/$linker/,"<a name=\"$linker\">$linker</a>")
 								it = "<a name=\"$linker\"></a>" + it
 								//add links
-								if (params.datalib == "trans"){
-									it = it.replaceAll(/\s(contig_\d+)/, "<a href=\"/search/trans_info?contig_id=\$1\">\$1</a>") 
-								}
-								if (params.datalib == "genome"){
-									it = it.replaceAll(/\s(contig_.*?)/, "<a href=\"/search/contig_info?contig_id=\$1\">\$1</a>") 
-								}
-								if (params.datalib == "bacs"){
-									it = it.replaceAll(/\sgi_(\d+)_.*/, "<a href=\"http://www.ncbi.nlm.nih.gov/nuccore/\$1\">\$1</a>") 
-								}	
+								def regex = '\\s(' + dataSplit[1].trim() + ')'
+								def link = dataSplit[2].trim()
+								it = it.replaceAll(regex, "<a href=\"$link\$1\">\t$linker</a>")	
 								//get id, score start and stop
 								singleHit.id=matcher[0][2]
 								singleHit.start=matcher[0][7]
@@ -164,21 +178,13 @@ class BlastController {
 								def linker = matcher[0][1]
 								it = it.replaceAll(/>/,"<a name=\"$linker\">></a>")                       
 								//transform IDs to links but not before the first alignment
-								//add links
-								def regex = grailsApplication.config.priv.file"${params.datalib}".header
-								def link = grailsApplication.config.priv.file"${params.datalib}".link
-								it.replaceAll(/\s(regex)/, "<a href=\""+link+"\$1\">\$1</a>")
-								//if (params.datalib == "trans"){
-								//	it = it.replaceAll(/\s(contig_\d+)/, "<a href=\"/search/trans_info?contig_id=\$1\">\$1</a>") 
-								//}
-								//if (params.datalib == "genome"){
-								//	it = it.replaceAll(/\s(contig_\d+)/, "<a href=\"/search/contig_info?contig_id=\$1\">\$1</a>") 
-								//}
-								//if (params.datalib == "bacs"){
-								//	it = it.replaceAll(/\sgi_(\d+)_.*/, "<a href=\"http://www.ncbi.nlm.nih.gov/nuccore/\$1\">\$1</a>") 
-								//}	
+								//add links and trim to remove whitespace
+								def regex = '\\s' + dataSplit[1].trim()
+								def link = dataSplit[2].trim()
+								it = it.replaceAll(regex, "<a href=\"$link\$1\">$linker</a>")
 								oldId = newId
-								newId = matcher[0][1]                    
+								newId = matcher[0][1]        
+								
 							}
 							if ((matcher = it =~ /\s+Score\s=\s+(.*?)\s+bits.*/)){
 								//check the alignment has been parsed

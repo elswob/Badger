@@ -36,7 +36,7 @@
          data = ${jsonData};
          //check for no hits
          //alert(data.length)
-         if (data.length >1){
+         if (data.length >0){
 			 var paperWidth = $('#blast_fig').width() - 10;
 			 var drawing = new BioDrawing();
 			 drawing.start(paperWidth, 'blast_fig');
@@ -104,7 +104,7 @@
 			    <input align="right" type="submit" value="Download BLAST result" class="mybuttons"/>
 	  </g:form>
 	  </td>
-      <% if (blast_file == 'genome' || blast_file == 'trans'){ %>
+      <% if (blast_file == 'Genome' || blast_file == 'Transcriptome'){ %>
       	<td>
       		<g:form name="blastDownload" url="[controller:'FileDownload', action:'blast_contig_download']">
 			    <g:hiddenField name="fileId" value=""/>

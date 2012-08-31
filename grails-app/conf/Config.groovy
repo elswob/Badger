@@ -1,7 +1,14 @@
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
+
 grails.config.locations = ["file:${userHome}/GDB.config.properties"]
+//grails.config.locations = ["file:${userHome}/GDB.config.groovy"]
 println "Using external configuration file "+grails.config.locations	
+
+//pub.files = [Transcripts: ["L_rubellus/small_trans.fa", "Contig\\d+", "/search/trans_info?contig_id="],
+//			Contigs: ["L_rubellus/contigs.fa", "contig_\\d+", "/search/contig_info?contig_id="]
+//			]
+
 //projectID = "Bicyclus anynana"
 // grails.config.locations = [ "classpath:${appName}-config.properties",
 //                             "classpath:${appName}-config.groovy",

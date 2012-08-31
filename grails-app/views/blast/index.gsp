@@ -30,16 +30,13 @@
     <g:link controller="blast" action="info" fragment="db">Database</g:link>
     <select name = "datalib">
     <sec:ifLoggedIn>
-    	 <!--g:if test="${grailsApplication.config.priv.Transcripts.size() > 0}"><option value="Transcripts">Transcripts</option></g:if>
-    	 <g:if test="${grailsApplication.config.priv.BACs.size() > 0}"><option value="BACs">BACs</option></g:if>
-    	 <g:if test="${grailsApplication.config.priv.Genome.size() > 0}"><option value="Genome">Genome contigs</option></g:if>
-    	 <g:if test="${grailsApplication.config.priv.Genes.size() > 0}"><option value="Genes">Genes</option></g:if-->
+    	<g:each var="res" in="${privBlastFiles}">
+    		<option value="${res.key}"/> ${res.key}</option>
+		</g:each>
     </sec:ifLoggedIn>
-    
-    <g:if test="${grailsApplication.config.pub.Transcripts.size() > 0}"><option value="Transcripts">Transcripts</option></g:if>
-    <g:if test="${grailsApplication.config.pub.BACs.size() > 0}"><option value="BACs">BACs</option></g:if>
-    <g:if test="${grailsApplication.config.pub.Genome.size() > 0}"><option value="Genome">Genome contigs</option></g:if>
-    <g:if test="${grailsApplication.config.pub.Genes.size() > 0}"><option value="Genes">Genes</option></g:if>
+    <g:each var="res" in="${pubBlastFiles}">
+    	<option value="${res.key}" /> ${res.key}</option>
+	</g:each>
     </select>
     
     <input TYPE="checkbox" NAME="UNGAPPED_ALIGNMENT" VALUE="is_set">
