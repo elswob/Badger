@@ -15,6 +15,11 @@ class BootStrap {
                 servletContext.setAttribute("env", "dev")
                 def userRole = Security.SecRole.findByAuthority('ROLE_USER') ?: new Security.SecRole(authority: 'ROLE_USER').save(failOnError: true)
                 def adminRole = Security.SecRole.findByAuthority('ROLE_ADMIN') ?: new Security.SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)     
+                
+                def adminUser = Security.SecUser.findByUsername('admin') ?: new Security.SecUser( username: 'admin', password: 'admin',enabled: true).save(failOnError: true)
+                if (!adminUser.authorities.contains(adminRole)) {
+                	Security.SecUserSecRole.create adminUser, adminRole
+                }
             }
         }       
     }

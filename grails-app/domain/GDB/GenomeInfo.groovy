@@ -1,6 +1,6 @@
 package GDB
 
-class Contig {
+class GenomeInfo {
     String contig_id
     String sequence
     Float gc

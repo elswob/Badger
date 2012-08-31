@@ -2,4 +2,4 @@
 # run multiple scripts in the dev environment
 #grails run-script userScripts/someScript.groovy userScripts/otherScript.groovy
 
-grails prod run-script scripts/AddPublicationData.groovy  scripts/AddTransContigs.groovy scripts/AddTransBlastData.groovy
+grails prod run-script scripts/AddPublicationData.groovy  scripts/AddSequenceData.groovy scripts/AddTransBlastData.groovy

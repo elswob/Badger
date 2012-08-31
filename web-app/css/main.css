@@ -42,7 +42,7 @@ body {
     padding: 0.5em 0.75em;
 	color: #333333;
 	margin: 0 auto;
-	max-width: 80%;
+	max-width: 90%;
 	font-size: 11pt;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
 	   -moz-box-shadow: 0 0 0.3em #255b17;
@@ -811,12 +811,12 @@ position:absolute;
 
 /* highlight anchor/fragment */
 h3:target {
-	border:3px solid cyan;
+	border:3px solid green;
 	background: #ACDEEF;
 }
 
 tr:target {
-	outline: solid #ACDEEF;
+	outline: solid green;
 }
 
 /* popup text on hover */
