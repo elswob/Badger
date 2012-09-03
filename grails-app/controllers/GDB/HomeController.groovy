@@ -17,8 +17,10 @@ class HomeController {
  	 def newsData = News.findAllByTitleString(params.newsTitle)
  	 return [newsData: newsData]
  }
+ @Secured(['ROLE_ADMIN'])
  def addNews = {
  }
+ @Secured(['ROLE_ADMIN'])
  def addedNews = {
  	 def dataMap = [:]
  	 def data
@@ -52,11 +54,13 @@ class HomeController {
  	 new News(dataMap).save()
 	 return [newsTitle: title, newsData: data, newsDate: date]
  }
+ @Secured(['ROLE_ADMIN'])
  def editNews = {
  	 println "Editing "+params.titleString
  	 def newsData = News.findAllByTitleString(params.titleString)
  	 return [newsData: newsData] 
  }
+ @Secured(['ROLE_ADMIN'])
  def editedNews = {
  	 //delete old entry
  	 def newsData = News.findAllByTitleString(params.newsTitle)
@@ -95,11 +99,13 @@ class HomeController {
  	 new News(dataMap).save()
 	 return [newsTitle: title, newsData: data, newsDate: date]
  }
+ @Secured(['ROLE_ADMIN'])
  def deleteNews = {
  	 println "Deleting "+params.titleString
  	 def newsData = News.findAllByTitleString(params.titleString)
  	 return [newsData: newsData] 
  }
+ @Secured(['ROLE_ADMIN'])
  def deletedNews = {
  	 def newsData = News.findAllByTitleString(params.newsTitle)
  	 def delData = News.get(newsData.id[0])
