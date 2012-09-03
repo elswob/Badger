@@ -8,16 +8,16 @@ class BlastController {
     def index() { 
     	def pubBlastFiles = [:]
     	def privBlastFiles = [:]
-    	if (grailsApplication.config.pub){
-    		def pubLocations = grailsApplication.config.pub
+    	if (grailsApplication.config.blast.pub){
+    		def pubLocations = grailsApplication.config.blast.pub
     		pubLocations.each {
     			if (it.value.size() >0){
     				pubBlastFiles."${it.key}" = it.value 
     			}
     		}
     	}
-    	if (grailsApplication.config.priv){
-    		def privLocations = grailsApplication.config.priv
+    	if (grailsApplication.config.blast.priv){
+    		def privLocations = grailsApplication.config.blast.priv
     		privLocations.each {
     			if (it.value.size() >0){
     				privBlastFiles."${it.key}" = it.value 
@@ -35,9 +35,13 @@ class BlastController {
     	def dbfile
     	def dataSplit 
     	if (isLoggedIn()) {
-    		dataSplit = grailsApplication.config.priv."${params.datalib}".split(",")
+    		if (grailsApplication.config.blast.priv."${params.datalib}"){
+    			dataSplit = grailsApplication.config.blast.priv."${params.datalib}".split(",")
+    		}else{
+    			dataSplit = grailsApplication.config.blast.pub."${params.datalib}".split(",")
+    		}
      	}else{
-     		dataSplit = grailsApplication.config.pub."${params.datalib}".split(",")
+     		dataSplit = grailsApplication.config.blast.pub."${params.datalib}".split(",")
      	}
      	dbfile = dataSplit[0]
      	println "blastDB = "+params.datalib+" file = "+dbfile

@@ -20,7 +20,7 @@
 </head>
 <body>
   <div class="header" role="banner">
-      <a href="/home/index"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="padding:10px;" alt="b_anynana" align="left"/></a>
+      <a href="/"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="padding:10px;" alt="b_anynana" align="left"/></a>
       <font size="6"><br>The <font size="7"><i>${grailsApplication.config.projectID}</i></font> genome project</font>
   </div>
   <div class="footer" role="contentinfo">
@@ -35,7 +35,7 @@
 	   </sec:ifNotLoggedIn>
 	   <sec:ifLoggedIn>
 		<li><g:link controller="home" class="${pageProperty(name:'page.home')}">Home</g:link></li>
-		<li><g:link controller="home" action="consortium" class="${pageProperty(name:'page.consortium')}">The Consortium</g:link></li>
+		<li><g:link controller="home" action="members" class="${pageProperty(name:'page.members')}">Project Members</g:link></li>
 		<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>
 		<li><g:link controller="search" class="${pageProperty(name:'page.search')}">Search</g:link>
 			<ul>

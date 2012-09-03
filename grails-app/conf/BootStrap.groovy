@@ -22,7 +22,7 @@ class BootStrap {
                 	Security.SecUserSecRole.create adminUser, adminRole
                 }
                 //add some first data to news
-                def firstNews = new GDB.News(titleString: 'Site created', dataString: 'Site created', dateString: new Date(),enabled: true).save(failOnError: true)
+                def firstNews = new GDB.News(titleString: 'GDB created', dataString: 'The GDB database and web site were created', dateString: new Date(),enabled: true).save(failOnError: true)
             }
         }       
     }

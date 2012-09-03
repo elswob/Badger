@@ -14,8 +14,8 @@ class HomeController {
  }
  def blog() {}
  def news = {
- 	 def newsData = News.findAllByTitleString(params.newsTitle)
- 	 return [newsData: newsData]
+ 	 def newsData = News.findAll(sort:"dateString",order:"desc")
+ 	 return [newsData: newsData, highlight: params.newsTitle]
  }
  @Secured(['ROLE_ADMIN'])
  def addNews = {
@@ -157,5 +157,30 @@ class HomeController {
 	}
  }
  def consortium () {}
- def download () {}
+ def download = {
+ 	 def pubDownloadFiles = [:]
+     def privDownloadFiles = [:]
+     def dataSplit
+ 	 if (grailsApplication.config.download.pub){
+ 	 	 def pubLocations = grailsApplication.config.download.pub
+    	 pubLocations.each {
+    	 	 if (it.value.size() >0){
+    	 	 	 dataSplit = it.value.split(",")
+    	 	 	 pubDownloadFiles."${it.key}" = [dataSplit[0].trim(),dataSplit[1].trim()]
+    		}
+    	}
+    }
+    if (grailsApplication.config.download.priv){
+ 	 	 def privLocations = grailsApplication.config.download.priv
+    	 privLocations.each {
+    	 	 if (it.value.size() >0){
+    	 	 	 dataSplit = it.value.split(",")
+    	 	 	 privDownloadFiles."${it.key}" = [dataSplit[0].trim(),dataSplit[1].trim()] 
+    		}
+    	}
+    }
+    println "Public download files = "+pubDownloadFiles
+    println "Private download files = "+privDownloadFiles
+    return [ pubDownloadFiles: pubDownloadFiles, privDownloadFiles: privDownloadFiles]
+ }
 }

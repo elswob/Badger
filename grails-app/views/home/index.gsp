@@ -23,7 +23,7 @@
 			<h1>Latest News</h1>
 			<sec:ifAnyGranted roles="ROLE_ADMIN">
 				<g:form action="addNews" controller="home">
-					(<a href="#" onclick="parentNode.submit()">add news</a>)
+					(<a href="#" onclick="parentNode.submit()">add news item</a>)
 				</g:form>
 				<br>
 			</sec:ifAnyGranted>
@@ -31,22 +31,24 @@
 		 		  
 		  <table>	  
 		  <g:each var="res" in="${newsData}">
-		  <tr><td>
-		  <div class="inline">
-			<b><g:formatDate format="yyyy MMM d" date="${res.dateString}"/></b>
-			<sec:ifAnyGranted roles="ROLE_ADMIN">	    
-				<g:form action="editNews" controller="home" params="[titleString: res.titleString]" >
-					(<a href="#" onclick="parentNode.submit()">edit</a> /
-				</g:form>  	
-				<g:form action="deleteNews" controller="home" params="[titleString: res.titleString]" >
-					<a href="#" onclick="parentNode.submit()">delete</a>)
-				</g:form> 
-				<br>
-			</sec:ifAnyGranted>
-			</div>
-			<br>
-			<g:link action="news" params="${[newsTitle : res.titleString]}">${res.titleString} </g:link>
-		  </td></tr>
+			  <tr>
+				<td>
+				  <div class="inline">
+					<sec:ifAnyGranted roles="ROLE_ADMIN">	    
+						<g:form action="editNews" controller="home" params="[titleString: res.titleString]" >
+							<a href="#" onclick="parentNode.submit()"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
+						</g:form>  	
+						<g:form action="deleteNews" controller="home" params="[titleString: res.titleString]" >
+							<a href="#" onclick="parentNode.submit()"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
+						</g:form> 
+					</sec:ifAnyGranted>
+					<b><g:link action="news" params="${[newsTitle : res.titleString]}"><g:formatDate format="yyyy MMM d" date="${res.dateString}"/>:</b></g:link>
+
+					</td><td>
+					${res.titleString} 
+					</div>
+				  </td>
+			  </tr>
 		  </g:each>
 		  </table>
 	  </div>

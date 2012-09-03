@@ -11,14 +11,20 @@
   <body>
    
 <h1><i>${grailsApplication.config.projectID}</i> news:</h1>
-
 <table>
 <g:each var="res" in="${newsData}">
-<tr><td>
-<h3 id ="${res.dateString}"><b><g:formatDate format="yyyy MMM d" date="${res.dateString}"/></b>: ${res.titleString}.</h3>
-<p>${res.dataString}.
-</td></tr>
-</td></tr>
+	<g:if test = "${res.titleString == highlight}">
+		<tr style="background: #E1F2B6">
+	</g:if>
+	<g:else>
+		<tr>
+	</g:else>
+		<td>	
+			<h3 id ="${res.dateString}"><b><g:formatDate format="yyyy MMM d" date="${res.dateString}"/></b>: ${res.titleString}</h3>
+			<p>${res.dataString}
+		</td>
+	</tr>
+	
 </g:each>
 </table>
 
