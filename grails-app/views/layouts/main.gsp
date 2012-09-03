@@ -20,7 +20,7 @@
 </head>
 <body>
   <div class="header" role="banner">
-      <a href="/"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="padding:10px;" alt="b_anynana" align="left"/></a>
+      <a href="/home/index"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="padding:10px;" alt="b_anynana" align="left"/></a>
       <font size="6"><br>The <font size="7"><i>${grailsApplication.config.projectID}</i></font> genome project</font>
   </div>
   <div class="footer" role="contentinfo">

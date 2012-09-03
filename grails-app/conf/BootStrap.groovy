@@ -21,6 +21,8 @@ class BootStrap {
                 if (!adminUser.authorities.contains(adminRole)) {
                 	Security.SecUserSecRole.create adminUser, adminRole
                 }
+                //add some first data to news
+                def firstNews = new GDB.News(titleString: 'Site created', dataString: 'Site created', dateString: new Date(),enabled: true).save(failOnError: true)
             }
         }       
     }

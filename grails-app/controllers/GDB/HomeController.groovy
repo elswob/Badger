@@ -7,9 +7,9 @@ class HomeController {
  def grailsApplication
  javax.sql.DataSource dataSource
 
- //@Secured(['ROLE_'])
- def index() {
- 	 def newsData = News.findAll(sort:"dateString")
+ //@Secured(['ROLE_ADMIN','ROLE_USER'])
+ def index = {
+ 	 def newsData = News.findAll(sort:"dateString",order:"desc")
  	 return [newsData: newsData] 	 
  }
  def blog() {}
