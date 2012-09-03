@@ -119,6 +119,7 @@ def addPub(pubFile){
 			if ((matcher = line =~ /<Day>(.*?)<\/Day>/)){
 				day = matcher[0][1]
 				dateString = year + "/" + month + "/" + day
+				println "dateString = "+dateString
 				pubMap.dateString = dateString
 			}       	
 		}

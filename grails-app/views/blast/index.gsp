@@ -46,7 +46,7 @@
     <g:link controller="blast" action="info" fragment="filt">filtered</g:link>
     for low complexity regions by default.
     <br>Enter here your input data as sequence in <g:link controller="blast" action="info" fragment="fasta">FASTA</g:link> format or upload a file <input type="file" name="myFile"/><br>
-    <g:textArea name="blastId" style="width: 90%; height: 200px; border: 3px solid #cccccc; padding: 5px;"/><br>
+    <g:textArea name="blastId" style="width: 100%; height: 40px; border: 3px solid #cccccc; padding: 5px;"/><br>
     <p align="center">
 
     <br>Alignment view
