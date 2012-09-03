@@ -31,6 +31,7 @@
 		<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>
 		<li><g:link controller="search" action="trans_search" class="${pageProperty(name:'page.search')}">Search</g:link></li>
 		<li><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link></li>
+		<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link></li>
 		<li><g:link controller="login" class="${pageProperty(name:'page.login')}">Log in</g:link></li>
 	   </sec:ifNotLoggedIn>
 	   <sec:ifLoggedIn>
