@@ -156,7 +156,30 @@ class HomeController {
 		}
 	}
  }
- def consortium () {}
+
+ def members = {
+ 	 def memberData = [:]
+ 	 def memberLoc = [:]
+ 	 if (grailsApplication.config.mem.person){
+    	 grailsApplication.config.mem.person.each {
+    	 	 if (it.value.size() >0){
+    	 	 	 def dataSplit = it.value.split(",")
+    	 	 	 memberData."${it.key}" = [dataSplit[0].trim(),dataSplit[1].trim(),dataSplit[2].trim(),dataSplit[3].trim()]
+    		}
+    	}
+    }
+    if (grailsApplication.config.mem.location){
+    	 grailsApplication.config.mem.location.each {
+    	 	 if (it.value.size() >0){
+    	 	 	 def dataSplit = it.value.split(",")
+    	 	 	 memberLoc."${it.key}" = [dataSplit[0].trim(),dataSplit[1].trim()]
+    		}
+    	}
+    }
+    //println "Member data = "+memberData
+    //println "Member locations = "+memberLoc
+    return [ memberData: memberData, memberLoc: memberLoc]
+ }
  def download = {
  	 def pubDownloadFiles = [:]
      def privDownloadFiles = [:]
