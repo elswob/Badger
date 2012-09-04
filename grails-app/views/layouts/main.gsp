@@ -20,23 +20,49 @@
 </head>
 <body>
   <div class="header" role="banner">
-      <a href="/"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="padding:10px;" alt="b_anynana" align="left"/></a>
+      <a href="/"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="padding:10px;" alt="b_anynana" align="left" height="120px"/></a>
       <font size="6"><br>The <font size="7"><i>${grailsApplication.config.projectID}</i></font> genome project</font>
   </div>
   <div class="footer" role="contentinfo">
     <div class="navbar">
 	<ul>
+	   <li><g:link controller="home" class="${pageProperty(name:'page.home')}">Home</g:link></li>
 	   <sec:ifNotLoggedIn>
-		<li><g:link controller="home" class="${pageProperty(name:'page.home')}">Home</g:link></li>
-		<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>
+		
+		<!--li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>
 		<li><g:link controller="search" action="trans_search" class="${pageProperty(name:'page.search')}">Search</g:link></li>
 		<li><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link></li>
-		<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link></li>
+		<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link></li-->
+		
+		<% //add public internal links to navigation bar 
+		if (grailsApplication.config.i.links.pub){
+    		 grailsApplication.config.i.links.pub.each {
+    			if (it.value.size() >0){
+    				def dataSplit = it.value.split(",")
+    				%>
+    				<li><g:link controller="${dataSplit[1].trim()}" action="${dataSplit[2].trim()}" class="${pageProperty(name:'page.${dataSplit[1].trim()}')}">${dataSplit[0].trim()}</g:link></li>
+    			<%
+    			}
+    		}
+    	}
+    	%>
+		
+		<% //add public external links to navigation bar 
+		if (grailsApplication.config.e.links.pub){
+    		 grailsApplication.config.e.links.pub.each {
+    			if (it.value.size() >0){
+    				def dataSplit = it.value.split(",")
+    				println "<li><a href =\"${dataSplit[1].trim()}\" target='_blank'>${dataSplit[0].trim()}</a></li>"
+    			}
+    		}
+    	}
+    	%>
+		
 		<li><g:link controller="login" class="${pageProperty(name:'page.login')}">Log in</g:link></li>
 	   </sec:ifNotLoggedIn>
+	   
 	   <sec:ifLoggedIn>
-		<li><g:link controller="home" class="${pageProperty(name:'page.home')}">Home</g:link></li>
-		<li><g:link controller="home" action="members" class="${pageProperty(name:'page.members')}">Project Members</g:link></li>
+		<!--li><g:link controller="home" action="members" class="${pageProperty(name:'page.members')}">Project Members</g:link></li>
 		<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>
 		<li><g:link controller="search" class="${pageProperty(name:'page.search')}">Search</g:link>
 			<ul>
@@ -46,17 +72,57 @@
 				<%-- li><g:link controller="search" action="trans_search" class="${pageProperty(name:'page.search')}">Transposons</g:link></li --%>
 			</ul>
 		</li>       
-		<li><g:link controller="home" class="${pageProperty(name:'page.browse')}">Browse</g:link>
-			<ul>
-				<li><a href="http://salmo.bio.ed.ac.uk/fgb2/gbrowse/B_anynana_BACs/" target='_blank'>BACs</a></li>
-			</ul>
-		</li>
 		<li><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link></li>
-		<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link></li>
-		<%-- <li><g:link controller="home" class="${pageProperty(name:'page.download')}">Download</g:link></li>--%>
-		<li><a href ="https://www.wiki.ed.ac.uk/display/BAGW/Home" target='_blank'>Wiki</a></li>
-		<li><a href ="https://groups.google.com/group/bicyclus-anynana-genome?hl=en" target='_blank'>Google Group</a></li>
-		<li><g:link controller="logout">Log out</g:link></li>
+		<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link></li-->
+		
+		<% //add public internal links to navigation bar 
+		if (grailsApplication.config.i.links.pub){
+    		 grailsApplication.config.i.links.pub.each {
+    			if (it.value.size() >0){
+    				def dataSplit = it.value.split(",")
+    				%>
+    				<li><g:link controller="${dataSplit[1].trim()}" action="${dataSplit[2].trim()}" class="${pageProperty(name:'page.${dataSplit[1].trim()}')}">${dataSplit[0].trim()}</g:link></li>
+    			<%
+    			}
+    		}
+    	}
+    	%>
+    	
+    	<% //add private internal links to navigation bar 
+		if (grailsApplication.config.i.links.priv){
+    		 grailsApplication.config.i.links.priv.each {
+    			if (it.value.size() >0){
+    				def dataSplit = it.value.split(",")
+    				%>
+    				<li><g:link controller="${dataSplit[1].trim()}" action="${dataSplit[2].trim()}" class="${pageProperty(name:'page.${dataSplit[1].trim()}')}">${dataSplit[0].trim()}</g:link></li>
+    			<%
+    			}
+    		}
+    	}
+    	%>
+		
+		<% //add public external links to navigation bar 
+		if (grailsApplication.config.e.links.pub){
+    		 grailsApplication.config.e.links.pub.each {
+    			if (it.value.size() >0){
+    				def dataSplit = it.value.split(",")
+    				println "<li><a href =\"${dataSplit[1].trim()}\" target='_blank'>${dataSplit[0].trim()}</a></li>"
+    			}
+    		}
+    	}
+    	%>		
+		<% //add private external links to navigation bar 
+		if (grailsApplication.config.e.links.priv){
+    		 grailsApplication.config.e.links.priv.each {
+    			if (it.value.size() >0){
+    				def dataSplit = it.value.split(",")
+    				println "<li><a href =\"${dataSplit[1].trim()}\" target='_blank'>${dataSplit[0].trim()}</a></li>"
+    			}
+    		}
+    	}
+    	%>
+    	
+    	<li><g:link controller="logout">Log out</g:link></li>
 		<!--li style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="logout">Log out</g:link></li-->
 	   </sec:ifLoggedIn>
 	</ul>

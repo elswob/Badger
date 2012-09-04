@@ -81,17 +81,16 @@
   </head>
 
   <body>
+ 
+ <table><tr><td>
  <h1>Publication search</h1>
- <p>Search the <i>${grailsApplication.config.species}</i> publications from PubMed (updated weekly):</p>
+ Search the <i>${grailsApplication.config.species}</i> publications from PubMed (updated weekly):<br>
  - To search by year click on a bar in the chart below<br>
- - To search by keyword use the search box beneath the chart.<br>
- 
- <div id="chart" class="jqplot-target" style="height: 400px; width: 100%; position: center;"></div>
+ - To search by keyword use the search box.
+ </td>
 
- 
    <g:form action="publication_search">
-   <table>
-    <tr><td>
+ <td>
     
     <h1>Choose what to search:</h1>
     <label><input type="checkbox" checked="yes" name="pubVal" value="title" /> Title</label><br>
@@ -110,5 +109,6 @@
    </tr>
    </table>
    </g:form>
+    <div id="chart" class="jqplot-target" style="height: 400px; width: 100%; position: center;"></div>
 </body>
 </html>

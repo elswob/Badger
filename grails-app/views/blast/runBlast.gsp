@@ -35,8 +35,8 @@
          <script type="text/javascript">
          data = ${jsonData};
          //check for no hits
-         //alert(data.length)
-         if (data.length >0){
+         //alert(data)
+         if (data.length >1){
 			 var paperWidth = $('#blast_fig').width() - 10;
 			 var drawing = new BioDrawing();
 			 drawing.start(paperWidth, 'blast_fig');

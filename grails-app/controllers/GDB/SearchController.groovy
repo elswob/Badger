@@ -7,7 +7,7 @@ class SearchController {
 	def matcher
 	def grailsApplication
 	javax.sql.DataSource dataSource
-    @Secured(['ROLE_USER','ROLE_ADMIN'])
+    //@Secured(['ROLE_USER'])
     def index() {
     }
     def trans_search = {   

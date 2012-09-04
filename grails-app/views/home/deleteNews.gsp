@@ -19,7 +19,7 @@ ${newsData.titleString[0]}<br><br>
 ${newsData.dataString[0]}<br><br>
 <h2>Date:</h2>
 <g:formatDate format="yyyy MMM d" date="${newsData.dateString[0]}"/><br><br>
-
+<input type="hidden" value="${newsData.titleString[0]}" name="newsTitle">
 <input class="mybuttons" type="button" value="Delete" onclick="submit()" >
 
 </g:form>

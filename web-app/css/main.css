@@ -22,7 +22,9 @@ html {
 */
 
 html{
-	background-color: #E1f2B6;
+	/* background-color: #E1f2B6;
+	${grailsApplication.config.projectID}*/
+	background-color: ${grailsApplication.config.colour.background};
 }
 
 html.no-cssgradients {

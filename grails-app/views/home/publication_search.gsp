@@ -48,10 +48,11 @@
 	<tbody>
 	<g:each var="res" in="${pub_results}">
 	<tr>
-	<td><span class="dropt"><a href="http://www.ncbi.nlm.nih.gov/pubmed?term=${res.pubmed_id}" target='_blank'>${res.title}</a>
+	<td><a href="http://www.ncbi.nlm.nih.gov/pubmed?term=${res.pubmed_id}" target='_blank'>${res.title}</a></td>
+	<!--td><span class="dropt"><a href="http://www.ncbi.nlm.nih.gov/pubmed?term=${res.pubmed_id}" target='_blank'>${res.title}</a>
 			<span style="width:90%;"><b>Abstract</b></br>${res.abstract_text}</span>
 		</span>
-	</td>
+	</td-->
 	<td>${res.authors}.</td>
 	<td>${res.journal_short}</td>
 	<td><g:formatDate format="yyyy MMM d" date="${res.date_string}"/></td>
