@@ -15,7 +15,7 @@ def getPub(){
 	//get the pubmed data
 	def utils = "http://www.ncbi.nlm.nih.gov/entrez/eutils";
 	def db = 'PubMed';
-	def query = grailsApplication.config.species
+	def query = grailsApplication.config.species.trim()
 	//make sure all words are used in search
 	query = query.replace(" ","+AND+")
 	def esearch = "$utils/esearch.fcgi?db=$db&retmax=100000&term=$query";

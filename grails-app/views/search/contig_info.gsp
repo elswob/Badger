@@ -18,7 +18,7 @@
     <table>
       <tr>
         <td><b>Length:</b> ${printf("%,d\n",info_results.sequence[0].length())}</td>
-        <!--td><b>Coverage: </b> ${info_results.coverage[0]}</td-->
+        <td><b>Coverage: </b> ${info_results.coverage[0]}</td>
         <td><b>GC: </b> ${sprintf("%.2f",info_results.gc[0])}</td>
         <td><b>Sequence: </b> 
         <g:form name="fileDownload" url="[controller:'FileDownload', action:'genome_contig_download']" style="display: inline" >

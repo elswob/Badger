@@ -10,8 +10,6 @@ class GeneInfo {
     String nuc
     String pep
     int intron
-    Float coverage
-    int rep
     static constraints = {
         gene_id(blank:false, unique: true)
         source(blank:false)

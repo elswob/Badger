@@ -17,6 +17,12 @@
   		<g:if test="${grailsApplication.config.annoData.Genes == 'y'}">
   			<tr><td><g:link controller="search" action="gene_search">${printf("%,d\n",GDB.GeneInfo.count())} Genes</g:link></td><td>The latest set of genes.</td></tr>
   		</g:if>
+  		<g:if test="${grailsApplication.config.seqData.Genome}">
+  			<tr><td><g:link controller="search" action="genome_search">${printf("%,d\n",GDB.GenomeInfo.count())} Contigs/Scaffolds</g:link></td><td>The latest genome.</td></tr>
+  		</g:if>
+  		
+  		<tr><td><g:link controller="search" action="all">Search all</g:link></td><td>Search all data within the <i>${grailsApplication.config.species}</i> database.</td></tr>
+
   	</td></tr>
   </table>
 </body>

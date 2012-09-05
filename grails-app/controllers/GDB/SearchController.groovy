@@ -27,14 +27,25 @@ class SearchController {
      	 println "blastMap = "+blastMap
      	 return [ transData: results, funData: funresults, blastMap: blastMap]
     }
-    @Secured(['ROLE_USER','ROLE_ADMIN'])
+    @Secured(['ROLE_USER'])
     def gene_search = {
+     	 def blastMap = [:]
+     	 if (grailsApplication.config.g.blast.size()>0){
+     	 	for(item in grailsApplication.config.g.blast){
+     	 		item = item.toString()
+     	 		def splitter = item.split("=")
+     	 		blastMap[splitter[0]] = splitter[1]
+     	 	}
+     	 }
+     	 println "blastMap = "+blastMap
+     	 return [blastMap: blastMap]
+    }
+    def genome_search = {   
     	 def sql = new Sql(dataSource)
-     	 def sqlsearch = "select contig_id,gc,length,coverage from trans_info order by length desc;"
-     	 def funsearch = "select trans_anno.contig_id,gc,length,coverage,anno_db,anno_id from trans_info,trans_anno where (anno_db = 'EC' or anno_db = 'KEGG' or anno_db = 'GO' or anno_id ~ '^IPR') and trans_anno.contig_id = trans_info.contig_id order by length desc;"
+     	 def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"
      	 def results = sql.rows(sqlsearch)
-     	 def funresults = sql.rows(funsearch)
-     	 return [ transData: results, funData: funresults]
+     	 //println results
+     	 return [ genomeData: results]
     }
     //@Secured(['ROLE_USER','ROLE_ADMIN'])
     def search_results = {
@@ -157,7 +168,7 @@ class SearchController {
         	redirect(action: "gene_info", params: [gene_id: searchId])          
         }
     }
-    @Secured(['ROLE_USER','ROLE_ADMIN'])
+    @Secured(['ROLE_USER'])
     def gene_info = {
     	def offint = params.offset as Integer 
         def maxint = params.max as Integer
