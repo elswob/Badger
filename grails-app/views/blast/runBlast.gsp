@@ -19,8 +19,8 @@
   var contig_list=[];
   function get_contig_data(){
 	    document.getElementById('fileId').value=contig_list;
-	    //alert(table_scrape)
-    }
+	    //alert(contig_list)
+   }
     </script>
     
     <g:if test="${blast_result}">
@@ -35,8 +35,8 @@
          <script type="text/javascript">
          data = ${jsonData};
          //check for no hits
-         //alert(data)
-         if (data.length >1){
+         //alert(data.length)
+         if (data.length >0){
 			 var paperWidth = $('#blast_fig').width() - 10;
 			 var drawing = new BioDrawing();
 			 drawing.start(paperWidth, 'blast_fig');
@@ -95,28 +95,30 @@
          </script>
         
       </div>
-      <!--p>${jsonData}</p-->
+      <!--p>${jsonData.size()}</p-->
       <!--p>${queryInfo}</p-->
-      <table><tr><td>
-      <g:form name="resultsDownload" url="[controller:'FileDownload', action:'blast_download']">
-			    <g:hiddenField name="fileName" value='blast_result.txt'/>
-			    <g:hiddenField name="blastfileId" value="${blastId}"/>
-			    <input align="right" type="submit" value="Download BLAST result" class="mybuttons"/>
-	  </g:form>
-	  </td>
-      <% if (blast_file == 'Genome' || blast_file == 'Transcriptome'){ %>
-      	<td>
-      		<g:form name="blastDownload" url="[controller:'FileDownload', action:'blast_contig_download']">
-			    <g:hiddenField name="fileId" value=""/>
-			    <g:hiddenField name="dataSource" value="${blast_file}"/>
-			    <!--g:hiddenField name="fileName" value="${term}"/-->
-			     <g:hiddenField name="fileName" value='blast_result'/>
-			    <g:hiddenField name="blastfileId" value="${blastId}"/>
-			    <input align="right" type="submit" value="Download sequences" class="mybuttons" onclick="get_contig_data()"/>
-		    </g:form>
-		</td></tr>
-	 <% } %>
-	 </table>
+      <g:if test="${jsonData.size() > 2}"> 
+		  <table><tr><td>  
+		  <g:form name="resultsDownload" url="[controller:'FileDownload', action:'blast_download']">
+					<g:hiddenField name="fileName" value='blast_result.txt'/>
+					<g:hiddenField name="blastfileId" value="${blastId}"/>
+					<input align="right" type="submit" value="Download BLAST result" class="mybuttons"/>
+		  </g:form>
+		  </td>
+		  <% if (blast_file == 'Genome' || blast_file == 'Transcriptome'){ %>
+			<td>
+				<g:form name="blastDownload" url="[controller:'FileDownload', action:'blast_contig_download']">
+					<g:hiddenField name="fileId" value=""/>
+					<g:hiddenField name="dataSource" value="${blast_file}"/>
+					<!--g:hiddenField name="fileName" value="${term}"/-->
+					 <g:hiddenField name="fileName" value='blast_result'/>
+					<g:hiddenField name="blastfileId" value="${blastId}"/>
+					<input align="right" type="submit" value="Download sequences" class="mybuttons" onclick="get_contig_data()"/>
+				</g:form>
+			</td></tr>
+		 <% } %>
+		 </table>
+		</g:if>
 	 
       <div class="blast_res">
           <g:each var="line" in="${blast_result}">

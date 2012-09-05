@@ -52,7 +52,7 @@ class FileDownloadController {
      	 	 object_list.add(it)
      	 }
      	 println "object_list = "+object_list
-     	 def results = Contig.findAllByContig_idInList(object_list)
+     	 def results = GenomeInfo.findAllByContig_idInList(object_list)
      	 //def results = Contig.findAllByContig_idInList(object_list)
 		 def file_builder=""
      	 results.each {
@@ -78,17 +78,20 @@ class FileDownloadController {
      	 object_array.split(",").each{
      	 	 object_list.add(it)
      	 }
+     	 //remove redundancy caused by tblastx or whatever
+     	 object_list.unique()
      	 println "object_list = "+object_list
      	 def results
-     	 if (table == 'genome'){ results = Contig.findAllByContig_idInList(object_list)}
-     	 if (table == 'trans'){ println "in trans"; results = TransInfo.findAllByContig_idInList(object_list)}
+     	 if (table == 'Genome'){ println "Getting genome seqs"; results = GenomeInfo.findAllByContig_idInList(object_list)}
+     	 if (table == 'Transcriptome'){ println "Getting transcriptome seqs"; results = TransInfo.findAllByContig_idInList(object_list)}
      	 //def results = Contig.findAllByContig_idInList(object_list)
+     	 println "results = "+results
 		 def file_builder=""
      	 results.each {
      	 	println "contig_id = "+it.contig_id
      	 	file_builder = file_builder + ">"+it.contig_id+"\n"+it.sequence+"\n"
 		 }
-		 //get blast sequence
+		 //get the blast sequence
 		 def blastIn = new File(params.blastfileId).text
 		 file_builder = file_builder + blastIn
 		 def downloadName = params.fileName.trim()

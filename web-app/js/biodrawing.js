@@ -20,7 +20,11 @@
             var base, interval, xPos;
             this.pixelsPerBase = this.drawingWidth / length;
             //interval = 100
-            interval = length/20;
+            if (length < 100){
+            	interval = 10
+            }else{
+            	interval = length/20;
+            }
             interval = Math.round(interval/10)*10
             this.paper.rect(this.padding+push_right, this.yPos, this.drawingWidth, 2).attr({
                 fill: 'black',

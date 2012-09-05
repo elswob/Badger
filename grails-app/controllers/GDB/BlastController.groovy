@@ -128,7 +128,7 @@ class BlastController {
 				def hitInfo = []
 				def singleHit = [:]
 				def matcher
-				def oldId
+				def oldId = ""
 				def newId =""
 				//check output file has something in it
 				println "outfile size = "+BlastOutFile.length()
@@ -224,14 +224,21 @@ class BlastController {
 						}
 						//catch the last one
 						if (oldId != ""){
-							singleHit.id = oldId
-						}else{
+							singleHit.id = oldId  
+							
+						}else if (newId != ""){
 							singleHit.id = newId
+							println "singleHit = "+singleHit
 						}
-						hitInfo.add(singleHit)
+						
+						if (singleHit.size() > 0){
+							hitInfo.add(singleHit)
+						}
+						//println "hitInfo = "+hitInfo
 						def sortedHitInfo = hitInfo.sort{it.score as double}.reverse()
 						//def sortedHitInfo = hitInfo.sort{it.id}.reverse()
 						def jsonData = sortedHitInfo.encodeAsJSON();
+						//println "jsonData = "+jsonData
 						return[blast_file: params.datalib, blast_result: blastRes, term: blastName, command: comm, blastId: blastJobId, hitData: sortedHitInfo, queryInfo: queryInfo, jsonData: jsonData]
 					}	
 				}else{

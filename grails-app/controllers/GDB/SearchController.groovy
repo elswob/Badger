@@ -192,7 +192,7 @@ class SearchController {
         return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, a8r_results: a8r_results, nuc_fasta: nuc_fasta]
     }
     def contig_info = {
-        def info_results = Contig.findAllByContig_id(params.contig_id)
+        def info_results = GenomeInfo.findAllByContig_id(params.contig_id)
         def nuc_fasta = ">"+info_results.contig_id[0]+"\n"+info_results.sequence[0]+"\n"
         return [ info_results: info_results, nuc_fasta: nuc_fasta]
     }
