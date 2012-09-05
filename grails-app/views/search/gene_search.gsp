@@ -3,7 +3,7 @@
 <head>
     <meta name='layout' content='main'/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${grailsApplication.config.projectID} gene search</title>
+    <title>${grailsApplication.config.projectID} transcript search</title>
     <parameter name="search" value="selected"></parameter>
     <link rel="stylesheet" href="${resource(dir: 'js', file: 'jquery.loadmask.css')}" type="text/css"></link>
     <script src="${resource(dir: 'js', file: 'jqplot/jquery.min.js')}" type="text/javascript"></script>
@@ -43,7 +43,67 @@
     }
     function changed(plot_type,params) {
 	$("#chart").html('Loading...<img src="${resource(dir: 'images', file: 'spinner.gif')}" />');
-	setTimeout(""+plot_type+"('"+params+"')", 1000);
+	setTimeout(""+plot_type+"('"+params+"')", 2000);
+    }
+    <% 
+    def jsonData = transData.encodeAsJSON(); 
+    def funjsonData = funData.encodeAsJSON(); 
+    //println jsonData;
+    //println ecjsonData;
+    %>
+    var loadcheck = "no";
+    function loadPlotData(){  	    
+    	    if (loadcheck == "no"){
+		     //load the jqplot data
+		    ContigData = ${jsonData};
+		    for (var i = 0; i < ContigData.length; i++) {   		 	 
+			    var hit = ContigData[i];
+			    counter++;
+			    cum += hit.length;
+			    dlen.push(hit.length);
+			    dcov.push(hit.coverage);
+			    dgc.push(hit.gc);
+			    dcon.push(hit.contig_id);
+			    dcum.push(cum);
+			    dcou.push(counter);
+		    }
+		    FunData = ${funjsonData};
+		    var ipr_match = /^IPR/;
+		    for (var i = 0; i < FunData.length; i++) {   		 	 
+			    var hit = FunData[i];
+			    if (hit.anno_db == 'EC'){
+				    elen.push(hit.length);
+				    ecov.push(hit.coverage);
+				    egc.push(hit.gc);
+				    econ.push(hit.contig_id);
+			    }else if (hit.anno_db == 'GO'){
+				    glen.push(hit.length);
+				    gcov.push(hit.coverage);
+				    ggc.push(hit.gc);
+				    gcon.push(hit.contig_id);
+			    }else if (hit.anno_db == 'KEGG'){
+				    klen.push(hit.length);
+				    kcov.push(hit.coverage);
+				    kgc.push(hit.gc);
+				    kcon.push(hit.contig_id);
+			    }else if (hit.anno_id.match(/^IPR/)){
+				    ilen.push(hit.length);
+				    icov.push(hit.coverage);
+				    igc.push(hit.gc);
+				    icon.push(hit.contig_id);
+			    }
+		    }
+		    loadcheck = "yes";
+		    //draw the graph on load
+		    setTimeout("makeArrays('len_cov')", 1000);
+		    //add the click data here as adding it at the top causes multiple windows to open
+		    $('#chart').bind('jqplotDataClick',
+		    function (ev, seriesIndex, pointIndex, data) {
+			//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+			window.open("/search/trans_info?contig_id=" + data[2]);
+			}
+		    );      
+	    }
     }
  
     //set the global variable for the plots
@@ -58,6 +118,7 @@
     var xaxis_label="", yaxis_label="", title_label="", xaxis_type="", yaxis_type="";
     var arraySet, funSet, funColour;
     function makeArrays(arrayInfo){
+    	    joinArray = [];
     	    $("#chart").text('');
 	    //alert(arrayInfo)
 	    arraySet = arrayInfo;	    	    
@@ -97,6 +158,7 @@
 	    
     }
     function addArrays(funInfo){
+    	    joinArray2 = [];
     	    $("#chart").text('');
     	    //alert("funInfo = "+funInfo)
     	    if (funInfo){
@@ -150,10 +212,10 @@
 	    //alert("j2 = "+joinArray2)
 	    plot1 = $.jqplot ('chart', [joinArray,joinArray2],{
 		 title: title_label,
-		 legend: {
-		 	show: true,
-		 	location: 'ne',
-		 },  
+		 //legend: {
+		 //	show: true,
+		 //	location: 'ne',
+		 //},  
 		 series:[
 			 {
 			 showLine:false,
@@ -213,37 +275,35 @@
 </head>
 <body>
   <div id="content">
-    <g:form action="search_results">  
+  <br>
+     <p>There are two methods to search the ${printf("%,d\n",GDB.GeneInfo.count())} transcripts:</p><br>
+     1. By the description or ID of a functional annotation (BLAST, GO, EC, KEGG and InterPro domains)<br>
+     2. By contig attribute (the length, coverage and GC of the contigs)<br>
+    <g:form action="search_results">
+    <g:hiddenField name="dataSet" value="Transcripts"/>
+
+    <h1 STYLE="cursor: pointer" onclick="toggleDiv('showAnno');$('#showPub').hide();$('#showChart').hide();">1. Functional annotation search</h1>
+    <div id = "showAnno">
     <table>
-    <tr>
-      <td>  
-    <h1>Choose a data set:</h1>
-    <select name = dataSet>
-      <option value="Transcripts">Transcripts</option>
-      <%--
-      <option value="Genes">Gene annotations</option>    
-      <option value="ncRNA">ncRNA</option>
-      <option value="scaffoldID">Scaffold IDs</option>
-      --%>
-    </select>
-      </td>
-     
-      <td>  
-    <h1>Choose some annotations:</h1>   
+    <tr><td>
+    <h1>Choose some annotations:</h1>
+    <g:if test="${grailsApplication.config.g.blast.size()>0}">
       <label><input name="toggler" type="radio" id="blast" checked="checked" value="1"> BLAST homology</label><br>
       	<div class="toHide" id="blk_1" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
-		  <label><input type="checkbox" checked="yes" name="blastAnno" value="SwissProt" /> SwissProt <a href="http://web.expasy.org/groups/swissprot/" style="text-decoration:none" target="_blank">?</a></label><br>
-		  <label><input type="checkbox" checked="yes" name="blastAnno" value="UniRef90" /> UniRef90 <a href="http://www.uniprot.org/help/uniref" style="text-decoration:none" target="_blank">?</a></label><br>
-		  <label><input type="checkbox" checked="yes" name="blastAnno" value="EST others" /> EST Others <a href="http://www.ncbi.nlm.nih.gov.ezproxy.webfeat.lib.ed.ac.uk/dbEST/" style="text-decoration:none" target="_blank">?</a></label><br>
-	</div> 
-      
+      	  <g:each var="res" in="${blastMap}">      	 
+		  	<label><input type="checkbox" checked="yes" name="blastAnno" value="${res.key}" /> ${res.key}</label><br>
+		  </g:each>
+        </div>  
+    </g:if>
+    <g:if test="${grailsApplication.config.g.a8r.EC}" || test="${grailsApplication.config.g.a8r.KEGG}" || test="${grailsApplication.config.g.a8r.GO}">
       <label><input name="toggler" type="radio" id="a8r" value="2"> Annot8r <a href="http://www.nematodes.org/bioinformatics/annot8r/" style="text-decoration:none" target="_blank">?</a></label><br>
       	<div class="toHide" id="blk_2" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
-		  <label><input type="checkbox" checked="yes" name="a8rAnno" value="GO" /> Gene Ontology <a href="http://www.geneontology.org/" style="text-decoration:none" target="_blank">?</a></label><br>
-		  <label><input type="checkbox" checked="yes" name="a8rAnno" value="KEGG" /> KEGG <a href="http://www.genome.jp/kegg/" style="text-decoration:none" target="_blank">?</a></label><br>
-		  <label><input type="checkbox" checked="yes" name="a8rAnno" value="EC" /> Enzyme Commission <a href="http://enzyme.expasy.org/" style="text-decoration:none" target="_blank">?</a></label><br>
-	</div> 
-		
+		  <g:if test="${grailsApplication.config.g.a8r.GO}"> <label><input type="checkbox" checked="yes" name="a8rAnno" value="GO" /> Gene Ontology <a href="http://www.geneontology.org/" style="text-decoration:none" target="_blank">?</a></label><br></g:if>
+		  <g:if test="${grailsApplication.config.g.a8r.KEGG}"><label><input type="checkbox" checked="yes" name="a8rAnno" value="KEGG" /> KEGG <a href="http://www.genome.jp/kegg/" style="text-decoration:none" target="_blank">?</a></label><br></g:if>
+		  <g:if test="${grailsApplication.config.g.a8r.EC}"><label><input type="checkbox" checked="yes" name="a8rAnno" value="EC" /> Enzyme Commission <a href="http://enzyme.expasy.org/" style="text-decoration:none" target="_blank">?</a></label><br></g:if>
+	    </div> 
+	</g:if>
+	<g:if test="${grailsApplication.config.g.IPR}">
       <label><input name="toggler" type="radio" id="ipr" value="3"> InterProScan <a href="http://www.ebi.ac.uk/interpro/index.html" style="text-decoration:none" target="_blank">?</a></label><br>
       	<div class="toHide" id="blk_3" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
       		<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMPanther" /> PANTHER <a href="http://www.pantherdb.org/" style="text-decoration:none" target="_blank">?</a></label><br>
@@ -252,24 +312,24 @@
       		<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMSmart" /> SMART <a href="http://smart.embl-heidelberg.de/" style="text-decoration:none" target="_blank">?</a></label><br>
       		<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMPfam" /> Pfam <a href="http://pfam.sanger.ac.uk/" style="text-decoration:none" target="_blank">?</a></label><br>
       		<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMTigr" /> TIGRFAMs <a href="http://www.jcvi.org/cgi-bin/tigrfams/index.cgi" style="text-decoration:none" target="_blank">?</a></label><br>
-	</div> 
+	   </div> 
       </td> 
-      
+    </g:if>
     <td>  
     <h1>Choose what to search:</h1>
     <select class="toHide" name = "tableSelect_1" id ="sel_1" onChange='showSelected(this.value)'>
       <option value="e.g. ATPase">Description</option>
-      <option value="e.g. 215283796 or P31409">Accession</option>    
+      <option value="e.g. 215283796 or P31409">ID</option>    
       <!--option value="e.g. contig_1">ID</option-->
     </select>
     <select class="toHide" name = "tableSelect_2" id ="sel_2" onChange='showSelected(this.value)'>
       <option value="e.g. Calcium-transportingATPase">Description</option>
-      <option value="e.g. GO:0008094 or 3.6.3.8 or K02147">Accession</option>    
+      <option value="e.g. GO:0008094 or 3.6.3.8 or K02147">ID</option>    
       <!--option value="e.g. contig_1">ID</option-->
     </select>
     <select class="toHide" name = "tableSelect_3" id ="sel_3" onChange='showSelected(this.value)'>
       <option value="e.g. Vacuolar (H+)-ATPase G subunit">Description</option>
-      <option value="e.g. IPR023298 or PF01813">Accession</option>    
+      <option value="e.g. IPR023298 or PF01813">ID</option>    
       <!--option value="e.g. contig_1">ID</option-->
     </select>
       </td>
@@ -284,14 +344,10 @@
   </tr>
    </table>
    <br>
-   
-   
-   <div id="hideChart">
-   	<table><tr><td><h1 STYLE="cursor: pointer" onclick="toggleDiv('showChart');toggleDiv('hideChart');" value="Show plot">Search by contig attribute (show):</h1></td></tr></table>
    </div>
    
+   <h1 STYLE="cursor: pointer" onclick="toggleDiv('showChart');$('#showAnno').hide();$('#showPub').hide();loadPlotData();" value="Show plot">2. Contig attribute search:</h1>   
    <div id="showChart" style="display:none">
-	<table><tr><td><h1 STYLE="cursor: pointer" onclick="toggleDiv('showChart');toggleDiv('hideChart');" value="Show plot">Search by contig attribute (hide):</h1></td></tr></table>
 	<div id="contig_attribute">
 	<table><tr><td>
 			<!--tr><td>X axis</td><td>Y axis</td></tr>
@@ -317,13 +373,6 @@
 	  </div>
   </div>
   </div>
-
-  <% 
-  def jsonData = transData.encodeAsJSON(); 
-  def funjsonData = funData.encodeAsJSON(); 
-  //println jsonData;
-  //println ecjsonData;
-  %>
 	<script>
           $(document).ready(function(){
             $('.toHide').hide();
@@ -339,57 +388,7 @@
 				
             $("#cancel").bind("click", function () {
 		$("#content").unmask();
-            });
-            
-            //load the jqplot data
-            ContigData = ${jsonData};
-            for (var i = 0; i < ContigData.length; i++) {   		 	 
-            	    var hit = ContigData[i];
-            	    counter++;
-            	    cum += hit.length;
-            	    dlen.push(hit.length);
-            	    dcov.push(hit.coverage);
-            	    dgc.push(hit.gc);
-            	    dcon.push(hit.contig_id);
-            	    dcum.push(cum);
-            	    dcou.push(counter);
-            }
-            FunData = ${funjsonData};
-            var ipr_match = /^IPR/;
-            for (var i = 0; i < FunData.length; i++) {   		 	 
-            	    var hit = FunData[i];
-            	    if (hit.anno_db == 'EC'){
-			    elen.push(hit.length);
-			    ecov.push(hit.coverage);
-			    egc.push(hit.gc);
-			    econ.push(hit.contig_id);
-		    }else if (hit.anno_db == 'GO'){
-			    glen.push(hit.length);
-			    gcov.push(hit.coverage);
-			    ggc.push(hit.gc);
-			    gcon.push(hit.contig_id);
-		    }else if (hit.anno_db == 'KEGG'){
-			    klen.push(hit.length);
-			    kcov.push(hit.coverage);
-			    kgc.push(hit.gc);
-			    kcon.push(hit.contig_id);
-		    }else if (hit.anno_id.match(/^IPR/)){
-			    ilen.push(hit.length);
-			    icov.push(hit.coverage);
-			    igc.push(hit.gc);
-			    icon.push(hit.contig_id);
-		    }
-            }
-            //draw the graph on load
-            setTimeout("makeArrays('cum')", 1000);
-            //add the click data here as adding it at the top causes multiple windows to open
-            $('#chart').bind('jqplotDataClick',
-	    function (ev, seriesIndex, pointIndex, data) {
-		//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-		window.open("/search/trans_info?contig_id=" + data[2]);
-	    	}
-	    );      
-                    
+            });               
           });
         </script>
 </body>

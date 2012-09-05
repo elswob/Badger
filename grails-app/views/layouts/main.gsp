@@ -39,8 +39,10 @@
     		 grailsApplication.config.i.links.pub.each {
     			if (it.value.size() >0){
     				def dataSplit = it.value.split(",")
+    				def pageName = "page." + dataSplit[3].trim()
+    				//println pageName
     				%>
-    				<li><g:link controller="${dataSplit[1].trim()}" action="${dataSplit[2].trim()}" class="${pageProperty(name:'page.${dataSplit[1].trim()}')}">${dataSplit[0].trim()}</g:link></li>
+    				<li><g:link controller="${dataSplit[1].trim()}" action="${dataSplit[2].trim()}" class="${pageProperty(name:pageName)}">${dataSplit[0].trim()}</g:link></li>
     			<%
     			}
     		}
@@ -80,8 +82,9 @@
     		 grailsApplication.config.i.links.pub.each {
     			if (it.value.size() >0){
     				def dataSplit = it.value.split(",")
+    				def pageName = "page." + dataSplit[3].trim()
     				%>
-    				<li><g:link controller="${dataSplit[1].trim()}" action="${dataSplit[2].trim()}" class="${pageProperty(name:'page.${dataSplit[1].trim()}')}">${dataSplit[0].trim()}</g:link></li>
+    				<li><g:link controller="${dataSplit[1].trim()}" action="${dataSplit[2].trim()}" class="${pageProperty(name:pageName)}">${dataSplit[0].trim()}</g:link></li>
     			<%
     			}
     		}
@@ -93,8 +96,9 @@
     		 grailsApplication.config.i.links.priv.each {
     			if (it.value.size() >0){
     				def dataSplit = it.value.split(",")
+    				def pageName = "page." + dataSplit[3].trim()
     				%>
-    				<li><g:link controller="${dataSplit[1].trim()}" action="${dataSplit[2].trim()}" class="${pageProperty(name:'page.${dataSplit[1].trim()}')}">${dataSplit[0].trim()}</g:link></li>
+    				<li><g:link controller="${dataSplit[1].trim()}" action="${dataSplit[2].trim()}" class="${pageProperty(name:pageName)}">${dataSplit[0].trim()}</g:link></li>
     			<%
     			}
     		}

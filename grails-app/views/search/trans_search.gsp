@@ -295,7 +295,7 @@
 		  </g:each>
         </div>  
     </g:if>
-    <g:if test="${grailsApplication.config.uni.a8r.EC}" || test="${grailsApplication.config.uni.a8r.KEGG}" || test="${grailsApplication.config.uni.a8r.GO}">
+    <g:if test="${grailsApplication.config.t.a8r.EC}" || test="${grailsApplication.config.t.a8r.KEGG}" || test="${grailsApplication.config.t.a8r.GO}">
       <label><input name="toggler" type="radio" id="a8r" value="2"> Annot8r <a href="http://www.nematodes.org/bioinformatics/annot8r/" style="text-decoration:none" target="_blank">?</a></label><br>
       	<div class="toHide" id="blk_2" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
 		  <g:if test="${grailsApplication.config.t.a8r.GO}"> <label><input type="checkbox" checked="yes" name="a8rAnno" value="GO" /> Gene Ontology <a href="http://www.geneontology.org/" style="text-decoration:none" target="_blank">?</a></label><br></g:if>

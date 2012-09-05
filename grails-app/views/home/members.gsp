@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name='layout' content='main'/>
   <title>${grailsApplication.config.projectID} consortium</title>
-  <parameter name="consortium" value="selected"></parameter>
+  <parameter name="members" value="selected"></parameter>
   </head>
 
   <body>

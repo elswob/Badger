@@ -32,6 +32,7 @@ class SearchController {
      	 def blastMap = [:]
      	 if (grailsApplication.config.g.blast.size()>0){
      	 	for(item in grailsApplication.config.g.blast){
+     	 		println "size = "+grailsApplication.config.g.blast.size()
      	 		item = item.toString()
      	 		def splitter = item.split("=")
      	 		blastMap[splitter[0]] = splitter[1]
