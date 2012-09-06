@@ -9,19 +9,19 @@
 <body>
   <h1>Search the <i>${grailsApplication.config.projectID}</i> data:</h1>
   <table>
-  	    <tr><td><g:link controller="home" action="publications">${printf("%,d\n",GDB.Publication.count())} publications</g:link></td><td>Publications matching the term <i>${grailsApplication.config.species}</i>.</td></tr>
+  	    <tr><td><g:link controller="home" action="publications">${GDB.Publication.count()} publications</g:link></td><td>Publications matching the term <i>${grailsApplication.config.species}</i>.</td></tr>
 
   		<g:if test="${grailsApplication.config.annoData.Transcripts == 'y'}">
-  			<tr><td><g:link controller="search" action="trans_search">${printf("%,d\n",GDB.TransInfo.count())} transcripts</g:link></td><td>The current transcriptome.</td></tr>
+  			<tr><td><g:link controller="search" action="trans_search">${GDB.TransInfo.count()} transcripts</g:link></td><td>The current transcriptome.</td></tr>
   		</g:if>
   		<g:if test="${grailsApplication.config.annoData.Genes == 'y'}">
-  			<tr><td><g:link controller="search" action="gene_search">${printf("%,d\n",GDB.GeneInfo.count())} Genes</g:link></td><td>The latest set of genes.</td></tr>
+  			<tr><td><g:link controller="search" action="gene_search">${GDB.GeneInfo.count()} genes</g:link></td><td>The latest set of genes.</td></tr>
   		</g:if>
   		<g:if test="${grailsApplication.config.seqData.Genome}">
-  			<tr><td><g:link controller="search" action="genome_search">${printf("%,d\n",GDB.GenomeInfo.count())} Contigs/Scaffolds</g:link></td><td>The latest genome.</td></tr>
+  			<tr><td><g:link controller="search" action="genome_search">${GDB.GenomeInfo.count()} contigs/scaffolds</g:link></td><td>The latest genome.</td></tr>
   		</g:if>
   		
-  		<tr><td><g:link controller="search" action="all">Search all</g:link></td><td>Search all data within the <i>${grailsApplication.config.species}</i> database.</td></tr>
+  		<tr><td><g:link controller="search" action="all_search">Search all</g:link></td><td>Search all data within the <i>${grailsApplication.config.species}</i> database.</td></tr>
 
   	</td></tr>
   </table>

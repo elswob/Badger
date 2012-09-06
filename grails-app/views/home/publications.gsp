@@ -84,7 +84,7 @@
  
  <table><tr><td>
  <h1>Publication search</h1>
- Search the <i>${grailsApplication.config.species}</i> publications from PubMed (updated weekly):<br>
+ Search the ${GDB.Publication.count()} <i>${grailsApplication.config.species}</i> publications from PubMed (updated weekly):<br>
  - To search by year click on a bar in the chart below<br>
  - To search by keyword use the search box.
  </td>

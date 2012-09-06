@@ -10,6 +10,12 @@ class SearchController {
     //@Secured(['ROLE_USER'])
     def index() {
     }
+    def all_search = {
+    }
+    def all_searched = {
+    	println "Searching all databases for "+params.searchId	
+    	return [searchId: params.searchId]
+    }
     def trans_search = {   
     	 def sql = new Sql(dataSource)
      	 def sqlsearch = "select contig_id,gc,length,coverage from trans_info order by length desc;"

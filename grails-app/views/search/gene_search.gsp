@@ -276,7 +276,7 @@
 <body>
   <div id="content">
   <br>
-     <p>There are two methods to search the ${printf("%,d\n",GDB.GeneInfo.count())} transcripts:</p><br>
+     <p>There are two methods to search the ${GDB.GeneInfo.count()} genes:</p><br>
      1. By the description or ID of a functional annotation (BLAST, GO, EC, KEGG and InterPro domains)<br>
      2. By contig attribute (the length, coverage and GC of the contigs)<br>
     <g:form action="search_results">

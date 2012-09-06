@@ -276,67 +276,14 @@
 <body>
   <div id="content">
   <br>
-     <p>There are two methods to search the ${GDB.TransInfo.count()} transcripts:</p><br>
-     1. By the description or ID of a functional annotation (BLAST, GO, EC, KEGG and InterPro domains)<br>
-     2. By contig attribute (the length, coverage and GC of the contigs)<br>
-    <g:form action="search_results">
-    <g:hiddenField name="dataSet" value="Transcripts"/>
-
-    <h1 STYLE="cursor: pointer" onclick="toggleDiv('showAnno');$('#showPub').hide();$('#showChart').hide();">1. Functional annotation search</h1>
+     <p>There are two methods to search all the data:</p><br>
+     1. By key word (this will search all databases)<br>
+     2. By genomic contig attribute (the length, coverage and GC of the contigs)<br>
+    <g:form action="all_searched">
+    <h1 STYLE="cursor: pointer" onclick="toggleDiv('showAnno');$('#showPub').hide();$('#showChart').hide();">1. Key word</h1>
     <div id = "showAnno">
     <table>
     <tr><td>
-    <h1>Choose some annotations:</h1>
-    <g:if test="${grailsApplication.config.t.blast.size()>0}">
-      <label><input name="toggler" type="radio" id="blast" checked="checked" value="1"> BLAST homology</label><br>
-      	<div class="toHide" id="blk_1" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
-      	  <g:each var="res" in="${blastMap}">      	 
-		  	<label><input type="checkbox" checked="yes" name="blastAnno" value="${res.key}" /> ${res.key}</label><br>
-		  </g:each>
-        </div>  
-    </g:if>
-    <g:if test="${grailsApplication.config.t.a8r.EC}" || test="${grailsApplication.config.t.a8r.KEGG}" || test="${grailsApplication.config.t.a8r.GO}">
-      <label><input name="toggler" type="radio" id="a8r" value="2"> Annot8r <a href="http://www.nematodes.org/bioinformatics/annot8r/" style="text-decoration:none" target="_blank">?</a></label><br>
-      	<div class="toHide" id="blk_2" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
-		  <g:if test="${grailsApplication.config.t.a8r.GO}"> <label><input type="checkbox" checked="yes" name="a8rAnno" value="GO" /> Gene Ontology <a href="http://www.geneontology.org/" style="text-decoration:none" target="_blank">?</a></label><br></g:if>
-		  <g:if test="${grailsApplication.config.t.a8r.KEGG}"><label><input type="checkbox" checked="yes" name="a8rAnno" value="KEGG" /> KEGG <a href="http://www.genome.jp/kegg/" style="text-decoration:none" target="_blank">?</a></label><br></g:if>
-		  <g:if test="${grailsApplication.config.t.a8r.EC}"><label><input type="checkbox" checked="yes" name="a8rAnno" value="EC" /> Enzyme Commission <a href="http://enzyme.expasy.org/" style="text-decoration:none" target="_blank">?</a></label><br></g:if>
-	    </div> 
-	</g:if>
-	<g:if test="${grailsApplication.config.t.IPR}">
-      <label><input name="toggler" type="radio" id="ipr" value="3"> InterProScan <a href="http://www.ebi.ac.uk/interpro/index.html" style="text-decoration:none" target="_blank">?</a></label><br>
-      	<div class="toHide" id="blk_3" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
-      		<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMPanther" /> PANTHER <a href="http://www.pantherdb.org/" style="text-decoration:none" target="_blank">?</a></label><br>
-      		<label><input type="checkbox" checked="yes" name="iprAnno" value="BlastProDom" /> ProDom <a href="http://prodom.prabi.fr/prodom/current/html/home.php" style="text-decoration:none" target="_blank">?</a></label><br>
-      		<label><input type="checkbox" checked="yes" name="iprAnno" value="Gene3D" /> Gene3D <a href="http://gene3d.biochem.ucl.ac.uk/Gene3D/" style="text-decoration:none" target="_blank">?</a></label><br>
-      		<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMSmart" /> SMART <a href="http://smart.embl-heidelberg.de/" style="text-decoration:none" target="_blank">?</a></label><br>
-      		<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMPfam" /> Pfam <a href="http://pfam.sanger.ac.uk/" style="text-decoration:none" target="_blank">?</a></label><br>
-      		<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMTigr" /> TIGRFAMs <a href="http://www.jcvi.org/cgi-bin/tigrfams/index.cgi" style="text-decoration:none" target="_blank">?</a></label><br>
-	   </div> 
-      </td> 
-    </g:if>
-    <td>  
-    <h1>Choose what to search:</h1>
-    <select class="toHide" name = "tableSelect_1" id ="sel_1" onChange='showSelected(this.value)'>
-      <option value="e.g. ATPase">Description</option>
-      <option value="e.g. 215283796 or P31409">ID</option>    
-      <!--option value="e.g. contig_1">ID</option-->
-    </select>
-    <select class="toHide" name = "tableSelect_2" id ="sel_2" onChange='showSelected(this.value)'>
-      <option value="e.g. Calcium-transportingATPase">Description</option>
-      <option value="e.g. GO:0008094 or 3.6.3.8 or K02147">ID</option>    
-      <!--option value="e.g. contig_1">ID</option-->
-    </select>
-    <select class="toHide" name = "tableSelect_3" id ="sel_3" onChange='showSelected(this.value)'>
-      <option value="e.g. Vacuolar (H+)-ATPase G subunit">Description</option>
-      <option value="e.g. IPR023298 or PF01813">ID</option>    
-      <!--option value="e.g. contig_1">ID</option-->
-    </select>
-      </td>
-      
-      <td>
-    <h1>Enter a search term:</h1>
-    <div id='selectedResult'></div>
     <g:textField name="searchId"  size="30"/>
     <input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
     </g:form>
