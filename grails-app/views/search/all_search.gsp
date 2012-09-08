@@ -282,10 +282,11 @@
     <g:form action="all_searched">
     <h1 STYLE="cursor: pointer" onclick="toggleDiv('showAnno');$('#showPub').hide();$('#showChart').hide();">1. Key word</h1>
     <div id = "showAnno">
-    <p>Query text can contain the Boolean operators & (AND), | (OR) and ! (NOT).</p>
+    <p>Keyword search will find related terms, for example searching for 'tolerate' will also match 'tolerance'.</p>
+    <p>Query text can contain the Boolean operators & (and), | (or) and ! (not), e.g. 'atpase & zinc', '!metal', 'atpase & zinc | !metal'    </p>
     <table>
     <tr><td>
-    <g:textField name="searchId"  size="30"/>
+    <g:textField name="searchId"  size="100"/>
     <input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
     </g:form>
      </td>

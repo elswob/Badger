@@ -196,7 +196,7 @@
     	    "oLanguage": {
     	     	     "sSearch": "Filter records:"
     	     },
-    	    "aaSorting": [[ 4, "desc" ]],
+    	    "aaSorting": [[ 6, "desc" ]],
     	    "sDom": 'T<"clear">lfrtip',
             "oTableTools": {
         	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
@@ -210,7 +210,7 @@
     	    "oLanguage": {
     	     	     "sSearch": "Filter records:"
     	     },
-    	    "aaSorting": [[ 4, "desc" ]],
+    	    "aaSorting": [[ 6, "desc" ]],
     	    "sDom": 'T<"clear">lfrtip',
             "oTableTools": {
         	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
@@ -254,8 +254,7 @@
   </div><br>
   
   <g:if test="${transRes}">
-  	<h2>Results for transcriptome annotation data:</h2> 
-    	<p>Found ${transRes.size()} hits</p>
+  	<h2>${transRes.size()} matches from the transcriptome data:</h2>   
         <table id="trans_table" class="display">
             <thead>
               <tr>
@@ -287,11 +286,13 @@
          </table> 
          <br>
   </g:if>
+  <g:else>
+  	<h2>0 matches from the transcriptome data.</h2>
+  </g:else>
   
   <g:if test="${geneRes}">
-    <hr size = 5 color="green" width="100%" style="margin-top:10px">  
-  	<h2>Results for gene annotation data:</h2> 
-    	<p>Found ${geneRes.size()} hits </p>
+    <hr size = 5 color="green" width="100%" style="margin-top:10px"> 
+    <h2>${geneRes.size()} matches from the gene data:</h2> 
         <table id="gene_table" class="display">
             <thead>
               <tr>
@@ -307,7 +308,7 @@
              <tbody>
                <g:each var="res" in="${geneRes}">
                 <tr>  
-                  <td><g:link action="trans_info" params="${[contig_id: res.contig_id]}"> ${res.contig_id}</g:link></td>
+                  <td><g:link action="gene_info" params="${[gene_id: res.gene_id]}"> ${res.gene_id}</g:link></td>
                   <td>${res.anno_db}</td>
                   <%res.anno_id = res.anno_id.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
                   <%res.anno_id = res.anno_id.replaceAll(/lcl\|(.*)/, "<a href=\"http://www.uniprot.org/uniref/\$1\" target=\'_blank\'>\$1</a>")%>
@@ -323,11 +324,14 @@
          </table> 
          <br>
   </g:if>
+  <g:else>
+    <hr size = 5 color="green" width="100%" style="margin-top:10px">
+  	<h2>0 matches from the gene data.</h2>
+  </g:else>
   
     <g:if test="${pubRes}">
     <hr size = 5 color="green" width="100%" style="margin-top:10px">  
-  	<h2>Results for publication data:</h2> 
-    	<p>Found ${pubRes.size()} hits</p>
+  	<h2>${pubRes.size()} matches from the publication data:</h2> 
        	<table id="pub_table" class="display">
        		<thead>
        			<tr>
@@ -335,6 +339,7 @@
        				<th><b>Authors</b></th>
        				<th><b>Journal</b></th>
        				<th><b>Date</b></th>
+       				<th><b>Rank</b></th>
        			</tr>
        		</thead>
        		<tbody>
@@ -348,11 +353,16 @@
        				<td>${res.authors}.</td>
        				<td>${res.journal_short}</td>
        				<td><g:formatDate format="yyyy MMM d" date="${res.date_string}"/></td>
+       				<td>${sprintf("%.3f",res.rank)}</td>
        			</tr>
        		</g:each>
        		</tbody>
        	</table>
     </g:if>
+    <g:else>
+     <hr size = 5 color="green" width="100%" style="margin-top:10px">
+  	 <h2>0 matches from the publication data.</h2>
+    </g:else>
   
 </body>
 </html>

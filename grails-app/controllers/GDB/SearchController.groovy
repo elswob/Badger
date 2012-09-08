@@ -25,7 +25,8 @@ class SearchController {
     	def geneRes = sql.rows(genesearch)
     	println "Gene search = "+genesearch
     	
-    	def pubsearch = "SELECT * FROM publication WHERE to_tsvector(abstract_text || ' ' || authors || ' ' || journal || '' || title) @@ to_tsquery('"+params.searchId+"')";
+    	//def pubsearch = "SELECT * FROM publication WHERE textsearchable_index_col @@ to_tsquery('"+params.searchId+"')";
+    	def pubsearch = "SELECT *, ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM publication, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query ORDER BY rank DESC;"
     	def pubRes = sql.rows(pubsearch)
     	println "Publication search = "+pubsearch
     	
