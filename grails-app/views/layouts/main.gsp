@@ -134,7 +134,7 @@
   </div>
 <g:layoutBody/>
 <div class="footer" role="contentinfo"> 
-<p align="right">Contact: <a href="mailto:ben.elsworth@ed.ac.uk">ben.elsworth@ed.ac.uk</a></p>
+<p align="right">Contact: <a href="mailto:${grailsApplication.config.contact.email}">${grailsApplication.config.contact.email}</a></p>
 </div>
 <g:javascript library="application"/>
 <r:layoutResources />
