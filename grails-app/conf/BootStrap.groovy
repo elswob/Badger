@@ -1,3 +1,5 @@
+import groovy.sql.Sql
+
 class BootStrap {
     def springSecurityService
     javax.sql.DataSource dataSource
@@ -12,6 +14,11 @@ class BootStrap {
                 servletContext.setAttribute("env", "test")
             }
             development {
+            	//create some indexes
+            	def sql = new Sql(dataSource)
+                sql.execute("CREATE INDEX trans_annotation_idx ON trans_anno USING gin(to_tsvector('english', descr || ' ' || anno_id));")
+                sql.execute("CREATE INDEX gene_annotation_idx ON gene_anno USING gin(to_tsvector('english', descr || ' ' || anno_id));")
+                sql.execute("CREATE INDEX publication_idx ON publication USING gin(to_tsvector('english', abstract_text || ' ' || authors || ' ' || journal || '' || title));")                
                 servletContext.setAttribute("env", "dev")
                 def userRole = Security.SecRole.findByAuthority('ROLE_USER') ?: new Security.SecRole(authority: 'ROLE_USER').save(failOnError: true)
                 def adminRole = Security.SecRole.findByAuthority('ROLE_ADMIN') ?: new Security.SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)     

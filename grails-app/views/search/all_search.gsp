@@ -282,6 +282,7 @@
     <g:form action="all_searched">
     <h1 STYLE="cursor: pointer" onclick="toggleDiv('showAnno');$('#showPub').hide();$('#showChart').hide();">1. Key word</h1>
     <div id = "showAnno">
+    <p>Query text can contain the Boolean operators & (AND), | (OR) and ! (NOT).</p>
     <table>
     <tr><td>
     <g:textField name="searchId"  size="30"/>

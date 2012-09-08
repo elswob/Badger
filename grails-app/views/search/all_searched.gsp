@@ -1,240 +1,172 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <html>
-<head>
+  <head>
     <meta name='layout' content='main'/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${grailsApplication.config.projectID} transcript search</title>
-    <parameter name="search" value="selected"></parameter>
-    <link rel="stylesheet" href="${resource(dir: 'js', file: 'jquery.loadmask.css')}" type="text/css"></link>
+    <title>${grailsApplication.config.projectID} search results</title>
+    <parameter name="search" value="selected"></parameter>   
     <script src="${resource(dir: 'js', file: 'jqplot/jquery.min.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.js')}" type="text/javascript"></script>
-    <script src="${resource(dir: 'js', file: 'jquery.loadmask.min.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.canvasTextRenderer.min.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.highlighter.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.cursor.min.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.dateAxisRenderer.min.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.logAxisRenderer.js')}" type="text/javascript"></script>
+    <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.bubbleRenderer.min.js')}" type="text/javascript"></script>
     <link rel="stylesheet" href="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.css')}" type="text/css"></link>
-    <script type="text/javascript"> 
-    	$(window).unload(function() {});
-    </script>
-    <script type="text/javascript">
+    <script src="${resource(dir: 'js', file: 'DataTables-1.9.0/media/js/jquery.dataTables.js')}" type="text/javascript"></script>
+    <script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/TableTools.js')}" type="text/javascript"></script>
+    <script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/ZeroClipboard.js')}" type="text/javascript"></script>
+    <style type="text/css">
+            @import "${resource(dir: 'js', file: 'DataTables-1.9.0/media/css/demo_page.css')}";
+            @import "${resource(dir: 'js', file: 'DataTables-1.9.0/media/css/demo_table.css')}";
+            @import "${resource(dir: 'js', file: 'TableTools-2.0.2/media/css/TableTools.css')}";
+    </style>
 
-    function showSelected(val){
-		document.getElementById
-		('selectedResult').innerHTML = val;
+    <script type="text/javascript">
+        /* new sorting functions */
+        jQuery.fn.dataTableExt.oSort['scientific-asc']  = function(a,b) {
+        	var x = parseFloat(a);
+        	var y = parseFloat(b);
+        	return ((x < y) ? -1 : ((x > y) ?  1 : 0));
+        };
+ 
+        jQuery.fn.dataTableExt.oSort['scientific-desc']  = function(a,b) {
+        	var x = parseFloat(a);
+        	var y = parseFloat(b);
+        	return ((x < y) ? 1 : ((x > y) ?  -1 : 0));
+        };
+    </script> 
+    <script>
+    function get_table_data(){
+    	    var table_scrape = [];
+	    var oTable = document.getElementById('table_data');
+	    //gets table
+	    var rowLength = oTable.rows.length;
+	    //gets rows of table
+	    for (i = 0; i < rowLength; i++){
+	    //loops through rows
+	       var oCells = oTable.rows.item(i).cells;
+	       var cellVal = oCells.item(0).innerHTML;
+	       var regex = /.*?contig.*/g;
+	       var matcher = cellVal.match(/.*?contig_id=(contig_\d+).*/);
+	       if (matcher){
+	       	       table_scrape.push(matcher[1])
+	       }
+	    }
+	    document.getElementById('fileId').value=table_scrape;
+	    //alert(table_scrape)
     }
-    $(function() {
-		$("[name=toggler]").click(function(){
-				$('.toHide').hide();
-				$("#blk_"+$(this).val()).show('slow');
-				$("#sel_"+$(this).val()).show('fast');
-				showSelected($("#sel_"+$(this).val()).val())
-		});
-    });
+    </script>
+    <script>
     function zip(arrays) {
             	    return arrays[0].map(function(_,i){
             	    return arrays.map(function(array){return array[i]})
            });
     }
     function toggleDiv(divId) {
-    	    $("#"+divId).slideToggle(2000);
+    	    $("#"+divId).slideToggle(20);
     }
     function changed(plot_type,params) {
 	$("#chart").html('Loading...<img src="${resource(dir: 'images', file: 'spinner.gif')}" />');
-	setTimeout(""+plot_type+"('"+params+"')", 2000);
+	setTimeout(""+plot_type+"('"+params+"')", 1000);
     }
+
     <% 
-    def jsonData = transData.encodeAsJSON(); 
-    def funjsonData = funData.encodeAsJSON(); 
+    def jsonData = chartData.encodeAsJSON();  
     //println jsonData;
-    //println ecjsonData;
     %>
     var loadcheck = "no";
-    function loadPlotData(){  	    
-    	    if (loadcheck == "no"){
-		     //load the jqplot data
+    function loadPlotData(){ 
+    	     if (loadcheck == "no"){
+		    //load the jqplot data
 		    ContigData = ${jsonData};
+		    //alert("loading the data")
 		    for (var i = 0; i < ContigData.length; i++) {   		 	 
 			    var hit = ContigData[i];
-			    counter++;
-			    cum += hit.length;
 			    dlen.push(hit.length);
 			    dcov.push(hit.coverage);
 			    dgc.push(hit.gc);
 			    dcon.push(hit.contig_id);
-			    dcum.push(cum);
-			    dcou.push(counter);
-		    }
-		    FunData = ${funjsonData};
-		    var ipr_match = /^IPR/;
-		    for (var i = 0; i < FunData.length; i++) {   		 	 
-			    var hit = FunData[i];
-			    if (hit.anno_db == 'EC'){
-				    elen.push(hit.length);
-				    ecov.push(hit.coverage);
-				    egc.push(hit.gc);
-				    econ.push(hit.contig_id);
-			    }else if (hit.anno_db == 'GO'){
-				    glen.push(hit.length);
-				    gcov.push(hit.coverage);
-				    ggc.push(hit.gc);
-				    gcon.push(hit.contig_id);
-			    }else if (hit.anno_db == 'KEGG'){
-				    klen.push(hit.length);
-				    kcov.push(hit.coverage);
-				    kgc.push(hit.gc);
-				    kcon.push(hit.contig_id);
-			    }else if (hit.anno_id.match(/^IPR/)){
-				    ilen.push(hit.length);
-				    icov.push(hit.coverage);
-				    igc.push(hit.gc);
-				    icon.push(hit.contig_id);
-			    }
+			    dsco.push(hit.score);
 		    }
 		    loadcheck = "yes";
-		    //draw the graph on load
 		    setTimeout("makeArrays('len_cov')", 1000);
 		    //add the click data here as adding it at the top causes multiple windows to open
 		    $('#chart').bind('jqplotDataClick',
 		    function (ev, seriesIndex, pointIndex, data) {
 			//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-			window.open("/search/trans_info?contig_id=" + data[2]);
+			window.open("/search/trans_info?contig_id=" + data[3]);
 			}
-		    );      
-	    }
+		    );
+	     }
     }
- 
     //set the global variable for the plots
-    var dlen = [], dcov = [], dgc = [], dcon = [], dcum = [], dcou = [];
-    var elen = [], ecov = [], egc = [], econ = [];
-    var glen = [], gcov = [], ggc = [], gcon = [];
-    var klen = [], kcov = [], kgc = [], kcon = [];
-    var ilen = [], icov = [], igc = [], icon = [];
-    var joinArray = [], joinArray2 = [];
-    var counter=0;
-    var cum = 0;
+    var dlen = [], dcov = [], dgc = [], dcon = [], dcum = [], dcou = [], dsco = [];
+    var joinArray = [];
     var xaxis_label="", yaxis_label="", title_label="", xaxis_type="", yaxis_type="";
-    var arraySet, funSet, funColour;
     function makeArrays(arrayInfo){
-    	    joinArray = [];
     	    $("#chart").text('');
-	    //alert(arrayInfo)
-	    arraySet = arrayInfo;	    	    
+	    //alert(arrayInfo)	    
 	    if (arrayInfo == 'len_gc'){
-		    joinArray = zip([dgc,dlen,dcon,dlen,dgc,dcov]);
+		    joinArray = zip([dgc,dlen,dsco,dcon,dlen,dgc,dcov]);
 		    xaxis_label = "GC";
 		    xaxis_type = $.jqplot.LinearAxisRenderer;
 		    yaxis_label = "Length";
 		    yaxis_type = $.jqplot.LogAxisRenderer;
 		    title_label = "Length vs GC";
-		    addArrays()
 	    }else if (arrayInfo == 'cov_gc'){
-		    joinArray = zip([dgc,dcov,dcon,dlen,dgc,dcov]);
+		    joinArray = zip([dgc,dcov,dsco,dcon,dlen,dgc,dcov]);
 		    xaxis_label = "GC";
 		    xaxis_type = $.jqplot.LinearAxisRenderer;
 		    yaxis_label = "Coverage";
 		    yaxis_type = $.jqplot.LogAxisRenderer;
 		    title_label = "Coverage vs GC";
-		    addArrays()
 	    }else if (arrayInfo == 'len_cov'){
-		    joinArray = zip([dlen,dcov,dcon,dlen,dgc,dcov]);
+		    joinArray = zip([dlen,dcov,dsco,dcon,dlen,dgc,dcov]);
 		    xaxis_label = "Length";
 		    xaxis_type = $.jqplot.LinearAxisRenderer;
 		    yaxis_label = "Coverage";
 		    yaxis_type = $.jqplot.LogAxisRenderer;
 		    title_label = "Length vs Coverage";
-		    addArrays()
-	    }else if (arrayInfo == 'cum'){          	    	    
-		    joinArray = zip([dcou,dcum,dcon,dlen,dgc,dcov]);
-		    xaxis_label = "Contigs ranked by size";
-		    xaxis_type = $.jqplot.LinearAxisRenderer;
-		    yaxis_label = "Cumulative contig length (bp)";
-		    yaxis_type = $.jqplot.LinearAxisRenderer;
-		    title_label = "Cumulative contig length";
-		    graphDraw()
 	    }
+	    graphDraw()
 	    
     }
-    function addArrays(funInfo){
-    	    joinArray2 = [];
-    	    $("#chart").text('');
-    	    //alert("funInfo = "+funInfo)
-    	    if (funInfo){
-    	    	    funSet = funInfo;
-    	    }
-	    if (funSet == 'EC'){
-	    	    funColour = "blue";
-	    	    if (arraySet == 'len_gc'){
-	    	    	    joinArray2 = zip([egc,elen,econ,elen,egc,ecov]);
-	    	    }if (arraySet == 'cov_gc'){
-	    	    	    joinArray2 = zip([egc,ecov,econ,elen,egc,ecov]);
-	    	    }if (arraySet == 'len_cov'){
-	    	    	    joinArray2 = zip([elen,ecov,econ,elen,egc,ecov]);
-	    	    }	    	    
-	    }else if (funSet == 'GO'){
-	    	    funColour = "orange";
-	    	    if (arraySet == 'len_gc'){
-	    	    	    joinArray2 = zip([ggc,glen,gcon,glen,ggc,gcov]);
-	    	    }if (arraySet == 'cov_gc'){
-	    	    	    joinArray2 = zip([ggc,gcov,gcon,glen,ggc,gcov]);
-	    	    }if (arraySet == 'len_cov'){
-	    	    	    joinArray2 = zip([glen,gcov,gcon,glen,ggc,gcov]);
-	    	    }	    	    
-	    }else if (funSet == 'KEGG'){
-	    	    funColour = "red";
-	    	    if (arraySet == 'len_gc'){
-	    	    	    joinArray2 = zip([kgc,klen,kcon,klen,kgc,kcov]);
-	    	    }if (arraySet == 'cov_gc'){
-	    	    	    joinArray2 = zip([kgc,kcov,kcon,klen,kgc,kcov]);
-	    	    }if (arraySet == 'len_cov'){
-	    	    	    joinArray2 = zip([klen,kcov,kcon,klen,kgc,kcov]);
-	    	    }	    	    
-	    }else if (funSet == 'InterPro Domains'){
-	    	    funColour = "purple";
-	    	    if (arraySet == 'len_gc'){
-	    	    	    joinArray2 = zip([igc,ilen,icon,ilen,igc,icov]);
-	    	    }if (arraySet == 'cov_gc'){
-	    	    	    joinArray2 = zip([igc,icov,icon,ilen,igc,icov]);
-	    	    }if (arraySet == 'len_cov'){
-	    	    	    joinArray2 = zip([ilen,icov,icon,ilen,igc,icov]);
-	    	    }			    	    
-	    }else{
-	    	    joinArray2 = "";
-	    }
-	    //alert(joinArray2)
-	    graphDraw()
-    }
-    function graphDraw(){
+        function graphDraw(){
+            //alert(joinArray)
     	    $('#chart').empty();
-	    //alert("j = "+joinArray)
-	    //alert("j2 = "+joinArray2)
-	    plot1 = $.jqplot ('chart', [joinArray,joinArray2],{
-		 title: title_label,
-		 //legend: {
-		 //	show: true,
-		 //	location: 'ne',
-		 //},  
-		 series:[
-			 {
-			 showLine:false,
-			 markerOptions: { size: 1, style:"circle", color:"green"},
-			 label: 'No annotation',
-			 color: 'green'
-			 },
-			 {
-			 showLine:false,
-			 markerOptions: { size: 1, style:'dimaond', color:funColour},
-			 label: funSet,
-			 color: funColour
-			 }
-		 ],
+	    plot = $.jqplot('chart',[joinArray],{
+		title: title_label, 
+		seriesDefaults:{
+		    renderer: $.jqplot.BubbleRenderer,
+		       rendererOptions: {
+			bubbleAlpha: 0.6,
+			highlightAlpha: 0.8,
+			showLabels: false,
+			autoscalePointsFactor: -0.15,
+			autoscaleMultiplier: 0.5,
+			varyBubbleColors: false,
+			color: 'green'
+		    },	
+		},
+		highlighter: {
+			 tooltipAxes: 'yx',
+			 yvalues: 6,
+			 show: true,
+			 sizeAdjust: 7.5,
+			 formatString: '<span style="display:none">%s</span>Score: %s<br>Contig ID: %s<br>Length: %s<br>GC: %.2f<br>Coverage: %.2f'
+	
+		 },
+		 cursor:{
+		 	 show: true,
+		 	 zoom:true,
+		 	 tooltipLocation:'nw'
+		 },
 		 axesDefaults: {
 			 labelRenderer: $.jqplot.CanvasAxisLabelRenderer
-		 },
-		 noDataIndicator: {
-		    show: true
 		 },
 		 axes: {
 			xaxis: {
@@ -251,30 +183,178 @@
 				}
 			}
 		 },
-		 //seriesColors: pointcolours,
-		 highlighter: {
-			 tooltipAxes: 'yx',
-			 yvalues: 5,
-			 show: true,
-			 sizeAdjust: 7.5,
-			 //formatString: "%d"
-			 //formatString: ContigData[0].contig_id +" length: " + ContigData[1].length
-			 formatString: '<span style="display:none">%s</span>Contig ID: %s<br>Length: %s<br>GC: %.2f<br>Coverage: %.2f'
-	
-		 },
-		 cursor:{
-		 	 show: true,
-		 	 zoom:true,
-		 	 tooltipLocation:'nw'
-		 }
 	    });
-	    $('.button-reset').click(function() { plot1.resetZoom() });
+	    $('.button-reset').click(function() { plot.resetZoom() });
     }
     </script>
-	
-</head>
-<body>
-     <p>You searched for ${searchId}....</p><br>
-   
+    <script>
+    $(document).ready(function() {
+            $('#trans_table').dataTable({
+    	    "sPaginationType": "full_numbers",
+    	    "iDisplayLength": 10,
+    	    "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+    	    "oLanguage": {
+    	     	     "sSearch": "Filter records:"
+    	     },
+    	    "aaSorting": [[ 4, "desc" ]],
+    	    "sDom": 'T<"clear">lfrtip',
+            "oTableTools": {
+        	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+            }
+         });
+         
+         $('#gene_table').dataTable({
+    	    "sPaginationType": "full_numbers",
+    	    "iDisplayLength": 10,
+    	    "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+    	    "oLanguage": {
+    	     	     "sSearch": "Filter records:"
+    	     },
+    	    "aaSorting": [[ 4, "desc" ]],
+    	    "sDom": 'T<"clear">lfrtip',
+            "oTableTools": {
+        	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+            }
+         });
+         
+         $('#pub_table').dataTable({
+    	    "sPaginationType": "full_numbers",
+    	    "iDisplayLength": 10,
+    	    "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+    	    "oLanguage": {
+    	     	     "sSearch": "Filter records:"
+    	     },
+    	    "aaSorting": [[ 4, "desc" ]],
+    	    "sDom": 'T<"clear">lfrtip',
+            "oTableTools": {
+        	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+            }
+         });
+    });
+    </script>
+  </head>
+  <body>
+    
+  <!-- check for errors -->
+  <g:if test="${error == "empty"}">
+    <h1>Please enter a search term</h1>
+    <g:link action=''>Search Again</g:link>
+  </g:if>
+  <g:if test="${error == "too_short"}">
+    <h1>Your search term is too short, it needs to be at least two characters, please <g:link action=''>search Again</g:link></h1>
+  </g:if>
+  <g:if test="${error == "no_anno"}">
+    <h1>Please select some annotations</h1>
+    <g:link action=''>Search Again</g:link>
+  </g:if>
+  
+  <div class="inline">
+  <br><h1>Results for search of '<em>${searchId}</em>' across all data</h1> 
+  <p>(searched all records in ${search_time})</p>
+  </div><br>
+  
+  <g:if test="${transRes}">
+  	<h2>Results for transcriptome annotation data:</h2> 
+    	<p>Found ${transRes.size()} hits</p>
+        <table id="trans_table" class="display">
+            <thead>
+              <tr>
+                <th><b>Transcript ID</b></th>
+                <th><b>Database</b></th>
+                <th><b>Hit ID</b></th>
+                <th><b>Description</b></th>
+                <th><b>Start</b></th>
+                <th><b>Stop</b></th>
+                <th><b>Score</b></th>
+              </tr>
+             </thead>
+             <tbody>
+               <g:each var="res" in="${transRes}">
+                <tr>  
+                  <td><g:link action="trans_info" params="${[contig_id: res.contig_id]}"> ${res.contig_id}</g:link></td>
+                  <td>${res.anno_db}</td>
+                  <%res.anno_id = res.anno_id.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
+                  <%res.anno_id = res.anno_id.replaceAll(/lcl\|(.*)/, "<a href=\"http://www.uniprot.org/uniref/\$1\" target=\'_blank\'>\$1</a>")%>
+                  <td>${res.anno_id}</td>
+                  <%res.descr = res.descr.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
+                  <td>${res.descr}</td>
+                  <td>${res.anno_start}</td>
+                  <td>${res.anno_stop}</td>
+                  <td>${res.score}</td>
+                </tr>                  
+               </g:each>
+              </tbody>
+         </table> 
+         <br>
+  </g:if>
+  
+  <g:if test="${geneRes}">
+    <hr size = 5 color="green" width="100%" style="margin-top:10px">  
+  	<h2>Results for gene annotation data:</h2> 
+    	<p>Found ${geneRes.size()} hits </p>
+        <table id="gene_table" class="display">
+            <thead>
+              <tr>
+                <th><b>Gene ID</b></th>
+                <th><b>Database</b></th>
+                <th><b>Hit ID</b></th>
+                <th><b>Description</b></th>
+                <th><b>Start</b></th>
+                <th><b>Stop</b></th>
+                <th><b>Score</b></th>
+              </tr>
+             </thead>
+             <tbody>
+               <g:each var="res" in="${geneRes}">
+                <tr>  
+                  <td><g:link action="trans_info" params="${[contig_id: res.contig_id]}"> ${res.contig_id}</g:link></td>
+                  <td>${res.anno_db}</td>
+                  <%res.anno_id = res.anno_id.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
+                  <%res.anno_id = res.anno_id.replaceAll(/lcl\|(.*)/, "<a href=\"http://www.uniprot.org/uniref/\$1\" target=\'_blank\'>\$1</a>")%>
+                  <td>${res.anno_id}</td>
+                  <%res.descr = res.descr.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
+                  <td>${res.descr}</td>
+                  <td>${res.anno_start}</td>
+                  <td>${res.anno_stop}</td>
+                  <td>${res.score}</td>
+                </tr>                  
+               </g:each>
+              </tbody>
+         </table> 
+         <br>
+  </g:if>
+  
+    <g:if test="${pubRes}">
+    <hr size = 5 color="green" width="100%" style="margin-top:10px">  
+  	<h2>Results for publication data:</h2> 
+    	<p>Found ${pubRes.size()} hits</p>
+       	<table id="pub_table" class="display">
+       		<thead>
+       			<tr>
+       				<th><b>Title</b></th>
+       				<th><b>Authors</b></th>
+       				<th><b>Journal</b></th>
+       				<th><b>Date</b></th>
+       			</tr>
+       		</thead>
+       		<tbody>
+       		<g:each var="res" in="${pubRes}">
+       			<tr>
+       				<td><a href="http://www.ncbi.nlm.nih.gov/pubmed?term=${res.pubmed_id}" target='_blank'>${res.title}</a></td>
+       					<!--td><span class="dropt"><a href="http://www.ncbi.nlm.nih.gov/pubmed?term=${res.pubmed_id}" target='_blank'>${res.title}</a>
+       					<span style="width:90%;"><b>Abstract</b></br>${res.abstract_text}</span>
+       					</span>
+       				</td-->
+       				<td>${res.authors}.</td>
+       				<td>${res.journal_short}</td>
+       				<td><g:formatDate format="yyyy MMM d" date="${res.date_string}"/></td>
+       			</tr>
+       		</g:each>
+       		</tbody>
+       	</table>
+    </g:if>
+  
 </body>
 </html>
+
+

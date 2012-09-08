@@ -13,8 +13,25 @@ class SearchController {
     def all_search = {
     }
     def all_searched = {
-    	println "Searching all databases for "+params.searchId	
-    	return [searchId: params.searchId]
+    	def timeStart = new Date()
+    	def sql = new Sql(dataSource)
+    	println "Searching all databases for "+params.searchId
+    	
+    	def transsearch = "SELECT * FROM trans_anno WHERE to_tsvector(descr || ' ' || anno_id) @@ to_tsquery('"+params.searchId+"')";
+    	def transRes = sql.rows(transsearch)
+    	println "Trans search = "+transsearch
+    	
+    	def genesearch = "SELECT * FROM gene_anno WHERE to_tsvector(descr || ' ' || anno_id) @@ to_tsquery('"+params.searchId+"')";
+    	def geneRes = sql.rows(genesearch)
+    	println "Gene search = "+genesearch
+    	
+    	def pubsearch = "SELECT * FROM publication WHERE to_tsvector(abstract_text || ' ' || authors || ' ' || journal || '' || title) @@ to_tsquery('"+params.searchId+"')";
+    	def pubRes = sql.rows(pubsearch)
+    	println "Publication search = "+pubsearch
+    	
+    	def timeStop = new Date()
+		def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
+    	return [searchId: params.searchId, search_time: duration, transRes: transRes, geneRes: geneRes, pubRes: pubRes]
     }
     def trans_search = {   
     	 def sql = new Sql(dataSource)

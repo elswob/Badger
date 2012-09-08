@@ -113,3 +113,8 @@ grails.plugins.springsecurity.auth.loginFormUrl = '/'
 
 grails.app.context = "/"
 
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'Security.SecUser'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'Security.SecUserSecRole'
+grails.plugins.springsecurity.authority.className = 'Security.SecRole'
