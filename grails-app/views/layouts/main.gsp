@@ -19,10 +19,10 @@
 
 </head>
 <body>
-  <div class="header" role="banner">
-      <a href="/"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="padding:10px;" alt="b_anynana" align="left" height="120px"/></a>
-      <font size="6"><br>The <font size="7"><i>${grailsApplication.config.projectID}</i></font> genome project</font>
-  </div>
+ <div class="header" role="banner">
+  	  <a href="/"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="padding:10px;" alt="b_anynana" align="left" height="100px"/></a>
+   	  <font size="6"><br>The <font size="7"><i>${grailsApplication.config.projectID}</i></font> genome project</font>
+ </div>    	  
   <div class="footer" role="contentinfo">
     <div class="navbar">
 	<ul>
@@ -59,8 +59,8 @@
     		}
     	}
     	%>
-		
-		<li><g:link controller="login" class="${pageProperty(name:'page.login')}">Log in</g:link></li>
+		<li style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="login">Log in</g:link></li>
+    	
 	   </sec:ifNotLoggedIn>
 	   
 	   <sec:ifLoggedIn>
@@ -126,8 +126,8 @@
     	}
     	%>
     	
-    	<li><g:link controller="logout">Log out</g:link></li>
-		<!--li style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="logout">Log out</g:link></li-->
+    	<!--li><g:link controller="logout">Log out</g:link></li-->
+		<li style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="logout">Log out</g:link></li>
 	   </sec:ifLoggedIn>
 	</ul>
     </div>

@@ -47,11 +47,11 @@
 	    									<a href="#" onclick="parentNode.submit()" title="Delete news item"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
 	    								</g:form> 
 	    							</sec:ifAnyGranted>
-	    						<b><g:link action="news" params="${[newsTitle : res.titleString]}"><g:formatDate format="yyyy MMM d" date="${res.dateString}"/>:</b></g:link>
+	    						<b><g:formatDate format="yyyy MMM d" date="${res.dateString}"/>:</b>
 
 	    					</td>
 	    					<td>
-	    					${res.titleString} 
+	    						<g:link action="news" params="${[newsTitle : res.titleString]}">${res.titleString}</g:link>
 	    					</div>
 	    					</td>
 	    				</tr>
@@ -101,11 +101,11 @@
 	    									<a href="#" onclick="parentNode.submit()" title="Delete news item"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
 	    								</g:form> 
 	    							</sec:ifAnyGranted>
-	    						<b><g:link action="news" params="${[newsTitle : res.titleString]}"><g:formatDate format="yyyy MMM d" date="${res.dateString}"/>:</b></g:link>
+	    						<b><g:formatDate format="yyyy MMM d" date="${res.dateString}"/>:</b>
 
 	    					</td>
 	    					<td>
-	    					${res.titleString} 
+	    					<g:link action="news" params="${[newsTitle : res.titleString]}">${res.titleString}</g:link>
 	    					</div>
 	    					</td>
 	    				</tr>

@@ -836,3 +836,9 @@ span.dropt:hover span {
 	margin: 20px 0 0 0;
 	z-index:6;
 } 
+
+.login {
+	float:right;
+	border-left:1px solid #abbf78;
+	border-right:0px;
+}

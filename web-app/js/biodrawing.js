@@ -96,7 +96,7 @@
                 'font-size': 14,
                 'fill' : colour
             });
-            this.yPos = this.yPos + 20;
+            this.yPos = this.yPos - 10;
             return title;
         };
         BioDrawing.prototype.drawSpacer = function(pixels) {

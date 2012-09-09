@@ -196,7 +196,7 @@
     	    "oLanguage": {
     	     	     "sSearch": "Filter records:"
     	     },
-    	    "aaSorting": [[ 6, "desc" ]],
+    	    "aaSorting": [[ 7, "desc" ]],
     	    "sDom": 'T<"clear">lfrtip',
             "oTableTools": {
         	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
@@ -210,7 +210,7 @@
     	    "oLanguage": {
     	     	     "sSearch": "Filter records:"
     	     },
-    	    "aaSorting": [[ 6, "desc" ]],
+    	    "aaSorting": [[ 7, "desc" ]],
     	    "sDom": 'T<"clear">lfrtip',
             "oTableTools": {
         	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
@@ -265,6 +265,7 @@
                 <th><b>Start</b></th>
                 <th><b>Stop</b></th>
                 <th><b>Score</b></th>
+                <th><b>Rank</b></th>
               </tr>
              </thead>
              <tbody>
@@ -280,6 +281,7 @@
                   <td>${res.anno_start}</td>
                   <td>${res.anno_stop}</td>
                   <td>${res.score}</td>
+                  <td>${sprintf("%.3f",res.rank)}</td>
                 </tr>                  
                </g:each>
               </tbody>
@@ -303,6 +305,7 @@
                 <th><b>Start</b></th>
                 <th><b>Stop</b></th>
                 <th><b>Score</b></th>
+                <th><b>Rank</b></th>
               </tr>
              </thead>
              <tbody>
@@ -318,6 +321,7 @@
                   <td>${res.anno_start}</td>
                   <td>${res.anno_stop}</td>
                   <td>${res.score}</td>
+                  <td>${sprintf("%.3f",res.rank)}</td>
                 </tr>                  
                </g:each>
               </tbody>

@@ -6,6 +6,7 @@ input, select, textarea {
 
 /* BASE LAYOUT */
 
+/*
 html {
 	background-color: #ddd;
 	background-image: -moz-linear-gradient(center top, #aaa, #ddd);
@@ -14,10 +15,14 @@ html {
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#aaaaaa', EndColorStr = '#dddddd');
 	background-repeat: no-repeat;
 	height: 100%;
-	/* change the box model to exclude the padding from the calculation of 100% height (IE8+) */
-	-webkit-box-sizing: border-box;
+	   -webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
+}
+*/
+
+html{
+	background-color: #E1f2B6;
 }
 
 html.no-cssgradients {
@@ -37,13 +42,20 @@ body {
     padding: 0.5em 0.75em;
 	color: #333333;
 	margin: 0 auto;
-	max-width: 80%;
-	font-size: 12pt;
+	max-width: 90%;
+	font-size: 11pt;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
 	   -moz-box-shadow: 0 0 0.3em #255b17;
 	-webkit-box-shadow: 0 0 0.3em #255b17;
 	        box-shadow: 0 0 0.3em #255b17;
 }
+
+
+.boxdiv
+{
+border:3px solid;
+border-color: #EFEFEF;
+} 
 
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -61,6 +73,7 @@ body {
 
 a:link, a:visited, a:hover {
 	color: #48802c;
+	text-decoration:none;
 }
 
 a:hover, a:active {
@@ -70,8 +83,20 @@ a:hover, a:active {
 h1 {
 	color: #48802c;
 	font-weight: normal;
-	font-size: 1.25em;
+	font-size: 1.4em;
 	margin: 0.8em 0 0.3em 0;
+}
+
+h2 {
+	font-weight: normal;
+	font-size: 1.2em;
+	margin: 0 0 0.3em 0;
+}
+
+h3 {
+	font-weight: normal;
+	font-size: 1em;
+	margin: 0 0 0.3em 0;
 }
 
 ul {
@@ -142,9 +167,80 @@ img {
 
 /* NAVIGATION MENU */
 
+.navbar {
+	background-color: #efefef;
+	padding: 0.2em 0.2em;
+}
+.navbar a {
+	color: #2D2D2D;
+	display: block;
+	padding: 0.55em 0.7em;
+    font-size: 1.2em;
+	text-decoration: none;
+	border-radius: 0.3em;
+}
+.navbar a:focus, .navbar a:hover {
+	background-color: #999999;
+	color: #ffffff;
+	outline: none;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+.navbar ul {
+	overflow: hidden;
+	padding-left: 0;
+}
+.navbar li {
+	display: block;
+	float: left;
+	list-style-type: none;
+	margin-right: 0;
+	padding: 3px;
+	border-right: 1px solid #abbf78;
+}
+.navbar li li {
+	display: block;
+	float: left;
+	list-style-type: none;
+	margin-right: 0;
+	padding: 1px;
+	border-right: 0px solid #abbf78;
+}
+.navbar li a {
+	display: block;
+	padding: 3px 8px;
+	background-color: #efefef;
+	color: #0C4D09;
+	text-decoration: none; }
+.navbar li ul {
+	display: none;
+}
+.navbar li:hover ul {
+	display: block;
+	position: absolute;
+	margin: 0;
+	padding: 0; 
+}
+.navbar li:hover li {
+	float: none; 
+}
+.navbar li:hover li a {
+	background-color: #999999;
+	color: #ffffff;
+}
+.navbar li li a:hover {
+	background-color: #999999;
+}
+/* change colour of current location in navigation bar */
+.navbar li a.selected {
+    color: #ffffff;
+    background-color: #999999;
+}
+
+	
+
 .nav {
 	background-color: #efefef;
-	padding: 0.5em 0.75em;
+	padding: 0.2em 0.2em;
 	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
 	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
 	        box-shadow: 0 0 3px 1px #aaaaaa;
@@ -161,8 +257,13 @@ img {
 	display: block;
 	float: left;
 	list-style-type: none;
-	margin-right: 0.5em;
-	padding: 0;
+	margin-right: 0;
+	padding: 3px;
+	border-right: 1px solid #abbf78;	
+}
+
+.nav li.last {
+border-right: 1px solid #FFF;
 }
 
 .nav a {
@@ -411,6 +512,19 @@ input:invalid:focus, select:invalid:focus, textarea:invalid:focus {
 
 /* TABLES */
 
+.table_border{
+	border:3px solid;
+	border-color: #EFEFEF;
+}
+
+.table_border td{
+	vertical-align:middle;
+}
+
+.table_basic td{
+	vertical-align:middle;
+}
+
 table_100 {
 	border-top: 1px solid #DFDFDF;
 	border-collapse: collapse;
@@ -431,7 +545,7 @@ tr>td:last-child, tr>th:last-child {
 }
 
 td, th {
-	line-height: 1.5em;
+	line-height: 1.3em;
 	padding: 0.5em 0.6em;
 	text-align: left;
 	vertical-align: top;
@@ -532,7 +646,41 @@ th:hover, tr:hover {
 	text-decoration: underline;
 }
 
+div.inline *  { display: inline; }
+
+.inlineDiv{
+	display: inline;
+}
+
 /* ACTION BUTTONS */
+
+.blankbutton {
+	background-color: #white;
+}
+
+.mybuttons {
+	background-color: #efefef;
+	overflow: hidden;
+	padding: 0.3em;
+	-moz-box-shadow: 0 0 3px 1px #aaaaaa;
+	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
+	        box-shadow: 0 0 3px 1px #aaaaaa;
+	margin: 0 0 0 0;
+	border: 0em;
+}
+
+.mybuttons:hover {
+	color:green;
+	border-color:#3278BE;
+}
+ 
+.mybuttons:focus 
+ {
+     border:0.5em solid #00c; /* here configure as your needs */
+     color:#00c;
+  }
+
+
 
 .buttons {
 	background-color: #efefef;
@@ -619,3 +767,72 @@ a.skip {
 .page_num a {
 	text-decoration:none
 }
+
+/* highlight anchor/fragment */
+h3:target {
+	border:3px solid green;
+	background: #E1F2B6;
+}
+
+tr:target {
+	outline: solid green;
+}
+
+
+/* modified from js-shapelib - copyright Addy Osmani, 2010. */
+
+.container { 
+width:800px; 
+margin:0 auto; 
+height:350px;
+}
+
+
+.box {   
+float:left;
+position:absolute;
+}
+
+.box:hover{
+     border:5px solid #ABBF78;  
+}
+
+.logo{
+  background-repeat:no-repeat;
+  margin:0 auto;
+  margin-top:240px;
+  margin-left:260px;
+  position:absolute;
+}
+
+.logo:hover{
+     border:5px solid #ABBF78;  
+}
+
+/* highlight anchor/fragment */
+h3:target {
+	border:3px solid green;
+	background: #ACDEEF;
+}
+
+tr:target {
+	outline: solid green;
+}
+
+/* popup text on hover */
+span.dropt:hover {
+	text-decoration: none; 
+	background: #ffffff; 
+	z-index: 6; 
+}
+span.dropt span {
+	position: absolute; left: -9999px;
+	margin: 0 0 0 0px; padding: 3px 3px 3px 3px;
+  	border-style:solid; border-color:black; border-width:1px; z-index: 6;
+}
+span.dropt:hover span {
+	left: 5%; 
+	background: #ffffff;
+	margin: 20px 0 0 0;
+	z-index:6;
+} 

@@ -17,11 +17,13 @@ class SearchController {
     	def sql = new Sql(dataSource)
     	println "Searching all databases for "+params.searchId
     	
-    	def transsearch = "SELECT * FROM trans_anno WHERE to_tsvector(descr || ' ' || anno_id) @@ to_tsquery('"+params.searchId+"')";
+    	//def transsearch = "SELECT distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score FROM trans_anno WHERE to_tsvector(descr || ' ' || anno_id) @@ to_tsquery('"+params.searchId+"')";
+    	def transsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM trans_anno, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query;"    	
     	def transRes = sql.rows(transsearch)
     	println "Trans search = "+transsearch
     	
-    	def genesearch = "SELECT * FROM gene_anno WHERE to_tsvector(descr || ' ' || anno_id) @@ to_tsquery('"+params.searchId+"')";
+    	//def genesearch = "SELECT distinct on (anno_db,gene_id) gene_id,anno_id,anno_db,anno_start,anno_stop,descr,score FROM gene_anno WHERE to_tsvector(descr || ' ' || anno_id) @@ to_tsquery('"+params.searchId+"')";
+    	def genesearch = "select distinct on (anno_db,gene_id) gene_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM gene_anno, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query;"
     	def geneRes = sql.rows(genesearch)
     	println "Gene search = "+genesearch
     	
@@ -212,20 +214,33 @@ class SearchController {
      		item = item.toString()
      			def splitter = item.split("=")
      			blastDBs += "'"+splitter[0]+"' or anno_db = "
-     			println "adding "+splitter[0]
+     			//println "adding "+splitter[0]
      		}
      	}
      	blastDBs = blastDBs[0..-15]
+     	
+     	def funDBs = "anno_db = "
+     	if (grailsApplication.config.t.fun.size()>0){
+     		for(item in grailsApplication.config.t.fun){
+     		item = item.toString()
+     			def splitter = item.split("=")
+     			funDBs += "'"+splitter[0]+"' or anno_db = "
+     			//println "adding "+splitter[0]
+     		}
+     	}
+     	funDBs = funDBs[0..-15]
+     	
      	def blastsql = "select * from trans_anno where ("+blastDBs+") and contig_id = '"+params.contig_id+"' order by score desc;";
     	println blastsql
      	def blast_results = sql.rows(blastsql)
     	def iprsql = "select * from trans_anno where anno_id ~ '^IPR' and contig_id = '"+params.contig_id+"' order by score;";
     	def ipr_results = sql.rows(iprsql)
-    	def a8rsql = "select * from trans_anno where (anno_db = 'EC' or anno_db = 'GO' or anno_db = 'KEGG') and contig_id = '"+params.contig_id+"' order by score desc;";
-    	def a8r_results = sql.rows(a8rsql)
+    	def funsql = "select * from trans_anno where ("+funDBs+") and contig_id = '"+params.contig_id+"' order by score desc;";
+    	println funsql
+    	def fun_results = sql.rows(funsql)
         def info_results = TransInfo.findAllByContig_id(params.contig_id)
         def nuc_fasta = ">"+info_results.contig_id[0]+"\n"+info_results.sequence[0]+"\n"
-        return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, a8r_results: a8r_results, nuc_fasta: nuc_fasta]
+        return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, nuc_fasta: nuc_fasta]
     }
     def contig_info = {
         def info_results = GenomeInfo.findAllByContig_id(params.contig_id)
