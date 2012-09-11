@@ -12,36 +12,32 @@ class SearchController {
     }
     def all_search = {
     }
-    def all_searched = {
-    	def timeStart = new Date()
-    	def sql = new Sql(dataSource)
-    	println "Searching all databases for "+params.searchId
-    	
-    	//def transsearch = "SELECT distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score FROM trans_anno WHERE to_tsvector(descr || ' ' || anno_id) @@ to_tsquery('"+params.searchId+"')";
-    	def transsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM trans_anno, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query;"    	
-    	def transRes = sql.rows(transsearch)
-    	println "Trans search = "+transsearch
-    	
-    	//def genesearch = "SELECT distinct on (anno_db,gene_id) gene_id,anno_id,anno_db,anno_start,anno_stop,descr,score FROM gene_anno WHERE to_tsvector(descr || ' ' || anno_id) @@ to_tsquery('"+params.searchId+"')";
-    	def genesearch = "select distinct on (anno_db,gene_id) gene_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM gene_anno, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query;"
-    	def geneRes = sql.rows(genesearch)
-    	println "Gene search = "+genesearch
-    	
-    	//def pubsearch = "SELECT * FROM publication WHERE textsearchable_index_col @@ to_tsquery('"+params.searchId+"')";
-    	def pubsearch = "SELECT *, ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM publication, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query ORDER BY rank DESC;"
-    	def pubRes = sql.rows(pubsearch)
-    	println "Publication search = "+pubsearch
-    	
-    	def timeStop = new Date()
-		def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
-    	return [searchId: params.searchId, search_time: duration, transRes: transRes, geneRes: geneRes, pubRes: pubRes]
+     def all_searched = {
+        def timeStart = new Date()
+        def sql = new Sql(dataSource)
+        println "Searching all databases for "+params.searchId
+        
+        //def transsearch = "SELECT distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score FROM trans_anno WHERE to_tsvector(descr || ' ' || anno_id) @@ to_tsquery('"+params.searchId+"')";
+        def transsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM trans_anno, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query;"      
+        def transRes = sql.rows(transsearch)
+        println "Trans search = "+transsearch
+        
+        //def genesearch = "SELECT distinct on (anno_db,gene_id) gene_id,anno_id,anno_db,anno_start,anno_stop,descr,score FROM gene_anno WHERE to_tsvector(descr || ' ' || anno_id) @@ to_tsquery('"+params.searchId+"')";
+        def genesearch = "select distinct on (anno_db,gene_id) gene_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM gene_anno, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query;"
+        def geneRes = sql.rows(genesearch)
+        println "Gene search = "+genesearch
+        
+        //def pubsearch = "SELECT * FROM publication WHERE textsearchable_index_col @@ to_tsquery('"+params.searchId+"')";
+        def pubsearch = "SELECT *, ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM publication, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query ORDER BY rank DESC;"
+        def pubRes = sql.rows(pubsearch)
+        println "Publication search = "+pubsearch
+        
+        def timeStop = new Date()
+        def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
+        return [searchId: params.searchId, search_time: duration, transRes: transRes, geneRes: geneRes, pubRes: pubRes]
     }
+
     def trans_search = {   
-    	 def sql = new Sql(dataSource)
-     	 def sqlsearch = "select contig_id,gc,length,coverage from trans_info order by length desc;"
-     	 def funsearch = "select trans_anno.contig_id,gc,length,coverage,anno_db,anno_id from trans_info,trans_anno where (anno_db = 'EC' or anno_db = 'KEGG' or anno_db = 'GO' or anno_id ~ '^IPR') and trans_anno.contig_id = trans_info.contig_id order by length desc;"
-     	 def results = sql.rows(sqlsearch)
-     	 def funresults = sql.rows(funsearch)
      	 def blastMap = [:]
      	 if (grailsApplication.config.t.blast.size()>0){
      	 	for(item in grailsApplication.config.t.blast){
@@ -51,7 +47,23 @@ class SearchController {
      	 	}
      	 }
      	 println "blastMap = "+blastMap
-     	 return [ transData: results, funData: funresults, blastMap: blastMap]
+     	 
+     	 def funMap = [:]
+     	 if (grailsApplication.config.t.fun.size()>0){
+     	 	for(item in grailsApplication.config.t.fun){
+     	 		item = item.toString()
+     	 		def splitter = item.split("=")
+     	 		funMap[splitter[0]] = splitter[1]
+     	 	}
+     	 }
+     	 println "funMap = "+funMap
+     	 
+     	 def iprMap = [:]
+     	 if (grailsApplication.config.t.IPR.size()>0){
+     	 	iprMap.IPR = grailsApplication.config.t.IPR
+     	 }
+     	 println "iprMap = "+iprMap
+     	 return [blastMap: blastMap, funMap: funMap, iprMap: iprMap]
     }
     @Secured(['ROLE_USER'])
     def gene_search = {
@@ -75,7 +87,98 @@ class SearchController {
      	 return [ genomeData: results]
     }
     //@Secured(['ROLE_USER','ROLE_ADMIN'])
-    def search_results = {
+    def trans_search_results = {
+    	def sql = new Sql(dataSource)
+    	//set up some global search things
+    	def timeStart = new Date()
+        def table = params.dataSet
+        def searchId = params.searchId   
+        def annoSearch = "(anno_db = "
+        def whatSearch
+        def annoType = params.toggler
+        println "annoType = "+annoType
+        def annoDB
+		if (annoType == '1'){
+			whatSearch = params.tableSelect_1
+			annoDB = params.blastAnno
+			//choose what to search			
+			if (whatSearch == 'e.g. ATPase'){whatSearch = 'descr ~* '}
+			if (whatSearch == 'e.g. 215283796 or P31409'){whatSearch = 'anno_id ~* '}
+			if (whatSearch == 'e.g. contig_1'){whatSearch = 'contig_id = '}
+		}
+		if (annoType == '2'){
+			whatSearch = params.tableSelect_2
+			annoDB = params.a8rAnno
+			//choose what to search			
+			if (whatSearch == 'e.g. Calcium-transportingATPase'){whatSearch = 'descr ~* '}
+			if (whatSearch == 'e.g. GO:0008094 or 3.6.3.8 or K02147'){whatSearch = 'anno_id ~* '}
+			if (whatSearch == 'e.g. contig_1'){whatSearch = 'contig_id = '}
+		}
+		if (annoType == '3'){
+			whatSearch = params.tableSelect_3
+			annoDB = params.iprAnno
+			//choose what to search			
+			if (whatSearch == 'e.g. Vacuolar (H+)-ATPase G subunit'){whatSearch = 'descr ~* '}
+			if (whatSearch == 'e.g. IPR023298 or PF01813'){whatSearch = 'anno_id ~* '}
+			if (whatSearch == 'e.g. contig_1'){whatSearch = 'contig_id = '}
+		}
+		println "annoDB = "+annoDB
+		//construct the anno_db search string			
+		//if just one db is passed then the list becomes a string
+		if (annoDB){
+			if (annoDB instanceof String){
+				annoSearch += "\'" + annoDB + "\'"
+			}else{
+				def annoSelect = annoDB		
+				annoSelect.each {
+					annoSearch += "\'" + it + "\'" + " or anno_db = "
+				}
+				annoSearch = annoSearch[0..-15]			
+			}
+			annoSearch += ")"
+		}
+		
+		if (!annoDB){
+			return [error: "no_anno"]
+		}
+        //check for single letter searches
+        else if (searchId.size() < 2){
+        		return [error: "too_short"]
+        //check for empty searches
+        }else if (searchId ==""){
+            return [error: "empty"]
+        }else{   
+        	def sqlsearch
+        	println "search = "+params.toggler
+        	if (params.toggler == "1"){
+        		println "Searching blast data"
+        		sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,gaps,hit_start,hit_stop,hseq,identity,midline,positive,qseq from trans_blast where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		        		
+        	}else{
+        		println "Searching anno data"
+        		sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score from trans_anno where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		
+        	}
+        	println sqlsearch
+        	def results_all = sql.rows(sqlsearch)
+            //count the number of unique hits
+            def hits = []
+            results_all.each {
+            	hits.add(it.contig_id)
+            }
+            def uniques = hits.unique()
+            def results
+            if (results_all.size() > 0){
+            	results = results_all.sort({-it.score as double})
+            }else{
+            	results = results_all
+            }
+            def timeStop = new Date()
+            def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
+            return [results: results, term : searchId , search_time: duration, uniques:uniques.size(),sql:sqlsearch, annoType: annoType]         
+        }
+      }
+    
+     //@Secured(['ROLE_USER','ROLE_ADMIN'])
+    def gene_search_results = {
     	def sql = new Sql(dataSource)
     	//set up some global search things
     	def timeStart = new Date()
@@ -136,37 +239,21 @@ class SearchController {
         }else if (searchId ==""){
             return [error: "empty"]
             
-        //check for gene annotation data
-        }else if (table == 'Genes' || params.search =='gene'){
-			def results_all = GeneAnno.findAllByDescrLike("%${searchId}%")	
-			def results
-			if (results_all.size() > 0){
-            	results = results_all.sort({-it.score as double})
-            }else{
-            	results = results_all
-            }
-			def timeStop = new Date()
-			def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
-			return [ anno: "yes", results: results, term : searchId , search_time: duration ]
-			
-        //check for transciptome annotation data
-        }else if (table == 'Transcripts' || params.search =='trans'){
-        	def sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score from trans_anno where "+annoSearch+" and "+whatSearch+ "'${searchId}';"
-        	def chartsearch = "select distinct on (trans_anno.contig_id,gc,length,coverage,score) trans_anno.contig_id,gc,length,coverage,score from trans_anno,trans_info where "+annoSearch+" and "+whatSearch+ "'${searchId}' and trans_info.contig_id = trans_anno.contig_id;"
+        	def sqlsearch
+        	println "search = "+params.toggler
+        	if (params.toggler == "1"){
+        		println "Searching blast data"
+        		sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,gaps,hit_start,hit_stop,hseq,identity,midline,positive,qseq from gene_blast where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		        		
+        	}else{
+        		println "Searching anno data"
+        		sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score from gene_anno where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		
+        	}
         	println sqlsearch
-        	println chartsearch
         	def results_all = sql.rows(sqlsearch)
-        	def chart_results = sql.rows(chartsearch)
             //count the number of unique hits
             def hits = []
             results_all.each {
             	hits.add(it.contig_id)
-            }
-            //interpro scores are a problem for the chart so convert all to 1 (not great)
-            chart_results.each {
-            	if (it.score < 1){
-            		it.score = 1;
-            	}
             }
             def uniques = hits.unique()
             def results
@@ -177,24 +264,11 @@ class SearchController {
             }
             def timeStop = new Date()
             def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
-            return [ uni: "yes", results: results, term : searchId , search_time: duration, uniques:uniques.size(),sql:sqlsearch, annoType: annoType, chartData: chart_results]
-            
-            
-        //check for ncrna data
-    	}else if (table == 'ncRNA'){            
-        
-        //go straight to a genomic contig page
-        }else if (table == 'scaffoldID' || params.search == 'contig'){
-            def contigs = Contig.findAllByContig_idLike(searchId)
-            def genes = GeneInfo.findAllByContig_idLike(searchId)
-            def fasta = ">"+params.contig_id+"\n"+contigs.sequence[0]+"\n"
-            return [ contig: "yes", contigs: contigs, term : searchId, fasta : fasta, genes: genes ]
-        
-        //go straight to a gene page
-        }else if (table == 'geneID'){
-        	redirect(action: "gene_info", params: [gene_id: searchId])          
+            return [ uni: "yes", results: results, term : searchId , search_time: duration, uniques:uniques.size(),sql:sqlsearch, annoType: annoType]         
         }
-    }
+      }
+    
+    
     @Secured(['ROLE_USER'])
     def gene_info = {
     	def offint = params.offset as Integer 

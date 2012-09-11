@@ -21,7 +21,7 @@
   			<tr><td><g:link controller="search" action="genome_search">${GDB.GenomeInfo.count()} contigs/scaffolds</g:link></td><td>The latest genome.</td></tr>
   		</g:if>
   		
-  		<tr><td><g:link controller="search" action="all_search">Search all</g:link></td><td>Search all data within the <i>${grailsApplication.config.species}</i> database by keywords.</td></tr>
+  		<tr><td><g:link controller="search" action="all_search">Search all by keyword</g:link></td><td>Search all data within the <i>${grailsApplication.config.species}</i> database by keywords.</td></tr>
 
   	</td></tr>
   </table>

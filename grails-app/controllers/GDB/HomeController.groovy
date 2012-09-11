@@ -123,7 +123,7 @@ class HomeController {
  	//get the year from the bar chart 
  	if (params.year){
  		def yearbefore = params.year-1
- 		def yearsql = "select * from publication where date_string between \'01/01/" +params.year+ "\' and \'31/12/"+params.year+"\';"
+ 		def yearsql = "select *,to_char(date_string,'yyyy Mon dd') as date_out from publication where date_string between \'01/01/" +params.year+ "\' and \'31/12/"+params.year+"\';"
  		println yearsql
  		def pub_results = sql.rows(yearsql)
  		return [ pub_results: pub_results, searchId: params.year]
@@ -144,7 +144,7 @@ class HomeController {
 				pubSearch = pubSearch[0..-5]			
 			}
 			pubSearch += ")"
-			def pub_search = "select  * from publication where "+pubSearch+" order by date_string desc;"
+			def pub_search = "select *,to_char(date_string,'yyyy Mon dd') as date_out from publication where "+pubSearch+" order by date_string desc;"
 			def pub_results = sql.rows(pub_search)
 			println pub_search
 			println "number of results = "+pub_results.size()

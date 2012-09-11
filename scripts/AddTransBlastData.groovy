@@ -52,6 +52,30 @@ def addTransBlast(db,blastFile){
         if ((matcher = line =~ /<Hsp_query-to>(.*?)<\/Hsp_query-to>/)){
                 annoMap.anno_stop = matcher[0][1]
         }
+        if ((matcher = line =~ /<Hsp_hit-from>(.*?)<\/Hsp_hit-from>/)){
+                annoMap.hit_start = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_hit-to>(.*?)<\/Hsp_hit-to>/)){
+                annoMap.hit_stop = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_identity>(.*?)<\/Hsp_identity>/)){
+                annoMap.identity = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_gaps>(.*?)<\/Hsp_gaps>/)){
+                annoMap.gaps = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_align>(.*?)<\/Hsp_align>/)){
+                annoMap.align = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_qseq>(.*?)<\/Hsp_qseq>/)){
+                annoMap.qseq = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_hseq>(.*?)<\/Hsp_hseq>/)){
+                annoMap.hseq = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_midline>(.*?)<\/Hsp_midline>/)){
+                annoMap.midline = matcher[0][1]
+        }
         //if ((matcher = line =~ /<Hsp_evalue>(.*?)<\/Hsp_evalue>/)){
         //        annoMap.eval = matcher[0][1]
         //}
@@ -63,11 +87,12 @@ def addTransBlast(db,blastFile){
             	def scoreInt = annoMap.score as Integer
             	if (scoreInt >= 100){
             		count_all++
-            		if ((count_all % 10000) ==  0){
+            		if ((count_all % 10) ==  0){
             			println count_all
-            			new TransAnno(annoMap).save(flush:true)
+            			//println annoMap
+            			new TransBlast(annoMap).save(flush:true)
             		}else{
-            			new TransAnno(annoMap).save()
+            			new TransBlast(annoMap).save()
             		}
             	}
             }

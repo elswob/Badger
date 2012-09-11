@@ -842,3 +842,5 @@ span.dropt:hover span {
 	border-left:1px solid #abbf78;
 	border-right:0px;
 }
+
+div.innerDetails { display: none }
