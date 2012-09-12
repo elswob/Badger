@@ -33,7 +33,7 @@
     var counter=0;
     var cum = 0;
     var xaxis_label="", yaxis_label="", title_label="", xaxis_type="", yaxis_type="";
-    var arraySet, funSet, funColour;
+    var arraySet;
     function makeArrays(arrayInfo){
     	joinArray = [];
     	$("#chart").text('');
@@ -90,12 +90,6 @@
 			 label: 'No annotation',
 			 color: 'green'
 			 },
-			 {
-			 showLine:false,
-			 markerOptions: { size: 1, style:'dimaond', color:funColour},
-			 label: funSet,
-			 color: funColour
-			 }
 		 ],
 		 axesDefaults: {
 			 labelRenderer: $.jqplot.CanvasAxisLabelRenderer

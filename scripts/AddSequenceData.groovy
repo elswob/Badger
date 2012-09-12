@@ -58,7 +58,7 @@ def addTransData(){
 	}
 }
 
-//add the genome data
+//add the genome data (header needs to be in format of >contigID_coverage)
 addGenomeData()
 def addGenomeData(){
 	if (grailsApplication.config.seqData.Genome){
@@ -82,6 +82,7 @@ def addGenomeData(){
 					//add data to map
 					contigMap.contig_id = contig_id
 					contigMap.gc = gc
+					coverage = sprintf("%.2f",coverage)
 					contigMap.coverage = coverage
 					contigMap.length = sequence.length()
 					contigMap.sequence = sequence
@@ -96,7 +97,7 @@ def addGenomeData(){
 					sequence=""
 				}
 				contig_id = matcher[0][1]
-				coverage = matcher[0][2]
+				coverage = matcher[0][2].toFloat()
 				count_gc = 0
 			}else{
 				sequence += it
