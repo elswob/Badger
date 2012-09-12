@@ -258,9 +258,9 @@
         <table id="trans_table" class="display">
             <thead>
               <tr>
-                <th><b>Transcript ID</b></th>
+                <th><b>Transcript</b></th>
                 <th><b>Database</b></th>
-                <th><b>Hit ID</b></th>
+                <th><b>Hit</b></th>
                 <th><b>Description</b></th>
                 <th><b>Start</b></th>
                 <th><b>Stop</b></th>

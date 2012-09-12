@@ -28,11 +28,11 @@ class FileDownloadController {
      	 object_array.split(",").each{
      	 	 object_list.add(it)
      	 }
-     	 //println "object_list = "+object_list
+     	 println "object_list = "+object_list
      	 def results = TransInfo.findAllByContig_idInList(object_list)
 		 def file_builder=""
      	 results.each {
-     	 	//println "contig_id = "+it.contig_id
+     	 	println "contig_id = "+it.contig_id
      	 	file_builder = file_builder + ">"+it.contig_id+"\n"+it.sequence+"\n"
 		 }
 		 println "created download file "+params.fileName+".fna"

@@ -63,7 +63,7 @@ def addGeneBlast(db,blastFile){
             	def scoreInt = annoMap.score as Integer
             	if (scoreInt >= 100){
             		count_all++
-            		if ((count_all % 10) ==  0){
+            		if ((count_all % 100) ==  0){
             			println count_all
             			new GeneAnno(annoMap).save(flush:true)
             		}else{

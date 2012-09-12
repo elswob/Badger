@@ -4,10 +4,6 @@ import groovy.sql.Sql
 
 def grailsApplication
 
-//inFile = new File('data/cap3_public_e5_b10_v10_sprot_blastx2.out').text
-//inFile = new File('data/est_others_m7_e5_b10_v10_blastn').text
-//addTransBlast(inFile, 'SwissProt')
-
 getBlastData()
 def getBlastData(){
 	if (grailsApplication.config.t.blast.size()>0){
@@ -64,7 +60,7 @@ def addTransBlast(db,blastFile){
         if ((matcher = line =~ /<Hsp_gaps>(.*?)<\/Hsp_gaps>/)){
                 annoMap.gaps = matcher[0][1]
         }
-        if ((matcher = line =~ /<Hsp_align>(.*?)<\/Hsp_align>/)){
+        if ((matcher = line =~ /<Hsp_align-len>(.*?)<\/Hsp_align-len>/)){
                 annoMap.align = matcher[0][1]
         }
         if ((matcher = line =~ /<Hsp_qseq>(.*?)<\/Hsp_qseq>/)){
@@ -87,7 +83,7 @@ def addTransBlast(db,blastFile){
             	def scoreInt = annoMap.score as Integer
             	if (scoreInt >= 100){
             		count_all++
-            		if ((count_all % 10) ==  0){
+            		if ((count_all % 100) ==  0){
             			println count_all
             			//println annoMap
             			new TransBlast(annoMap).save(flush:true)

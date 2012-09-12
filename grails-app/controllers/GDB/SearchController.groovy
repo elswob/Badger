@@ -108,7 +108,7 @@ class SearchController {
 		}
 		if (annoType == '2'){
 			whatSearch = params.tableSelect_2
-			annoDB = params.a8rAnno
+			annoDB = params.funAnno
 			//choose what to search			
 			if (whatSearch == 'e.g. Calcium-transportingATPase'){whatSearch = 'descr ~* '}
 			if (whatSearch == 'e.g. GO:0008094 or 3.6.3.8 or K02147'){whatSearch = 'anno_id ~* '}
@@ -152,7 +152,7 @@ class SearchController {
         	println "search = "+params.toggler
         	if (params.toggler == "1"){
         		println "Searching blast data"
-        		sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,gaps,hit_start,hit_stop,hseq,identity,midline,positive,qseq from trans_blast where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		        		
+        		sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,gaps,hit_start,hit_stop,hseq,identity,midline,positive,qseq,align from trans_blast where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		        		
         	}else{
         		println "Searching anno data"
         		sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score from trans_anno where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		
@@ -243,7 +243,7 @@ class SearchController {
         	println "search = "+params.toggler
         	if (params.toggler == "1"){
         		println "Searching blast data"
-        		sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,gaps,hit_start,hit_stop,hseq,identity,midline,positive,qseq from gene_blast where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		        		
+        		sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,gaps,hit_start,hit_stop,hseq,identity,midline,positive,qseq,align from gene_blast where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		        		
         	}else{
         		println "Searching anno data"
         		sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score from gene_anno where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		
@@ -304,7 +304,7 @@ class SearchController {
      	}
      	funDBs = funDBs[0..-15]
      	
-     	def blastsql = "select * from trans_anno where ("+blastDBs+") and contig_id = '"+params.contig_id+"' order by score desc;";
+     	def blastsql = "select * from trans_blast where ("+blastDBs+") and contig_id = '"+params.contig_id+"' order by score desc;";
     	println blastsql
      	def blast_results = sql.rows(blastsql)
     	def iprsql = "select * from trans_anno where anno_id ~ '^IPR' and contig_id = '"+params.contig_id+"' order by score;";

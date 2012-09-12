@@ -285,7 +285,7 @@
 	   <g:if test="${fun_results}">
 	   <br>
 	   <hr size = 5 color="green" width="100%" style="margin-top:10px">
-	   <h1>annot8r results</h1>
+	   <h1>Functional annotation results</h1>
 	   <table id="fun_table_data" class="display">
 	      <thead>
 	      <tr>
