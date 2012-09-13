@@ -21,7 +21,9 @@ def getData(){
     }
 }
 
-//add the annot8r info
+//add the functional annotation info
+//tab delimited
+//contig_id	source	hit_id	start	stop	bit score	description
 
 def addFunc(source,file){
     def annoMap = [:]
@@ -39,7 +41,7 @@ def addFunc(source,file){
     }
 }
 
-// add the interposcan data
+// add the interposcan raw data 
 def addInterProScan(file){
 	// get the ipr descriptions
 	def iprMap = [:]
@@ -50,28 +52,54 @@ def addInterProScan(file){
 		}
 	}
     def annoMap = [:]
+    def GOMap = [:]
     file.eachLine { line ->
     	    splitter = line.split("\t")
     	    if (splitter[11] != 'NULL'){
 				if ((matcher = splitter[0] =~ /(.*?)_\d+_ORF\d.*/)){
 					annoMap.contig_id = matcher[0][1]
+					GOMap.contig_id = matcher[0][1]
 				}
 				annoMap.anno_db = splitter[3]
 				annoMap.anno_id = splitter[11]+" - "+splitter[4]
 				def start = splitter[6] as int
 				def stop = splitter[7] as int
 				annoMap.anno_start = start*3
+				GOMap.anno_start = start*3
 				annoMap.anno_stop = stop*3
+				GOMap.anno_stop = stop*3
 				//println "score = "+splitter[8]
 				def score = splitter[8] as double
 				//def score = splitter[8]
 				//println "score2 = "+score
 				annoMap.score = splitter[8]
+				GOMap.score = splitter[8]
+				GOMap.anno_db = "IPRGO"
 				//annoMap.score = splitter[8] as float
 				annoMap.descr = iprMap[splitter[11]]
 				//println annoMap
+              	if ((matcher = line =~ /(Molecular Function:.*?)\s\((GO:\d+)\)/)){
+						GOMap.descr = matcher[0][1]
+						GOMap.anno_id = matcher[0][2]
+						if (score < 1e-5){
+							new TransAnno(GOMap).save()
+						}
+				}
+                if ((matcher = line =~ /(Cellular Component:.*?)\s\((GO:\d+)\)/)){
+						GOMap.descr = matcher[0][1]
+						GOMap.anno_id = matcher[0][2]
+						if (score < 1e-5){
+							new TransAnno(GOMap).save()
+						}
+				}
+                if ((matcher = line =~ /.*?(Biological Process:.*?)\s\((GO:\d+)\)/)){
+						GOMap.descr = matcher[0][1]
+						GOMap.anno_id = matcher[0][2]
+						if (score < 1e-5){
+							new TransAnno(GOMap).save()
+						}
+				}
 				if (score < 1e-5){
-					//println annoMap
 					new TransAnno(annoMap).save()
 				}
 		  }

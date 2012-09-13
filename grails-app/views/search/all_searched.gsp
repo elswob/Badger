@@ -188,6 +188,9 @@
     }
     </script>
     <script>
+    <% 
+    def pubjsonData = pubRes.encodeAsJSON(); 
+    %>
     $(document).ready(function() {
             $('#trans_table').dataTable({
     	    "sPaginationType": "full_numbers",
@@ -217,19 +220,74 @@
             }
          });
          
-         $('#pub_table').dataTable({
-    	    "sPaginationType": "full_numbers",
-    	    "iDisplayLength": 10,
-    	    "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-    	    "oLanguage": {
-    	     	     "sSearch": "Filter records:"
-    	     },
-    	    "aaSorting": [[ 4, "desc" ]],
-    	    "sDom": 'T<"clear">lfrtip',
-            "oTableTools": {
-        	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
-            }
-         });
+         var anOpen = [];
+		var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.0/examples/examples_support/')}";
+		 
+		var oTable = $('#pub_table').dataTable( {
+			"bProcessing": true,
+			"aaData": ${pubjsonData},
+			"aoColumns": [
+				{
+				   "mDataProp": null,
+				   "sClass": "control center",
+				   "sDefaultContent": '<img src="'+sImageUrl+'details_open.png'+'">'
+				},
+				{ "mDataProp": "title",
+				"fnRender": function ( oObj, sVal ){
+					return "<a href=\"http://www.ncbi.nlm.nih.gov/pubmed?term="+oObj.aData["pubmed_id"]+ "\"target='_blank'>"+sVal+"</a>";
+				}},
+				{ "mDataProp": "authors" },
+				{ "mDataProp": "journal_short" },
+				{ "mDataProp": "date_out"},
+				{ "mDataProp": "rank",
+				"fnRender": function ( oObj, sVal ){
+					return sVal.toFixed(3);
+				}},
+			],
+			"sPaginationType": "full_numbers",
+				"iDisplayLength": 10,
+				"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+				"oLanguage": {
+						 "sSearch": "Filter records:"
+				 },
+				"aaSorting": [[ 5, "desc" ]],
+				"sDom": 'T<"clear">lfrtip',
+				"oTableTools": {
+				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+				}
+		} );
+		
+		$('#pub_table td.control').live( 'click', function () {
+		  var nTr = this.parentNode;
+		  var i = $.inArray( nTr, anOpen );
+		   
+		  if ( i === -1 ) {
+			$('img', this).attr( 'src', sImageUrl+"details_close.png" );
+			var nDetailsRow = oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
+			$('div.innerDetails', nDetailsRow).slideDown();
+			anOpen.push( nTr );
+		  }
+		  else {
+			$('img', this).attr( 'src', sImageUrl+"details_open.png" );
+			$('div.innerDetails', $(nTr).next()[0]).slideUp( function () {
+			  oTable.fnClose( nTr );
+			  anOpen.splice( i, 1 );
+			} );
+		  }
+		} );
+		 
+		function fnFormatDetails( oTable, nTr )
+		{
+		  var oData = oTable.fnGetData( nTr );
+		  var sOut =
+			'<div class="innerDetails">'+
+			  '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:10px;">'+
+				'<tr><td><b>Abstract:</b><br>'+oData.abstract_text+'</td></tr>'+
+			  '</table>'+
+			'</div>';
+		   //alert(sOut)
+		  return sOut;
+		}
     });
     </script>
   </head>
@@ -336,32 +394,19 @@
     <g:if test="${pubRes}">
     <hr size = 5 color="green" width="100%" style="margin-top:10px">  
   	<h2>${pubRes.size()} matches from the publication data:</h2> 
-       	<table id="pub_table" class="display">
-       		<thead>
-       			<tr>
-       				<th><b>Title</b></th>
-       				<th><b>Authors</b></th>
-       				<th><b>Journal</b></th>
-       				<th><b>Date</b></th>
-       				<th><b>Rank</b></th>
-       			</tr>
-       		</thead>
-       		<tbody>
-       		<g:each var="res" in="${pubRes}">
-       			<tr>
-       				<td><a href="http://www.ncbi.nlm.nih.gov/pubmed?term=${res.pubmed_id}" target='_blank'>${res.title}</a></td>
-       					<!--td><span class="dropt"><a href="http://www.ncbi.nlm.nih.gov/pubmed?term=${res.pubmed_id}" target='_blank'>${res.title}</a>
-       					<span style="width:90%;"><b>Abstract</b></br>${res.abstract_text}</span>
-       					</span>
-       				</td-->
-       				<td>${res.authors}.</td>
-       				<td>${res.journal_short}</td>
-       				<td><g:formatDate format="yyyy MMM d" date="${res.date_string}"/></td>
-       				<td>${sprintf("%.3f",res.rank)}</td>
-       			</tr>
-       		</g:each>
-       		</tbody>
-       	</table>
+    	<table cellpadding="0" cellspacing="0" border="0" class="display" id="pub_table">
+			<thead>
+				<tr>
+					<th></th>
+					<th width="40%">Title</th>
+					<th>Authors</th>
+					<th>Journal</th>
+					<th>Date</th>
+					<th><b>Rank</b></th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
     </g:if>
     <g:else>
      <hr size = 5 color="green" width="100%" style="margin-top:10px">

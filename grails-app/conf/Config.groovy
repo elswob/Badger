@@ -2,7 +2,6 @@
 // config files can either be Java properties files or ConfigSlurper scripts
 
 grails.config.locations = ["file:GDB.config.properties"]
-//grails.config.locations = ["file:${userHome}/GDB.config.groovy"]
 println "Using external configuration file "+grails.config.locations	
 
 //pub.files = [Transcripts: ["L_rubellus/small_trans.fa", "Contig\\d+", "/search/trans_info?contig_id="],

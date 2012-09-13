@@ -28,7 +28,7 @@ class SearchController {
         println "Gene search = "+genesearch
         
         //def pubsearch = "SELECT * FROM publication WHERE textsearchable_index_col @@ to_tsquery('"+params.searchId+"')";
-        def pubsearch = "SELECT *, ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM publication, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query ORDER BY rank DESC;"
+        def pubsearch = "SELECT *, to_char(date_string,'yyyy Mon dd') as date_out, ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM publication, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query ORDER BY rank DESC;"
         def pubRes = sql.rows(pubsearch)
         println "Publication search = "+pubsearch
         
@@ -307,7 +307,7 @@ class SearchController {
      	def blastsql = "select * from trans_blast where ("+blastDBs+") and contig_id = '"+params.contig_id+"' order by score desc;";
     	println blastsql
      	def blast_results = sql.rows(blastsql)
-    	def iprsql = "select * from trans_anno where anno_id ~ '^IPR' and contig_id = '"+params.contig_id+"' order by score;";
+    	def iprsql = "select * from trans_anno where (anno_id ~ '^IPR' or anno_db = 'IPRGO') and contig_id = '"+params.contig_id+"' order by score;";
     	def ipr_results = sql.rows(iprsql)
     	def funsql = "select * from trans_anno where ("+funDBs+") and contig_id = '"+params.contig_id+"' order by score desc;";
     	println funsql

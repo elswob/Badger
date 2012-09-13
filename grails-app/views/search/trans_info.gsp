@@ -1,8 +1,3 @@
-<!--
-  To change this template, choose Tools | Templates
-  and open the template in the editor.
--->
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
@@ -251,17 +246,16 @@
 			 <% def blast_check = [:]%>
 			 <g:each var="res" in="${blast_results}">
 			 <g:unless test = "${blast_check[res.anno_db]}">
-				  <% if (res.anno_db == 'SwissProt'){ %> <tr class='gradeA' id="${res.anno_id}">  <% } %>
-					  <% if (res.anno_db == 'UniRef90'){ %> <tr class='gradeB' id="${res.anno_id}">  <% } %>
-					  <% if (res.anno_db == 'EST others'){ %> <tr class='gradeC' id="${res.anno_id}">  <% } %> 
+			 <tr id="${res.anno_id}">
 			<td><a name="${res.anno_id}">${res.anno_db}</td>
 			<%
+			//set links for blast
 			res.anno_id = res.anno_id.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>") 
 			res.descr = res.descr.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>") 
 			res.anno_id = res.anno_id.replaceAll(/lcl\|(.*)/, "<a href=\"http://www.uniprot.org/uniref/\$1\" target=\'_blank\'>\$1</a>") 
 			res.anno_id = res.anno_id.replaceAll(/(^\d+\.\d+\.\d+\.\d+)/, "<a href=\"http://enzyme.expasy.org/EC/\$1\" target=\'_blank\'>\$1</a>")
-					res.anno_id = res.anno_id.replaceAll(/(GO:\d+)/, "<a href=\"http://www.ebi.ac.uk/QuickGO/GTerm?id=\$1\" target=\'_blank\'>\$1</a>")
-					res.anno_id = res.anno_id.replaceAll(/(^K\d+)/, "<a href=\"http://www.genome.jp/dbget-bin/www_bget?ko:\$1\" target=\'_blank\'>\$1</a>")
+			res.anno_id = res.anno_id.replaceAll(/(GO:\d+)/, "<a href=\"http://www.ebi.ac.uk/QuickGO/GTerm?id=\$1\" target=\'_blank\'>\$1</a>")
+			res.anno_id = res.anno_id.replaceAll(/(^K\d+)/, "<a href=\"http://www.genome.jp/dbget-bin/www_bget?ko:\$1\" target=\'_blank\'>\$1</a>")
 			%>
 			<td>${res.anno_id}</td>
 			<td>${res.descr}</td>
@@ -301,12 +295,12 @@
 	     <% def fun_check = [:]%>
 	     <g:each var="res" in="${fun_results}">
 	     <g:unless test = "${fun_check[res.anno_db]}">
-                <% if (res.anno_db == 'GO' || res.anno_db == 'EC' || res.anno_db == 'KEGG'){ %> <tr class='gradeD' id="${res.anno_id}">  <% } %>
+	     <tr id="${res.anno_id}">
 		<td><a name="${res.anno_id}">${res.anno_db}</td>
 		<%
 		res.anno_id = res.anno_id.replaceAll(/(^\d+\.\d+\.\d+\.\d+)/, "<a href=\"http://enzyme.expasy.org/EC/\$1\" target=\'_blank\'>\$1</a>")
-                res.anno_id = res.anno_id.replaceAll(/(GO:\d+)/, "<a href=\"http://www.ebi.ac.uk/QuickGO/GTerm?id=\$1\" target=\'_blank\'>\$1</a>")
-                res.anno_id = res.anno_id.replaceAll(/(^K\d+)/, "<a href=\"http://www.genome.jp/dbget-bin/www_bget?ko:\$1\" target=\'_blank\'>\$1</a>")
+        res.anno_id = res.anno_id.replaceAll(/(GO:\d+)/, "<a href=\"http://www.ebi.ac.uk/QuickGO/GTerm?id=\$1\" target=\'_blank\'>\$1</a>")
+    	res.anno_id = res.anno_id.replaceAll(/(^K\d+)/, "<a href=\"http://www.genome.jp/dbget-bin/www_bget?ko:\$1\" target=\'_blank\'>\$1</a>")
 		%>
 		<td>${res.anno_id}</td>
 		<td>${res.descr}</td>
@@ -351,7 +345,8 @@
 				<tr id="${res.anno_id}">
 			<td><a name="${res.anno_id}">${res.anno_db}</td>
 			<%
-					res.anno_id = res.anno_id.replaceAll(/(^IPR\d+)/, "<a href=\"http://www.ebi.ac.uk/interpro/IEntry?ac=\$1\" target=\'_blank\'>\$1</a>")
+			res.anno_id = res.anno_id.replaceAll(/(^IPR\d+)/, "<a href=\"http://www.ebi.ac.uk/interpro/IEntry?ac=\$1\" target=\'_blank\'>\$1</a>")
+			res.anno_id = res.anno_id.replaceAll(/(^GO:\d+)/, "<a href=\"http://www.ebi.ac.uk/QuickGO/GTerm?id=\$1\" target=\'_blank\'>\$1</a>")
 			%>
 			<td>${res.anno_id}</td>
 			<td>${res.descr}</td>

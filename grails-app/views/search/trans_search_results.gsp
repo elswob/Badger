@@ -167,6 +167,7 @@
     	    "oLanguage": {
     	     	     "sSearch": "Filter records:"
     	     },
+    	    "aaSorting": [[ 4, "desc" ]], 
     	    "sDom": 'T<"clear">lfrtip',
             "oTableTools": {
         	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
@@ -183,7 +184,15 @@
 					return "<a href=\"trans_info?contig_id="+oObj.aData["contig_id"]+ "\"target='_blank'>"+sVal+"</a>";
 				}},
 				{ "mDataProp": "anno_db" },
-				{ "mDataProp": "anno_id" },
+				{ "mDataProp": "anno_id" ,
+				"fnRender": function ( oObj, sVal ){
+					var splitter = sVal.split(" ");
+					if (splitter[0].match(/IPR/g)){ 
+						return "<a href=\"http://www.ebi.ac.uk/interpro/IEntry?ac="+splitter[0]+ "\"target='_blank'>"+splitter[0]+"</a>: "+splitter[2]+"";
+					}else{
+						return "<a href=\"http://www.ebi.ac.uk/QuickGO/GTerm?id="+sVal+ "\"target='_blank'>"+sVal+"</a>";
+					}
+				}},
 				{ "mDataProp": "descr"},
 				{ "mDataProp": "score", "sType": "scientific"},
 			],
