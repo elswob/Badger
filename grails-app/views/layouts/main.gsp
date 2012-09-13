@@ -34,20 +34,34 @@
 		<li><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link></li>
 		<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link></li-->
 		
-		<% //add public internal links to navigation bar 
-		if (grailsApplication.config.i.links.pub){
-    		 grailsApplication.config.i.links.pub.each {
-    			if (it.value.size() >0){
-    				def dataSplit = it.value.split(",")
-    				def pageName = "page." + dataSplit[3].trim()
-    				//println pageName
-    				%>
-    				<li><g:link controller="${dataSplit[1].trim()}" action="${dataSplit[2].trim()}" class="${pageProperty(name:pageName)}">${dataSplit[0].trim()}</g:link></li>
-    			<%
-    			}
-    		}
-    	}
-    	%>
+		<!--% //add public internal links to navigation bar -->
+		<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link>
+		<li><g:link controller="search" class="${pageProperty(name:'page.search')}">Search</g:link>
+			<ul>
+				<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>
+				<g:if test = "${grailsApplication.config.i.links.trans == 'public'}">
+			    	<li><g:link controller="search" action="trans_search" class="${pageProperty(name:'page.search')}">Transcripts</g:link></li>
+				</g:if>
+				<g:if test = "${grailsApplication.config.i.links.genes == 'public'}">
+			    	<li><g:link controller="search" action="gene_search" class="${pageProperty(name:'page.search')}">Genes</g:link></li>
+				</g:if>
+				<g:if test = "${grailsApplication.config.i.links.genome == 'public'}">
+			    	<li><g:link controller="search" action="genome_search" class="${pageProperty(name:'page.search')}">Genome</g:link></li>
+				</g:if>
+				<g:if test = "${grailsApplication.config.i.links.all == 'public'}">
+			    	<li><g:link controller="search" action="all_search" class="${pageProperty(name:'page.search')}">All</g:link></li>
+				</g:if>
+			</ul>
+		</li> 
+		<g:if test = "${grailsApplication.config.i.links.blast == 'public'}">
+			<li><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link>
+		</g:if>
+		<g:if test = "${grailsApplication.config.i.links.members == 'public'}">
+			<li><g:link controller="home" action="members" class="${pageProperty(name:'page.members')}">Members</g:link>
+		</g:if>
+		<g:if test = "${grailsApplication.config.i.links.download == 'public'}">
+			<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link>
+		</g:if>
 		
 		<% //add public external links to navigation bar 
 		if (grailsApplication.config.e.links.pub){
@@ -63,47 +77,20 @@
     	
 	   </sec:ifNotLoggedIn>
 	   
-	   <sec:ifLoggedIn>
-		<!--li><g:link controller="home" action="members" class="${pageProperty(name:'page.members')}">Project Members</g:link></li>
-		<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>
+	   <sec:ifLoggedIn>		
+		<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link>
 		<li><g:link controller="search" class="${pageProperty(name:'page.search')}">Search</g:link>
 			<ul>
-				<%-- <li><g:link controller="search" action="gene_search" class="${pageProperty(name:'page.search')}">Genes</g:link></li> --%>
-				<li><g:link controller="search" action="trans_search" class="${pageProperty(name:'page.search')}">Transcripts</g:link></li>
-				<%-- li><g:link controller="search" action="ncrna_search" class="${pageProperty(name:'page.search')}">ncRNA</g:link></li --%>
-				<%-- li><g:link controller="search" action="trans_search" class="${pageProperty(name:'page.search')}">Transposons</g:link></li --%>
+				<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>
+			    <li><g:link controller="search" action="trans_search" class="${pageProperty(name:'page.search')}">Transcripts</g:link></li>
+			    <li><g:link controller="search" action="gene_search" class="${pageProperty(name:'page.search')}">Genes</g:link></li>
+				<li><g:link controller="search" action="genome_search" class="${pageProperty(name:'page.search')}">Genome</g:link></li>
+				<li><g:link controller="search" action="all_search" class="${pageProperty(name:'page.search')}">All</g:link></li>
 			</ul>
-		</li>       
-		<li><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link></li>
-		<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link></li-->
-		
-		<% //add public internal links to navigation bar 
-		if (grailsApplication.config.i.links.pub){
-    		 grailsApplication.config.i.links.pub.each {
-    			if (it.value.size() >0){
-    				def dataSplit = it.value.split(",")
-    				def pageName = "page." + dataSplit[3].trim()
-    				%>
-    				<li><g:link controller="${dataSplit[1].trim()}" action="${dataSplit[2].trim()}" class="${pageProperty(name:pageName)}">${dataSplit[0].trim()}</g:link></li>
-    			<%
-    			}
-    		}
-    	}
-    	%>
-    	
-    	<% //add private internal links to navigation bar 
-		if (grailsApplication.config.i.links.priv){
-    		 grailsApplication.config.i.links.priv.each {
-    			if (it.value.size() >0){
-    				def dataSplit = it.value.split(",")
-    				def pageName = "page." + dataSplit[3].trim()
-    				%>
-    				<li><g:link controller="${dataSplit[1].trim()}" action="${dataSplit[2].trim()}" class="${pageProperty(name:pageName)}">${dataSplit[0].trim()}</g:link></li>
-    			<%
-    			}
-    		}
-    	}
-    	%>
+		</li> 
+		<li><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link>
+		<li><g:link controller="home" action="members" class="${pageProperty(name:'page.members')}">Members</g:link>
+		<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link>
 		
 		<% //add public external links to navigation bar 
 		if (grailsApplication.config.e.links.pub){
