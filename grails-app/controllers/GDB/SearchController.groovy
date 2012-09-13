@@ -80,18 +80,33 @@ class SearchController {
     def gene_search = {
          if (grailsApplication.config.i.links.genes == 'private' && !isLoggedIn()) {
      		redirect(controller: "home", action: "index")
-     	 }else{
-     	 def blastMap = [:]
+     	 }else{  
+			 def blastMap = [:]
 			 if (grailsApplication.config.g.blast.size()>0){
 				for(item in grailsApplication.config.g.blast){
-					println "size = "+grailsApplication.config.g.blast.size()
 					item = item.toString()
 					def splitter = item.split("=")
 					blastMap[splitter[0]] = splitter[1]
 				}
 			 }
 			 println "blastMap = "+blastMap
-			 return [blastMap: blastMap]
+			 
+			 def funMap = [:]
+			 if (grailsApplication.config.g.fun.size()>0){
+				for(item in grailsApplication.config.g.fun){
+					item = item.toString()
+					def splitter = item.split("=")
+					funMap[splitter[0]] = splitter[1]
+				}
+			 }
+			 println "funMap = "+funMap
+			 
+			 def iprMap = [:]
+			 if (grailsApplication.config.g.IPR.size()>0){
+				iprMap.IPR = grailsApplication.config.g.IPR
+			 }
+			 println "iprMap = "+iprMap
+			 return [blastMap: blastMap, funMap: funMap, iprMap: iprMap]
 		}
     }
     def genome_search = {
@@ -263,22 +278,22 @@ class SearchController {
 			//check for empty searches
 			}else if (searchId ==""){
 				return [error: "empty"]
-				
+			}else{
 				def sqlsearch
 				println "search = "+params.toggler
 				if (params.toggler == "1"){
 					println "Searching blast data"
-					sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,gaps,hit_start,hit_stop,hseq,identity,midline,positive,qseq,align from gene_blast where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		        		
+					sqlsearch = "select distinct on (anno_db,gene_id) gene_id,anno_id,anno_db,anno_start,anno_stop,descr,score,gaps,hit_start,hit_stop,hseq,identity,midline,positive,qseq,align from gene_blast where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		        		
 				}else{
 					println "Searching anno data"
-					sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score from gene_anno where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		
+					sqlsearch = "select distinct on (anno_db,gene_id) gene_id,anno_id,anno_db,anno_start,anno_stop,descr,score from gene_anno where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		
 				}
 				println sqlsearch
 				def results_all = sql.rows(sqlsearch)
 				//count the number of unique hits
 				def hits = []
 				results_all.each {
-					hits.add(it.contig_id)
+					hits.add(it.gene_id)
 				}
 				def uniques = hits.unique()
 				def results
@@ -289,7 +304,7 @@ class SearchController {
 				}
 				def timeStop = new Date()
 				def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
-				return [ uni: "yes", results: results, term : searchId , search_time: duration, uniques:uniques.size(),sql:sqlsearch, annoType: annoType]         
+				return [results: results, term : searchId , search_time: duration, uniques:uniques.size(),sql:sqlsearch, annoType: annoType]         
 			}
 		}
       }

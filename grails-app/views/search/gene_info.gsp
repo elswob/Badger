@@ -19,29 +19,33 @@
       <tr>
         <td><b>Scaffold Id</b></td>
         <td><b>Length</b></td>
-        <td><b>Coverage</b></td>
         <td><b>Introns</b></td>
         <td><b>Source</b></td>
         <td><b>Scaffold start</b></td>
         <td><b>Scaffold stop</b></td>
-        <td><b>Nucleotide sequence</b></td>
-        <td><b>Peptide sequence</b></td>
+        <td><b>Download sequences</b></td>
       </tr>
       <tr>
         <td><g:link action="search_results" params="${[search: 'contig', searchId: info_results.contig_id[0]]}">${info_results.contig_id[0]}</g:link></td>
         <td>${info_results.pep[0].length()}</td>
-        <td>${info_results.coverage[0]}</td>
         <td>${info_results.intron[0]}</td>
         <td>${info_results.source[0]}</td>
         <td>${info_results.start[0]}</td>
         <td>${info_results.stop[0]}</td>
-        <td><g:link controller="FileDownload" action="contig_download" params="${[fileId : nuc_fasta, fileName: info_results.gene_id[0]+'.fa']}">Download</g:link></td>
-        <td><g:link controller="FileDownload" action="contig_download" params="${[fileId : pep_fasta, fileName: info_results.gene_id[0]+'.aa']}">Download</g:link></td>
+        <td>
+        	<g:form name="fileDownload" url="[controller:'FileDownload', action:'gene_download']">
+		    	<g:hiddenField name="fileId" value="${info_results.gene_id[0]}"/>
+		    	<g:hiddenField name="fileName" value="${info_results.gene_id[0]}"/>
+		    	<input align="right" name="seq" type="submit" value="Nucleotides" class="mybuttons" onclick="get_table_data()"/>
+		    	<input align="right" name="seq" type="submit" value="Peptides" class="mybuttons" onclick="get_table_data()"/>
+		    </g:form>
+		</td>
       </tr>
     </table> 
-    <div class="midtable">
-    <h1>Browse on the genome: <a href ="">GBrowse2</a></h1>
-    </div>
+    <h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=gi|269847892|gb|AC239114.1|" target='_blank'>(go to genome browser)</a>:</h1>
+     <iframe src="${grailsApplication.config.g.link}?name=gi|269847892|gb|AC239114.1|" width="100%" height="500">
+   		<img src="${grailsApplication.config.g.link}?name=gi|269847892|gb|AC239114.1|"/>
+	 </iframe>
     <h1>Top annotations for gene ${info_results.gene_id[0]}:</h1>
     <table>
       <tr>

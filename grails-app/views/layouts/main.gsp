@@ -35,7 +35,7 @@
 		<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link></li-->
 		
 		<!--% //add public internal links to navigation bar -->
-		<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link>
+		<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li> 
 		<li><g:link controller="search" class="${pageProperty(name:'page.search')}">Search</g:link>
 			<ul>
 				<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>
@@ -54,23 +54,28 @@
 			</ul>
 		</li> 
 		<g:if test = "${grailsApplication.config.i.links.blast == 'public'}">
-			<li><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link>
+			<li><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link></li> 
 		</g:if>
 		<g:if test = "${grailsApplication.config.i.links.members == 'public'}">
-			<li><g:link controller="home" action="members" class="${pageProperty(name:'page.members')}">Members</g:link>
+			<li><g:link controller="home" action="members" class="${pageProperty(name:'page.members')}">Members</g:link></li> 
 		</g:if>
 		<g:if test = "${grailsApplication.config.i.links.download == 'public'}">
-			<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link>
+			<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link></li> 
+		</g:if>
+		<g:if test = "${grailsApplication.config.i.links.genome == 'public'}">
+			<li><a href="${grailsApplication.config.g.link}" target='_blank'>Browse </a></li> 
 		</g:if>
 		
 		<% //add public external links to navigation bar 
 		if (grailsApplication.config.e.links.pub){
+			println "<li><a href=\"#\">Links</a><ul>"
     		 grailsApplication.config.e.links.pub.each {
     			if (it.value.size() >0){
     				def dataSplit = it.value.split(",")
     				println "<li><a href =\"${dataSplit[1].trim()}\" target='_blank'>${dataSplit[0].trim()}</a></li>"
     			}
     		}
+    		println "</ul></li>"
     	}
     	%>
 		<li style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="login">Log in</g:link></li>
@@ -91,26 +96,27 @@
 		<li><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link>
 		<li><g:link controller="home" action="members" class="${pageProperty(name:'page.members')}">Members</g:link>
 		<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link>
+		<li><a href="${grailsApplication.config.g.link}" target='_blank'>Browse </a>
 		
-		<% //add public external links to navigation bar 
+		<% //add public and private external links to navigation bar 
 		if (grailsApplication.config.e.links.pub){
+			println "<li><a href=\"#\">Links</a><ul>"
     		 grailsApplication.config.e.links.pub.each {
     			if (it.value.size() >0){
     				def dataSplit = it.value.split(",")
     				println "<li><a href =\"${dataSplit[1].trim()}\" target='_blank'>${dataSplit[0].trim()}</a></li>"
     			}
     		}
-    	}
-    	%>		
-		<% //add private external links to navigation bar 
-		if (grailsApplication.config.e.links.priv){
-    		 grailsApplication.config.e.links.priv.each {
-    			if (it.value.size() >0){
-    				def dataSplit = it.value.split(",")
-    				println "<li><a href =\"${dataSplit[1].trim()}\" target='_blank'>${dataSplit[0].trim()}</a></li>"
+    		if (grailsApplication.config.e.links.priv){
+    			grailsApplication.config.e.links.priv.each {
+    				if (it.value.size() >0){
+    					def dataSplit = it.value.split(",")
+    					println "<li><a href =\"${dataSplit[1].trim()}\" target='_blank'>${dataSplit[0].trim()}</a></li>"
+    				}
     			}
-    		}
-    	}
+    		println "</ul></li>"	
+			}
+		}
     	%>
     	
     	<!--li><g:link controller="logout">Log out</g:link></li-->

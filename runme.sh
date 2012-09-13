@@ -5,5 +5,5 @@
 grails prod run-script scripts/AddPublicationData.groovy \
 scripts/AddSequenceData.groovy \
 scripts/AddTransBlastData.groovy \
-scripts/AddGeneBlastData.groovy \
-scripts/AddTransFuncAnnoData.groovy 
+scripts/AddTransFuncAnnoData.groovy \
+scripts/AddGeneBlastData.groovy 

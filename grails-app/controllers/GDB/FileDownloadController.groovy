@@ -42,6 +42,39 @@ class FileDownloadController {
          response.outputStream.flush()
     }
     
+	def gene_download = {
+     	 def object_array = params.fileId
+     	 object_array = object_array.replaceAll(/\[/, '')
+     	 object_array = object_array.replaceAll(/\]/, '')
+     	 object_array = object_array.replaceAll(/ /, '')
+     	 def object_list = [] 
+     	 object_array.split(",").each{
+     	 	 object_list.add(it)
+     	 }
+     	 println "object_list = "+object_list
+     	 def results = GeneInfo.findAllByGene_idInList(object_list)
+		 def pep_file_builder=""
+		 def nuc_file_builder=""
+     	 results.each {
+     	 	println "gene_id = "+it.gene_id
+     	 	pep_file_builder = pep_file_builder + ">"+it.gene_id+"\n"+it.pep+"\n"
+     	 	nuc_file_builder = nuc_file_builder + ">"+it.gene_id+"\n"+it.nuc+"\n"
+		 }
+		 println "created download files "+params.fileName+".aa" + " and "+params.fileName+".fna"
+		 println "seq = "+params.seq
+		 if (params.seq == 'Peptides'){
+     	 	response.setHeader "Content-disposition", "attachment; filename="+params.fileName+".aa"
+         	response.contentType = 'text/csv'
+         	response.outputStream << pep_file_builder
+         	response.outputStream.flush()
+         }else{
+	    	 response.setHeader "Content-disposition", "attachment; filename="+params.fileName+".fna"
+    	     response.contentType = 'text/csv'
+        	 response.outputStream << nuc_file_builder
+         	 response.outputStream.flush()
+         }
+    }
+    
     def genome_contig_download = {
      	 def object_array = params.fileId
      	 object_array = object_array.replaceAll(/\[/, '')

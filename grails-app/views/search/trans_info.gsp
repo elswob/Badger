@@ -375,7 +375,7 @@
 	</g:else>
   </g:if>
   <g:else>
-    <h1>The gene Id has no information</h1>
+    <h1>The transcript ID has no information</h1>
   </g:else>
   </body>
 </html>

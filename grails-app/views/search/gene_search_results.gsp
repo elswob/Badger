@@ -6,16 +6,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${grailsApplication.config.projectID} search results</title>
     <parameter name="search" value="selected"></parameter>   
-    <script src="${resource(dir: 'js', file: 'jqplot/jquery.min.js')}" type="text/javascript"></script>
-    <script src="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.js')}" type="text/javascript"></script>
-    <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.canvasTextRenderer.min.js')}" type="text/javascript"></script>
-    <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js')}" type="text/javascript"></script>
-    <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.highlighter.js')}" type="text/javascript"></script>
-    <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.cursor.min.js')}" type="text/javascript"></script>
-    <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.dateAxisRenderer.min.js')}" type="text/javascript"></script>
-    <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.logAxisRenderer.js')}" type="text/javascript"></script>
-    <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.bubbleRenderer.min.js')}" type="text/javascript"></script>
-    <link rel="stylesheet" href="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.css')}" type="text/css"></link>
     <script src="${resource(dir: 'js', file: 'DataTables-1.9.0/media/js/jquery.dataTables.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/TableTools.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/ZeroClipboard.js')}" type="text/javascript"></script>
@@ -41,70 +31,186 @@
     </script> 
     <script>
     function get_table_data(){
-    	    var table_scrape = [];
-	    var oTable = document.getElementById('table_data');
+    	//alert(${annoType})
+    	var table_scrape = [];
+    	var rowNum
+    	var regex
+    	if (${annoType} === 1){ 
+	    	var oTableData = document.getElementById('table_data');
+	    	rowNum = 1
+	    }else if (${annoType} === 2){ 
+	    	var oTableData = document.getElementById('func_table_data');
+	    	rowNum = 0
+	    }else if (${annoType} === 3){ 
+	    	var oTableData = document.getElementById('ipr_table_data');
+	    	rowNum = 0
+	    }
 	    //gets table
-	    var rowLength = oTable.rows.length;
+	    var rowLength = oTableData.rows.length;
 	    //gets rows of table
 	    for (i = 0; i < rowLength; i++){
 	    //loops through rows
-	       var oCells = oTable.rows.item(i).cells;
-	       var cellVal = oCells.item(0).innerHTML;
-	       var regex = /.*?contig.*/g;
-	       var matcher = cellVal.match(/.*?contig_id=(contig_\d+).*/);
+	       var oCells = oTableData.rows.item(i).cells;
+	       var cellVal = oCells.item(rowNum).innerHTML;
+	       var matcher = cellVal.match(/.*?gene_id=(.*?)"\starget.*/);
 	       if (matcher){
-	       	       table_scrape.push(matcher[1])
-	       }
+	       	  	table_scrape.push(matcher[1])
+	    	}
 	    }
 	    document.getElementById('fileId').value=table_scrape;
 	    //alert(table_scrape)
     }
     </script>
     <script>
-
-    function toggleDiv(divId) {
-    	    $("#"+divId).slideToggle(20);
-    }
-
-
+    
+    <% 
+    def jsonData = results.encodeAsJSON(); 
+    %>
 
     </script>
     <script>
-    $(document).ready(function() {
-            $('#table_data').dataTable({
-    	    "sPaginationType": "full_numbers",
-    	    "iDisplayLength": 10,
-    	    "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+ 
+  $(document).ready(function() {
+ 
+  var anOpen = [];
+  var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.0/examples/examples_support/')}";
+     
+	  if (${annoType} === 1){ 
+		var oTable = $('#table_data').dataTable( {
+			"bProcessing": true,
+			"aaData": ${jsonData},
+			"aoColumns": [
+				{
+				   "mDataProp": null,
+				   "sClass": "control center",
+				   "sDefaultContent": '<img src="'+sImageUrl+'details_open.png'+'">'
+				},
+				{ "mDataProp": "gene_id",
+				"fnRender": function ( oObj, sVal ){
+					return "<a href=\"gene_info?gene_id="+oObj.aData["gene_id"]+ "\"target='_blank'>"+sVal+"</a>";
+				}},
+				{ "mDataProp": "anno_db" },
+				{ "mDataProp": "anno_id" },
+				{ "mDataProp": "descr"},
+				{ "mDataProp": "score"},
+			],
+			"sPaginationType": "full_numbers",
+				"iDisplayLength": 10,
+				"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+				"oLanguage": {
+						 "sSearch": "Filter records:"
+				 },
+				"aaSorting": [[ 5, "desc" ]],
+				"sDom": 'T<"clear">lfrtip',
+				"oTableTools": {
+				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+				}
+		} );
+		
+	   
+	  $('#table_data td.control').live( 'click', function () {
+	  var nTr = this.parentNode;
+	  var i = $.inArray( nTr, anOpen );
+	   
+	  if ( i === -1 ) {
+		$('img', this).attr( 'src', sImageUrl+"details_close.png" );
+		var nDetailsRow = oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
+		$('div.innerDetails', nDetailsRow).slideDown();
+		anOpen.push( nTr );
+	  }
+	  else {
+		$('img', this).attr( 'src', sImageUrl+"details_open.png" );
+		$('div.innerDetails', $(nTr).next()[0]).slideUp( function () {
+		  oTable.fnClose( nTr );
+		  anOpen.splice( i, 1 );
+		} );
+	  }
+	} );
+	 
+	function fnFormatDetails( oTable, nTr )
+	{
+	  var oData = oTable.fnGetData( nTr );
+	  var sOut =
+		'<div class="innerDetails">'+
+		'<div class="blast_res">'+
+		  '<table width="100%" cellpadding="5" cellspacing="0" border="0" style="table-layout:fixed; padding-left:10px; overflow:auto;">'+
+			'<tr><td><b>Alignment info:</b> Length='+oData.align+' Gaps='+oData.gaps+' Identity='+oData.identity+'</td></tr>'+
+			'<tr><td><b>'+oData.gene_id+'</b> '+oData.anno_start+' '+oData.anno_stop+'</td></tr>'+
+			'<tr><td>'+oData.qseq+'</td></tr>'+
+			'<tr><td>'+oData.midline+'</td></tr>'+
+			'<tr><td>'+oData.hseq+'</td></tr>'+
+			'<tr><td><b>'+oData.anno_id+'</b> '+oData.hit_start+' '+oData.hit_stop+'</td></tr>'+
+		  '</table>'+
+		'</div>'+  
+		'</div>';
+	   //alert(sOut)
+	  return sOut;
+	}
+  }else if (${annoType} === 2){
+  //for func annotations  
+	var iprTable = $('#func_table_data').dataTable( {
+        "bProcessing": true,
+        "aaData": ${jsonData},
+        "aoColumns": [
+          	{ "mDataProp": "gene_id",
+				"fnRender": function ( oObj, sVal ){
+					return "<a href=\"gene_info?gene_id="+oObj.aData["gene_id"]+ "\"target='_blank'>"+sVal+"</a>";
+			}},
+            { "mDataProp": "anno_db" },
+            { "mDataProp": "anno_id" },
+            { "mDataProp": "descr"},
+            { "mDataProp": "score"},
+        ],
+        "sPaginationType": "full_numbers",
+    		"iDisplayLength": 10,
+    		"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
     	    "oLanguage": {
     	     	     "sSearch": "Filter records:"
     	     },
-    	    "aaSorting": [[ 4, "desc" ]],
+    	    "aaSorting": [[ 4, "desc" ]], 
     	    "sDom": 'T<"clear">lfrtip',
             "oTableTools": {
         	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
             }
-         });
-    	$('#ipr_table_data').dataTable({
-    	    "sPaginationType": "full_numbers",
-    	    "iDisplayLength": 10,
-    	    "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-    	    "oLanguage": {
-    	     	     "sSearch": "Filter records:"
-    	     },
-    	    "aaSorting": [[ 4, "asc" ]],
-    	    "aoColumns": [
-                 null,
-                 null,
-                 null,
-                 null,
-                 { "sType": "scientific" }
-            ],
-    	    "sDom": 'T<"clear">lfrtip',
-            "oTableTools": {
-        	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
-            }
-         });
-    });
+    	} 	);
+	}else if (${annoType} === 3){
+	  //for interproscan and it's evalue sorting
+		var iprTable = $('#ipr_table_data').dataTable( {
+			"bProcessing": true,
+			"aaData": ${jsonData},
+			"aoColumns": [
+				{ "mDataProp": "gene_id",
+				"fnRender": function ( oObj, sVal ){
+					return "<a href=\"gene_info?gene_id="+oObj.aData["gene_id"]+ "\"target='_blank'>"+sVal+"</a>";
+				}},
+				{ "mDataProp": "anno_db" },
+				{ "mDataProp": "anno_id" ,
+				"fnRender": function ( oObj, sVal ){
+					var splitter = sVal.split(" ");
+					if (splitter[0].match(/IPR/g)){ 
+						return "<a href=\"http://www.ebi.ac.uk/interpro/IEntry?ac="+splitter[0]+ "\"target='_blank'>"+splitter[0]+"</a>: "+splitter[2]+"";
+					}else{
+						return "<a href=\"http://www.ebi.ac.uk/QuickGO/GTerm?id="+sVal+ "\"target='_blank'>"+sVal+"</a>";
+					}
+				}},
+				{ "mDataProp": "descr"},
+				{ "mDataProp": "score", "sType": "scientific"},
+			],
+			"sPaginationType": "full_numbers",
+			"iDisplayLength": 10,
+			"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+			"oLanguage": {
+					 "sSearch": "Filter records:"
+			 },
+			"aaSorting": [[ 4, "asc" ]],
+			"sDom": 'T<"clear">lfrtip',
+			"oTableTools": {
+			"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+				}
+			} 	);
+	}
+  });
+    
     </script>
   </head>
   <body>
@@ -122,103 +228,44 @@
     <g:link action=''>Search Again</g:link>
   </g:if>
   
-  <!-- check for gene annotation searches -->
-  <g:if test="${anno}">
-            <h1>Results for gene annotation description matching '<em>${term}</em>'.</h1> 
-            <p>Searched ${bicyclus_anynana.GeneAnno.count()} records in ${search_time}</p>
-            <g:if test="${results}">
-            <p>Found ${uniques} genes with ${results.size()} hits</p>
-            <g:link action=''>Search Again</g:link>           
-              <table id="table_data" class="display">
-                <thead>
-                <tr>
-                  <th><b>Gene ID</b></th>
-                  <th><b>Database</b></th>
-                  <th><b>Hit ID</b></th>
-                  <th><b>Description</b></th>
-                  <th><b>Start</b></th>
-                  <th><b>Stop</b></th>
-                  <th><b>Score</b></th>
-                </tr>
-                </thead>
-                <tbody>
-                  <g:each var="res" in="${results}">
-                  <tr>  
-                    <td><g:link action="gene_info" params="${[gene_id: res.gene_id]}"> ${res.gene_id}</g:link></td>
-                    <td>${res.anno_db}</td>
-                    <%res.anno_id = res.anno_id.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
-                    <%res.anno_id = res.anno_id.replaceAll(/lcl\|(.*)/, "<a href=\"http://www.uniprot.org/uniref/\$1\" target=\'_blank\'>\$1</a>")%>
-                    <td>${res.anno_id}</td>
-                    <%res.descr = res.descr.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
-                    <td>${res.descr}</td>
-                    <td>${res.anno_start}</td>
-                    <td>${res.anno_stop}</td>
-                    <td>${res.score}</td>
-                  </tr>                  
-                </g:each>
-                </tbody>
-              </table>
-          </g:if>
-          <g:else>
-          	<p>Found <strong>${resCount}</strong> hits.</p>
-          	<g:link action=''>Search Again</g:link>
-          </g:else>
-  </g:if>
-  <!-- check for trans annotation searches -->
-  <g:if test="${uni}">
-            <h1>Results for transcriptome annotation descriptions matching '<em>${term}</em>'.</h1>
+    <h1>Results for gene annotation descriptions matching '<em>${term}</em>'.</h1>
 		<g:if test="${results}">
-		    		<table class="table_border" width='100%'>
-		    		<tr><td>
-		    		<% if (annoType == '1'){ %>
-		    			Searched ${printf("%,d\n",GDB.TransBlast.count())} records in ${search_time}.<br>
-		    		<% }else{ %>
-		    			Searched ${printf("%,d\n",GDB.TransAnno.count())} records in ${search_time}.<br>
-		    		<% } %>
-		    			Found ${uniques} contigs with ${results.size()} top hits from distinct databases
+		    <table class="table_border" width='100%'>
+		    	<tr><td>
+		    		Searched ${printf("%,d\n",GDB.GeneBlast.count() + GDB.GeneAnno.count())} records in ${search_time}.<br>
+		    		Found ${uniques} genes with ${results.size()} top hits from distinct databases
 		    		</td><td><center>
-		    		<!-- download contigs form gets fileName value from get_table_data() -->
-		    		<g:form name="fileDownload" url="[controller:'FileDownload', action:'trans_contig_download']">
+		    		Download genes:
+		    		<!-- download genes form gets fileName value from get_table_data() -->
+		    		<g:form name="fileDownload" url="[controller:'FileDownload', action:'gene_download']">
 		    			<g:hiddenField name="fileId" value=""/>
 		    			<g:hiddenField name="fileName" value="${term}"/>
-		    			<input align="right" type="submit" value="Download contigs in table" class="mybuttons" onclick="get_table_data()"/>
+		    			<input align="right" name="seq" type="submit" value="Nucleotides" class="mybuttons" onclick="get_table_data()"/>
+		    			<input align="right" name="seq" type="submit" value="Peptides" class="mybuttons" onclick="get_table_data()"/>
 		    		</g:form>
 		    		</center>
 		    		</td></tr>
 		    		</table>
-
-			    <% if (annoType == '3'){ %><table id='ipr_table_data' class="display">  <% }else{ %><table id="table_data" class="display"> <% } %>    
-			      <thead>
+		    	<% if (annoType == "1"){ %>
+				<table id='table_data' class="display">  	
+				<% }else if (annoType == "2"){ %>
+				<table id='func_table_data' class="display">  
+			    <% }else if (annoType == "3"){ %>
+			    <table id='ipr_table_data' class="display">  
+			    <% } %>   
+			    <thead>
 				<tr>
+				<% if (annoType == "1"){ %>
+				  <th></th>
+				<% } %>
 				  <th><b>Transcript ID</b></th>
 				  <th><b>Database</b></th>
 				  <th><b>Hit ID</b></th>
-				  <th><b>Description</b></th>
+				  <th width=50%><b>Description</b></th>
 				  <th><b>Score</b></th>
 				</tr>
 				</thead>
 				<tbody>
-				  <g:each var="res" in="${results}">
-				  <% if (res.anno_db == 'SwissProt'){ %> <tr class='gradeA'>  <% } %>
-				  <% if (res.anno_db == 'UniRef90'){ %> <tr class='gradeB'>  <% } %>
-				  <% if (res.anno_db == 'EST others'){ %> <tr class='gradeC'>  <% } %>
-				  <% if (res.anno_db == 'GO' || res.anno_db == 'EC' || res.anno_db == 'KEGG'){ %> <tr class='gradeD'>  <% } %>
-				    <td><g:link action="trans_info" params="${[contig_id: res.contig_id]}"> ${res.contig_id}</g:link></td>
-				    <td>${res.anno_db}</td>
-				    <%
-				    res.anno_id = res.anno_id.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")
-				    res.anno_id = res.anno_id.replaceAll(/lcl\|(.*)/, "<a href=\"http://www.uniprot.org/uniref/\$1\" target=\'_blank\'>\$1</a>")
-				    res.anno_id = res.anno_id.replaceAll(/(^\d+\.\d+\.\d+\.\d+)/, "<a href=\"http://enzyme.expasy.org/EC/\$1\" target=\'_blank\'>\$1</a>")
-				    res.anno_id = res.anno_id.replaceAll(/(GO:\d+)/, "<a href=\"http://www.ebi.ac.uk/QuickGO/GTerm?id=\$1\" target=\'_blank\'>\$1</a>")
-				    res.anno_id = res.anno_id.replaceAll(/(^K\d+)/, "<a href=\"http://www.genome.jp/dbget-bin/www_bget?ko:\$1\" target=\'_blank\'>\$1</a>")
-				    res.anno_id = res.anno_id.replaceAll(/(^IPR\d+)/, "<a href=\"http://www.ebi.ac.uk/interpro/IEntry?ac=\$1\" target=\'_blank\'>\$1</a>")
-				    %>
-				    <td>${res.anno_id}</td>
-				    <%res.descr = res.descr.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
-				    <td>${res.descr}</td>
-				    <td>${res.score}</td>
-				  </tr>  
-				</g:each>
 				</tbody>
 			      </table>
 
@@ -227,48 +274,6 @@
           	<p>Found <strong>0</strong> hits.</p>
           	<g:link action=''>Search Again</g:link>
           </g:else>
-  </g:if>
-   <!-- check for scaffold searches -->
-  <g:if test="${contig}">
-      <g:if test = "${contigs.size()}">
-    <h1>Information for <em>${term}</em></h1>
-      <table>
-        <tr>
-          <td><b>Stats</b></td>
-          <td><b>Genes</b></td>
-          <td><b>Links</b></td>
-          <td><b>Data</b></td>
-        </tr>
-        <g:each var="contig" in="${contigs}">
-          <tr>
-            <td>
-              Contig length = ${contig.sequence.length()}<br>
-              GC = ${contig.gc}<br>
-              Estimated coverage = ${contig.coverage}<br>
-            </td>
-            <td>Number of genes = ${genes.size()}</td>
-            <td><a href ="">Browse</a></td>
-            <td><g:link controller="FileDownload" action="contig_download" params="${[fileId : fasta, fileName: term+'.txt']}">Contigs</g:link></td>
-          </tr>
-      </g:each>
-      </table>
-  </g:if>
-  <g:elseif test ="${term == ''}" >
-    <h1>Please enter a search term!</h1>
-  </g:elseif>
-  <g:else>
-    <h1>There is no contig with the ID <em>${term}</em>.</h1> 
-    <g:link action=''>Search Again</g:link>
-  </g:else> 
-  </g:if>
-  
-
-  
-  
-  
-  
-  
-  
 </body>
 </html>
 

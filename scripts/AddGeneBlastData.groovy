@@ -4,10 +4,6 @@ import groovy.sql.Sql
 
 def grailsApplication
 
-//inFile = new File('data/cap3_public_e5_b10_v10_sprot_blastx2.out').text
-//inFile = new File('data/est_others_m7_e5_b10_v10_blastn').text
-//addTransBlast(inFile, 'SwissProt')
-
 getBlastData()
 def getBlastData(){
 	if (grailsApplication.config.g.blast.size()>0){
@@ -52,6 +48,30 @@ def addGeneBlast(db,blastFile){
         if ((matcher = line =~ /<Hsp_query-to>(.*?)<\/Hsp_query-to>/)){
                 annoMap.anno_stop = matcher[0][1]
         }
+        if ((matcher = line =~ /<Hsp_hit-from>(.*?)<\/Hsp_hit-from>/)){
+                annoMap.hit_start = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_hit-to>(.*?)<\/Hsp_hit-to>/)){
+                annoMap.hit_stop = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_identity>(.*?)<\/Hsp_identity>/)){
+                annoMap.identity = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_gaps>(.*?)<\/Hsp_gaps>/)){
+                annoMap.gaps = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_align-len>(.*?)<\/Hsp_align-len>/)){
+                annoMap.align = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_qseq>(.*?)<\/Hsp_qseq>/)){
+                annoMap.qseq = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_hseq>(.*?)<\/Hsp_hseq>/)){
+                annoMap.hseq = matcher[0][1]
+        }
+        if ((matcher = line =~ /<Hsp_midline>(.*?)<\/Hsp_midline>/)){
+                annoMap.midline = matcher[0][1]
+        }
         //if ((matcher = line =~ /<Hsp_evalue>(.*?)<\/Hsp_evalue>/)){
         //        annoMap.eval = matcher[0][1]
         //}
@@ -65,9 +85,10 @@ def addGeneBlast(db,blastFile){
             		count_all++
             		if ((count_all % 100) ==  0){
             			println count_all
-            			new GeneAnno(annoMap).save(flush:true)
+            			//println annoMap
+            			new GeneBlast(annoMap).save(flush:true)
             		}else{
-            			new GeneAnno(annoMap).save()
+            			new GeneBlast(annoMap).save()
             		}
             	}
             }
