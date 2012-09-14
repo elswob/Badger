@@ -20,10 +20,20 @@ class BootStrap {
                 sql.execute("CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON trans_anno FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(textsearchable_index_col, 'pg_catalog.english', descr);")
                 sql.execute("CREATE INDEX transsearch_idx ON trans_anno USING gin(textsearchable_index_col);")
                 
+                //trans_blast
+                sql.execute("ALTER TABLE trans_blast ADD COLUMN textsearchable_index_col tsvector;")
+                sql.execute("CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON trans_blast FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(textsearchable_index_col, 'pg_catalog.english', descr);")
+                sql.execute("CREATE INDEX transsearch_idx ON trans_blast USING gin(textsearchable_index_col);")
+                
                 //gene_anno
                 sql.execute("ALTER TABLE gene_anno ADD COLUMN textsearchable_index_col tsvector;")
                 sql.execute("CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON gene_anno FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(textsearchable_index_col, 'pg_catalog.english', descr);")
                 sql.execute("CREATE INDEX genesearch_idx ON gene_anno USING gin(textsearchable_index_col);")
+               	
+               	//gene_blast
+                sql.execute("ALTER TABLE gene_blast ADD COLUMN textsearchable_index_col tsvector;")
+                sql.execute("CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON gene_blast FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(textsearchable_index_col, 'pg_catalog.english', descr);")
+                sql.execute("CREATE INDEX transsearch_idx ON gene_blast USING gin(textsearchable_index_col);")
                
                 //publication
                 sql.execute("ALTER TABLE publication ADD COLUMN textsearchable_index_col tsvector;")
@@ -57,12 +67,22 @@ class BootStrap {
                 //trans_anno
                 sql.execute("ALTER TABLE trans_anno ADD COLUMN textsearchable_index_col tsvector;")
                 sql.execute("CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON trans_anno FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(textsearchable_index_col, 'pg_catalog.english', descr);")
-                sql.execute("CREATE INDEX transsearch_idx ON trans_anno USING gin(textsearchable_index_col);")
+                sql.execute("CREATE INDEX transannosearch_idx ON trans_anno USING gin(textsearchable_index_col);")
+                
+                //trans_blast
+                sql.execute("ALTER TABLE trans_blast ADD COLUMN textsearchable_index_col tsvector;")
+                sql.execute("CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON trans_blast FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(textsearchable_index_col, 'pg_catalog.english', descr);")
+                sql.execute("CREATE INDEX transblastsearch_idx ON trans_blast USING gin(textsearchable_index_col);")
                 
                 //gene_anno
                 sql.execute("ALTER TABLE gene_anno ADD COLUMN textsearchable_index_col tsvector;")
                 sql.execute("CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON gene_anno FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(textsearchable_index_col, 'pg_catalog.english', descr);")
-                sql.execute("CREATE INDEX genesearch_idx ON gene_anno USING gin(textsearchable_index_col);")
+                sql.execute("CREATE INDEX geneannosearch_idx ON gene_anno USING gin(textsearchable_index_col);")
+               	
+               	//gene_blast
+                sql.execute("ALTER TABLE gene_blast ADD COLUMN textsearchable_index_col tsvector;")
+                sql.execute("CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON gene_blast FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(textsearchable_index_col, 'pg_catalog.english', descr);")
+                sql.execute("CREATE INDEX geneblastsearch_idx ON gene_blast USING gin(textsearchable_index_col);")
                
                 //publication
                 sql.execute("ALTER TABLE publication ADD COLUMN textsearchable_index_col tsvector;")

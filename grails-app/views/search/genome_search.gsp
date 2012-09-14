@@ -177,7 +177,7 @@
             $('#chart').bind('jqplotDataClick',
             function (ev, seriesIndex, pointIndex, data) {
             //alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-            window.open("/search/contig_info?contig_id=" + data[2]);
+            window.open("/search/genome_info?contig_id=" + data[2]);
 	    	}
 	    );      
                     

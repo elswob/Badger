@@ -43,7 +43,12 @@ class FileDownloadController {
     }
     
 	def gene_download = {
-     	 def object_array = params.fileId
+		def object_array
+		if (params.seq == 'Peptides'){
+     		object_array = params.pepFileId
+     	}else{
+     		object_array = params.nucFileId
+     	}
      	 object_array = object_array.replaceAll(/\[/, '')
      	 object_array = object_array.replaceAll(/\]/, '')
      	 object_array = object_array.replaceAll(/ /, '')
@@ -60,14 +65,15 @@ class FileDownloadController {
      	 	pep_file_builder = pep_file_builder + ">"+it.gene_id+"\n"+it.pep+"\n"
      	 	nuc_file_builder = nuc_file_builder + ">"+it.gene_id+"\n"+it.nuc+"\n"
 		 }
-		 println "created download files "+params.fileName+".aa" + " and "+params.fileName+".fna"
 		 println "seq = "+params.seq
 		 if (params.seq == 'Peptides'){
+		 	println "created download file "+params.fileName+".aa"
      	 	response.setHeader "Content-disposition", "attachment; filename="+params.fileName+".aa"
          	response.contentType = 'text/csv'
          	response.outputStream << pep_file_builder
          	response.outputStream.flush()
          }else{
+         	 println "created download files "+params.fileName+".fna"
 	    	 response.setHeader "Content-disposition", "attachment; filename="+params.fileName+".fna"
     	     response.contentType = 'text/csv'
         	 response.outputStream << nuc_file_builder

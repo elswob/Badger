@@ -23,28 +23,37 @@
         <td><b>Source</b></td>
         <td><b>Scaffold start</b></td>
         <td><b>Scaffold stop</b></td>
-        <td><b>Download sequences</b></td>
+        <td><b>Download</b></td>
       </tr>
       <tr>
-        <td><g:link action="search_results" params="${[search: 'contig', searchId: info_results.contig_id[0]]}">${info_results.contig_id[0]}</g:link></td>
+        <td><g:link action="genome_info" params="${[contig_id: info_results.contig_id[0]]}">${info_results.contig_id[0]}</g:link></td>
         <td>${info_results.pep[0].length()}</td>
         <td>${info_results.intron[0]}</td>
         <td>${info_results.source[0]}</td>
         <td>${info_results.start[0]}</td>
         <td>${info_results.stop[0]}</td>
         <td>
-        	<g:form name="fileDownload" url="[controller:'FileDownload', action:'gene_download']">
+        	<div class="inline">
+        	<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
 		    	<g:hiddenField name="fileId" value="${info_results.gene_id[0]}"/>
 		    	<g:hiddenField name="fileName" value="${info_results.gene_id[0]}"/>
-		    	<input align="right" name="seq" type="submit" value="Nucleotides" class="mybuttons" onclick="get_table_data()"/>
-		    	<input align="right" name="seq" type="submit" value="Peptides" class="mybuttons" onclick="get_table_data()"/>
+		    	<g:hiddenField name="seq" value="Nucleotides"/>
+		    	<a href="#" onclick="document.nucfileDownload.submit()">Nucleotides</a>
+		    </g:form> 
+		    |
+		    <g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+		    	<g:hiddenField name="fileId" value="${info_results.gene_id[0]}"/>
+		    	<g:hiddenField name="fileName" value="${info_results.gene_id[0]}"/>
+		    	<g:hiddenField name="seq" value="Peptides"/>
+		    	<a href="#" onclick="document.pepfileDownload.submit()">Peptides</a>
 		    </g:form>
+		    </div>
 		</td>
       </tr>
     </table> 
-    <h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=gi|269847892|gb|AC239114.1|" target='_blank'>(go to genome browser)</a>:</h1>
-     <iframe src="${grailsApplication.config.g.link}?name=gi|269847892|gb|AC239114.1|" width="100%" height="500">
-   		<img src="${grailsApplication.config.g.link}?name=gi|269847892|gb|AC239114.1|"/>
+    <h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.gene_id[0]}" target='_blank'>(go to genome browser)</a>:</h1>
+     <iframe src="${grailsApplication.config.g.link}?name=${info_results.gene_id[0]}" width="100%" height="500">
+   		<img src="${grailsApplication.config.g.link}?name=${info_results.gene_id[0]}"/>
 	 </iframe>
     <h1>Top annotations for gene ${info_results.gene_id[0]}:</h1>
     <table>

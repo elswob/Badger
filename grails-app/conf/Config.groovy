@@ -4,11 +4,6 @@
 grails.config.locations = ["file:GDB.config.properties"]
 println "Using external configuration file "+grails.config.locations	
 
-//pub.files = [Transcripts: ["L_rubellus/small_trans.fa", "Contig\\d+", "/search/trans_info?contig_id="],
-//			Contigs: ["L_rubellus/contigs.fa", "contig_\\d+", "/search/contig_info?contig_id="]
-//			]
-
-//projectID = "Bicyclus anynana"
 // grails.config.locations = [ "classpath:${appName}-config.properties",
 //                             "classpath:${appName}-config.groovy",
 //                             "file:${userHome}/.grails/${appName}-config.properties",

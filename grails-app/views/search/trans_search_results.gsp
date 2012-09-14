@@ -239,7 +239,7 @@
 		    		<g:form name="fileDownload" url="[controller:'FileDownload', action:'trans_contig_download']">
 		    			<g:hiddenField name="fileId" value=""/>
 		    			<g:hiddenField name="fileName" value="${term}"/>
-		    			<input align="right" type="submit" value="Download contigs in table" class="mybuttons" onclick="get_table_data()"/>
+		    			<a href="#" onclick="get_table_data();document.fileDownload.submit()">Download transcripts</a>
 		    		</g:form>
 		    		</center>
 		    		</td></tr>

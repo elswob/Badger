@@ -30,8 +30,7 @@
         };
     </script> 
     <script>
-    function get_table_data(){
-    	//alert(${annoType})
+    function get_table_data(fileId){
     	var table_scrape = [];
     	var rowNum
     	var regex
@@ -57,7 +56,7 @@
 	       	  	table_scrape.push(matcher[1])
 	    	}
 	    }
-	    document.getElementById('fileId').value=table_scrape;
+	    document.getElementById(fileId).value=table_scrape;
 	    //alert(table_scrape)
     }
     </script>
@@ -237,12 +236,21 @@
 		    		</td><td><center>
 		    		Download genes:
 		    		<!-- download genes form gets fileName value from get_table_data() -->
-		    		<g:form name="fileDownload" url="[controller:'FileDownload', action:'gene_download']">
-		    			<g:hiddenField name="fileId" value=""/>
+		    		<div class="inline">
+        				<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+		    			<g:hiddenField name="nucFileId" value=""/>
 		    			<g:hiddenField name="fileName" value="${term}"/>
-		    			<input align="right" name="seq" type="submit" value="Nucleotides" class="mybuttons" onclick="get_table_data()"/>
-		    			<input align="right" name="seq" type="submit" value="Peptides" class="mybuttons" onclick="get_table_data()"/>
+		    			<g:hiddenField name="seq" value="Nucleotides"/>
+		    			<a href="#" onclick="get_table_data('nucFileId');document.nucfileDownload.submit()">Nucleotides</a>
+		    		</g:form> 
+		    		|
+		    		<g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+		    			<g:hiddenField name="pepFileId" value=""/>
+		    			<g:hiddenField name="fileName" value="${term}"/>
+		    			<g:hiddenField name="seq" value="Peptides"/>
+		    			<a href="#" onclick="get_table_data('pepFileId');document.pepfileDownload.submit()">Peptides</a>
 		    		</g:form>
+		    		</div>
 		    		</center>
 		    		</td></tr>
 		    		</table>
