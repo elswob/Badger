@@ -16,6 +16,26 @@
             return this.paper = Raphael(containerId, this.paperWidth, 2000);
         };
         var push_right = 40;
+        BioDrawing.prototype.drawScoreScale = function(length) {
+            var base, interval, xPos;
+            this.pixelsPerBase = this.drawingWidth / length;
+            var height = 9
+            interval = length/11;
+            //blast and functional
+            this.drawScoreId(0,interval*5,12,'BLAST and functional annotation bitscores'); 
+            this.drawScoreBar(0,interval,8,'red','','>=200');           
+            this.drawScoreBar(interval,interval*2,height,'magenta','','80-200');
+            this.drawScoreBar(interval*2,interval*3,height,'lime','','50-80');
+            this.drawScoreBar(interval*3,interval*4,height,'blue','','40-50');
+            this.drawScoreBar(interval*4,interval*5,height,'black','','<40');
+            //interpro
+            this.drawScoreId(interval*6,length,12,'InterProScan e-value'); 
+            this.drawScoreBar(interval*6,interval*7,height,'red','','<= 1e-100');           
+            this.drawScoreBar(interval*7,interval*8,height,'magenta','','1e-50 -1e- 100');
+            this.drawScoreBar(interval*8,interval*9,height,'lime','','1e-20 - 1e-50');
+            this.drawScoreBar(interval*9,interval*10,height,'blue','','1e-5 - 1e-20');
+            this.drawScoreBar(interval*10,interval*11,height,'black','','<1');
+        };
         BioDrawing.prototype.drawScale = function(length) {
             var base, interval, xPos;
             this.pixelsPerBase = this.drawingWidth / length;
@@ -40,6 +60,15 @@
             }
             return this.yPos = this.yPos + 20;
         };
+        BioDrawing.prototype.drawLine = function(length) {
+            var base, interval, xPos;
+            this.pixelsPerBase = this.drawingWidth / length;
+            this.paper.rect(this.padding+push_right, this.yPos, this.drawingWidth, 2).attr({
+                fill: 'grey',
+                'stroke-width': '0'
+            });
+            return this.yPos = this.yPos + 20;
+        };
         BioDrawing.prototype.drawChart = function(data, height) {
             var x, xValues;
             xValues = (function() {
@@ -55,6 +84,25 @@
             });
             return this.yPos = this.yPos + height + 20;
         };
+        
+     	BioDrawing.prototype.drawScoreBar = function(start, stop, height, colour, description, text) {
+            var bar, width;
+            width = (stop * this.pixelsPerBase) - (start * this.pixelsPerBase);
+            bar = this.paper.rect((start * this.pixelsPerBase) + this.padding +push_right, this.yPos, width, height).attr({
+                fill: colour,
+                'stroke-width': '0',
+                'title': description
+            });
+            var textColour = 'black';
+            var textYPosition = this.yPos-10;
+            var textPosition = ((start * this.pixelsPerBase + this.padding +push_right) + (stop * this.pixelsPerBase + this.padding +push_right)) / 2;
+            var title = this.paper.text(textPosition, textYPosition, text).attr({
+                'font-size': (height * 1),
+                'fill' : textColour
+            })
+            return bar;
+        };
+        
         BioDrawing.prototype.drawBar = function(start, stop, height, colour, description, text) {
             var bar, width;
             width = (stop * this.pixelsPerBase) - (start * this.pixelsPerBase);
@@ -64,7 +112,25 @@
                 'title': description,
                 'cursor': 'pointer'
             });
-
+            var textColour = 'black';
+            var textYPosition = this.yPos-10;
+            var textPosition = ((start * this.pixelsPerBase + this.padding +push_right) + (stop * this.pixelsPerBase + this.padding +push_right)) / 2;
+            var title = this.paper.text(textPosition, textYPosition, text).attr({
+                'font-size': (height * 1),
+                'fill' : textColour
+            })
+            return bar;
+        };
+        
+        BioDrawing.prototype.drawScoreId = function(start, stop, height, text) {
+            var bar, width;
+            //width = (stop * this.pixelsPerBase) - (start * this.pixelsPerBase);
+			var textPosition = ((start * this.pixelsPerBase + this.padding +push_right) + (stop * this.pixelsPerBase + this.padding +push_right)) / 2;            var textYPosition = this.yPos - 25;
+            var textColour = 'black';
+            var title = this.paper.text(textPosition, textYPosition, text).attr({
+                'font-size': (height * 1),
+                'fill' : textColour
+            })
             return bar;
         };
         
@@ -92,9 +158,10 @@
         };
         BioDrawing.prototype.drawColouredTitle = function(text, colour) {
             var title;
-            title = this.paper.text(50, this.yPos, text).attr({
+            title = this.paper.text(0, this.yPos, text).attr({
                 'font-size': 14,
-                'fill' : colour
+                'fill' : colour,
+                'text-anchor': 'start'
             });
             this.yPos = this.yPos - 10;
             return title;
@@ -102,13 +169,21 @@
         BioDrawing.prototype.drawSpacer = function(pixels) {
             return this.yPos = this.yPos + pixels;
         };
-        BioDrawing.prototype.getBLASTColour = function(bitscore) {
+        BioDrawing.prototype.getBLASTColour = function(bitscore,annoType) {
         	var hitColour;
-        	if (bitscore < 1000000){hitColour = 'red';}
-            if (bitscore < 200){hitColour = 'magenta';}
-            if (bitscore < 80){hitColour = 'lime';}
-            if (bitscore < 50){hitColour = 'blue';}
-            if (bitscore < 40){hitColour = 'black';}          
+        	if (annoType === 'ipr'){
+        		if (bitscore < 1){hitColour = 'black';}
+        		if (bitscore < 1e-5){hitColour = 'blue';}
+        		if (bitscore < 1e-20){hitColour = 'lime';}
+        		if (bitscore < 1e-50){hitColour = 'magenta';}
+        		if (bitscore < 1e-100){hitColour = 'red';}				
+        	}else{
+				if (bitscore < 1000000){hitColour = 'red';}
+				if (bitscore < 200){hitColour = 'magenta';}
+				if (bitscore < 80){hitColour = 'lime';}
+				if (bitscore < 50){hitColour = 'blue';}
+				if (bitscore < 40){hitColour = 'black';}     
+			}     
             return hitColour;
         };
         BioDrawing.prototype.end = function() {

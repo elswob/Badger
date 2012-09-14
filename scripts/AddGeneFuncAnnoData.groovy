@@ -1,28 +1,47 @@
 package GDB
 
 import groovy.sql.Sql
-def sql = new Sql(dataSource)
+def grailsApplication
 
-//add the annot8r info
+getData()
+def getData(){
+	if (grailsApplication.config.g.fun.size()>0){
+		for(item in grailsApplication.config.g.fun){
+			item = item.toString()
+     	 	def splitter = item.split("=")
+     	 	println "Adding "+splitter[0]+" - "+splitter[1]
+     	 	inFile = new File("data/"+splitter[1].trim()).text
+     	 	addFunc(splitter[0].trim(),inFile)
+     	 }
+    }
+    if (grailsApplication.config.g.IPR){
+    	def  iprFile = new File("data/"+grailsApplication.config.g.IPR.trim()).text
+    	println "Adding IPR - "+grailsApplication.config.g.IPR
+    	addInterProScan(iprFile)
+    }
+}
 
-def addAnnot8r(file){
+//add the functional annotation info
+//tab delimited
+//gene_id	source	hit_id	start	stop	bit score	description
+
+def addFunc(source,file){
     def annoMap = [:]
     file.eachLine { line ->
     	    splitter = line.split("\t")
-    	    annoMap.contig_id = splitter[0]
-    	    annoMap.anno_db = splitter[1]
+    	    annoMap.gene_id = splitter[0]
+    	    annoMap.anno_db = source
     	    annoMap.anno_id = splitter[2]
     	    annoMap.anno_start = splitter[3]
     	    annoMap.anno_stop = splitter[4]
     	    def score = splitter[5] as double
     	    annoMap.score = score
     	    annoMap.descr = splitter[6]
-    	    new UnigeneAnno(annoMap).save()
+    	    new TransAnno(annoMap).save()
     }
 }
 
-
-// add the interposcan data
+// add the interposcan raw data 
 def addInterProScan(file){
 	// get the ipr descriptions
 	def iprMap = [:]
@@ -33,53 +52,56 @@ def addInterProScan(file){
 		}
 	}
     def annoMap = [:]
+    def GOMap = [:]
     file.eachLine { line ->
     	    splitter = line.split("\t")
     	    if (splitter[11] != 'NULL'){
-				if ((matcher = splitter[0] =~ /(contig_\d+)_.*/)){
-					annoMap.contig_id = matcher[0][1]
+				if ((matcher = splitter[0] =~ /(.*?)_\d+_ORF\d.*/)){
+					annoMap.gene_id = matcher[0][1]
+					GOMap.gene_id = matcher[0][1]
 				}
 				annoMap.anno_db = splitter[3]
-				annoMap.anno_id = splitter[11]+":"+splitter[4]
+				annoMap.anno_id = splitter[11]+" - "+splitter[4]
 				def start = splitter[6] as int
 				def stop = splitter[7] as int
-				annoMap.anno_start = start*3
-				annoMap.anno_stop = stop*3
+				annoMap.anno_start = start
+				GOMap.anno_start = start
+				annoMap.anno_stop = stop
+				GOMap.anno_stop = stop
 				//println "score = "+splitter[8]
 				def score = splitter[8] as double
 				//def score = splitter[8]
 				//println "score2 = "+score
 				annoMap.score = splitter[8]
+				GOMap.score = splitter[8]
+				GOMap.anno_db = "IPRGO"
 				//annoMap.score = splitter[8] as float
 				annoMap.descr = iprMap[splitter[11]]
 				//println annoMap
+              	if ((matcher = line =~ /(Molecular Function:.*?)\s\((GO:\d+)\)/)){
+						GOMap.descr = matcher[0][1]
+						GOMap.anno_id = matcher[0][2]
+						if (score < 1e-5){
+							new GeneAnno(GOMap).save()
+						}
+				}
+                if ((matcher = line =~ /(Cellular Component:.*?)\s\((GO:\d+)\)/)){
+						GOMap.descr = matcher[0][1]
+						GOMap.anno_id = matcher[0][2]
+						if (score < 1e-5){
+							new GeneAnno(GOMap).save()
+						}
+				}
+                if ((matcher = line =~ /.*?(Biological Process:.*?)\s\((GO:\d+)\)/)){
+						GOMap.descr = matcher[0][1]
+						GOMap.anno_id = matcher[0][2]
+						if (score < 1e-5){
+							new GeneAnno(GOMap).save()
+						}
+				}
 				if (score < 1e-5){
-					//println annoMap
-					new UnigeneAnno(annoMap).save()
+					new GeneAnno(annoMap).save()
 				}
 		  }
     }
 }
-
-def inFile
-
-inFile = new File('data/iprscan_raw.out').text
-println "Adding ipr..."
-addInterProScan(inFile)
-
-inFile = new File('data/ec.txt').text
-println "Adding ec..."
-//addAnnot8r(inFile)
-
-inFile = new File('data/go.txt').text
-println "Adding go..."
-//addAnnot8r(inFile)
-
-inFile = new File('data/kegg.txt').text
-println "Adding kegg..."
-//addAnnot8r(inFile)
-
-
-
-
-

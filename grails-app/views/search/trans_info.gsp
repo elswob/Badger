@@ -152,31 +152,37 @@
 				 //alert("in drawHits");
 				 if (blast_data.length > 0 || ipr_data.length > 0 || fun_data.length > 0){
 				 	 //alert("drawing figure")
-					 var paperWidth = $('#blast_fig').width() - 40;
-					 //var drawing = new BioDrawing();
+					 var paperWidth = $('#blast_fig').width();
 					 drawing.start(paperWidth, 'blast_fig');
+					 drawing.drawSpacer(40);
+					 //add scale bars
+					 drawing.drawScoreScale(${info_results.sequence[0].length()});	
 					 drawing.drawSpacer(20);
 					 drawing.drawScale(${info_results.sequence[0].length()});			 
 					 drawing.drawSpacer(10);
 					 if (blast_data.length > 0){
-						 drawing.drawSpacer(20);
-						 drawing.drawColouredTitle('BLAST','green')
-						 drawBars(blast_data,blasttableShow)
+						 drawing.drawSpacer(10);
+						 drawing.drawColouredTitle('BLAST','black')
+						 drawBars(blast_data,blasttableShow,'blast')
+						 drawing.drawSpacer(10);
+						 drawing.drawLine(${info_results.sequence[0].length()});
 					 }
 					 if (fun_data.length > 0){
-						 drawing.drawSpacer(20);
-						 drawing.drawColouredTitle('Functional','green')
-						 drawBars(fun_data,funtableShow)
+						 drawing.drawSpacer(10);
+						 drawing.drawColouredTitle('Functional','black')
+						 drawBars(fun_data,funtableShow,'fun')
+						 drawing.drawSpacer(10);
+						 drawing.drawLine(${info_results.sequence[0].length()});
 					 }
 					 if (ipr_data.length > 0){
-						 drawing.drawSpacer(20);
-						 drawing.drawColouredTitle('InterPro','green')
-						 drawBars(ipr_data,iprtableShow)
+						 drawing.drawSpacer(10);
+						 drawing.drawColouredTitle('InterPro','black')
+						 drawBars(ipr_data,iprtableShow,'ipr')
 					 }
 					 drawing.end();         
 				 }
 			 }
-			 function drawBars(funcAnno,name){
+			 function drawBars(funcAnno,name,type){
 			  	 //alert("in drawBars")
 				 var start=''
 				 var stop=''
@@ -194,7 +200,7 @@
 						 stop = parseFloat(hit.anno_start)
 					 }
 					 score = parseFloat(hit.score) 	
-					 var hitColour = drawing.getBLASTColour(score);
+					 var hitColour = drawing.getBLASTColour(score,type);
 					 var blastRect = drawing.drawBar(start, stop, 7, hitColour, hit.anno_db + ": " + hit.anno_id + "\n" + hit.descr, '');
 					 blastRect.click(function(id){
 							 return function(){ location.href='#'+id;}

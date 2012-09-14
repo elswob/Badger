@@ -320,15 +320,48 @@ class SearchController {
     	if (grailsApplication.config.i.links.genes == 'private' && !isLoggedIn()) {
      		redirect(controller: "home", action: "index")
      	}else{
-			def offint = params.offset as Integer 
-			def maxint = params.max as Integer
-			def sum = maxint + offint
+			def sql = new Sql(dataSource)
+			def blastDBs = "anno_db = "
+			if (grailsApplication.config.g.blast.size()>0){
+				for(item in grailsApplication.config.g.blast){
+				item = item.toString()
+					def splitter = item.split("=")
+					blastDBs += "'"+splitter[0]+"' or anno_db = "
+					//println "adding "+splitter[0]
+				}
+				blastDBs = blastDBs[0..-15]
+			}
+			
+			def funDBs = "anno_db = "
+			if (grailsApplication.config.g.fun.size()>0){
+				for(item in grailsApplication.config.g.fun){
+				item = item.toString()
+					def splitter = item.split("=")
+					funDBs += "'"+splitter[0]+"' or anno_db = "
+					//println "adding "+splitter[0]
+				}
+				funDBs = funDBs[0..-15]
+			}
+			def blast_results
+			def fun_results
+			def ipr_results
+			if (grailsApplication.config.g.blast.size()>0){			
+				def blastsql = "select * from gene_blast where ("+blastDBs+") and gene_id = '"+params.gene_id+"' order by score desc;";
+				println blastsql
+				blast_results = sql.rows(blastsql)
+			}
+			if (grailsApplication.config.g.IPR){
+				def iprsql = "select * from gene_anno where (anno_id ~ '^IPR' or anno_db = 'IPRGO') and gene_id = '"+params.gene_id+"' order by score;";
+				ipr_results = sql.rows(iprsql)
+			}
+			if (grailsApplication.config.g.fun.size()>0){
+				def funsql = "select * from gene_anno where ("+funDBs+") and gene_id = '"+params.gene_id+"' order by score desc;";
+				println funsql
+				fun_results = sql.rows(funsql)
+			}
 			def info_results = GeneInfo.findAllByGene_id(params.gene_id)
-			def anno_results = GeneAnno.findAllByGene_id(params.gene_id,[sort:"score", order:"desc", max:params.max, offset:params.offset])
-			def nuc_fasta = ">"+info_results.gene_id[0]+"\n"+info_results.nuc[0]+"\n"
-			def pep_fasta = ">"+info_results.gene_id[0]+"\n"+info_results.pep[0]+"\n"
-			return [ info_results: info_results, anno_results: anno_results, nuc_fasta: nuc_fasta, pep_fasta: pep_fasta]
-		}
+			return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results]
+    	}
     }
     def trans_info = {
     	if (grailsApplication.config.i.links.trans == 'private' && !isLoggedIn()) {
@@ -343,8 +376,8 @@ class SearchController {
 					blastDBs += "'"+splitter[0]+"' or anno_db = "
 					//println "adding "+splitter[0]
 				}
+				blastDBs = blastDBs[0..-15]
 			}
-			blastDBs = blastDBs[0..-15]
 			
 			def funDBs = "anno_db = "
 			if (grailsApplication.config.t.fun.size()>0){
@@ -354,20 +387,28 @@ class SearchController {
 					funDBs += "'"+splitter[0]+"' or anno_db = "
 					//println "adding "+splitter[0]
 				}
+				funDBs = funDBs[0..-15]
 			}
-			funDBs = funDBs[0..-15]
-			
-			def blastsql = "select * from trans_blast where ("+blastDBs+") and contig_id = '"+params.contig_id+"' order by score desc;";
-			println blastsql
-			def blast_results = sql.rows(blastsql)
-			def iprsql = "select * from trans_anno where (anno_id ~ '^IPR' or anno_db = 'IPRGO') and contig_id = '"+params.contig_id+"' order by score;";
-			def ipr_results = sql.rows(iprsql)
-			def funsql = "select * from trans_anno where ("+funDBs+") and contig_id = '"+params.contig_id+"' order by score desc;";
-			println funsql
-			def fun_results = sql.rows(funsql)
+			def blast_results
+			def fun_results
+			def ipr_results
+			if (grailsApplication.config.t.blast.size()>0){			
+				def blastsql = "select * from trans_blast where ("+blastDBs+") and contig_id = '"+params.contig_id+"' order by score desc;";
+				println blastsql
+				blast_results = sql.rows(blastsql)
+			}
+			if (grailsApplication.config.t.IPR){
+				def iprsql = "select * from trans_anno where (anno_id ~ '^IPR' or anno_db = 'IPRGO') and contig_id = '"+params.contig_id+"' order by score;";
+				ipr_results = sql.rows(iprsql)
+				println iprsql
+			}
+			if (grailsApplication.config.t.fun.size()>0){
+				def funsql = "select * from trans_anno where ("+funDBs+") and contig_id = '"+params.contig_id+"' order by score desc;";
+				println funsql
+				fun_results = sql.rows(funsql)
+			}
 			def info_results = TransInfo.findAllByContig_id(params.contig_id)
-			def nuc_fasta = ">"+info_results.contig_id[0]+"\n"+info_results.sequence[0]+"\n"
-			return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, nuc_fasta: nuc_fasta]
+			return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results]
     	}
 	}
     def genome_info = {
