@@ -23,7 +23,7 @@
             interval = length/11;
             //blast and functional
             this.drawScoreId(0,interval*5,12,'BLAST and functional annotation bitscores'); 
-            this.drawScoreBar(0,interval,8,'red','','>=200');           
+            this.drawScoreBar(0,interval,height,'red','','>=200');           
             this.drawScoreBar(interval,interval*2,height,'magenta','','80-200');
             this.drawScoreBar(interval*2,interval*3,height,'lime','','50-80');
             this.drawScoreBar(interval*3,interval*4,height,'blue','','40-50');
@@ -31,10 +31,10 @@
             //interpro
             this.drawScoreId(interval*6,length,12,'InterProScan e-value'); 
             this.drawScoreBar(interval*6,interval*7,height,'red','','<= 1e-100');           
-            this.drawScoreBar(interval*7,interval*8,height,'magenta','','1e-50 -1e- 100');
+            this.drawScoreBar(interval*7,interval*8,height,'magenta','','1e-50 - 1e-100');
             this.drawScoreBar(interval*8,interval*9,height,'lime','','1e-20 - 1e-50');
             this.drawScoreBar(interval*9,interval*10,height,'blue','','1e-5 - 1e-20');
-            this.drawScoreBar(interval*10,interval*11,height,'black','','<1');
+            this.drawScoreBar(interval*10,interval*11,height,'black','','1 - 1e-5');
         };
         BioDrawing.prototype.drawScale = function(length) {
             var base, interval, xPos;

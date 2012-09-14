@@ -215,39 +215,42 @@
 				 var start=''
 				 var stop=''
 				 var score=''
+				 var matched = new Array();
 				 for (var i = 0; i < funcAnno.length; i++) {   		 	 
-				 var hit = funcAnno[i];
-				 //get rid of all strange characters
-				 var stringy = String(name);
-				 var idPattern = hit.anno_id.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-				 if (stringy.match(idPattern)){
-					 start = parseFloat(hit.anno_start)
-					 stop = parseFloat(hit.anno_stop)
-					 if (start > stop){
-						 start = parseFloat(hit.anno_stop)
-						 stop = parseFloat(hit.anno_start)
-					 }
-					 score = parseFloat(hit.score) 	
-					 var hitColour = drawing.getBLASTColour(score,type);
-					 var blastRect = drawing.drawBar(start, stop, 7, hitColour, hit.anno_db + ": " + hit.anno_id + "\n" + hit.descr, '');
-					 blastRect.click(function(id){
-							 return function(){ location.href='#'+id;}
-							 }(hit.anno_id));
-					 blastRect.hover(
-						 function(event) {
-							this.attr({stroke: 'black', 'stroke-width' : '2'});
-							$('#' + hit.anno_id).css("background-color", "bisque");
-			
-							},
-							function(event) {
-							this.attr({stroke: 'black', 'stroke-width' : '0'});
-							$('#' + hit.anno_id).css("background-color", "white");
-							}
-					)
-				 drawing.drawSpacer(10);	 
-				 }	    	    
-			 }
-		 }
+					 var hit = funcAnno[i];
+					 //get rid of all strange characters
+					 var stringy = String(name);
+					 var idPattern = hit.anno_id.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+					 //ignore duplicate IDs
+					 if (stringy.match(idPattern) && matched.indexOf(idPattern) < 0){
+						 start = parseFloat(hit.anno_start)
+						 stop = parseFloat(hit.anno_stop)
+						 if (start > stop){
+							 start = parseFloat(hit.anno_stop)
+							 stop = parseFloat(hit.anno_start)
+						 }
+						 score = parseFloat(hit.score) 	
+						 var hitColour = drawing.getBLASTColour(score,type);
+						 var blastRect = drawing.drawBar(start, stop, 7, hitColour, hit.anno_db + ": " + hit.anno_id + "\n" + hit.descr, '');
+						 blastRect.click(function(id){
+								 return function(){ location.href='#'+id;}
+								 }(hit.anno_id));
+						 blastRect.hover(
+							 function(event) {
+								this.attr({stroke: 'black', 'stroke-width' : '2'});
+								$('#' + hit.anno_id).css("background-color", "bisque");
+				
+								},
+								function(event) {
+								this.attr({stroke: 'black', 'stroke-width' : '0'});
+								$('#' + hit.anno_id).css("background-color", "white");
+								}
+						)
+					 drawing.drawSpacer(10);
+					 matched.push(idPattern);	
+					 }	    	    
+				 }
+		 	}
 			 </script>
 		
 		  </div>
