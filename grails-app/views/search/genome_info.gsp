@@ -18,13 +18,17 @@
     <table>
       <tr>
         <td><b>Length:</b> </td>
-        <td><b>Coverage: </b> </td>
+        <g:if test = "${grailsApplication.config.coverage.Genome == 'y'}">
+        	<td><b>Coverage: </b> </td>
+        </g:if>
         <td><b>GC: </b> </td>
         <td><b>Sequence: </b> </td> 
       </tr>
       <tr>
       <td>${printf("%,d\n",info_results.sequence[0].length())}</td>
-      <td>${info_results.coverage[0]}</td>
+      <g:if test = "${grailsApplication.config.coverage.Genome == 'y'}">
+      	<td>${info_results.coverage[0]}</td>
+      </g:if>
       <td>${sprintf("%.2f",info_results.gc[0])}</td>
       <td>        
       	<g:form name="fileDownload" url="[controller:'FileDownload', action:'genome_contig_download']" style="display: inline" >

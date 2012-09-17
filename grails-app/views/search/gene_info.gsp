@@ -184,25 +184,28 @@
 		</td>
       </tr>
     </table> 
-    
-    <div id="nav_float" class="nav_float">
-	<ul>
-	   <li><a href="#info_anchor">Info</a></li>
-  	   <li><a href="#anno_anchor">Annotations</a></li>
-  	   <g:if test = "${grailsApplication.config.g.link}"> 
-  	   		<li><a href="#browse_anchor">Browse</a></li>
-  	   </g:if>
-  	   <li><a href="#files_anchor">Files</a></li>
-  	   <g:if test="${blast_results}">
-	  	   <li><a href="#blast_anchor">BLAST</a></li>
-	   </g:if>
-	   <g:if test="${fun_results}">
-	  	   <li><a href="#fun_anchor">Functional</a></li>
-	   </g:if>
-	   <g:if test="${ipr_results}">
-	  	   <li><a href="#ipr_anchor">InterPro</a></li>
-	   </g:if>
-	</ul>
+    <div id="nav_float">
+		<div class="footer" role="contentinfo">
+			<div class="nav_float">
+			<ul>
+			   <li><a href="#info_anchor">Info</a></li>
+			   <li><a href="#anno_anchor">Annotations</a></li>
+			   <g:if test = "${grailsApplication.config.g.link}"> 
+					<li><a href="#browse_anchor">Browse</a></li>
+			   </g:if>
+			   <li><a href="#files_anchor">Sequence data</a></li>
+			   <g:if test="${blast_results}">
+				   <li><a href="#blast_anchor">BLAST</a></li>
+			   </g:if>
+			   <g:if test="${fun_results}">
+				   <li><a href="#fun_anchor">Functional</a></li>
+			   </g:if>
+			   <g:if test="${ipr_results}">
+				   <li><a href="#ipr_anchor">InterPro</a></li>
+			   </g:if>
+			</ul>
+			</div>
+		</div>
 	</div>
     
     <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
