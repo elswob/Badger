@@ -36,7 +36,34 @@
         	var y = parseFloat(b);
         	return ((x < y) ? 1 : ((x > y) ?  -1 : 0));
         };
-    </script>    
+    </script> 
+    <script type="text/javascript">  
+ 		$(function() {
+    		// get initial top offset of navigation 
+    		var floating_navigation_offset_top = $('#nav_float').offset().top;   
+    		// define the floating navigation function
+    		var floating_navigation = function(){
+            	// current vertical position from the top
+    	    	var scroll_top = $(window).scrollTop(); 
+	    	    // if scrolled more than the navigation, change its 
+                // position to fixed to float to top, otherwise change 
+                // it back to relative
+        		if (scroll_top > floating_navigation_offset_top) { 
+            		$('#nav_float').css({ 'position': 'fixed', 'top':0});
+        		} else {
+            		$('#nav_float').css({ 'position': 'relative' }); 
+        		}   
+    		};
+     
+    		// run function on load
+    		floating_navigation();
+     
+    		// run function every time you scroll
+    		$(window).scroll(function() {
+         		floating_navigation();
+    		});
+	});
+ 	</script>
     <script type="text/javascript" charset="utf-8">
     var blasttableShow="";
     var iprtableShow="";
@@ -120,8 +147,7 @@
   </head>
   <body>
   <g:if test="${info_results}">
-  	
-    <h1>Stats for gene ${info_results.gene_id[0]}:</h1>
+    <a name="info_anchor"><h1>Information for gene ${info_results.gene_id[0]}:</h1></a>
     <table>
       <tr>
         <td><b>Scaffold Id</b></td>
@@ -159,8 +185,28 @@
       </tr>
     </table> 
     
+    <div id="nav_float" class="nav_float">
+	<ul>
+	   <li><a href="#info_anchor">Info</a></li>
+  	   <li><a href="#anno_anchor">Annotations</a></li>
+  	   <g:if test = "${grailsApplication.config.g.link}"> 
+  	   		<li><a href="#browse_anchor">Browse</a></li>
+  	   </g:if>
+  	   <li><a href="#files_anchor">Files</a></li>
+  	   <g:if test="${blast_results}">
+	  	   <li><a href="#blast_anchor">BLAST</a></li>
+	   </g:if>
+	   <g:if test="${fun_results}">
+	  	   <li><a href="#fun_anchor">Functional</a></li>
+	   </g:if>
+	   <g:if test="${ipr_results}">
+	  	   <li><a href="#ipr_anchor">InterPro</a></li>
+	   </g:if>
+	</ul>
+	</div>
+    
     <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
-        <hr size = 5 color="green" width="100%" style="margin-top:10px">  
+        <a name="anno_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>  
     
 		<g:if test="${params.top != "10"}">
 			<h1>Top annotations  / <g:link action="gene_info" params="${[gene_id : info_results.gene_id[0], top: 10]}"> Top 10 annotations</g:link> from each database</h1>  
@@ -207,6 +253,7 @@
 						 drawing.drawColouredTitle('InterPro','black')
 						 drawBars(ipr_data,iprtableShow,'ipr')
 					 }
+					 drawing.drawSpacer(10);
 					 drawing.end();         
 				 }
 			 }
@@ -256,12 +303,13 @@
 		  </div>
       </g:if>
      <g:if test = "${grailsApplication.config.g.link}"> 
+         <a name="browse_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>  
 		 <h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.gene_id[0]}" target='_blank'>(go to genome browser)</a>:</h1>
 		 <iframe src="${grailsApplication.config.g.link}?name=${info_results.gene_id[0]}" width="100%" height="500">
 			<img src="${grailsApplication.config.g.link}?name=${info_results.gene_id[0]}"/>
 		 </iframe>
       </g:if>
-      <hr size = 5 color="green" width="100%" style="margin-top:10px">
+      <a name="files_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
       <h1>FASTA files</h1>
       <div style="overflow:auto; max-height:200px;">
 	      <table style="table-layout: fixed; width:100%">
@@ -278,7 +326,7 @@
 	      </table>
       </div>      
       <g:if test="${blast_results}">
-		  <hr size = 5 color="green" width="100%" style="margin-top:10px">
+		  <a name="blast_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
 			   <h1>BLAST results</h1>
 		   <table id="blast_table_data" class="display">
 			  <thead>
@@ -327,7 +375,7 @@
 	   
 	   <g:if test="${fun_results}">
 	   <br>
-	   <hr size = 5 color="green" width="100%" style="margin-top:10px">
+	   <a name="fun_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
 	   <h1>Functional annotation results</h1>
 	   <table id="fun_table_data" class="display">
 	      <thead>
@@ -374,7 +422,7 @@
 	   <br>
 	   
 	   <g:if test="${ipr_results}">
-		   <hr size = 5 color="green" width="100%" style="margin-top:10px">
+		   <a name="ipr_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
 		   <h1>InterProScan results</h1>
 		   <table id="ipr_table_data" class="display">
 			 <thead>

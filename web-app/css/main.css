@@ -170,6 +170,8 @@ img {
 .navbar {
 	background-color: #efefef;
 	padding: 0.2em 0.2em;
+	position: relative;
+	z-index: 100;  
 }
 .navbar a {
 	color: #2D2D2D;
@@ -199,18 +201,18 @@ img {
 }
 .navbar li li {
 	display: block;
-	float: left;
+	float: right;
 	list-style-type: none;
 	margin-right: 0;
 	padding: 1px;
-	border-right: 0px solid #abbf78;
 }
 .navbar li a {
 	display: block;
 	padding: 3px 8px;
 	background-color: #efefef;
 	color: #0C4D09;
-	text-decoration: none; }
+	text-decoration: none; 
+}	
 .navbar li ul {
 	display: none;
 }
@@ -236,63 +238,40 @@ img {
     background-color: #999999;
 }
 
-	
+/* Floating navigation bar */
 
-.nav {
+.nav_float {
 	background-color: #efefef;
 	padding: 0.2em 0.2em;
-	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
-	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
-	        box-shadow: 0 0 3px 1px #aaaaaa;
-	zoom: 1;
 }
-
-.nav ul {
-	overflow: hidden;
-	padding-left: 0;
-	zoom: 1;
-}
-
-.nav li {
+.nav_float a {
+	color: #48802c;
 	display: block;
-	float: left;
-	list-style-type: none;
-	margin-right: 0;
-	padding: 3px;
-	border-right: 1px solid #abbf78;	
-}
-
-.nav li.last {
-border-right: 1px solid #FFF;
-}
-
-.nav a {
-	color: #666666;
-	display: block;
-	padding: 0.55em 0.7em;
-        font-size: 1.3em;
+	padding: 0.2em 0.5em;
+    font-size: 0.9em;
 	text-decoration: none;
-	   -moz-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
-	        border-radius: 0.3em;
+	border-radius: 0.3em;
 }
-
-.nav a:active, .nav a:visited {
-	color: #666666;
-}
-
-.nav a:focus, .nav a:hover {
+.nav_float a:focus, .nav_float a:hover {
 	background-color: #999999;
 	color: #ffffff;
 	outline: none;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
 }
-
-/* change colour of current location in navigation bar */
-.nav li a.selected {
-    color: #ffffff;
-    background-color: #999999;
+.nav_float ul {
+	overflow: hidden;
+	padding-left: 0;
 }
+.nav_float li {
+	display: block;
+	float: left;
+	list-style-type: none;
+	margin-right: 0;
+	padding: 0px;
+	border-right: 1px solid #abbf78;
+}
+
+
 
 .no-borderradius .nav a:focus, .no-borderradius .nav a:hover {
 	background-color: transparent;
