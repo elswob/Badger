@@ -9,36 +9,36 @@
 <body>
   <h1>Search the <i>${grailsApplication.config.projectID}</i> data:</h1>
   <table>
-  	    <tr><td><g:link controller="home" action="publications">${GDB.Publication.count()} publications</g:link></td><td>Publications matching the term <i>${grailsApplication.config.species}</i>.</td></tr>
+  	    <tr><td><g:link controller="home" action="publications">${printf("%,d\n",GDB.Publication.count())} publications</g:link></td><td>Publications matching the term <i>${grailsApplication.config.species}</i>.</td></tr>
 		<g:if test="${grailsApplication.config.annoData.Transcripts == 'y'}">
 			<g:if test = "${grailsApplication.config.i.links.trans == 'public'}">			
-				<tr><td><g:link controller="search" action="trans_search">${GDB.TransInfo.count()} transcripts</g:link></td><td>The current transcriptome.</td></tr>
+				<tr><td><g:link controller="search" action="trans_search">${printf("%,d\n",GDB.TransInfo.count())} transcripts</g:link></td><td>The current transcriptome.</td></tr>
 			</g:if>
 			<g:else>
 				<sec:ifLoggedIn>
-					<tr><td><g:link controller="search" action="trans_search">${GDB.TransInfo.count()} transcripts</g:link></td><td>The current transcriptome.</td></tr>
+					<tr><td><g:link controller="search" action="trans_search">${printf("%,d\n",GDB.TransInfo.count())} transcripts</g:link></td><td>The current transcriptome.</td></tr>
 				</sec:ifLoggedIn>
 			</g:else>	
 		</g:if>
 		
   		<g:if test="${grailsApplication.config.annoData.Genes == 'y'}">
   			<g:if test = "${grailsApplication.config.i.links.genes == 'public'}">
-  				<tr><td><g:link controller="search" action="gene_search">${GDB.GeneInfo.count()} genes</g:link></td><td>The latest set of genes.</td></tr>
+  				<tr><td><g:link controller="search" action="gene_search">${printf("%,d\n",GDB.GeneInfo.count())} genes</g:link></td><td>The latest set of genes.</td></tr>
   			</g:if>
   			<g:else>
   				<sec:ifLoggedIn>
-  	  				<tr><td><g:link controller="search" action="gene_search">${GDB.GeneInfo.count()} genes</g:link></td><td>The latest set of genes.</td></tr>
+  	  				<tr><td><g:link controller="search" action="gene_search">${printf("%,d\n",GDB.GeneInfo.count())} genes</g:link></td><td>The latest set of genes.</td></tr>
 				</sec:ifLoggedIn>
 			</g:else>
 		</g:if>
 		
   		<g:if test="${grailsApplication.config.seqData.Genome}">
   			<g:if test = "${grailsApplication.config.i.links.genome == 'public'}">
-  				<tr><td><g:link controller="search" action="genome_search">${GDB.GenomeInfo.count()} contigs/scaffolds</g:link></td><td>The latest genome.</td></tr>
+  				<tr><td><g:link controller="search" action="genome_search">${printf("%,d\n",GDB.GenomeInfo.count())} contigs/scaffolds</g:link></td><td>The latest genome.</td></tr>
   			</g:if>
   			<g:else>
   				<sec:ifLoggedIn>
-  	  				<tr><td><g:link controller="search" action="genome_search">${GDB.GenomeInfo.count()} contigs/scaffolds</g:link></td><td>The latest genome.</td></tr>
+  	  				<tr><td><g:link controller="search" action="genome_search">${printf("%,d\n",GDB.GenomeInfo.count())} contigs/scaffolds</g:link></td><td>The latest genome.</td></tr>
 				</sec:ifLoggedIn>
 			</g:else>
 		</g:if>

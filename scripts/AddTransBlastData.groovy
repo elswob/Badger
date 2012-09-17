@@ -83,7 +83,7 @@ def addTransBlast(db,blastFile){
             	def scoreInt = annoMap.score as Integer
             	if (scoreInt >= 100){
             		count_all++
-            		if ((count_all % 100) ==  0){
+            		if ((count_all % 1000) ==  0){
             			println count_all
             			//println annoMap
             			new TransBlast(annoMap).save(flush:true)

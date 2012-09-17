@@ -166,7 +166,7 @@ def addGeneData(){
 					nucData."${geneId}" = sequence
 					sequence=""
 				}
-				geneId = matcher[0][1]
+				geneId = matcher[0][1].trim()
 			}else{
 				sequence += it
 			}               
@@ -183,7 +183,7 @@ def addGeneData(){
 					pepData."${geneId}" = sequence
 					sequence=""
 				}
-				geneId = matcher[0][1] 
+				geneId = matcher[0][1].trim() 
 			}else{
 				sequence += it
 			}
@@ -203,7 +203,7 @@ def addGeneData(){
               //println "ignoring "+it
             }else{
               def dataArray = it.split("\t")
-              geneData."${dataArray[0]}" = [dataArray[1],dataArray[2],dataArray[3],dataArray[4],dataArray[5]]
+              geneData."${dataArray[0].trim()}" = [dataArray[1],dataArray[2],dataArray[3],dataArray[4],dataArray[5]]
             }
         }
       	//println geneData
@@ -219,6 +219,7 @@ def addGeneData(){
           geneMap.pep = pepData."${gene.key}"
           if ((count % 1000) ==  0){
             println "Added "+count
+            //println geneMap
             new GeneInfo(geneMap).save(flush:true)
           }else{
             new GeneInfo(geneMap).save()
