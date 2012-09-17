@@ -152,7 +152,7 @@
     <table>
       <tr>
         <td><b>Length:</b> ${printf("%,d\n",info_results.sequence[0].length())}</td>
-        <g:if test = "${grailsApplication.config.coverage.Transcriptome == 'public'}">
+        <g:if test = "${grailsApplication.config.coverage.Transcriptome == 'y'}">
         	<td><b>Coverage: </b> ${info_results.coverage[0]}</td>
         </g:if>
         <td><b>GC: </b> ${sprintf("%.2f",info_results.gc[0])}</td>
