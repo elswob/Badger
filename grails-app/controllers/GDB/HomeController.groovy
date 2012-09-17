@@ -12,6 +12,8 @@ class HomeController {
  	 def newsData = News.findAll(sort:"dateString",order:"desc")
  	 return [newsData: newsData] 	 
  }
+ def browse = {
+ }
  def news = {
  	 def newsData = News.findAll(sort:"dateString",order:"desc")
  	 return [newsData: newsData, highlight: params.newsTitle]

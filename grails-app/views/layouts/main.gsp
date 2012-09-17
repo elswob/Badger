@@ -62,8 +62,10 @@
 		<g:if test = "${grailsApplication.config.i.links.download == 'public'}">
 			<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link></li> 
 		</g:if>
-		<g:if test = "${grailsApplication.config.i.links.genome == 'public'}">
-			<li><a href="${grailsApplication.config.g.link}" target='_blank'>Browse </a></li> 
+		<g:if test = "${grailsApplication.config.i.links.browse == 'public'}">
+			<g:if test ="${grailsApplication.config.g.link}">
+				<li><g:link controller="home" action="browse" class="${pageProperty(name:'page.browse')}">Browse</g:link></li>
+			</g:if>
 		</g:if>
 		
 		<% //add public external links to navigation bar 
@@ -96,7 +98,10 @@
 		<li><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link>
 		<li><g:link controller="home" action="members" class="${pageProperty(name:'page.members')}">Members</g:link>
 		<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link>
-		<li><a href="${grailsApplication.config.g.link}" target='_blank'>Browse </a>
+		<g:if test = "${grailsApplication.config.g.link}">
+			<li><g:link controller="home" action="browse" class="${pageProperty(name:'page.browse')}">Browse</g:link></li>
+		</g:if>
+		<!--li><a href="${grailsApplication.config.g.link}" target='_blank'>Browse </a></li--> 
 		
 		<% //add public and private external links to navigation bar 
 		if (grailsApplication.config.e.links.pub){

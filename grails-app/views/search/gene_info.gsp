@@ -308,7 +308,7 @@
      <g:if test = "${grailsApplication.config.g.link}"> 
          <a name="browse_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>  
 		 <h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.gene_id[0]}" target='_blank'>(go to genome browser)</a>:</h1>
-		 <iframe src="${grailsApplication.config.g.link}?name=${info_results.gene_id[0]}" width="100%" height="500">
+		 <iframe src="${grailsApplication.config.g.link}?name=${info_results.gene_id[0]}" width="100%" height="1000" frameborder="0">
 			<img src="${grailsApplication.config.g.link}?name=${info_results.gene_id[0]}"/>
 		 </iframe>
       </g:if>
