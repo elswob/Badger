@@ -78,7 +78,7 @@ def addTransData(){
 addGenomeData()
 def addGenomeData(){
 		if (grailsApplication.config.seqData.Genome){
-		println "Adding transcript data - "+grailsApplication.config.seqData.Genome
+		println "Adding genome data - "+grailsApplication.config.seqData.Genome
 		def contigFile = new File("data/"+grailsApplication.config.seqData.Genome.trim()).text
 		def cov_check = false
       	def header_regex

@@ -27,5 +27,6 @@ class Publication {
         abstractText type: "text"
         title type: "text"
         authors type: "text"
+        journal type: "text"
     }
 }
