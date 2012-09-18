@@ -123,7 +123,7 @@ def addGenomeData(){
             		}			
 					sequence=""
 				}
-				contig_id = matcher[0][1]
+				contig_id = matcher[0][1].trim()
 				if (cov_check == true){
 					coverage = matcher[0][2].toFloat()
 				}else{

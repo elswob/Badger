@@ -27,7 +27,9 @@ def getData(){
 
 def addFunc(source,file){
     def annoMap = [:]
+    def count=0
     file.eachLine { line ->
+      		count++
     	    splitter = line.split("\t")
     	    annoMap.gene_id = splitter[0]
     	    annoMap.anno_db = source
@@ -37,12 +39,19 @@ def addFunc(source,file){
     	    def score = splitter[5] as double
     	    annoMap.score = score
     	    annoMap.descr = splitter[6]
-    	    new TransAnno(annoMap).save()
+    	    if ((count % 1000) ==  0){
+            	println count
+            	new GeneAnno(annoMap).save(flush:true)
+            }else{
+            	new GeneAnno(annoMap).save()
+            }	
+    	    //new GeneAnno(annoMap).save()
     }
 }
 
 // add the interposcan raw data 
 def addInterProScan(file){
+  	def count=0
 	// get the ipr descriptions
 	def iprMap = [:]
 	iprFile = new File('data/entry.list').text 
@@ -53,9 +62,10 @@ def addInterProScan(file){
 	}
     def annoMap = [:]
     file.eachLine { line ->
+      		count++
     	    splitter = line.split("\t")
     	    if (splitter[11] != 'NULL'){
-				if ((matcher = splitter[0] =~ /(.*?)_\d+_ORF\d.*/)){
+				if ((matcher = splitter[0] =~ /(.*)/)){
 					annoMap.gene_id = matcher[0][1]
 				}
 				annoMap.anno_db = splitter[3]
@@ -65,15 +75,20 @@ def addInterProScan(file){
 				annoMap.anno_start = start
 				annoMap.anno_stop = stop
 				//println "score = "+splitter[8]
-				def score = splitter[8] as double
-				//def score = splitter[8]
+				//def score = splitter[8] as double
+				def score = splitter[8] as float
 				//println "score2 = "+score
-				annoMap.score = splitter[8]
-				//annoMap.score = splitter[8] as float
+				//annoMap.score = splitter[8]
+				annoMap.score = score
 				annoMap.descr = iprMap[splitter[11]]
-				//println annoMap
 				if (score < 1e-5){
-					new GeneAnno(annoMap).save()
+                  	if ((count % 1000) ==  0){
+            			println count
+                      	println annoMap
+						new GeneAnno(annoMap).save(flush:true)
+                    }else{
+                      	new GeneAnno(annoMap).save()
+                    }
 				}
 		  }
     }

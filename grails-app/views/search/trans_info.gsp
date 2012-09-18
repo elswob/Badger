@@ -74,7 +74,10 @@
 	fun_data = ${funjsonData};
     
     $(document).ready(function() {
-
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$('[name="'+this.hash.substring(1)+'"]').offset().top}, 500);
+		});
     	if (blast_data.length > 0){
 			$('#blast_table_data').dataTable({
 				"sPaginationType": "full_numbers",
@@ -164,17 +167,17 @@
 		<div class="footer" role="contentinfo">
 			<div class="nav_float">
 				<ul>
-				   <li><a href="#info_anchor">Info</a></li>
-				   <li><a href="#anno_anchor">Annotations</a></li>
-				   <li><a href="#files_anchor">Sequence data</a></li>
+				   <li><a href="#info_anchor" class="scroll">Info</a></li>
+				   <li><a href="#anno_anchor" class="scroll">Annotations</a></li>
+				   <li><a href="#files_anchor" class="scroll">Sequence data</a></li>
 				   <g:if test="${blast_results}">
-					   <li><a href="#blast_anchor">BLAST</a></li>
+					   <li><a href="#blast_anchor" class="scroll">BLAST</a></li>
 				   </g:if>
 				   <g:if test="${fun_results}">
-					   <li><a href="#fun_anchor">Functional</a></li>
+					   <li><a href="#fun_anchor" class="scroll">Functional</a></li>
 				   </g:if>
 				   <g:if test="${ipr_results}">
-					   <li><a href="#ipr_anchor">InterPro</a></li>
+					   <li><a href="#ipr_anchor" class="scroll">InterPro</a></li>
 				   </g:if>
 				</ul>
 			</div>

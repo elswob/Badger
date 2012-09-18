@@ -167,9 +167,9 @@ class BlastController {
 						 //split blast result by new lines
 						blastOut.split("\n").each{  
 							//create internal links markers
-							if ((matcher = it =~ /^\s{2}(\w+).*?\s+(.*?)\s{4}(\d{1}[e\.].*?)$/)){
+							if ((matcher = it =~ /^\s{2}(.*?)(\s+.*?\s{4}(\d{1}[e\.].*?)$)/)){
 								def linker = matcher[0][1]
-								it = it.replaceAll(/$linker/,"<a href=\"#$linker\">$linker</a>")
+								it = "<a href=\"#$linker\">$linker</a>"+"  "+matcher[0][2]
 							}
 							//get the query length
 							if ((matcher = it =~ /^Length=(.*)/)){
@@ -177,7 +177,7 @@ class BlastController {
 									queryInfo.add(matcher[0][1])
 								}
 							 }
-							if ((matcher = it =~ /^>\s(\w+)/)){
+							if ((matcher = it =~ /^>\s(.*)/)){
 								//add name attribute to alignment for anchor
 								def linker = matcher[0][1]
 								it = it.replaceAll(/>/,"<a name=\"$linker\">></a>")                       

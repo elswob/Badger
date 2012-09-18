@@ -73,6 +73,10 @@
 	fun_data = ${funjsonData};
     
     $(document).ready(function() {
+    	$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$('[name="'+this.hash.substring(1)+'"]').offset().top}, 500);
+		});
 
     	if (blast_data.length > 0){
 			$('#blast_table_data').dataTable({
@@ -159,7 +163,7 @@
         <td><b>Download</b></td>
       </tr>
       <tr>
-        <td><g:link action="genome_info" params="${[contig_id: info_results.contig_id[0]]}">${info_results.contig_id[0]}</g:link></td>
+        <td><g:link action="genome_info" params="${[contig_id: info_results.contig_id[0].trim()]}">${info_results.contig_id[0]}</g:link></td>
         <td>${info_results.pep[0].length()}</td>
         <td>${info_results.intron[0]}</td>
         <td>${info_results.source[0]}</td>
@@ -188,20 +192,20 @@
 		<div class="footer" role="contentinfo">
 			<div class="nav_float">
 			<ul>
-			   <li><a href="#info_anchor">Info</a></li>
-			   <li><a href="#anno_anchor">Annotations</a></li>
+			   <li><a href="#info_anchor" class="scroll">Info</a></li>
+			   <li><a href="#anno_anchor" class="scroll">Annotations</a></li>
 			   <g:if test = "${grailsApplication.config.g.link}"> 
-					<li><a href="#browse_anchor">Browse</a></li>
+					<li><a href="#browse_anchor" class="scroll">Browse</a></li>
 			   </g:if>
-			   <li><a href="#files_anchor">Sequence data</a></li>
+			   <li><a href="#files_anchor" class="scroll">Sequence data</a></li>
 			   <g:if test="${blast_results}">
-				   <li><a href="#blast_anchor">BLAST</a></li>
+				   <li><a href="#blast_anchor" class="scroll">BLAST</a></li>
 			   </g:if>
 			   <g:if test="${fun_results}">
-				   <li><a href="#fun_anchor">Functional</a></li>
+				   <li><a href="#fun_anchor" class="scroll">Functional</a></li>
 			   </g:if>
 			   <g:if test="${ipr_results}">
-				   <li><a href="#ipr_anchor">InterPro</a></li>
+				   <li><a href="#ipr_anchor" class="scroll">InterPro</a></li>
 			   </g:if>
 			</ul>
 			</div>
@@ -305,13 +309,16 @@
 		
 		  </div>
       </g:if>
+      
      <g:if test = "${grailsApplication.config.g.link}"> 
-         <a name="browse_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>  
-		 <h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.gene_id[0]}" target='_blank'>(go to genome browser)</a>:</h1>
-		 <iframe src="${grailsApplication.config.g.link}?name=${info_results.gene_id[0]}" width="100%" height="1000" frameborder="0">
-			<img src="${grailsApplication.config.g.link}?name=${info_results.gene_id[0]}"/>
-		 </iframe>
-      </g:if>
+     	<a name="browse_anchor"><div></a>
+         	<hr size = 5 color="green" width="100%" style="margin-top:10px">
+		 	<h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
+		 	<iframe src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" width="100%" height="700" frameborder="0">
+				<img src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}"/>
+		 	</iframe>
+		 </div>
+     </g:if>
       <a name="files_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
       <h1>FASTA files</h1>
       <div style="overflow:auto; max-height:200px;">

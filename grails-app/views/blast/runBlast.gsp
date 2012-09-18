@@ -105,7 +105,7 @@
 					<input align="right" type="submit" value="Download BLAST result" class="mybuttons"/>
 		  </g:form>
 		  </td>
-		  <% if (blast_file == 'Genome' || blast_file == 'Transcriptome'){ %>
+		  <% if (blast_file == 'Genome' || blast_file == 'Transcriptome' || blast_file == 'Genes'){ %>
 			<td>
 				<g:form name="blastDownload" url="[controller:'FileDownload', action:'blast_contig_download']">
 					<g:hiddenField name="fileId" value=""/>
@@ -127,7 +127,7 @@ ${line}<br>
       </div>
     </g:if>
   <g:else test="${term}">
-    <h1>Your BLAST of <em>${term}</em> produced no results</h1>
+    <h1>Your BLAST of produced no results</h1>
     <p>Perhaps you used the wrong BLAST program, please go <g:link controller="blast">back</g:link> and try again.</p>  
   </g:else>
   </body>

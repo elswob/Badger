@@ -31,10 +31,34 @@
 </head>
 <body>
   <div id="content">
-  <br>
      <h1>Search all the data by keyword:</h1>
-
-    <p>Keyword search will find related terms, for example searching for 'tolerate' will also match 'tolerance'.</p>
+	<table>
+  	    <tr><td><g:link controller="home" action="publications">${printf("%,d\n",GDB.Publication.count())} publications</g:link></td><td>The title and abstract of publications matching the term <i>${grailsApplication.config.species}</i>.</td></tr>
+		<g:if test="${grailsApplication.config.annoData.Transcripts == 'y'}">
+			<g:if test = "${grailsApplication.config.i.links.trans == 'public'}">			
+				<tr><td><g:link controller="search" action="trans_search">${printf("%,d\n",GDB.TransInfo.count())} transcripts</g:link></td><td>The description of the current transcriptome annotations.</td></tr>
+			</g:if>
+			<g:else>
+				<sec:ifLoggedIn>
+					<tr><td><g:link controller="search" action="trans_search">${printf("%,d\n",GDB.TransInfo.count())} transcripts</g:link></td><td>The description of the current transcriptome annotations.</td></tr>
+				</sec:ifLoggedIn>
+			</g:else>	
+		</g:if>
+		
+  		<g:if test="${grailsApplication.config.annoData.Genes == 'y'}">
+  			<g:if test = "${grailsApplication.config.i.links.genes == 'public'}">
+  				<tr><td><g:link controller="search" action="gene_search">${printf("%,d\n",GDB.GeneInfo.count())} genes</g:link></td><td>The descriptions from the latest set of genes annotations.</td></tr>
+  			</g:if>
+  			<g:else>
+  				<sec:ifLoggedIn>
+  	  				<tr><td><g:link controller="search" action="gene_search">${printf("%,d\n",GDB.GeneInfo.count())} genes</g:link></td><td>The descriptions from the latest set of genes annotations.</td></tr>
+				</sec:ifLoggedIn>
+			</g:else>
+		</g:if>
+  	</td></tr>
+  </table>
+	<br>
+    <p>Keyword search will find related terms, for example searching for 'tolerate' will also match 'tolerance'.</p><br>
     <p>Query text can contain the Boolean operators & (and), | (or) and ! (not), e.g. 'atpase & zinc', '!metal', 'atpase & zinc | !metal'    </p>
     <g:form action="all_searched">
     <table>

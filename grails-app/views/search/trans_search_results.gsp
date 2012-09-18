@@ -87,7 +87,7 @@
 				},
 				{ "mDataProp": "contig_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"trans_info?contig_id="+oObj.aData["contig_id"]+ "\"target='_blank'>"+sVal+"</a>";
+					return "<a href=\"trans_info?contig_id="+oObj.aData["contig_id"]+ "\">"+sVal+"</a>";
 				}},
 				{ "mDataProp": "anno_db" },
 				{ "mDataProp": "anno_id" },
@@ -154,7 +154,7 @@
         "aoColumns": [
           	{ "mDataProp": "contig_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"trans_info?contig_id="+oObj.aData["contig_id"]+ "\"target='_blank'>"+sVal+"</a>";
+					return "<a href=\"trans_info?contig_id="+oObj.aData["contig_id"]+ "\">"+sVal+"</a>";
 			}},
             { "mDataProp": "anno_db" },
             { "mDataProp": "anno_id" },
@@ -181,7 +181,7 @@
 			"aoColumns": [
 				{ "mDataProp": "contig_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"trans_info?contig_id="+oObj.aData["contig_id"]+ "\"target='_blank'>"+sVal+"</a>";
+					return "<a href=\"trans_info?contig_id="+oObj.aData["contig_id"]+ "\">"+sVal+"</a>";
 				}},
 				{ "mDataProp": "anno_db" },
 				{ "mDataProp": "anno_id" ,
