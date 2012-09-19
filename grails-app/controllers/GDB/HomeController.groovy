@@ -214,7 +214,7 @@ class HomeController {
 			 pubLocations.each {
 				 if (it.value.size() >0){
 					 dataSplit = it.value.split(",")
-					 pubDownloadFiles."${it.key}" = [dataSplit[0].trim(),dataSplit[1].trim()]
+					 pubDownloadFiles."${it.key}" = [dataSplit[0].trim(),dataSplit[1].trim(),dataSplit[2].trim()]
 				}
 			}
 		}
@@ -223,7 +223,7 @@ class HomeController {
 			 privLocations.each {
 				 if (it.value.size() >0){
 					 dataSplit = it.value.split(",")
-					 privDownloadFiles."${it.key}" = [dataSplit[0].trim(),dataSplit[1].trim()] 
+					 privDownloadFiles."${it.key}" = [dataSplit[0].trim(),dataSplit[1].trim(), dataSplit[2].trim()] 
 				}
 			}
 		}

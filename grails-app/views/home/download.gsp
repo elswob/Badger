@@ -13,15 +13,15 @@
     <sec:ifLoggedIn>
     	<g:each var="res" in="${privDownloadFiles}">
     		<tr>
-    			<td>Private</td><td>${res.key}</td><td>${res.value[1]}</td>
-    			<td><g:link controller="FileDownload" action="zip_download" params="${[fileName: res.value[0]]}">${res.value[0]}</g:link></td>
+    			<td>Private</td><td>${res.value[0]}</td><td>${res.value[2]}</td>
+    			<td><g:link controller="FileDownload" action="zip_download" params="${[fileName: res.value[1]]}">${res.value[1]}</g:link></td>
     		</tr>
     	</g:each>
     </sec:ifLoggedIn>
     <g:each var="res" in="${pubDownloadFiles}">
     	<tr>
-    		<td>Public</td><td>${res.key}</td><td>${res.value[1]}</td>
-    		<td><g:link controller="FileDownload" action="zip_download" params="${[fileName: res.value[0]]}">${res.value[0]}</g:link></td>
+    		<td>Public</td><td>${res.value[0]}</td><td>${res.value[2]}</td>
+    		<td><g:link controller="FileDownload" action="zip_download" params="${[fileName: res.value[1]]}">${res.value[1]}</g:link></td>
     	</tr>
     </g:each>
     </table>

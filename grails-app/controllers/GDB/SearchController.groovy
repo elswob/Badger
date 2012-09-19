@@ -220,8 +220,7 @@ class SearchController {
 			}
 		  }
 		}
-    
-     
+         
     def gene_search_results = {
         if (grailsApplication.config.i.links.genes == 'private' && !isLoggedIn()) {
      		redirect(controller: "home", action: "index")
@@ -236,7 +235,15 @@ class SearchController {
 			def annoType = params.toggler
 			println "annoType = "+annoType
 			def annoDB
+			def annoLinks = [:]
 			if (annoType == '1'){
+				for(item in grailsApplication.config.g.blast){
+					item = item.toString()
+     	 			def splitter = item.split("=")
+     	 			def splitter2 = splitter[1].split(",")
+     	 			annoLinks."${splitter[0]}" = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]
+     	 			
+     	 		}
 				whatSearch = params.tableSelect_1
 				annoDB = params.blastAnno
 				//choose what to search			
@@ -245,6 +252,12 @@ class SearchController {
 				if (whatSearch == 'e.g. contig_1'){whatSearch = 'contig_id = '}
 			}
 			if (annoType == '2'){
+				for(item in grailsApplication.config.g.fun){
+					item = item.toString()
+     	 			def splitter = item.split("=")
+     	 			def splitter2 = splitter[1].split(",")
+     	 			annoLinks."${splitter[0]}" = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]    	 			
+     	 		}
 				whatSearch = params.tableSelect_2
 				annoDB = params.funAnno
 				//choose what to search			
@@ -253,6 +266,9 @@ class SearchController {
 				if (whatSearch == 'e.g. contig_1'){whatSearch = 'contig_id = '}
 			}
 			if (annoType == '3'){
+     	 		def splitter2 = grailsApplication.config.g.IPR.split(",")
+     	 		annoLinks.IPR = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]
+     	 		     	 			
 				whatSearch = params.tableSelect_3
 				annoDB = params.iprAnno
 				//choose what to search			
@@ -260,6 +276,7 @@ class SearchController {
 				if (whatSearch == 'e.g. IPR023298 or PF01813'){whatSearch = 'anno_id ~* '}
 				if (whatSearch == 'e.g. contig_1'){whatSearch = 'contig_id = '}
 			}
+			println "Anno links =  "+annoLinks
 			println "annoDB = "+annoDB
 			//construct the anno_db search string			
 			//if just one db is passed then the list becomes a string
@@ -311,7 +328,7 @@ class SearchController {
 				}
 				def timeStop = new Date()
 				def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
-				return [results: results, term : searchId , search_time: duration, uniques:uniques.size(),sql:sqlsearch, annoType: annoType]         
+				return [results: results, term : searchId , search_time: duration, uniques:uniques.size(),sql:sqlsearch, annoType: annoType, annoLinks: annoLinks]         
 			}
 		}
       }

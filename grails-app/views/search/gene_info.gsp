@@ -164,11 +164,11 @@
       </tr>
       <tr>
         <td><g:link action="genome_info" params="${[contig_id: info_results.contig_id[0].trim()]}">${info_results.contig_id[0]}</g:link></td>
-        <td>${info_results.pep[0].length()}</td>
+        <td>${printf("%,d\n",info_results.pep[0].length())}</td>
         <td>${info_results.intron[0]}</td>
         <td>${info_results.source[0]}</td>
-        <td>${info_results.start[0]}</td>
-        <td>${info_results.stop[0]}</td>
+        <td>${printf("%,d\n",info_results.start[0])}</td>
+        <td>${printf("%,d\n",info_results.stop[0])}</td>
         <td>
         	<div class="inline">
         	<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
@@ -454,7 +454,6 @@
 			<td><a name="${res.anno_id}">${res.anno_db}</td>
 			<%
 			res.anno_id = res.anno_id.replaceAll(/(^IPR\d+)/, "<a href=\"http://www.ebi.ac.uk/interpro/IEntry?ac=\$1\" target=\'_blank\'>\$1</a>")
-			res.anno_id = res.anno_id.replaceAll(/(^GO:\d+)/, "<a href=\"http://www.ebi.ac.uk/QuickGO/GTerm?id=\$1\" target=\'_blank\'>\$1</a>")
 			%>
 			<td>${res.anno_id}</td>
 			<td>${res.descr}</td>

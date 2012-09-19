@@ -6,23 +6,24 @@ def grailsApplication
 
 getBlastData()
 def getBlastData(){
-	if (grailsApplication.config.g.blast.size()>0){
+	if (grailsApplication.config.g.blast.size()>0){		
 		for(item in grailsApplication.config.g.blast){
 			item = item.toString()
      	 	def splitter = item.split("=")
-     	 	println "Adding "+splitter[0]+" - "+splitter[1]
-     	 	inFile = new File('data/'+splitter[1].trim()).text
+     	 	def splitter2 = splitter[1].split(",")
+     	 	println "Adding "+splitter[0]+" - "+splitter2[0]
+     	 	inFile = new File('data/'+splitter2[0].trim()).text
      	 	addGeneBlast(splitter[0].trim(),inFile)
      	 }
     }
 }
-
 
 //add Unigene annotations
 def addGeneBlast(db,blastFile){
     def annoMap = [:]
     def count_check = 0
     def count_all = 0
+    def anno_id
     annoMap.anno_db = db
     blastFile.eachLine { line ->		
         if ((matcher = line =~ /<Iteration_query-def>(.*?)<\/Iteration_query-def>/)){
@@ -33,10 +34,23 @@ def addGeneBlast(db,blastFile){
                 count_check++
         }
         if ((matcher = line =~ /<Hit_id>(.*?)<\/Hit_id>/)){
-                annoMap.anno_id = matcher[0][1]
+        		annoMap.anno_id = matcher[0][1]
+        		//catch the stupid BL_ORD_ID hitIDs
+        		if ((matcher = line =~ /<Hit_id>.*?BL_ORD_ID.*<\/Hit_id>/)){
+        			anno_id = "wrong"
+        		}else{            	
+	               	anno_id = "right"
+                }
         }
         if ((matcher = line =~ /<Hit_def>(.*?)<\/Hit_def>/)){
-                annoMap.descr = matcher[0][1]
+        		annoMap.descr = matcher[0][1]
+        		if (anno_id == "wrong"){
+        			if ((matcher = line =~ /<Hit_def>(.*?)\s(.*?)<\/Hit_def>/)){
+        				annoMap.anno_id = matcher[0][1]
+        			}else{
+        				annoMap.anno_id = "n/a"
+        			}
+        		}                
         }
         //get HSP info
         if ((matcher = line =~ /<Hsp_score>(.*?)<\/Hsp_score>/)){
