@@ -246,7 +246,7 @@ class SearchController {
 			}
 			if (annoType == '2'){
 				whatSearch = params.tableSelect_2
-				annoDB = params.a8rAnno
+				annoDB = params.funAnno
 				//choose what to search			
 				if (whatSearch == 'e.g. Calcium-transportingATPase'){whatSearch = 'descr ~* '}
 				if (whatSearch == 'e.g. GO:0008094 or 3.6.3.8 or K02147'){whatSearch = 'anno_id ~* '}
@@ -415,9 +415,11 @@ class SearchController {
        	if (grailsApplication.config.i.links.genome == 'private' && !isLoggedIn()) {
      		redirect(controller: "home", action: "index")
      	}else{
+     		def gene_results = GeneInfo.findAllByContig_id(params.contig_id)
+     		println "gene_results = "+gene_results
+     		println "contig_id ="+params.contig_id+"test"
 			def info_results = GenomeInfo.findAllByContig_id(params.contig_id)
-			def nuc_fasta = ">"+info_results.contig_id[0]+"\n"+info_results.sequence[0]+"\n"
-			return [ info_results: info_results, nuc_fasta: nuc_fasta]
+			return [ info_results: info_results, gene_results: gene_results]
 		}
     }
 }

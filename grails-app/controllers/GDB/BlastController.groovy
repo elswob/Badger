@@ -228,7 +228,7 @@ class BlastController {
 							
 						}else if (newId != ""){
 							singleHit.id = newId
-							println "singleHit = "+singleHit
+							//println "singleHit = "+singleHit
 						}
 						
 						if (singleHit.size() > 0){

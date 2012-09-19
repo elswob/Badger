@@ -36,6 +36,19 @@
             this.drawScoreBar(interval*9,interval*10,height,'blue','','1e-5 - 1e-20');
             this.drawScoreBar(interval*10,interval*11,height,'black','','1 - 1e-5');
         };
+    	BioDrawing.prototype.drawBlastScale = function(length) {
+            var base, interval, xPos;
+            this.pixelsPerBase = this.drawingWidth / length;
+            var height = 9
+            interval = length/5;
+            //blast and functional
+            this.drawScoreId(0,interval*5,12,'BLAST bit scores'); 
+            this.drawScoreBar(0,interval,height,'red','','>=200');           
+            this.drawScoreBar(interval,interval*2,height,'magenta','','80-200');
+            this.drawScoreBar(interval*2,interval*3,height,'lime','','50-80');
+            this.drawScoreBar(interval*3,interval*4,height,'blue','','40-50');
+            this.drawScoreBar(interval*4,interval*5,height,'black','','<40');
+        };
         BioDrawing.prototype.drawScale = function(length) {
             var base, interval, xPos;
             this.pixelsPerBase = this.drawingWidth / length;

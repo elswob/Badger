@@ -172,14 +172,14 @@
         <td>
         	<div class="inline">
         	<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-		    	<g:hiddenField name="fileId" value="${info_results.gene_id[0]}"/>
+		    	<g:hiddenField name="nucFileId" value="${info_results.gene_id[0]}"/>
 		    	<g:hiddenField name="fileName" value="${info_results.gene_id[0]}"/>
 		    	<g:hiddenField name="seq" value="Nucleotides"/>
 		    	<a href="#" onclick="document.nucfileDownload.submit()">Nucleotides</a>
 		    </g:form> 
 		    |
 		    <g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-		    	<g:hiddenField name="fileId" value="${info_results.gene_id[0]}"/>
+		    	<g:hiddenField name="pepFileId" value="${info_results.gene_id[0]}"/>
 		    	<g:hiddenField name="fileName" value="${info_results.gene_id[0]}"/>
 		    	<g:hiddenField name="seq" value="Peptides"/>
 		    	<a href="#" onclick="document.pepfileDownload.submit()">Peptides</a>
@@ -287,8 +287,9 @@
 						 var hitColour = drawing.getBLASTColour(score,type);
 						 var blastRect = drawing.drawBar(start, stop, 7, hitColour, hit.anno_db + ": " + hit.anno_id + "\n" + hit.descr, '');
 						 blastRect.click(function(id){
-								 return function(){ location.href='#'+id;}
+						 		 return function(){ location.href='#'+id;}
 								 }(hit.anno_id));
+								 //.addClass("scroll")
 						 blastRect.hover(
 							 function(event) {
 								this.attr({stroke: 'black', 'stroke-width' : '2'});

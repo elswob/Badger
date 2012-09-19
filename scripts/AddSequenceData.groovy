@@ -106,7 +106,7 @@ def addGenomeData(){
 					def gc = (count_gc/sequence.length())*100
 					gc = sprintf("%.2f",gc)
 					//add data to map
-					contigMap.contig_id = contig_id
+					contigMap.contig_id = contig_id.trim()
 					contigMap.gc = gc
 					if (cov_check == true){
 						coverage = sprintf("%.2f",coverage)
@@ -123,7 +123,7 @@ def addGenomeData(){
             		}			
 					sequence=""
 				}
-				contig_id = matcher[0][1].trim()
+				contig_id = matcher[0][1]
 				if (cov_check == true){
 					coverage = matcher[0][2].toFloat()
 				}else{
@@ -203,7 +203,7 @@ def addGeneData(){
               //println "ignoring "+it
             }else{
               def dataArray = it.split("\t")
-              geneData."${dataArray[0].trim()}" = [dataArray[1],dataArray[2],dataArray[3],dataArray[4],dataArray[5]]
+              geneData."${dataArray[0].trim()}" = [dataArray[1].trim(),dataArray[2].trim(),dataArray[3].trim(),dataArray[4].trim(),dataArray[5].trim()]
             }
         }
       	//println geneData

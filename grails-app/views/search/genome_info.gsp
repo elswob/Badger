@@ -11,7 +11,60 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${grailsApplication.config.projectID} genome detail</title>
     <parameter name="search" value="selected"></parameter>
+    <script src="${resource(dir: 'js', file: 'DataTables-1.9.0/media/js/jquery.js')}" type="text/javascript"></script> 
+    <script src="${resource(dir: 'js', file: 'DataTables-1.9.0/media/js/jquery.dataTables.js')}" type="text/javascript"></script>
+    <script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/TableTools.js')}" type="text/javascript"></script>
+    <script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/ZeroClipboard.js')}" type="text/javascript"></script>
+    <style type="text/css">
+            @import "${resource(dir: 'js', file: 'DataTables-1.9.0/media/css/demo_page.css')}";
+            @import "${resource(dir: 'js', file: 'DataTables-1.9.0/media/css/demo_table.css')}";
+            @import "${resource(dir: 'js', file: 'TableTools-2.0.2/media/css/TableTools.css')}";
+    </style>
+    <script>
+    function get_table_data(fileId){
+    	var table_scrape = [];
+    	var rowNum
+    	var regex
+	    var oTableData = document.getElementById('gene_table_data');
+	    //gets table
+	    var rowLength = oTableData.rows.length;
+	    //gets rows of table
+	    for (i = 0; i < rowLength; i++){
+	    //loops through rows
+	       var oCells = oTableData.rows.item(i).cells;
+	       var cellVal = oCells.item(rowNum).innerHTML;
+	       //alert(cellVal)
+	       var matcher = cellVal.match(/.*?gene_id=(.*?)">.*/);
+	       if (matcher){
+	       	  	table_scrape.push(matcher[1])
+	    	}
+	    }
+	    document.getElementById(fileId).value=table_scrape;
+	    //alert(table_scrape)
+    }
+    </script>
+  <script>
+  $(document).ready(function() {
+	$('#gene_table_data').dataTable({
+		"sPaginationType": "full_numbers",
+		"iDisplayLength": 10,
+		"oLanguage": {
+			"sSearch": "Filter records:"
+		},
+		"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+		"aaSorting": [[3, "asc" ]],
+		"sDom": 'T<"clear">lfrtip',
+		"oTableTools": {
+			"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+		}
+	});     
+   });
+   </script>
+  
   </head>
+  
+  
+  
   <body>
     <g:if test="${info_results}">
     <h1>Information for <b>${info_results.contig_id[0]}</b>:</h1>
@@ -39,6 +92,54 @@
 	  </td>
 	  </tr>
     </table>
+    
+    	<g:if test="${gene_results}">
+    	<div class="inline">
+    	 <h1>Genes on <b>${info_results.contig_id[0]}</b>:</h1>
+			<!-- download genes form gets fileName value from get_table_data() -->		    		
+			 <div style="right:0px;">
+				 &nbsp;&nbsp;(Download gene sequences:
+					<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+					<g:hiddenField name="nucFileId" value=""/>
+					<g:hiddenField name="fileName" value="${info_results.contig_id[0]}.genes"/>
+					<g:hiddenField name="seq" value="Nucleotides"/>
+					<a href="#" onclick="get_table_data('nucFileId');document.nucfileDownload.submit()">Nucleotides</a>
+				</g:form> 
+				|
+				<g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+					<g:hiddenField name="pepFileId" value=""/>
+					<g:hiddenField name="fileName" value="${info_results.contig_id[0]}.genes"/>
+					<g:hiddenField name="seq" value="Peptides"/>
+					<a href="#" onclick="get_table_data('pepFileId');document.pepfileDownload.submit()">Peptides</a>
+				</g:form>
+				)	 
+			</div>   	
+		 </div>	
+		    		
+    		<table id="gene_table_data" class="display">
+			  <thead>
+			  	<tr>
+					<th><b>Gene ID</b></th>
+					<th><b>Length</b></th>
+					<th><b>Introns</b></th>
+					<th><b>Start</b></th>
+					<th><b>Stop</b></th>
+			   </tr>
+			  </thead>
+			  <tbody>
+			 	<g:each var="res" in="${gene_results}">
+			 		<tr>
+						<td><a href="gene_info?gene_id=${res.gene_id}">${res.gene_id}</a></td>
+						<td>${res.pep.length()}</td>
+						<td>${res.intron}</td>
+						<td>${res.start}</td>
+						<td>${res.stop}</td>
+			  		</tr>  
+			 	</g:each>
+			  </tbody>
+			</table>			
+    	</g:if>    	
+    	<br>
 		<g:if test = "${grailsApplication.config.g.link}"> 
 			<h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}" target='_blank'>(go to genome browser)</a>:</h1>
 			 <iframe src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}" width="100%" height="700" frameborder="0">

@@ -52,7 +52,7 @@
 	    //loops through rows
 	       var oCells = oTableData.rows.item(i).cells;
 	       var cellVal = oCells.item(rowNum).innerHTML;
-	       var matcher = cellVal.match(/.*?contig_id=(.*?)"\starget.*/);
+	       var matcher = cellVal.match(/.*?contig_id=(.*?)">.*/);
 	       if (matcher){
 	       	  	table_scrape.push(matcher[1])
 	    	}

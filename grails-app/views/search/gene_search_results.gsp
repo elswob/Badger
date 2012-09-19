@@ -51,7 +51,8 @@
 	    //loops through rows
 	       var oCells = oTableData.rows.item(i).cells;
 	       var cellVal = oCells.item(rowNum).innerHTML;
-	       var matcher = cellVal.match(/.*?gene_id=(.*?)"\starget.*/);
+	       //alert(cellVal)
+	       var matcher = cellVal.match(/.*?gene_id=(.*?)">.*/);
 	       if (matcher){
 	       	  	table_scrape.push(matcher[1])
 	    	}

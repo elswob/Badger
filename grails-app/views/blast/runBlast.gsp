@@ -40,6 +40,9 @@
 			 var paperWidth = $('#blast_fig').width() - 10;
 			 var drawing = new BioDrawing();
 			 drawing.start(paperWidth, 'blast_fig');
+			 drawing.drawSpacer(40);
+			 //add scale bar
+			 drawing.drawBlastScale(${queryInfo});
 			 drawing.drawSpacer(20);
 			 drawing.drawScale(${queryInfo});
 			 var start=''
