@@ -148,6 +148,8 @@ img {
 	margin-top: 1.0em;
 	padding: 1em;
 	min-height: 1em;
+	z-index: 1; 
+	position: relative;
 }
 
 .footer a {
@@ -205,6 +207,7 @@ img {
 	list-style-type: none;
 	margin-right: 0;
 	padding: 1px;
+	border-right: 0px;
 }
 .navbar li a {
 	display: block;
@@ -243,6 +246,8 @@ img {
 .nav_float {
 	background-color: #efefef;
 	padding: 0.2em 0.2em;
+	z-index: 1; 
+	position: relative;
 }
 .nav_float a {
 	color: #48802c;

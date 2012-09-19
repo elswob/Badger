@@ -92,8 +92,9 @@
 	  </td>
 	  </tr>
     </table>
-    
+    	
     	<g:if test="${gene_results}">
+    	<hr size = 5 color="green" width="100%" style="margin-top:10px">
     	<div class="inline">
     	 <h1>Genes on <b>${info_results.contig_id[0]}</b>:</h1>
 			<!-- download genes form gets fileName value from get_table_data() -->		    		
@@ -141,6 +142,7 @@
     	</g:if>    	
     	<br>
 		<g:if test = "${grailsApplication.config.g.link}"> 
+			<hr size = 5 color="green" width="100%" style="margin-top:10px">
 			<h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}" target='_blank'>(go to genome browser)</a>:</h1>
 			 <iframe src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}" width="100%" height="700" frameborder="0">
 				<img src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}"/>
