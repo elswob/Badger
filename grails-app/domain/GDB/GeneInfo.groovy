@@ -9,7 +9,7 @@ class GeneInfo {
     int stop
     String nuc
     String pep
-    int intron
+    int exon
     static constraints = {
         gene_id(blank:false, unique: true)
         source(blank:false)

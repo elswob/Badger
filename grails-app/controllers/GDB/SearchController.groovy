@@ -59,7 +59,7 @@ class SearchController {
 			 if (grailsApplication.config.t.blast.size()>0){
 				for(item in grailsApplication.config.t.blast){
 					item = item.toString()
-					def splitter = item.split("=")
+					def splitter = item.split("=",2)
 					blastMap[splitter[0]] = splitter[1]
 				}
 			 }
@@ -69,7 +69,7 @@ class SearchController {
 			 if (grailsApplication.config.t.fun.size()>0){
 				for(item in grailsApplication.config.t.fun){
 					item = item.toString()
-					def splitter = item.split("=")
+					def splitter = item.split("=",2)
 					funMap[splitter[0]] = splitter[1]
 				}
 			 }
@@ -92,7 +92,7 @@ class SearchController {
 			 if (grailsApplication.config.g.blast.size()>0){
 				for(item in grailsApplication.config.g.blast){
 					item = item.toString()
-					def splitter = item.split("=")
+					def splitter = item.split("=",2)
 					blastMap[splitter[0]] = splitter[1]
 				}
 			 }
@@ -102,7 +102,7 @@ class SearchController {
 			 if (grailsApplication.config.g.fun.size()>0){
 				for(item in grailsApplication.config.g.fun){
 					item = item.toString()
-					def splitter = item.split("=")
+					def splitter = item.split("=",2)
 					funMap[splitter[0]] = splitter[1]
 				}
 			 }
@@ -239,7 +239,7 @@ class SearchController {
 			if (annoType == '1'){
 				for(item in grailsApplication.config.g.blast){
 					item = item.toString()
-     	 			def splitter = item.split("=")
+     	 			def splitter = item.split("=",2)
      	 			def splitter2 = splitter[1].split(",")
      	 			annoLinks."${splitter[0]}" = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]
      	 			
@@ -254,7 +254,7 @@ class SearchController {
 			if (annoType == '2'){
 				for(item in grailsApplication.config.g.fun){
 					item = item.toString()
-     	 			def splitter = item.split("=")
+     	 			def splitter = item.split("=",2)
      	 			def splitter2 = splitter[1].split(",")
      	 			annoLinks."${splitter[0]}" = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]    	 			
      	 		}
@@ -338,13 +338,15 @@ class SearchController {
      		redirect(controller: "home", action: "index")
      	}else{
 			def sql = new Sql(dataSource)
+			def annoLinks = [:]
 			def blastDBs = "anno_db = "
 			if (grailsApplication.config.g.blast.size()>0){
 				for(item in grailsApplication.config.g.blast){
 				item = item.toString()
-					def splitter = item.split("=")
+					def splitter = item.split("=",2)
 					blastDBs += "'"+splitter[0]+"' or anno_db = "
-					//println "adding "+splitter[0]
+					def splitter2 = splitter[1].split(",")
+     	 			annoLinks."${splitter[0]}" = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]
 				}
 				blastDBs = blastDBs[0..-15]
 			}
@@ -353,9 +355,10 @@ class SearchController {
 			if (grailsApplication.config.g.fun.size()>0){
 				for(item in grailsApplication.config.g.fun){
 				item = item.toString()
-					def splitter = item.split("=")
+					def splitter = item.split("=",2)
 					funDBs += "'"+splitter[0]+"' or anno_db = "
-					//println "adding "+splitter[0]
+					def splitter2 = splitter[1].split(",")
+     	 			annoLinks."${splitter[0]}" = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]
 				}
 				funDBs = funDBs[0..-15]
 			}
@@ -368,7 +371,9 @@ class SearchController {
 				blast_results = sql.rows(blastsql)
 			}
 			if (grailsApplication.config.g.IPR){
-				def iprsql = "select * from gene_anno where (anno_id ~ '^IPR' or anno_db = 'IPRGO') and gene_id = '"+params.gene_id+"' order by score;";
+				def splitter2 = grailsApplication.config.g.IPR.split(",")
+     	 		annoLinks.IPR = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]
+				def iprsql = "select * from gene_anno where anno_id ~ '^IPR' and gene_id = '"+params.gene_id+"' order by score;";
 				ipr_results = sql.rows(iprsql)
 			}
 			if (grailsApplication.config.g.fun.size()>0){
@@ -376,8 +381,9 @@ class SearchController {
 				println funsql
 				fun_results = sql.rows(funsql)
 			}
+			println "Anno links =  "+annoLinks
 			def info_results = GeneInfo.findAllByGene_id(params.gene_id)
-			return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results]
+			return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks]
     	}
     }
     def trans_info = {
@@ -389,7 +395,7 @@ class SearchController {
 			if (grailsApplication.config.t.blast.size()>0){
 				for(item in grailsApplication.config.t.blast){
 				item = item.toString()
-					def splitter = item.split("=")
+					def splitter = item.split("=",2)
 					blastDBs += "'"+splitter[0]+"' or anno_db = "
 					//println "adding "+splitter[0]
 				}
@@ -400,7 +406,7 @@ class SearchController {
 			if (grailsApplication.config.t.fun.size()>0){
 				for(item in grailsApplication.config.t.fun){
 				item = item.toString()
-					def splitter = item.split("=")
+					def splitter = item.split("=",2)
 					funDBs += "'"+splitter[0]+"' or anno_db = "
 					//println "adding "+splitter[0]
 				}

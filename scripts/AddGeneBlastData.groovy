@@ -9,7 +9,7 @@ def getBlastData(){
 	if (grailsApplication.config.g.blast.size()>0){		
 		for(item in grailsApplication.config.g.blast){
 			item = item.toString()
-     	 	def splitter = item.split("=")
+     	 	def splitter = item.split("=",2)
      	 	def splitter2 = splitter[1].split(",")
      	 	println "Adding "+splitter[0]+" - "+splitter2[0]
      	 	inFile = new File('data/'+splitter2[0].trim()).text

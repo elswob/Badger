@@ -156,7 +156,7 @@
       <tr>
         <td><b>Scaffold Id</b></td>
         <td><b>Length</b></td>
-        <td><b>Introns</b></td>
+        <td><b>Exons</b></td>
         <td><b>Source</b></td>
         <td><b>Scaffold start</b></td>
         <td><b>Scaffold stop</b></td>
@@ -165,7 +165,7 @@
       <tr>
         <td><g:link action="genome_info" params="${[contig_id: info_results.contig_id[0].trim()]}">${info_results.contig_id[0]}</g:link></td>
         <td>${printf("%,d\n",info_results.pep[0].length())}</td>
-        <td>${info_results.intron[0]}</td>
+        <td>${info_results.exon[0]}</td>
         <td>${info_results.source[0]}</td>
         <td>${printf("%,d\n",info_results.start[0])}</td>
         <td>${printf("%,d\n",info_results.stop[0])}</td>
@@ -357,13 +357,14 @@
 			 <tr id="${res.anno_id}">
 			<td><a name="${res.anno_id}">${res.anno_db}</td>
 			<%
-			//set links for blast
-			res.anno_id = res.anno_id.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>") 
-			res.descr = res.descr.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>") 
-			res.anno_id = res.anno_id.replaceAll(/lcl\|(.*)/, "<a href=\"http://www.uniprot.org/uniref/\$1\" target=\'_blank\'>\$1</a>") 
-			res.anno_id = res.anno_id.replaceAll(/(^\d+\.\d+\.\d+\.\d+)/, "<a href=\"http://enzyme.expasy.org/EC/\$1\" target=\'_blank\'>\$1</a>")
-			res.anno_id = res.anno_id.replaceAll(/(GO:\d+)/, "<a href=\"http://www.ebi.ac.uk/QuickGO/GTerm?id=\$1\" target=\'_blank\'>\$1</a>")
-			res.anno_id = res.anno_id.replaceAll(/(^K\d+)/, "<a href=\"http://www.genome.jp/dbget-bin/www_bget?ko:\$1\" target=\'_blank\'>\$1</a>")
+			//set links
+			annoLinks.each{
+				if (res.anno_db == it.key){
+					print "anno_db = "+res.anno_db
+					println "regex = "+it.value[1]
+					res.anno_id = res.anno_id.replaceAll(it.value[1], "<a href=\""+it.value[2]+"\$1\" target=\'_blank\'>\$1</a>") 
+				}
+			}
 			%>
 			<td>${res.anno_id}</td>
 			<td>${res.descr}</td>
@@ -406,9 +407,14 @@
 	     <tr id="${res.anno_id}">
 		<td><a name="${res.anno_id}">${res.anno_db}</td>
 		<%
-		res.anno_id = res.anno_id.replaceAll(/(^\d+\.\d+\.\d+\.\d+)/, "<a href=\"http://enzyme.expasy.org/EC/\$1\" target=\'_blank\'>\$1</a>")
-        res.anno_id = res.anno_id.replaceAll(/(GO:\d+)/, "<a href=\"http://www.ebi.ac.uk/QuickGO/GTerm?id=\$1\" target=\'_blank\'>\$1</a>")
-    	res.anno_id = res.anno_id.replaceAll(/(^K\d+)/, "<a href=\"http://www.genome.jp/dbget-bin/www_bget?ko:\$1\" target=\'_blank\'>\$1</a>")
+			//set links
+			annoLinks.each{
+				if (res.anno_db == it.key){
+					print "anno_db = "+res.anno_db
+					println "regex = "+it.value[1]
+					res.anno_id = res.anno_id.replaceAll(it.value[1], "<a href=\""+it.value[2]+"\$1\" target=\'_blank\'>\$1</a>") 
+				}
+			}
 		%>
 		<td>${res.anno_id}</td>
 		<td>${res.descr}</td>

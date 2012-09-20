@@ -65,6 +65,7 @@
     
     <% 
     def jsonData = results.encodeAsJSON(); 
+    def jsonAnno = annoLinks.encodeAsJSON(); 
     %>
 
     </script>
@@ -90,7 +91,16 @@
 					return "<a href=\"gene_info?gene_id="+oObj.aData["gene_id"]+ "\">"+sVal+"</a>";
 				}},
 				{ "mDataProp": "anno_db" },
-				{ "mDataProp": "anno_id" },
+				{ "mDataProp": "anno_id",
+				"fnRender": function ( oObj, sVal ){
+					AnnoData = ${jsonAnno};
+					var db = oObj.aData["anno_db"]
+					if (AnnoData[db]){
+						var regex = new RegExp(AnnoData[db][1]);
+						var link = sVal.replace(regex,"<a href=\""+AnnoData[db][2]+"$1 \" target='_blank'>$1</a>")
+					}
+					return link
+				}},
 				{ "mDataProp": "descr"},
 				{ "mDataProp": "score"},
 			],
@@ -157,7 +167,16 @@
 					return "<a href=\"gene_info?gene_id="+oObj.aData["gene_id"]+ "\">"+sVal+"</a>";
 			}},
             { "mDataProp": "anno_db" },
-            { "mDataProp": "anno_id" },
+            { "mDataProp": "anno_id",
+				"fnRender": function ( oObj, sVal ){
+					AnnoData = ${jsonAnno};
+					var db = oObj.aData["anno_db"]
+					if (AnnoData[db]){
+						var regex = new RegExp(AnnoData[db][1]);
+						var link = sVal.replace(regex,"<a href=\""+AnnoData[db][2]+"$1 \" target='_blank'>$1</a>")
+					}
+					return link
+				}},
             { "mDataProp": "descr"},
             { "mDataProp": "score"},
         ],
@@ -214,7 +233,6 @@
     </script>
   </head>
   <body>
-    
   <!-- check for errors -->
   <g:if test="${error == "empty"}">
     <h1>Please enter a search term</h1>

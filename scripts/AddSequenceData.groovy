@@ -211,7 +211,7 @@ def addGeneData(){
           count++
           geneMap.gene_id = gene.key
           geneMap.contig_id = gene.value[0]
-          geneMap.intron = gene.value[1]
+          geneMap.exon = gene.value[1]
           geneMap.source = gene.value[2]
           geneMap.start = gene.value[3]
           geneMap.stop = gene.value[4]

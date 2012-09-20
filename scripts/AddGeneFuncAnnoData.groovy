@@ -8,14 +8,16 @@ def getData(){
 	if (grailsApplication.config.g.fun.size()>0){
 		for(item in grailsApplication.config.g.fun){
 			item = item.toString()
-     	 	def splitter = item.split("=")
-     	 	println "Adding "+splitter[0]+" - "+splitter[1]
-     	 	inFile = new File("data/"+splitter[1].trim()).text
+			def splitter = item.split("=",2)
+     	 	def splitter2 = splitter[1].split(",")
+     	 	println "Adding "+splitter[0]+" - "+splitter2[0]
+     	 	inFile = new File('data/'+splitter2[0].trim()).text
      	 	addFunc(splitter[0].trim(),inFile)
      	 }
     }
     if (grailsApplication.config.g.IPR){
-    	def  iprFile = new File("data/"+grailsApplication.config.g.IPR.trim()).text
+    	def splitter = grailsApplication.config.g.IPR.split(",")
+    	def iprFile = new File("data/"+splitter[0].trim()).text
     	println "Adding IPR - "+grailsApplication.config.g.IPR
     	addInterProScan(iprFile)
     }
@@ -84,7 +86,7 @@ def addInterProScan(file){
 				if (score < 1e-5){
                   	if ((count % 1000) ==  0){
             			println count
-                      	println annoMap
+                      	//println annoMap
 						new GeneAnno(annoMap).save(flush:true)
                     }else{
                       	new GeneAnno(annoMap).save()
