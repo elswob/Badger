@@ -73,6 +73,9 @@
 				<li><g:link controller="home" action="browse" class="${pageProperty(name:'page.browse')}">Browse</g:link></li>
 			</g:if>
 		</g:if>
+		<g:if test = "${grailsApplication.config.i.links.stats == 'public'}">
+			<li><g:link controller="home" action="stats" class="${pageProperty(name:'page.stats')}">Statistics</g:link></li>
+		</g:if>
 		
 		<% //add public external links to navigation bar 
 		if (grailsApplication.config.e.links.pub){
@@ -113,6 +116,7 @@
 		<g:if test = "${grailsApplication.config.g.link}">
 			<li><g:link controller="home" action="browse" class="${pageProperty(name:'page.browse')}">Browse</g:link></li>
 		</g:if>
+		<li><g:link controller="home" action="stats" class="${pageProperty(name:'page.stats')}">Statistics</g:link></li>
 		<!--li><a href="${grailsApplication.config.g.link}" target='_blank'>Browse </a></li--> 
 		
 		<% //add public and private external links to navigation bar 

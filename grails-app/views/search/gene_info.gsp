@@ -165,7 +165,7 @@
       <tr>
         <td><g:link action="genome_info" params="${[contig_id: info_results.contig_id[0].trim()]}">${info_results.contig_id[0]}</g:link></td>
         <td>${printf("%,d\n",info_results.pep[0].length())}</td>
-        <td>${info_results.exon[0]}</td>
+        <td>${exon_res.count[0]}</td>
         <td>${info_results.source[0]}</td>
         <td>${printf("%,d\n",info_results.start[0])}</td>
         <td>${printf("%,d\n",info_results.stop[0])}</td>
@@ -360,8 +360,6 @@
 			//set links
 			annoLinks.each{
 				if (res.anno_db == it.key){
-					print "anno_db = "+res.anno_db
-					println "regex = "+it.value[1]
 					res.anno_id = res.anno_id.replaceAll(it.value[1], "<a href=\""+it.value[2]+"\$1\" target=\'_blank\'>\$1</a>") 
 				}
 			}
@@ -410,8 +408,6 @@
 			//set links
 			annoLinks.each{
 				if (res.anno_db == it.key){
-					print "anno_db = "+res.anno_db
-					println "regex = "+it.value[1]
 					res.anno_id = res.anno_id.replaceAll(it.value[1], "<a href=\""+it.value[2]+"\$1\" target=\'_blank\'>\$1</a>") 
 				}
 			}

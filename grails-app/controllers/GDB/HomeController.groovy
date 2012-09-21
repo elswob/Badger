@@ -115,7 +115,7 @@ class HomeController {
  }
  def publications = {
      //check the privacy setting
-     if (grailsApplication.config.i.links.priv.members && !isLoggedIn()) {
+     if (grailsApplication.config.i.links.priv.publications && !isLoggedIn()) {
      	redirect(controller: "home", action: "index")
 	 }else{ 
 		 def sql = new Sql(dataSource)
@@ -232,4 +232,29 @@ class HomeController {
 		return [ pubDownloadFiles: pubDownloadFiles, privDownloadFiles: privDownloadFiles]
 	 }
   }
+  
+  def stats = {
+     //check the privacy setting
+     if (grailsApplication.config.i.links.priv.stats && !isLoggedIn()) {
+     	redirect(controller: "home", action: "index")
+	 }else{ 
+		 def sql = new Sql(dataSource)
+		 def geneCount = GeneInfo.count()
+		 def exonCount = "select gene_id, count(gene_id) as num from exon_info group by gene_id;"
+		 def exonCountGet = sql.rows(exonCount)
+		 def counts = [:]
+		 exonCountGet.each {
+		 	counts."${it.num}" = 0
+		 }
+		 exonCountGet.each {
+			counts."${it.num}" = counts."${it.num}" + 1
+			//println counts."${it.num}"
+		 }
+		 println counts
+		 def exonCountData = counts
+ 		 //def exonLengths = ""
+		 
+		 return [exonCountData: exonCountData, geneCount:geneCount]
+	 }
+ }
 }

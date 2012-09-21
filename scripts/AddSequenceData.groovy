@@ -158,7 +158,8 @@ def addGeneData(){
 		println "Adding gene data... "
 		println "Reading nucleotide data - "+grailsApplication.config.seqData.GeneNuc
 		def nucFile = new File("data/"+grailsApplication.config.seqData.GeneNuc.trim()).text
-		def sequence=""
+		//def nucFile = new File("data/A_viteae/test.fa".trim()).text
+        def sequence=""
 		def count=0
 		nucFile.split("\n").each{
 			if ((matcher = it =~ /^>(.*)/)){
@@ -176,7 +177,8 @@ def addGeneData(){
 		
 		println "Reading peptide data - "+grailsApplication.config.seqData.GenePep
 		def pepFile = new File("data/"+grailsApplication.config.seqData.GenePep.trim()).text
-		sequence=""
+		//def pepFile = new File("data/A_viteae/test.aa".trim()).text
+        sequence=""
 		pepFile.split("\n").each{
 			if ((matcher = it =~ /^>(.*)/)){
 				if (sequence != ""){
@@ -195,37 +197,67 @@ def addGeneData(){
       	//println nucData
         //println pepData
       
-      	println "Reading gene data file - "+grailsApplication.config.seqData.GeneData
+      	println "Reading gff file - "+grailsApplication.config.seqData.GeneData
       	def dataFile = new File("data/"+grailsApplication.config.seqData.GeneData.trim()).text
-      	dataFile.split("\n").each{
+      	//def dataFile = new File("data/A_viteae/test.gff".trim()).text
+        def gene_count=0
+      	def gene_id
+        
+        def exonMap = [:]
+        def exon_id
+        def exon_count
+      	def exon_start
+      	def exon_end
+      	def exon_score
+      	def exon_frame
+        dataFile.split("\n").each{
+          	
       		//ignore comment lines
         	if ((matcher = it =~ /^#.*/)){
               //println "ignoring "+it
             }else{
               def dataArray = it.split("\t")
-              geneData."${dataArray[0].trim()}" = [dataArray[1].trim(),dataArray[2].trim(),dataArray[3].trim(),dataArray[4].trim(),dataArray[5].trim()]
-            }
+              if (dataArray[2] == 'mRNA'){
+                exon_count=0
+                gene_count++
+				if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
+                  	gene_id = matcher[0][1]
+                }
+                geneMap.gene_id = gene_id
+                geneMap.start = dataArray[3]
+                geneMap.stop = dataArray[4]
+                geneMap.source = dataArray[1]
+                geneMap.contig_id = dataArray[0]
+                geneMap.nuc = nucData."${gene_id}"
+                geneMap.pep = pepData."${gene_id}"
+				if ((gene_count % 1000) ==  0){
+            			println gene_count
+            			new GeneInfo(geneMap).save(flush:true)
+            		}else{
+            			new GeneInfo(geneMap).save()
+            		}
+              }
+              if (dataArray[2] == 'CDS'){
+                exon_count++
+                if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){                
+      		      	exonMap.exon_id = matcher[0][1]
+                  	//println "exon = "+exon_id+" - "+exon_count
+                }
+                exonMap.contig_id = dataArray[0]
+                exonMap.gene_id = gene_id
+                exonMap.start = dataArray[3]
+                exonMap.stop = dataArray[4]
+                exonMap.score = dataArray[5]
+                exonMap.phase = dataArray[6]
+                if ((gene_count % 1000) ==  0){
+                	//println exonMap
+            		new ExonInfo(exonMap).save(flush:true)
+            	}else{
+            		new ExonInfo(exonMap).save()
+            	}
+              }
+            }     
         }
-      	//println geneData
-      	geneData.each{gene->
-          count++
-          geneMap.gene_id = gene.key
-          geneMap.contig_id = gene.value[0]
-          geneMap.exon = gene.value[1]
-          geneMap.source = gene.value[2]
-          geneMap.start = gene.value[3]
-          geneMap.stop = gene.value[4]
-          geneMap.nuc = nucData."${gene.key}"
-          geneMap.pep = pepData."${gene.key}"
-          if ((count % 1000) ==  0){
-            println "Added "+count
-            //println geneMap
-            new GeneInfo(geneMap).save(flush:true)
-          }else{
-            new GeneInfo(geneMap).save()
-          }			         
-        }
-        println "Added "+count		
 	}else{
 		println "One of the three required files is missing"
 	}
