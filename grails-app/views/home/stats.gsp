@@ -65,6 +65,7 @@
 		 },
 		 axes: {
 			xaxis: {
+				renderer: $.jqplot.LogAxisRenderer,
 				label: 'Number of exons per gene',
 				pad: 0
 			},
@@ -118,7 +119,7 @@
   		 		
   		var plot2 = $.jqplot ('chart2', [exDistNumArray],{
   		 animate: true,
-		 title: 'Distribution of exon lengths (<500bp)', 
+		 title: 'Distribution of exon lengths (<1000bp)', 
 		 series:[
 			 {
 			 showLine:false,
@@ -132,7 +133,7 @@
 		 axes: {
 			xaxis: {
 				label: 'Exon length (bp)',
-				//renderer: $.jqplot.LinearAxisRenderer,
+				renderer: $.jqplot.LogAxisRenderer,
 				pad: 0
 			},
 			yaxis: {
@@ -241,15 +242,16 @@
   
  <h1>Genome:</h1>
  <table>
- <tr><td><b>Scaffolds</b></td><td><b>N50</b></td><td><b>Largest</b></td><td><b>Smallest</b></td><td><b>GC</b></td><td><b>Non ATGC</b></td></tr>
- <tr><td>${printf("%,d\n",GDB.GenomeInfo.count())}</td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+ <tr><td><b>Span (Mb)</b></td><td><b>Scaffolds</b></td><td><b>N50</b></td><td><b>Smallest</b></td><td><b>Largest</b></td><td><b>GC</b></td><td><b>Non ATGC</b></td></tr>
+ <tr><td> </td><td>${printf("%,d\n",GDB.GenomeInfo.count())}</td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
  </table>
  
  <h1>Genes:</h1>
  <table>
  <tr><td><b>Number</b></td><td><b>Mean length</b></td><td><b>Mean number of exons</b></td><td><b>Smallest</b></td><td><b>Largest</b></td><td><b>GC</b></td><td><b>Non ATGC</b></td></tr>
- <tr><td>${printf("%,d\n",GDB.GeneInfo.count())}</td><td> </td><td> </td><td> </td><td> </td><td> </td>><td> </td></tr>
+ <tr><td>${printf("%,d\n",GDB.GeneInfo.count())}</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
  </table>
+ 
  	<div id="chart3" class="jqplot-target" style="height: 400px; width: 100%; position: center;"></div>
  	<br>
     <div id="chart1" class="jqplot-target" style="height: 400px; width: 100%; position: center;"></div>

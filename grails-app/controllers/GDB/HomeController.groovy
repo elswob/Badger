@@ -243,7 +243,7 @@ class HomeController {
 		 def exonCount = ExonInfo.count()
 		 def exonCountSql = "select num,count(num) from (select gene_id, count(gene_id) as num from exon_info group by gene_id) as foo group by num order by num;"
 		 def exonCountData = sql.rows(exonCountSql)
-		 def exonDist = "select num,count(num) from (select exon_id, stop-start as num from exon_info group by exon_id,start,stop) as foo where num<500 group by num order by num;"
+		 def exonDist = "select num,count(num) from (select exon_id, stop-start as num from exon_info group by exon_id,start,stop) as foo where num<1000 group by num order by num;"
 		 def exonDistData = sql.rows(exonDist)
 		 def geneDist = "select num,count(num) from (select gene_id, length(pep) as num from gene_info group by gene_id,pep) as foo group by num order by num;"
 		 def geneDistData = sql.rows(geneDist)
