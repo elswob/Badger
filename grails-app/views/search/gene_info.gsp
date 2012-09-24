@@ -193,7 +193,9 @@
 			<div class="nav_float">
 			<ul>
 			   <li><a href="#info_anchor" class="scroll">Info</a></li>
-			   <li><a href="#anno_anchor" class="scroll">Annotations</a></li>
+			   <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
+				   <li><a href="#anno_anchor" class="scroll">Annotations</a></li>
+			   </g:if>
 			   <g:if test = "${grailsApplication.config.g.link}"> 
 					<li><a href="#browse_anchor" class="scroll">Browse</a></li>
 			   </g:if>

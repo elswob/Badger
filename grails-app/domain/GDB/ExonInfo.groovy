@@ -1,25 +1,25 @@
 package GDB
 
-class GeneInfo {
+class ExonInfo {
 
     String gene_id
-    String source
     String contig_id    
     int start
     int stop
-    String nuc
-    String pep
+    int phase
+    String exon_id
+    float score
+    int exon_number
     float gc
+    String sequence
     String strand
     static constraints = {
-        gene_id(blank:false, unique: true)
-        source(blank:false)
+        exon_id(blank:false, unique: true)
         contig_id(blank:false)
         start(blank:false)
         stop(blank:false)
     }
     static mapping = {
-        nuc type: "text"
-        pep type: "text"
+        sequence  type: "text"
     }
 }

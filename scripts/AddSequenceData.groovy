@@ -155,6 +155,9 @@ def addGeneData(){
 		def pepData = [:]
       	def geneMap = [:]
         def geneId
+      	def gene_nuc
+        def gene_count_gc
+      	def gene_start
 		println "Adding gene data... "
 		println "Reading nucleotide data - "+grailsApplication.config.seqData.GeneNuc
 		def nucFile = new File("data/"+grailsApplication.config.seqData.GeneNuc.trim()).text
@@ -205,11 +208,15 @@ def addGeneData(){
         
         def exonMap = [:]
         def exon_id
-        def exon_count
-      	def exon_start
-      	def exon_end
+        int exon_count
+      	int exon_start
+      	int exon_marker
+      	int exon_end
       	def exon_score
       	def exon_frame
+      	def exon_count_gc
+      	def exon_sequence
+      	def exon_gc
         dataFile.split("\n").each{
           	
       		//ignore comment lines
@@ -218,20 +225,29 @@ def addGeneData(){
             }else{
               def dataArray = it.split("\t")
               if (dataArray[2] == 'mRNA'){
+              	exon_marker=0
                 exon_count=0
                 gene_count++
 				if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
                   	gene_id = matcher[0][1]
                 }
+                gene_start = dataArray[3].toInteger()
+                gene_nuc = nucData."${gene_id}"
+				gene_count_gc = gene_nuc.toUpperCase().findAll({it=='G'|it=='C'}).size()
+				gene_gc = (gene_count_gc/gene_nuc.length())*100
+				gene_gc = sprintf("%.3f",gene_gc)
+				geneMap.gc = gene_gc
                 geneMap.gene_id = gene_id
                 geneMap.start = dataArray[3]
                 geneMap.stop = dataArray[4]
                 geneMap.source = dataArray[1]
                 geneMap.contig_id = dataArray[0]
+                geneMap.strand = dataArray[6]
                 geneMap.nuc = nucData."${gene_id}"
                 geneMap.pep = pepData."${gene_id}"
 				if ((gene_count % 1000) ==  0){
             			println gene_count
+            			//println geneMap
             			new GeneInfo(geneMap).save(flush:true)
             		}else{
             			new GeneInfo(geneMap).save()
@@ -243,12 +259,35 @@ def addGeneData(){
       		      	exonMap.exon_id = matcher[0][1]
                   	//println "exon = "+exon_id+" - "+exon_count
                 }
+                //println "gene_id = "+gene_id
+                //println "exon count = "+exon_count
+                //println "exon start = "+dataArray[3]
+                //println "exon_stop = "+dataArray[4]
+                //println "gene_start = "+gene_start
+                exon_start = exon_marker
+                exon_end = dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()+1
+                //println "exon start real = "+exon_start
+                //println "exon stop real = "+exon_end
+                //println "exon length = "+gene_nuc.length()
+                //println "exon_marker = "+exon_marker
+                exon_sequence = gene_nuc[exon_marker..dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()]
+                //println "exon seq = "+exon_sequence
+                //get exon gc
+				exon_count_gc = exon_sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
+				exon_gc = (exon_count_gc/exon_sequence.length())*100
+				exon_gc = sprintf("%.3f",exon_gc)
+				exonMap.sequence = exon_sequence
+				exon_marker = exon_start + dataArray[4].toInteger()-dataArray[3].toInteger()+1
+				
                 exonMap.contig_id = dataArray[0]
+                exonMap.exon_number = exon_count
                 exonMap.gene_id = gene_id
                 exonMap.start = dataArray[3]
                 exonMap.stop = dataArray[4]
                 exonMap.score = dataArray[5]
-                exonMap.phase = dataArray[6]
+                exonMap.strand = dataArray[6]
+                exonMap.phase = dataArray[7].toInteger()
+                exonMap.gc = exon_gc
                 if ((gene_count % 1000) ==  0){
                 	//println exonMap
             		new ExonInfo(exonMap).save(flush:true)

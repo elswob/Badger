@@ -122,7 +122,6 @@
 			  	<tr>
 					<th><b>Gene ID</b></th>
 					<th><b>Length</b></th>
-					<th><b>Exons</b></th>
 					<th><b>Start</b></th>
 					<th><b>Stop</b></th>
 			   </tr>
@@ -132,7 +131,6 @@
 			 		<tr>
 						<td><a href="gene_info?gene_id=${res.gene_id}">${res.gene_id}</a></td>
 						<td>${res.pep.length()}</td>
-						<td>${res.exon}</td>
 						<td>${res.start}</td>
 						<td>${res.stop}</td>
 			  		</tr>  
