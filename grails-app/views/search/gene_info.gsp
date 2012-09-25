@@ -20,7 +20,8 @@
 		  def iprjsonData = ipr_results.encodeAsJSON();
 		  def blastjsonData = blast_results.encodeAsJSON();
 		  def funjsonData = fun_results.encodeAsJSON();
-		  //println blastjsonData
+		  def exonjsonData = exon_results.encodeAsJSON();
+		  //println exonjsonData
 		  %>  
     
     <script type="text/javascript">
@@ -71,6 +72,7 @@
     blast_data = ${blastjsonData};	
 	ipr_data = ${iprjsonData};
 	fun_data = ${funjsonData};
+	exon_data = ${exonjsonData};
     
     $(document).ready(function() {
     	$(".scroll").click(function(event){		
@@ -145,6 +147,78 @@
 
      //draw the figure
      drawHits(); 
+     
+     //exons
+     var anOpen = [];
+  	 var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.0/examples/examples_support/')}";
+     
+	 var oTable = $('#exon_table').dataTable( {
+			"bProcessing": true,
+			"aaData": ${exonjsonData},
+			"aoColumns": [
+				{
+				   "mDataProp": null,
+				   "sClass": "control center",
+				   "sDefaultContent": '<img src="'+sImageUrl+'details_open.png'+'">'
+				},
+				{ "mDataProp": "exon_id",
+				"fnRender": function ( oObj, sVal ){
+					return "<a href=\"${grailsApplication.config.g.link}?name="+oObj.aData["contig_id"]+":"+oObj.aData["start"]+".."+oObj.aData["stop"]+"\" target='_blank'>"+sVal+"</a>";
+				}},
+				{ "mDataProp": "exon_number" },
+				{ "mDataProp": "length" },
+				{ "mDataProp": "gc"},
+				{ "mDataProp": "phase"},
+				{ "mDataProp": "score"},
+			],
+			"sPaginationType": "full_numbers",
+				"iDisplayLength": 10,
+				"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+				"oLanguage": {
+						 "sSearch": "Filter records:"
+				 },
+				"aaSorting": [[ 1, "asc" ]],
+				"sDom": 'T<"clear">lfrtip',
+				"oTableTools": {
+				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+				}
+		} );
+		
+	   
+	  $('#exon_table td.control').live( 'click', function () {
+	  var nTr = this.parentNode;
+	  var i = $.inArray( nTr, anOpen );
+	   
+	  if ( i === -1 ) {
+		$('img', this).attr( 'src', sImageUrl+"details_close.png" );
+		var nDetailsRow = oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
+		$('div.innerDetails', nDetailsRow).slideDown();
+		anOpen.push( nTr );
+	  }
+	  else {
+		$('img', this).attr( 'src', sImageUrl+"details_open.png" );
+		$('div.innerDetails', $(nTr).next()[0]).slideUp( function () {
+		  oTable.fnClose( nTr );
+		  anOpen.splice( i, 1 );
+		} );
+	  }
+	} );
+	
+	function fnFormatDetails( oTable, nTr )
+	{
+	  var oData = oTable.fnGetData( nTr );
+	  var sOut =
+		'<div class="innerDetails">'+
+		'<div class="blast_res">'+
+		  '<table width="100%" cellpadding="5" cellspacing="0" border="0" style="table-layout:fixed; padding-left:10px; overflow:auto;">'+
+			'<tr><td><b>Sequence:</b></td></tr>'+
+			'<tr><td>'+oData.sequence+'</td></tr>'+
+		  '</table>'+
+		'</div>'+  
+		'</div>';
+	   //alert(sOut)
+	  return sOut;
+	}
         
     });
     </script>
@@ -155,20 +229,22 @@
     <table>
       <tr>
         <td><b>Scaffold Id</b></td>
-        <td><b>Length</b></td>
+        <td><b>Length (aa)</b></td>
         <td><b>Exons</b></td>
         <td><b>Source</b></td>
         <td><b>Scaffold start</b></td>
         <td><b>Scaffold stop</b></td>
+        <td><b>Strand</b></td>
         <td><b>Download</b></td>
       </tr>
       <tr>
         <td><g:link action="genome_info" params="${[contig_id: info_results.contig_id[0].trim()]}">${info_results.contig_id[0]}</g:link></td>
         <td>${printf("%,d\n",info_results.pep[0].length())}</td>
-        <td>${exon_res.count[0]}</td>
+        <td>${exon_results.size()}</td>
         <td>${info_results.source[0]}</td>
         <td>${printf("%,d\n",info_results.start[0])}</td>
         <td>${printf("%,d\n",info_results.stop[0])}</td>
+        <td>${info_results.strand[0]}</td>
         <td>
         	<div class="inline">
         	<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
@@ -209,12 +285,13 @@
 			   <g:if test="${ipr_results}">
 				   <li><a href="#ipr_anchor" class="scroll">InterPro</a></li>
 			   </g:if>
+			   <li><a href="#exon_anchor" class="scroll">Exons</a></li>
 			</ul>
 			</div>
 		</div>
 	</div>
     
-    <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
+    <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}" || test="${exon_results}">
         <a name="anno_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>  
     
 		<g:if test="${params.top != "10"}">
@@ -233,7 +310,7 @@
 			 //alert("in blast_fig")
 			 function drawHits(){
 				 //alert("in drawHits");
-				 if (blast_data.length > 0 || ipr_data.length > 0 || fun_data.length > 0){
+				 //if (blast_data.length > 0 || ipr_data.length > 0 || fun_data.length > 0){
 				 	 //alert("drawing figure")
 					 var paperWidth = $('#blast_fig').width();
 					 drawing.start(paperWidth, 'blast_fig');
@@ -243,6 +320,20 @@
 					 drawing.drawSpacer(20);
 					 drawing.drawScale(${info_results.pep[0].length()});			 
 					 drawing.drawSpacer(10);
+					 // add exon boundaries
+					 if (exon_data.length > 0){
+					 	drawing.drawSpacer(10);
+					 	drawing.drawColouredTitle('Exons','black')
+					 	var marker=0
+					 	for (var i = 0; i < exon_data.length; i++) {   		 	 
+					 		var exon = exon_data[i];
+					 		drawing.drawExon(${info_results.pep[0].length()},exon.length/3,marker,exon.exon_number)
+					 		marker = marker + exon.length/3
+					 		//alert(marker)
+					 	}
+					 	drawing.drawSpacer(20);
+					 	drawing.drawLine(${info_results.pep[0].length()});
+					 }
 					 if (blast_data.length > 0){
 						 drawing.drawSpacer(10);
 						 drawing.drawColouredTitle('BLAST','black')
@@ -264,16 +355,16 @@
 					 }
 					 drawing.drawSpacer(10);
 					 drawing.end();         
-				 }
+				 //}
 			 }
-			 function drawBars(funcAnno,name,type){
+			 function drawBars(Anno,name,type){
 			  	 //alert("in drawBars")
 				 var start=''
 				 var stop=''
 				 var score=''
 				 var matched = new Array();
-				 for (var i = 0; i < funcAnno.length; i++) {   		 	 
-					 var hit = funcAnno[i];
+				 for (var i = 0; i < Anno.length; i++) {   		 	 
+					 var hit = Anno[i];
 					 //get rid of all strange characters
 					 var stringy = String(name);
 					 var idPattern = hit.anno_id.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
@@ -477,6 +568,25 @@
 			 </tbody>
 			</table>
 	   </g:if> 
+     <br>
+    
+     
+    <a name="exon_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
+		<h1>Exons</h1>
+		 <table cellpadding="0" cellspacing="0" border="0" class="display" id="exon_table">
+		 <thead>
+			<tr>
+				<th></th>
+				<th>ID</th>
+				<th>Number</th>
+				<th>Length</th>
+				<th>GC</th>
+				<th>Phase</th>
+				<th>Score</th>
+			</tr>
+		 </thead>
+		 <tbody></tbody>
+	     </table> 
      
 	<g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
 	</g:if>

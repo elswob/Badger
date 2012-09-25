@@ -7,7 +7,9 @@ class PublicationUpdaterJob {
     	cron name: 'myTrigger', cronExpression: "0 0 0 ? * 1"  
     }
     def execute(){
-    	print "Updating publications!"
+    	def today = new Date()
+		println today
+    	println "Updating publications!"
     	pubService.getPub()
     }
 }

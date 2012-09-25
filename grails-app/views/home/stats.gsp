@@ -242,8 +242,8 @@
   
  <h1>Genome:</h1>
  <table>
- <tr><td><b>Span (Mb)</b></td><td><b>Scaffolds</b></td><td><b>N50</b></td><td><b>Smallest</b></td><td><b>Largest</b></td><td><b>GC</b></td><td><b>Non ATGC</b></td></tr>
- <tr><td> </td><td>${printf("%,d\n",GDB.GenomeInfo.count())}</td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+ <tr><td><b>Span (bp)</b></td><td><b>Scaffolds</b></td><td><b>N50</b></td><td><b>Smallest</b></td><td><b>Largest</b></td><td><b>GC</b></td><td><b>Non ATGC</b></td></tr>
+ <tr><td>${printf("%,d\n",genome_stats.span)}</td><td>${printf("%,d\n",GDB.GenomeInfo.count())}</td><td>${printf("%,d\n",genome_stats.n50)}</td><td>${printf("%,d\n",genome_stats.min)}</td><td>${printf("%,d\n",genome_stats.max)}</td><td>${printf("%.4g",genome_stats.gc)}</td><td>${printf("%,d\n",genome_stats.nonATGC)}</td></tr>
  </table>
  
  <h1>Genes:</h1>

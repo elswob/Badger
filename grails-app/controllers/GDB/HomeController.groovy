@@ -238,7 +238,49 @@ class HomeController {
      if (grailsApplication.config.i.links.priv.stats && !isLoggedIn()) {
      	redirect(controller: "home", action: "index")
 	 }else{ 
-		 def sql = new Sql(dataSource)
+	 	 def sql = new Sql(dataSource)
+	 	 
+	 	 //get genome stats
+	 	 def genomeInfoSql = "select sequence,gc,length from genome_info order by length;"
+	 	 def genomeInfo = sql.rows(genomeInfoSql) 
+		 int span=0, min=10000000000, max=0, n50=0, halfSpan=0, n50Span=0, nonATGC=0
+		 float gc
+		 def n50check = false
+		 def genome_stats = [:]
+	 	 //span
+	 	 genomeInfo.each {
+			span += it.length
+			gc += it.gc
+			nonATGC += it.sequence.toUpperCase().count("N")
+			//nonATGC += it.sequence.toUpperCase().findAll(/G|C|A|T/).size()
+			if (it.length < min){
+				min = it.length
+			}
+			if (it.length > max){
+				max = it.length
+			}
+		 }
+		 //nonATGC = span-nonATGC
+
+		 gc = gc/genomeInfo.size()
+		 
+		 //n50
+		 halfSpan = span/2
+		 genomeInfo.each {
+			n50Span += it.length
+			if (n50Span >= halfSpan && n50check !=true){
+				n50 = it.length
+				n50check = true
+			}
+		 }
+	 	 genome_stats.span = span
+	 	 genome_stats.n50 = n50
+	 	 genome_stats.min = min
+		 genome_stats.max = max
+		 genome_stats.gc = gc
+		 genome_stats.nonATGC = nonATGC
+		 
+		 //get data for plots
 		 def geneCount = GeneInfo.count()
 		 def exonCount = ExonInfo.count()
 		 def exonCountSql = "select num,count(num) from (select gene_id, count(gene_id) as num from exon_info group by gene_id) as foo group by num order by num;"
@@ -247,7 +289,7 @@ class HomeController {
 		 def exonDistData = sql.rows(exonDist)
 		 def geneDist = "select num,count(num) from (select gene_id, length(pep) as num from gene_info group by gene_id,pep) as foo group by num order by num;"
 		 def geneDistData = sql.rows(geneDist)
-		 return [exonCountData: exonCountData, geneCount:geneCount, exonDistData: exonDistData, exonCount: exonCount, geneDistData:geneDistData]
+		 return [exonCountData: exonCountData, geneCount:geneCount, exonDistData: exonDistData, exonCount: exonCount, geneDistData:geneDistData, genome_stats:genome_stats]
 	 }
  }
 }

@@ -49,6 +49,14 @@
             this.drawScoreBar(interval*3,interval*4,height,'blue','','40-50');
             this.drawScoreBar(interval*4,interval*5,height,'black','','<40');
         };
+        
+        BioDrawing.prototype.drawExon = function(length,exon_length,marker,number) {
+            var base, interval, xPos;
+            this.pixelsPerBase = this.drawingWidth / length;
+            var height = 9
+            this.drawBar(marker,marker+exon_length-0.5,height,'grey','Exon '+number,number);           
+        };
+        
         BioDrawing.prototype.drawScale = function(length) {
             var base, interval, xPos;
             this.pixelsPerBase = this.drawingWidth / length;
@@ -126,7 +134,7 @@
                 'cursor': 'pointer'
             });
             var textColour = 'black';
-            var textYPosition = this.yPos-10;
+            var textYPosition = this.yPos + (height / 2);
             var textPosition = ((start * this.pixelsPerBase + this.padding +push_right) + (stop * this.pixelsPerBase + this.padding +push_right)) / 2;
             var title = this.paper.text(textPosition, textYPosition, text).attr({
                 'font-size': (height * 1),
@@ -138,7 +146,8 @@
         BioDrawing.prototype.drawScoreId = function(start, stop, height, text) {
             var bar, width;
             //width = (stop * this.pixelsPerBase) - (start * this.pixelsPerBase);
-			var textPosition = ((start * this.pixelsPerBase + this.padding +push_right) + (stop * this.pixelsPerBase + this.padding +push_right)) / 2;            var textYPosition = this.yPos - 25;
+			var textPosition = ((start * this.pixelsPerBase + this.padding +push_right) + (stop * this.pixelsPerBase + this.padding +push_right)) / 2;            
+			var textYPosition = this.yPos - 25;
             var textColour = 'black';
             var title = this.paper.text(textPosition, textYPosition, text).attr({
                 'font-size': (height * 1),

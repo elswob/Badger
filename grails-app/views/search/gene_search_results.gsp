@@ -294,7 +294,7 @@
 				</thead>
 				<tbody>
 				</tbody>
-			      </table>
+			    </table>
 
           </g:if>
           <g:else>

@@ -381,11 +381,14 @@ class SearchController {
 				println funsql
 				fun_results = sql.rows(funsql)
 			}
+			//get exon info
+			def exonsql = "select *,stop-start as length from exon_info where gene_id = '"+params.gene_id+"' order by exon_number;"
+			def exon_results = sql.rows(exonsql)
+			
 			println "Anno links =  "+annoLinks
-			def exonsql = "select count(exon_id) from exon_info where gene_id = '"+params.gene_id+"';";
-			def exon_res = sql.rows(exonsql)
+
 			def info_results = GeneInfo.findAllByGene_id(params.gene_id)
-			return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_res: exon_res]
+			return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results]
     	}
     }
     def trans_info = {
