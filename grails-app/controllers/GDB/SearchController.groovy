@@ -430,6 +430,7 @@ class SearchController {
 			aaCount.each{
 				if (aaInfo."${it.key}"){
 					def aa = [(it.value/pep_seq.length())*100,"'"+aaInfo."${it.key}"+"'"]
+					//def aa = [it.value,"'"+aaInfo."${it.key}"+"'"]
 					aaData.add(aa)
 				}
 			}

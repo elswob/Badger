@@ -151,9 +151,20 @@ img {
 	z-index: 1; 
 	position: relative;
 }
-
 .footer a {
 	color: #255b17;
+}
+
+.mid {
+	background: #48802C;
+	color: #000;
+	clear: both;
+	font-size: 0.7em;
+	margin-top: 0.8em;
+	padding: 1em;
+	min-height: 1em;
+	z-index: 1; 
+	position: relative;
 }
 
 .spinner {
@@ -268,8 +279,10 @@ img {
 	padding-left: 0;
 }
 .nav_float li {
+	/* remove these to put bar to side */
 	display: block;
 	float: left;
+	/*    */
 	list-style-type: none;
 	margin-right: 0;
 	padding: 0px;

@@ -153,9 +153,10 @@
 			var iproTable = $('#ipr_table_data').dataTable();
 			iprtableShow = iproTable._('td');
 		}
-
-     //draw the figure
-     drawHits(); 
+	 if (blast_data.length > 0 || fun_data.length > 0 || ipr_data.length > 0 ){
+     	//draw the figure
+     	drawHits(); 
+     }
      
      //exons
      var anOpen = [];
@@ -232,6 +233,8 @@
     //aa chart
 
   var aa_plot = $.jqplot('aa_chart', [aa_data], {
+  		animate: !$.jqplot.use_excanvas,
+  		seriesColors: [ "green"],
         seriesDefaults: {
             renderer:$.jqplot.BarRenderer,
             // Show point labels to the right ('e'ast) of each bar.
@@ -243,8 +246,10 @@
             shadowAngle: 135,
             // Here's where we tell the chart it is oriented horizontally.
             rendererOptions: {
-                barDirection: 'horizontal'
-            }
+                barDirection: 'horizontal',
+				//shadowDepth: 2,
+        		//barMargin: 4,
+		    }
         },
         axes: {
         	xaxis: {
@@ -262,51 +267,49 @@
   <body>
   <g:if test="${info_results}">
     <a name="info_anchor"><h1>Information for gene ${info_results.gene_id[0]}:</h1></a>
+    <table width=100%>
+      <tr><td width=40%>
+		<table>
+			<tr><td><b>Scaffold Id</b></td><td><g:link action="genome_info" params="${[contig_id: info_results.contig_id[0].trim()]}">${info_results.contig_id[0]}</g:link></td></tr>
+			<tr><td><b>Length</b></td><td>${printf("%,d\n",info_results.nuc[0].length())} bp (${printf("%,d\n",info_results.pep[0].length())} aa)</td></tr>
+			<tr><td><b>Exons</b></td><td>${exon_results.size()}</td></tr>
+			<tr><td><b>Source</b></td><td>${info_results.source[0]}</td></tr>
+			<tr><td><b>Scaffold start</b></td><td>${printf("%,d\n",info_results.start[0])}</td></tr>
+			<tr><td><b>Scaffold stop</b></td><td>${printf("%,d\n",info_results.stop[0])}</td></tr>
+			<tr><td><b>Strand</b></td><td>${info_results.strand[0]}</td></tr>
+			<tr><td><b>Download</b></td>
+					<td>
+				<div class="inline">
+				<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+					<g:hiddenField name="nucFileId" value="${info_results.gene_id[0]}"/>
+					<g:hiddenField name="fileName" value="${info_results.gene_id[0]}"/>
+					<g:hiddenField name="seq" value="Nucleotides"/>
+					<a href="#" onclick="document.nucfileDownload.submit()">Nucleotides</a>
+				</g:form> 
+				|
+				<g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+					<g:hiddenField name="pepFileId" value="${info_results.gene_id[0]}"/>
+					<g:hiddenField name="fileName" value="${info_results.gene_id[0]}"/>
+					<g:hiddenField name="seq" value="Peptides"/>
+					<a href="#" onclick="document.pepfileDownload.submit()">Peptides</a>
+				</g:form>
+				</div>
+			</td>
+			</tr>
+		</table> 
+    </td>
     
-    <table>
-      <tr>
-        <td><b>Scaffold Id</b></td>
-        <td><b>Length (aa)</b></td>
-        <td><b>Exons</b></td>
-        <td><b>Source</b></td>
-        <td><b>Scaffold start</b></td>
-        <td><b>Scaffold stop</b></td>
-        <td><b>Strand</b></td>
-        <td><b>Download</b></td>
-      </tr>
-      <tr>
-        <td><g:link action="genome_info" params="${[contig_id: info_results.contig_id[0].trim()]}">${info_results.contig_id[0]}</g:link></td>
-        <td>${printf("%,d\n",info_results.pep[0].length())}</td>
-        <td>${exon_results.size()}</td>
-        <td>${info_results.source[0]}</td>
-        <td>${printf("%,d\n",info_results.start[0])}</td>
-        <td>${printf("%,d\n",info_results.stop[0])}</td>
-        <td>${info_results.strand[0]}</td>
-        <td>
-        	<div class="inline">
-        	<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-		    	<g:hiddenField name="nucFileId" value="${info_results.gene_id[0]}"/>
-		    	<g:hiddenField name="fileName" value="${info_results.gene_id[0]}"/>
-		    	<g:hiddenField name="seq" value="Nucleotides"/>
-		    	<a href="#" onclick="document.nucfileDownload.submit()">Nucleotides</a>
-		    </g:form> 
-		    |
-		    <g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-		    	<g:hiddenField name="pepFileId" value="${info_results.gene_id[0]}"/>
-		    	<g:hiddenField name="fileName" value="${info_results.gene_id[0]}"/>
-		    	<g:hiddenField name="seq" value="Peptides"/>
-		    	<a href="#" onclick="document.pepfileDownload.submit()">Peptides</a>
-		    </g:form>
-		    </div>
-		</td>
-      </tr>
-    </table> 
+    <td width=60%>
+		<div id="aa_chart" class="jqplot-target"></div>
+    </td>
+    </tr>
+    </table>
+    
     <div id="nav_float">
-		<div class="footer" role="contentinfo">
+		<div class="mid" role="contentinfo">
 			<div class="nav_float">
 			<ul>
 			   <li><a href="#info_anchor" class="scroll">Info</a></li>
-			   <li><a href="#aa_anchor" class="scroll">Composition</a></li>
 			   <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
 				   <li><a href="#anno_anchor" class="scroll">Annotations</a></li>
 			   </g:if>
@@ -328,12 +331,8 @@
 			</div>
 		</div>
 	</div>
-	
-    <a name="aa_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>  
-    <h1>Amino acid composition</h1>
-    <div id="aa_chart" class="jqplot-target" style="height: 400px; width: 100%; position: center;"></div>
      
-    <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}" || test="${exon_results}">
+    <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
         <a name="anno_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>  
     
 		<g:if test="${params.top != "10"}">
@@ -619,7 +618,7 @@
 		 <thead>
 			<tr>
 				<th></th>
-				<th>ID</th>
+				<th width=30%>ID</th>
 				<th>Number</th>
 				<th>Length</th>
 				<th>GC</th>
@@ -629,7 +628,7 @@
 		 </thead>
 		 <tbody></tbody>
 	     </table> 
-     
+     <br>
 	<g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
 	</g:if>
 	<g:else>
