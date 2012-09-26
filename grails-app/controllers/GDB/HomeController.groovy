@@ -280,6 +280,38 @@ class HomeController {
 		 genome_stats.gc = gc
 		 genome_stats.nonATGC = nonATGC
 		 
+		 //get gene stats
+		 def geneInfoSql = "select * from gene_info;"
+	 	 def geneInfo = sql.rows(geneInfoSql) 
+	 	 int mean=0
+	 	 min=10000000000
+	 	 max=0
+	 	 nonATGC=0
+	 	 gc=0
+		 def gene_stats = [:]
+		 
+	 	 geneInfo.each {
+			mean += it.nuc.length()
+			gc += it.gc
+			nonATGC += it.nuc.toUpperCase().count("N")
+			//nonATGC += it.sequence.toUpperCase().findAll(/G|C|A|T/).size()
+			if (it.nuc.length() < min){
+				min = it.nuc.length()
+			}
+			if (it.nuc.length() > max){
+				max = it.nuc.length()
+			}
+		 }
+		 //nonATGC = span-nonATGC
+		 mean = mean/geneInfo.size()
+		 gc = gc/geneInfo.size()
+	 	 gene_stats.mean = mean
+	 	 gene_stats.gc = gc
+	 	 gene_stats.min = min
+	 	 gene_stats.max = max
+	 	 gene_stats.nonATGC = nonATGC
+	 	 println gene_stats
+		 
 		 //get data for plots
 		 def geneCount = GeneInfo.count()
 		 def exonCount = ExonInfo.count()
@@ -289,7 +321,7 @@ class HomeController {
 		 def exonDistData = sql.rows(exonDist)
 		 def geneDist = "select num,count(num) from (select gene_id, length(pep) as num from gene_info group by gene_id,pep) as foo group by num order by num;"
 		 def geneDistData = sql.rows(geneDist)
-		 return [exonCountData: exonCountData, geneCount:geneCount, exonDistData: exonDistData, exonCount: exonCount, geneDistData:geneDistData, genome_stats:genome_stats]
+		 return [exonCountData: exonCountData, geneCount:geneCount, exonDistData: exonDistData, exonCount: exonCount, geneDistData:geneDistData, genome_stats:genome_stats, gene_stats:gene_stats]
 	 }
  }
 }

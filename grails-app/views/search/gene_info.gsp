@@ -6,8 +6,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${grailsApplication.config.projectID} gene info</title>
     <parameter name="search" value="selected"></parameter>
-    <script src="${resource(dir: 'js', file: 'DataTables-1.9.0/media/js/jquery.js')}" type="text/javascript"></script> 
-    <script src="${resource(dir: 'js', file: 'DataTables-1.9.0/media/js/jquery.dataTables.js')}" type="text/javascript"></script>
+  
+ 	<script src="${resource(dir: 'js', file: 'jqplot/jquery.min.js')}" type="text/javascript"></script>
+    <script src="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.js')}" type="text/javascript"></script>
+    <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.barRenderer.min.js')}" type="text/javascript"></script>
+    <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.categoryAxisRenderer.min.js')}" type="text/javascript"></script>    
+    <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.pointLabels.min.js')}" type="text/javascript"></script>    
+    <link rel="stylesheet" href="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.css')}" type="text/css"></link>
+    
+	<script src="${resource(dir: 'js', file: 'DataTables-1.9.0/media/js/jquery.dataTables.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/TableTools.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/ZeroClipboard.js')}" type="text/javascript"></script>
     <style type="text/css">
@@ -21,7 +28,7 @@
 		  def blastjsonData = blast_results.encodeAsJSON();
 		  def funjsonData = fun_results.encodeAsJSON();
 		  def exonjsonData = exon_results.encodeAsJSON();
-		  //println exonjsonData
+		  //println aaData
 		  %>  
     
     <script type="text/javascript">
@@ -73,6 +80,8 @@
 	ipr_data = ${iprjsonData};
 	fun_data = ${funjsonData};
 	exon_data = ${exonjsonData};
+	aa_data = ${aaData}
+	//alert(aa_data)
     
     $(document).ready(function() {
     	$(".scroll").click(function(event){		
@@ -219,6 +228,33 @@
 	   //alert(sOut)
 	  return sOut;
 	}
+     
+    //aa chart
+
+  var aa_plot = $.jqplot('aa_chart', [aa_data], {
+        seriesDefaults: {
+            renderer:$.jqplot.BarRenderer,
+            // Show point labels to the right ('e'ast) of each bar.
+            // edgeTolerance of -15 allows labels flow outside the grid
+            // up to 15 pixels.  If they flow out more than that, they 
+            // will be hidden.
+            pointLabels: { show: true, location: 'e', edgeTolerance: -15 },
+            // Rotate the bar shadow as if bar is lit from top right.
+            shadowAngle: 135,
+            // Here's where we tell the chart it is oriented horizontally.
+            rendererOptions: {
+                barDirection: 'horizontal'
+            }
+        },
+        axes: {
+        	xaxis: {
+				label: 'Percentage of amino acids',
+			},
+            yaxis: {
+                renderer: $.jqplot.CategoryAxisRenderer
+            }
+        }
+    });
         
     });
     </script>
@@ -226,6 +262,7 @@
   <body>
   <g:if test="${info_results}">
     <a name="info_anchor"><h1>Information for gene ${info_results.gene_id[0]}:</h1></a>
+    
     <table>
       <tr>
         <td><b>Scaffold Id</b></td>
@@ -269,6 +306,7 @@
 			<div class="nav_float">
 			<ul>
 			   <li><a href="#info_anchor" class="scroll">Info</a></li>
+			   <li><a href="#aa_anchor" class="scroll">Composition</a></li>
 			   <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
 				   <li><a href="#anno_anchor" class="scroll">Annotations</a></li>
 			   </g:if>
@@ -290,7 +328,11 @@
 			</div>
 		</div>
 	</div>
-    
+	
+    <a name="aa_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>  
+    <h1>Amino acid composition</h1>
+    <div id="aa_chart" class="jqplot-target" style="height: 400px; width: 100%; position: center;"></div>
+     
     <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}" || test="${exon_results}">
         <a name="anno_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>  
     
