@@ -7,7 +7,9 @@ class SearchController {
 	def matcher
 	def grailsApplication
 	javax.sql.DataSource dataSource
+	def peptideService
     //@Secured(['ROLE_USER'])
+    
     def index() {
     }
     def all_search = {
@@ -49,6 +51,7 @@ class SearchController {
 			def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
 			return [searchId: params.searchId, search_time: duration, transRes: transRes, geneRes: geneRes, pubRes: pubRes]
 		}
+		sql.close()
     }
 
     def trans_search = { 
@@ -125,6 +128,7 @@ class SearchController {
 			 def results = sql.rows(sqlsearch)
 			 //println results
 			 return [ genomeData: results]
+			 sql.close()
 		}
     }
     def trans_search_results = {
@@ -218,7 +222,8 @@ class SearchController {
 				def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
 				return [results: results, term : searchId , search_time: duration, uniques:uniques.size(),sql:sqlsearch, annoType: annoType]         
 			}
-		  }
+			sql.close()	
+		  }		  
 		}
          
     def gene_search_results = {
@@ -330,6 +335,7 @@ class SearchController {
 				def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
 				return [results: results, term : searchId , search_time: duration, uniques:uniques.size(),sql:sqlsearch, annoType: annoType, annoLinks: annoLinks]         
 			}
+			sql.close()
 		}
       }
     
@@ -388,54 +394,15 @@ class SearchController {
 			println "Anno links =  "+annoLinks
 
 			//get amino acid info
-			
-			def aaInfo = [:]
-			aaInfo.G = "Glycine (Gly)"
-			aaInfo.P = "Proline (Pro)"
-			aaInfo.A = "Alanine (Ala)"
-			aaInfo.V = "Valine (Val)"
-			aaInfo.L = "Leucine (Leu)"
-			aaInfo.I = "Isoleucine (Ile)"
-			aaInfo.M = "Methionine (Met)"
-			aaInfo.C = "Cysteine (Cys)"
-			aaInfo.F = "Phenylalanine (Phe)"
-			aaInfo.Y = "Tyrosine (Tyr)"
-			aaInfo.W = "Tryptophan (Trp)"
-			aaInfo.H = "Histidine (His)"
-			aaInfo.K = "Lysine (Lys)"
-			aaInfo.R = "Arginine (Arg)"
-			aaInfo.Q = "Glutamine (Gln)"
-			aaInfo.N = "Asparagine (Asn)"
-			aaInfo.E = "Glutamic Acid (Glu)"
-			aaInfo.D = "Aspartic Acid (Asp)"
-			aaInfo.S = "Serine (Ser)"
-			aaInfo.T = "Threonine (Thr)"
-			
 			def info_results = GeneInfo.findAllByGene_id(params.gene_id)
-			def aaCount = [:]
-			def pep_seq
+			def aaData
 			info_results.each {
-				pep_seq = it.pep
-				def splitter = it.pep.split('')
-				splitter.each { letter->
-					if (aaCount."${letter}"){
-						aaCount."${letter}" += 1
-					}else{
-						 aaCount."${letter}" = 1
-					}
-				}
-			}
-			//println "aaCount = "+aaCount
-			def aaData = []
-			aaCount.each{
-				if (aaInfo."${it.key}"){
-					def aa = [(it.value/pep_seq.length())*100,"'"+aaInfo."${it.key}"+"'"]
-					//def aa = [it.value,"'"+aaInfo."${it.key}"+"'"]
-					aaData.add(aa)
-				}
-			}
-			//println "aaData = "+aaData
+				aaData = peptideService.getComp(it.pep)
+				//println "service = "+service
+			}	
+			println "aaData = "+aaData
 			return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData]
+    	sql.close()
     	}
     }
     def trans_info = {
@@ -484,6 +451,7 @@ class SearchController {
 			}
 			def info_results = TransInfo.findAllByContig_id(params.contig_id)
 			return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results]
+    	sql.close()
     	}
 	}
     def genome_info = {

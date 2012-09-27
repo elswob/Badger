@@ -270,14 +270,14 @@
     <table width=100%>
       <tr><td width=40%>
 		<table>
-			<tr><td><b>Scaffold Id</b></td><td><g:link action="genome_info" params="${[contig_id: info_results.contig_id[0].trim()]}">${info_results.contig_id[0]}</g:link></td></tr>
-			<tr><td><b>Length</b></td><td>${printf("%,d\n",info_results.nuc[0].length())} bp (${printf("%,d\n",info_results.pep[0].length())} aa)</td></tr>
-			<tr><td><b>Exons</b></td><td>${exon_results.size()}</td></tr>
-			<tr><td><b>Source</b></td><td>${info_results.source[0]}</td></tr>
-			<tr><td><b>Scaffold start</b></td><td>${printf("%,d\n",info_results.start[0])}</td></tr>
-			<tr><td><b>Scaffold stop</b></td><td>${printf("%,d\n",info_results.stop[0])}</td></tr>
-			<tr><td><b>Strand</b></td><td>${info_results.strand[0]}</td></tr>
-			<tr><td><b>Download</b></td>
+			<tr><td><b>Scaffold Id:</b></td><td><g:link action="genome_info" params="${[contig_id: info_results.contig_id[0].trim()]}">${info_results.contig_id[0]}</g:link></td></tr>
+			<tr><td><b>Length:</b></td><td>${printf("%,d\n",info_results.nuc[0].length())} bp (${printf("%,d\n",info_results.pep[0].length())} aa)</td></tr>
+			<tr><td><b>Exons:</b></td><td>${exon_results.size()}</td></tr>
+			<tr><td><b>Source:</b></td><td>${info_results.source[0]}</td></tr>
+			<tr><td><b>Scaffold start:</b></td><td>${printf("%,d\n",info_results.start[0])}</td></tr>
+			<tr><td><b>Scaffold stop:</b></td><td>${printf("%,d\n",info_results.stop[0])}</td></tr>
+			<tr><td><b>Strand:</b></td><td>${info_results.strand[0]}</td></tr>
+			<tr><td><b>Download:</b></td>
 					<td>
 				<div class="inline">
 				<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">

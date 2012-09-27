@@ -122,6 +122,7 @@ class HomeController {
 		 def yearsql = "select count(*),date_part('year',date_string) from publication group by date_part('year',date_string) order by date_part('year',date_string);"
 		 def yearData = sql.rows(yearsql)
 		 return [yearData: yearData]
+		 sql.close()
 	 }
  }
  def publication_search = {
@@ -165,6 +166,7 @@ class HomeController {
 				return [error: "no_type", searchId: searchId]
 			}
 		}
+		sql.close()
 	}
  }
 
@@ -323,5 +325,6 @@ class HomeController {
 		 def geneDistData = sql.rows(geneDist)
 		 return [exonCountData: exonCountData, geneCount:geneCount, exonDistData: exonDistData, exonCount: exonCount, geneDistData:geneDistData, genome_stats:genome_stats, gene_stats:gene_stats]
 	 }
+	 sql.close()
  }
 }
