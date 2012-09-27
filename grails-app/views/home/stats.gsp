@@ -279,6 +279,16 @@
             }
         }
     });
+    $('#fun_chart').bind('jqplotDataClick',
+		function (ev, seriesIndex, pointIndex, data) {
+			//alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
+			if (fDb[pointIndex] == 'BlastProDom' || fDb[pointIndex] == 'HMMTigr' || fDb[pointIndex] == 'SignalPHMM' || fDb[pointIndex] == 'FPrintScan' || fDb[pointIndex] == 'ProfileScan' || fDb[pointIndex] == 'TMHMM' || fDb[pointIndex] == 'HMMPIR' || fDb[pointIndex] == 'HAMAP' || fDb[pointIndex] == 'HMMPanther' || fDb[pointIndex] == 'HMMPfam' || fDb[pointIndex] == 'PatternScan' || fDb[pointIndex] == 'Gene3D' || fDb[pointIndex] == 'HMMSmart' || fDb[pointIndex] == 'SuperFamily'){
+				window.open("/search/gene_link?annoType=3&db="+fDb[pointIndex],'_self');
+			}else{
+				window.open("/search/gene_link?annoType=2&db="+fDb[pointIndex],'_self');
+			}
+		}
+	);
     
     BlastData = ${jsonBlastData};    
 	var bCount = [], bDb = [], bPer =[];
@@ -298,7 +308,7 @@
 	var blast_plot = $.jqplot('blast_chart', [BlastArray], {
 		title: 'BLAST homology', 
   		animate: !$.jqplot.use_excanvas,
-  		seriesColors: [ "blue"],
+  		seriesColors: [ "#3366CC"],
         seriesDefaults: {
             renderer:$.jqplot.BarRenderer,
             // Show point labels to the right ('e'ast) of each bar.
@@ -324,6 +334,13 @@
             }
         }
     });
+    
+    $('#blast_chart').bind('jqplotDataClick',
+		function (ev, seriesIndex, pointIndex, data) {
+			//alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
+			window.open("/search/gene_link?annoType=1&db="+bDb[pointIndex],'_self');
+		}
+	);
 	    
 	}); 
 	

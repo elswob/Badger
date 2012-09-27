@@ -285,7 +285,7 @@
 				<% if (annoType == "1"){ %>
 				  <th></th>
 				<% } %>
-				  <th><b>Transcript ID</b></th>
+				  <th><b>Gene ID</b></th>
 				  <th><b>Database</b></th>
 				  <th><b>Hit ID</b></th>
 				  <th width=50%><b>Description</b></th>

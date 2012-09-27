@@ -8,6 +8,7 @@ class SearchController {
 	def grailsApplication
 	javax.sql.DataSource dataSource
 	def peptideService
+	def annoLinksService
     //@Secured(['ROLE_USER'])
     
     def index() {
@@ -240,15 +241,7 @@ class SearchController {
 			def annoType = params.toggler
 			println "annoType = "+annoType
 			def annoDB
-			def annoLinks = [:]
 			if (annoType == '1'){
-				for(item in grailsApplication.config.g.blast){
-					item = item.toString()
-     	 			def splitter = item.split("=",2)
-     	 			def splitter2 = splitter[1].split(",")
-     	 			annoLinks."${splitter[0]}" = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]
-     	 			
-     	 		}
 				whatSearch = params.tableSelect_1
 				annoDB = params.blastAnno
 				//choose what to search			
@@ -257,12 +250,6 @@ class SearchController {
 				if (whatSearch == 'e.g. contig_1'){whatSearch = 'contig_id = '}
 			}
 			if (annoType == '2'){
-				for(item in grailsApplication.config.g.fun){
-					item = item.toString()
-     	 			def splitter = item.split("=",2)
-     	 			def splitter2 = splitter[1].split(",")
-     	 			annoLinks."${splitter[0]}" = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]    	 			
-     	 		}
 				whatSearch = params.tableSelect_2
 				annoDB = params.funAnno
 				//choose what to search			
@@ -270,10 +257,7 @@ class SearchController {
 				if (whatSearch == 'e.g. GO:0008094 or 3.6.3.8 or K02147'){whatSearch = 'anno_id ~* '}
 				if (whatSearch == 'e.g. contig_1'){whatSearch = 'contig_id = '}
 			}
-			if (annoType == '3'){
-     	 		def splitter2 = grailsApplication.config.g.IPR.split(",")
-     	 		annoLinks.IPR = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]
-     	 		     	 			
+			if (annoType == '3'){  	 			
 				whatSearch = params.tableSelect_3
 				annoDB = params.iprAnno
 				//choose what to search			
@@ -281,6 +265,7 @@ class SearchController {
 				if (whatSearch == 'e.g. IPR023298 or PF01813'){whatSearch = 'anno_id ~* '}
 				if (whatSearch == 'e.g. contig_1'){whatSearch = 'contig_id = '}
 			}
+			def annoLinks = annoLinksService.getLinks()
 			println "Anno links =  "+annoLinks
 			println "annoDB = "+annoDB
 			//construct the anno_db search string			
@@ -344,15 +329,13 @@ class SearchController {
      		redirect(controller: "home", action: "index")
      	}else{
 			def sql = new Sql(dataSource)
-			def annoLinks = [:]
+			
 			def blastDBs = "anno_db = "
 			if (grailsApplication.config.g.blast.size()>0){
 				for(item in grailsApplication.config.g.blast){
 				item = item.toString()
 					def splitter = item.split("=",2)
 					blastDBs += "'"+splitter[0]+"' or anno_db = "
-					def splitter2 = splitter[1].split(",")
-     	 			annoLinks."${splitter[0]}" = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]
 				}
 				blastDBs = blastDBs[0..-15]
 			}
@@ -363,8 +346,6 @@ class SearchController {
 				item = item.toString()
 					def splitter = item.split("=",2)
 					funDBs += "'"+splitter[0]+"' or anno_db = "
-					def splitter2 = splitter[1].split(",")
-     	 			annoLinks."${splitter[0]}" = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]
 				}
 				funDBs = funDBs[0..-15]
 			}
@@ -377,8 +358,6 @@ class SearchController {
 				blast_results = sql.rows(blastsql)
 			}
 			if (grailsApplication.config.g.IPR){
-				def splitter2 = grailsApplication.config.g.IPR.split(",")
-     	 		annoLinks.IPR = [splitter2[0].trim(),splitter2[1].trim(),splitter2[2].trim()]
 				def iprsql = "select * from gene_anno where anno_id ~ '^IPR' and gene_id = '"+params.gene_id+"' order by score;";
 				ipr_results = sql.rows(iprsql)
 			}
@@ -391,6 +370,7 @@ class SearchController {
 			def exonsql = "select *,stop-start as length from exon_info where gene_id = '"+params.gene_id+"' order by exon_number;"
 			def exon_results = sql.rows(exonsql)
 			
+			def annoLinks = annoLinksService.getLinks()
 			println "Anno links =  "+annoLinks
 
 			//get amino acid info
@@ -463,6 +443,36 @@ class SearchController {
      		println "contig_id ="+params.contig_id+"test"
 			def info_results = GenomeInfo.findAllByContig_id(params.contig_id)
 			return [ info_results: info_results, gene_results: gene_results]
+		}
+    }
+	def gene_link = {
+		def sql = new Sql(dataSource)
+       	if (grailsApplication.config.i.links.genes == 'private' && !isLoggedIn()) {
+     		redirect(controller: "home", action: "index")
+     	}else{
+     		def timeStart = new Date()
+     		def db = params.db
+     		def type = params.annoType
+     		def gene_sql
+     		if (type == "1"){
+     			gene_sql = "select distinct on (gene_id,anno_db) gene_id,anno_db,anno_start,anno_stop,anno_id,score,descr,gaps,align,hit_start,hit_stop,hseq,identity,midline,positive,qseq from gene_blast where anno_db = '"+db+"';"
+     		}
+     		else if (type == "2" || type == "3"){
+     			gene_sql = "select distinct on (gene_id,anno_db) gene_id,anno_db,anno_id,score,descr from gene_anno where anno_db = '"+db+"';"
+     		}
+     		
+     		//to get genes with no blast hits
+     		//select gene_info.gene_id from gene_info left outer join gene_blast on (gene_info.gene_id = gene_blast.gene_id) where anno_db is NULL;
+     		
+     		println gene_sql
+     		//get anno links
+     		def annoLinks = annoLinksService.getLinks()
+     		println "links = "+annoLinks
+     		def gene_results = sql.rows(gene_sql)
+     		def timeStop = new Date()
+			def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
+			return [ type: type, db: db, gene_results: gene_results, search_time: duration, annoLinks: annoLinks, annoType: type,]
+			sql.close()
 		}
     }
 }
