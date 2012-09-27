@@ -317,13 +317,17 @@ class HomeController {
 		 //get data for plots
 		 def geneCount = GeneInfo.count()
 		 def exonCount = ExonInfo.count()
+		 def funAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_info left outer join gene_anno on (gene_info.gene_id = gene_anno.gene_id) group by anno_db;"
+		 def funAnnoData = sql.rows(funAnnoSql)
+		 def blastAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_info left outer join gene_blast on (gene_info.gene_id = gene_blast.gene_id) group by anno_db;"
+		 def blastAnnoData = sql.rows(blastAnnoSql)
 		 def exonCountSql = "select num,count(num) from (select gene_id, count(gene_id) as num from exon_info group by gene_id) as foo group by num order by num;"
 		 def exonCountData = sql.rows(exonCountSql)
 		 def exonDist = "select num,count(num) from (select exon_id, stop-start as num from exon_info group by exon_id,start,stop) as foo where num<1000 group by num order by num;"
 		 def exonDistData = sql.rows(exonDist)
 		 def geneDist = "select num,count(num) from (select gene_id, length(pep) as num from gene_info group by gene_id,pep) as foo group by num order by num;"
 		 def geneDistData = sql.rows(geneDist)
-		 return [exonCountData: exonCountData, geneCount:geneCount, exonDistData: exonDistData, exonCount: exonCount, geneDistData:geneDistData, genome_stats:genome_stats, gene_stats:gene_stats]
+		 return [exonCountData: exonCountData, geneCount:geneCount, exonDistData: exonDistData, exonCount: exonCount, geneDistData:geneDistData, genome_stats:genome_stats, gene_stats:gene_stats, blastAnnoData: blastAnnoData, funAnnoData: funAnnoData]
 	 }
 	 sql.close()
  }
