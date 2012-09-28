@@ -121,7 +121,7 @@
   		 		
   		var plot2 = $.jqplot ('chart2', [exDistNumArray],{
   		 animate: true,
-		 title: 'Distribution of exon lengths (<1000bp)', 
+		 title: 'Distribution of exon lengths', 
 		 series:[
 			 {
 			 showLine:false,
@@ -341,6 +341,75 @@
 			window.open("/search/gene_link?annoType=Blast&val="+bDb[pointIndex],'_self');
 		}
 	);
+	
+	exonLenNumData = ${exonLenNum}
+	exonGCNumData = ${exonGCNum}
+	var exonNumPlot = $.jqplot ('exon_num', [exonLenNumData, exonGCNumData],{
+		legend: {
+ 		   show: true,
+    		location: 'nw',
+    		xoffset: 1,
+    		fontSize: '11px',
+    		rowSpacing: '10px',
+    		textColor: '#222222',
+    		fontFamily: 'Lucida Grande, Lucida Sans, Arial, sans-serif'
+		 },
+  		 animate: true,
+		 title: 'Mean Length and GC content of exons by exon number', 
+		 series:[
+			 {
+			 //showLine:false,
+			 label:'Length',
+			 markerOptions: { size: 2, style:"circle", color:"green"},
+			 color: 'green'
+			 },
+			 {
+			 //showLine:false,
+			 label:'GC',
+			 markerOptions: { size: 2, style:"circle", color:"orange"},
+			 color: 'orange',
+			 yaxis:'y2axis'
+			 },
+		 ],
+		 axesDefaults: {
+			 labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+		 },
+		 axes: {
+			xaxis: {
+				//renderer: $.jqplot.LogAxisRenderer,
+				label: 'Exon number',
+				pad: 0
+			},
+			yaxis: {
+				autoscale:true, 
+				label: 'Length (bp)',
+				pad: 0,
+			},
+			y2axis:{
+				label: 'GC (%)',
+          		autoscale:true, 
+          		tickOptions:{showGridline:false}
+      		}
+		 },
+		 //seriesColors: pointcolours,
+		 highlighter: {
+			 tooltipAxes: 'yx',
+			 yvalues: 1,
+			 show: true,
+			 sizeAdjust: 7.5,
+			 //formatString: "%d"
+			 //formatString: ContigData[0].contig_id +" length: " + ContigData[1].length
+			 formatString: 'Value: %d<br>Exon: %d'
+	
+		 },
+		 cursor:{
+		 	 show: true,
+		 	 zoom:true,
+		 	 showTooltip: false,
+		 	 //tooltipLocation:'nw'
+		 }
+
+	    });  
 	    
 	}); 
 	
@@ -349,12 +418,6 @@
   </head>
 
   <body>
-  
-
- 
-
- 
- 
  <table width=100%>
       <tr><td width=40%>
       	 <h1>Genome:</h1>
@@ -389,5 +452,7 @@
     <div id="chart1" class="jqplot-target" style="height: 400px; width: 100%; position: center;"></div>
     <br>
     <div id="chart2" class="jqplot-target" style="height: 400px; width: 100%; position: center;"></div>
+	<br>
+    <div id="exon_num" class="jqplot-target" style="height: 400px; width: 100%; position: center;"></div>
 </body>
 </html>

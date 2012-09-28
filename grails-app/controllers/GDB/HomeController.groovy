@@ -331,7 +331,19 @@ class HomeController {
 		 def exonDistData = sql.rows(exonDist)
 		 def geneDist = "select num,count(num) from (select gene_id, length(pep) as num from gene_info group by gene_id,pep) as foo group by num order by num;"
 		 def geneDistData = sql.rows(geneDist)
-		 return [exonCountData: exonCountData, geneCount:geneCount, exonDistData: exonDistData, exonCount: exonCount, geneDistData:geneDistData, genome_stats:genome_stats, gene_stats:gene_stats, blastAnnoData: blastAnnoData, funAnnoData: funAnnoData]
+		 
+		 //exon lengths and gc by exon number
+		 def exonNumLenGCsql = "select exon_number,avg(length(sequence)) as len ,avg(gc) as gc from exon_info group by exon_number order by exon_number;"
+		 def exonNumLenGC = sql.rows(exonNumLenGCsql)
+		 def exonLenNum = []
+		 def exonGCNum = []
+		 exonNumLenGC.each{
+		 	def aa = [it.exon_number,it.len]
+		 	exonLenNum.add(aa)
+		 	def bb = [it.exon_number,it.gc]
+		 	exonGCNum.add(bb)
+		 }
+		 return [exonCountData: exonCountData, geneCount:geneCount, exonDistData: exonDistData, exonCount: exonCount, geneDistData:geneDistData, genome_stats:genome_stats, gene_stats:gene_stats, blastAnnoData: blastAnnoData, funAnnoData: funAnnoData, exonLenNum: exonLenNum, exonGCNum: exonGCNum ]
 	 }
 	 sql.close()
  }
