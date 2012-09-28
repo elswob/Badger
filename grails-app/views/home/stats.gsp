@@ -99,7 +99,7 @@
   		$('#chart1').bind('jqplotDataClick',
             function (ev, seriesIndex, pointIndex, data) {
             	//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-            	window.open("/search/genome_info?contig_id=" + data[2]);
+            	window.open("/search/gene_link?annoType=Exon_num&val=" + data[0]);
 	    	}
 	    );  
 	    
@@ -166,7 +166,7 @@
   		$('#chart2').bind('jqplotDataClick',
             function (ev, seriesIndex, pointIndex, data) {
             	//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-            	window.open("/search/genome_info?contig_id=" + data[2]);
+            	window.open("/search/gene_link?annoType=Exon_length&val=" + data[0]);
 	    	}
 	    );  
 	    
@@ -231,7 +231,7 @@
   		$('#chart3').bind('jqplotDataClick',
             function (ev, seriesIndex, pointIndex, data) {
             	//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-            	window.open("/search/genome_info?contig_id=" + data[2]);
+            	window.open("/search/gene_link?annoType=Length&val=" + data[0]);
 	    	}
 	    );  
 	
@@ -283,9 +283,9 @@
 		function (ev, seriesIndex, pointIndex, data) {
 			//alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
 			if (fDb[pointIndex] == 'BlastProDom' || fDb[pointIndex] == 'HMMTigr' || fDb[pointIndex] == 'SignalPHMM' || fDb[pointIndex] == 'FPrintScan' || fDb[pointIndex] == 'ProfileScan' || fDb[pointIndex] == 'TMHMM' || fDb[pointIndex] == 'HMMPIR' || fDb[pointIndex] == 'HAMAP' || fDb[pointIndex] == 'HMMPanther' || fDb[pointIndex] == 'HMMPfam' || fDb[pointIndex] == 'PatternScan' || fDb[pointIndex] == 'Gene3D' || fDb[pointIndex] == 'HMMSmart' || fDb[pointIndex] == 'SuperFamily'){
-				window.open("/search/gene_link?annoType=3&db="+fDb[pointIndex],'_self');
+				window.open("/search/gene_link?annoType=IPR&val="+fDb[pointIndex]);
 			}else{
-				window.open("/search/gene_link?annoType=2&db="+fDb[pointIndex],'_self');
+				window.open("/search/gene_link?annoType=Functional&val="+fDb[pointIndex]);
 			}
 		}
 	);
@@ -338,7 +338,7 @@
     $('#blast_chart').bind('jqplotDataClick',
 		function (ev, seriesIndex, pointIndex, data) {
 			//alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
-			window.open("/search/gene_link?annoType=1&db="+bDb[pointIndex],'_self');
+			window.open("/search/gene_link?annoType=Blast&val="+bDb[pointIndex],'_self');
 		}
 	);
 	    

@@ -173,7 +173,7 @@
 				},
 				{ "mDataProp": "exon_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"${grailsApplication.config.g.link}?name="+oObj.aData["contig_id"]+":"+oObj.aData["start"]+".."+oObj.aData["stop"]+"\" target='_blank'>"+sVal+"</a>";
+					return "<a href=\"/home/browse?contig_id="+oObj.aData["contig_id"]+"&start="+oObj.aData["start"]+"&stop="+oObj.aData["stop"]+"\">"+sVal+"</a>";
 				}},
 				{ "mDataProp": "exon_number" },
 				{ "mDataProp": "length" },

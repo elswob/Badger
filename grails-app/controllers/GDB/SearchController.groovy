@@ -367,7 +367,7 @@ class SearchController {
 				fun_results = sql.rows(funsql)
 			}
 			//get exon info
-			def exonsql = "select *,stop-start as length from exon_info where gene_id = '"+params.gene_id+"' order by exon_number;"
+			def exonsql = "select *,length(sequence) as length from exon_info where gene_id = '"+params.gene_id+"' order by exon_number;"
 			def exon_results = sql.rows(exonsql)
 			
 			def annoLinks = annoLinksService.getLinks()
@@ -451,27 +451,42 @@ class SearchController {
      		redirect(controller: "home", action: "index")
      	}else{
      		def timeStart = new Date()
-     		def db = params.db
+     		def val = params.val
      		def type = params.annoType
      		def gene_sql
-     		if (type == "1"){
-     			gene_sql = "select distinct on (gene_id,anno_db) gene_id,anno_db,anno_start,anno_stop,anno_id,score,descr,gaps,align,hit_start,hit_stop,hseq,identity,midline,positive,qseq from gene_blast where anno_db = '"+db+"';"
+     		if (type == "Blast"){
+     			if (val == "None"){
+     				gene_sql = "select gene_info.gene_id,gc,length(pep) as lpep, length(nuc) as lnuc, strand from gene_info left outer join gene_blast on (gene_info.gene_id = gene_blast.gene_id) where anno_db is NULL;"
+     			}else{
+     				gene_sql = "select distinct on (gene_id,anno_db) gene_id,anno_db,anno_start,anno_stop,anno_id,score,descr,gaps,align,hit_start,hit_stop,hseq,identity,midline,positive,qseq from gene_blast where anno_db = '"+val+"';"
+     			}
      		}
-     		else if (type == "2" || type == "3"){
-     			gene_sql = "select distinct on (gene_id,anno_db) gene_id,anno_db,anno_id,score,descr from gene_anno where anno_db = '"+db+"';"
+     		else if (type == "Functional" || type == "IPR"){
+     			if (val == "None"){
+     				gene_sql = "select gene_info.gene_id,gc,length(pep) as lpep, length(nuc) as lnuc, strand from gene_info left outer join gene_anno on (gene_info.gene_id = gene_anno.gene_id) where anno_db is NULL;"
+     			}else{
+     				gene_sql = "select distinct on (gene_id,anno_db) gene_id,anno_db,anno_id,score,descr from gene_anno where anno_db = '"+val+"';"
+     			}
      		}
-     		
-     		//to get genes with no blast hits
-     		//select gene_info.gene_id from gene_info left outer join gene_blast on (gene_info.gene_id = gene_blast.gene_id) where anno_db is NULL;
-     		
+     		else if (type == "Length"){
+     			gene_sql = "select gene_id,gc,length(pep) as lpep, length(nuc) as lnuc, strand from gene_info where length(pep) = '"+val+"';"
+     		}
+     		else if (type == "Exon_num"){
+     			gene_sql = "select gene_id,gc,length(pep) as lpep, length(nuc) as lnuc, strand from gene_info where gene_id in (select gene_id from exon_info group by gene_id having count(exon_id) = '"+val+"');"
+     		}else if (type == "Exon_length"){
+     			gene_sql = "select gene_info.gene_id,gene_info.gc,length(pep) as lpep, length(nuc) as lnuc, gene_info.strand from gene_info,exon_info where gene_info.gene_id = exon_info.gene_id and length(exon_info.sequence) = '"+val+"';"
+     		}
+
      		println gene_sql
+     		def gene_results = sql.rows(gene_sql)
+     		
      		//get anno links
      		def annoLinks = annoLinksService.getLinks()
      		println "links = "+annoLinks
-     		def gene_results = sql.rows(gene_sql)
+     		
      		def timeStop = new Date()
 			def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
-			return [ type: type, db: db, gene_results: gene_results, search_time: duration, annoLinks: annoLinks, annoType: type,]
+			return [ val: val, gene_results: gene_results, search_time: duration, annoLinks: annoLinks, annoType: type]
 			sql.close()
 		}
     }
