@@ -96,7 +96,8 @@
     	<g:if test="${gene_results}">
     	<hr size = 5 color="green" width="100%" style="margin-top:10px">
     	<div class="inline">
-    	 <h1>Genes on <b>${info_results.contig_id[0]}</b>:</h1>
+    	<br>
+    	 <h1>${gene_results.size()} genes</b>:</h1>
 			<!-- download genes form gets fileName value from get_table_data() -->		    		
 			 <div style="right:0px;">
 				 &nbsp;&nbsp;(Download gene sequences:

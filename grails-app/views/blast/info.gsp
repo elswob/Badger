@@ -31,11 +31,14 @@ the six-frame translations of a nucleotide sequence database.</p>
 <h1><A name=db>Databases available for BLAST search</h1></center></A>
 <hr>
 <p>
-<h3><b>Nucleotide Sequence Databases</b> :</h3>
-
-<p><b>Genome contigs (members only)</b> - The latest genome assembly</p>
-<p><b>UniGenes</b> - A 20,003 contig CAP3 assembly of the public ESTs</p>
-
+   <sec:ifLoggedIn>
+    	<g:each var="res" in="${privBlastFiles}">
+    		<option value="${res.key}"/> ${res.key}</option>
+		</g:each>
+    </sec:ifLoggedIn>
+    <g:each var="res" in="${pubBlastFiles}">
+    	<option value="${res.key}" /> ${res.key}</option>
+	</g:each>
 <p>
 <hr>
 <h1><A name=filt>Low complexity filtering</h1></center></A>

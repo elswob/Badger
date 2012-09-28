@@ -36,8 +36,8 @@ class PeptideService {
 		def aaData = []
 		aaCount.each{
 			if (aaInfo."${it.key}"){
-				def aa = [(it.value/seq.length())*100,"'"+aaInfo."${it.key}"+"'"]
-				//def aa = [it.value,"'"+aaInfo."${it.key}"+"'"]
+				//def aa = [(it.value/seq.length())*100,"'"+aaInfo."${it.key}"+"'"]
+				def aa = [it.value,"'"+aaInfo."${it.key}"+"'"]
 				aaData.add(aa)
 			}
 		}

@@ -234,6 +234,7 @@
 
   var aa_plot = $.jqplot('aa_chart', [aa_data], {
   		animate: !$.jqplot.use_excanvas,
+  		title: 'Gene composition',
   		seriesColors: [ "green"],
         seriesDefaults: {
             renderer:$.jqplot.BarRenderer,
@@ -253,7 +254,7 @@
         },
         axes: {
         	xaxis: {
-				label: 'Percentage of amino acids',
+				//label: 'Percentage of amino acids',
 			},
             yaxis: {
                 renderer: $.jqplot.CategoryAxisRenderer
@@ -313,10 +314,6 @@
 			   <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
 				   <li><a href="#anno_anchor" class="scroll">Annotations</a></li>
 			   </g:if>
-			   <g:if test = "${grailsApplication.config.g.link}"> 
-					<li><a href="#browse_anchor" class="scroll">Browse</a></li>
-			   </g:if>
-			   <li><a href="#files_anchor" class="scroll">Sequence data</a></li>
 			   <g:if test="${blast_results}">
 				   <li><a href="#blast_anchor" class="scroll">BLAST</a></li>
 			   </g:if>
@@ -326,6 +323,10 @@
 			   <g:if test="${ipr_results}">
 				   <li><a href="#ipr_anchor" class="scroll">InterPro</a></li>
 			   </g:if>
+			   <g:if test = "${grailsApplication.config.g.link}"> 
+					<li><a href="#browse_anchor" class="scroll">Browse</a></li>
+			   </g:if>
+			   <li><a href="#files_anchor" class="scroll">Sequence data</a></li>
 			   <li><a href="#exon_anchor" class="scroll">Exons</a></li>
 			</ul>
 			</div>
@@ -335,12 +336,8 @@
     <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
         <a name="anno_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>  
     
-		<g:if test="${params.top != "10"}">
-			<h1>Top annotations  / <g:link action="gene_info" params="${[gene_id : info_results.gene_id[0], top: 10]}"> Top 10 annotations</g:link> from each database</h1>  
-		</g:if>
-		<g:else>    	    
-			<h1><g:link action="gene_info" params="${[gene_id : info_results.gene_id[0], top: 1]}">Top annotations </g:link> /  Top 10 annotations  from each database</h1>  
-		</g:else>  
+		  <h1>Annotation overview</h1>  
+ 
 		  <div id = "blast_fig">
 			 <script type="text/javascript" src="${resource(dir: 'js', file: 'raphael-min.js')}"></script>
 			 <script type="text/javascript" src="${resource(dir: 'js', file: 'g.raphael-min.js')}"></script>
@@ -445,31 +442,6 @@
 		  </div>
       </g:if>
       
-     <g:if test = "${grailsApplication.config.g.link}"> 
-     	<a name="browse_anchor"><div></a>
-         	<hr size = 5 color="green" width="100%" style="margin-top:10px">
-		 	<h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
-		 	<iframe src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" width="100%" height="700" frameborder="0">
-				<img src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}"/>
-		 	</iframe>
-		 </div>
-     </g:if>
-      <a name="files_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
-      <h1>FASTA files</h1>
-      <div style="overflow:auto; max-height:200px;">
-	      <table style="table-layout: fixed; width:100%">
-	      <tr><td style="word-wrap: break-word">
-	      >${info_results.gene_id[0]}<br>${info_results.pep[0]}
-	      </td></tr>
-	      </table>
-      </div>    
-      <div style="overflow:auto; max-height:200px;">
-	      <table style="table-layout: fixed; width:100%">
-	      <tr><td style="word-wrap: break-word">
-	      >${info_results.gene_id[0]}<br>${info_results.nuc[0]}
-	      </td></tr>
-	      </table>
-      </div>      
       <g:if test="${blast_results}">
 		  <a name="blast_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
 			   <h1>BLAST results</h1>
@@ -485,9 +457,7 @@
 			  </tr>
 			  </thead>
 			  <tbody>
-			 <% def blast_check = [:]%>
 			 <g:each var="res" in="${blast_results}">
-			 <g:unless test = "${blast_check[res.anno_db]}">
 			 <tr id="${res.anno_id}">
 			<td><a name="${res.anno_id}">${res.anno_db}</td>
 			<%
@@ -504,14 +474,6 @@
 			<td>${res.anno_stop}</td>
 			<td>${res.score}</td>
 			  </tr>  
-			  </g:unless>
-			  <%
-			  if (params.top != '10'){
-			//just get the first one for each annotation
-			def check_id = res.anno_db
-			blast_check[check_id] = "yes"
-			  }
-			  %>
 			 </g:each>
 			  </tbody>
 			</table>
@@ -533,9 +495,7 @@
 	      </tr>
 	      </thead>
 	      <tbody>
-	     <% def fun_check = [:]%>
 	     <g:each var="res" in="${fun_results}">
-	     <g:unless test = "${fun_check[res.anno_db]}">
 	     <tr id="${res.anno_id}">
 		<td><a name="${res.anno_id}">${res.anno_db}</td>
 		<%
@@ -552,14 +512,6 @@
 		<td>${res.anno_stop}</td>
 		<td>${res.score}</td>
 	      </tr>  
-	    </g:unless>
-	      <%
-	      if (params.top != '10'){
-		//just get the first one for each annotation
-		def check_id = res.anno_db
-		fun_check[check_id] = "yes"
-	      }
-	      %>
 	     </g:each>
 	      </tbody>
 	    </table>
@@ -611,6 +563,31 @@
 	   </g:if> 
      <br>
     
+    <g:if test = "${grailsApplication.config.g.link}"> 
+     	<a name="browse_anchor"><div></a>
+         	<hr size = 5 color="green" width="100%" style="margin-top:10px">
+		 	<h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
+		 	<iframe src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" width="100%" height="700" frameborder="0">
+				<img src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}"/>
+		 	</iframe>
+		 </div>
+     </g:if>
+      <a name="files_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
+      <h1>FASTA files</h1>
+      <div style="overflow:auto; max-height:200px;">
+	      <table style="table-layout: fixed; width:100%">
+	      <tr><td style="word-wrap: break-word">
+	      >${info_results.gene_id[0]}<br>${info_results.pep[0]}
+	      </td></tr>
+	      </table>
+      </div>    
+      <div style="overflow:auto; max-height:200px;">
+	      <table style="table-layout: fixed; width:100%">
+	      <tr><td style="word-wrap: break-word">
+	      >${info_results.gene_id[0]}<br>${info_results.nuc[0]}
+	      </td></tr>
+	      </table>
+      </div>      
      
     <a name="exon_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
 		<h1>Exons</h1>
@@ -633,7 +610,7 @@
 	</g:if>
 	<g:else>
 	  	<hr size = 5 color="green" width="100%" style="margin-top:10px">
-		<h1>There are no annotations for this contig</h1>
+		<h1>There are no annotations for this gene</h1>
 	</g:else>
   </g:if>
   <g:else>
