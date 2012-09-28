@@ -4,51 +4,15 @@ import grails.plugins.springsecurity.Secured
 
 class BlastController { 
 	def grailsApplication
+	def configDataService
+	
     def info = {
-    	def pubBlastFiles = [:]
-    	def privBlastFiles = [:]
-    	if (grailsApplication.config.blast.pub){
-    		def pubLocations = grailsApplication.config.blast.pub
-    		pubLocations.each {
-    			if (it.value.size() >0){
-    				pubBlastFiles."${it.key}" = it.value 
-    			}
-    		}
-    	}
-    	if (grailsApplication.config.blast.priv){
-    		def privLocations = grailsApplication.config.blast.priv
-    		privLocations.each {
-    			if (it.value.size() >0){
-    				privBlastFiles."${it.key}" = it.value 
-    			}
-    		}
-    	}
-    	println "public blastFiles = "+pubBlastFiles
-    	println "private blastFiles = "+privBlastFiles
-    	return[pubBlastFiles: pubBlastFiles, privBlastFiles: privBlastFiles]
+    	def blastFiles = configDataService.getBlastLinks()
+    	return[pubBlastFiles: blastFiles[0], privBlastFiles: blastFiles[1]]
     }
     def index() { 
-    	def pubBlastFiles = [:]
-    	def privBlastFiles = [:]
-    	if (grailsApplication.config.blast.pub){
-    		def pubLocations = grailsApplication.config.blast.pub
-    		pubLocations.each {
-    			if (it.value.size() >0){
-    				pubBlastFiles."${it.key}" = it.value 
-    			}
-    		}
-    	}
-    	if (grailsApplication.config.blast.priv){
-    		def privLocations = grailsApplication.config.blast.priv
-    		privLocations.each {
-    			if (it.value.size() >0){
-    				privBlastFiles."${it.key}" = it.value 
-    			}
-    		}
-    	}
-    	println "public blastFiles = "+pubBlastFiles
-    	println "private blastFiles = "+privBlastFiles
-    	return[pubBlastFiles: pubBlastFiles, privBlastFiles: privBlastFiles]
+    	def blastFiles = configDataService.getBlastLinks()
+    	return[pubBlastFiles: blastFiles[0], privBlastFiles: blastFiles[1]]
     }
     def blastError = {
     }

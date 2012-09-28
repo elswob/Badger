@@ -8,7 +8,7 @@ class SearchController {
 	def grailsApplication
 	javax.sql.DataSource dataSource
 	def peptideService
-	def annoLinksService
+	def configDataService
     //@Secured(['ROLE_USER'])
     
     def index() {
@@ -265,7 +265,7 @@ class SearchController {
 				if (whatSearch == 'e.g. IPR023298 or PF01813'){whatSearch = 'anno_id ~* '}
 				if (whatSearch == 'e.g. contig_1'){whatSearch = 'contig_id = '}
 			}
-			def annoLinks = annoLinksService.getLinks()
+			def annoLinks = configDataService.getGeneAnnoLinks()
 			println "Anno links =  "+annoLinks
 			println "annoDB = "+annoDB
 			//construct the anno_db search string			
@@ -370,7 +370,7 @@ class SearchController {
 			def exonsql = "select *,length(sequence) as length from exon_info where gene_id = '"+params.gene_id+"' order by exon_number;"
 			def exon_results = sql.rows(exonsql)
 			
-			def annoLinks = annoLinksService.getLinks()
+			def annoLinks = configDataService.getGeneAnnoLinks()
 			println "Anno links =  "+annoLinks
 
 			//get amino acid info
@@ -481,7 +481,7 @@ class SearchController {
      		def gene_results = sql.rows(gene_sql)
      		
      		//get anno links
-     		def annoLinks = annoLinksService.getLinks()
+     		def annoLinks = configDataService.getGeneAnnoLinks()
      		println "links = "+annoLinks
      		
      		def timeStop = new Date()

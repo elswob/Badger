@@ -8,8 +8,8 @@ import org.junit.*
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-@TestFor(AnnoLinksService)
-class AnnoLinksServiceTests {
+@TestFor(ConfigDataService)
+class ConfigDataServiceTests {
 
     void testSomething() {
         fail "Implement me"
