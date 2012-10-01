@@ -29,7 +29,8 @@
  
     //set the global variable for the plots
     var dlen = [], dcov = [], dgc = [], dcon = [], dcum = [], dcou = [];
-    var joinArray = [];
+    var joinArray = []; 
+    var N50 = ${n50}, N90 = ${n90};
     var counter=0;
     var cum = 0;
     var xaxis_label="", yaxis_label="", title_label="", xaxis_type="", yaxis_type="";
@@ -70,25 +71,133 @@
 		    yaxis_label = "Cumulative contig length (bp)";
 		    yaxis_type = $.jqplot.LinearAxisRenderer;
 		    title_label = "Cumulative contig length";
-		    graphDraw()
+		    cumDraw()
 	    }
 	    
     }
 
+    function cumDraw(){
+       	//alert(joinArray)
+	    plot1 = $.jqplot ('chart', [joinArray,N50,N90],{
+		 title: title_label,
+		 legend: {
+		 	show: true,
+		 	location: 'se',
+		 },  
+		 series:[
+			 {
+				showLine:false,
+			 	markerOptions: { size: 1, style:"circle", color:"green"},
+			 	//label: 'No annotation',
+			 	color: 'green',
+			 	showLabel: false,
+			 	highlighter: {
+					 tooltipAxes: 'yx',
+					 yvalues: 5,
+					 show: true,
+					 sizeAdjust: 7.5,
+					 //formatString: "%d"
+					 //formatString: ContigData[0].contig_id +" length: " + ContigData[1].length
+					 formatString: '<span style="display:none">%s</span>Contig ID: %s<br>Length: %s<br>GC: %.2f<br>Coverage: %.2f'
+			
+				 },
+			 },
+			 {
+            	showLine:false,
+                markerOptions: { size: 20, style:'circle', color:"blue"},
+                label: "N50",
+                color: "blue",
+                highlighter: {
+					 tooltipAxes: 'yx',
+					 yvalues: 2,
+					 show: true,
+					 sizeAdjust: 7.5,
+					 formatString: '<span style="display:none">%s</span>N50:%s'
+			
+				 },
+             },
+             {
+            	showLine:false,
+                markerOptions: { size: 20, style:'circle', color:"red"},
+                label: "N90",
+                color: "red",
+                highlighter: {
+					 tooltipAxes: 'yx',
+					 yvalues: 2,
+					 show: true,
+					 sizeAdjust: 7.5,
+					 formatString: '<span style="display:none">%s</span>N90:%s'
+			
+				 },
+             }
+
+		 ],
+		 axesDefaults: {
+			 labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+		 },
+		 noDataIndicator: {
+		    show: true
+		 },
+		 axes: {
+			xaxis: {
+				label: xaxis_label,
+				renderer: xaxis_type,
+				pad: 0
+			},
+			yaxis: {
+				label: yaxis_label,
+				renderer: yaxis_type,
+				pad: 0,
+				tickOptions: {
+					formatString: "%'i"
+				}
+			}
+		 },
+		 //seriesColors: pointcolours,
+		 highlighter: {
+			 tooltipAxes: 'yx',
+			 yvalues: 5,
+			 show: true,
+			 sizeAdjust: 7.5,
+			 //formatString: "%d"
+			 //formatString: ContigData[0].contig_id +" length: " + ContigData[1].length
+			 formatString: '<span style="display:none">%s</span>Contig ID: %s<br>Length: %s<br>GC: %.2f<br>Coverage: %.2f'
+	
+		 },
+		 cursor:{
+		 	 show: true,
+		 	 zoom:true,
+		 	 tooltipLocation:'nw'
+		 }
+	    });
+	    $('.button-reset').click(function() { plot1.resetZoom() });
+    }
+    
     function graphDraw(){
        	//alert(joinArray)
 	    plot1 = $.jqplot ('chart', [joinArray],{
 		 title: title_label,
-		 //legend: {
-		 //	show: true,
-		 //	location: 'ne',
-		 //},  
+		 legend: {
+		 	show: true,
+		 	location: 'se',
+		 },  
 		 series:[
 			 {
-			 showLine:false,
-			 markerOptions: { size: 1, style:"circle", color:"green"},
-			 label: 'No annotation',
-			 color: 'green'
+				showLine:false,
+			 	markerOptions: { size: 1, style:"circle", color:"green"},
+			 	//label: 'No annotation',
+			 	color: 'green',
+			 	showLabel: false,
+			 	highlighter: {
+					 tooltipAxes: 'yx',
+					 yvalues: 5,
+					 show: true,
+					 sizeAdjust: 7.5,
+					 //formatString: "%d"
+					 //formatString: ContigData[0].contig_id +" length: " + ContigData[1].length
+					 formatString: '<span style="display:none">%s</span>Contig ID: %s<br>Length: %s<br>GC: %.2f<br>Coverage: %.2f'
+			
+				 },
 			 },
 		 ],
 		 axesDefaults: {

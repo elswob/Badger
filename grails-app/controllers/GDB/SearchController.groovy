@@ -2,6 +2,7 @@ package GDB
 import grails.plugins.springsecurity.Secured
 import groovy.time.*
 import groovy.sql.Sql
+import grails.plugin.cache.Cacheable
 
 class SearchController {
 	def matcher
@@ -120,15 +121,43 @@ class SearchController {
 			 return [blastMap: blastMap, funMap: funMap, iprMap: iprMap]
 		}
     }
-    def genome_search = {
+    //@Cacheable('genome_cache') 
+    def genome_search () {
     	if (grailsApplication.config.i.links.genome == 'private' && !isLoggedIn()) {
      		redirect(controller: "home", action: "index")
      	}else{   
 			 def sql = new Sql(dataSource)
 			 def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"
 			 def results = sql.rows(sqlsearch)
-			 //println results
-			 return [ genomeData: results]
+			 int halfSpan=0, checkSpan=0, counter=0, span=0, ninetySpan=0;
+			 def n50check = false, n90check = false;
+			 def n50 = [], n90 = [];
+			 
+			 // get the span of the genome
+			 results.each {
+				span += it.length
+			 }
+			 
+			 //calculate n50
+			 halfSpan = span/2
+			 ninetySpan = span/100*90
+			 results.each {
+			 	counter++
+				checkSpan += it.length
+				if (checkSpan >= halfSpan && n50check !=true){
+					def aa = [counter,checkSpan,it.length]
+					n50.add(aa)
+					n50check = true
+				}
+				if (checkSpan >= ninetySpan && n90check !=true){
+					def aa = [counter,checkSpan,it.length]
+					n90.add(aa)
+					n90check = true
+				}
+			 }
+			 println "n50 = "+n50
+			 println "n90 = "+n90
+			 return [ genomeData: results, n50: n50, n90: n90]
 			 sql.close()
 		}
     }

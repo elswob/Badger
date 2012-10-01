@@ -112,3 +112,12 @@ grails.app.context = "/"
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'Security.SecUser'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'Security.SecUserSecRole'
 grails.plugins.springsecurity.authority.className = 'Security.SecRole'
+
+grails.cache.config = {
+   cache {
+      name 'stats_cache'
+   }
+   cache {
+      name 'genome_cache'
+   }
+}

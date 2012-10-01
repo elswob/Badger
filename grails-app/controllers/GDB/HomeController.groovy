@@ -2,6 +2,7 @@ package GDB
 import grails.plugins.springsecurity.Secured
 import groovy.time.*
 import groovy.sql.Sql
+import grails.plugin.cache.Cacheable
 
 class HomeController {
  def grailsApplication
@@ -238,7 +239,8 @@ class HomeController {
 	 }
   }
   
-  def stats = {
+  @Cacheable('stats_cache') 
+  def stats() {  	 
      //check the privacy setting
      if (grailsApplication.config.i.links.priv.stats && !isLoggedIn()) {
      	redirect(controller: "home", action: "index")
@@ -246,7 +248,7 @@ class HomeController {
 	 	 def sql = new Sql(dataSource)
 	 	 
 	 	 //get genome stats
-	 	 def genomeInfoSql = "select sequence,gc,length from genome_info order by length;"
+	 	 def genomeInfoSql = "select sequence,gc,length from genome_info order by length desc;"
 	 	 def genomeInfo = sql.rows(genomeInfoSql) 
 		 int span=0, min=10000000000, max=0, n50=0, halfSpan=0, n50Span=0, nonATGC=0
 		 float gc

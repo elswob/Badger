@@ -419,7 +419,7 @@
 
   <body>
  <table width=100%>
-      <tr><td width=40%>
+      <tr><td width=30%>
       	 <h1>Genome:</h1>
  		<table>
       	<tr><td><b>Span (bp):</b></td><td>${printf("%,d\n",genome_stats.span)}</td></tr>
@@ -433,6 +433,7 @@
 		 <h1>Genes:</h1>
 		 <table>
 		 <tr><td><b>Number</b></td><td>${printf("%,d\n",GDB.GeneInfo.count())}</td></tr>
+		 <tr><td><b>Frequency (genes per Kb)</b></td><td>${printf("%.4g",(GDB.GeneInfo.count()/genome_stats.span)*1000)}</td></tr>
 		 <tr><td><b>Mean length (bp)</b></td><td>${printf("%,d\n",gene_stats.mean)}</td></tr>
 		 <tr><td><b>Smallest (bp)</b></td><td>${printf("%,d\n",gene_stats.min)}</td></tr>
 		 <tr><td><b>Largest (bp)</b></td><td>${printf("%,d\n",gene_stats.max)}</td></tr>
