@@ -28,7 +28,8 @@
 		  def blastjsonData = blast_results.encodeAsJSON();
 		  def funjsonData = fun_results.encodeAsJSON();
 		  def exonjsonData = exon_results.encodeAsJSON();
-		  //println aaData
+		  def jsonAnno = annoLinks.encodeAsJSON();
+		  //println blastjsonData
 		  %>  
     
     <script type="text/javascript">
@@ -84,29 +85,96 @@
 	//alert(aa_data)
     
     $(document).ready(function() {
+    	var anOpen = [];
+    	var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.0/examples/examples_support/')}";
     	$(".scroll").click(function(event){		
 			event.preventDefault();
 			$('html,body').animate({scrollTop:$('[name="'+this.hash.substring(1)+'"]').offset().top}, 500);
 		});
 
     	if (blast_data.length > 0){
-			$('#blast_table_data').dataTable({
-				"sPaginationType": "full_numbers",
+    		var blastTable = $('#blast_table_data').dataTable( {
+			"bProcessing": true,
+			"aaData": ${blastjsonData},
+			"aoColumns": [
+				{
+				   "mDataProp": null,
+				   "sClass": "control center",
+				   "sDefaultContent": '<img src="'+sImageUrl+'details_open.png'+'">'
+				},
+				{ "mDataProp": "anno_db"},
+				{ "mDataProp": "anno_id",
+				"fnRender": function ( oObj, sVal ){
+					AnnoData = ${jsonAnno};
+					var db = oObj.aData["anno_db"]
+					if (AnnoData[db]){
+						var regex = new RegExp(AnnoData[db][1]);
+						var link = sVal.replace(regex,"<a name=\""+sVal+"\"><a href=\""+AnnoData[db][2]+"$1 \" target='_blank'>$1</a></a>")
+						//link = "<a name=\"$1\">"+link+"</a>"
+					}
+					return link
+				}},
+				{ "mDataProp": "descr"},
+				{ "mDataProp": "anno_start"},
+				{ "mDataProp": "anno_stop"},
+				{ "mDataProp": "score"},
+			],
+			"sPaginationType": "full_numbers",
 				"iDisplayLength": 10,
+				"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
 				"oLanguage": {
 						 "sSearch": "Filter records:"
 				 },
-				"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-				"aaSorting": [[ 5, "desc" ]],
+				"aaSorting": [[ 6, "desc" ]],
 				"sDom": 'T<"clear">lfrtip',
 				"oTableTools": {
 				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
 				}
-			 });     
-			 //capture the rows in the tables to use for the image
-			 var blastoTable = $('#blast_table_data').dataTable();
-			 blasttableShow = blastoTable._('td');
-		}
+		} );
+		
+	   
+	  $('#blast_table_data td.control').live( 'click', function () {
+	  var nTr = this.parentNode;
+	  var i = $.inArray( nTr, anOpen );
+	   
+	  if ( i === -1 ) {
+		$('img', this).attr( 'src', sImageUrl+"details_close.png" );
+		var nDetailsRow = blastTable.fnOpen( nTr, fnFormatBlastDetails(blastTable, nTr), 'details' );
+		$('div.innerDetails', nDetailsRow).slideDown();
+		anOpen.push( nTr );
+	  }
+	  else {
+		$('img', this).attr( 'src', sImageUrl+"details_open.png" );
+		$('div.innerDetails', $(nTr).next()[0]).slideUp( function () {
+		  blastTable.fnClose( nTr );
+		  anOpen.splice( i, 1 );
+		} );
+	  }
+	} );
+	 
+	function fnFormatBlastDetails( blastTable, nTr )
+	{
+	  var oData = blastTable.fnGetData( nTr );
+	  var sOut =
+		'<div class="innerDetails">'+
+		'<div class="blast_res">'+
+		  '<table width="100%" cellpadding="5" cellspacing="0" border="0" style="table-layout:fixed; padding-left:10px; overflow:auto;">'+
+			'<tr><td><b>Alignment info:</b> Length='+oData.align+' Gaps='+oData.gaps+' Identity='+oData.identity+'</td></tr>'+
+			'<tr><td><b>'+oData.gene_id+'</b> '+oData.anno_start+' '+oData.anno_stop+'</td></tr>'+
+			'<tr><td>'+oData.qseq+'</td></tr>'+
+			'<tr><td>'+oData.midline+'</td></tr>'+
+			'<tr><td>'+oData.hseq+'</td></tr>'+
+			'<tr><td><b>'+oData.anno_id+'</b> '+oData.hit_start+' '+oData.hit_stop+'</td></tr>'+
+		  '</table>'+
+		'</div>'+  
+		'</div>';
+	   //alert(sOut)
+	  return sOut;
+	}
+		//capture the rows in the tables to use for the image
+		var blastoTable = $('#blast_table_data').dataTable();
+		blasttableShow = blastoTable._('td');
+	}
         
 		if (fun_data.length > 0){
 			$('#fun_table_data').dataTable({
@@ -230,11 +298,10 @@
 	  return sOut;
 	}
      
-    //aa chart
-
-  var aa_plot = $.jqplot('aa_chart', [aa_data], {
+  //aa chart
+  var aa_plot = $.jqplot('aa_chart', [aa_data[0],aa_data[1],aa_data[2],aa_data[3]], {
   		animate: !$.jqplot.use_excanvas,
-  		title: 'Gene composition',
+  		title: 'Amino acid composition',
   		seriesColors: [ "green"],
         seriesDefaults: {
             renderer:$.jqplot.BarRenderer,
@@ -251,6 +318,17 @@
 				//shadowDepth: 2,
         		//barMargin: 4,
 		    }
+        },
+        series:[
+            {label:'Non-polar',color:'orange'},
+            {label:'Polar',color:'blue'},
+            {label:'Acidic',color:'red'},
+            {label:'Basic',color:'green'}
+        ],
+    	legend: {
+            show: true,
+            placement: 'outsideGrid',
+            //location="s"
         },
         axes: {
         	xaxis: {
@@ -407,7 +485,7 @@
 					 var stringy = String(name);
 					 var idPattern = hit.anno_id.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 					 //ignore duplicate IDs
-					 if (stringy.match(idPattern) && matched.indexOf(idPattern) < 0){
+					 //if (stringy.match(idPattern) && matched.indexOf(idPattern) < 0){
 						 start = parseFloat(hit.anno_start)
 						 stop = parseFloat(hit.anno_stop)
 						 if (start > stop){
@@ -434,7 +512,7 @@
 						)
 					 drawing.drawSpacer(10);
 					 matched.push(idPattern);	
-					 }	    	    
+					 //}	    	    
 				 }
 		 	}
 			 </script>
@@ -448,33 +526,16 @@
 		   <table id="blast_table_data" class="display">
 			  <thead>
 			  <tr>
+			<th></th>
 			<th><b>Database</b></th>
 			<th><b>Hit ID</b></th>
-			<th><b>Description</b></th>
+			<th width=40%><b>Description</b></th>
 			<th><b>Start</b></th>
 			<th><b>Stop</b></th>
 			<th><b>Score</b></th>
 			  </tr>
 			  </thead>
 			  <tbody>
-			 <g:each var="res" in="${blast_results}">
-			 <tr id="${res.anno_id}">
-			<td><a name="${res.anno_id}">${res.anno_db}</td>
-			<%
-			//set links
-			annoLinks.each{
-				if (res.anno_db == it.key){
-					res.anno_id = res.anno_id.replaceAll(it.value[1], "<a href=\""+it.value[2]+"\$1\" target=\'_blank\'>\$1</a>") 
-				}
-			}
-			%>
-			<td>${res.anno_id}</td>
-			<td>${res.descr}</td>
-			<td>${res.anno_start}</td>
-			<td>${res.anno_stop}</td>
-			<td>${res.score}</td>
-			  </tr>  
-			 </g:each>
 			  </tbody>
 			</table>
 	   </g:if>

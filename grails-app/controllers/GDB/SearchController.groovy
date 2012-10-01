@@ -121,7 +121,7 @@ class SearchController {
 			 return [blastMap: blastMap, funMap: funMap, iprMap: iprMap]
 		}
     }
-    //@Cacheable('genome_cache') 
+    @Cacheable('genome_cache') 
     def genome_search () {
     	if (grailsApplication.config.i.links.genome == 'private' && !isLoggedIn()) {
      		redirect(controller: "home", action: "index")
@@ -409,7 +409,6 @@ class SearchController {
 				aaData = peptideService.getComp(it.pep)
 				//println "service = "+service
 			}	
-			println "aaData = "+aaData
 			return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData]
     	sql.close()
     	}
