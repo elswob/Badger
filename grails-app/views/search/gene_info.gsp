@@ -87,11 +87,7 @@
     $(document).ready(function() {
     	var anOpen = [];
     	var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.0/examples/examples_support/')}";
-    	$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$('[name="'+this.hash.substring(1)+'"]').offset().top}, 500);
-		});
-
+    	
     	if (blast_data.length > 0){
     		var blastTable = $('#blast_table_data').dataTable( {
 			"bProcessing": true,
@@ -345,7 +341,7 @@
   </head>
   <body>
   <g:if test="${info_results}">
-    <a name="info_anchor"><h1>Information for gene ${info_results.gene_id[0]}:</h1></a>
+    <div id="info_anchor"><h1>Information for gene ${info_results.gene_id[0]}:</h1></div>
     <table width=100%>
       <tr><td width=40%>
 		<table>
@@ -388,31 +384,32 @@
 		<div class="mid" role="contentinfo">
 			<div class="nav_float">
 			<ul>
-			   <li><a href="#info_anchor" class="scroll">Info</a></li>
+			   <li><a href="#" onclick="$.scrollTo('#info_anchor', 800, {offset : -50});">Info</a></li>
 			   <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
-				   <li><a href="#anno_anchor" class="scroll">Annotations</a></li>
+				   <!--li><a href="#anno_anchor" class="scroll">Annotations</a></li-->
+				    <li><a href="#" onclick="$.scrollTo('#anno_anchor', 800, {offset : -50});">Annotations</a></li>
 			   </g:if>
 			   <g:if test="${blast_results}">
-				   <li><a href="#blast_anchor" class="scroll">BLAST</a></li>
+				   <li><a href="#" onclick="$.scrollTo('#blast_anchor', 800, {offset : -50});">BLAST</a></li>
 			   </g:if>
 			   <g:if test="${fun_results}">
-				   <li><a href="#fun_anchor" class="scroll">Functional</a></li>
+				   <li><a href="#" onclick="$.scrollTo('#fun_anchor', 800, {offset : -50});">Functional</a></li>
 			   </g:if>
 			   <g:if test="${ipr_results}">
-				   <li><a href="#ipr_anchor" class="scroll">InterPro</a></li>
+				   <li><a href="#" onclick="$.scrollTo('#ipr_anchor', 800, {offset : -50});">InterPro</a></li>
 			   </g:if>
 			   <g:if test = "${grailsApplication.config.g.link}"> 
-					<li><a href="#browse_anchor" class="scroll">Browse</a></li>
+					<li><a href="#" onclick="$.scrollTo('#browse_anchor', 800, {offset : -50});">Browse</a></li>
 			   </g:if>
-			   <li><a href="#files_anchor" class="scroll">Sequence data</a></li>
-			   <li><a href="#exon_anchor" class="scroll">Exons</a></li>
+			   <li><a href="#" onclick="$.scrollTo('#files_anchor', 800, {offset : -50});">Sequence data</a></li>
+			   <li><a href="#" onclick="$.scrollTo('#exon_anchor', 800, {offset : -50});">Exons</a></li>
 			</ul>
 			</div>
 		</div>
 	</div>
      
     <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
-        <a name="anno_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>  
+        <div id="anno_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>  
     
 		  <h1>Annotation overview</h1>  
  
@@ -521,7 +518,7 @@
       </g:if>
       
       <g:if test="${blast_results}">
-		  <a name="blast_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
+		  <div id="blast_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
 			   <h1>BLAST results</h1>
 		   <table id="blast_table_data" class="display">
 			  <thead>
@@ -542,7 +539,7 @@
 	   
 	   <g:if test="${fun_results}">
 	   <br>
-	   <a name="fun_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
+	   <div id="fun_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
 	   <h1>Functional annotation results</h1>
 	   <table id="fun_table_data" class="display">
 	      <thead>
@@ -582,7 +579,7 @@
 	   <br>
 	   
 	   <g:if test="${ipr_results}">
-		   <a name="ipr_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
+		   <div id="ipr_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
 		   <h1>InterProScan results</h1>
 		   <table id="ipr_table_data" class="display">
 			 <thead>
@@ -625,7 +622,7 @@
      <br>
     
     <g:if test = "${grailsApplication.config.g.link}"> 
-     	<a name="browse_anchor"><div></a>
+     	<div id="browse_anchor"><div></div>
          	<hr size = 5 color="green" width="100%" style="margin-top:10px">
 		 	<h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
 		 	<iframe src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" width="100%" height="700" frameborder="0">
@@ -633,7 +630,7 @@
 		 	</iframe>
 		 </div>
      </g:if>
-      <a name="files_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
+      <div id="files_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
       <h1>FASTA files</h1>
       <div style="overflow:auto; max-height:200px;">
 	      <table style="table-layout: fixed; width:100%">
@@ -650,7 +647,7 @@
 	      </table>
       </div>      
      
-    <a name="exon_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></a>
+    <div id="exon_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
 		<h1>Exons</h1>
 		 <table cellpadding="0" cellspacing="0" border="0" class="display" id="exon_table">
 		 <thead>

@@ -107,28 +107,33 @@
       <!--p>${jsonData.size()}</p-->
       <!--p>${queryInfo}</p-->
       <g:if test="${jsonData.size() > 2}"> 
-		  <table><tr><td>  
+		  <table><tr><td><b>Download:</b></td><td> 
+		  <div class="inline">
 		  <g:form name="resultsDownload" url="[controller:'FileDownload', action:'blast_download']">
 					<g:hiddenField name="fileName" value='blast_result.txt'/>
 					<g:hiddenField name="blastfileId" value="${blastId}"/>
-					<input align="right" type="submit" value="Download BLAST result" class="mybuttons"/>
+					<!--input align="right" type="submit" value="Download BLAST result" class="mybuttons"/-->
+					<a href="#" onclick="document.resultsDownload.submit()">BLAST results</a>
 		  </g:form>
-		  </td>
-		  <% if (blast_file == 'Genome' || blast_file == 'Transcriptome' || blast_file == 'Genes'){ %>
-			<td>
-				<g:form name="blastDownload" url="[controller:'FileDownload', action:'blast_contig_download']">
-					<g:hiddenField name="fileId" value=""/>
-					<g:hiddenField name="dataSource" value="${blast_file}"/>
-					<!--g:hiddenField name="fileName" value="${term}"/-->
-					 <g:hiddenField name="fileName" value='blast_result'/>
-					<g:hiddenField name="blastfileId" value="${blastId}"/>
-					<input align="right" type="submit" value="Download sequences" class="mybuttons" onclick="get_contig_data()"/>
-				</g:form>
-			</td></tr>
-		 <% } %>
-		 </table>
-		</g:if>
-	  
+		  
+			  <% if (blast_file == 'Genome' || blast_file == 'Transcriptome' || blast_file == 'Genes'){ %>
+				|
+					<g:form name="blastDownload" url="[controller:'FileDownload', action:'blast_contig_download']">
+						<g:hiddenField name="fileId" value=""/>
+						<g:hiddenField name="dataSource" value="${blast_file}"/>
+						<!--g:hiddenField name="fileName" value="${term}"/-->
+						 <g:hiddenField name="fileName" value='blast_result'/>
+						<g:hiddenField name="blastfileId" value="${blastId}"/>
+						<a href="#" onclick="get_contig_data();document.blastDownload.submit()">Sequences</a>
+						<!--input align="right" type="submit" value="Download sequences" class="mybuttons" onclick="get_contig_data()"/-->
+					</g:form>
+				</td></tr>
+			 <% } %>
+			 
+			</g:if>
+		</div>
+	  </table>
+	  <hr size = 5 color="green" width="100%" style="margin-top:10px">
       <div class="blast_res">
           <g:each var="line" in="${blast_result}">
 ${line}<br>
