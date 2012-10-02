@@ -126,7 +126,7 @@ class BlastController {
 						blastOut.split("\n").each{ 
 							if ((matcher = it =~ /(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*?)\t(.*)/)){
 								//define link
-								def linker = matcher[0][2]
+								def linker = matcher[0][2].replaceAll(/-\./, '') 
 								it = "<a name=\"$linker\"></a>" + it
 								//add links
 								def regex = '\\s(' + dataSplit[1].trim() + ')'
@@ -154,8 +154,10 @@ class BlastController {
 						blastOut.split("\n").each{  
 							//create internal links markers
 							if ((matcher = it =~ /^\s{2}(.*?)(\s+.*?\s{4}(\d{1}[e\.].*?)$)/)){
+								def linker_rep = matcher[0][1].replaceAll(/\.|-/, "")
 								def linker = matcher[0][1]
-								it = "<a href=\"#$linker\">$linker</a>"+"  "+matcher[0][2]
+								//it = "<a href=\"#$linker\">$linker</a>"+"  "+matcher[0][2]
+								it = "<a href=\"#\" onclick=\"\$.scrollTo('#$linker_rep', 800, {offset : -10});\">$linker</a>"+"  "+matcher[0][2]
 							}
 							//get the query length
 							if ((matcher = it =~ /^Length=(.*)/)){
@@ -165,13 +167,14 @@ class BlastController {
 							 }
 							if ((matcher = it =~ /^>\s(.*)/)){
 								//add name attribute to alignment for anchor
-								def linker = matcher[0][1]
-								it = it.replaceAll(/>/,"<a name=\"$linker\">></a>")                       
+								def linker = matcher[0][1].replaceAll(/\.|-/, "") 
+								//it = it.replaceAll(/>/,"<a name=\"$linker\">></a>") 
+								it = it.replaceAll(/>/,"<span id=\"$linker\">></span>")                     
 								//transform IDs to links but not before the first alignment
 								//add links and trim to remove whitespace
 								def regex = '\\s' + dataSplit[1].trim()
 								def link = dataSplit[2].trim()
-								it = it.replaceAll(regex, "<a href=\"$link\$1\">$linker</a>")
+								it = it.replaceAll(regex, "<a href=\"$link\$1\">\$1</a>")
 								oldId = newId
 								newId = matcher[0][1]        
 								

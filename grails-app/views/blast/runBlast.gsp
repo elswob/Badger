@@ -10,6 +10,7 @@
     <meta name='layout' content='main'/>
     <parameter name="blast" value="selected"></parameter>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="${resource(dir: 'js', file: 'jquery.scrollTo-1.4.2-min.js')}" type="text/javascript"></script>   
     <title>${grailsApplication.config.projectID} BLAST</title>
     
   </head>
@@ -68,8 +69,13 @@
 					 var hit_desc = hit.id+": "+start+" - "+stop;
 					 var blastRect = drawing.drawBar(start, stop, 8, hitColour, hit_desc, '');
 					 blastRect.click(function(id){
-							 return function(){ location.href='#'+id;}
-							 }(hit.id));
+					 		//alert(id)
+							 return function(){ 
+							 	var result = id.replace(/-|\./g, "");
+							 	//alert(result)
+							 	$.scrollTo('#'+result, 800, {offset : -10});
+							 }
+						}(hit.id));
 					 blastRect.hover(
 						 function(event) {
 							this.attr({stroke: 'black', 'stroke-width' : '2'});
@@ -122,7 +128,7 @@
 		 <% } %>
 		 </table>
 		</g:if>
-	 
+	  
       <div class="blast_res">
           <g:each var="line" in="${blast_result}">
 ${line}<br>
