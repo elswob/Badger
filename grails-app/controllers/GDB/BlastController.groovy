@@ -154,7 +154,7 @@ class BlastController {
 						blastOut.split("\n").each{  
 							//create internal links markers
 							if ((matcher = it =~ /^\s{2}(.*?)(\s+.*?\s{4}(\d{1}[e\.].*?)$)/)){
-								def linker_rep = matcher[0][1].replaceAll(/\.|-/, "")
+								def linker_rep = matcher[0][1].replaceAll(/\.|-|\||:/, "")
 								def linker = matcher[0][1]
 								//it = "<a href=\"#$linker\">$linker</a>"+"  "+matcher[0][2]
 								it = "<a href=\"#\" onclick=\"\$.scrollTo('#$linker_rep', 800, {offset : -10});\">$linker</a>"+"  "+matcher[0][2]

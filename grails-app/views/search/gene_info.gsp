@@ -105,7 +105,7 @@
 					var db = oObj.aData["anno_db"]
 					if (AnnoData[db]){
 						var regex = new RegExp(AnnoData[db][1]);
-						var link = sVal.replace(regex,"<a name=\""+sVal+"\"><a href=\""+AnnoData[db][2]+"$1 \" target='_blank'>$1</a></a>")
+						var link = sVal.replace(regex,"<span id=\""+oObj.aData["id"]+"\"><a href=\""+AnnoData[db][2]+"$1 \" target='_blank'>$1</a></span>")
 						//link = "<a name=\"$1\">"+link+"</a>"
 					}
 					return link
@@ -492,10 +492,12 @@
 						 score = parseFloat(hit.score) 	
 						 var hitColour = drawing.getBLASTColour(score,type);
 						 var blastRect = drawing.drawBar(start, stop, 7, hitColour, hit.anno_db + ": " + hit.anno_id + "\n" + hit.descr, '');
+						 var link_id = hit.id
 						 blastRect.click(function(id){
-						 		 return function(){ location.href='#'+id;}
-								 }(hit.anno_id));
-								 //.addClass("scroll")
+						 		 return function(event){ 
+						 		 	$.scrollTo('#'+id, 800, {offset : -60});
+						 		 	}
+								 }(hit.id));
 						 blastRect.hover(
 							 function(event) {
 								this.attr({stroke: 'black', 'stroke-width' : '2'});
@@ -554,8 +556,8 @@
 	      </thead>
 	      <tbody>
 	     <g:each var="res" in="${fun_results}">
-	     <tr id="${res.anno_id}">
-		<td><a name="${res.anno_id}">${res.anno_db}</td>
+	     <tr id="${res.id}">
+		<td>${res.anno_db}</td>
 		<%
 			//set links
 			annoLinks.each{
@@ -596,8 +598,8 @@
 			 <% def ipr_check = [:]%>
 			 <g:each var="res" in="${ipr_results}">
 			 <g:unless test = "${ipr_check[res.anno_db]}">
-				<tr id="${res.anno_id}">
-			<td><a name="${res.anno_id}">${res.anno_db}</td>
+			<tr id="${res.id}">
+			<td>${res.anno_db}</td>
 			<%
 			res.anno_id = res.anno_id.replaceAll(/(^IPR\d+)/, "<a href=\"http://www.ebi.ac.uk/interpro/IEntry?ac=\$1\" target=\'_blank\'>\$1</a>")
 			%>
