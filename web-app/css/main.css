@@ -257,7 +257,7 @@ img {
 .nav_float {
 	background-color: #efefef;
 	padding: 0.2em 0.2em;
-	z-index: 1; 
+	z-index: 1000000; 
 	position: relative;
 }
 .nav_float a {
@@ -841,3 +841,7 @@ span.dropt:hover span {
 }
 
 div.innerDetails { display: none }
+
+.highlight {
+	 background-color: bisque;
+}
