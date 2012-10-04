@@ -33,7 +33,13 @@
  * CONTAINER
  * TableTools container element and styles applying to all components
  */
-
+div.DTTT_container {
+	position:relative;
+	margin-left: auto;
+    margin-right: auto;
+	width: 30em;
+	top: 30px;
+}
 
 button.DTTT_button {
 	position: relative;

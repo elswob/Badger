@@ -105,7 +105,7 @@
 					var db = oObj.aData["anno_db"]
 					if (AnnoData[db]){
 						var regex = new RegExp(AnnoData[db][1]);
-						var link = sVal.replace(regex,"<span id=\""+oObj.aData["id"]+"\"><a href=\""+AnnoData[db][2]+"$1 \" target='_blank'>$1</a></span>")
+						var link = sVal.replace(regex,"<a href=\""+AnnoData[db][2]+"$1 \" target='_blank'>$1</a>")
 						//link = "<a name=\"$1\">"+link+"</a>"
 					}
 					return link
@@ -115,6 +115,11 @@
 				{ "mDataProp": "anno_stop"},
 				{ "mDataProp": "score"},
 			],
+			"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+				//<span id=\""+oObj.aData["id"]+"\">
+      			$(nRow).attr("id",aData["id"]);
+      			return nRow;
+    		},
 			"sPaginationType": "full_numbers",
 				"iDisplayLength": 10,
 				"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
@@ -530,7 +535,7 @@
 			<th></th>
 			<th><b>Database</b></th>
 			<th><b>Hit ID</b></th>
-			<th width=40%><b>Description</b></th>
+			<th width=50%><b>Description</b></th>
 			<th><b>Start</b></th>
 			<th><b>Stop</b></th>
 			<th><b>Score</b></th>
@@ -597,9 +602,7 @@
 			  </tr>
 			  </thead>
 			  <tbody>
-			 <% def ipr_check = [:]%>
 			 <g:each var="res" in="${ipr_results}">
-			 <g:unless test = "${ipr_check[res.anno_db]}">
 			<tr id="${res.id}">
 			<td>${res.anno_db}</td>
 			<%
@@ -611,14 +614,6 @@
 			<td>${res.anno_stop}</td>
 			<td>${res.score}</td>
 			  </tr>  
-			  </g:unless>
-			  <%
-			  if (params.top != '10'){
-			//just get the first one for each annotation
-			def check_id = res.anno_db
-			ipr_check[check_id] = "yes"
-			  }
-			  %>
 			 </g:each>
 			 </tbody>
 			</table>
