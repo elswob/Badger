@@ -31,7 +31,37 @@
 		  def jsonAnno = annoLinks.encodeAsJSON();
 		  //println blastjsonData
 		  %>  
-    
+    <script>
+    function get_table_data(table){
+    	var table_scrape = [];
+    	var rowNum
+    	var regex
+    	if (table == 'blast'){ 
+    		//alert('getting blast data')
+	    	var oTableData = document.getElementById('blast_table_data');
+	    	rowNum = 2
+	    }else if (table == 'fun'){ 
+	    	var oTableData = document.getElementById('fun_table_data');
+	    	rowNum = 1
+	    }else if (table == 'ipr'){ 
+	    	var oTableData = document.getElementById('ipr_table_data');
+	    	rowNum = 1
+	    }
+	    //gets table
+	    var rowLength = oTableData.rows.length;
+	    //gets rows of table
+	    for (i = 0; i < rowLength; i++){
+	    //loops through rows
+	       var oCells = oTableData.rows.item(i).cells;
+	       var cellVal = oCells.item(rowNum).innerHTML;
+	       //alert(cellVal)
+	       table_scrape.push(cellVal)
+	    }
+	    //alert(table_scrape)
+	    return table_scrape;
+	    
+    }
+    </script>
     <script type="text/javascript">
         /* new sorting functions */
         jQuery.fn.dataTableExt.oSort['scientific-asc']  = function(a,b) {
@@ -101,6 +131,7 @@
 				{ "mDataProp": "anno_db"},
 				{ "mDataProp": "anno_id",
 				"fnRender": function ( oObj, sVal ){
+					//alert("id = "+sVal);
 					AnnoData = ${jsonAnno};
 					var db = oObj.aData["anno_db"]
 					if (AnnoData[db]){
@@ -119,7 +150,12 @@
 				//<span id=\""+oObj.aData["id"]+"\">
       			$(nRow).attr("id",aData["id"]);
       			return nRow;
+      			
     		},
+    		"fnInfoCallback": function( oSettings, iStart, iEnd, iMax, iTotal, sPre ) {
+    			//alert('drawHits');
+    			//drawHits();
+  			},
 			"sPaginationType": "full_numbers",
 				"iDisplayLength": 10,
 				"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
@@ -173,8 +209,8 @@
 	  return sOut;
 	}
 		//capture the rows in the tables to use for the image
-		var blastoTable = $('#blast_table_data').dataTable();
-		blasttableShow = blastoTable._('td');
+		//var blastoTable = $('#blast_table_data').dataTable();
+		//blasttableShow = blastoTable._('td');
 	}
         
 		if (fun_data.length > 0){
@@ -192,8 +228,8 @@
 				}
 			 });     
 			//capture the rows in the tables to use for the image
-			var funoTable = $('#fun_table_data').dataTable();
-			funtableShow = funoTable._('td');
+			//var funoTable = $('#fun_table_data').dataTable();
+			//funtableShow = funoTable._('td');
         }
 		
         if (ipr_data.length > 0){
@@ -219,8 +255,8 @@
 				}
 			 });  
 			//capture the rows in the tables to use for the image
-			var iproTable = $('#ipr_table_data').dataTable();
-			iprtableShow = iproTable._('td');
+			//var iproTable = $('#ipr_table_data').dataTable();
+			//iprtableShow = iproTable._('td');
 		}
 	 if (blast_data.length > 0 || fun_data.length > 0 || ipr_data.length > 0 ){
      	//draw the figure
@@ -455,21 +491,24 @@
 					 if (blast_data.length > 0){
 						 drawing.drawSpacer(10);
 						 drawing.drawColouredTitle('BLAST','black')
-						 drawBars(blast_data,blasttableShow,'blast')
+						 var tableData = get_table_data('blast')
+						 drawBars(blast_data,tableData,'blast')
 						 drawing.drawSpacer(10);
 						 drawing.drawLine(${info_results.pep[0].length()});
 					 }
 					 if (fun_data.length > 0){
 						 drawing.drawSpacer(10);
 						 drawing.drawColouredTitle('Functional','black')
-						 drawBars(fun_data,funtableShow,'fun')
+						 var tableData = get_table_data('fun')
+						 drawBars(fun_data,tableData,'fun')
 						 drawing.drawSpacer(10);
 						 drawing.drawLine(${info_results.pep[0].length()});
 					 }
 					 if (ipr_data.length > 0){
 						 drawing.drawSpacer(10);
 						 drawing.drawColouredTitle('InterPro','black')
-						 drawBars(ipr_data,iprtableShow,'ipr')
+						 var tableData = get_table_data('ipr')
+						 drawBars(ipr_data,tableData,'ipr')
 					 }
 					 drawing.drawSpacer(10);
 					 drawing.end();         
