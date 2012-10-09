@@ -32,12 +32,12 @@
 		  //println blastjsonData
 		  %>  
     <script>
+    var drawCount=0;
     function get_table_data(table){
     	var table_scrape = [];
     	var rowNum
     	var regex
     	if (table == 'blast'){ 
-    		//alert('getting blast data')
 	    	var oTableData = document.getElementById('blast_table_data');
 	    	rowNum = 2
 	    }else if (table == 'fun'){ 
@@ -112,6 +112,7 @@
 	fun_data = ${funjsonData};
 	exon_data = ${exonjsonData};
 	aa_data = ${aaData}
+	AnnoData = ${jsonAnno};
 	//alert(aa_data)
     
     $(document).ready(function() {
@@ -131,8 +132,7 @@
 				{ "mDataProp": "anno_db"},
 				{ "mDataProp": "anno_id",
 				"fnRender": function ( oObj, sVal ){
-					//alert("id = "+sVal);
-					AnnoData = ${jsonAnno};
+					//alert("id = "+sVal);					
 					var db = oObj.aData["anno_db"]
 					if (AnnoData[db]){
 						var regex = new RegExp(AnnoData[db][1]);
@@ -152,13 +152,15 @@
       			return nRow;
       			
     		},
-    		"fnInfoCallback": function( oSettings, iStart, iEnd, iMax, iTotal, sPre ) {
-    			//alert('drawHits');
-    			//drawHits();
+    		"fnInfoCallback": function( oSettings, iStart, iEnd, iMax, iTotal, sPre ) {    			
+    			if (drawCount>0){
+    				//alert('redrawHits');
+    				drawAnno();
+    			}
   			},
 			"sPaginationType": "full_numbers",
-				"iDisplayLength": 10,
-				"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+				"iDisplayLength": 5,
+				"aLengthMenu": [[5,10, 25, 50, 100, -1], [5,10, 25, 50, 100, "All"]],
 				"oLanguage": {
 						 "sSearch": "Filter records:"
 				 },
@@ -216,16 +218,22 @@
 		if (fun_data.length > 0){
 			$('#fun_table_data').dataTable({
 				"sPaginationType": "full_numbers",
-				"iDisplayLength": 10,
+				"iDisplayLength": 5,
 				"oLanguage": {
 						 "sSearch": "Filter records:"
 				 },
-				"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+				"aLengthMenu": [[5,10, 25, 50, 100, -1], [5,10, 25, 50, 100, "All"]],
 				"aaSorting": [[ 5, "desc" ]],
 				"sDom": 'T<"clear">lfrtip',
 				"oTableTools": {
 				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
-				}
+				},
+				"fnInfoCallback": function( oSettings, iStart, iEnd, iMax, iTotal, sPre ) {    			
+					if (drawCount>0){
+						//alert('redrawHits');
+						drawAnno();
+					}
+				},
 			 });     
 			//capture the rows in the tables to use for the image
 			//var funoTable = $('#fun_table_data').dataTable();
@@ -235,11 +243,11 @@
         if (ipr_data.length > 0){
 			$('#ipr_table_data').dataTable({
 				"sPaginationType": "full_numbers",
-				"iDisplayLength": 10,
+				"iDisplayLength": 5,
 				"oLanguage": {
 						 "sSearch": "Filter records:"
 				 },
-				"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+				"aLengthMenu": [[5,10, 25, 50, 100, -1], [5,10, 25, 50, 100, "All"]],
 				"aaSorting": [[ 5, "asc" ]],
 				"aoColumns": [
 					 null,
@@ -252,16 +260,18 @@
 				"sDom": 'T<"clear">lfrtip',
 				"oTableTools": {
 				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
-				}
+				},
+				"fnInfoCallback": function( oSettings, iStart, iEnd, iMax, iTotal, sPre ) {    			
+					if (drawCount>0){
+						//alert('redrawHits');
+						drawAnno();
+					}
+				},
 			 });  
 			//capture the rows in the tables to use for the image
 			//var iproTable = $('#ipr_table_data').dataTable();
 			//iprtableShow = iproTable._('td');
 		}
-	 if (blast_data.length > 0 || fun_data.length > 0 || ipr_data.length > 0 ){
-     	//draw the figure
-     	drawHits(); 
-     }
      
      //exons
      var anOpen = [];
@@ -376,9 +386,18 @@
             }
         }
     });
+    
+    if (blast_data.length > 0 || fun_data.length > 0 || ipr_data.length > 0 ){
+     			//draw the figure
+     			drawAnno(); 
+     		}
         
     });
+    
+    
     </script>
+    
+    
   </head>
   <body>
   <g:if test="${info_results}">
@@ -454,115 +473,12 @@
     
 		  <h1>Annotation overview</h1>  
  
-		  <div id = "blast_fig">
-			 <script type="text/javascript" src="${resource(dir: 'js', file: 'raphael-min.js')}"></script>
-			 <script type="text/javascript" src="${resource(dir: 'js', file: 'g.raphael-min.js')}"></script>
-			 <script type="text/javascript" src="${resource(dir: 'js', file: 'g.line-min.js')}"></script>
-			 <script type="text/javascript" src="${resource(dir: 'js', file: 'biodrawing.js')}"></script>
-			 <script type="text/javascript">
-			 var drawing = new BioDrawing();
-			 //alert("in blast_fig")
-			 function drawHits(){
-				 //alert("in drawHits");
-				 //if (blast_data.length > 0 || ipr_data.length > 0 || fun_data.length > 0){
-				 	 //alert("drawing figure")
-					 var paperWidth = $('#blast_fig').width();
-					 drawing.start(paperWidth, 'blast_fig');
-					 drawing.drawSpacer(40);
-					 //add scale bars
-					 drawing.drawScoreScale(${info_results.pep[0].length()});	
-					 drawing.drawSpacer(20);
-					 drawing.drawScale(${info_results.pep[0].length()});			 
-					 drawing.drawSpacer(10);
-					 // add exon boundaries
-					 if (exon_data.length > 0){
-					 	drawing.drawSpacer(10);
-					 	drawing.drawColouredTitle('Exons','black')
-					 	var marker=0
-					 	for (var i = 0; i < exon_data.length; i++) {   		 	 
-					 		var exon = exon_data[i];
-					 		drawing.drawExon(${info_results.pep[0].length()},exon.length/3,marker,exon.exon_number)
-					 		marker = marker + exon.length/3
-					 		//alert(marker)
-					 	}
-					 	drawing.drawSpacer(20);
-					 	drawing.drawLine(${info_results.pep[0].length()});
-					 }
-					 if (blast_data.length > 0){
-						 drawing.drawSpacer(10);
-						 drawing.drawColouredTitle('BLAST','black')
-						 var tableData = get_table_data('blast')
-						 drawBars(blast_data,tableData,'blast')
-						 drawing.drawSpacer(10);
-						 drawing.drawLine(${info_results.pep[0].length()});
-					 }
-					 if (fun_data.length > 0){
-						 drawing.drawSpacer(10);
-						 drawing.drawColouredTitle('Functional','black')
-						 var tableData = get_table_data('fun')
-						 drawBars(fun_data,tableData,'fun')
-						 drawing.drawSpacer(10);
-						 drawing.drawLine(${info_results.pep[0].length()});
-					 }
-					 if (ipr_data.length > 0){
-						 drawing.drawSpacer(10);
-						 drawing.drawColouredTitle('InterPro','black')
-						 var tableData = get_table_data('ipr')
-						 drawBars(ipr_data,tableData,'ipr')
-					 }
-					 drawing.drawSpacer(10);
-					 drawing.end();         
-				 //}
-			 }
-			 function drawBars(Anno,name,type){
-			  	 //alert("in drawBars")
-				 var start=''
-				 var stop=''
-				 var score=''
-				 var matched = new Array();
-				 for (var i = 0; i < Anno.length; i++) {   		 	 
-					 var hit = Anno[i];
-					 //get rid of all strange characters
-					 var stringy = String(name);
-					 var idPattern = hit.anno_id.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-					 //ignore duplicate IDs
-					 //if (stringy.match(idPattern) && matched.indexOf(idPattern) < 0){
-						 start = parseFloat(hit.anno_start)
-						 stop = parseFloat(hit.anno_stop)
-						 if (start > stop){
-							 start = parseFloat(hit.anno_stop)
-							 stop = parseFloat(hit.anno_start)
-						 }
-						 score = parseFloat(hit.score) 	
-						 var hitColour = drawing.getBLASTColour(score,type);
-						 var blastRect = drawing.drawBar(start, stop, 7, hitColour, hit.anno_db + ": " + hit.anno_id + "\n" + hit.descr, '');
-						 var link_id = hit.id
-						 blastRect.click(function(id){
-						 		 return function(event){ 
-						 		 	var link = $('#' + id);
-						 		 	link.effect("highlight", {}, 10000);
-						 		 	$.scrollTo('#'+id, 800, {offset : -100});
-						 		 	}
-								 }(hit.id));
-						 blastRect.hover(
-							 function(event) {
-								this.attr({stroke: 'black', 'stroke-width' : '2'});
-								$('#' + hit.anno_id).css("background-color", "bisque");
-				
-								},
-								function(event) {
-								this.attr({stroke: 'black', 'stroke-width' : '0'});
-								$('#' + hit.anno_id).css("background-color", "white");
-								}
-						)
-					 drawing.drawSpacer(10);
-					 matched.push(idPattern);	
-					 //}	    	    
-				 }
-		 	}
-			 </script>
-		
+		  <div id="blast_fig">
+		  
+		   
+  
 		  </div>
+		  
       </g:if>
       
       <g:if test="${blast_results}">
@@ -712,5 +628,123 @@
   <g:else>
     <h1>The gene ID has no information</h1>
   </g:else>
-  </body>
+ 	 <script type="text/javascript" src="${resource(dir: 'js', file: 'raphael-min.js')}"></script>
+	 <script type="text/javascript" src="${resource(dir: 'js', file: 'g.raphael-min.js')}"></script>
+	 <script type="text/javascript" src="${resource(dir: 'js', file: 'g.line-min.js')}"></script>
+	 <script type="text/javascript" src="${resource(dir: 'js', file: 'biodrawing.js')}"></script>
+	 <script type="text/javascript">
+	 	function drawAnno(){
+			var drawing = new BioDrawing(); 
+			$('#blast_fig').empty();
+			drawCount++;
+			drawHits()
+			function drawHits(){			 	
+				 //alert("drawing figure")
+				 var paperWidth = $('#blast_fig').width();
+				 drawing.start(paperWidth, 'blast_fig');
+				 drawing.drawSpacer(40);
+				 //add scale bars
+				 drawing.drawScoreScale(${info_results.pep[0].length()});	
+				 drawing.drawSpacer(20);
+				 drawing.drawScale(${info_results.pep[0].length()});			 
+				 drawing.drawSpacer(10);
+				 // add exon boundaries
+				 if (exon_data.length > 0){
+					drawing.drawSpacer(10);
+					drawing.drawColouredTitle('Exons','black')
+					var marker=0
+					for (var i = 0; i < exon_data.length; i++) {   		 	 
+						var exon = exon_data[i];
+						drawing.drawExon(${info_results.pep[0].length()},exon.length/3,marker,exon.exon_number)
+						marker = marker + exon.length/3
+						//alert('marker='+marker)
+					}
+					drawing.drawSpacer(20);
+					drawing.drawLine(${info_results.pep[0].length()});
+				 }
+				 if (blast_data.length > 0){
+					 drawing.drawSpacer(10);
+					 drawing.drawColouredTitle('BLAST','black')
+					 var tableData = get_table_data('blast')
+					 drawBars(blast_data,tableData,'blast')
+					 drawing.drawSpacer(10);
+					 drawing.drawLine(${info_results.pep[0].length()});
+				 }
+				 if (fun_data.length > 0){
+					 drawing.drawSpacer(10);
+					 drawing.drawColouredTitle('Functional','black')
+					 var tableData = get_table_data('fun')
+					 drawBars(fun_data,tableData,'fun')
+					 drawing.drawSpacer(10);
+					 drawing.drawLine(${info_results.pep[0].length()});
+				 }
+				 if (ipr_data.length > 0){
+					 drawing.drawSpacer(10);
+					 drawing.drawColouredTitle('InterPro','black')
+					 var tableData = get_table_data('ipr')
+					 drawBars(ipr_data,tableData,'ipr')
+				 }
+				 drawing.drawSpacer(10);
+				 drawing.end();         
+			 }
+			 function drawBars(Anno,name,type){
+				 var start=''
+				 var stop=''
+				 var score=''
+				 var matched = new Array();
+				 for (var i = 0; i < Anno.length; i++) {   		 	 
+					 var hit = Anno[i];
+					 //get rid of all strange characters
+					 var stringy = String(name);
+					 var idPattern = hit.anno_id
+					 if (AnnoData[hit.anno_db]){
+						var regex = new RegExp(AnnoData[hit.anno_db][1]);
+						idPattern = idPattern.replace(regex,"$1")
+					 }
+					 //catch the interpro hits
+					 idPattern = idPattern.replace(/(^IPR\d+).*/,"$1");
+					 //alert('stringy = '+stringy+' idPattern = '+idPattern)
+					 //var idPattern = hit.anno_id.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+					 //ignore duplicate IDs
+					 //if (stringy.match(idPattern) && matched.indexOf(idPattern) < 0){
+					 if (stringy.match(idPattern)){
+						 start = parseFloat(hit.anno_start)
+						 stop = parseFloat(hit.anno_stop)
+						 if (start > stop){
+							 start = parseFloat(hit.anno_stop)
+							 stop = parseFloat(hit.anno_start)
+						 }
+						 score = parseFloat(hit.score) 
+						 var hitColour = drawing.getBLASTColour(score,type);
+						 var blastRect = drawing.drawBar(start, stop, 7, hitColour, hit.anno_db + ": " + hit.anno_id + "\n" + hit.descr, '');
+						 var link_id = hit.id
+						 blastRect.click(function(id){
+						 		 return function(event){ 
+						 		 	var link = $('#' + id);
+						 		 	link.effect("highlight", {}, 10000);
+						 		 	$.scrollTo('#'+id, 800, {offset : -100});
+						 		 	}
+								 }(hit.id));
+						 blastRect.hover(
+							 function(event) {
+								this.attr({stroke: 'black', 'stroke-width' : '2'});
+								$('#' + hit.anno_id).css("background-color", "bisque");
+				
+								},
+								function(event) {
+								this.attr({stroke: 'black', 'stroke-width' : '0'});
+								$('#' + hit.anno_id).css("background-color", "white");
+								}
+						)
+					 drawing.drawSpacer(10);
+					 matched.push(idPattern);	
+					 }	    	    
+				 }
+				 
+		 	}
+		 }
+
+	 </script>
+		  
+	 </body>		 
 </html>
