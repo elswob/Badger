@@ -152,7 +152,7 @@
       			return nRow;
       			
     		},
-    		"fnInfoCallback": function( oSettings, iStart, iEnd, iMax, iTotal, sPre ) {    			
+    		"fnDrawCallback": function( oSettings ) {    			
     			if (drawCount>0){
     				//alert('redrawHits');
     				drawAnno();
@@ -228,7 +228,7 @@
 				"oTableTools": {
 				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
 				},
-				"fnInfoCallback": function( oSettings, iStart, iEnd, iMax, iTotal, sPre ) {    			
+				"fnDrawCallback": function( oSettings ) {   			
 					if (drawCount>0){
 						//alert('redrawHits');
 						drawAnno();
@@ -261,7 +261,7 @@
 				"oTableTools": {
 				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
 				},
-				"fnInfoCallback": function( oSettings, iStart, iEnd, iMax, iTotal, sPre ) {    			
+				"fnDrawCallback": function( oSettings ) {    			
 					if (drawCount>0){
 						//alert('redrawHits');
 						drawAnno();
