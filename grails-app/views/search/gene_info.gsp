@@ -24,12 +24,12 @@
     </style>
     
             	  <% 
-		  def iprjsonData = ipr_results.encodeAsJSON();
-		  def blastjsonData = blast_results.encodeAsJSON();
-		  def funjsonData = fun_results.encodeAsJSON();
 		  def exonjsonData = exon_results.encodeAsJSON();
 		  def jsonAnno = annoLinks.encodeAsJSON();
+		  def blastTopjson = blastTopRes.encodeAsJSON();
+		  def annoTopjson = annoTopRes.encodeAsJSON();
 		  //println blastjsonData
+		  println "blastData = "+blastData
 		  %>  
     <script>
     var drawCount=0;
@@ -107,22 +107,23 @@
     var blasttableShow="";
     var iprtableShow="";
     var funtableShow="";
-    blast_data = ${blastjsonData};	
-	ipr_data = ${iprjsonData};
-	fun_data = ${funjsonData};
 	exon_data = ${exonjsonData};
 	aa_data = ${aaData}
 	AnnoData = ${jsonAnno};
+	//blastTop = ${blastTopjson};
+	//annoTop = ${annoTopjson};
 	//alert(aa_data)
     
     $(document).ready(function() {
     	var anOpen = [];
     	var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.0/examples/examples_support/')}";
-    	
-    	if (blast_data.length > 0){
-    		var blastTable = $('#blast_table_data').dataTable( {
+    	    	
+    	//if (blast_data.length > 0){
+    		var blastTable = $('#blast_table_data').dataTable( {	
 			"bProcessing": true,
-			"aaData": ${blastjsonData},
+			"bServerSide" : true,
+        	"sAjaxSource" : "${createLink(controller:'ajax', action:'getDataJSON', params :[db : 'blast', gene_id : info_results.gene_id[0] ])}",        
+			//"aaData": dataSource,
 			"aoColumns": [
 				{
 				   "mDataProp": null,
@@ -152,26 +153,25 @@
       			return nRow;
       			
     		},
-    		"fnDrawCallback": function( oSettings ) {    			
-    			if (drawCount>0){
-    				//alert('redrawHits');
-    				drawAnno();
-    			}
-  			},
 			"sPaginationType": "full_numbers",
-				"iDisplayLength": 5,
-				"aLengthMenu": [[5,10, 25, 50, 100, -1], [5,10, 25, 50, 100, "All"]],
-				"oLanguage": {
-						 "sSearch": "Filter records:"
-				 },
-				"aaSorting": [[ 6, "desc" ]],
-				"sDom": 'T<"clear">lfrtip',
-				"oTableTools": {
+			"iDisplayLength": -1,
+			"aLengthMenu": [[-1, 5, 10, 25, 50, 100, 1000000000], ["Top", 5, 10, 25, 50, 100, "All"]],
+			"oLanguage": {
+					 "sSearch": "Filter records:"
+			 },
+			"aaSorting": [[ 6, "desc" ]],
+			"sDom": 'T<"clear">lfrtip',
+			"oTableTools": {
 				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
-				}
+			},
+			"fnDrawCallback": function( oSettings ) {  
+    			if (drawCount>0){
+    				//alert('redrawHits');   				
+    				//drawAnno();
+    			}
+  			}
 		} );
-		
-	   
+	    
 	  $('#blast_table_data td.control').live( 'click', function () {
 	  var nTr = this.parentNode;
 	  var i = $.inArray( nTr, anOpen );
@@ -210,18 +210,18 @@
 	   //alert(sOut)
 	  return sOut;
 	}
-		//capture the rows in the tables to use for the image
-		//var blastoTable = $('#blast_table_data').dataTable();
-		//blasttableShow = blastoTable._('td');
-	}
+	
+	//}
         
-		if (fun_data.length > 0){
+		//if (fun_data.length > 0){
 			$('#fun_table_data').dataTable({
 				"sPaginationType": "full_numbers",
 				"iDisplayLength": 5,
 				"oLanguage": {
 						 "sSearch": "Filter records:"
 				 },
+				"bServerSide" : true,
+        		"sAjaxSource" : "${createLink(controller:'ajax', action:'getDataJSON', params :[geneId : gene_id])}",
 				"aLengthMenu": [[5,10, 25, 50, 100, -1], [5,10, 25, 50, 100, "All"]],
 				"aaSorting": [[ 5, "desc" ]],
 				"sDom": 'T<"clear">lfrtip',
@@ -238,15 +238,17 @@
 			//capture the rows in the tables to use for the image
 			//var funoTable = $('#fun_table_data').dataTable();
 			//funtableShow = funoTable._('td');
-        }
+        //}
 		
-        if (ipr_data.length > 0){
+        //if (ipr_data.length > 0){
 			$('#ipr_table_data').dataTable({
 				"sPaginationType": "full_numbers",
 				"iDisplayLength": 5,
 				"oLanguage": {
 						 "sSearch": "Filter records:"
 				 },
+				"bServerSide" : true,
+        		"sAjaxSource" : "${createLink(controller:'ajax', action:'getDataJSON', params :[geneId : gene_id])}", 
 				"aLengthMenu": [[5,10, 25, 50, 100, -1], [5,10, 25, 50, 100, "All"]],
 				"aaSorting": [[ 5, "asc" ]],
 				"aoColumns": [
@@ -271,7 +273,7 @@
 			//capture the rows in the tables to use for the image
 			//var iproTable = $('#ipr_table_data').dataTable();
 			//iprtableShow = iproTable._('td');
-		}
+		//}
      
      //exons
      var anOpen = [];
@@ -302,7 +304,7 @@
 				"oLanguage": {
 						 "sSearch": "Filter records:"
 				 },
-				"aaSorting": [[ 1, "asc" ]],
+				"aaSorting": [[ 2, "asc" ]],
 				"sDom": 'T<"clear">lfrtip',
 				"oTableTools": {
 				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
@@ -387,10 +389,10 @@
         }
     });
     
-    if (blast_data.length > 0 || fun_data.length > 0 || ipr_data.length > 0 ){
+    //if (blast_data.length > 0 || fun_data.length > 0 || ipr_data.length > 0 ){
      			//draw the figure
      			drawAnno(); 
-     		}
+     //		}
         
     });
     
@@ -481,7 +483,7 @@
 		  
       </g:if>
       
-      <g:if test="${blast_results}">
+      <!--g:if test="${blast_results}"-->
 		  <div id="blast_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
 			   <h1>BLAST results</h1>
 		   <table id="blast_table_data" class="display">
@@ -499,7 +501,7 @@
 			  <tbody>
 			  </tbody>
 			</table>
-	   </g:if>
+	   <!--/g:if-->
 	   
 	   <g:if test="${fun_results}">
 	   <br>

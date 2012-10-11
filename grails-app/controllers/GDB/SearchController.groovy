@@ -359,42 +359,7 @@ class SearchController {
      	}else{
 			def sql = new Sql(dataSource)
 			
-			def blastDBs = "anno_db = "
-			if (grailsApplication.config.g.blast.size()>0){
-				for(item in grailsApplication.config.g.blast){
-				item = item.toString()
-					def splitter = item.split("=",2)
-					blastDBs += "'"+splitter[0]+"' or anno_db = "
-				}
-				blastDBs = blastDBs[0..-15]
-			}
 			
-			def funDBs = "anno_db = "
-			if (grailsApplication.config.g.fun.size()>0){
-				for(item in grailsApplication.config.g.fun){
-				item = item.toString()
-					def splitter = item.split("=",2)
-					funDBs += "'"+splitter[0]+"' or anno_db = "
-				}
-				funDBs = funDBs[0..-15]
-			}
-			def blast_results
-			def fun_results
-			def ipr_results
-			if (grailsApplication.config.g.blast.size()>0){			
-				def blastsql = "select * from gene_blast where ("+blastDBs+") and gene_id = '"+params.gene_id+"' order by score desc;";
-				println blastsql
-				blast_results = sql.rows(blastsql)
-			}
-			if (grailsApplication.config.g.IPR){
-				def iprsql = "select * from gene_anno where anno_id ~ '^IPR' and gene_id = '"+params.gene_id+"' order by score;";
-				ipr_results = sql.rows(iprsql)
-			}
-			if (grailsApplication.config.g.fun.size()>0){
-				def funsql = "select * from gene_anno where ("+funDBs+") and gene_id = '"+params.gene_id+"' order by score desc;";
-				println funsql
-				fun_results = sql.rows(funsql)
-			}
 			//get exon info
 			def exonsql = "select *,length(sequence) as length from exon_info where gene_id = '"+params.gene_id+"' order by exon_number;"
 			def exon_results = sql.rows(exonsql)
@@ -404,12 +369,21 @@ class SearchController {
 
 			//get amino acid info
 			def info_results = GeneInfo.findAllByGene_id(params.gene_id)
+			println "info_results ="+info_results
 			def aaData
 			info_results.each {
 				aaData = peptideService.getComp(it.pep)
 				//println "service = "+service
 			}	
-			return [ info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData]
+			
+			//get top hits
+			def blastTopSql = "select distinct on (anno_db) * from gene_blast where gene_id = '"+params.gene_id+"' order by anno_db,score desc;"
+			def blastTopRes = sql.rows(blastTopSql)
+			def annoTopSql = "select distinct on (anno_db) * from gene_anno where gene_id = '"+params.gene_id+"' order by anno_db,score desc;"
+			def annoTopRes = sql.rows(annoTopSql)
+			println blastTopSql
+			println annoTopSql
+			return [ info_results: info_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, blastTopRes: blastTopRes, annoTopRes:annoTopRes]
     	sql.close()
     	}
     }
