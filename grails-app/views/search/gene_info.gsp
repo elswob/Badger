@@ -26,10 +26,10 @@
             	  <% 
 		  def exonjsonData = exon_results.encodeAsJSON();
 		  def jsonAnno = annoLinks.encodeAsJSON();
-		  def blastTopjson = blastTopRes.encodeAsJSON();
-		  def annoTopjson = annoTopRes.encodeAsJSON();
-		  //println blastjsonData
-		  println "blastData = "+blastData
+		  def blastjsonData = blast_results.encodeAsJSON();
+		  def funjsonData = fun_results.encodeAsJSON();
+		  def iprjsonData = ipr_results.encodeAsJSON();
+		  //println iprjsonData
 		  %>  
     <script>
     var drawCount=0;
@@ -110,15 +110,16 @@
 	exon_data = ${exonjsonData};
 	aa_data = ${aaData}
 	AnnoData = ${jsonAnno};
-	//blastTop = ${blastTopjson};
-	//annoTop = ${annoTopjson};
+	blast_data = ${blastjsonData}
+	fun_data = ${funjsonData}
+	ipr_data = ${iprjsonData}
 	//alert(aa_data)
     
     $(document).ready(function() {
     	var anOpen = [];
     	var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.0/examples/examples_support/')}";
     	    	
-    	//if (blast_data.length > 0){
+    	if (blast_data.length > 0){
     		var blastTable = $('#blast_table_data').dataTable( {	
 			"bProcessing": true,
 			"bServerSide" : true,
@@ -167,7 +168,7 @@
 			"fnDrawCallback": function( oSettings ) {  
     			if (drawCount>0){
     				//alert('redrawHits');   				
-    				//drawAnno();
+    				drawAnno();
     			}
   			}
 		} );
@@ -211,22 +212,44 @@
 	  return sOut;
 	}
 	
-	//}
+	}
         
-		//if (fun_data.length > 0){
+		if (fun_data.length > 0){
 			$('#fun_table_data').dataTable({
 				"sPaginationType": "full_numbers",
-				"iDisplayLength": 5,
 				"oLanguage": {
 						 "sSearch": "Filter records:"
 				 },
 				"bServerSide" : true,
-        		"sAjaxSource" : "${createLink(controller:'ajax', action:'getDataJSON', params :[geneId : gene_id])}",
-				"aLengthMenu": [[5,10, 25, 50, 100, -1], [5,10, 25, 50, 100, "All"]],
-				"aaSorting": [[ 5, "desc" ]],
+        		"sAjaxSource" : "${createLink(controller:'ajax', action:'getDataJSON', params :[db : 'fun', gene_id : info_results.gene_id[0] ])}",        		
+				"aoColumns": [
+					{ "mDataProp": "anno_db"},
+					{ "mDataProp": "anno_id",
+					"fnRender": function ( oObj, sVal ){
+						//alert("id = "+sVal);					
+						var db = oObj.aData["anno_db"]
+						if (AnnoData[db]){
+							var regex = new RegExp(AnnoData[db][1]);
+							var link = sVal.replace(regex,"<a href=\""+AnnoData[db][2]+"$1 \" target='_blank'>$1</a>")
+							//link = "<a name=\"$1\">"+link+"</a>"
+						}
+						return link
+					}},
+					{ "mDataProp": "descr"},
+					{ "mDataProp": "anno_start"},
+					{ "mDataProp": "anno_stop"},
+					{ "mDataProp": "score"},
+				],
+				"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+					$(nRow).attr("id",aData["id"]);
+					return nRow;
+					
+				},
+				"iDisplayLength": -1,
+				"aLengthMenu": [[-1, 5, 10, 25, 50, 100, 1000000000], ["Top", 5, 10, 25, 50, 100, "All"]],
 				"sDom": 'T<"clear">lfrtip',
 				"oTableTools": {
-				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+					"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
 				},
 				"fnDrawCallback": function( oSettings ) {   			
 					if (drawCount>0){
@@ -235,33 +258,47 @@
 					}
 				},
 			 });     
-			//capture the rows in the tables to use for the image
-			//var funoTable = $('#fun_table_data').dataTable();
-			//funtableShow = funoTable._('td');
-        //}
+        }
 		
-        //if (ipr_data.length > 0){
+        if (ipr_data.length > 0){
 			$('#ipr_table_data').dataTable({
 				"sPaginationType": "full_numbers",
-				"iDisplayLength": 5,
 				"oLanguage": {
 						 "sSearch": "Filter records:"
 				 },
 				"bServerSide" : true,
-        		"sAjaxSource" : "${createLink(controller:'ajax', action:'getDataJSON', params :[geneId : gene_id])}", 
-				"aLengthMenu": [[5,10, 25, 50, 100, -1], [5,10, 25, 50, 100, "All"]],
-				"aaSorting": [[ 5, "asc" ]],
+   		     	"sAjaxSource" : "${createLink(controller:'ajax', action:'getDataJSON', params :[db : 'ipr', gene_id : info_results.gene_id[0] ])}",         
 				"aoColumns": [
-					 null,
-					 null,
-					 null,
-					 null,
-					 null,
-					 { "sType": "scientific" }
+					{ "mDataProp": "anno_db"},
+					{ "mDataProp": "anno_id",
+					"fnRender": function ( oObj, sVal ){
+						//alert("id = "+sVal);					
+						var db = oObj.aData["anno_db"]
+						if (AnnoData[db]){
+							var regex = new RegExp(AnnoData[db][1]);
+							var link = sVal.replace(regex,"<a href=\""+AnnoData[db][2]+"$1 \" target='_blank'>$1</a>")
+							//link = "<a name=\"$1\">"+link+"</a>"
+						}
+						return link
+					}},
+					{ "mDataProp": "descr"},
+					{ "mDataProp": "anno_start"},
+					{ "mDataProp": "anno_stop"},
+					{ "mDataProp": "score",
+					  "sType": "scientific"
+					},
 				],
+				"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+					//<span id=\""+oObj.aData["id"]+"\">
+					$(nRow).attr("id",aData["id"]);
+					return nRow;	
+				},
+				"iDisplayLength": -1,
+				"aLengthMenu": [[-1, 5, 10, 25, 50, 100, 1000000000], ["Top", 5, 10, 25, 50, 100, "All"]],
+				"aaSorting": [[ 5, "asc" ]],
 				"sDom": 'T<"clear">lfrtip',
 				"oTableTools": {
-				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+					"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
 				},
 				"fnDrawCallback": function( oSettings ) {    			
 					if (drawCount>0){
@@ -270,10 +307,7 @@
 					}
 				},
 			 });  
-			//capture the rows in the tables to use for the image
-			//var iproTable = $('#ipr_table_data').dataTable();
-			//iprtableShow = iproTable._('td');
-		//}
+		}
      
      //exons
      var anOpen = [];
@@ -389,13 +423,11 @@
         }
     });
     
-    //if (blast_data.length > 0 || fun_data.length > 0 || ipr_data.length > 0 ){
+    if (blast_data.length > 0 || fun_data.length > 0 || ipr_data.length > 0 ){
      			//draw the figure
-     			drawAnno(); 
-     //		}
-        
+     			drawAnno();		
+     	}        
     });
-    
     
     </script>
     
@@ -472,18 +504,11 @@
      
     <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
         <div id="anno_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>  
-    
 		  <h1>Annotation overview</h1>  
- 
-		  <div id="blast_fig">
-		  
-		   
-  
-		  </div>
-		  
+		  <div id="blast_fig"></div>
       </g:if>
       
-      <!--g:if test="${blast_results}"-->
+      <g:if test="${blast_results}">
 		  <div id="blast_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
 			   <h1>BLAST results</h1>
 		   <table id="blast_table_data" class="display">
@@ -501,49 +526,29 @@
 			  <tbody>
 			  </tbody>
 			</table>
-	   <!--/g:if-->
+	   </g:if>
 	   
 	   <g:if test="${fun_results}">
-	   <br>
-	   <div id="fun_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
-	   <h1>Functional annotation results</h1>
-	   <table id="fun_table_data" class="display">
-	      <thead>
-	      <tr>
-		<th><b>Database</b></th>
-		<th><b>Hit ID</b></th>
-		<th><b>Description</b></th>
-		<th><b>Start</b></th>
-		<th><b>Stop</b></th>
-		<th><b>Score</b></th>
-	      </tr>
-	      </thead>
-	      <tbody>
-	     <g:each var="res" in="${fun_results}">
-	     <tr id="${res.id}">
-		<td>${res.anno_db}</td>
-		<%
-			//set links
-			annoLinks.each{
-				if (res.anno_db == it.key){
-					res.anno_id = res.anno_id.replaceAll(it.value[1], "<a href=\""+it.value[2]+"\$1\" target=\'_blank\'>\$1</a>") 
-				}
-			}
-		%>
-		<td>${res.anno_id}</td>
-		<td>${res.descr}</td>
-		<td>${res.anno_start}</td>
-		<td>${res.anno_stop}</td>
-		<td>${res.score}</td>
-	      </tr>  
-	     </g:each>
-	      </tbody>
-	    </table>
+		   <br>
+		   <div id="fun_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
+		   <h1>Functional annotation results</h1>
+		   <table id="fun_table_data" class="display">
+			  <thead>
+			  <tr>
+			<th><b>Database</b></th>
+			<th><b>Hit ID</b></th>
+			<th><b>Description</b></th>
+			<th><b>Start</b></th>
+			<th><b>Stop</b></th>
+			<th><b>Score</b></th>
+			  </tr>
+			  </thead>
+			  <tbody>
+			  </tbody>
+			</table>
 	    </g:if>
 	   
-	    
-	   <br>
-	   
+	   <br>	   
 	   <g:if test="${ipr_results}">
 		   <div id="ipr_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
 		   <h1>InterProScan results</h1>
@@ -559,20 +564,7 @@
 			  </tr>
 			  </thead>
 			  <tbody>
-			 <g:each var="res" in="${ipr_results}">
-			<tr id="${res.id}">
-			<td>${res.anno_db}</td>
-			<%
-			res.anno_id = res.anno_id.replaceAll(/(^IPR\d+)/, "<a href=\"http://www.ebi.ac.uk/interpro/IEntry?ac=\$1\" target=\'_blank\'>\$1</a>")
-			%>
-			<td>${res.anno_id}</td>
-			<td>${res.descr}</td>
-			<td>${res.anno_start}</td>
-			<td>${res.anno_stop}</td>
-			<td>${res.score}</td>
-			  </tr>  
-			 </g:each>
-			 </tbody>
+			  </tbody>
 			</table>
 	   </g:if> 
      <br>
@@ -581,7 +573,7 @@
      	<div id="browse_anchor"><div></div>
          	<hr size = 5 color="green" width="100%" style="margin-top:10px">
 		 	<h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
-		 	<iframe src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" width="100%" height="700" frameborder="0">
+		 	<iframe width="100%" height="700" frameborder="0">
 				<img src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}"/>
 		 	</iframe>
 		 </div>
