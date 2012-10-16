@@ -359,17 +359,6 @@ class SearchController {
      	}else{
 			def sql = new Sql(dataSource)
 			
-			def funDBs = "(anno_db = "
-			if (grailsApplication.config.g.fun.size()>0){
-				for(item in grailsApplication.config.g.fun){
-				item = item.toString()
-					def splitter = item.split("=",2)
-					funDBs += "'"+splitter[0]+"' or anno_db = "
-				}
-				funDBs = funDBs[0..-15]
-				funDBs += ")"
-			}
-			
 			
 			//get exon info
 			def exonsql = "select *,length(sequence) as length from exon_info where gene_id = '"+params.gene_id+"' order by exon_number;"
@@ -386,15 +375,15 @@ class SearchController {
 				aaData = peptideService.getComp(it.pep)
 				//println "service = "+service
 			}	
-			//get data (this is redundant as the ajax call within datatables makes this but not sure how to capture that info)
-			def blastSql = "select * from gene_blast where gene_id = '"+params.gene_id+"';"
-			def blast_results = sql.rows(blastSql)
-			def funSql = "select * from gene_anno where gene_id = '"+params.gene_id+"' and "+funDBs+";"
-			def fun_results = sql.rows(funSql)
-			def iprSql = "select * from gene_anno where gene_id = '"+params.gene_id+"' and anno_id ~ '^IPR';"
-			def ipr_results = sql.rows(iprSql)
-
-			return [ info_results: info_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, blast_results: blast_results, fun_results: fun_results, ipr_results: ipr_results]
+			
+			//get top hits
+			def blastTopSql = "select distinct on (anno_db) * from gene_blast where gene_id = '"+params.gene_id+"' order by anno_db,score desc;"
+			def blastTopRes = sql.rows(blastTopSql)
+			def annoTopSql = "select distinct on (anno_db) * from gene_anno where gene_id = '"+params.gene_id+"' order by anno_db,score desc;"
+			def annoTopRes = sql.rows(annoTopSql)
+			println blastTopSql
+			println annoTopSql
+			return [ info_results: info_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, blastTopRes: blastTopRes, annoTopRes:annoTopRes]
     	sql.close()
     	}
     }
