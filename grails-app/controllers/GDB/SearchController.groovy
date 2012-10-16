@@ -387,11 +387,11 @@ class SearchController {
 				//println "service = "+service
 			}	
 			//get data (this is redundant as the ajax call within datatables makes this but not sure how to capture that info)
-			def blastSql = "select * from gene_blast where gene_id = '"+params.gene_id+"';"
+			def blastSql = "select * from gene_blast where gene_id = '"+params.gene_id+"' order by score desc;"
 			def blast_results = sql.rows(blastSql)
-			def funSql = "select * from gene_anno where gene_id = '"+params.gene_id+"' and "+funDBs+";"
+			def funSql = "select * from gene_anno where gene_id = '"+params.gene_id+"' and "+funDBs+" order by score desc;"
 			def fun_results = sql.rows(funSql)
-			def iprSql = "select * from gene_anno where gene_id = '"+params.gene_id+"' and anno_id ~ '^IPR';"
+			def iprSql = "select * from gene_anno where gene_id = '"+params.gene_id+"' and anno_id ~ '^IPR' order by score asc;"
 			def ipr_results = sql.rows(iprSql)
 
 			return [ info_results: info_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, blast_results: blast_results, fun_results: fun_results, ipr_results: ipr_results]

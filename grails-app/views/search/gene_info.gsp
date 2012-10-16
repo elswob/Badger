@@ -273,7 +273,7 @@
 					{ "mDataProp": "anno_id",
 					"fnRender": function ( oObj, sVal ){
 						//alert("id = "+sVal);					
-						var db = oObj.aData["anno_db"]
+						var db = "IPR";
 						if (AnnoData[db]){
 							var regex = new RegExp(AnnoData[db][1]);
 							var link = sVal.replace(regex,"<a href=\""+AnnoData[db][2]+"$1 \" target='_blank'>$1</a>")
@@ -573,8 +573,7 @@
      	<div id="browse_anchor"><div></div>
          	<hr size = 5 color="green" width="100%" style="margin-top:10px">
 		 	<h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
-		 	<iframe width="100%" height="700" frameborder="0">
-				<img src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}"/>
+		 	<iframe src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" width="100%" height="700" frameborder="0">
 		 	</iframe>
 		 </div>
      </g:if>
