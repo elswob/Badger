@@ -281,7 +281,7 @@
 		  var sOut =
 			'<div class="innerDetails">'+
 			  '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:10px;">'+
-				'<tr><td><b>Abstract:</b><br>'+oData.abstract_text+'</td></tr>'+
+				'<tr><td><b>Abstract:</b><br><p align="justify">'+oData.abstract_text+'</p></td></tr>'+
 			  '</table>'+
 			'</div>';
 		   //alert(sOut)
