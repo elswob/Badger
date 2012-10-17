@@ -9,7 +9,6 @@
   </head>
 
   <body>
-  
 	  <sec:ifNotLoggedIn>
 	  	<h1>Welcome to the home of the <i>${grailsApplication.config.projectID}</i> genome project.</h1> 
 	  	<h3>This is the public side.</h3>
@@ -82,7 +81,7 @@
 	    					<div class="inline">  
 	    						<h1>Latest News</h1>
 	    							<sec:ifAnyGranted roles="ROLE_ADMIN">
-	    								<g:form action="addNews" controller="home">
+	    								<g:form action="addNews" controller="admin">
 	    									(<a href="#" onclick="parentNode.submit()">add news item</a>)
 	    								</g:form><br>
 	    							</sec:ifAnyGranted>
@@ -94,10 +93,10 @@
 	    					<td>
 	    						<div class="inline">
 	    							<sec:ifAnyGranted roles="ROLE_ADMIN">	    
-	    								<g:form action="editNews" controller="home" params="[titleString: res.titleString]" >
+	    								<g:form action="editNews" controller="admin" params="[titleString: res.titleString]" >
 	    									<a href="#" onclick="parentNode.submit()" title="Edit news item"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
 	    								</g:form>  	
-	    								<g:form action="deleteNews" controller="home" params="[titleString: res.titleString]" >
+	    								<g:form action="deleteNews" controller="admin" params="[titleString: res.titleString]" >
 	    									<a href="#" onclick="parentNode.submit()" title="Delete news item"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
 	    								</g:form> 
 	    							</sec:ifAnyGranted>

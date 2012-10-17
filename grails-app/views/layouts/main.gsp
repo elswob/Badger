@@ -135,14 +135,22 @@
     					println "<li><a href =\"${dataSplit[1].trim()}\" target='_blank'>${dataSplit[0].trim()}</a></li>"
     				}
     			}
-    		println "</ul></li>"	
+    			println "</ul></li>"	
+			}else{
+				println "</ul></li>"
 			}
 		}
     	%>
     	
+    	<!-- admin only -->
+    	<sec:ifAnyGranted roles="ROLE_ADMIN">
+    		<li><g:link controller="admin" action="home" class="${pageProperty(name:'page.admin')}">Admin</g:link></li>
+    	</sec:ifAnyGranted>
+    	
     	<!--li><g:link controller="logout">Log out</g:link></li-->
 		<li style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="logout">Log out</g:link></li>
 	   </sec:ifLoggedIn>
+	   
 	</ul>
     </div>
   </div>
