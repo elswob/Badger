@@ -36,25 +36,25 @@
 <div id="addSpecies">
 	<h2><b>General data</b></h2>
 	<g:form action="addedData" controller="admin">
-	<p>Genus*</p>
-	<g:textArea name="genus" style="width: 98%; height: 15px; border: 3px solid #cccccc; padding: 5px;"/><br>
-	<p>Species*</p>
-	<g:textArea name="species" style="width: 98%; height: 15px; border: 3px solid #cccccc; padding: 5px;"/><br>
-	<p>Version*</p>
-	<g:textArea name="version" style="width: 98%; height: 15px; border: 3px solid #cccccc; padding: 5px;"/><br>
-	<p>Description*</p>
-	<g:textArea name="description" style="width: 98%; height: 50px; border: 3px solid #cccccc; padding: 5px;"/><br>	
+	<p>Genus<font color="red">*</font></p>
+	<g:textArea name="genus" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+	<p>Species<font color="red">*</font></p>
+	<g:textArea name="species" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+	<p>Version<font color="red">*</font></p>
+	<g:textArea name="version" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+	<p>Description<font color="red">*</font></p>
+	<g:textArea name="description" style="width: 98%; height: 50px; border: 3px solid #cccccc; padding: 2px;"/><br>	
 	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 	
-	<h2><b>Data files</b> (relative to data directory, e.g. A_viteae/trans.fa)</h2>	
-	<p>Location (directory within data folder)</p>
-	<g:textArea name="dir" style="width: 98%; height: 15px; border: 3px solid #cccccc; padding: 5px;"/><br>
+	<h2><b>Data files</b></h2>	
+	<p>Location (directory within data folder)<font color="red">*</font></p>
+	<g:textArea name="dir" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<p>Transcriptome (FASTA file)</p>
-	<g:textArea name="trans" style="width: 98%; height: 15px; border: 3px solid #cccccc; padding: 5px;"/><br>
-	<p>Genome (FASTA file)*</p>
-	<g:textArea name="genome" style="width: 98%; height: 15px; border: 3px solid #cccccc; padding: 5px;"/><br>
-	<p>GFF (GFF3 file)*</p>
-	<g:textArea name="gff" style="width: 98%; height: 15px; border: 3px solid #cccccc; padding: 5px;"/><br>
+	<g:textArea name="trans" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+	<p>Genome (FASTA file)<font color="red">*</font></p>
+	<g:textArea name="genome" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+	<p>GFF (GFF3 file)<font color="red">*</font></p>
+	<g:textArea name="gff" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 	
 	<h2><b>BLAST server</b></h2>	

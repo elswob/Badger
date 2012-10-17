@@ -134,31 +134,38 @@ class AdminController {
 	 	def fileMap = [:]
 	 	int getFileID = FileData.count()
 	 	if (params.trans){
-			fileMap.file_id = getFileID + 1
+	 		getFileID++
+			fileMap.file_id = getFileID
 			fileMap.data_id = data_id
 			fileMap.file_type = "transcriptome"
 			fileMap.file_dir = params.dir
 			fileMap.file_name = params.trans	
+			fileMap.blast = params.blast_trans
 			println fileMap
-			new FileData(fileMap).save(flush:true) 
+			new FileData(fileMap).save() 
+			
 		}
 		if (params.genome){
-			fileMap.file_id = getFileID + 1
+			getFileID++
+			fileMap.file_id = getFileID
 			fileMap.data_id = data_id
 			fileMap.file_type = "genome"
 			fileMap.file_dir = params.dir
 			fileMap.file_name = params.genome	
+			fileMap.blast = params.blast_genome
 			println fileMap
-			new FileData(fileMap).save(flush:true) 
+			new FileData(fileMap).save() 
 		}
 		if (params.gff){
-			fileMap.file_id = getFileID + 1
+			getFileID++
+			fileMap.file_id = getFileID
 			fileMap.data_id = data_id
 			fileMap.file_type = "gff"
 			fileMap.file_dir = params.dir
 			fileMap.file_name = params.gff	
+			fileMap.blast = params.blast_genes
 			println fileMap
-			new FileData(fileMap).save(flush:true) 
+			new FileData(fileMap).save() 
 		}
 		
 		return [dataMap:dataMap]
