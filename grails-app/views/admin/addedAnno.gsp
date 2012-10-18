@@ -14,12 +14,8 @@
 	</g:if>
 	<g:else>
 		<h1>You have successfully added the following data:</h1>
-		<table>
-		<tr><td><b>Species:</b></td><td><i>${dataMap.genus} ${dataMap.species}</i></td></tr>
-		<tr><td><b>Description:</b></td><td>${dataMap.description}</td></tr>
-		</table>
-		<!--p>Go <g:link action="home">back</g:link> and add or edit data</p-->
-		<p>Now <g:link action="addAnno">add</g:link> some annotations</p> 
+		
+		<p>Now <g:link action="addAnno">add</g:link> some more annotations</p> 
 	</g:else>	
 </body>
 </html>
