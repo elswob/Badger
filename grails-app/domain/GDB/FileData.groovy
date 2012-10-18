@@ -9,6 +9,9 @@ class FileData {
     String blast
     String file_version
     String description
+    String cov
+    String search
+    String download
     static constraints = {
         file_id(blank:false, unique: true)
     }

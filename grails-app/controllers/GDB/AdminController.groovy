@@ -125,16 +125,15 @@ class AdminController {
 		int data_id = getDataID + 1
 		
 		//check if name and version are unique
-		def check = MetaData.findByGenusAndSpecies(params.genus, params.species)
+		def check = MetaData.findByGenusAndSpecies(params.genus.trim(), params.species.trim())
 		if (check){
 			println "species already exists - "+check
 			return [error: "duplicate"]	
 		}else{  		
 			dataMap.data_id = data_id
-			dataMap.genus = params.genus
-			dataMap.data_version = params.version
-			dataMap.species = params.species
-			dataMap.description = params.description
+			dataMap.genus = params.genus.trim()
+			dataMap.species = params.species.trim()
+			dataMap.description = params.description.trim()
 			println dataMap
 			new MetaData(dataMap).save()
 			
@@ -145,11 +144,14 @@ class AdminController {
 				fileMap.file_id = getFileID
 				fileMap.data_id = data_id
 				fileMap.file_type = "transcriptome"
-				fileMap.file_dir = params.dir
-				fileMap.file_name = params.trans	
+				fileMap.file_dir = params.dir.trim()
+				fileMap.file_name = params.trans.trim()
 				fileMap.blast = params.blast_trans
-				fileMap.file_version = params.trans_v
-				fileMap.description = params.trans_d
+				fileMap.search = params.search_trans
+				fileMap.download = params.down_trans
+				fileMap.file_version = params.trans_v.trim()
+				fileMap.description = params.trans_d.trim()
+				fileMap.cov = params.trans_c.trim()
 				println fileMap
 				new FileData(fileMap).save() 
 				
@@ -159,11 +161,14 @@ class AdminController {
 				fileMap.file_id = getFileID
 				fileMap.data_id = data_id
 				fileMap.file_type = "genome"
-				fileMap.file_dir = params.dir
-				fileMap.file_name = params.genome	
+				fileMap.file_dir = params.dir.trim()
+				fileMap.file_name = params.genome.trim()	
 				fileMap.blast = params.blast_genome
-				fileMap.file_version = params.genome_v
-				fileMap.description = params.genome_d
+				fileMap.search = params.search_genome
+				fileMap.download = params.down_genome
+				fileMap.file_version = params.genome_v.trim()
+				fileMap.description = params.genome_d.trim()
+				fileMap.cov = params.genome_c.trim()
 				println fileMap
 				new FileData(fileMap).save() 
 			}
@@ -172,11 +177,13 @@ class AdminController {
 				fileMap.file_id = getFileID
 				fileMap.data_id = data_id
 				fileMap.file_type = "gff"
-				fileMap.file_dir = params.dir
-				fileMap.file_name = params.genes
+				fileMap.file_dir = params.dir.trim()
+				fileMap.file_name = params.genes.trim()
 				fileMap.blast = params.blast_genes
-				fileMap.file_version = params.genes_v
-				fileMap.description = params.genes_d
+				fileMap.search = params.search_genes
+				fileMap.download = params.down_genes
+				fileMap.file_version = params.genes_v.trim()
+				fileMap.description = params.genes_d.trim()
 				println fileMap
 				new FileData(fileMap).save() 
 			}		
@@ -195,37 +202,56 @@ class AdminController {
 	
 	@Secured(['ROLE_ADMIN'])
 	def addedAnno = {
-		//check if annotation is unique
-		def check = AnnoData.findByData_idAndFile_idAndAnno_file(params.data_id, params.file_id, params.file_name)
-		if (check){
-			println "annotation already exists - "+check
-			return [error: "duplicate"]	
-		}else{
-			def annoMap = [:]
-			def dataSplit = params.dataSelect.split(":")	
-			annoMap.data_id = dataSplit[0]
-			annoMap.file_id = dataSplit[1]
-			if (params.annoSelect == "1"){
+		def dataSplit = params.dataSelect.split(":")	
+	
+		def annoMap = [:]			
+		annoMap.data_id = dataSplit[0].trim()
+		annoMap.file_id = dataSplit[1].trim()
+		if (params.annoSelect == "1"){
+			//check if annotation is unique
+			def check = AnnoData.findByData_idAndFile_idAndAnno_file(dataSplit[0].trim(), dataSplit[1].trim(), params.b_anno_file.trim())
+			if (check){
+				return [error: "duplicate"]	
+			}else{
 				annoMap.type = "blast"				
-				annoMap.link = params.b_link
-				annoMap.source = params.b_source
-				annoMap.regex = params.b_regex	
-				annoMap.anno_file = params.b_anno_file	
-			}else if (params.annoSelect == "2"){
+				annoMap.link = params.b_link.trim()
+				annoMap.source = params.b_source.trim()
+				annoMap.regex = params.b_regex.trim()
+				annoMap.anno_file = params.b_anno_file.trim()	
+				println annoMap
+				new AnnoData(annoMap).save()
+				return [annoMap: annoMap]
+			}
+		}else if (params.annoSelect == "2"){
+			//check if annotation is unique
+			def check = AnnoData.findByData_idAndFile_idAndAnno_file(dataSplit[0].trim(), dataSplit[1].trim(), params.f_anno_file.trim())
+			if (check){
+				return [error: "duplicate"]	
+			}else{
 				annoMap.type = "fun"
-				annoMap.link = params.f_link
-				annoMap.source = params.f_source
-				annoMap.regex = params.f_regex	
-				annoMap.anno_file = params.f_anno_file	
-			}else if (params.annoSelect == "3"){
+				annoMap.link = params.f_link.trim()
+				annoMap.source = params.f_source.trim()
+				annoMap.regex = params.f_regex.trim()	
+				annoMap.anno_file = params.f_anno_file.trim()	
+				println annoMap
+				new AnnoData(annoMap).save()
+				return [annoMap: annoMap]
+			}
+		}else if (params.annoSelect == "3"){
+			//check if annotation is unique
+			def check = AnnoData.findByData_idAndFile_idAndAnno_file(dataSplit[0].trim(), dataSplit[1].trim(), params.i_anno_file.trim())
+			if (check){
+				return [error: "duplicate"]	
+			}else{
 				annoMap.type = "ipr"
 				annoMap.link = "http://www.ebi.ac.uk/interpro/IEntry?ac="
 				annoMap.regex = "(IPR\\d+).*?"
 				annoMap.source = "InteProScan"
-				annoMap.anno_file = params.i_anno_file	
+				annoMap.anno_file = params.i_anno_file.trim()	
+				println annoMap
+				new AnnoData(annoMap).save()
+				return [annoMap: annoMap]
 			}
-			println annoMap
-			new AnnoData(annoMap).save()
 		}
 	}
 	

@@ -4,150 +4,163 @@ import groovy.sql.Sql
 
 def grailsApplication
 
+def getFiles = FileData.findAll()
+getFiles.each {
+	def fileLoc = it.file_dir+"/"+it.file_name
+	if (it.file_type == "genome"){
+		addGenomeData(fileLoc, it.cov, it.data_id, it.file_id)
+	}else if (it.file_type == "transcriptome"){
+		//addTransData(fileLoc, it.cov)
+	}else if (it.file_type == "genes"){
+		//addGenomeData(fileLoc, it.cov)
+	}
+}
+
 //add the Transcripts
-addTransData()
-def addTransData(){
-	if (grailsApplication.config.seqData.Transcriptome){
-		println "Adding transcript data - "+grailsApplication.config.seqData.Transcriptome
-		def contigFile = new File("data/"+grailsApplication.config.seqData.Transcriptome.trim()).text
-		def cov_check = false
-      	def header_regex
-		if (grailsApplication.config.coverage.Transcriptome == 'y'){
-			cov_check = true
-          	println "Data has coverage info."
-          	header_regex = "^>(.*?)_(.*)"
-		}else{
-          	header_regex = "^>(.*)"
-          	println "Data has no coverage info."
-        }
-		def sequence=""
-		def contig_id=""
-		def count=0
-		def count_gc		
-		def contigMap = [:]
-		contigFile.split("\n").each{
-			if ((matcher = it =~ header_regex)){
-				if (sequence != ""){
-					//println "Adding $contig_id - $count"
-					count++
-					//get gc
-					count_gc = sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
-					def gc = (count_gc/sequence.length())*100
-					gc = sprintf("%.2f",gc)
-					//add data to map
-					contigMap.contig_id = contig_id
-					contigMap.gc = gc
-					if (cov_check == true){
-						coverage = sprintf("%.2f",coverage)
-					}
-					contigMap.coverage = coverage
-					contigMap.length = sequence.length()
-					contigMap.sequence = sequence
-					//println contigMap
-					if ((count % 1000) ==  0){
-            			println count
-            			new TransInfo(contigMap).save(flush:true)
-            		}else{
-            			new TransInfo(contigMap).save()
-            		}					
-					sequence=""
-				}
-				contig_id = matcher[0][1]
-				if (cov_check == true){
-					coverage = matcher[0][2].toFloat()
-				}else{
-					coverage = 0
-				}
-			}else{
-				sequence += it
-			}
-		} 
-		//catch the last one
-		count_gc = sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
-		def gc = (count_gc/sequence.length())*100
-		contigMap.contig_id = contig_id
-		contigMap.gc = gc
-		contigMap.length = sequence.length()
-		contigMap.sequence = sequence
-		contigMap.coverage = 0
-		new TransInfo(contigMap).save()
+def addTransData(fileLoc, cov, data_id, file_id){
+	println "Adding transcript data - "+fileLoc
+	def contigFile = new File("data/"+fileLoc).text
+	def cov_check = false
+	def header_regex
+	if (cov == 'y'){
+		cov_check = true
+		println "Data has coverage info."
+		header_regex = "^>(.*?)_(.*)"
+	}else{
+		header_regex = "^>(.*)"
+		println "Data has no coverage info."
 	}
+	def sequence=""
+	def contig_id=""
+	def count=0
+	def count_gc		
+	def contigMap = [:]
+	contigFile.split("\n").each{
+		if ((matcher = it =~ header_regex)){
+			if (sequence != ""){
+				//println "Adding $contig_id - $count"
+				count++
+				//get gc
+				count_gc = sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
+				def gc = (count_gc/sequence.length())*100
+				gc = sprintf("%.2f",gc)
+				//add data to map
+				contigMap.contig_id = contig_id
+				contigMap.gc = gc
+				if (cov_check == true){
+					coverage = sprintf("%.2f",coverage)
+				}
+				contigMap.coverage = coverage
+				contigMap.length = sequence.length()
+				contigMap.sequence = sequence
+				contigMap.data_id = data_id
+				contigMap.file_id = file_id
+				//println contigMap
+				if ((count % 1000) ==  0){
+					println count
+					new TransInfo(contigMap).save(flush:true)
+				}else{
+					new TransInfo(contigMap).save()
+				}					
+				sequence=""
+			}
+			contig_id = matcher[0][1]
+			if (cov_check == true){
+				coverage = matcher[0][2].toFloat()
+			}else{
+				coverage = 0
+			}
+		}else{
+			sequence += it
+		}
+	} 
+	//catch the last one
+	count_gc = sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
+	def gc = (count_gc/sequence.length())*100
+	contigMap.contig_id = contig_id
+	contigMap.gc = gc
+	contigMap.length = sequence.length()
+	contigMap.sequence = sequence
+	contigMap.coverage = coverage
+	contigMap.data_id = data_id
+	contigMap.file_id = file_id
+	new TransInfo(contigMap).save()
 }
 
-//add the genome data (header needs to be in format of >contigID_coverage)
-addGenomeData()
-def addGenomeData(){
-		if (grailsApplication.config.seqData.Genome){
-		println "Adding genome data - "+grailsApplication.config.seqData.Genome
-		def contigFile = new File("data/"+grailsApplication.config.seqData.Genome.trim()).text
-		def cov_check = false
-      	def header_regex
-		if (grailsApplication.config.coverage.Genome == 'y'){
-			cov_check = true
-          	println "Data has coverage info."
-          	header_regex = "^>(.*?)_(.*)"
-		}else{
-          	header_regex = "^>(.*)"
-          	println "Data has no coverage info."
-        }
-		def sequence=""
-		def contig_id=""
-		def count=0
-		def count_gc		
-		def coverage
-		def contigMap = [:]
-		contigFile.split("\n").each{
-            if ((matcher = it =~ header_regex)){
-				if (sequence != ""){
-					//println "Adding $contig_id - $count"
-					count++
-					//get gc
-					count_gc = sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
-					def gc = (count_gc/sequence.length())*100
-					gc = sprintf("%.2f",gc)
-					//add data to map
-					contigMap.contig_id = contig_id.trim()
-					contigMap.gc = gc
-					if (cov_check == true){
-						coverage = sprintf("%.2f",coverage)
-					}
-					contigMap.coverage = coverage
-					contigMap.length = sequence.length()
-					contigMap.sequence = sequence
-					//println contigMap
-					if ((count % 1000) ==  0){
-            			println count
-            			new GenomeInfo(contigMap).save(flush:true)
-            		}else{
-            			new GenomeInfo(contigMap).save()
-            		}			
-					sequence=""
-				}
-				contig_id = matcher[0][1]
-				if (cov_check == true){
-					coverage = matcher[0][2].toFloat()
-				}else{
-					coverage = 0
-				}
-				count_gc = 0
-			}else{
-				sequence += it
-			}
-		} 
-		//catch the last one
-		count_gc = sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
-		def gc = (count_gc/sequence.length())*100
-		contigMap.contig_id = contig_id
-		contigMap.gc = gc
-		contigMap.length = sequence.length()
-		contigMap.sequence = sequence
-		contigMap.coverage = coverage
-		new GenomeInfo(contigMap).save()
+//add the genome data (for coverage info header needs to be in format of >contigID_coverage)
+def addGenomeData(fileLoc, cov, data_id, file_id){
+	println "Adding genome data - "+fileLoc
+	def contigFile = new File("data/"+fileLoc).text
+	def cov_check = false
+	def header_regex
+	if (cov == 'y'){
+		cov_check = true
+		println "Data has coverage info."
+		header_regex = "^>(.*?)_(.*)"
+	}else{
+		header_regex = "^>(.*)"
+		println "Data has no coverage info."
 	}
+	def sequence=""
+	def contig_id=""
+	def count=0
+	def count_gc		
+	def coverage
+	def contigMap = [:]
+	contigFile.split("\n").each{
+		if ((matcher = it =~ header_regex)){
+			if (sequence != ""){
+				//println "Adding $contig_id - $count"
+				count++
+				//get gc
+				count_gc = sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
+				def gc = (count_gc/sequence.length())*100
+				gc = sprintf("%.2f",gc)
+				//add data to map
+				contigMap.contig_id = contig_id.trim()
+				contigMap.gc = gc
+				if (cov_check == true){
+					coverage = sprintf("%.2f",coverage)
+				}
+				contigMap.coverage = coverage
+				contigMap.length = sequence.length()
+				contigMap.sequence = sequence
+				contigMap.data_id = data_id
+				contigMap.file_id = file_id
+				//println contigMap
+				if ((count % 1000) ==  0){
+					println count
+					new GenomeInfo(contigMap).save(flush:true)
+				}else{
+					new GenomeInfo(contigMap).save()
+				}			
+				sequence=""
+			}
+			contig_id = matcher[0][1]
+			if (cov_check == true){
+				coverage = matcher[0][2].toFloat()
+			}else{
+				coverage = 0
+			}
+			count_gc = 0
+		}else{
+			sequence += it
+		}
+	} 
+	//catch the last one
+	count_gc = sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
+	def gc = (count_gc/sequence.length())*100
+	contigMap.contig_id = contig_id
+	contigMap.gc = gc
+	contigMap.length = sequence.length()
+	contigMap.sequence = sequence
+	contigMap.coverage = coverage
+	contigMap.data_id = data_id
+	contigMap.file_id = file_id
+	new GenomeInfo(contigMap).save()
 }
 
-//add the Genes
-addGeneData()
+//add the GFF data
 def addGeneData(){	
 	if (grailsApplication.config.seqData.GeneNuc && grailsApplication.config.seqData.GenePep && grailsApplication.config.seqData.GeneData){
 		def geneData = [:]
@@ -301,5 +314,19 @@ def addGeneData(){
 		println "One of the three required files is missing"
 	}
 }
+
+//package GDB
+
+//import groovy.sql.Sql
+//def nucToPepService
+
+//getPep()
+//def getPep(){
+// 	def seq = "ATGGTGCTGTCTGCCGCCGACAAGGGCAATGTCAAGGCCGCCTGGGGCAAGGTTGGCGGCCACGCTGCAGAGTATGGCGCAGAGGCCCTG";
+//	def service = nucToPepService.getPep(seq)
+//    println "service = +"service
+//    println "seq = "+seq
+//}
+
 
 
