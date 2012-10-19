@@ -2,7 +2,7 @@ package GDB
 
 class ExonInfo {
 
-    String gene_id
+    String mrna_id
     String contig_id    
     int start
     int stop

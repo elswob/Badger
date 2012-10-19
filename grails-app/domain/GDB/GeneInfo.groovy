@@ -1,8 +1,10 @@
 package GDB
 
 class GeneInfo {
-
+	int data_id
+	int file_id
     String gene_id
+    String mrna_id
     String source
     String contig_id    
     int start
