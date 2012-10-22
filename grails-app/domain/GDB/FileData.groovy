@@ -3,6 +3,7 @@ package GDB
 class FileData {
 	int data_id
 	int file_id
+	int file_link
     String file_type
     String file_dir
     String file_name

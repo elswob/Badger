@@ -8,6 +8,7 @@ class TransAnno {
     int anno_stop
     float score 
     String descr
+    int file_id
     static constraints = {
         contig_id(blank:false)
         anno_db(blank:false)

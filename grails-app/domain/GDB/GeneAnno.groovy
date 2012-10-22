@@ -6,6 +6,7 @@ class GeneAnno {
     String anno_id
     int anno_start
     int anno_stop
+    int file_id
     float score 
     String descr
     static constraints = {

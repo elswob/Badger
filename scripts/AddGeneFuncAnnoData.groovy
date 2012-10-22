@@ -3,34 +3,35 @@ package GDB
 import groovy.sql.Sql
 def grailsApplication
 
-getData()
-def getData(){
-	if (grailsApplication.config.g.fun.size()>0){
-		for(item in grailsApplication.config.g.fun){
-			item = item.toString()
-			def splitter = item.split("=",2)
-     	 	def splitter2 = splitter[1].split(",")
-     	 	println "Adding "+splitter[0]+" - "+splitter2[0]
-     	 	inFile = new File('data/'+splitter2[0].trim()).text
-     	 	addFunc(splitter[0].trim(),inFile)
-     	 }
-    }
-    if (grailsApplication.config.g.IPR){
-    	def splitter = grailsApplication.config.g.IPR.split(",")
-    	def iprFile = new File("data/"+splitter[0].trim()).text
-    	println "Adding IPR - "+grailsApplication.config.g.IPR
-    	addInterProScan(iprFile)
-    }
+def dataSource = ctx.getBean("dataSource")
+def sql = new Sql(dataSource)
+
+def getFilesSql = "select file_dir,anno_file,anno_data.file_id,source,type from anno_data,file_data where anno_data.file_id = file_data.file_id and type != 'blast';";
+println getFilesSql
+def getFiles = sql.rows(getFilesSql)
+getFiles.each {  	
+	def fileLoc = it.file_dir+"/"+it.anno_file
+	def annoFile = new File("data/"+fileLoc).text
+	if (it.type == "fun"){
+		println "Adding functional annotation info for "+fileLoc		
+		addFunc(it.source,annoFile,it.file_id)
+	}else if (it.type == "ipr"){
+		println "Adding InterProScan annotation info for "+fileLoc		
+		addInterProScan(annoFile,it.file_id)
+	}
 }
 
-//add the functional annotation info
-//tab delimited
-//gene_id	source	hit_id	start	stop	bit score	description
-
-def addFunc(source,file){
+def addFunc(source,file,file_id){
+	def dataSource = ctx.getBean("dataSource")
+  	def sql = new Sql(dataSource)
+  	println "Deleting old data..."
+	def delsql = "delete from gene_anno where file_id = '"+file_id+"' and anno_db = '"+source+"';";
+	sql.execute(delsql)
+	println "Adding new...."
     def annoMap = [:]
     def count=0
     file.eachLine { line ->
+    		annoMap.file_id = file_id
       		count++
     	    splitter = line.split("\t")
     	    annoMap.gene_id = splitter[0]
@@ -52,18 +53,25 @@ def addFunc(source,file){
 }
 
 // add the interposcan raw data 
-def addInterProScan(file){
+def addInterProScan(file,file_id){
+	def dataSource = ctx.getBean("dataSource")
+  	def sql = new Sql(dataSource)
+  	println "Deleting old data..."
+	def delsql = "delete from gene_anno where file_id = '"+file_id+"' and anno_id ~ '^IPR';";
+	sql.execute(delsql)
+	println "Adding new...."
   	def count=0
 	// get the ipr descriptions
 	def iprMap = [:]
-	iprFile = new File('data/entry.list').text 
-	iprFile.eachLine { line ->
-		if ((matcher = line =~ /(IPR\d+)\s+(.*)/)){
-			iprMap[matcher[0][1]] = matcher[0][2]
-		}
-	}
+	iprFile = new File('data/entry.list').text
+ 	iprFile.eachLine { line ->
+        if ((matcher = line =~ /(IPR\d+)\s+(.*)/)){
+    		iprMap[matcher[0][1]] = matcher[0][2]
+        }
+    }
     def annoMap = [:]
     file.eachLine { line ->
+    		annoMap.file_id = file_id
       		count++
     	    splitter = line.split("\t")
     	    if (splitter[11] != 'NULL'){

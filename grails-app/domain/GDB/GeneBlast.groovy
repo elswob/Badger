@@ -10,6 +10,7 @@ class GeneBlast {
     int positive
     int gaps
     int align
+    int file_id
     String qseq
     String hseq
     String midline

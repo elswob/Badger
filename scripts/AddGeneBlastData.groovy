@@ -2,29 +2,32 @@ package GDB
 
 import groovy.sql.Sql
 
-def grailsApplication
+def dataSource = ctx.getBean("dataSource")
+def sql = new Sql(dataSource)
 
-getBlastData()
-def getBlastData(){
-	if (grailsApplication.config.g.blast.size()>0){		
-		for(item in grailsApplication.config.g.blast){
-			item = item.toString()
-     	 	def splitter = item.split("=",2)
-     	 	def splitter2 = splitter[1].split(",")
-     	 	println "Adding "+splitter[0]+" - "+splitter2[0]
-     	 	inFile = new File('data/'+splitter2[0].trim()).text
-     	 	addGeneBlast(splitter[0].trim(),inFile)
-     	 }
-    }
+def getFilesSql = "select file_dir,anno_file,anno_data.file_id,source from anno_data,file_data where anno_data.file_id = file_data.file_id and type = 'blast';";
+def getFiles = sql.rows(getFilesSql)
+getFiles.each {  	
+	def fileLoc = it.file_dir+"/"+it.anno_file
+	println "Adding blast annotation info for "+fileLoc
+	def blastFile = new File("data/"+fileLoc).text
+	addGeneBlast(it.source,blastFile,it.file_id)
 }
 
 //add Unigene annotations
-def addGeneBlast(db,blastFile){
+def addGeneBlast(db,blastFile,file_id){
+	def dataSource = ctx.getBean("dataSource")
+  	def sql = new Sql(dataSource)
+  	println "Deleting old data..."
+	def delsql = "delete from gene_blast where file_id = '"+file_id+"' and anno_db = '"+db+"';";
+	sql.execute(delsql)
+	println "Adding new...."
     def annoMap = [:]
     def count_check = 0
     def count_all = 0
     def anno_id
     annoMap.anno_db = db
+    annoMap.file_id = file_id
     blastFile.eachLine { line ->		
         if ((matcher = line =~ /<Iteration_query-def>(.*?)<\/Iteration_query-def>/)){
                 annoMap.gene_id = matcher[0][1]

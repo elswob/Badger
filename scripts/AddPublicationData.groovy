@@ -2,32 +2,30 @@ package GDB
 
 import groovy.sql.Sql
 
-def grailsApplication
 def matcher
-def idlist = new File("/tmp/idlist.txt")
-def pubdata = new File("/tmp/pubdata.txt")
-if (idlist.exists()){idlist.delete()}
-if (pubdata.exists()){pubdata.delete()}
 
-getPub()
-def getPub(){
-	println "Adding publication data..."
+def getFiles = MetaData.findAll()
+getFiles.each {  	
+	def query = it.genus+"+AND+"+it.species
+	println "Getting publication information for "+it.genus+" "+it.species
+	getPub(it.data_id,query)
+}
+
+def getPub(data_id,query){
+	def idlist = new File("/tmp/idlist.txt")
+	def pubdata = new File("/tmp/pubdata.txt")
+	if (idlist.exists()){idlist.delete()}
+	if (pubdata.exists()){pubdata.delete()}
 	//get the pubmed data
 	def utils = "http://www.ncbi.nlm.nih.gov/entrez/eutils";
 	def db = 'PubMed';
-	def query = grailsApplication.config.species.trim()
-	//make sure all words are used in search
-	query = query.replace(" ","+AND+")
 	def esearch = "$utils/esearch.fcgi?db=$db&retmax=100000&term=$query";
-	println "Searching PubMed for all articles containing '"+grailsApplication.config.species+"'"
 	println "Getting IDs...";
 	println esearch
-	def idlist = new File("/tmp/idlist.txt")
 	idlist << new URL(esearch).getText()
 	def esearch_result=new File("/tmp/idlist.txt").text
 	def counter=0
 	def efetch_ids=''
-	def pubdata = new File("/tmp/pubdata.txt")
 	esearch_result.split("\n").each{
 		if ((matcher = it =~ /.*?<Id>(\d+)<\/Id>/)){
 			efetch_ids += matcher[0][1] + ","
@@ -47,16 +45,16 @@ def getPub(){
 	println "Fetching "+counter			
 	def efetch = "$utils/efetch.fcgi?db=$db&id=$efetch_ids&retmode=xml";
 	pubdata << new URL(efetch).getText()
-	addPub(pubdata) 
+	addPub(pubdata,data_id) 
 }
 //add info
-def addPub(pubFile){
+def addPub(pubFile,data_id){
 	def dataSource = ctx.getBean("dataSource")
 	def sql = new Sql(dataSource)
 	println "Deleting old data..."
-	def delsql = "delete from Publication;";
+	def delsql = "delete from Publication where data_id = '"+data_id+"';";
 	sql.execute(delsql)
-	println "Adding data to db..."
+	println "Adding new data to db..."
 	def pubMap = [:]
 	int count_all = 0
 	def dateString = ''
@@ -68,6 +66,7 @@ def addPub(pubFile){
 	def lastname = ''
 	boolean indate = false
 	pubFile.eachLine { line ->		
+		pubMap.data_id = data_id
 		if ((matcher = line =~ /<ArticleId IdType="pubmed">(.*?)<\/ArticleId>/)){
 				pubMap.pubmedId = matcher[0][1]
 				count_all++
@@ -139,7 +138,3 @@ def addPub(pubFile){
 	}
 	println "Added "+count_all 
 }
-//remove the tmp pubmed files
-println "Deleting tmp pubmed files..."
-idlist.delete()
-pubdata.delete()

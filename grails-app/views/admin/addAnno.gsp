@@ -4,7 +4,7 @@
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name='layout' content='main'/>
-  <title>${grailsApplication.config.projectID} news</title>
+  <title>${grailsApplication.config.projectID} admin</title>
   <parameter name="admin" value="selected"></parameter>
   <script>
   function demoData(db){
@@ -20,7 +20,25 @@
     	$("#b_source").val("Nembase4");
     	$("#b_link").val("http://www.nematodes.org/nembase4/cluster.php?cluster=");
    	 	$("#b_regex").val("(.*)");
-    }
+    }if (db == 'a8r_ec'){
+    	$("#f_source").val("Annot8r EC");
+    	$("#f_link").val("http://enzyme.expasy.org/EC/");
+   	 	$("#f_regex").val("(.*)");
+   	 }if (db == 'a8r_go'){
+    	$("#f_source").val("Annot8r GO");
+    	$("#f_link").val("http://www.ebi.ac.uk/QuickGO/GTerm?id=");
+   	 	$("#f_regex").val("(.*)");
+   	 }if (db == 'a8r_kegg'){
+    	$("#f_source").val("Annot8r KEGG");
+    	$("#f_link").val("http://www.genome.jp/dbget-bin/www_bget?ko:");
+   	 	$("#f_regex").val("(.*)");
+   	 }if (db == 'ipr_raw'){
+    	$("#i_anno_file").val("A_viteae.iprscan.raw");
+    	$("select[name='iprSelect']").val("ipr_raw");
+   	 }if (db == 'ipr_xml'){
+    	$("#i_anno_file").val("A_viteae.iprscan.xml");
+    	$("select[name='iprSelect']").val("ipr_xml");
+   	 }
   }
   $(function() {
     $('#annoSelect').change(function(){
@@ -84,7 +102,10 @@
 	</div>
 	
 	<div id="fun" style="display:none"> 
-		<h2><b>Functional annotation file (tab delimited file)</b></h2>
+		<div class="inline">
+			<h2><b>Functional annotation file (tab delimited file)</b></h2>
+			<p>Examples: <a href = "javascript:void(0)" onclick="demoData('a8r_ec')">EC</a> | <a href = "javascript:void(0)" onclick="demoData('a8r_go')">GO</a> | <a href = "javascript:void(0)" onclick="demoData('a8r_kegg')">KEGG</a><br>
+		</div>
 			<p>Database<font color="red">*</font></p>
 			<g:textArea name="f_source" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 			<p>File name<font color="red">*</font></p>
@@ -98,7 +119,14 @@
 	</div>
 	
 	<div id="ipr" style="display:none"> 
-		<h2><b>InterProScan (raw output)</b></h2>
+		<div class="inline">	
+			<h2><b>InterProScan</b></h2>
+			<p>Examples: <a href = "javascript:void(0)" onclick="demoData('ipr_raw')">Raw output</a> | <a href = "javascript:void(0)" onclick="demoData('ipr_xml')">XML</a><br>
+		</div>
+			<select id="iprSelect" name="iprSelect">
+				<option value="ipr_raw">Raw</option>
+				<option value="ipr_xml">XML</option>
+			</select>
 			<p>File name<font color="red">*</font></p>
 			<g:textArea name="i_anno_file" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 			<br><input class="mybuttons" type="button" value="Add data" onclick="submit()" >

@@ -8,4 +8,7 @@ class MetaData {
     static constraints = {
         data_id(blank:false, unique: true)
     }
+    static mapping = {
+        description type: "text"
+    }
 }

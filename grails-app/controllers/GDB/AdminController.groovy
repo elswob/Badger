@@ -138,6 +138,8 @@ class AdminController {
 			new MetaData(dataMap).save()
 			
 			def fileMap = [:]
+			int genomeID
+			int geneID
 			int getFileID = FileData.count()
 			if (params.trans){
 				getFileID++
@@ -169,6 +171,7 @@ class AdminController {
 				fileMap.file_version = params.genome_v.trim()
 				fileMap.description = params.genome_d.trim()
 				fileMap.cov = params.genome_c.trim()
+				genomeID = getFileID
 				println fileMap
 				new FileData(fileMap).save() 
 			}
@@ -184,9 +187,43 @@ class AdminController {
 				fileMap.download = params.down_genes
 				fileMap.file_version = params.genes_v.trim()
 				fileMap.description = params.genes_d.trim()
+				fileMap.file_link = genomeID
+				geneID = getFileID
 				println fileMap
 				new FileData(fileMap).save() 
-			}		
+			}
+			if (params.mrna_trans){
+				getFileID++
+				fileMap.file_id = getFileID
+				fileMap.data_id = data_id
+				fileMap.file_type = "mrna_trans"
+				fileMap.file_dir = params.dir.trim()
+				fileMap.file_name = params.mrna_trans.trim()
+				fileMap.blast = params.blast_genes
+				fileMap.search = params.search_genes
+				fileMap.download = params.down_genes
+				fileMap.file_version = params.mrna_trans_v.trim()
+				fileMap.description = params.mrna_trans_d.trim()
+				fileMap.file_link = geneID
+				println fileMap
+				new FileData(fileMap).save() 
+			}
+			if (params.mrna_pep){
+				getFileID++
+				fileMap.file_id = getFileID
+				fileMap.data_id = data_id
+				fileMap.file_type = "mrna_pep"
+				fileMap.file_dir = params.dir.trim()
+				fileMap.file_name = params.mrna_pep.trim()
+				fileMap.blast = params.blast_genes
+				fileMap.search = params.search_genes
+				fileMap.download = params.down_genes
+				fileMap.file_version = params.mrna_pep_v.trim()
+				fileMap.description = params.mrna_pep_d.trim()
+				fileMap.file_link = geneID
+				println fileMap
+				new FileData(fileMap).save() 
+			}			
 			return [dataMap:dataMap]
 		}
 	}

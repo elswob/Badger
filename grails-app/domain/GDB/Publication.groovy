@@ -1,6 +1,7 @@
 package GDB
 
 class Publication {
+	int data_id
 	int pubmedId
     String journal
     String journal_short
@@ -12,7 +13,7 @@ class Publication {
     Date dateString
     String doi
     static constraints = {
-        pubmedId(blank:false, unique: true)
+        pubmedId(blank:false)
         journal(blank:false)
         journal_short(blank:false)
         volume(blank:false)

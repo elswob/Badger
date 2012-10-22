@@ -10,7 +10,7 @@
 
   <body>
 	  <sec:ifNotLoggedIn>
-	  	<h1>Welcome to the home of the <i>${grailsApplication.config.projectID}</i> genome project.</h1> 
+	  	<h1>Welcome to the home of the <b>${grailsApplication.config.projectID} project</b></h1> 
 	  	<h3>This is the public side.</h3>
 	  	
 	  	<g:if test="${grailsApplication.config.news.status == 'public'}">

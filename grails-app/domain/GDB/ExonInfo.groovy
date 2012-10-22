@@ -6,6 +6,7 @@ class ExonInfo {
     String contig_id    
     int start
     int stop
+    int file_id
     int phase
     String exon_id
     float score
