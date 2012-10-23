@@ -12,7 +12,6 @@ class MetaData {
     }
     static mapping = {
         description type: "text"
-    }
-    
+    }    
     static hasMany = [files: FileData]
 }

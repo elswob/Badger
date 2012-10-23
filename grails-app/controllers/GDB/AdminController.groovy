@@ -110,12 +110,22 @@ class AdminController {
 	
 	@Secured(['ROLE_ADMIN'])
 	def home = {
+		
+		
+		def dataId = MetaData.findBySpecies('viteae')
+		if (dataId){
+			Long a = MetaData.findBySpecies('viteae').id
+			def b = MetaData.get(a)
+			for (file in b.files) { println "file name = "+file.file_name }
+		//	b.delete()
+		}
+		
+		def a = MetaData.findBySpecies("viteae")
+		for (b in a.files) {
+    		println "type = "+b.file_type
+		}
+		
 		def metaData = MetaData.findAll()
-		def a = MetaData.get(6)
-		println "a = "+a.files
-		for (t in a.files) {
-    		println "file_ids for "+a+ " are "+t.file_id
-		}	
 		return [metaData: metaData]	 
 	}
 	
@@ -142,7 +152,8 @@ class AdminController {
 			dataMap.image_file = params.image_f.trim()
 			dataMap.image_source = params.image_s.trim()
 			println dataMap
-			new MetaData(dataMap).save()
+			MetaData meta = new MetaData(dataMap)
+			meta.save()
 			
 			def fileMap = [:]
 			int genomeID
@@ -151,7 +162,6 @@ class AdminController {
 			if (params.trans){
 				getFileID++
 				fileMap.file_id = getFileID
-				fileMap.data_id = data_id
 				fileMap.file_type = "Transcriptome"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.trans.trim()
@@ -162,13 +172,14 @@ class AdminController {
 				fileMap.description = params.trans_d.trim()
 				fileMap.cov = params.trans_c.trim()
 				println fileMap
-				new FileData(fileMap).save() 
+				FileData file = new FileData(fileMap) 
+				meta.addToFiles(file)
+				file.save()
 				
 			}
 			if (params.genome){
 				getFileID++
 				fileMap.file_id = getFileID
-				fileMap.data_id = data_id
 				fileMap.file_type = "Genome"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.genome.trim()	
@@ -180,12 +191,13 @@ class AdminController {
 				fileMap.cov = params.genome_c.trim()
 				genomeID = getFileID
 				println fileMap
-				new FileData(fileMap).save() 
+				FileData file = new FileData(fileMap) 
+				meta.addToFiles(file)
+				file.save()
 			}
 			if (params.genes){
 				getFileID++
 				fileMap.file_id = getFileID
-				fileMap.data_id = data_id
 				fileMap.file_type = "Genes"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.genes.trim()
@@ -197,12 +209,13 @@ class AdminController {
 				fileMap.file_link = genomeID
 				geneID = getFileID
 				println fileMap
-				new FileData(fileMap).save() 
+				FileData file = new FileData(fileMap) 
+				meta.addToFiles(file)
+				file.save()
 			}
 			if (params.mrna_trans){
 				getFileID++
 				fileMap.file_id = getFileID
-				fileMap.data_id = data_id
 				fileMap.file_type = "mRNA"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.mrna_trans.trim()
@@ -213,12 +226,13 @@ class AdminController {
 				fileMap.description = params.mrna_trans_d.trim()
 				fileMap.file_link = geneID
 				println fileMap
-				new FileData(fileMap).save() 
+				FileData file = new FileData(fileMap) 
+				meta.addToFiles(file)
+				file.save()
 			}
 			if (params.mrna_pep){
 				getFileID++
 				fileMap.file_id = getFileID
-				fileMap.data_id = data_id
 				fileMap.file_type = "Peptide"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.mrna_pep.trim()
@@ -229,7 +243,9 @@ class AdminController {
 				fileMap.description = params.mrna_pep_d.trim()
 				fileMap.file_link = geneID
 				println fileMap
-				new FileData(fileMap).save() 
+				FileData file = new FileData(fileMap) 
+				meta.addToFiles(file)
+				file.save()
 			}			
 			return [dataMap:dataMap]
 		}
@@ -238,8 +254,9 @@ class AdminController {
 	@Secured(['ROLE_ADMIN'])
 	def addAnno = {
 		def sql = new Sql(dataSource)
-		def dataSetsSql = "select meta_data.data_id,genus,species,file_name, file_version, file_type, file_id from meta_data, file_data where meta_data.data_id = file_data.data_id and (file_type = 'Genes' or file_type = 'Transcriptome') ;";
-		def dataSets = sql.rows(dataSetsSql)
+		//def dataSetsSql = "select meta_data.data_id,genus,species,file_name, file_version, file_type, file_id from meta_data, file_data where meta_data.data_id = file_data.data_id and (file_type = 'Genes' or file_type = 'Transcriptome') ;";
+		//def dataSets = sql.rows(dataSetsSql)
+		def dataSets = MetaData.findAll()
 		//print dataSets
 		return [dataSets:dataSets]
 	}

@@ -1,7 +1,6 @@
 package GDB
 
 class FileData {
-	int data_id
 	int file_id
 	int file_link
     String file_type
@@ -19,4 +18,6 @@ class FileData {
     static mapping = {
         description type: "text"
     }
+    //static belongsTo = [meta: MetaData]
+    
 }
