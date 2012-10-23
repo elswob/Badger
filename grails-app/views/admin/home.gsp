@@ -11,23 +11,27 @@
   	if (sp == "A_vit"){
 		$("#genus").val("Acanthocheilonema");
 		$("#species").val("viteae");
-		$("#description").val("A. viteae genome project");
+		$("#description").val("Acanthocheilonema viteae is a filarial nematode parasite of rodents. It is widely used as a model for human filariases. Importantly, A. viteae lacks the Wolbachia bacterial endosymbiont found in most human-infective filarial nematodes. Thus this species has become central in efforts to understand the role of the Wolbachia in the nematode-bacterial symbiosis, and in particular its possible role in immune evasion. The Wolbachia is also a drug target in nematodes that carry this symbiont, so work on A. viteae can also help to disentangle anti-nematode and anti-symbiont effects.");
 		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/");
+		$("#image_f").val("A_viteae_main.jpeg");
+		$("#image_s").val("A. viteae lifecycle; from http://www.uni-giessen.de");
 		
 		$("#dir").val("A_viteae");
 		//$("#trans").val("trans.fa"); $("#trans_v").val("1.1"); $("#trans_d").val("UniGenes"); $("select[name='trans_c']").val("n");
-		$("#genome").val("Acanthocheilonema_viteae_v1.0.fna"); $("#genome_v").val("1.0"); $("#genome_d").val("Data freeze 02.03.12"); $("select[name='genome_c']").val("n");
+		$("#genome").val("Acanthocheilonema_viteae_v1.0.fna"); $("#genome_v").val("1.0"); $("#genome_d").val("The A. viteae genome was sequenced from material supplied by Kenneth Pfarr. Sequencing was performed by the GenePool Genomics Facility, University of Edinburgh. Assembly and annotation of the genome was performed by Georgios Koutsovoulos (assisted by Sujai Kumar and Alex Marshall)."); $("select[name='genome_c']").val("n");
 		$("#genes").val("nAv.1.0.1.aug.blast2go.gff"); $("#genes_v").val("1.1"); $("#genes_d").val("Augustus");
 		$("#mrna_trans").val("nAv.1.0.1.aug.transcripts.fasta"); $("#mrna_trans_v").val("1.1"); $("#mrna_trans_d").val("Augustus");
 		$("#mrna_pep").val("nAv.1.0.1.aug.proteins.fasta"); $("#mrna_pep_v").val("1.1"); $("#mrna_pep_d").val("Augustus");
 	}if (sp == "L_sig"){
 		$("#genus").val("Litomosoides");
 		$("#species").val("sigmodontis");
-		$("#description").val("L. sigmodontis genome project");
+		$("#description").val("Litomosoides sigmodontis is a filarial nematode parasite of rodents. Found in cotton rats in the wild, it has been adapted to the laboratory mouse and is widely used as a model for human filariases. Beginning with work in Odile Bain's laboratory in Paris, this L. sigmodontis model has become central in efforts to develop vaccines against filarial infections, test new drugs before they are progressed to clinical trials, and to investigate the basic biology of the fascinating interactions between parasitic nematodes and their mammalian hosts.");
 		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nLs.2.1.2/");
+		$("#image_f").val("Litomosoides_sigmodontis.jpg");
+		$("#image_s").val("tails of male L. sigmodontis; by L. LeGeoff");
 		
 		$("#dir").val("L_sigmodontis");
-		$("#genome").val("Litomosoides_sigmodontis_2.1.fna"); $("#genome_v").val("2.1"); $("#genome_d").val("Genome assembly"); $("select[name='genome_c']").val("n");
+		$("#genome").val("Litomosoides_sigmodontis_2.1.fna"); $("#genome_v").val("2.1"); $("#genome_d").val("The L. sigmodontis genome was sequenced from material supplied by Simon Babayan. Sequencing was performed by the GenePool Genomics Facility, University of Edinburgh. Assembly and annotation of the genome was performed by Sujai Kumar (assisted by Graham Thomas, Georgios Koutsovoulos and Alex Marshall)."); $("select[name='genome_c']").val("n");
 		$("#genes").val("nLs.2.1.2.aug.gff"); $("#genes_v").val("2.1.2"); $("#genes_d").val("Augustus");
 		$("#mrna_trans").val("nLs.2.1.2.aug.transcripts.fasta"); $("#mrna_trans_v").val("2.1"); $("#mrna_trans_d").val("Augustus");
 		$("#mrna_pep").val("nLs.2.1.2.aug.proteins.fasta"); $("#mrna_pep_v").val("2.1"); $("#mrna_pep_d").val("Augustus");
@@ -73,6 +77,10 @@
 	<g:textArea name="description" style="width: 98%; height: 50px; border: 3px solid #cccccc; padding: 2px;"/><br>	
 	<p>GBrowse link</p>
 	<g:textField name="gbrowse" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+	<p>Image file</p>
+	<g:textField name="image_f" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+	<p>Image source</p>
+	<g:textField name="image_s" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 	
 	<h2><b>Data files</b></h2>	

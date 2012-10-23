@@ -1,6 +1,8 @@
 package GDB
 
 class TransInfo {
+	int data_id
+	int file_id
     String contig_id
     String sequence
     Float gc

@@ -289,7 +289,7 @@ def addGeneData(fileLoc, data_id, file_id, trans, pep){
 					gene_id = matcher[0][1]
 				}	
 		  }
-		  if (dataArray[2] == 'mRNA'){
+		  if (dataArray[2] == 'mRNA' || dataArray[2] == 'transcript'){
 			exon_marker=0
 			exon_count=0
 			gene_count++
@@ -301,6 +301,8 @@ def addGeneData(fileLoc, data_id, file_id, trans, pep){
 			gene_count_gc = gene_nuc.toUpperCase().findAll({it=='G'|it=='C'}).size()
 			gene_gc = (gene_count_gc/gene_nuc.length())*100
 			gene_gc = sprintf("%.3f",gene_gc)
+			geneMap.data_id = data_id
+			geneMap.file_id = file_id
 			geneMap.gc = gene_gc
 			geneMap.gene_id = gene_id
 			geneMap.start = dataArray[3]

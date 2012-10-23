@@ -110,7 +110,12 @@ class AdminController {
 	
 	@Secured(['ROLE_ADMIN'])
 	def home = {
-		def metaData = MetaData.findAll()	
+		def metaData = MetaData.findAll()
+		def a = MetaData.get(6)
+		println "a = "+a.files
+		for (t in a.files) {
+    		println "file_ids for "+a+ " are "+t.file_id
+		}	
 		return [metaData: metaData]	 
 	}
 	
@@ -134,6 +139,8 @@ class AdminController {
 			dataMap.genus = params.genus.trim()
 			dataMap.species = params.species.trim()
 			dataMap.description = params.description.trim()
+			dataMap.image_file = params.image_f.trim()
+			dataMap.image_source = params.image_s.trim()
 			println dataMap
 			new MetaData(dataMap).save()
 			
@@ -145,7 +152,7 @@ class AdminController {
 				getFileID++
 				fileMap.file_id = getFileID
 				fileMap.data_id = data_id
-				fileMap.file_type = "transcriptome"
+				fileMap.file_type = "Transcriptome"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.trans.trim()
 				fileMap.blast = params.blast_trans
@@ -162,7 +169,7 @@ class AdminController {
 				getFileID++
 				fileMap.file_id = getFileID
 				fileMap.data_id = data_id
-				fileMap.file_type = "genome"
+				fileMap.file_type = "Genome"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.genome.trim()	
 				fileMap.blast = params.blast_genome
@@ -179,7 +186,7 @@ class AdminController {
 				getFileID++
 				fileMap.file_id = getFileID
 				fileMap.data_id = data_id
-				fileMap.file_type = "gff"
+				fileMap.file_type = "Genes"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.genes.trim()
 				fileMap.blast = params.blast_genes
@@ -196,7 +203,7 @@ class AdminController {
 				getFileID++
 				fileMap.file_id = getFileID
 				fileMap.data_id = data_id
-				fileMap.file_type = "mrna_trans"
+				fileMap.file_type = "mRNA"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.mrna_trans.trim()
 				fileMap.blast = params.blast_genes
@@ -212,7 +219,7 @@ class AdminController {
 				getFileID++
 				fileMap.file_id = getFileID
 				fileMap.data_id = data_id
-				fileMap.file_type = "mrna_pep"
+				fileMap.file_type = "Peptide"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.mrna_pep.trim()
 				fileMap.blast = params.blast_genes
@@ -231,7 +238,7 @@ class AdminController {
 	@Secured(['ROLE_ADMIN'])
 	def addAnno = {
 		def sql = new Sql(dataSource)
-		def dataSetsSql = "select meta_data.data_id,genus,species,file_name, file_version, file_type, file_id from meta_data, file_data where meta_data.data_id = file_data.data_id and (file_type = 'gff' or file_type = 'transcriptome') ;";
+		def dataSetsSql = "select meta_data.data_id,genus,species,file_name, file_version, file_type, file_id from meta_data, file_data where meta_data.data_id = file_data.data_id and (file_type = 'Genes' or file_type = 'Transcriptome') ;";
 		def dataSets = sql.rows(dataSetsSql)
 		//print dataSets
 		return [dataSets:dataSets]

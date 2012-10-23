@@ -16,4 +16,7 @@ class FileData {
     static constraints = {
         file_id(blank:false, unique: true)
     }
+    static mapping = {
+        description type: "text"
+    }
 }

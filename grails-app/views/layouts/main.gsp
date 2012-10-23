@@ -38,22 +38,10 @@
 		<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li> 
 		<li><g:link controller="search" class="${pageProperty(name:'page.search')}">Search</g:link>
 			<ul>
+				<g:if test = "${grailsApplication.config.i.links.species == 'public'}">
+			    		<li><g:link controller="search" action="species" class="${pageProperty(name:'page.search')}">Species</g:link></li>
+				</g:if>
 				<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>
-				<g:if test = "${grailsApplication.config.seqData.Transcriptome}">
-					<g:if test = "${grailsApplication.config.i.links.trans == 'public'}">
-			    		<li><g:link controller="search" action="trans_search" class="${pageProperty(name:'page.search')}">Transcripts</g:link></li>
-					</g:if>
-				</g:if>
-				<g:if test = "${grailsApplication.config.seqData.GenePep}">
-					<g:if test = "${grailsApplication.config.i.links.genes == 'public'}">
-						<li><g:link controller="search" action="gene_search" class="${pageProperty(name:'page.search')}">Genes</g:link></li>
-					</g:if>
-				</g:if>
-				<g:if test = "${grailsApplication.config.seqData.Genome}">
-					<g:if test = "${grailsApplication.config.i.links.genome == 'public'}">
-						<li><g:link controller="search" action="genome_search" class="${pageProperty(name:'page.search')}">Genome</g:link></li>
-					</g:if>
-				</g:if>
 				<g:if test = "${grailsApplication.config.i.links.all == 'public'}">
 			    	<li><g:link controller="search" action="all_search" class="${pageProperty(name:'page.search')}">All</g:link></li>
 				</g:if>
@@ -97,16 +85,8 @@
 		<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link>
 		<li><g:link controller="search" class="${pageProperty(name:'page.search')}">Search</g:link>
 			<ul>
-				<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>
-			    <g:if test = "${grailsApplication.config.seqData.Transcriptome}">
-			    	<li><g:link controller="search" action="trans_search" class="${pageProperty(name:'page.search')}">Transcripts</g:link></li>
-			    </g:if>
-			    <g:if test = "${grailsApplication.config.seqData.GenePep}">
-				    <li><g:link controller="search" action="gene_search" class="${pageProperty(name:'page.search')}">Genes</g:link></li>
-				</g:if>
-				<g:if test = "${grailsApplication.config.seqData.Genome}">
-					<li><g:link controller="search" action="genome_search" class="${pageProperty(name:'page.search')}">Genome</g:link></li>
-				</g:if>
+				<li><g:link controller="search" action="species" class="${pageProperty(name:'page.search')}">Species</g:link></li>
+				<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>				
 				<li><g:link controller="search" action="all_search" class="${pageProperty(name:'page.search')}">All</g:link></li>
 			</ul>
 		</li> 
