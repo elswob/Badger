@@ -22,26 +22,21 @@ class SearchController {
     }
     def species_search = {
     	def sql = new Sql(dataSource)
-    	//def dataSetsSql = "select meta_data.data_id,genus,species,file_name, file_version, file_type, file_id from meta_data, file_data where meta_data.data_id = meta_data.data_id and (file_type = 'Genes' or file_type = 'Transcriptome') and meta_data.data_id = '"+params.id+"' ;";
-		//def dataSets = sql.rows(dataSetsSql)
-    	def annoData = AnnoData.findAllByData_id(params.id)
-    	def annoTypeSql = "select distinct(type) from anno_data where data_id = '"+params.id+"';"
-    	def annoType = sql.rows(annoTypeSql)
-    	def metaData = MetaData.findByData_id(params.id)
+    	def metaData = MetaData.findBySpecies(params.id)
     	//def fileData = FileData.findAllByData_id(params.id)
-    	def geneSql = "select count(gene_id) as gcount,count(mrna_id) as mcount, count(pep) as pcount, file_id from gene_info,meta_data where gene_info.data_id = meta_data.data_id and meta_data.data_id = '"+params.id+"' group by genus,species,file_id,meta_data.data_id;";
-    	def geneData = sql.rows(geneSql)
-    	def transSql = "select count(contig_id) as tCount from trans_info,meta_data where trans_info.data_id = meta_data.data_id and meta_data.data_id = '"+params.id+"' group by genus,species,file_id,meta_data.data_id;";
-    	def transData = sql.rows(transSql)
-    	def genomeSql = "select count(contig_id) as gecount from genome_info,meta_data where genome_info.data_id = meta_data.data_id and meta_data.data_id = '"+params.id+"' group by genus,species,file_id,meta_data.data_id;";
-    	def genomeData = sql.rows(genomeSql)
+    	//def geneSql = "select count(gene_id) as gcount,count(mrna_id) as mcount, count(pep) as pcount, file_id from gene_info,meta_data where gene_info.data_id = meta_data.data_id and meta_data.data_id = '"+params.id+"' group by genus,species,file_id,meta_data.data_id;";
+    	//def geneData = sql.rows(geneSql)
+    	//def transSql = "select count(contig_id) as tCount from trans_info,meta_data where trans_info.data_id = meta_data.data_id and meta_data.data_id = '"+params.id+"' group by genus,species,file_id,meta_data.data_id;";
+    	//def transData = sql.rows(transSql)
+    	//def genomeSql = "select count(contig_id) as gecount from genome_info,meta_data where genome_info.data_id = meta_data.data_id and meta_data.data_id = '"+params.id+"' group by genus,species,file_id,meta_data.data_id;";
+    	//def genomeData = sql.rows(genomeSql)
     	def stats = [:]
-    	stats.Transcriptome = transData.tcount[0]
-    	stats.Genes = geneData.gcount[0]
-    	stats.mRNA = geneData.mcount[0]
-    	stats.Peptide = geneData.pcount[0]
-    	stats.Genome = genomeData.gecount[0]
-    	return [anno: annoData, annoType: annoType, meta: metaData, stats: stats]
+    	//stats.Transcriptome = transData.tcount[0]
+    	//stats.Genes = geneData.gcount[0]
+    	//stats.mRNA = geneData.mcount[0]
+    	//stats.Peptide = geneData.pcount[0]
+    	//stats.Genome = genomeData.gecount[0]
+    	return [meta: metaData, stats: stats]
     }
     def all_search = {
          if (grailsApplication.config.i.links.all == 'private' && !isLoggedIn()) {

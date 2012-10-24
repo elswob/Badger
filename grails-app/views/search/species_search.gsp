@@ -47,7 +47,7 @@
   	<h2><b>Select a data set</b></h2>
 	<select name="dataSelect">
 		<g:each var="res" in="${meta}">
-			<option value=${res.data_id}:${res.file_id}>${res.files.genus} ${res.species}: ${res.file_type} (${res.file_version}) - ${res.file_name}
+			<option value=${res.id}>${res.files.genus} ${res.species}: ${res.file_type} (${res.file_version}) - ${res.file_name}
 		</g:each>
 	</select>	
 		<div id = "showAnno">

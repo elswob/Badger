@@ -9,7 +9,8 @@ a.each{
 	def b = anno.filedata
 	def fileLoc = b.file_dir+"/"+anno.anno_file
 	def blastFile = new File("data/"+fileLoc).text
-	println fileLoc
+	println "anno.source = "+anno.source
+	println "fileLoc = "+fileLoc
 	addGeneBlast(anno.source,blastFile)
 }
 
@@ -100,12 +101,11 @@ def addGeneBlast(db,blastFile){
             	def scoreInt = annoMap.score as Integer
             	if (scoreInt >= 100){
             		count_all++
-            		
             		GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
             		GeneBlast gb = new GeneBlast(annoMap)
-					geneFind.addToGeneBlast(gb)
+					geneFind.addToGblast(gb)
 					
-            		if ((count_all % 1000) ==  0){
+            		if ((count_all % 10000) ==  0){
             			println count_all
             			//println annoMap
             			gb.save(flush:true)
@@ -116,4 +116,5 @@ def addGeneBlast(db,blastFile){
             }
         } 
     }
+    println count_all
 }

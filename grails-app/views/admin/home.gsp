@@ -49,10 +49,10 @@
 <g:if test = "${metaData}">	
 	<g:each var="res" in="${metaData}">
 		<div class="inline">	    
-	    	<g:form action="addAnno" controller="admin" params="[data_id: res.data_id]" >
+	    	<g:form action="addAnno" controller="admin" params="[species: res.species]" >
 	    		<a href="#" onclick="parentNode.submit()" title="Edit data"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
 	    	</g:form>  	
-	    	<g:form action="deleteSpecies" controller="admin" params="[data_id: res.data_id]" >
+	    	<g:form action="deleteSpecies" controller="admin" params="[species: res.species]" >
 	    		<a href="#" onclick="parentNode.submit()" title="Delete data"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
 	    	</g:form> 	
 	    	${res.genus} ${res.species}
