@@ -1,8 +1,6 @@
 package GDB
 
 class GeneInfo {
-	int data_id
-	int file_id
     String gene_id
     String mrna_id
     String source
@@ -24,4 +22,5 @@ class GeneInfo {
         nuc type: "text"
         pep type: "text"
     }
+    static hasMany = [exon:ExonInfo, gblast:GeneBlast, ganno: GeneAnno]
 }

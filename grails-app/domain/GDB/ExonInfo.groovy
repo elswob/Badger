@@ -1,12 +1,8 @@
 package GDB
 
-class ExonInfo {
-
-    String mrna_id
-    String contig_id    
+class ExonInfo {    
     int start
     int stop
-    int file_id
     int phase
     String exon_id
     float score
@@ -16,7 +12,6 @@ class ExonInfo {
     String strand
     static constraints = {
         exon_id(blank:false, unique: true)
-        contig_id(blank:false)
         start(blank:false)
         stop(blank:false)
     }

@@ -110,21 +110,6 @@ class AdminController {
 	
 	@Secured(['ROLE_ADMIN'])
 	def home = {
-		
-		
-		def dataId = MetaData.findBySpecies('viteae')
-		if (dataId){
-			Long a = MetaData.findBySpecies('viteae').id
-			def b = MetaData.get(a)
-			for (file in b.files) { println "file name = "+file.file_name }
-		//	b.delete()
-		}
-		
-		def a = MetaData.findBySpecies("viteae")
-		for (b in a.files) {
-    		println "type = "+b.file_type
-		}
-		
 		def metaData = MetaData.findAll()
 		return [metaData: metaData]	 
 	}
@@ -136,8 +121,6 @@ class AdminController {
 	@Secured(['ROLE_ADMIN'])
 	def addedData = {
 		def dataMap = [:]		
-		int getDataID = MetaData.count()
-		int data_id = getDataID + 1
 		
 		//check if name and version are unique
 		def check = MetaData.findByGenusAndSpecies(params.genus.trim(), params.species.trim())
@@ -145,7 +128,6 @@ class AdminController {
 			println "species already exists - "+check
 			return [error: "duplicate"]	
 		}else{  		
-			dataMap.data_id = data_id
 			dataMap.genus = params.genus.trim()
 			dataMap.species = params.species.trim()
 			dataMap.description = params.description.trim()
@@ -158,10 +140,7 @@ class AdminController {
 			def fileMap = [:]
 			int genomeID
 			int geneID
-			int getFileID = FileData.count()
 			if (params.trans){
-				getFileID++
-				fileMap.file_id = getFileID
 				fileMap.file_type = "Transcriptome"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.trans.trim()
@@ -171,6 +150,7 @@ class AdminController {
 				fileMap.file_version = params.trans_v.trim()
 				fileMap.description = params.trans_d.trim()
 				fileMap.cov = params.trans_c.trim()
+				fileMap.file_link = "n"
 				println fileMap
 				FileData file = new FileData(fileMap) 
 				meta.addToFiles(file)
@@ -178,8 +158,6 @@ class AdminController {
 				
 			}
 			if (params.genome){
-				getFileID++
-				fileMap.file_id = getFileID
 				fileMap.file_type = "Genome"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.genome.trim()	
@@ -189,15 +167,13 @@ class AdminController {
 				fileMap.file_version = params.genome_v.trim()
 				fileMap.description = params.genome_d.trim()
 				fileMap.cov = params.genome_c.trim()
-				genomeID = getFileID
+				fileMap.file_link = "n"
 				println fileMap
 				FileData file = new FileData(fileMap) 
 				meta.addToFiles(file)
 				file.save()
 			}
 			if (params.genes){
-				getFileID++
-				fileMap.file_id = getFileID
 				fileMap.file_type = "Genes"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.genes.trim()
@@ -206,16 +182,13 @@ class AdminController {
 				fileMap.download = params.down_genes
 				fileMap.file_version = params.genes_v.trim()
 				fileMap.description = params.genes_d.trim()
-				fileMap.file_link = genomeID
-				geneID = getFileID
+				fileMap.file_link = params.genome.trim()
 				println fileMap
 				FileData file = new FileData(fileMap) 
 				meta.addToFiles(file)
 				file.save()
 			}
 			if (params.mrna_trans){
-				getFileID++
-				fileMap.file_id = getFileID
 				fileMap.file_type = "mRNA"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.mrna_trans.trim()
@@ -224,15 +197,13 @@ class AdminController {
 				fileMap.download = params.down_genes
 				fileMap.file_version = params.mrna_trans_v.trim()
 				fileMap.description = params.mrna_trans_d.trim()
-				fileMap.file_link = geneID
+				fileMap.file_link = params.genes.trim()
 				println fileMap
 				FileData file = new FileData(fileMap) 
 				meta.addToFiles(file)
 				file.save()
 			}
 			if (params.mrna_pep){
-				getFileID++
-				fileMap.file_id = getFileID
 				fileMap.file_type = "Peptide"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.mrna_pep.trim()
@@ -241,7 +212,7 @@ class AdminController {
 				fileMap.download = params.down_genes
 				fileMap.file_version = params.mrna_pep_v.trim()
 				fileMap.description = params.mrna_pep_d.trim()
-				fileMap.file_link = geneID
+				fileMap.file_link = params.genes.trim()
 				println fileMap
 				FileData file = new FileData(fileMap) 
 				meta.addToFiles(file)
@@ -264,14 +235,13 @@ class AdminController {
 	@Secured(['ROLE_ADMIN'])
 	def addedAnno = {
 		def dataSplit = params.dataSelect.split(":")	
-	
+		FileData file = FileData.findByFile_name(params.dataSelect)
 		def annoMap = [:]			
-		annoMap.data_id = dataSplit[0].trim()
-		annoMap.file_id = dataSplit[1].trim()
 		if (params.annoSelect == "1"){
-			//check if annotation is unique
-			def check = AnnoData.findByData_idAndFile_idAndAnno_file(dataSplit[0].trim(), dataSplit[1].trim(), params.b_anno_file.trim())
-			if (check){
+			def check = FileData.findByFile_name(params.dataSelect).anno.anno_file
+			println "check = "+check
+			if (params.b_anno_file.trim() in check){
+				println "check exists : "+check
 				return [error: "duplicate"]	
 			}else{
 				annoMap.type = "blast"				
@@ -280,13 +250,16 @@ class AdminController {
 				annoMap.regex = params.b_regex.trim()
 				annoMap.anno_file = params.b_anno_file.trim()	
 				println annoMap
-				new AnnoData(annoMap).save()
+				AnnoData anno = new AnnoData(annoMap)
+				file.addToAnno(anno)
+				anno.save()
 				return [annoMap: annoMap]
 			}
 		}else if (params.annoSelect == "2"){
-			//check if annotation is unique
-			def check = AnnoData.findByData_idAndFile_idAndAnno_file(dataSplit[0].trim(), dataSplit[1].trim(), params.f_anno_file.trim())
-			if (check){
+			def check = FileData.findByFile_name(params.dataSelect).anno.anno_file
+			println "check = "+check
+			if (params.f_anno_file.trim() in check){
+				println "check exists : "+check
 				return [error: "duplicate"]	
 			}else{
 				annoMap.type = "fun"
@@ -295,13 +268,16 @@ class AdminController {
 				annoMap.regex = params.f_regex.trim()	
 				annoMap.anno_file = params.f_anno_file.trim()	
 				println annoMap
-				new AnnoData(annoMap).save()
+				AnnoData anno = new AnnoData(annoMap)
+				file.addToAnno(anno)
+				anno.save()
 				return [annoMap: annoMap]
 			}
 		}else if (params.annoSelect == "3"){
-			//check if annotation is unique
-			def check = AnnoData.findByData_idAndFile_idAndAnno_file(dataSplit[0].trim(), dataSplit[1].trim(), params.i_anno_file.trim())
-			if (check){
+			def check = FileData.findByFile_name(params.dataSelect).anno.anno_file
+			println "check = "+check
+			if (params.i_anno_file.trim() in check){
+				println "check exists : "+check
 				return [error: "duplicate"]	
 			}else{
 				annoMap.type = "ipr"
@@ -310,7 +286,9 @@ class AdminController {
 				annoMap.source = "InteProScan"
 				annoMap.anno_file = params.i_anno_file.trim()	
 				println annoMap
-				new AnnoData(annoMap).save()
+				AnnoData anno = new AnnoData(annoMap)
+				file.addToAnno(anno)
+				anno.save()
 				return [annoMap: annoMap]
 			}
 		}

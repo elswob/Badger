@@ -71,7 +71,11 @@
 	<h2><b>Select your data set</b></h2>
 	<select name="dataSelect">
 		<g:each var="res" in="${dataSets}">
-			<option value=${res.data_id}:${res.file_id}>${res.genus} ${res.species}: ${res.file_type} (${res.file_version}) - ${res.file_name}
+			<g:each var="f" in="${res.files}">
+				<g:if test="${f.file_type == 'Genes' || f.file_type == 'Transcriptome'}">
+					<option value=${f.file_name}>${res.genus} ${res.species}: ${f.file_type} (${f.file_version}) - ${f.file_name}
+				</g:if>
+			</g:each>
 		</g:each>
 	</select>
 	<br><br>

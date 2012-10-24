@@ -2,35 +2,35 @@ package GDB
 
 import groovy.sql.Sql
 
-def dataSource = ctx.getBean("dataSource")
-def sql = new Sql(dataSource)
-
-def getFilesSql = "select file_dir,anno_file,anno_data.file_id,source from anno_data,file_data where anno_data.file_id = file_data.file_id and type = 'blast';";
-def getFiles = sql.rows(getFilesSql)
-getFiles.each {  	
-	def fileLoc = it.file_dir+"/"+it.anno_file
-	println "Adding blast annotation info for "+fileLoc
+def a = AnnoData.findAllByType('blast')
+a.each{
+	AnnoData anno = it
+	//get FileData parent of AnnoData object
+	def b = anno.filedata
+	def fileLoc = b.file_dir+"/"+anno.anno_file
 	def blastFile = new File("data/"+fileLoc).text
-	addGeneBlast(it.source,blastFile,it.file_id)
+	println fileLoc
+	addGeneBlast(anno.source,blastFile)
 }
 
 //add Unigene annotations
-def addGeneBlast(db,blastFile,file_id){
+def addGeneBlast(db,blastFile){
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
-  	println "Deleting old data..."
-	def delsql = "delete from gene_blast where file_id = '"+file_id+"' and anno_db = '"+db+"';";
-	sql.execute(delsql)
+  	//println "Deleting old data..."
+	//def delsql = "delete from gene_blast where file_id = '"+file_id+"' and anno_db = '"+db+"';";
+	//sql.execute(delsql)
 	println "Adding new...."
     def annoMap = [:]
     def count_check = 0
     def count_all = 0
     def anno_id
     annoMap.anno_db = db
-    annoMap.file_id = file_id
+    def mrna_id
     blastFile.eachLine { line ->		
         if ((matcher = line =~ /<Iteration_query-def>(.*?)<\/Iteration_query-def>/)){
-                annoMap.gene_id = matcher[0][1]
+                annoMap.mrna_id = matcher[0][1]
+                mrna_id = matcher[0][1] 
                 count_check = 0
         }                	
         if ((matcher = line =~ /<Hit_num>(.*?)<\/Hit_num>/)){
@@ -100,12 +100,17 @@ def addGeneBlast(db,blastFile,file_id){
             	def scoreInt = annoMap.score as Integer
             	if (scoreInt >= 100){
             		count_all++
+            		
+            		GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
+            		GeneBlast gb = new GeneBlast(annoMap)
+					geneFind.addToGeneBlast(gb)
+					
             		if ((count_all % 1000) ==  0){
             			println count_all
             			//println annoMap
-            			new GeneBlast(annoMap).save(flush:true)
+            			gb.save(flush:true)
             		}else{
-            			new GeneBlast(annoMap).save()
+            			gb.save()
             		}
             	}
             }

@@ -1,7 +1,6 @@
 package GDB
 
 class GeneBlast {
-    String gene_id
     String anno_db
     String anno_id
     int hit_start
@@ -19,7 +18,6 @@ class GeneBlast {
     float score 
     String descr
     static constraints = {
-        gene_id(blank:false)
         anno_db(blank:false)
         anno_id(blank:false)
         anno_start(blank:false)

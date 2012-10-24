@@ -24,32 +24,25 @@ def getPep(seq, int frame){
 //def pep = getPep(seq,0)
 //println "pep = "+pep
 
-//load all genome data first as it is needed to gff
 def getFiles = FileData.findAll()
 getFiles.each {  	
 	def fileLoc = it.file_dir+"/"+it.file_name
-	if (it.file_type == "genome"){
-      	println "Type = "+it.file_type
-		addGenomeData(fileLoc, it.cov, it.data_id, it.file_id)
-	}else if (it.file_type == "transcriptome"){
-		addTransData(fileLoc, it.cov)
-	}
-}
-
-getFiles.each {  	
-	def fileLoc = it.file_dir+"/"+it.file_name
-	if (it.file_type == "gff"){
-      	println "Type = "+it.file_type
-      	def getTransSql = "select file_name from file_data where file_type = 'mrna_trans' and file_link = '"+it.file_id+"';";
-      	def getTrans = sql.rows(getTransSql)
-      	def getPepSql = "select file_name from file_data where file_type = 'mrna_pep' and file_link = '"+it.file_id+"';";
-      	def getPep = sql.rows(getPepSql)
-      	def trans = it.file_dir+"/"+getTrans.file_name[0]
-      	def pep = it.file_dir+"/"+getPep.file_name[0]
-      	//def getTrans = FileData.findByFile_link(it.file_id)
-      	println "trans = "+trans
-      	println "pep = "+pep
-		addGeneData(fileLoc, it.data_id, it.file_id, trans, pep)
+	if (it.file_type == "Genome"){
+		//addGenomeData(fileLoc, it.cov, it.file_name)
+	}else if (it.file_type == "Transcriptome"){
+		//addTransData(fileLoc, it.cov, it.id)
+	}else if (it.file_type == "Genes"){
+      	def getSeqs = FileData.findAllByFile_link(it.file_name)
+      	def nuc
+      	def pep
+      	getSeqs.each{
+          	if (it.file_type == "mRNA"){
+              nuc = it.file_dir+"/"+it.file_name
+            }else if (it.file_type == "Peptide"){
+              pep = it.file_dir+"/"+it.file_name
+            }
+      	}
+		addGeneData(fileLoc, it.file_name, nuc, pep)
 	}
 }
 //add the Transcripts
@@ -124,13 +117,14 @@ def addTransData(fileLoc, cov, data_id, file_id){
 }
 
 //add the genome data (for coverage info header needs to be in format of >contigID_coverage)
-def addGenomeData(fileLoc, cov, data_id, file_id){
+def addGenomeData(fileLoc, cov, file_name){
+	FileData file = FileData.findByFile_name(file_name)
   	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
 	println "Adding genome data for - "+fileLoc
-  	println "Deleting old data..."
-	def delsql = "delete from genome_info where data_id = '"+data_id+"' and file_id = '"+file_id+"';";
-	sql.execute(delsql)
+  	//println "Deleting old data..."
+	//def delsql = "delete from genome_info where data_id = '"+data_id+"' and file_id = '"+file_id+"';";
+	//sql.execute(delsql)
 	def contigFile = new File("data/"+fileLoc).text
 	def cov_check = false
 	def header_regex
@@ -166,14 +160,14 @@ def addGenomeData(fileLoc, cov, data_id, file_id){
 				contigMap.coverage = coverage
 				contigMap.length = sequence.length()
 				contigMap.sequence = sequence
-				contigMap.data_id = data_id
-				contigMap.file_id = file_id
 				//println contigMap
+				GenomeInfo genome = new GenomeInfo(contigMap)
+				file.addToScaffold(genome)				
 				if ((count % 1000) ==  0){
 					println count
-					new GenomeInfo(contigMap).save(flush:true)
+					genome.save(flush:true)
 				}else{
-					new GenomeInfo(contigMap).save()
+					genome.save()
 				}			
 				sequence=""
 			}
@@ -196,20 +190,21 @@ def addGenomeData(fileLoc, cov, data_id, file_id){
 	contigMap.length = sequence.length()
 	contigMap.sequence = sequence
 	contigMap.coverage = coverage
-	contigMap.data_id = data_id
-	contigMap.file_id = file_id
-	new GenomeInfo(contigMap).save(flush:true)
+	GenomeInfo genome = new GenomeInfo(contigMap)
+	file.addToScaffold(genome)
+	genome.save(flush:true)
 }
 
 //add the Genes
-def addGeneData(fileLoc, data_id, file_id, trans, pep){	
+def addGeneData(fileLoc, file_name, trans, pep){
+	FileData file = FileData.findByFile_name(file_name)	
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
-  	println "Deleting any old gene and exon data..."
-	def gsql = "delete from gene_info where data_id = '"+data_id+"' and file_id = '"+file_id+"';";
-	def esql = "delete from exon_info where file_id = '"+file_id+"';";
-	sql.execute(gsql)
-	sql.execute(esql)
+  	//println "Deleting any old gene and exon data..."
+	//def gsql = "delete from gene_info where data_id = '"+data_id+"' and file_id = '"+file_id+"';";
+	//def esql = "delete from exon_info where file_id = '"+file_id+"';";
+	//sql.execute(gsql)
+	//sql.execute(esql)
 	def geneData = [:]
 	def nucData = [:]
 	def pepData = [:]
@@ -254,11 +249,9 @@ def addGeneData(fileLoc, data_id, file_id, trans, pep){
 	}
 	//catch the last one
 	pepData."${geneId}" = sequence
-	
-	//println nucData
-	//println pepData
   
 	println "Reading gff file - "+fileLoc
+	println "Adding gene data"
 	def dataFile = new File("data/"+fileLoc).text
 	//def dataFile = new File("data/A_viteae/test.gff".trim()).text
 	def gene_count=0
@@ -301,10 +294,9 @@ def addGeneData(fileLoc, data_id, file_id, trans, pep){
 			gene_count_gc = gene_nuc.toUpperCase().findAll({it=='G'|it=='C'}).size()
 			gene_gc = (gene_count_gc/gene_nuc.length())*100
 			gene_gc = sprintf("%.3f",gene_gc)
-			geneMap.data_id = data_id
-			geneMap.file_id = file_id
 			geneMap.gc = gene_gc
 			geneMap.gene_id = gene_id
+			geneMap.mrna_id = mrna_id
 			geneMap.start = dataArray[3]
 			geneMap.stop = dataArray[4]
 			geneMap.source = dataArray[1]
@@ -312,65 +304,80 @@ def addGeneData(fileLoc, data_id, file_id, trans, pep){
 			geneMap.strand = dataArray[6]
 			geneMap.nuc = nucData."${mrna_id}"
 			geneMap.pep = pepData."${mrna_id}"
-			geneMap.gene_id = gene_id
-            geneMap.mrna_id = mrna_id
-			if ((gene_count % 1000) ==  0){
+			GeneInfo gene = new GeneInfo(geneMap)
+			file.addToGene(gene)
+			if ((gene_count % 5000) ==  0){
 					println gene_count
 					//println geneMap
-					new GeneInfo(geneMap).save(flush:true)
+					gene.save(flush:true)
 				}else{
-					new GeneInfo(geneMap).save()
+					gene.save()
 				}
-		  }
-		  if (dataArray[2] == 'CDS'){
-			exon_count++
-			if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){                
-				exonMap.exon_id = matcher[0][1]
-				//println "exon = "+exon_id+" - "+exon_count
-			}
-			//println "gene_id = "+gene_id
-			//println "exon count = "+exon_count
-			//println "exon start = "+dataArray[3]
-			//println "exon_stop = "+dataArray[4]
-			//println "gene_start = "+gene_start
-			exon_start = exon_marker
-			exon_end = dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()+1
-			//println "exon start real = "+exon_start
-			//println "exon stop real = "+exon_end
-			//println "exon length = "+gene_nuc.length()
-			//println "exon_marker = "+exon_marker
-			exon_sequence = gene_nuc[exon_marker..dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()]
-			//println "exon seq = "+exon_sequence
-			//get exon gc
-			exon_count_gc = exon_sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
-			exon_gc = (exon_count_gc/exon_sequence.length())*100
-			exon_gc = sprintf("%.3f",exon_gc)
-			exonMap.sequence = exon_sequence
-			exon_marker = exon_start + dataArray[4].toInteger()-dataArray[3].toInteger()+1
-			
-			exonMap.contig_id = dataArray[0]
-			exonMap.exon_number = exon_count
-			exonMap.mrna_id = mrna_id
-			exonMap.start = dataArray[3]
-			exonMap.stop = dataArray[4]
-			exonMap.score = dataArray[5]
-			exonMap.strand = dataArray[6]
-			exonMap.phase = dataArray[7].toInteger()
-			exonMap.gc = exon_gc
-			exonMap.file_id = file_id
-			if ((gene_count % 1000) ==  0){
-				//println exonMap
-				new ExonInfo(exonMap).save(flush:true)
-			}else{
-				new ExonInfo(exonMap).save()
-			}
-		  }
-		}     
+		  	}
+		}
 	}
+	println gene_count
+	
+	gene_count = 0
+	//read the file again as the gene tables need to be complete to use ids in exon tables
+	println "Adding exon data"
+	dataFile = new File("data/"+fileLoc).text
+	dataFile.split("\n").each{
+		if ((matcher = it =~ /^#.*/)){
+		  //println "ignoring "+it
+		}else{
+			def dataArray = it.split("\t")
+			if (dataArray[2] == 'gene'){
+		  		if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
+					gene_id = matcher[0][1]
+				}else if ((matcher = dataArray[8] =~ /ID=(.*)/)){  
+					gene_id = matcher[0][1]
+				}
+			}
+			if (dataArray[2] == 'mRNA' || dataArray[2] == 'transcript'){
+				exon_marker=0
+				exon_count=0
+				gene_count++
+				if ((gene_count % 1000) ==  0){
+					println gene_count
+				}
+				if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
+					mrna_id = matcher[0][1]
+				}
+				gene_nuc = nucData."${mrna_id}"
+			}
+			GeneInfo geneFind = GeneInfo.findByGene_id(gene_id)
+			if (dataArray[2] == 'CDS'){				
+				exon_count++
+				if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){                
+					exonMap.exon_id = matcher[0][1]
+					//println "exon = "+exon_id+" - "+exon_count
+				}
+				exon_start = exon_marker
+				exon_end = dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()+1
+				exon_sequence = gene_nuc[exon_marker..dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()]
+				exon_count_gc = exon_sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
+				exon_gc = (exon_count_gc/exon_sequence.length())*100
+				exon_gc = sprintf("%.3f",exon_gc)
+				exonMap.sequence = exon_sequence
+				exon_marker = exon_start + dataArray[4].toInteger()-dataArray[3].toInteger()+1
+				
+				exonMap.exon_number = exon_count
+				exonMap.start = dataArray[3]
+				exonMap.stop = dataArray[4]
+				exonMap.score = dataArray[5]
+				exonMap.strand = dataArray[6]
+				exonMap.phase = dataArray[7].toInteger()
+				exonMap.gc = exon_gc
+				ExonInfo exon = new ExonInfo(exonMap)
+				geneFind.addToExon(exon)
+				if ((gene_count % 100) ==  0){
+					exon.save(flush:true)
+				}else{
+					exon.save()
+				}
+			}
+	  	}    
+	}
+	println gene_count
 }
-
-
-
-
-
-

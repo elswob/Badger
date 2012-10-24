@@ -10,7 +10,7 @@
 
   <body>
 	<g:if test = "${error == 'duplicate'}">
-		<br><h2>This annotation file name already exists for this data set.<br> Please go <a href="previous.html" onClick="history.back();return false;">back</a> and edit the form.</h2>
+		<br><h2>This annotation file name already exists for this file.<br> Please go <a href="previous.html" onClick="history.back();return false;">back</a> and edit the form.</h2>
 	</g:if>
 	<g:else>
 		<h1>You have successfully added the following annotation data:</h1>
