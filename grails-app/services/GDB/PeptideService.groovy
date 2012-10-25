@@ -81,4 +81,5 @@ class PeptideService {
     	}
   		return pepSeq
 	}
+	//def getNuc(
 }

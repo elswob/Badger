@@ -129,7 +129,7 @@
 			  <tbody>
 			 	<g:each var="res" in="${gene_results}">
 			 		<tr>
-						<td><a href="g_info?id=${res.gene_id}">${res.gene_id}</a></td>
+						<td><a href="g_info?gid=${res.gene_id}">${res.gene_id}</a></td>
 						<td>${res.pep.length()}</td>
 						<td>${res.start}</td>
 						<td>${res.stop}</td>
@@ -139,11 +139,11 @@
 			</table>			
     	</g:if>    	
     	<br>
-		<g:if test = "${grailsApplication.config.g.link}"> 
+		<g:if test ="${gbrowse}"> 
 			<hr size = 5 color="green" width="100%" style="margin-top:10px">
-			<h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}" target='_blank'>(go to genome browser)</a>:</h1>
-			 <iframe src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}" width="100%" height="700" frameborder="0">
-				<img src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}"/>
+			<h1>Browse on the genome <a href="${gbrowse}?name=${info_results.contig_id[0].trim()}" target='_blank'>(go to genome browser)</a>:</h1>
+			 <iframe src="${gbrowse}?name=${info_results.contig_id[0].trim()}" width="100%" height="700" frameborder="0">
+				<img src="${gbrowse}?name=${info_results.contig_id[0].trim()}"/>
 			 </iframe>
 		</g:if>
     </g:if>

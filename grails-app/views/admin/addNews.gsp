@@ -12,7 +12,7 @@
    
 <h1>Add news to the <i>${grailsApplication.config.projectID}</i> project:</h1>
 
-<g:form action="addedNews" controller="home">
+<g:form action="addedNews" controller="admin">
 <h2>Title</h2>
 <g:textArea name="newsTitle" style="width: 98%; height: 20px; border: 3px solid #cccccc; padding: 5px;"/><br>
 <h2>Details</h2>

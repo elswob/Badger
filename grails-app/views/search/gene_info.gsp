@@ -4,7 +4,7 @@
   <head>
     <meta name='layout' content='main'/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${grailsApplication.config.projectID} gene info</title>
+    <title>${grailsApplication.config.projectID} transcript info</title>
     <parameter name="search" value="selected"></parameter>
   
     <script src="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.js')}" type="text/javascript"></script>
@@ -459,7 +459,7 @@
 			   <g:if test="${ipr_results}">
 				   <li><a href="#" onclick="$.scrollTo('#ipr_anchor', 800, {offset : -50});">InterPro</a></li>
 			   </g:if>
-			   <g:if test = "${grailsApplication.config.g.link}"> 
+			   <g:if test = "${gbrowse}"> 
 					<li><a href="#" onclick="$.scrollTo('#browse_anchor', 800, {offset : -50});">Browse</a></li>
 			   </g:if>
 			   <li><a href="#" onclick="$.scrollTo('#files_anchor', 800, {offset : -50});">Sequence data</a></li>
@@ -568,15 +568,16 @@
 	   </g:if> 
      <br>
     
-    <g:if test = "${grailsApplication.config.g.link}"> 
+   <g:if test ="${gbrowse}">
      	<div id="browse_anchor"><div></div>
          	<hr size = 5 color="green" width="100%" style="margin-top:10px">
-		 	<h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
-		 	<iframe src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" width="100%" height="700" frameborder="0">
-				<img src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}"/>
+		 	<h1>Browse on the genome <a href="${gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
+		 	<iframe src="${gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" width="100%" height="700" frameborder="0">
+				<img src="${gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}"/>
 		 	</iframe>
 		 </div>
      </g:if>
+
       <div id="files_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
       <h1>FASTA files</h1>
       <div style="overflow:auto; max-height:200px;">

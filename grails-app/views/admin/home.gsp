@@ -13,7 +13,7 @@
 		$("#species").val("viteae");
 		$("#description").val("Acanthocheilonema viteae is a filarial nematode parasite of rodents. It is widely used as a model for human filariases. Importantly, A. viteae lacks the Wolbachia bacterial endosymbiont found in most human-infective filarial nematodes. Thus this species has become central in efforts to understand the role of the Wolbachia in the nematode-bacterial symbiosis, and in particular its possible role in immune evasion. The Wolbachia is also a drug target in nematodes that carry this symbiont, so work on A. viteae can also help to disentangle anti-nematode and anti-symbiont effects.");
 		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/");
-		$("#image_f").val("A_viteae_main.jpeg");
+		$("#image_f").val("a_viteae_lifecycle.jpg");
 		$("#image_s").val("A. viteae lifecycle; from http://www.uni-giessen.de");
 		
 		$("#dir").val("A_viteae");
@@ -22,7 +22,8 @@
 		$("#genes").val("nAv.1.0.1.aug.blast2go.gff"); $("#genes_v").val("1.1"); $("#genes_d").val("Augustus");
 		$("#mrna_trans").val("nAv.1.0.1.aug.transcripts.fasta"); $("#mrna_trans_v").val("1.1"); $("#mrna_trans_d").val("Augustus");
 		$("#mrna_pep").val("nAv.1.0.1.aug.proteins.fasta"); $("#mrna_pep_v").val("1.1"); $("#mrna_pep_d").val("Augustus");
-	}if (sp == "L_sig"){
+	}
+	if (sp == "L_sig"){
 		$("#genus").val("Litomosoides");
 		$("#species").val("sigmodontis");
 		$("#description").val("Litomosoides sigmodontis is a filarial nematode parasite of rodents. Found in cotton rats in the wild, it has been adapted to the laboratory mouse and is widely used as a model for human filariases. Beginning with work in Odile Bain's laboratory in Paris, this L. sigmodontis model has become central in efforts to develop vaccines against filarial infections, test new drugs before they are progressed to clinical trials, and to investigate the basic biology of the fascinating interactions between parasitic nematodes and their mammalian hosts.");
@@ -35,6 +36,34 @@
 		$("#genes").val("nLs.2.1.2.aug.gff"); $("#genes_v").val("2.1.2"); $("#genes_d").val("Augustus");
 		$("#mrna_trans").val("nLs.2.1.2.aug.transcripts.fasta"); $("#mrna_trans_v").val("2.1"); $("#mrna_trans_d").val("Augustus");
 		$("#mrna_pep").val("nLs.2.1.2.aug.proteins.fasta"); $("#mrna_pep_v").val("2.1"); $("#mrna_pep_d").val("Augustus");
+	}
+	if (sp == "D_imm"){
+		$("#genus").val("Dirofilaria");
+		$("#species").val("immitis");
+		$("#description").val("The heartworm Dirofilaria immitis is an important parasite of dogs. Transmitted by mosquitoes in warmer climatic zones, it is spreading across Southern Europe and the Americas at an alarming pace. There is no vaccine and chemotherapy is prone to complications. To learn more about this parasite, we have sequenced the genomes of D. immitis and its endosymbiont Wolbachia.");
+		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nDi.2.2.2/");
+		$("#image_f").val("D_immitis.jpg");
+		$("#image_s").val("heartworm in situ; photo from S. Williams");
+		
+		$("#dir").val("D_immitis");
+		$("#genome").val("Dirofilaria_immitis_2.2.fna"); $("#genome_v").val("2.2"); $("#genome_d").val("The D. immitis genome was sequenced by an international collaboration headed by Mark Blaxter and Pascal Mäser. Sequencing was performed by the GenePool Genomics Facility, University of Edinburgh, and FASTERIS SA, Switzerland. The version 2.2 assembly and annotation was performed by Sujai Kumar (assisted by Georgios Koutsovoulos and Alex Marshall)."); $("select[name='genome_c']").val("n");
+		$("#genes").val("nDi.2.2.2.aug.blast2go.gff"); $("#genes_v").val("2.2.2"); $("#genes_d").val("Augustus");
+		$("#mrna_trans").val("nDi.2.2.2.aug.transcripts.fasta"); $("#mrna_trans_v").val("2.2.2"); $("#mrna_trans_d").val("Augustus");
+		$("#mrna_pep").val("nDi.2.2.2.aug.proteins.fasta"); $("#mrna_pep_v").val("2.2.2"); $("#mrna_pep_d").val("Augustus");
+	}
+	if (sp == "O_och"){
+		$("#genus").val("Onchocerca");
+		$("#species").val("ochengi");
+		$("#description").val("Onchocerca ochengi is a filarial nematode parasite of cattle, and is native to West Africa, including Cameroon, where the specimens used for this genome project were isolated. As well as being a significant disease of native (Bos indicus) cattle, O. ochengi is very closely related to the human-parasitic Onchocerca volvulus. O. volvulus causes river blindness and skin disease throughout West Africa, and is the subject of intense efforts by several international agencies and teams aiming at disease eradication. The relationship between O. ochengi and O. volvulus, and concern over the possibility of cattle acting as a zoonotic reservoir make understanding of the parasite of some importance. Additionally, the genetic closeness to O. volvulus and the tractability of the bovine host makes the O. ochengi-cattle model a useful one in vaccine and drug development work.");
+		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nOo.2.0.1/");
+		$("#image_f").val("O_ochengi.jpg");
+		$("#image_s").val("O. ochengi larva; from Sandy Trees and colleagues http://ars.sciencedirect.com");
+		
+		$("#dir").val("O_ochengi");
+		$("#genome").val("Onchocerca_ochengi_nuclear_assembly_nOo.2.0.fna"); $("#genome_v").val("2.0"); $("#genome_d").val("The O. ochengi genome was sequenced from material supplied by Benjamin Makepeace. Sequencing was performed by the GenePool Genomics Facility, University of Edinburgh. Assembly and annotation of the genome was performed by Gaganjot Kaur and Alex Marshall (assisted by Sujai Kumar and Georgios Koutsovoulos)."); $("select[name='genome_c']").val("n");
+		$("#genes").val("nOo.2.0.1.aug.gff"); $("#genes_v").val("2.0.1"); $("#genes_d").val("Augustus");
+		$("#mrna_trans").val("nOo.2.0.1.aug.transcripts.fasta"); $("#mrna_trans_v").val("2.0.1"); $("#mrna_trans_d").val("Augustus");
+		$("#mrna_pep").val("nOo.2.0.1.aug.proteins.fasta"); $("#mrna_pep_v").val("2.0.1"); $("#mrna_pep_d").val("Augustus");
 	}
   }
   </script>
@@ -65,7 +94,11 @@
 
 <br>
 <div class="inline">
-	<h1>Add a data set:</h1> Examples: <a href = "javascript:void(0)" onclick="demoData('A_vit')">A. viteae </a>| <a href = "javascript:void(0)" onclick="demoData('L_sig')">L. sigmodontis </a>
+	<h1>Add a data set:</h1> Examples: 
+	 <a href = "javascript:void(0)" onclick="demoData('A_vit')">A. viteae </a>
+	 | <a href = "javascript:void(0)" onclick="demoData('L_sig')">L. sigmodontis </a>
+	 | <a href = "javascript:void(0)" onclick="demoData('D_imm')">D. immitis </a>
+	 | <a href = "javascript:void(0)" onclick="demoData('O_och')">O. ochengi </a>
 </div><br>
 <h2><b>Project data</b></h2>
 <g:form action="addedData" controller="admin">

@@ -11,7 +11,7 @@
   <body>
    
 <h1>Delete news item:</h1>
-<g:form action="deletedNews" controller="home">
+<g:form action="deletedNews" controller="admin">
 <b>Are you sure you want to delete the following news item?</b><br><br>
 <h2>Title:</h2>
 ${newsData.titleString[0]}<br><br>

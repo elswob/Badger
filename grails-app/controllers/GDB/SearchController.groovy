@@ -20,10 +20,11 @@ class SearchController {
     	return [meta: metaData, file: fileData]
     	
     }
-    def species_search = {
+    //@Cacheable('species_cache')
+    def species_search() {
     	def sql = new Sql(dataSource)
     	def metaData = MetaData.findById(params.id)
-
+		
     	def stats = [:]
     	for (a in metaData.files){
     		if (a.file_type == "Genes"){
@@ -43,7 +44,115 @@ class SearchController {
     			stats.Genome = m.c[0]
     		}
     	}
-    	return [meta: metaData, stats: stats]
+    	
+    	 //get genome stats
+	 	 def genomeInfoSql = "select sequence,contig_id,gc,length,coverage from genome_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id and meta_data.id = '"+params.id+"' order by length desc;"
+	 	 //def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"
+	 	 println genomeInfoSql
+	 	 def genomeInfo = sql.rows(genomeInfoSql) 
+		 int span=0, min=10000000000, max=0, n50=0, halfSpan=0, checkSpan=0, nonATGC=0, num=0, ninetySpan=0, counter=0;
+		 def n50_list = [], n90_list = [];
+		 float gc
+		 	 
+		 def n50check = false, n90check = false;
+		 def genome_stats = [:]
+	 	 //span
+	 	 genomeInfo.each {
+	 	 	num ++
+			span += it.length
+			gc += it.gc
+			nonATGC += it.sequence.toUpperCase().count("N")
+			//nonATGC += it.sequence.toUpperCase().findAll(/G|C|A|T/).size()
+			if (it.length < min){
+				min = it.length
+			}
+			if (it.length > max){
+				max = it.length
+			}
+		 }
+		 //nonATGC = span-nonATGC
+
+		 gc = gc/genomeInfo.size()
+		 
+		 //n50
+		 halfSpan = span/2
+		 ninetySpan = span/100*90
+		 genomeInfo.each {
+		 	counter++
+			checkSpan += it.length
+			if (checkSpan >= halfSpan && n50check !=true){
+				def aa = [counter,checkSpan,it.length]
+				n50 = it.length
+				n50check = true
+				n50_list.add(aa)
+			}
+			if (checkSpan >= ninetySpan && n90check !=true){
+				def aa = [counter,checkSpan,it.length]
+				n90_list.add(aa)
+				n90check = true
+			}
+		 }
+		 
+		 println "n50 = "+n50_list
+		 println "n90 = "+n90_list
+		 
+		 genome_stats.num = num
+	 	 genome_stats.span = span
+	 	 genome_stats.n50 = n50
+	 	 genome_stats.min = min
+		 genome_stats.max = max
+		 genome_stats.gc = gc
+		 genome_stats.nonATGC = nonATGC
+		 
+		 //get gene stats
+		 def geneInfoSql = "select * from gene_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id and  meta_data.id = '"+params.id+"';";
+	 	 def geneInfo = sql.rows(geneInfoSql) 
+	 	 int mean=0, genenum=0, mrnanum=0
+	 	 min=10000000000
+	 	 max=0
+	 	 nonATGC=0
+	 	 gc=0
+		 def gene_stats = [:]
+		 
+	 	 geneInfo.each {
+	 	 	genenum++
+	 	 	if (it.mrna_id){
+	 	 		mrnanum++
+	 	 	}
+			mean += it.nuc.length()
+			gc += it.gc
+			nonATGC += it.nuc.toUpperCase().count("N")
+			//nonATGC += it.sequence.toUpperCase().findAll(/G|C|A|T/).size()
+			if (it.nuc.length() < min){
+				min = it.nuc.length()
+			}
+			if (it.nuc.length() > max){
+				max = it.nuc.length()
+			}
+		 }
+		 //nonATGC = span-nonATGC
+		 mean = mean/geneInfo.size()
+		 gc = gc/geneInfo.size()
+		 gene_stats.genenum = genenum
+		 gene_stats.mrnanum = mrnanum
+	 	 gene_stats.mean = mean
+	 	 gene_stats.gc = gc
+	 	 gene_stats.min = min
+	 	 gene_stats.max = max
+	 	 gene_stats.nonATGC = nonATGC
+	 	 println gene_stats
+		 
+		 //get data for plots
+		 //def funAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_anno,gene_info,file_data,meta_data where gene_anno.gene_id = gene_info.id and gene_info.file_id = file_data.id and meta_id = '"+params.id+"' group by anno_db;";
+		 def funAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_info left outer join gene_anno on (gene_info.id = gene_anno.gene_id),file_data,meta_data where gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id and meta_data.id = '"+params.id+"' group by anno_db;";
+		 println funAnnoSql
+		 def funAnnoData = sql.rows(funAnnoSql)
+		 //def blastAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_blast,gene_info,file_data,meta_data where gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and meta_id = '"+params.id+"' group by anno_db;";
+		 def blastAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_info left outer join gene_blast on (gene_info.id = gene_blast.gene_id),file_data,meta_data where gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id and meta_data.id = '"+params.id+"' group by anno_db;";		
+		 println blastAnnoSql
+		 def blastAnnoData = sql.rows(blastAnnoSql)
+    	
+    	return [n50: n50_list, n90: n90_list, meta: metaData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats, genomeInfo: genomeInfo]
     }
     def all_search = {
          if (grailsApplication.config.i.links.all == 'private' && !isLoggedIn()) {
@@ -189,7 +298,6 @@ class SearchController {
 			 println "n50 = "+n50
 			 println "n90 = "+n90
 			 return [ genomeData: results, n50: n50, n90: n90]
-			 sql.close()
 		}
     }
     def trans_search_results = {
@@ -421,16 +529,16 @@ class SearchController {
 			def fun_results
 			def ipr_results
 			if (grailsApplication.config.g.blast.size()>0){			
-				def blastsql = "select * from gene_blast,gene_info where gene_blast.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score desc;";
+				def blastsql = "select gene_info.mrna_id,gene_info.gene_id,gene_blast.id,anno_id,anno_db,anno_start,anno_stop,descr,score,gaps,hit_start,hit_stop,hseq,identity,midline,positive,qseq,align from gene_blast,gene_info where gene_blast.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score desc;";
 				println blastsql
 				blast_results = sql.rows(blastsql)
 			}
 			if (grailsApplication.config.g.IPR){
-				def iprsql = "select * from gene_anno,gene_info where anno_id ~ '^IPR' and gene_anno.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score;";
+				def iprsql = "select gene_anno.id,anno_db,anno_id,anno_start,anno_stop,descr,score from gene_anno,gene_info where anno_id ~ '^IPR' and gene_anno.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score;";
 				ipr_results = sql.rows(iprsql)
 			}
 			if (grailsApplication.config.g.fun.size()>0){
-				def funsql = "select * from gene_anno,gene_info where anno_id !~ '^IPR' and gene_anno.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score desc;";
+				def funsql = "select gene_anno.id,anno_db,anno_id,anno_start,anno_stop,descr,score from gene_anno,gene_info where anno_id !~ '^IPR' and gene_anno.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score desc;";
 				println funsql
 				fun_results = sql.rows(funsql)
 			}
@@ -458,7 +566,9 @@ class SearchController {
 				aaData = peptideService.getComp(it.pep)
 				//println "service = "+service
 			}	
-			return [mrna_id: mrna_id, info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData]
+			def gbrowsesql = "select gbrowse from gene_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id and mrna_id = '"+mrna_id+"';"; 
+     		def gbrowse = sql.rows(gbrowsesql).gbrowse[0]
+			return [mrna_id: mrna_id, info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, gbrowse: gbrowse]
     	sql.close()
     	}
     }
@@ -515,20 +625,26 @@ class SearchController {
        	if (grailsApplication.config.i.links.genome == 'private' && !isLoggedIn()) {
      		redirect(controller: "home", action: "index")
      	}else{
+     		def sql = new Sql(dataSource)
+     		def gbrowsesql = "select gbrowse from genome_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id and contig_id = '"+params.contig_id+"';"; 
+     		def gbrowse = sql.rows(gbrowsesql).gbrowse[0]
      		def gene_results = GeneInfo.findAllByContig_id(params.contig_id)
      		println "gene_results = "+gene_results
      		println "contig_id ="+params.contig_id+"test"
 			def info_results = GenomeInfo.findAllByContig_id(params.contig_id)
-			return [ info_results: info_results, gene_results: gene_results]
+			return [ info_results: info_results, gene_results: gene_results, gbrowse: gbrowse]
 		}
     }
     def g_info = {
        	if (grailsApplication.config.i.links.genome == 'private' && !isLoggedIn()) {
      		redirect(controller: "home", action: "index")
      	}else{
+     		def sql = new Sql(dataSource)
+     		def gbrowsesql = "select gbrowse from gene_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id and gene_id = '"+params.gid+"';"; 
+     		def gbrowse = sql.rows(gbrowsesql).gbrowse[0]
      		def results = GeneInfo.findAllByGene_id(params.gid)
      		println "g = "+results
-			return [ results: results]
+			return [ results: results, gbrowse: gbrowse]
 		}
     }
 	def gene_link = {

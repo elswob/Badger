@@ -11,7 +11,7 @@ class BlastController {
     	return[pubBlastFiles: blastFiles[0], privBlastFiles: blastFiles[1]]
     }
     def index() { 
-    	def blastFiles = FileData.findAllByFile_typeInList(["mRNA","Peptide","Genome"])
+    	def blastFiles = FileData.findAllByFile_typeInList(["mRNA","Peptide","Genome"],[sort:"id"])
     	return [blastFiles:blastFiles]
     	//def blastFiles = configDataService.getBlastLinks()
     	//return[pubBlastFiles: blastFiles[0], privBlastFiles: blastFiles[1]]

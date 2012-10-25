@@ -31,13 +31,13 @@
     <select name = "datalib">
     <sec:ifLoggedIn>
     	<g:each var="res" in="${blastFiles}">
-    		<option value="${res.file_name}"/> ${res.file_type} (${res.file_name})</option>
+    		<option value="${res.file_name}"/> ${res.meta.genus} ${res.meta.species}: ${res.file_type} (${res.file_name})</option>
 		</g:each>
     </sec:ifLoggedIn>
     <sec:ifNotLoggedIn>
 	    <g:each var="res" in="${blastFiles}">
     		<g:if test = "${res.blast == 'pub'}">
-    			<option value="${res.file_name}" /> ${res.file_name}</option>
+    			<option value="${res.file_name}" /> ${res.meta.genus} ${res.meta.species}: ${res.file_type} (${res.file_name})</option>
     		</g:if>
 		</g:each>
 	</sec:ifNotLoggedIn>

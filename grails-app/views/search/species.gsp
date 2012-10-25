@@ -7,14 +7,14 @@
     <parameter name="search" value="selected"></parameter>
 </head>
 <body>
-  <h1>Species in <b>${grailsApplication.config.projectID}</b>:</h1>
   	 <g:if test = "${meta}">
+  	 	<br>
   	 	<g:each var="res" in="${meta}">
   	 		<h2><b><i>${res.genus} ${res.species}</i></b></h2>
   	 		<table>
   	 			<tr>
-  	 				<td width=150> 
-	    				<a href = "species_search?id=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="150" style="float:left;"/></a>
+  	 				<td width=300> 
+	    				<a href = "species_search?id=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="300" style="float:left;"/></a>
 	    				<br><font size="1">Picture supplied by ${res.image_source}</font>
 	    			</td>
 	    			<td>

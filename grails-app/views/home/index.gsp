@@ -67,7 +67,7 @@
 	  <sec:ifLoggedIn>
 	  <h1>Welcome <sec:username /></h1>
 	    <p>
-	    This site represents the main portal to the <i>${grailsApplication.config.projectID}</i> genome project. All assembly and annotation data 
+	    This site represents the main portal to the <i>${grailsApplication.config.projectID}</i> project. All assembly and annotation data 
 	    will be accessible from here via the links above. </p><br>
 	  
 <div style="overflow:auto; padding-right:2px; height:380px">
@@ -75,6 +75,7 @@
 	    		<tr>
 	    			<td>
 	    				<img src="${resource(dir: 'images', file: grailsApplication.config.mainImage)}" height="300" style="padding:10px; float:left;margin:0 5px 0 0;"/>
+	    				<br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
 	    			</td>
 	    			<td>
 	    				<div style="overflow:auto; padding-right:2px; max-height:200px">  
@@ -116,8 +117,8 @@
 	    	</table>
 	    </div>
 	  
-	  <h1>Plan</h1>
-	  The plan for the project....
+	  <h1>More</h1>
+	  More information for those who can log in....
 	
 	</sec:ifLoggedIn>
   </body>

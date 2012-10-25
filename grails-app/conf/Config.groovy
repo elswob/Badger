@@ -120,4 +120,7 @@ grails.cache.config = {
    cache {
       name 'genome_cache'
    }
+   cache {
+      name 'species_cache'
+   }
 }

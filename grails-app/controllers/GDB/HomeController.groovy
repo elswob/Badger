@@ -14,9 +14,14 @@ class HomeController {
  	 return [newsData: newsData] 	 
  }
  def browse = {
- 	if (params.start && params.stop){
- 		return [start:params.start, stop:params.stop]
- 	} 
+ 	  //check the privacy setting
+     if (grailsApplication.config.i.links.priv.browse && !isLoggedIn()) {
+     	redirect(controller: "home", action: "index")
+     }
+     else{
+		 def files = FileData.findAll(sort:"id")
+		 return [ files: files]
+	 }
  }
  def news = {
  	 def newsData = News.findAll(sort:"dateString",order:"desc")
@@ -29,9 +34,11 @@ class HomeController {
      	redirect(controller: "home", action: "index")
 	 }else{ 
 		 def sql = new Sql(dataSource)
-		 def yearsql = "select count(*),date_part('year',date_string) from publication group by date_part('year',date_string) order by date_part('year',date_string);"
+		 def yearsql = "select count(distinct(pubmed_id)),date_part('year',date_string) from publication group by date_part('year',date_string) order by date_part('year',date_string);"
 		 def yearData = sql.rows(yearsql)
-		 return [yearData: yearData]
+		 def dissql = "select count(distinct(pubmed_id)) from publication;"
+		 def dis = sql.rows(dissql)
+		 return [yearData: yearData, distinct: dis]
 		 sql.close()
 	 }
  }
@@ -118,30 +125,8 @@ class HomeController {
      	redirect(controller: "home", action: "index")
      }
      else{
-		 def pubDownloadFiles = [:]
-		 def privDownloadFiles = [:]
-		 def dataSplit
-		 if (grailsApplication.config.download.pub){
-			 def pubLocations = grailsApplication.config.download.pub
-			 pubLocations.each {
-				 if (it.value.size() >0){
-					 dataSplit = it.value.split(",")
-					 pubDownloadFiles."${it.key}" = [dataSplit[0].trim(),dataSplit[1].trim(),dataSplit[2].trim()]
-				}
-			}
-		}
-		if (grailsApplication.config.download.priv){
-			 def privLocations = grailsApplication.config.download.priv
-			 privLocations.each {
-				 if (it.value.size() >0){
-					 dataSplit = it.value.split(",")
-					 privDownloadFiles."${it.key}" = [dataSplit[0].trim(),dataSplit[1].trim(), dataSplit[2].trim()] 
-				}
-			}
-		}
-		println "Public download files = "+pubDownloadFiles
-		println "Private download files = "+privDownloadFiles
-		return [ pubDownloadFiles: pubDownloadFiles, privDownloadFiles: privDownloadFiles]
+		 def files = FileData.findAll(sort:"id")
+		 return [ files: files]
 	 }
   }
   
@@ -155,6 +140,7 @@ class HomeController {
 	 	 
 	 	 //get genome stats
 	 	 def genomeInfoSql = "select sequence,gc,length from genome_info order by length desc;"
+	 	 //def genomeInfoSql = "select gc,length,meta_data.species from genome_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id order by species,length desc;"
 	 	 def genomeInfo = sql.rows(genomeInfoSql) 
 		 int span=0, min=10000000000, max=0, n50=0, halfSpan=0, n50Span=0, nonATGC=0
 		 float gc

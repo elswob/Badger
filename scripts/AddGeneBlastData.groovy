@@ -105,7 +105,7 @@ def addGeneBlast(db,blastFile){
             		GeneBlast gb = new GeneBlast(annoMap)
 					geneFind.addToGblast(gb)
 					
-            		if ((count_all % 10000) ==  0){
+            		if ((count_all % 2000) ==  0){
             			println count_all
             			//println annoMap
             			gb.save(flush:true)

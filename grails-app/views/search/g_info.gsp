@@ -72,7 +72,7 @@
         <td><b>End: </b> </td> 
       </tr>
       <tr>
-      <td>${results.contig_id[0]}</td>
+      <td><a href="genome_info?contig_id=${results.contig_id[0]}">${results.contig_id[0]}</a></td>
       <td>${results.start[0]}</td>
       <td>${results.stop[0]}</td>
 	  </tr>
@@ -125,14 +125,16 @@
 			</table>			
     	</g:if>    	
     	<br>
-			<hr size = 5 color="green" width="100%" style="margin-top:10px">
-			<h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${results.contig_id[0].trim()}" target='_blank'>(go to genome browser)</a>:</h1>
-			 <iframe src="${grailsApplication.config.g.link}?name=${results.contig_id[0].trim()}" width="100%" height="700" frameborder="0">
-				<img src="${grailsApplication.config.g.link}?name=${results.contig_id[0].trim()}"/>
-			 </iframe>
+			<g:if test ="${gbrowse}">
+				<hr size = 5 color="green" width="100%" style="margin-top:10px">
+		 		<h1>Browse on the genome <a href="${gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
+		 		<iframe src="${gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}" width="100%" height="700" frameborder="0">
+					<img src="${gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}"/>
+		 		</iframe>
+			</g:if>
     </g:if>
     <g:else>
-	    <h1>There is no information for <b>${info_results.contig_id[0]}</b></h1>
+	    <h1>There is no information for <b>${results.contig_id[0]}</b></h1>
     </g:else>
   </body>
 </html>

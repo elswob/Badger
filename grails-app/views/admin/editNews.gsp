@@ -11,7 +11,7 @@
   <body>
    
 <h1>Edit news item:</h1>
-<g:form action="editedNews" controller="home">
+<g:form action="editedNews" controller="admin">
 <h2>Title</h2>
 <g:textArea value="${newsData.titleString[0]}" name="newsTitle" style="width: 98%; height: 20px; border: 3px solid #cccccc; padding: 5px;"/><br>
 <h2>Details</h2>
