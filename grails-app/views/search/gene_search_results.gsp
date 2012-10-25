@@ -51,7 +51,7 @@
 	       var oCells = oTableData.rows.item(i).cells;
 	       var cellVal = oCells.item(rowNum).innerHTML;
 	       //alert(cellVal)
-	       var matcher = cellVal.match(/.*?gene_id=(.*?)">.*/);
+	       var matcher = cellVal.match(/.*?mrna_id=(.*?)">.*/);
 	       if (matcher){
 	       	  	table_scrape.push(matcher[1])
 	    	}
@@ -85,18 +85,17 @@
 				   "sClass": "control center",
 				   "sDefaultContent": '<img src="'+sImageUrl+'details_open.png'+'">'
 				},
-				{ "mDataProp": "gene_id",
+				{ "mDataProp": "mrna_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"gene_info?gene_id="+oObj.aData["gene_id"]+ "\">"+sVal+"</a>";
-				}},
+					return "<a href=\"gene_info?id="+oObj.aData["g_id"]+"\">"+sVal+"</a>";				}},
 				{ "mDataProp": "anno_db" },
 				{ "mDataProp": "anno_id",
 				"fnRender": function ( oObj, sVal ){
 					AnnoData = ${jsonAnno};
 					var db = oObj.aData["anno_db"]
 					if (AnnoData[db]){
-						var regex = new RegExp(AnnoData[db][1]);
-						var link = sVal.replace(regex,"<a href=\""+AnnoData[db][2]+"$1 \" target='_blank'>$1</a>")
+						var regex = new RegExp(AnnoData[db][0]);
+						var link = sVal.replace(regex,"<a href=\""+AnnoData[db][1]+"$1 \" target='_blank'>$1</a>")
 					}
 					return link
 				}},
@@ -144,7 +143,7 @@
 		'<div class="blast_res">'+
 		  '<table width="100%" cellpadding="5" cellspacing="0" border="0" style="table-layout:fixed; padding-left:10px; overflow:auto;">'+
 			'<tr><td><b>Alignment info:</b> Length='+oData.align+' Gaps='+oData.gaps+' Identity='+oData.identity+'</td></tr>'+
-			'<tr><td><b>'+oData.gene_id+'</b> '+oData.anno_start+' '+oData.anno_stop+'</td></tr>'+
+			'<tr><td><b>'+oData.mrna_id+'</b> '+oData.anno_start+' '+oData.anno_stop+'</td></tr>'+
 			'<tr><td>'+oData.qseq+'</td></tr>'+
 			'<tr><td>'+oData.midline+'</td></tr>'+
 			'<tr><td>'+oData.hseq+'</td></tr>'+
@@ -161,9 +160,9 @@
         "bProcessing": true,
         "aaData": ${jsonData},
         "aoColumns": [
-          	{ "mDataProp": "gene_id",
+          	{ "mDataProp": "mrna_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"gene_info?gene_id="+oObj.aData["gene_id"]+ "\">"+sVal+"</a>";
+					return "<a href=\"gene_info?id="+oObj.aData["mrna_id"]+"\">"+sVal+"</a>";
 			}},
             { "mDataProp": "anno_db" },
             { "mDataProp": "anno_id",
@@ -171,8 +170,8 @@
 					AnnoData = ${jsonAnno};
 					var db = oObj.aData["anno_db"]
 					if (AnnoData[db]){
-						var regex = new RegExp(AnnoData[db][1]);
-						var link = sVal.replace(regex,"<a href=\""+AnnoData[db][2]+"$1 \" target='_blank'>$1</a>")
+						var regex = new RegExp(AnnoData[db][0]);
+						var link = sVal.replace(regex,"<a href=\""+AnnoData[db][1]+"$1 \" target='_blank'>$1</a>")
 					}
 					return link
 				}},
@@ -197,9 +196,9 @@
 			"bProcessing": true,
 			"aaData": ${jsonData},
 			"aoColumns": [
-				{ "mDataProp": "gene_id",
+				{ "mDataProp": "mrna_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"gene_info?gene_id="+oObj.aData["gene_id"]+ "\">"+sVal+"</a>";
+					return "<a href=\"gene_info?id="+oObj.aData["g_id"]+"\">"+sVal+"</a>";
 				}},
 				{ "mDataProp": "anno_db" },
 				{ "mDataProp": "anno_id" ,
@@ -284,7 +283,7 @@
 				<% if (annoType == "1"){ %>
 				  <th></th>
 				<% } %>
-				  <th><b>Gene ID</b></th>
+				  <th><b>Transcript ID</b></th>
 				  <th><b>Database</b></th>
 				  <th><b>Hit ID</b></th>
 				  <th width=50%><b>Description</b></th>

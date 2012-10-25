@@ -29,7 +29,7 @@
 		  def funjsonData = fun_results.encodeAsJSON();
 		  def exonjsonData = exon_results.encodeAsJSON();
 		  def jsonAnno = annoLinks.encodeAsJSON();
-		  //println blastjsonData
+		  //println fun_results
 		  %>  
     <script>
     var drawCount=0;
@@ -135,8 +135,8 @@
 					//alert("id = "+sVal);					
 					var db = oObj.aData["anno_db"]
 					if (AnnoData[db]){
-						var regex = new RegExp(AnnoData[db][1]);
-						var link = sVal.replace(regex,"<a href=\""+AnnoData[db][2]+"$1 \" target='_blank'>$1</a>")
+						var regex = new RegExp(AnnoData[db][0]);
+						var link = sVal.replace(regex,"<a href=\""+AnnoData[db][1]+"$1 \" target='_blank'>$1</a>")
 						//link = "<a name=\"$1\">"+link+"</a>"
 					}
 					return link
@@ -401,11 +401,12 @@
   </head>
   <body>
   <g:if test="${info_results}">
-    <div id="info_anchor"><h1>Information for gene ${info_results.gene_id[0]}:</h1></div>
+    <div id="info_anchor"><h1>Information for transcript ${info_results.mrna_id[0]}:</h1></div>
     <table width=100%>
       <tr><td width=40%>
 		<table>
 			<tr><td><b>Scaffold Id:</b></td><td><g:link action="genome_info" params="${[contig_id: info_results.contig_id[0].trim()]}">${info_results.contig_id[0]}</g:link></td></tr>
+			<tr><td><b>Gene:</b></td><td><g:link action="g_info" params="${[gid: info_results.gene_id[0]]}"> ${info_results.gene_id[0]}</g:link></td></tr>
 			<tr><td><b>Length:</b></td><td>${printf("%,d\n",info_results.nuc[0].length())} bp (${printf("%,d\n",info_results.pep[0].length())} aa)</td></tr>
 			<tr><td><b>Exons:</b></td><td>${exon_results.size()}</td></tr>
 			<tr><td><b>Source:</b></td><td>${info_results.source[0]}</td></tr>
@@ -435,7 +436,7 @@
     </td>
     
     <td width=60%>
-		<div id="aa_chart" class="jqplot-target"></div>
+		<div id="aa_chart" class="jqplot-target" style="height: 330px;"></div>
     </td>
     </tr>
     </table>
@@ -445,7 +446,7 @@
 			<div class="nav_float">
 			<ul>
 			   <li><a href="#" onclick="$.scrollTo('#info_anchor', 800, {offset : -50});">Info</a></li>
-			   <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
+			   <g:if test="${blast_results || ipr_results || fun_results}">
 				   <!--li><a href="#anno_anchor" class="scroll">Annotations</a></li-->
 				    <li><a href="#" onclick="$.scrollTo('#anno_anchor', 800, {offset : -50});">Annotations</a></li>
 			   </g:if>
@@ -467,18 +468,10 @@
 			</div>
 		</div>
 	</div>
-     
-    <g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
+    <g:if test="${blast_results || ipr_results || fun_results}">
         <div id="anno_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>  
-    
 		  <h1>Annotation overview</h1>  
- 
-		  <div id="blast_fig">
-		  
-		   
-  
-		  </div>
-		  
+			  <div id="blast_fig"></div>
       </g:if>
       
       <g:if test="${blast_results}">
@@ -524,7 +517,7 @@
 			//set links
 			annoLinks.each{
 				if (res.anno_db == it.key){
-					res.anno_id = res.anno_id.replaceAll(it.value[1], "<a href=\""+it.value[2]+"\$1\" target=\'_blank\'>\$1</a>") 
+					res.anno_id = res.anno_id.replaceAll(it.value[0], "<a href=\""+it.value[1]+"\$1\" target=\'_blank\'>\$1</a>") 
 				}
 			}
 		%>
@@ -648,6 +641,7 @@
 				 drawing.drawSpacer(20);
 				 drawing.drawScale(${info_results.pep[0].length()});			 
 				 drawing.drawSpacer(10);
+				 
 				 // add exon boundaries
 				 if (exon_data.length > 0){
 					drawing.drawSpacer(10);

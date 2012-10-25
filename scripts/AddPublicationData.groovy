@@ -8,7 +8,7 @@ def getFiles = MetaData.findAll()
 getFiles.each {  	
 	def query = it.genus+"+AND+"+it.species
 	println "Getting publication information for "+it.genus+" "+it.species
-	getPub(it.data_id,query)
+	getPub(it.id,query)
 }
 
 def getPub(data_id,query){
@@ -49,10 +49,11 @@ def getPub(data_id,query){
 }
 //add info
 def addPub(pubFile,data_id){
+	MetaData meta = MetaData.findById(data_id)
 	def dataSource = ctx.getBean("dataSource")
 	def sql = new Sql(dataSource)
 	println "Deleting old data..."
-	def delsql = "delete from Publication where data_id = '"+data_id+"';";
+	def delsql = "delete from Publication where meta_id = '"+data_id+"';";
 	sql.execute(delsql)
 	println "Adding new data to db..."
 	def pubMap = [:]
@@ -66,7 +67,6 @@ def addPub(pubFile,data_id){
 	def lastname = ''
 	boolean indate = false
 	pubFile.eachLine { line ->		
-		pubMap.data_id = data_id
 		if ((matcher = line =~ /<ArticleId IdType="pubmed">(.*?)<\/ArticleId>/)){
 				pubMap.pubmedId = matcher[0][1]
 				count_all++
@@ -128,11 +128,13 @@ def addPub(pubFile,data_id){
 			nameString = ''
 			dateString = ''            
 			//println pubMap
+            Publication pub = new Publication(pubMap)
+			meta.addToPubs(pub)
 			if ((count_all % 100) ==  0){
 				println "Adding "+count_all
-				new Publication(pubMap).save(flush:true)
+				pub.save(flush:true)
 			}else{
-				new Publication(pubMap).save()
+				pub.save()
 			}
 		}
 	}

@@ -31,4 +31,5 @@ class GeneBlast {
         hseq type: "text"
         midline type: "text"
     }
+    static belongsTo = [ gene: GeneInfo ]
 }

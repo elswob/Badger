@@ -9,7 +9,7 @@
   <head>
     <meta name='layout' content='main'/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${grailsApplication.config.projectID} genome detail</title>
+    <title>${grailsApplication.config.projectID} gene detail</title>
     <parameter name="search" value="selected"></parameter>
     <script src="${resource(dir: 'js', file: 'DataTables-1.9.0/media/js/jquery.js')}" type="text/javascript"></script> 
     <script src="${resource(dir: 'js', file: 'DataTables-1.9.0/media/js/jquery.dataTables.js')}" type="text/javascript"></script>
@@ -33,7 +33,7 @@
 	       var oCells = oTableData.rows.item(i).cells;
 	       var cellVal = oCells.item(rowNum).innerHTML;
 	       //alert(cellVal)
-	       var matcher = cellVal.match(/.*?gene_id=(.*?)">.*/);
+	       var matcher = cellVal.match(/.*?id=(.*?)">.*/);
 	       if (matcher){
 	       	  	table_scrape.push(matcher[1])
 	    	}
@@ -61,55 +61,41 @@
    </script>
   
   </head>
-  
-  
-  
+ 
   <body>
-    <g:if test="${info_results}">
-    <h1>Information for <b>${info_results.contig_id[0]}</b>:</h1>
+    <g:if test="${results}">
+    <h1>Information for gene <b>${results.gene_id[0]}</b>:</h1>
     <table>
       <tr>
-        <td><b>Length:</b> </td>
-        <g:if test = "${grailsApplication.config.coverage.Genome == 'y'}">
-        	<td><b>Coverage: </b> </td>
-        </g:if>
-        <td><b>GC: </b> </td>
-        <td><b>Sequence: </b> </td> 
+        <td><b>Scaffold:</b> </td>
+        <td><b>Start: </b> </td>
+        <td><b>End: </b> </td> 
       </tr>
       <tr>
-      <td>${printf("%,d\n",info_results.sequence[0].length())}</td>
-      <g:if test = "${grailsApplication.config.coverage.Genome == 'y'}">
-      	<td>${info_results.coverage[0]}</td>
-      </g:if>
-      <td>${sprintf("%.2f",info_results.gc[0])}</td>
-      <td>        
-      	<g:form name="fileDownload" url="[controller:'FileDownload', action:'genome_contig_download']" style="display: inline" >
-        	<g:hiddenField name="fileId" value="${info_results.contig_id[0]}"/>
-			<g:hiddenField name="fileName" value="${info_results.contig_id[0]}"/>
-			<a href="#" onclick="document.fileDownload.submit()">Download</a>
-		</g:form>
-	  </td>
+      <td>${results.contig_id[0]}</td>
+      <td>${results.start[0]}</td>
+      <td>${results.stop[0]}</td>
 	  </tr>
     </table>
     	
-    	<g:if test="${gene_results}">
+    	<g:if test="${results}">
     	<hr size = 5 color="green" width="100%" style="margin-top:10px">
     	<div class="inline">
     	<br>
-    	 <h1>${gene_results.size()} genes</b>:</h1>
+    	 <h1>${results.size()} transcripts</b>:</h1>
 			<!-- download genes form gets fileName value from get_table_data() -->		    		
 			 <div style="right:0px;">
-				 &nbsp;&nbsp;(Download gene sequences:
+				 &nbsp;&nbsp;(Download transcript sequences:
 					<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
 					<g:hiddenField name="nucFileId" value=""/>
-					<g:hiddenField name="fileName" value="${info_results.contig_id[0]}.genes"/>
+					<g:hiddenField name="fileName" value="${results.contig_id[0]}.genes"/>
 					<g:hiddenField name="seq" value="Nucleotides"/>
 					<a href="#" onclick="get_table_data('nucFileId');document.nucfileDownload.submit()">Nucleotides</a>
 				</g:form> 
 				|
 				<g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
 					<g:hiddenField name="pepFileId" value=""/>
-					<g:hiddenField name="fileName" value="${info_results.contig_id[0]}.genes"/>
+					<g:hiddenField name="fileName" value="${results.contig_id[0]}.genes"/>
 					<g:hiddenField name="seq" value="Peptides"/>
 					<a href="#" onclick="get_table_data('pepFileId');document.pepfileDownload.submit()">Peptides</a>
 				</g:form>
@@ -120,17 +106,17 @@
     		<table id="gene_table_data" class="display">
 			  <thead>
 			  	<tr>
-					<th><b>Gene ID</b></th>
-					<th><b>Length</b></th>
+					<th><b>Transcript ID</b></th>
+					<th><b>Length (bp)</b></th>
 					<th><b>Start</b></th>
 					<th><b>Stop</b></th>
 			   </tr>
 			  </thead>
 			  <tbody>
-			 	<g:each var="res" in="${gene_results}">
+			 	<g:each var="res" in="${results}">
 			 		<tr>
-						<td><a href="g_info?id=${res.gene_id}">${res.gene_id}</a></td>
-						<td>${res.pep.length()}</td>
+						<td><a href="gene_info?id=${res.mrna_id}">${res.mrna_id}</a></td>
+						<td>${res.nuc.length()}</td>
 						<td>${res.start}</td>
 						<td>${res.stop}</td>
 			  		</tr>  
@@ -139,13 +125,11 @@
 			</table>			
     	</g:if>    	
     	<br>
-		<g:if test = "${grailsApplication.config.g.link}"> 
 			<hr size = 5 color="green" width="100%" style="margin-top:10px">
-			<h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}" target='_blank'>(go to genome browser)</a>:</h1>
-			 <iframe src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}" width="100%" height="700" frameborder="0">
-				<img src="${grailsApplication.config.g.link}?name=${info_results.contig_id[0].trim()}"/>
+			<h1>Browse on the genome <a href="${grailsApplication.config.g.link}?name=${results.contig_id[0].trim()}" target='_blank'>(go to genome browser)</a>:</h1>
+			 <iframe src="${grailsApplication.config.g.link}?name=${results.contig_id[0].trim()}" width="100%" height="700" frameborder="0">
+				<img src="${grailsApplication.config.g.link}?name=${results.contig_id[0].trim()}"/>
 			 </iframe>
-		</g:if>
     </g:if>
     <g:else>
 	    <h1>There is no information for <b>${info_results.contig_id[0]}</b></h1>

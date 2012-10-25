@@ -99,9 +99,9 @@ def addInterProScan(file){
 				annoMap.score = score
 				annoMap.descr = iprMap[splitter[11]]
 				if (score < 1e-5){
-					GeneInfo geneFindI = GeneInfo.findByMrna_id(mrna_id)
+					GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
             		GeneAnno ga = new GeneAnno(annoMap)
-					geneFindI.addToGanno(ga)
+					geneFind.addToGanno(ga)
                   	if ((count % 1000) ==  0){
             			println count
                       	//println annoMap

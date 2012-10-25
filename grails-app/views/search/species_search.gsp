@@ -30,8 +30,8 @@
   <h1>Search the <b><i>${meta.genus} ${meta.species}</i></b> annotations:</h1>
   	 <g:if test = "${meta}">
   	 	<table>
-  	 		<tr><td><b>Data type</b></td><td><b>Version</b></td><td><b>Description</b></td><td><b>Number</b></td></tr>
-  	 		<g:each var="f" in="${file}">
+  	 		<tr><td width=15%><b>Data type</b></td><td><b>Version</b></td><td><b>Description</b></td><td><b>Number</b></td></tr>
+  	 		<g:each var="f" in="${meta.files}">
   	 			<tr><td>${f.file_type}</td><td>${f.file_version}</td><td>${f.description}</td><td>${stats."${f.file_type}"}</td></tr>
   	 		</g:each>
   	 	</table>
@@ -41,41 +41,43 @@
   	 </g:else>
   </table>
   
-  <g:if test = "${anno}">
+  <g:if test = "${meta}">
   <div id="content">
   	<g:form action="gene_search_results">	
   	<h2><b>Select a data set</b></h2>
 	<select name="dataSelect">
-		<g:each var="res" in="${meta}">
-			<option value=${res.id}>${res.files.genus} ${res.species}: ${res.file_type} (${res.file_version}) - ${res.file_name}
+		<g:each var="f" in="${meta.files}">
+			<g:if test="${f.file_type == 'Genes'}">
+				<option value=${f.id}>${meta.genus} ${meta.species}: ${f.file_type} (${f.file_version}) - ${f.file_name}
+			</g:if>
 		</g:each>
 	</select>	
 		<div id = "showAnno">
 		<table>
 		<tr><td>
 		<h1>Choose an annotation:</h1>
-		<g:each var="t" in="${annoType}">
-			<g:if test="${t.type == 'blast'}">
+		<g:each var="t" in="${meta.files.anno}">
+			<g:if test="${'blast' in t.type}">
 				<label><input name="toggler" type="radio" id="blast" checked="checked" value="1"> 1. BLAST homology</label><br>
 				<div class="toHide" id="blk_1" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
-					<g:each var="a" in="${anno}">
+					<g:each var="a" in="${t}">
 						<g:if test="${a.type == 'blast'}">
 							<label><input type="checkbox" checked="yes" name="blastAnno" value="${a.source}" /> ${a.source}</label><br>
 						</g:if>
 					</g:each> 
 				</div> 
 			</g:if>
-			<g:if test="${t.type == 'fun'}">
+			<g:if test="${'fun' in t.type}">
 				<label><input name="toggler" type="radio" id="anno" value="2"> 2. Functional annotation </label><br>  			
 				<div class="toHide" id="blk_2" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
-					<g:each var="a" in="${anno}">
+					<g:each var="a" in="${t}">
 						<g:if test="${a.type == 'fun'}">
 							<label><input type="checkbox" checked="yes" name="funAnno" value="${a.source}" /> ${a.source}</label><br>
 						</g:if>
 					</g:each>	
 				</div> 
 			</g:if>
-			<g:if test="${t.type == 'ipr'}">
+			<g:if test="${'ipr' in t.type}">
 				<label><input name="toggler" type="radio" id="ipr" value="3"> 3. InterPro domains</label><br>
 				<div class="toHide" id="blk_3" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
 					<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMPanther" /> PANTHER <a href="http://www.pantherdb.org/" style="text-decoration:none" target="_blank">?</a></label><br>
@@ -93,17 +95,14 @@
 		<select class="toHide" name = "tableSelect_1" id ="sel_1" onChange='showSelected(this.value)'>
 		  <option value="e.g. ATPase">Description</option>
 		  <option value="e.g. 215283796 or P31409">ID</option>    
-		  <!--option value="e.g. contig_1">ID</option-->
 		</select>
 		<select class="toHide" name = "tableSelect_2" id ="sel_2" onChange='showSelected(this.value)'>
 		  <option value="e.g. Calcium-transportingATPase">Description</option>
 		  <option value="e.g. GO:0008094 or 3.6.3.8 or K02147">ID</option>    
-		  <!--option value="e.g. contig_1">ID</option-->
 		</select>
 		<select class="toHide" name = "tableSelect_3" id ="sel_3" onChange='showSelected(this.value)'>
 		  <option value="e.g. Vacuolar (H+)-ATPase G subunit">Description</option>
 		  <option value="e.g. IPR023298 or PF01813">ID</option>    
-		  <!--option value="e.g. contig_1">ID</option-->
 		</select>
 		  </td>
 		  

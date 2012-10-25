@@ -30,15 +30,18 @@
     <g:link controller="blast" action="info" fragment="db">Database</g:link>
     <select name = "datalib">
     <sec:ifLoggedIn>
-    	<g:each var="res" in="${privBlastFiles}">
-    		<option value="${res.key}"/> ${res.key}</option>
+    	<g:each var="res" in="${blastFiles}">
+    		<option value="${res.file_name}"/> ${res.file_type} (${res.file_name})</option>
 		</g:each>
     </sec:ifLoggedIn>
-    <g:each var="res" in="${pubBlastFiles}">
-    	<option value="${res.key}" /> ${res.key}</option>
-	</g:each>
+    <sec:ifNotLoggedIn>
+	    <g:each var="res" in="${blastFiles}">
+    		<g:if test = "${res.blast == 'pub'}">
+    			<option value="${res.file_name}" /> ${res.file_name}</option>
+    		</g:if>
+		</g:each>
+	</sec:ifNotLoggedIn>
     </select>
-    
     <input TYPE="checkbox" NAME="UNGAPPED_ALIGNMENT" VALUE="is_set">
     Perform ungapped alignment
     <br>&nbsp;

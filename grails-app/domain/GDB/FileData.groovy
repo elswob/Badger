@@ -15,7 +15,7 @@ class FileData {
     static mapping = {
         description type: "text"
     }
-    //static belongsTo = [meta: MetaData]
     static hasMany = [anno:AnnoData, gene:GeneInfo, scaffold:GenomeInfo, trans:TransInfo]
+    static belongsTo = [ meta: MetaData ]
     
 }

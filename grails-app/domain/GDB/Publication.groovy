@@ -1,7 +1,6 @@
 package GDB
 
 class Publication {
-	int data_id
 	int pubmedId
     String journal
     String journal_short
@@ -30,4 +29,5 @@ class Publication {
         authors type: "text"
         journal type: "text"
     }
+    static belongsTo = [ meta: MetaData ]
 }

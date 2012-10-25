@@ -11,26 +11,18 @@ class BlastController {
     	return[pubBlastFiles: blastFiles[0], privBlastFiles: blastFiles[1]]
     }
     def index() { 
-    	def blastFiles = configDataService.getBlastLinks()
-    	return[pubBlastFiles: blastFiles[0], privBlastFiles: blastFiles[1]]
+    	def blastFiles = FileData.findAllByFile_typeInList(["mRNA","Peptide","Genome"])
+    	return [blastFiles:blastFiles]
+    	//def blastFiles = configDataService.getBlastLinks()
+    	//return[pubBlastFiles: blastFiles[0], privBlastFiles: blastFiles[1]]
     }
     def blastError = {
     }
     def runBlast = {
     	// set the database files
-    	def dbfile
-    	def dataSplit 
-    	if (isLoggedIn()) {
-    		if (grailsApplication.config.blast.priv."${params.datalib}"){
-    			dataSplit = grailsApplication.config.blast.priv."${params.datalib}".split(",")
-    		}else{
-    			dataSplit = grailsApplication.config.blast.pub."${params.datalib}".split(",")
-    		}
-     	}else{
-     		dataSplit = grailsApplication.config.blast.pub."${params.datalib}".split(",")
-     	}
-     	dbfile = dataSplit[0]
-     	println "blastDB = "+params.datalib+" file = "+dbfile
+    	def fileInfo = FileData.findByFile_name(params.datalib)
+    	def dbfile = fileInfo.file_dir+"/"+fileInfo.file_name
+     	println "dbfile = "+dbfile
         def db = "data/"+dbfile
         def blast_file = dbfile
         def program = grailsApplication.config.blastPath+params.PROGRAM
@@ -171,10 +163,11 @@ class BlastController {
 								//it = it.replaceAll(/>/,"<a name=\"$linker\">></a>") 
 								it = it.replaceAll(/>/,"<span id=\"$linker\">></span>")                     
 								//transform IDs to links but not before the first alignment
-								//add links and trim to remove whitespace
-								def regex = '\\s' + dataSplit[1].trim()
-								def link = dataSplit[2].trim()
-								it = it.replaceAll(regex, "<a href=\"$link\$1\">\$1</a>")
+								if (fileInfo.file_type == 'Peptide' || 'Genes' || 'mRNA'){
+									it = "><a href=\"/search/gene_info?id="+matcher[0][1]+"\">"+matcher[0][1]+"</a>"
+								}else if (fileInfo.file_type == 'Genome'){
+									it = "><a href=\"/search/genome_info?contig_id="+matcher[0][1]+"\">"+matcher[0][1]+"</a>"
+								}
 								oldId = newId
 								newId = matcher[0][1]        
 								

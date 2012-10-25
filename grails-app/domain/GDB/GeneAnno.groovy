@@ -18,4 +18,5 @@ class GeneAnno {
     static mapping = {
         descr type: "text"
     }
+    static belongsTo = [ gene: GeneInfo ]
 }

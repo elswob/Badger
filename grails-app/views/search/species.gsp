@@ -14,7 +14,7 @@
   	 		<table>
   	 			<tr>
   	 				<td width=150> 
-	    				<a href = "species_search?species=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="150" style="float:left;"/></a>
+	    				<a href = "species_search?id=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="150" style="float:left;"/></a>
 	    				<br><font size="1">Picture supplied by ${res.image_source}</font>
 	    			</td>
 	    			<td>

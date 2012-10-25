@@ -28,7 +28,7 @@ def getFiles = FileData.findAll()
 getFiles.each {  	
 	def fileLoc = it.file_dir+"/"+it.file_name
 	if (it.file_type == "Genome"){
-		//addGenomeData(fileLoc, it.cov, it.file_name)
+		addGenomeData(fileLoc, it.cov, it.file_name)
 	}else if (it.file_type == "Transcriptome"){
 		//addTransData(fileLoc, it.cov, it.id)
 	}else if (it.file_type == "Genes"){
@@ -193,6 +193,7 @@ def addGenomeData(fileLoc, cov, file_name){
 	GenomeInfo genome = new GenomeInfo(contigMap)
 	file.addToScaffold(genome)
 	genome.save(flush:true)
+	println count
 }
 
 //add the Genes
@@ -346,7 +347,6 @@ def addGeneData(fileLoc, file_name, trans, pep){
 				}
 				gene_nuc = nucData."${mrna_id}"
 			}
-			GeneInfo geneFind = GeneInfo.findByGene_id(gene_id)
 			if (dataArray[2] == 'CDS'){				
 				exon_count++
 				if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){                
@@ -369,13 +369,14 @@ def addGeneData(fileLoc, file_name, trans, pep){
 				exonMap.strand = dataArray[6]
 				exonMap.phase = dataArray[7].toInteger()
 				exonMap.gc = exon_gc
-				ExonInfo exon = new ExonInfo(exonMap)
-				geneFind.addToExon(exon)
-				if ((gene_count % 100) ==  0){
-					exon.save(flush:true)
-				}else{
-					exon.save()
-				}
+				//GeneInfo geneFind = GeneInfo.findByGene_id(gene_id)
+				//ExonInfo exon = new ExonInfo(exonMap)
+				//geneFind.addToExon(exon)
+				//if ((gene_count % 100) ==  0){
+				//	exon.save(flush:true)
+				//}else{
+				//	exon.save()
+				//}
 			}
 	  	}    
 	}

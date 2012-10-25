@@ -1,8 +1,6 @@
 package GDB
 
 class TransInfo {
-	int data_id
-	int file_id
     String contig_id
     String sequence
     Float gc
@@ -19,4 +17,5 @@ class TransInfo {
         sequence type: "text"
         contig_id index:'trans_contig'
     }
+    static belongsTo = [ file: FileData ]
 }
