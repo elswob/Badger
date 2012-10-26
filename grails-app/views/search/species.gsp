@@ -13,8 +13,8 @@
   	 		<h2><b><i>${res.genus} ${res.species}</i></b></h2>
   	 		<table>
   	 			<tr>
-  	 				<td width=300> 
-	    				<a href = "species_search?id=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="300" style="float:left;"/></a>
+  	 				<td width=250> 
+	    				<a href = "species_search?id=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="250" style="float:left;"/></a>
 	    				<br><font size="1">Picture supplied by ${res.image_source}</font>
 	    			</td>
 	    			<td>

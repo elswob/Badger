@@ -323,6 +323,7 @@ def addGeneData(fileLoc, file_name, trans, pep){
 	//read the file again as the gene tables need to be complete to use ids in exon tables
 	println "Adding exon data"
 	dataFile = new File("data/"+fileLoc).text
+	GeneInfo geneFind
 	dataFile.split("\n").each{
 		if ((matcher = it =~ /^#.*/)){
 		  //println "ignoring "+it
@@ -334,6 +335,7 @@ def addGeneData(fileLoc, file_name, trans, pep){
 				}else if ((matcher = dataArray[8] =~ /ID=(.*)/)){  
 					gene_id = matcher[0][1]
 				}
+				geneFind = GeneInfo.findByGene_id(gene_id)
 			}
 			if (dataArray[2] == 'mRNA' || dataArray[2] == 'transcript'){
 				exon_marker=0
@@ -369,14 +371,14 @@ def addGeneData(fileLoc, file_name, trans, pep){
 				exonMap.strand = dataArray[6]
 				exonMap.phase = dataArray[7].toInteger()
 				exonMap.gc = exon_gc
-				//GeneInfo geneFind = GeneInfo.findByGene_id(gene_id)
-				//ExonInfo exon = new ExonInfo(exonMap)
-				//geneFind.addToExon(exon)
-				//if ((gene_count % 100) ==  0){
-				//	exon.save(flush:true)
-				//}else{
-				//	exon.save()
-				//}
+				
+				ExonInfo exon = new ExonInfo(exonMap)
+				geneFind.addToExon(exon)
+				if ((gene_count % 100) ==  0){
+					exon.save(flush:true)
+				}else{
+					exon.save()
+				}
 			}
 	  	}    
 	}

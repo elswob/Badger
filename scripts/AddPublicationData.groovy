@@ -123,7 +123,9 @@ def addPub(pubFile,data_id){
 		}
 		//end of an entry
 		else if ((matcher = line =~ /<\/PubmedArticle>/)){
-			nameString = nameString[0..-3]
+			if (nameString.size() > 0){
+				nameString = nameString[0..-3]
+			}
 			pubMap.authors = nameString
 			nameString = ''
 			dateString = ''            

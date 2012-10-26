@@ -54,7 +54,6 @@
     var dlen = [], dcov = [], dgc = [], dcon = [], dcum = [], dcou = [];
     var joinArray = []; 
     var N50 = ${n50}, N90 = ${n90};
-    alert('n50 = '+N50)
     var counter=0;
     var cum = 0;
     var xaxis_label="", yaxis_label="", title_label="", xaxis_type="", yaxis_type="";
@@ -415,16 +414,34 @@
 
 <table width=100%>
       <tr><td width=30%>
-      	 <h1>Genome:</h1>
- 		<table>
-      	<tr><td><b>Span (bp):</b></td><td>${printf("%,d\n",genome_stats.span)}</td></tr>
-		 <tr><td><b>Scaffolds:</b></td><td>${printf("%,d\n",genome_stats.num)}</td></tr>
-		 <tr><td><b>N50:</b></td><td>${printf("%,d\n",genome_stats.n50)}</td></tr>
-		 <tr><td><b>Smallest (bp)</b></td><td>${printf("%,d\n",genome_stats.min)}</td></tr>
-		 <tr><td><b>Largest (bp)</b></td><td>${printf("%,d\n",genome_stats.max)}</td></tr>
-		 <tr><td><b>GC (%)</b></td><td>${printf("%.4g",genome_stats.gc)}</td></tr>
-		 <tr><td><b>Non ATGC (bp)</b></td><td>${printf("%,d\n",genome_stats.nonATGC)}</td></tr>
-		  </table>
+			 <h1>Genome:</h1>
+			<table>
+			<tr><td><b>Span (bp):</b></td><td>${printf("%,d\n",genome_stats.span)}</td></tr>
+			 <tr><td><b>Scaffolds:</b></td><td>${printf("%,d\n",genome_stats.num)}</td></tr>
+			 <tr><td><b>N50:</b></td><td>${printf("%,d\n",genome_stats.n50)}</td></tr>
+			 <tr><td><b>Smallest (bp)</b></td><td>${printf("%,d\n",genome_stats.min)}</td></tr>
+			 <tr><td><b>Largest (bp)</b></td><td>${printf("%,d\n",genome_stats.max)}</td></tr>
+			 <tr><td><b>GC (%)</b></td><td>${printf("%.4g",genome_stats.gc)}</td></tr>
+			 <tr><td><b>Non ATGC (bp)</b></td><td>${printf("%,d\n",genome_stats.nonATGC)}</td></tr>
+			  </table>
+		</td>
+		<td>
+			<table>
+			<tr>
+				<td>
+					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','cum')" value="Cumulative length"/>
+					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','len_gc')" value="Length vs GC"/>
+					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','cov_gc')" value="Coverage vs GC"/>
+					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','len_cov')" value="Length vs Coverage"/>
+				</td>
+			</tr>
+			<tr><td><p>Zoom in by dragging around an area. Reset by double clicking or clicking <font STYLE="cursor: pointer" color="green" class="button-reset">here</font></td></tr>
+		 	</table>   
+		 
+		  	<div id="chart" class="jqplot-target" style="height: 300px; width: 100%; position: center;">Loading...<img src="${resource(dir: 'images', file: 'spinner.gif')}"</div>
+		 
+		 </td></tr>
+		 <tr><td>
 		 <h1>Genes:</h1>
 		 <table>
 		 <tr><td><b>Number genes</b></td><td>${printf("%,d\n",gene_stats.genenum)}</td></tr>
@@ -440,39 +457,9 @@
 	 	<br>
  		<div id="blast_chart" class="jqplot-target" style="height: 200px; width: 100%; position: center;"></div>
  		<br>
- 		<div id="fun_chart" class="jqplot-target" style="height: 350px; width: 100%; position: center;"></div>
+ 		<div id="fun_chart" class="jqplot-target" style="height: 250px; width: 100%; position: center;"></div>
  	 </td></tr>
  </table>
-
-
-<div>
-     <table>
-     	<tr>
-     		<td>
-     			<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','cum')" value="Cumulative length"/>
-     			<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','len_gc')" value="Length vs GC"/>
-     			<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','cov_gc')" value="Coverage vs GC"/>
-     			<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','len_cov')" value="Length vs Coverage"/>
-     		</td>
-     	</tr>
-		<tr><td><p>Zoom in by dragging around an area. Reset by double clicking or clicking <font STYLE="cursor: pointer" color="green" class="button-reset">here</font></td></tr>
-	 </table>   
-	 
-	  <div id="chart" class="jqplot-target" style="height: 500px; width: 100%; position: center;">Loading...<img src="${resource(dir: 'images', file: 'spinner.gif')}"</div>
-	</div>
-  
-  	 <g:if test = "${meta}">
-  	 	<table>
-  	 		<tr><td width=15%><b>Data type</b></td><td><b>Version</b></td><td><b>Description</b></td><td><b>Number</b></td></tr>
-  	 		<g:each var="f" in="${meta.files}">
-  	 			<tr><td>${f.file_type}</td><td>${f.file_version}</td><td>${f.description}</td><td>${stats."${f.file_type}"}</td></tr>
-  	 		</g:each>
-  	 	</table>
-  	 </g:if>
-  	 <g:else>
-  	 	<h2>There are no species in the database at present, please add some</h2>
-  	 </g:else>
-  </table>
   
   <g:if test = "${meta}">
   <div id="content">
@@ -550,6 +537,19 @@
 	   </table>
 	   <br>
 	   </div>
+	   
+	   <g:if test = "${meta}">
+  	 	<table>
+  	 		<tr><td width=15%><b>Data type</b></td><td><b>Version</b></td><td><b>Description</b></td><td><b>Number</b></td></tr>
+  	 		<g:each var="f" in="${meta.files}">
+  	 			<tr><td>${f.file_type}</td><td>${f.file_version}</td><td>${f.description}</td><td>${stats."${f.file_type}"}</td></tr>
+  	 		</g:each>
+  	 	</table>
+  	 </g:if>
+  	 <g:else>
+  	 	<h2>There are no species in the database at present, please add some</h2>
+  	 </g:else>
+	   
 	</g:if>
 	<g:else>
 		<h2>There are no annotations for this species</h2>
