@@ -16,7 +16,8 @@
     <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.highlighter.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.cursor.min.js')}" type="text/javascript"></script>
   	<script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.logAxisRenderer.js')}" type="text/javascript"></script>
-  	<script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.barRenderer.min.js')}" type="text/javascript"></script>  	
+  	<script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.barRenderer.min.js')}" type="text/javascript"></script> 
+  	<script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.enhancedLegendRenderer.min.js')}" type="text/javascript"></script> 	
     <link rel="stylesheet" href="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.css')}" type="text/css"></link>
   
    <% 
@@ -38,61 +39,50 @@
     }
         
     $(document).ready(function(){
-   
-		GCountData = ${jsonGeneCountData};
+   		
+   		//get gene counts
+		GCountData = ${jsonGeneCountData};		
 		
-		
+		//exons per gene
 		NumData = ${jsonCountData};
 		var CArray = []
-		
+		var legendLabels = []
 		for (var i = 0; i < GCountData.length; i++) {   		
 			var count = GCountData[i];
 			//alert('species = '+count.species+' count = '+count.count)
     		var exCountNumArray = [];
     		var exCount = [], exNum = [], exPer = [];
+    		var meanCount = 0
     		
 			for (var j = 0; j < NumData.length; j++) {   		 	 
 				var hit = NumData[j];
 				if (hit.species == count.species){
+					meanCount += (hit.count*hit.num)
 					exPer.push((hit.count/count.count)*100);
 					exNum.push(hit.num);
 					exCount.push(hit.count)
 				}
 			}
 			if (exNum.length>0){
+				meanCount = meanCount/count.count
 				exCountNumArray = zip([exNum,exPer,exCount]);
 				CArray.push(exCountNumArray)
+				legendLabels.push(count.genus+" "+count.species+" (mean="+meanCount.toFixed(2)+")")
 			}
 
 		}
   		var plot1 = $.jqplot ('chart1', CArray	,{
   		 animate: true,
 		 title: 'Distribution of exons per gene', 
-		 series:[
-			 {
-			 markerOptions: { size: 2, style:"circle", color:"green"},
-			 color: 'green',
-			 label: 'A. viteae'
-			 },
-			 {
-			 markerOptions: { size: 2, style:"circle", color:"blue"},
-			 color: 'blue',
-			 label: 'D. immitis'
-			 },
-			 {
-			 markerOptions: { size: 2, style:"circle", color:"red"},
-			 color: 'red',
-			 label: 'O. ochengi'
-			 },
-			 {
-			 markerOptions: { size: 2, style:"circle", color:"orange"},
-			 color: 'orange',
-			 label: 'L. sigmodontis'
-			 },
-		 ],
 		 legend: {
+		 	renderer: $.jqplot.EnhancedLegendRenderer,
+            rendererOptions: {
+            	seriesToggle: 'slow',
+                seriesToggleReplot: { resetAxes: true }
+            },
             show: true,
-            placement: 'ne'
+            placement: 'ne',
+            labels: legendLabels
          },
 		 axesDefaults: {
 			 labelRenderer: $.jqplot.CanvasAxisLabelRenderer
@@ -135,31 +125,48 @@
 	    	}
 	    );  
 	    
-	    var exDCount = [], exDNum = [], exDPer = [];
-    
-    	var exDistNumArray = [];
+	    //exon lengths    
     	DistData = ${jsonDistData};
-        for (var i = 0; i < DistData.length; i++) {   		 	 
-			var hit = DistData[i];
-			//alert(hit.count)
-			exDPer.push((hit.count/"${exonCount}")*100);
-			exDNum.push(hit.num);
-			exDCount.push(hit.count)
-        }
-    	exDistNumArray = zip([exDNum,exDPer,exDCount]);
-    	//alert(exCountNumArray)
-  		//var plot1 = $.jqplot ('chart1', [exCountNumArray]);
-  		 		
-  		var plot2 = $.jqplot ('chart2', [exDistNumArray],{
+    	legendLabels = []
+    	var DArray = []
+    	for (var i = 0; i < GCountData.length; i++) {   		
+			var count = GCountData[i];
+			var exDCount = [], exDNum = [], exDPer = [];
+			var exDistNumArray = [];
+			var meanCount = 0
+			for (var j = 0; j < DistData.length; j++) {   		 	 
+				var hit = DistData[j];
+				if (hit.species == count.species){
+					meanCount += (hit.count*hit.num)
+					exDPer.push((hit.count/count.count)*100);
+					exDNum.push(hit.num);
+					exDCount.push(hit.count)
+				}
+			}
+			if (exDNum.length>0){
+				meanCount = meanCount/count.count
+    			exDistNumArray = zip([exDNum,exDPer,exDCount]);
+    			DArray.push(exDistNumArray)
+    			legendLabels.push(count.genus+" "+count.species+" (mean="+meanCount.toFixed(2)+")")
+    		}
+    	}		
+  		var plot2 = $.jqplot ('chart2', DArray,{
   		 animate: true,
 		 title: 'Distribution of exon lengths', 
-		 series:[
-			 {
-			 showLine:false,
-			 markerOptions: { size: 2, style:"circle", color:"green"},
-			 color: 'green'
-			 },
-		 ],
+		 seriesDefaults:{
+		 	showLine:false,
+		 	markerOptions: { size: 2, style:"circle"},
+		 },
+		 legend: {
+		 	renderer: $.jqplot.EnhancedLegendRenderer,
+            rendererOptions: {
+            	seriesToggle: 'slow',
+                seriesToggleReplot: { resetAxes: true }
+            },
+            show: true,
+            placement: 'ne',
+            labels: legendLabels
+         },
 		 axesDefaults: {
 			 labelRenderer: $.jqplot.CanvasAxisLabelRenderer
 		 },
@@ -201,63 +208,54 @@
 	    	}
 	    );  
 	    
+	    //gene lengths
 	    GDistData = ${jsonGeneData};
 	    
 	    var GArray = [];
+	    var legendLabels = [];
 		for (var i = 0; i < GCountData.length; i++) {   		
 			var count = GCountData[i];
 			//alert(count.species)
 		
 			var GCount = [], GNum = [], GPer = [];
-				
+			var meanCount = 0	
 			var GDistNumArray = [];
 			
 			for (var j = 0; j < GDistData.length; j++) {   		 	 
 				var hit = GDistData[j];
 				//alert(hit.count)
 				if (hit.species == count.species){
+					meanCount += (hit.count*hit.num)
 					GPer.push((hit.count/count.count)*100);
 					GNum.push(hit.num);
 					GCount.push(hit.count)
 				}
 			}
-			GDistNumArray = zip([GNum,GPer,GCount]);
-			//alert(GDistNumArray)
-			GArray.push(GDistNumArray)
+			if (GNum.length>0){
+				meanCount = meanCount/count.count
+				GDistNumArray = zip([GNum,GPer,GCount]);
+				//alert(GDistNumArray)
+				GArray.push(GDistNumArray)
+				legendLabels.push(count.genus+" "+count.species+" (mean="+meanCount.toFixed(2)+")")
+			}
 		}
   		 		
   		var plot3 = $.jqplot ('chart3', GArray,{
   		 animate: true,
 		 title: 'Distribution of gene lengths', 
-		 series:[
-			 {
-			 showLine:false,
-			 markerOptions: { size: 2, style:"circle", color:"green"},
-			 color: 'green',
-			 label: 'A. viteae'
-			 },
-			 {
-			 showLine:false,
-			 markerOptions: { size: 2, style:"circle", color:"blue"},
-			 color: 'blue',
-			 label: 'D. immitis'
-			 },
-			 {
-			 showLine:false,
-			 markerOptions: { size: 2, style:"circle", color:"red"},
-			 color: 'red',
-			 label: 'O. ochengi'
-			 },
-			 {
-			 showLine:false,
-			 markerOptions: { size: 2, style:"circle", color:"orange"},
-			 color: 'orange',
-			 label: 'L. sigmodontis'
-			 },
-		 ],
+		 seriesDefaults:{
+		 	showLine:false,
+		 	markerOptions: { size: 2, style:"circle"},
+		 },
 		 legend: {
+		 	renderer: $.jqplot.EnhancedLegendRenderer,
+            rendererOptions: {
+            	seriesToggle: 'slow',
+                seriesToggleReplot: { resetAxes: true }
+            },
             show: true,
-            placement: 'ne'
+            placement: 'ne',
+            labels: legendLabels
          },
 		 axesDefaults: {
 			 labelRenderer: $.jqplot.CanvasAxisLabelRenderer
@@ -301,7 +299,8 @@
 	    );  
 	
 
-		exonLenNumData = ${exonLenNum}
+	//length and gc of exons by number
+	exonLenNumData = ${exonLenNum}
 	exonGCNumData = ${exonGCNum}
 	var exonNumPlot = $.jqplot ('exon_num', [exonLenNumData, exonGCNumData],{
 		legend: {
@@ -367,11 +366,7 @@
 		 	 showTooltip: false,
 		 	 //tooltipLocation:'nw'
 		 }
-
-	    });  
-	    
-	
-	    
+	    });      
 	}); 
 	
  </script>

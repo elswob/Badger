@@ -161,13 +161,15 @@ class BlastController {
 								//add name attribute to alignment for anchor
 								def linker = matcher[0][1].replaceAll(/\.|-/, "") 
 								//it = it.replaceAll(/>/,"<a name=\"$linker\">></a>") 
-								it = it.replaceAll(/>/,"<span id=\"$linker\">></span>")                     
-								//transform IDs to links but not before the first alignment
+								                     
+								//create internal links
 								if (fileInfo.file_type == 'Peptide' || 'Genes' || 'mRNA'){
 									it = "><a href=\"/search/gene_info?id="+matcher[0][1]+"\">"+matcher[0][1]+"</a>"
 								}else if (fileInfo.file_type == 'Genome'){
 									it = "><a href=\"/search/genome_info?contig_id="+matcher[0][1]+"\">"+matcher[0][1]+"</a>"
 								}
+								//transform IDs to links but not before the first alignment
+								it = it.replaceAll(/^>/,"<span id=\"$linker\">></span>")
 								oldId = newId
 								newId = matcher[0][1]        
 								

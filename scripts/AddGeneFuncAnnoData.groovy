@@ -3,6 +3,15 @@ package GDB
 import groovy.sql.Sql
 def grailsApplication
 
+def cleanUpGorm() { 
+	def sessionFactory = ctx.getBean("sessionFactory")
+	def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
+    def session = sessionFactory.currentSession 
+    session.flush() 
+    session.clear() 
+    propertyInstanceMap.get().clear() 
+}
+
 def a = AnnoData.findAllByType('fun')
 a.each{
 	AnnoData anno = it
@@ -13,7 +22,7 @@ a.each{
 	println "anno.source = "+anno.source
 	println "fileLoc = "+fileLoc
 	//println "type = "+a.type
-	addFunc(anno.source,annoFile)
+	addFunc(anno.source,annoFile,annoName)
 }
 
 a = AnnoData.findAllByType('ipr')
@@ -26,16 +35,18 @@ a.each{
 	println "anno.source = "+anno.source
 	println "fileLoc = "+fileLoc
 	//println "type = "+a.type
-	addInterProScan(annoFile)
+	addInterProScan(annoFile,annoName)
 }
 
-def addFunc(source,file){
+def addFunc(source,file,annoFile){
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
-  	//println "Deleting old data..."
-	//def delsql = "delete from gene_anno where file_id = '"+file_id+"' and anno_db = '"+source+"';";
-	//sql.execute(delsql)
+  	println "Deleting old data..."
+	def delsql = "delete from gene_anno,gene_info,file_data,anno_data where gene_anno.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.id = anno_data.filedata_id and anno_data.anno_file = '"+annoFile+"';";
+	println delsql
+	sql.execute(delsql)
 	println "Adding new...."
+	println new Date()
     def annoMap = [:]
     def count=0
     file.eachLine { line ->
@@ -53,8 +64,10 @@ def addFunc(source,file){
     	    GeneInfo geneFindFun = GeneInfo.findByMrna_id(mrna_id)
             GeneAnno ga = new GeneAnno(annoMap)
 			geneFindFun.addToGanno(ga)
-    	    if ((count % 1000) ==  0){
+    	    if ((count % 2000) ==  0){
             	println count
+            	println new Date()
+            	cleanUpGorm()
             	ga.save(flush:true)
             }else{
             	ga.save()
@@ -64,13 +77,15 @@ def addFunc(source,file){
 }
 
 // add the interposcan raw data 
-def addInterProScan(file){
+def addInterProScan(file,annoFile){
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
-  	//println "Deleting old data..."
-	//def delsql = "delete from gene_anno where file_id = '"+file_id+"' and anno_id ~ '^IPR';";
-	//sql.execute(delsql)
+  	println "Deleting old data..."
+	def delsql = "delete from gene_anno,gene_info,file_data,anno_data where gene_anno.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.id = anno_data.filedata_id and anno_data.anno_file = '"+annoFile+"';";
+	println delsql
+	sql.execute(delsql)
 	println "Adding new...."
+	println new Date()
   	def count=0
 	// get the ipr descriptions
 	def iprMap = [:]
@@ -102,9 +117,11 @@ def addInterProScan(file){
 					GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
             		GeneAnno ga = new GeneAnno(annoMap)
 					geneFind.addToGanno(ga)
-                  	if ((count % 1000) ==  0){
+                  	if ((count % 2000) ==  0){
             			println count
                       	//println annoMap
+                      	println new Date()
+            			cleanUpGorm()
 						ga.save(flush:true)
                     }else{
                       	ga.save()

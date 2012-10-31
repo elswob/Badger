@@ -150,7 +150,7 @@ class HomeController {
 			 def geneCount = "select count(mrna_id) from gene_info,file_data,meta_data where gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id and meta_data.id = '"+it.id+"';";
 		 	 println geneCount
 		 	 def geneCountData = sql.rows(geneCount)
-		 	 geneCountAll.add([species:it.species,count:geneCountData.count[0]])
+		 	 geneCountAll.add([genus:it.genus,species:it.species,count:geneCountData.count[0]])
 		 }
 		 
 		 //println geneDistAll
@@ -165,12 +165,13 @@ class HomeController {
 		 println exonCountSql
 		 def exonCountData = sql.rows(exonCountSql)
 		
-		 def exonDist = "select num,count(num) from (select exon_id, length(sequence) as num from exon_info group by exon_id,sequence) as foo group by num order by num;"
+		 def exonDist = "select num,count(num),species from (select exon_id, length(sequence) as num,species from exon_info,gene_info,file_data,meta_data where exon_info.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by species,exon_id,sequence) as foo group by species,num order by species,num;"
 		 println exonDist
 		 def exonDistData = sql.rows(exonDist)
 		 
 		 	//exon lengths and gc by exon number
 		def exonNumLenGCsql = "select exon_number,avg(length(sequence)) as len ,avg(gc) as gc from exon_info group by exon_number order by exon_number;"
+		//def exonNumLenGCsql = "select exon_number,avg(length(sequence)) as len ,avg(exon_info.gc) as gc,species from exon_info,gene_info,file_data,meta_data where exon_info.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by species,exon_number order by species,exon_number;";
 		def exonNumLenGC = sql.rows(exonNumLenGCsql)
 		def exonLenNum = []
 		def exonGCNum = []
@@ -182,11 +183,12 @@ class HomeController {
 		}
 		
 		//exons per gene
-		def exonPerGeneSql = "select num,count(num),species from (select count(exon_id) as num ,gene_info.gene_id,species from exon_info,gene_info,file_data,meta_data where exon_info.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by gene_info.gene_id,species) as foo group by species,num;";
-		def exonPerGene = sql.rows(exonPerGeneSql)
-		 //return [geneDistData:geneDistData, geneCount: geneCount, exonCountData: exonCountData, exonDistData:exonDistData, exonCount:exonCount, exonLenNum: exonLenNum, exonGCNum: exonGCNum]
-		 return [exonPerGene:exonPerGene, geneDistData:geneDistData, geneCountData:geneCountAll, exonCountData: exonCountData, exonDistData:exonDistData, exonCount:exonCount, exonLenNum: exonLenNum, exonGCNum: exonGCNum]
+		//def exonPerGeneSql = "select num,count(num),species from (select count(exon_id) as num ,gene_info.gene_id,species from exon_info,gene_info,file_data,meta_data where exon_info.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by gene_info.gene_id,species) as foo group by species,num;";
+		//def exonPerGene = sql.rows(exonPerGeneSql
+		 
+		//return [geneDistData:geneDistData, geneCount: geneCount, exonCountData: exonCountData, exonDistData:exonDistData, exonCount:exonCount, exonLenNum: exonLenNum, exonGCNum: exonGCNum]
+		return [geneDistData:geneDistData, geneCountData:geneCountAll, exonCountData: exonCountData, exonDistData:exonDistData, exonCount:exonCount, exonLenNum: exonLenNum, exonGCNum: exonGCNum]
 	 }
 	 sql.close()
- }
+  }
 }

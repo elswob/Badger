@@ -121,7 +121,7 @@ class AdminController {
 	@Secured(['ROLE_ADMIN'])
 	def addedData = {
 		def dataMap = [:]		
-		
+
 		//check if name and version are unique
 		def check = MetaData.findByGenusAndSpecies(params.genus.trim(), params.species.trim())
 		if (check){
@@ -152,10 +152,14 @@ class AdminController {
 				fileMap.description = params.trans_d.trim()
 				fileMap.cov = params.trans_c.trim()
 				fileMap.file_link = "n"
-				println fileMap
-				FileData file = new FileData(fileMap) 
-				meta.addToFiles(file)
-				file.save()
+				if (new File("data/"+params.dir.trim()+"/"+params.trans.trim()).exists()){
+					println fileMap
+					FileData file = new FileData(fileMap) 
+					meta.addToFiles(file)
+					file.save()
+				}else{
+					return [error: "no trans"]
+				}
 				
 			}
 			if (params.genome){
@@ -169,10 +173,14 @@ class AdminController {
 				fileMap.description = params.genome_d.trim()
 				fileMap.cov = params.genome_c.trim()
 				fileMap.file_link = "n"
-				println fileMap
-				FileData file = new FileData(fileMap) 
-				meta.addToFiles(file)
-				file.save()
+				if (new File("data/"+params.dir.trim()+"/"+params.genome.trim()).exists()){
+					println fileMap
+					FileData file = new FileData(fileMap) 
+					meta.addToFiles(file)
+					file.save()
+				}else{
+					return [error: "no genome"]
+				}
 			}
 			if (params.genes){
 				fileMap.file_type = "Genes"
@@ -184,10 +192,14 @@ class AdminController {
 				fileMap.file_version = params.genes_v.trim()
 				fileMap.description = params.genes_d.trim()
 				fileMap.file_link = params.genome.trim()
-				println fileMap
-				FileData file = new FileData(fileMap) 
-				meta.addToFiles(file)
-				file.save()
+				if (new File("data/"+params.dir.trim()+"/"+params.genes.trim()).exists()){
+					println fileMap
+					FileData file = new FileData(fileMap) 
+					meta.addToFiles(file)
+					file.save()
+				}else{
+					return [error: "no genes"]
+				}
 			}
 			if (params.mrna_trans){
 				fileMap.file_type = "mRNA"
@@ -199,10 +211,14 @@ class AdminController {
 				fileMap.file_version = params.mrna_trans_v.trim()
 				fileMap.description = params.mrna_trans_d.trim()
 				fileMap.file_link = params.genes.trim()
-				println fileMap
-				FileData file = new FileData(fileMap) 
-				meta.addToFiles(file)
-				file.save()
+				if (new File("data/"+params.dir.trim()+"/"+params.mrna_trans.trim()).exists()){
+					println fileMap
+					FileData file = new FileData(fileMap) 
+					meta.addToFiles(file)
+					file.save()
+				}else{
+					return [error: "no mrna"]
+				}
 			}
 			if (params.mrna_pep){
 				fileMap.file_type = "Peptide"
@@ -214,10 +230,14 @@ class AdminController {
 				fileMap.file_version = params.mrna_pep_v.trim()
 				fileMap.description = params.mrna_pep_d.trim()
 				fileMap.file_link = params.genes.trim()
-				println fileMap
-				FileData file = new FileData(fileMap) 
-				meta.addToFiles(file)
-				file.save()
+				if (new File("data/"+params.dir.trim()+"/"+params.mrna_pep.trim()).exists()){
+					println fileMap
+					FileData file = new FileData(fileMap) 
+					meta.addToFiles(file)
+					file.save()
+				}else{
+					return [error: "no pep"]
+				}
 			}			
 			return [dataMap:dataMap]
 		}
@@ -237,9 +257,10 @@ class AdminController {
 	def addedAnno = {
 		def dataSplit = params.dataSelect.split(":")	
 		FileData file = FileData.findByFile_name(params.dataSelect)
+		def filedir = FileData.findByFile_name(params.dataSelect).file_dir
 		def annoMap = [:]			
 		if (params.annoSelect == "1"){
-			def check = FileData.findByFile_name(params.dataSelect).anno.anno_file
+			def check = FileData.findByFile_name(params.dataSelect).anno.anno_file			
 			println "check = "+check
 			if (params.b_anno_file.trim() in check){
 				println "check exists : "+check
@@ -250,11 +271,15 @@ class AdminController {
 				annoMap.source = params.b_source.trim()
 				annoMap.regex = params.b_regex.trim()
 				annoMap.anno_file = params.b_anno_file.trim()	
-				println annoMap
-				AnnoData anno = new AnnoData(annoMap)
-				file.addToAnno(anno)
-				anno.save()
-				return [annoMap: annoMap]
+				if (new File("data/"+filedir+"/"+params.b_anno_file.trim()).exists()){				
+					println annoMap
+					AnnoData anno = new AnnoData(annoMap)
+					file.addToAnno(anno)
+					anno.save()
+					return [annoMap: annoMap]
+				}else{
+					return [error: "no file", file: "data/"+filedir+"/"+params.b_anno_file]
+				}
 			}
 		}else if (params.annoSelect == "2"){
 			def check = FileData.findByFile_name(params.dataSelect).anno.anno_file
@@ -267,12 +292,16 @@ class AdminController {
 				annoMap.link = params.f_link.trim()
 				annoMap.source = params.f_source.trim()
 				annoMap.regex = params.f_regex.trim()	
-				annoMap.anno_file = params.f_anno_file.trim()	
-				println annoMap
-				AnnoData anno = new AnnoData(annoMap)
-				file.addToAnno(anno)
-				anno.save()
-				return [annoMap: annoMap]
+				annoMap.anno_file = params.f_anno_file.trim()
+				if (new File("data/"+filedir+"/"+params.f_anno_file.trim()).exists()){		
+					println annoMap
+					AnnoData anno = new AnnoData(annoMap)
+					file.addToAnno(anno)
+					anno.save()
+					return [annoMap: annoMap]
+				}else{
+					return [error: "no file", file: "data/"+filedir+"/"+params.f_anno_file]
+				}
 			}
 		}else if (params.annoSelect == "3"){
 			def check = FileData.findByFile_name(params.dataSelect).anno.anno_file
@@ -286,11 +315,15 @@ class AdminController {
 				annoMap.regex = "(IPR\\d+).*?"
 				annoMap.source = "InteProScan"
 				annoMap.anno_file = params.i_anno_file.trim()	
-				println annoMap
-				AnnoData anno = new AnnoData(annoMap)
-				file.addToAnno(anno)
-				anno.save()
-				return [annoMap: annoMap]
+				if (new File("data/"+filedir+"/"+params.i_anno_file.trim()).exists()){
+					println annoMap
+					AnnoData anno = new AnnoData(annoMap)
+					file.addToAnno(anno)
+					anno.save()
+					return [annoMap: annoMap]
+				}else{
+					return [error: "no file", file: "data/"+filedir+"/"+params.i_anno_file]
+				}
 			}
 		}
 	}

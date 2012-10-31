@@ -2,6 +2,15 @@ package GDB
 
 import groovy.sql.Sql
 
+def cleanUpGorm() { 
+	def sessionFactory = ctx.getBean("sessionFactory")
+	def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
+    def session = sessionFactory.currentSession 
+    session.flush() 
+    session.clear() 
+    propertyInstanceMap.get().clear() 
+}
+
 def a = AnnoData.findAllByType('blast')
 a.each{
 	AnnoData anno = it
@@ -11,17 +20,19 @@ a.each{
 	def blastFile = new File("data/"+fileLoc).text
 	println "anno.source = "+anno.source
 	println "fileLoc = "+fileLoc
-	addGeneBlast(anno.source,blastFile)
+	addGeneBlast(anno.source,blastFile,anno.anno_file)
 }
 
 //add Unigene annotations
-def addGeneBlast(db,blastFile){
+def addGeneBlast(db,blastFile,annoFile){
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
-  	//println "Deleting old data..."
-	//def delsql = "delete from gene_blast where file_id = '"+file_id+"' and anno_db = '"+db+"';";
-	//sql.execute(delsql)
+  	println "Deleting old data..."
+	def delsql = "delete from gene_blast,gene_info,file_data,anno_data where gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.id = anno_data.filedata_id and anno_data.anno_file = '"+annoFile+"';";
+	println delsql
+	sql.execute(delsql)
 	println "Adding new...."
+	println new Date()
     def annoMap = [:]
     def count_check = 0
     def count_all = 0
@@ -105,8 +116,10 @@ def addGeneBlast(db,blastFile){
             		GeneBlast gb = new GeneBlast(annoMap)
 					geneFind.addToGblast(gb)
 					
-            		if ((count_all % 2000) ==  0){
+            		if ((count_all % 5000) ==  0){
             			println count_all
+            			println new Date()
+            			cleanUpGorm()
             			//println annoMap
             			gb.save(flush:true)
             		}else{

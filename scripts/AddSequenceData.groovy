@@ -6,6 +6,7 @@ def grailsApplication
 def dataSource = ctx.getBean("dataSource")
 def sql = new Sql(dataSource)
 
+
 def getPep(seq, int frame){
 	def trans = [ ATT:'I',ATC:'I',ATA:'I',CTT:'L',CTC:'L',CTA:'L',CTG:'L',TTA:'L',TTG:'L',GTT:'V',GTC:'V',GTA:'V',GTG:'V',TTT:'F',TTC:'F',ATG:'M',TGT:'C',TGC:'C',GCT:'A',GCC:'A',GCA:'A',GCG:'A',GGT:'G',GGC:'G',GGA:'G',GGG:'G',CCT:'P',CCC:'P',CCA:'P',CCG:'P',ACT:'T',ACC:'T',ACA:'T',ACG:'T',TCT:'S',TCC:'S',TCA:'S',TCG:'S',AGT:'S',AGC:'S',TAT:'Y',TAC:'Y',TGG:'W',CAA:'Q',CAG:'Q',AAT:'N',AAC:'N',CAT:'H',CAC:'H',GAA:'E',GAG:'E',GAT:'D',GAC:'D',AAA:'K',AAG:'K',CGT:'R',CGC:'R',CGA:'R',CGG:'R',AGA:'R',AGG:'R',TAA:'.',TAG:'.',TGA:'.' ];
 	//def trans = [ ATT:'I',ATC:'I',ATA:'I',CTT:'L',CTC:'L',CTA:'L',CTG:'L',TTA:'L',TTG:'L',GTT:'V',GTC:'V',GTA:'V',GTG:'V',TTT:'F',TTC:'F',ATG:'M',TGT:'C',TGC:'C',GCT:'A',GCC:'A',GCA:'A',GCG:'A',GGT:'G',GGC:'G',GGA:'G',GGG:'G',CCT:'P',CCC:'P',CCA:'P',CCG:'P',ACT:'T',ACC:'T',ACA:'T',ACG:'T',TCT:'S',TCC:'S',TCA:'S',TCG:'S',AGT:'S',AGC:'S',TAT:'Y',TAC:'Y',TGG:'W',CAA:'Q',CAG:'Q',AAT:'N',AAC:'N',CAT:'H',CAC:'H',GAA:'E',GAG:'E',GAT:'D',GAC:'D',AAA:'K',AAG:'K',CGT:'R',CGC:'R',CGA:'R',CGG:'R',AGA:'R',AGG:'R'];
@@ -20,11 +21,17 @@ def getPep(seq, int frame){
 	return pepSeq
 }
 
-//def seq = "ATGGTGCTGTCTGCCGCCGACAAGGGCAATGTCAAGGCCGCCTGGGGCAAGGTTGGCGGCCACGCTGCAGAGTATGGCGCAGAGGCCCTG";
-//def pep = getPep(seq,0)
-//println "pep = "+pep
 
-def getFiles = FileData.findAll()
+def cleanUpGorm() { 
+	def sessionFactory = ctx.getBean("sessionFactory")
+	def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
+    def session = sessionFactory.currentSession 
+    session.flush() 
+    session.clear() 
+    propertyInstanceMap.get().clear() 
+}
+
+def getFiles = FileData.findAll(sort:"id")
 getFiles.each {  	
 	def fileLoc = it.file_dir+"/"+it.file_name
 	if (it.file_type == "Genome"){
@@ -48,6 +55,7 @@ getFiles.each {
 //add the Transcripts
 def addTransData(fileLoc, cov, data_id, file_id){
 	println "Adding transcript data - "+fileLoc
+	println new Date()
 	def contigFile = new File("data/"+fileLoc).text
 	def cov_check = false
 	def header_regex
@@ -122,6 +130,7 @@ def addGenomeData(fileLoc, cov, file_name){
   	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
 	println "Adding genome data for - "+fileLoc
+	println new Date()
   	//println "Deleting old data..."
 	//def delsql = "delete from genome_info where data_id = '"+data_id+"' and file_id = '"+file_id+"';";
 	//sql.execute(delsql)
@@ -163,7 +172,7 @@ def addGenomeData(fileLoc, cov, file_name){
 				//println contigMap
 				GenomeInfo genome = new GenomeInfo(contigMap)
 				file.addToScaffold(genome)				
-				if ((count % 1000) ==  0){
+				if ((count % 2000) ==  0){
 					println count
 					genome.save(flush:true)
 				}else{
@@ -252,6 +261,7 @@ def addGeneData(fileLoc, file_name, trans, pep){
 	pepData."${geneId}" = sequence
   
 	println "Reading gff file - "+fileLoc
+	println new Date()
 	println "Adding gene data"
 	def dataFile = new File("data/"+fileLoc).text
 	//def dataFile = new File("data/A_viteae/test.gff".trim()).text
@@ -262,6 +272,7 @@ def addGeneData(fileLoc, file_name, trans, pep){
 	def exonMap = [:]
 	def exon_id
 	int exon_count
+	int exon_count_all = 0
 	int exon_start
 	int exon_marker
 	int exon_end
@@ -322,6 +333,7 @@ def addGeneData(fileLoc, file_name, trans, pep){
 	gene_count = 0
 	//read the file again as the gene tables need to be complete to use ids in exon tables
 	println "Adding exon data"
+	println new Date()
 	dataFile = new File("data/"+fileLoc).text
 	GeneInfo geneFind
 	dataFile.split("\n").each{
@@ -343,6 +355,7 @@ def addGeneData(fileLoc, file_name, trans, pep){
 				gene_count++
 				if ((gene_count % 1000) ==  0){
 					println gene_count
+					println new Date()
 				}
 				if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
 					mrna_id = matcher[0][1]
@@ -351,6 +364,7 @@ def addGeneData(fileLoc, file_name, trans, pep){
 			}
 			if (dataArray[2] == 'CDS'){				
 				exon_count++
+				exon_count_all++
 				if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){                
 					exonMap.exon_id = matcher[0][1]
 					//println "exon = "+exon_id+" - "+exon_count
@@ -365,18 +379,25 @@ def addGeneData(fileLoc, file_name, trans, pep){
 				exon_marker = exon_start + dataArray[4].toInteger()-dataArray[3].toInteger()+1
 				
 				exonMap.exon_number = exon_count
-				exonMap.start = dataArray[3]
-				exonMap.stop = dataArray[4]
+				exonMap.start = dataArray[3].toInteger()
+				exonMap.stop = dataArray[4].toInteger()
 				exonMap.score = dataArray[5]
 				exonMap.strand = dataArray[6]
 				exonMap.phase = dataArray[7].toInteger()
+				exonMap.gene = geneFind
+				//exonMap.gene_id = geneFind.id.toBigInteger()
 				exonMap.gc = exon_gc
 				
 				ExonInfo exon = new ExonInfo(exonMap)
 				geneFind.addToExon(exon)
-				if ((gene_count % 100) ==  0){
+				
+				if ((exon_count_all % 10000) ==  0){
 					exon.save(flush:true)
+					cleanUpGorm()
+					//println exonMap
+					//new ExonInfo(exonMap).save(flush:true)
 				}else{
+					//new ExonInfo(exonMap).save()
 					exon.save()
 				}
 			}

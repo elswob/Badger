@@ -10,15 +10,17 @@
   	 <g:if test = "${meta}">
   	 	<br>
   	 	<g:each var="res" in="${meta}">
-  	 		<h2><b><i>${res.genus} ${res.species}</i></b></h2>
+  	 		<h2><b><i>${res.genus} ${res.species}</i></b></h2> 		
   	 		<table>
   	 			<tr>
-  	 				<td width=250> 
-	    				<a href = "species_search?id=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="250" style="float:left;"/></a>
-	    				<br><font size="1">Picture supplied by ${res.image_source}</font>
+  	 				<td width=150> 
+	    				<a href = "species_search?id=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="150" style="float:left;"/></a>
 	    			</td>
 	    			<td>
-	    				<p>${res.description}</p>
+	    				<div style="overflow:auto; padding-right:2px; height:150px">
+	    					<p>${res.description}</p>
+	    					<br><font size="1">Picture supplied by ${res.image_source}</font>
+	    				</div>
 	    			</td>
 	    		</tr>
 	    	</table>

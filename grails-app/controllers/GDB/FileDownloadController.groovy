@@ -147,10 +147,14 @@ class FileDownloadController {
     }
     
     def zip_download = {
-    	def fileOut = new File('data/'+params.fileName)
-        response.setHeader "Content-disposition", "attachment; filename="+params.fileName
-        response.contentType = 'application/zip'
-        response.outputStream << fileOut.newInputStream()
-        response.outputStream.flush()
+    	if (new File('data/'+params.fileName).exists()){
+    		def fileOut = new File('data/'+params.fileName)
+			response.setHeader "Content-disposition", "attachment; filename="+params.fileName
+			response.contentType = 'application/zip'
+			response.outputStream << fileOut.newInputStream()
+			response.outputStream.flush()
+		}else{
+			println "data/"+params.fileName+" does not exists"
+		}
     }
 }

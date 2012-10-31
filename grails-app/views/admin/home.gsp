@@ -6,6 +6,8 @@
   <meta name='layout' content='main'/>
   <title>${grailsApplication.config.projectID} admin</title>
   <parameter name="admin" value="selected"></parameter>
+  <r:require modules="jquery-validation-ui" />
+  
   <script>
   function demoData(sp){
   	if (sp == "A_vit"){
@@ -100,20 +102,28 @@
 	 | <a href = "javascript:void(0)" onclick="demoData('D_imm')">D. immitis </a>
 	 | <a href = "javascript:void(0)" onclick="demoData('O_och')">O. ochengi </a>
 </div><br>
+
 <h2><b>Project data</b></h2>
 <g:form action="addedData" controller="admin">
-	<p>Genus<font color="red">*</font></p>
-	<g:textField name="genus" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+	<label for="genus" class="control-label"><g:message code="person.name.label" default="Genus" /><span class="required-indicator">*</span></label>
+	<div class="control-group fieldcontain ${hasErrors(bean: meta_data, field: 'genus', 'error')} required">
+	
+	<div class="controls">	
+		
+		<g:textField style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;" name="genus" required="" value="${meta_data?.genus}"/>
+		<span class="help-inline">${hasErrors(bean: mete_data, field: 'genus', 'error')}</span>
+	</div>
+	</div>
 	<p>Species<font color="red">*</font></p>
-	<g:textField name="species" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+	<g:textField name="species" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<p>Description<font color="red">*</font></p>
-	<g:textArea name="description" style="width: 98%; height: 50px; border: 3px solid #cccccc; padding: 2px;"/><br>	
+	<g:textArea name="description" style="width: 80%; height: 50px; border: 3px solid #cccccc; padding: 2px;"/><br>	
 	<p>GBrowse link</p>
-	<g:textField name="gbrowse" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+	<g:textField name="gbrowse" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<p>Image file</p>
-	<g:textField name="image_f" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+	<g:textField name="image_f" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<p>Image source</p>
-	<g:textField name="image_s" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+	<g:textField name="image_s" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 	
 	<h2><b>Data files</b></h2>	
@@ -238,7 +248,9 @@
 	
 	
 	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
-	<br><input class="mybuttons" type="button" value="Add data" onclick="submit()" >
+	<div class="form-actions">
+    	<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+    </div>
 </g:form>
 	
 
