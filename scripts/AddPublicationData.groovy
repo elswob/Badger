@@ -6,6 +6,7 @@ def matcher
 
 def getFiles = MetaData.findAll()
 getFiles.each {  	
+	println new Date()
 	def query = it.genus+"+AND+"+it.species
 	println "Getting publication information for "+it.genus+" "+it.species
 	getPub(it.id,query)

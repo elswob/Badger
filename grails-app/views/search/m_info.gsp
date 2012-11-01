@@ -32,7 +32,7 @@
 		  //println fun_results
 		  %>  
     <script>
-    var drawCount=0;
+    
     function get_table_data(table){
     	var table_scrape = [];
     	var rowNum
@@ -115,7 +115,8 @@
 	AnnoData = ${jsonAnno};
 	//alert(aa_data)
     
-    $(document).ready(function() {
+    var drawCount=0;
+    $(document).ready(function() {   	
     	var anOpen = [];
     	var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.0/examples/examples_support/')}";
     	
@@ -152,23 +153,23 @@
       			return nRow;
       			
     		},
-    		"fnDrawCallback": function( oSettings ) {    			
+			"sPaginationType": "full_numbers",
+			"iDisplayLength": 5,
+			"aLengthMenu": [[5,10, 25, 50, 100, -1], [5,10, 25, 50, 100, "All"]],
+			"oLanguage": {
+					 "sSearch": "Filter records:"
+			 },
+			"aaSorting": [[ 6, "desc" ]],
+			"sDom": 'T<"clear">lfrtip',
+			"oTableTools": {
+				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+			},    		
+			"fnDrawCallback": function( oSettings ) {    			
     			if (drawCount>0){
     				//alert('redrawHits');
     				drawAnno();
     			}
   			},
-			"sPaginationType": "full_numbers",
-				"iDisplayLength": 5,
-				"aLengthMenu": [[5,10, 25, 50, 100, -1], [5,10, 25, 50, 100, "All"]],
-				"oLanguage": {
-						 "sSearch": "Filter records:"
-				 },
-				"aaSorting": [[ 6, "desc" ]],
-				"sDom": 'T<"clear">lfrtip',
-				"oTableTools": {
-				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
-				}
 		} );
 		
 	   
@@ -288,7 +289,7 @@
 				},
 				{ "mDataProp": "exon_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"/home/browse?contig_id="+oObj.aData["contig_id"]+"&start="+oObj.aData["start"]+"&stop="+oObj.aData["stop"]+"\">"+sVal+"</a>";
+					return "<a href=\"/home/browse?link=${gbrowse}&contig_id="+oObj.aData["contig_id"]+"&start="+oObj.aData["start"]+"&stop="+oObj.aData["stop"]+"\">"+sVal+"</a>";
 				}},
 				{ "mDataProp": "exon_number" },
 				{ "mDataProp": "length" },
@@ -390,8 +391,7 @@
     if (blast_data.length > 0 || fun_data.length > 0 || ipr_data.length > 0 ){
      			//draw the figure
      			drawAnno(); 
-     		}
-        
+     		} 
     });
     
     
@@ -401,6 +401,7 @@
   </head>
   <body>
   <g:if test="${info_results}">
+  	<div id="top_anchor"></div>
     <div id="info_anchor"><h1>Information for transcript ${info_results.mrna_id[0]}:</h1></div>
     <table width=100%>
       <tr><td width=40%>
@@ -445,6 +446,7 @@
 		<div class="mid" role="contentinfo">
 			<div class="nav_float">
 			<ul>
+			   <li><a href="#" onclick="$.scrollTo('#top_anchor', 800, {offset : -50});">Top</a></li>
 			   <li><a href="#" onclick="$.scrollTo('#info_anchor', 800, {offset : -50});">Info</a></li>
 			   <g:if test="${blast_results || ipr_results || fun_results}">
 				   <!--li><a href="#anno_anchor" class="scroll">Annotations</a></li-->
@@ -693,16 +695,13 @@
 					 var stringy = String(name);
 					 var idPattern = hit.anno_id
 					 if (AnnoData[hit.anno_db]){
-						var regex = new RegExp(AnnoData[hit.anno_db][1]);
+						var regex = new RegExp(AnnoData[hit.anno_db][0]);
 						idPattern = idPattern.replace(regex,"$1")
-					 }
+					 }					 
 					 //catch the interpro hits
 					 idPattern = idPattern.replace(/(^IPR\d+).*/,"$1");
-					 //alert('stringy = '+stringy+' idPattern = '+idPattern)
-					 //var idPattern = hit.anno_id.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-					 //ignore duplicate IDs
-					 //if (stringy.match(idPattern) && matched.indexOf(idPattern) < 0){
 					 if (stringy.match(idPattern)){
+					 	 //alert('stringy = '+stringy+' and idPattern = '+idPattern)
 						 start = parseFloat(hit.anno_start)
 						 stop = parseFloat(hit.anno_stop)
 						 if (start > stop){

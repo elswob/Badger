@@ -506,25 +506,7 @@ class SearchController {
      	}else{
 			def sql = new Sql(dataSource)
 			def mrna_id = params.id
-			def blastDBs = "anno_db = "
-			if (grailsApplication.config.g.blast.size()>0){
-				for(item in grailsApplication.config.g.blast){
-				item = item.toString()
-					def splitter = item.split("=",2)
-					blastDBs += "'"+splitter[0]+"' or anno_db = "
-				}
-				blastDBs = blastDBs[0..-15]
-			}
 			
-			def funDBs = "anno_db = "
-			if (grailsApplication.config.g.fun.size()>0){
-				for(item in grailsApplication.config.g.fun){
-				item = item.toString()
-					def splitter = item.split("=",2)
-					funDBs += "'"+splitter[0]+"' or anno_db = "
-				}
-				funDBs = funDBs[0..-15]
-			}
 			def blast_results
 			def fun_results
 			def ipr_results
@@ -543,8 +525,9 @@ class SearchController {
 				fun_results = sql.rows(funsql)
 			}
 			//get exon info
-			def exonsql = "select *,length(exon_info.sequence) as length from exon_info,gene_info where exon_info.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by exon_number;"
+			def exonsql = "select contig_id,exon_info.*,length(exon_info.sequence) as length from exon_info,gene_info where exon_info.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by exon_number;"
 			def exon_results = sql.rows(exonsql)
+			println exonsql
 			
 			def fsql = "select file_id from gene_info where mrna_id = '"+mrna_id+"';";
 			println fsql

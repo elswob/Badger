@@ -147,9 +147,10 @@ class FileDownloadController {
     }
     
     def zip_download = {
-    	if (new File('data/'+params.fileName).exists()){
-    		def fileOut = new File('data/'+params.fileName)
-			response.setHeader "Content-disposition", "attachment; filename="+params.fileName
+    	def f = FileData.findByFile_name(params.fileName)
+    	if (new File("data/"+f.file_dir+"/"+f.file_name).exists()){
+    		def fileOut = new File("data/"+f.file_dir+"/"+f.file_name+".zip")
+			response.setHeader "Content-disposition", "attachment; filename="+f.file_name+".zip"
 			response.contentType = 'application/zip'
 			response.outputStream << fileOut.newInputStream()
 			response.outputStream.flush()

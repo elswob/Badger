@@ -32,13 +32,13 @@ class BlastController {
         //check if a file has been uploaded
         def upload = request.getFile('myFile')
 		if (!upload.empty) {
-				println "Uploaded file for BLAST"
-				println "Class: ${upload.class}"
-				println "Name: ${upload.name}"
-				println "OriginalFileName: ${upload.originalFilename}"
-				println "Size: ${upload.size}"
-				println "ContentType: ${upload.contentType}"
-				blastSeq = upload.inputStream.text
+			println "Uploaded file for BLAST"
+			println "Class: ${upload.class}"
+			println "Name: ${upload.name}"
+			println "OriginalFileName: ${upload.originalFilename}"
+			println "Size: ${upload.size}"
+			println "ContentType: ${upload.contentType}"
+			blastSeq = upload.inputStream.text
 		}
         //blastSeq = params.blastId
         def numDesc = params.DESCRIPTIONS
@@ -91,7 +91,6 @@ class BlastController {
 				f.write(blastSeq)
 				def BlastOutFile = new File(blastJobId+".out")       
 				println "running BLAST"
-				//outFmt="\"7 sseqid ssac qstart qend sstart send qseq evalue bitscore\""
 				def comm = "$program -db $db -outfmt $outFmt -num_threads 1 -query $blastJobId -evalue $eval -num_descriptions $numDesc -num_alignments $numAlign -out $BlastOutFile $unGap"
 				println "blast command = "+comm
 				def p = comm.execute()   
@@ -111,7 +110,7 @@ class BlastController {
 				//check output file has something in it
 				println "outfile size = "+BlastOutFile.length()
 				if (BlastOutFile.length() > 0){
-					//check which format the BLAST is
+					//check for tab format
 					if (outFmt == '6'){
 						def blastOut = new File("$BlastOutFile").text
 						//split blast result by new lines
@@ -141,7 +140,7 @@ class BlastController {
 						def sortedHitInfo = hitInfo.sort{it.score as double}.reverse()
 						def jsonData = sortedHitInfo.encodeAsJSON();
 						return[blast_file: params.datalib, blast_result: blastRes, term: blastName, command: comm, blastId: blastJobId, hitData: sortedHitInfo, queryInfo: queryInfo, jsonData: jsonData]
-							
+					//check for full format		
 					}else if (outFmt == '0'){              
 						def blastOut = new File("$BlastOutFile").text
 						 //split blast result by new lines
@@ -150,7 +149,6 @@ class BlastController {
 							if ((matcher = it =~ /^\s{2}(.*?)(\s+.*?\s{4}(\d{1}[e\.].*?)$)/)){
 								def linker_rep = matcher[0][1].replaceAll(/\.|-|\||:/, "")
 								def linker = matcher[0][1]
-								//it = "<a href=\"#$linker\">$linker</a>"+"  "+matcher[0][2]
 								it = "<a href=\"#\" onclick=\"\$.scrollTo('#$linker_rep', 800, {offset : -10});\">$linker</a>"+"  "+matcher[0][2]
 							}
 							//get the query length
@@ -163,7 +161,8 @@ class BlastController {
 								//add name attribute to alignment for anchor
 								def linker = matcher[0][1].replaceAll(/\.|-/, "") 								                     
 								//create internal links
-								if (fileInfo.file_type == 'Peptide' || 'Genes' || 'mRNA'){
+								println "file type = "+fileInfo.file_type
+								if (fileInfo.file_type == 'Peptide' || fileInfo.file_type == 'Genes' || fileInfo.file_type == 'mRNA'){
 									it = "><a href=\"/search/m_info?id="+matcher[0][1]+"\">"+matcher[0][1]+"</a>"
 								}else if (fileInfo.file_type == 'Genome'){
 									it = "><a href=\"/search/genome_info?contig_id="+matcher[0][1]+"\">"+matcher[0][1]+"</a>"
@@ -231,5 +230,4 @@ class BlastController {
 				}
             }
     }
-    def test = {}
 }

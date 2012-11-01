@@ -34,6 +34,10 @@ def cleanUpGorm() {
 def getFiles = FileData.findAll(sort:"id")
 getFiles.each {  	
 	def fileLoc = it.file_dir+"/"+it.file_name
+	println "Processing "+fileLoc
+    println "Zipping up for download..."
+	def ant = new AntBuilder()
+	ant.zip(destfile: "data/"+it.file_dir+"/"+it.file_name+".zip", basedir: "data/"+it.file_dir, includes: it.file_name)
 	if (it.file_type == "Genome"){
 		addGenomeData(fileLoc, it.cov, it.file_name)
 	}else if (it.file_type == "Transcriptome"){
