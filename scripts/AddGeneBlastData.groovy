@@ -20,11 +20,14 @@ a.each{
 	def blastFile = new File("data/"+fileLoc).text
 	println "anno.source = "+anno.source
 	println "fileLoc = "+fileLoc
-	addGeneBlast(anno.source,blastFile,anno.anno_file)
+	if (b.file_dir != "A_viteae"){
+		addGeneBlast(anno.source,blastFile,anno.anno_file)
+	}
 }
 
 //add Unigene annotations
 def addGeneBlast(db,blastFile,annoFile){
+	cleanUpGorm()
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
   	//println "Deleting old data..."

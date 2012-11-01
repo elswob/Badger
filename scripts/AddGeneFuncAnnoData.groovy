@@ -39,6 +39,7 @@ a.each{
 }
 
 def addFunc(source,file,annoFile){
+	cleanUpGorm()
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
   	//println "Deleting old data..."
@@ -79,6 +80,7 @@ def addFunc(source,file,annoFile){
 
 // add the interposcan raw data 
 def addInterProScan(file,annoFile){
+	cleanUpGorm()
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
   	//println "Deleting old data..."

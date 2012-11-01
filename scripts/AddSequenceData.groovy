@@ -31,31 +31,51 @@ def cleanUpGorm() {
     propertyInstanceMap.get().clear() 
 }
 
+def getBlast(){
+	def program = grailsApplication.config.blastPath
+	return program
+}
+
 def getFiles = FileData.findAll(sort:"id")
-getFiles.each {  	
+getFiles.each { 
+  	def blastPath = getBlast()
 	def fileLoc = it.file_dir+"/"+it.file_name
 	println "Processing "+fileLoc
-    println "Zipping up for download..."
-	def ant = new AntBuilder()
-	ant.zip(destfile: "data/"+it.file_dir+"/"+it.file_name+".zip", basedir: "data/"+it.file_dir, includes: it.file_name)
-	if (it.file_type == "Genome"){
+ 	if (it.file_type == "Genome"){
+		println "Creating BLAST database..."
+		def comm = "$blastPath/makeblastdb -in data/"+fileLoc+" -dbtype nucl -out data/"+fileLoc
+		println "blast database command = "+comm
+		def p = comm.execute()   
 		addGenomeData(fileLoc, it.cov, it.file_name)
 	}else if (it.file_type == "Transcriptome"){
-		//addTransData(fileLoc, it.cov, it.id)
+		println "Creating BLAST database..."
+		def comm = "$blastPath/makeblastdb -in data/"+fileLoc+" -dbtype nucl -out data/"+fileLoc
+		println "blast database command = "+comm
+		def p = comm.execute()  
+		addTransData(fileLoc, it.cov, it.id)
 	}else if (it.file_type == "Genes"){
       	def getSeqs = FileData.findAllByFile_link(it.file_name)
       	def nuc
       	def pep
       	getSeqs.each{
           	if (it.file_type == "mRNA"){
-              nuc = it.file_dir+"/"+it.file_name
+          		nuc = it.file_dir+"/"+it.file_name
+          	  	println "Creating BLAST database..."
+				def comm = "$blastPath/makeblastdb -in data/"+nuc+" -dbtype nucl -out data/"+nuc
+				println "blast database command = "+comm
+				def p = comm.execute()               
             }else if (it.file_type == "Peptide"){
-              pep = it.file_dir+"/"+it.file_name
+              	pep = it.file_dir+"/"+it.file_name
+                println "Creating BLAST database..."
+				def comm = "$blastPath/makeblastdb -in data/"+pep+" -dbtype prot -out data/"+pep
+				println "blast database command = "+comm
+				def p = comm.execute() 
             }
       	}
 		addGeneData(fileLoc, it.file_name, nuc, pep)
 	}
 }
+
 //add the Transcripts
 def addTransData(fileLoc, cov, data_id, file_id){
 	println "Adding transcript data - "+fileLoc
