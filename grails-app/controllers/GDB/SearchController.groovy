@@ -500,7 +500,7 @@ class SearchController {
 		}
       }
     
-    def gene_info = {
+    def m_info = {
     	if (grailsApplication.config.i.links.genes == 'private' && !isLoggedIn()) {
      		redirect(controller: "home", action: "index")
      	}else{

@@ -612,11 +612,11 @@
 		 <tbody></tbody>
 	     </table> 
      <br>
-	<g:if test="${blast_results}" || test="${ipr_results}" || test="${fun_results}">
+	<g:if test="${blast_results || ipr_results || fun_results}">
 	</g:if>
 	<g:else>
 	  	<hr size = 5 color="green" width="100%" style="margin-top:10px">
-		<h1>There are no annotations for this gene</h1>
+		<h1>There are no annotations for this transcript</h1>
 	</g:else>
   </g:if>
   <g:else>

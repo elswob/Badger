@@ -83,7 +83,7 @@
         "aoColumns": [
           	{ "mDataProp": "gene_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"gene_info?gene_id="+oObj.aData["gene_id"]+ "\">"+sVal+"</a>";
+					return "<a href=\"m_info?gene_id="+oObj.aData["gene_id"]+ "\">"+sVal+"</a>";
 			}},
             { "mDataProp": "gc"},
             { "mDataProp": "lpep"},
@@ -115,7 +115,7 @@
 				},
 				{ "mDataProp": "gene_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"gene_info?gene_id="+oObj.aData["gene_id"]+ "\">"+sVal+"</a>";
+					return "<a href=\"m_info?gene_id="+oObj.aData["gene_id"]+ "\">"+sVal+"</a>";
 				}},
 				{ "mDataProp": "anno_db" },
 				{ "mDataProp": "anno_id",
@@ -192,7 +192,7 @@
         "aoColumns": [
           	{ "mDataProp": "gene_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"gene_info?gene_id="+oObj.aData["gene_id"]+ "\">"+sVal+"</a>";
+					return "<a href=\"m_info?gene_id="+oObj.aData["gene_id"]+ "\">"+sVal+"</a>";
 			}},
             { "mDataProp": "anno_db" },
             { "mDataProp": "anno_id",
@@ -229,7 +229,7 @@
 			"aoColumns": [
 				{ "mDataProp": "gene_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"gene_info?gene_id="+oObj.aData["gene_id"]+ "\">"+sVal+"</a>";
+					return "<a href=\"m_info?gene_id="+oObj.aData["gene_id"]+ "\">"+sVal+"</a>";
 				}},
 				{ "mDataProp": "anno_db" },
 				{ "mDataProp": "anno_id" ,

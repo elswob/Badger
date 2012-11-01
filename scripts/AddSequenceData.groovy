@@ -231,7 +231,7 @@ def addGeneData(fileLoc, file_name, trans, pep){
 	nucFile.split("\n").each{
 		if ((matcher = it =~ /^>(.*)/)){
 			if (sequence != ""){
-				nucData."${geneId}" = sequence
+				nucData."${geneId}" = sequence.toUpperCase()
 				sequence=""
 			}
 			geneId = matcher[0][1].trim()
@@ -240,7 +240,7 @@ def addGeneData(fileLoc, file_name, trans, pep){
 		}               
 	}
 	//catch the last one
-	nucData."${geneId}" = sequence
+	nucData."${geneId}" = sequence.toUpperCase()
 	
 	println "Reading peptide data - "+pep
 	def pepFile = new File("data/"+pep).text
@@ -248,7 +248,7 @@ def addGeneData(fileLoc, file_name, trans, pep){
 	pepFile.split("\n").each{
 		if ((matcher = it =~ /^>(.*)/)){
 			if (sequence != ""){
-				pepData."${geneId}" = sequence
+				pepData."${geneId}" = sequence.toUpperCase()
 				sequence=""
 			}
 			geneId = matcher[0][1].trim() 
@@ -258,7 +258,7 @@ def addGeneData(fileLoc, file_name, trans, pep){
 		 
 	}
 	//catch the last one
-	pepData."${geneId}" = sequence
+	pepData."${geneId}" = sequence.toUpperCase()
   
 	println "Reading gff file - "+fileLoc
 	println new Date()

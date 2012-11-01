@@ -27,10 +27,10 @@ a.each{
 def addGeneBlast(db,blastFile,annoFile){
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
-  	println "Deleting old data..."
-	def delsql = "delete from gene_blast,gene_info,file_data,anno_data where gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.id = anno_data.filedata_id and anno_data.anno_file = '"+annoFile+"';";
-	println delsql
-	sql.execute(delsql)
+  	//println "Deleting old data..."
+	//def delsql = "delete from gene_blast,gene_info,file_data,anno_data where gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.id = anno_data.filedata_id and anno_data.anno_file = '"+annoFile+"';";
+	//println delsql
+	//sql.execute(delsql)
 	println "Adding new...."
 	println new Date()
     def annoMap = [:]
@@ -119,9 +119,9 @@ def addGeneBlast(db,blastFile,annoFile){
             		if ((count_all % 5000) ==  0){
             			println count_all
             			println new Date()
-            			cleanUpGorm()
-            			//println annoMap
             			gb.save(flush:true)
+            			cleanUpGorm()
+            			//println annoMap         			
             		}else{
             			gb.save()
             		}

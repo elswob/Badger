@@ -87,7 +87,7 @@
 				},
 				{ "mDataProp": "mrna_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"gene_info?id="+oObj.aData["g_id"]+"\">"+sVal+"</a>";				}},
+					return "<a href=\"m_info?id="+oObj.aData["g_id"]+"\">"+sVal+"</a>";				}},
 				{ "mDataProp": "anno_db" },
 				{ "mDataProp": "anno_id",
 				"fnRender": function ( oObj, sVal ){
@@ -162,7 +162,7 @@
         "aoColumns": [
           	{ "mDataProp": "mrna_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"gene_info?id="+oObj.aData["mrna_id"]+"\">"+sVal+"</a>";
+					return "<a href=\"m_info?id="+oObj.aData["mrna_id"]+"\">"+sVal+"</a>";
 			}},
             { "mDataProp": "anno_db" },
             { "mDataProp": "anno_id",
@@ -198,7 +198,7 @@
 			"aoColumns": [
 				{ "mDataProp": "mrna_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"gene_info?id="+oObj.aData["mrna_id"]+"\">"+sVal+"</a>";
+					return "<a href=\"m_info?id="+oObj.aData["mrna_id"]+"\">"+sVal+"</a>";
 				}},
 				{ "mDataProp": "anno_db" },
 				{ "mDataProp": "anno_id" ,

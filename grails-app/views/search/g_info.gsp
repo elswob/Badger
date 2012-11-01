@@ -115,7 +115,7 @@
 			  <tbody>
 			 	<g:each var="res" in="${results}">
 			 		<tr>
-						<td><a href="gene_info?id=${res.mrna_id}">${res.mrna_id}</a></td>
+						<td><a href="m_info?id=${res.mrna_id}">${res.mrna_id}</a></td>
 						<td>${res.nuc.length()}</td>
 						<td>${res.start}</td>
 						<td>${res.stop}</td>
