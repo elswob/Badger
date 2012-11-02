@@ -15,12 +15,15 @@ def cleanUpGorm() {
 def a = AnnoData.findAllByType('fun')
 a.each{
 	AnnoData anno = it
+  	if (!anno.isAttached()) {
+   	 anno.attach()
+	}
 	//get FileData parent of AnnoData object
 	def b = anno.filedata
 	def fileLoc = b.file_dir+"/"+anno.anno_file
 	def annoFile = new File("data/"+fileLoc).text
-	println "anno.source = "+anno.source
-	println "fileLoc = "+fileLoc
+	println "Source = "+anno.source
+	println "File = "+fileLoc
 	//println "type = "+a.type
 	addFunc(anno.source,annoFile,anno.anno_file)
 }
@@ -28,18 +31,20 @@ a.each{
 a = AnnoData.findAllByType('ipr')
 a.each{
 	AnnoData anno = it
+  	if (!anno.isAttached()) {
+   	 anno.attach()
+	}
 	//get FileData parent of AnnoData object
 	def b = anno.filedata
 	def fileLoc = b.file_dir+"/"+anno.anno_file
 	def annoFile = new File("data/"+fileLoc).text
-	println "anno.source = "+anno.source
-	println "fileLoc = "+fileLoc
+	println "Source = "+anno.source
+	println "File = "+fileLoc
 	//println "type = "+a.type
 	addInterProScan(annoFile,anno.anno_file)
 }
 
 def addFunc(source,file,annoFile){
-	cleanUpGorm()
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
   	//println "Deleting old data..."

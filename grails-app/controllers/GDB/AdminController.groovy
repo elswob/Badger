@@ -115,10 +115,6 @@ class AdminController {
 	}
 	
 	@Secured(['ROLE_ADMIN'])
-	def addSpecies = {
-	}
-	
-	@Secured(['ROLE_ADMIN'])
 	def addedData = {
 		def dataMap = [:]		
 
@@ -186,7 +182,6 @@ class AdminController {
 				fileMap.file_type = "Genes"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.genes.trim()
-				fileMap.blast = params.blast_genes
 				fileMap.search = params.search_genes
 				fileMap.download = params.down_genes
 				fileMap.file_version = params.genes_v.trim()
@@ -205,9 +200,8 @@ class AdminController {
 				fileMap.file_type = "mRNA"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.mrna_trans.trim()
-				fileMap.blast = params.blast_genes
-				fileMap.search = params.search_genes
-				fileMap.download = params.down_genes
+				fileMap.blast = params.blast_mrna
+				fileMap.download = params.down_mrna
 				fileMap.file_version = params.mrna_trans_v.trim()
 				fileMap.description = params.mrna_trans_d.trim()
 				fileMap.file_link = params.genes.trim()
@@ -224,9 +218,8 @@ class AdminController {
 				fileMap.file_type = "Peptide"
 				fileMap.file_dir = params.dir.trim()
 				fileMap.file_name = params.mrna_pep.trim()
-				fileMap.blast = params.blast_genes
-				fileMap.search = params.search_genes
-				fileMap.download = params.down_genes
+				fileMap.blast = params.blast_pep
+				fileMap.download = params.down_pep
 				fileMap.file_version = params.mrna_pep_v.trim()
 				fileMap.description = params.mrna_pep_d.trim()
 				fileMap.file_link = params.genes.trim()
@@ -329,16 +322,113 @@ class AdminController {
 	}
 	
 	@Secured(['ROLE_ADMIN'])
-	def deleteSpecies = {
-		println "Deleting "+params.titleString
-		def newsData = News.findAllByTitleString(params.titleString)
-	 	return [newsData: newsData] 
+	def editAnno = {
+		def annoData = AnnoData.findById(params.id)
+		return [annoData: annoData]	 
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def editedAnno = {
+		def sql = new Sql(dataSource)
+		def upsql 
+		if (params.b_anno_file){
+			upsql = "update anno_data set anno_file = '"+params.b_anno_file.trim()+"', source = '"+params.b_source.trim()+"', link = '"+params.b_link.trim()+"', regex = '"+params.b_regex.trim()+"' where id = '"+params.id+"';";		
+		}else if (params.f_anno_file){
+			upsql = "update anno_data set anno_file = '"+params.f_anno_file.trim()+"', source = '"+params.f_source.trim()+"', link = '"+params.f_link.trim()+"', regex = '"+params.f_regex.trim()+"' where id = '"+params.id+"';";
+		}else if (params.i_anno_file){
+			upsql = "update anno_data set anno_file = '"+params.i_anno_file.trim()+"' where id = '"+params.id+"';";
+		}
+		
+		println "upsql = "+upsql
+		def update = sql.execute(upsql)
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def deleteAnno = {
+		def annoData = AnnoData.findById(params.id)
+		return [annoData: annoData]	
 	}
 	@Secured(['ROLE_ADMIN'])
-	def deletedSpecies = {
-		def newsData = News.findAllByTitleString(params.newsTitle)
-	 	def delData = News.get(newsData.id[0])
-	 	delData.delete(flush: true)
-	 	println "Deleted "+params.newsTitle
+	def deletedAnno = {
+		def annoData = AnnoData.findById(params.id)
+		def source = annoData.source
+		def file = annoData.anno_file
+		println "Deleting "+source+" "+file		
+		//runAsync {
+	 		annoData.delete()
+	 	//}
+	 	return [source:source, file:file]
+	 	
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def editData = {
+		def metaData = MetaData.findById(params.id)
+		return [metaData: metaData]	 
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def editedData = {
+		def sql = new Sql(dataSource)
+		def upsql = "update meta_data set genus = '"+params.genus.trim()+"', species = '"+params.species.trim()+"', description = '"+params.description.trim()+"', image_file = '"+params.image_f.trim()+"', image_source = '"+params.image_s.trim()+"', gbrowse = '"+params.gbrowse.trim()+"' where id = '"+params.id+"';";
+		println "upsql = "+upsql
+		def update = sql.execute(upsql)
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def deleteData = {
+		def metaData = MetaData.findById(params.id)
+		return [metaData: metaData]	
+	}
+	@Secured(['ROLE_ADMIN'])
+	def deletedData = {
+		def metaData = MetaData.findById(params.id)
+		def genus = metaData.genus
+		def species = metaData.species
+		println "Deleting "+genus+" "+species		
+		//runAsync {
+	 		metaData.delete()
+	 	//}
+	 	return [genus:genus, species:species]
+	 	
+	}
+	@Secured(['ROLE_ADMIN'])
+	def editFile = {
+		def fileData = FileData.findById(params.id)
+		return [fileData: fileData]	 
+	}
+	@Secured(['ROLE_ADMIN'])
+	def editedFile = {
+		def sql = new Sql(dataSource)
+		def upsql
+		if (params.trans){
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.trans.trim()+"', blast = '"+params.blast_trans+"', search = '"+params.search_trans+"', download = '"+params.down_trans+"', file_version = '"+params.trans_v.trim()+"', description = '"+params.trans_d.trim()+"', cov = '"+params.trans_c.trim()+"' where id = '"+params.id+"';";
+		}else if (params.genome){
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.genome.trim()+"', blast = '"+params.blast_genome+"', search = '"+params.search_genome+"', download = '"+params.down_genome+"', file_version = '"+params.genome_v.trim()+"', description = '"+params.genome_d.trim()+"', cov = '"+params.genome_c.trim()+"' where id = '"+params.id+"';";
+		}else if (params.genes){
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.genes.trim()+"', search = '"+params.search_genes+"', download = '"+params.down_genes+"', file_version = '"+params.genes_v.trim()+"', description = '"+params.genes_d.trim()+"' where id = '"+params.id+"';";
+		}else if (params.mrna_trans){
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.mrna_trans.trim()+"', blast = '"+params.blast_mrna+"', download = '"+params.down_mrna+"', file_version = '"+params.mrna_trans_v.trim()+"', description = '"+params.mrna_trans_d.trim()+"' where id = '"+params.id+"';";		
+		}else if (params.mrna_pep){
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.mrna_pep.trim()+"', blast = '"+params.blast_pep+"', download = '"+params.down_pep+"', file_version = '"+params.mrna_pep_v.trim()+"', description = '"+params.mrna_pep_d.trim()+"' where id = '"+params.id+"';";				
+		}
+		println "upsql = "+upsql
+		def update = sql.execute(upsql)
+	}
+	@Secured(['ROLE_ADMIN'])
+	def deleteFile = {
+		def fileData = FileData.findById(params.id)
+		return [fileData: fileData]	 	
+	}
+	@Secured(['ROLE_ADMIN'])
+	def deletedFile = {
+		def fileData = FileData.findById(params.id)
+		def dir = fileData.file_dir
+		def name = fileData.file_name
+		println "Deleting "+dir+"/"+name
+		//runAsync {
+	 		fileData.delete()
+	 	//}
+	 	return [dir:dir,name:name]
 	}
 }

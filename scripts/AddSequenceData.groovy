@@ -6,22 +6,6 @@ def grailsApplication
 def dataSource = ctx.getBean("dataSource")
 def sql = new Sql(dataSource)
 
-
-def getPep(seq, int frame){
-	def trans = [ ATT:'I',ATC:'I',ATA:'I',CTT:'L',CTC:'L',CTA:'L',CTG:'L',TTA:'L',TTG:'L',GTT:'V',GTC:'V',GTA:'V',GTG:'V',TTT:'F',TTC:'F',ATG:'M',TGT:'C',TGC:'C',GCT:'A',GCC:'A',GCA:'A',GCG:'A',GGT:'G',GGC:'G',GGA:'G',GGG:'G',CCT:'P',CCC:'P',CCA:'P',CCG:'P',ACT:'T',ACC:'T',ACA:'T',ACG:'T',TCT:'S',TCC:'S',TCA:'S',TCG:'S',AGT:'S',AGC:'S',TAT:'Y',TAC:'Y',TGG:'W',CAA:'Q',CAG:'Q',AAT:'N',AAC:'N',CAT:'H',CAC:'H',GAA:'E',GAG:'E',GAT:'D',GAC:'D',AAA:'K',AAG:'K',CGT:'R',CGC:'R',CGA:'R',CGG:'R',AGA:'R',AGG:'R',TAA:'.',TAG:'.',TGA:'.' ];
-	//def trans = [ ATT:'I',ATC:'I',ATA:'I',CTT:'L',CTC:'L',CTA:'L',CTG:'L',TTA:'L',TTG:'L',GTT:'V',GTC:'V',GTA:'V',GTG:'V',TTT:'F',TTC:'F',ATG:'M',TGT:'C',TGC:'C',GCT:'A',GCC:'A',GCA:'A',GCG:'A',GGT:'G',GGC:'G',GGA:'G',GGG:'G',CCT:'P',CCC:'P',CCA:'P',CCG:'P',ACT:'T',ACC:'T',ACA:'T',ACG:'T',TCT:'S',TCC:'S',TCA:'S',TCG:'S',AGT:'S',AGC:'S',TAT:'Y',TAC:'Y',TGG:'W',CAA:'Q',CAG:'Q',AAT:'N',AAC:'N',CAT:'H',CAC:'H',GAA:'E',GAG:'E',GAT:'D',GAC:'D',AAA:'K',AAG:'K',CGT:'R',CGC:'R',CGA:'R',CGG:'R',AGA:'R',AGG:'R'];
-  	def pepSeq = ""
-	int i = frame
-	while (i + 2 < (seq.length())){
-		if (trans[seq[i..i+2]]){
-			pepSeq += trans[seq[i..i+2]]
-		}
-		i += 3
-	}
-	return pepSeq
-}
-
-
 def cleanUpGorm() { 
 	def sessionFactory = ctx.getBean("sessionFactory")
 	def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
@@ -37,20 +21,21 @@ def getBlast(){
 }
 
 def getFiles = FileData.findAll(sort:"id")
-getFiles.each { 
-  	def blastPath = getBlast()
+getFiles.each {  
+	def blastPath = getBlast()	
 	def fileLoc = it.file_dir+"/"+it.file_name
 	println "Processing "+fileLoc
- 	if (it.file_type == "Genome"){
+    println "Zipping up for download..."
+	def ant = new AntBuilder()
+	ant.zip(destfile: "data/"+it.file_dir+"/"+it.file_name+".zip", basedir: "data/"+it.file_dir, includes: it.file_name)
+	if (it.file_type == "Genome"){
 		println "Creating BLAST database..."
 		def comm = "$blastPath/makeblastdb -in data/"+fileLoc+" -dbtype nucl -out data/"+fileLoc
-		println "blast database command = "+comm
 		def p = comm.execute()   
 		addGenomeData(fileLoc, it.cov, it.file_name)
 	}else if (it.file_type == "Transcriptome"){
 		println "Creating BLAST database..."
 		def comm = "$blastPath/makeblastdb -in data/"+fileLoc+" -dbtype nucl -out data/"+fileLoc
-		println "blast database command = "+comm
 		def p = comm.execute()  
 		addTransData(fileLoc, it.cov, it.id)
 	}else if (it.file_type == "Genes"){
@@ -62,20 +47,17 @@ getFiles.each {
           		nuc = it.file_dir+"/"+it.file_name
           	  	println "Creating BLAST database..."
 				def comm = "$blastPath/makeblastdb -in data/"+nuc+" -dbtype nucl -out data/"+nuc
-				println "blast database command = "+comm
 				def p = comm.execute()               
             }else if (it.file_type == "Peptide"){
               	pep = it.file_dir+"/"+it.file_name
                 println "Creating BLAST database..."
 				def comm = "$blastPath/makeblastdb -in data/"+pep+" -dbtype prot -out data/"+pep
-				println "blast database command = "+comm
 				def p = comm.execute() 
             }
       	}
 		addGeneData(fileLoc, it.file_name, nuc, pep)
 	}
 }
-
 //add the Transcripts
 def addTransData(fileLoc, cov, data_id, file_id){
 	println "Adding transcript data - "+fileLoc
@@ -379,7 +361,7 @@ def addGeneData(fileLoc, file_name, trans, pep){
 				gene_count++
 				if ((gene_count % 1000) ==  0){
 					println gene_count
-					println new Date()
+					//println new Date()
 				}
 				if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
 					mrna_id = matcher[0][1]

@@ -80,10 +80,10 @@
 <g:if test = "${metaData}">	
 	<g:each var="res" in="${metaData}">
 		<div class="inline">	    
-	    	<g:form action="addAnno" controller="admin" params="[species: res.species]" >
+	    	<g:form action="editData" controller="admin" params="[id: res.id]" >
 	    		<a href="#" onclick="parentNode.submit()" title="Edit data"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
 	    	</g:form>  	
-	    	<g:form action="deleteSpecies" controller="admin" params="[species: res.species]" >
+	    	<g:form action="deleteData" controller="admin" params="[id: res.id]" >
 	    		<a href="#" onclick="parentNode.submit()" title="Delete data"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
 	    	</g:form> 	
 	    	${res.genus} ${res.species}
@@ -114,86 +114,86 @@
 		<span class="help-inline">${hasErrors(bean: mete_data, field: 'genus', 'error')}</span>
 	</div>
 	</div>
-	<p>Species<font color="red">*</font></p>
+	<p><b>Species</b><font color="red">*</font></p>
 	<g:textField name="species" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
-	<p>Description<font color="red">*</font></p>
+	<p><b>Description</b><font color="red">*</font></p>
 	<g:textArea name="description" style="width: 80%; height: 50px; border: 3px solid #cccccc; padding: 2px;"/><br>	
-	<p>GBrowse link</p>
+	<p><b>GBrowse link</b></p>
 	<g:textField name="gbrowse" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
-	<p>Image file</p>
+	<p><b>Image file</b></p>
 	<g:textField name="image_f" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
-	<p>Image source</p>
+	<p><b>Image source</b></p>
 	<g:textField name="image_s" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 	
 	<h2><b>Data files</b></h2>	
-	<p>Location (directory within data folder)<font color="red">*</font></p>
+	<p><b>Location (directory within data folder)</b><font color="red">*</font></p>
 	<g:textField name="dir" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<table width=100%>
 		<tr>
-			<td width="40%">Transcriptome (FASTA file)<br>
+			<td width="40%"><b>Transcriptome (FASTA file)</b><br>
 				<g:textField name="trans" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
-			<td width="10%">Version<br>
+			<td width="10%"><b>Version</b><br>
 				<g:textField name="trans_v" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
-			<td>Coverage<br>
+			<td><b>Coverage</b><br>
 				<select name="trans_c">
 					<option selected="selected" value="n">No</option>
 					<option value="y">Yes</option>
 				</select>
 			</td>
-			<td width="45%">Description<br>
+			<td width="45%"><b>Description</b><br>
 				<g:textField name="trans_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
 		</tr>
 		<tr>
-			<td width="40%">Genome (FASTA file)<font color="red">*</font><br>
+			<td width="40%"><b>Genome (FASTA file)</b><font color="red">*</font><br>
 				<g:textField name="genome" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
-			<td width="10%">Version<font color="red">*</font><br>
+			<td width="10%"><b>Version</b><font color="red">*</font><br>
 				<g:textField name="genome_v" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
-			<td>Coverage<br>
+			<td><b>Coverage</b><br>
 				<select name="genome_c">
 					<option selected="selected" value="n">No</option>
 					<option value="y">Yes</option>				
 				</select>
 			</td>
-			<td>Description<font color="red">*</font><br>
+			<td><b>Description</b><font color="red">*</font><br>
 				<g:textField name="genome_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
 		</tr>
 		<tr>
-			<td width="40%">Genes (GFF3 file)<font color="red">*</font><br>
+			<td width="40%"><b>Genes (GFF3 file)</b><font color="red">*</font><br>
 				<g:textField name="genes" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
-			<td width="10%">Version<font color="red">*</font><br>
+			<td width="10%"><b>Version</b><font color="red">*</font><br>
 				<g:textField name="genes_v" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
-			<td colspan=2>Description<font color="red">*</font><br>
+			<td colspan=2><b>Description</b><font color="red">*</font><br>
 				<g:textField name="genes_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
 		</tr>
 		<tr>
-			<td width="40%">mRNA transcripts (FASTA file)<font color="red">*</font><br>
+			<td width="40%"><b>mRNA transcripts (FASTA file)</b><font color="red">*</font><br>
 				<g:textField name="mrna_trans" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
-			<td width="10%">Version<font color="red">*</font><br>
+			<td width="10%"><b>Version</b><font color="red">*</font><br>
 				<g:textField name="mrna_trans_v" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
-			<td colspan=2>Description<font color="red">*</font><br>
+			<td colspan=2><b>Description</b><font color="red">*</font><br>
 				<g:textField name="mrna_trans_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
 		</tr>
 		<tr>
-			<td width="40%">Peptide sequences (FASTA file)<font color="red">*</font><br>
+			<td width="40%"><b>Peptide sequences (FASTA file)</b><font color="red">*</font><br>
 				<g:textField name="mrna_pep" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
-			<td width="10%">Version<font color="red">*</font><br>
+			<td width="10%"><b>Version</b><font color="red">*</font><br>
 				<g:textField name="mrna_pep_v" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
-			<td colspan=2>Description<font color="red">*</font><br>
+			<td colspan=2><b>Description</b><font color="red">*</font><br>
 				<g:textField name="mrna_pep_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
 		</tr>
@@ -236,11 +236,30 @@
 		<option value="pub">Public</option>
 		<option value="priv">Private</option>
 	</select></td>	
-	<td><select name="blast_genes">
+	<td></td>	
+	<td><select name="down_genes">
+		<option value="pub">Public</option>
+		<option value="priv">Private</option>
+	</select></td></tr>	
+	
+	<tr><td><b>mRNA</b></td>
+	<td></td>
+	<td><select name="blast_mrna">
 		<option value="pub">Public</option>
 		<option value="priv">Private</option>
 	</select></td>	
-	<td><select name="down_genes">
+	<td><select name="down_mrna">
+		<option value="pub">Public</option>
+		<option value="priv">Private</option>
+	</select></td></tr>	
+	
+	<tr><td><b>Peptide</b></td>
+		<td></td>
+	<td><select name="blast_pep">
+		<option value="pub">Public</option>
+		<option value="priv">Private</option>
+	</select></td>
+	<td><select name="down_pep">
 		<option value="pub">Public</option>
 		<option value="priv">Private</option>
 	</select></td></tr>	

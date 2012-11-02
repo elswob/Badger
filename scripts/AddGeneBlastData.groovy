@@ -14,20 +14,22 @@ def cleanUpGorm() {
 def a = AnnoData.findAllByType('blast')
 a.each{
 	AnnoData anno = it
+  	if (!anno.isAttached()) {
+   	 anno.attach()
+	}
 	//get FileData parent of AnnoData object
 	def b = anno.filedata
 	def fileLoc = b.file_dir+"/"+anno.anno_file
 	def blastFile = new File("data/"+fileLoc).text
-	println "anno.source = "+anno.source
-	println "fileLoc = "+fileLoc
-	if (b.file_dir != "A_viteae"){
+	println "Source = "+anno.source
+	println "File location = "+fileLoc
+	//if (b.file_dir != "A_viteae"){
 		addGeneBlast(anno.source,blastFile,anno.anno_file)
-	}
+	//}
 }
 
 //add Unigene annotations
 def addGeneBlast(db,blastFile,annoFile){
-	cleanUpGorm()
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
   	//println "Deleting old data..."
@@ -119,7 +121,7 @@ def addGeneBlast(db,blastFile,annoFile){
             		GeneBlast gb = new GeneBlast(annoMap)
 					geneFind.addToGblast(gb)
 					
-            		if ((count_all % 5000) ==  0){
+            		if ((count_all % 10000) ==  0){
             			println count_all
             			println new Date()
             			gb.save(flush:true)
