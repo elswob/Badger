@@ -9,7 +9,8 @@
   </head>
 
   <body>
-   
+  <g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editData" params="${[id:fileData.meta.id]}">Edit data set</g:link> > Edit file
+  
 <h1>Edit data file:</h1>
 
 <g:form action="editedFile" controller="admin">
@@ -169,28 +170,27 @@
 <input type = "hidden" name="id" value="${fileData.id}">	
 <input class="mybuttons" type="button" value="Update data file" onclick="submit()" >
 
-<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
-
-
-<h1>Edit / delete annotation files associated with this data set:</h1>
-
-<table>
-<g:each var="res" in="${fileData}">
-	   <g:each var="f" in="${res.anno}">
-	   <tr><td>
-	   <div class="inline">
-	   		<g:form action= "editAnno" controller="admin" params="[id: f.id]" >
-	    		<a href="#" onclick="parentNode.submit()" title="Edit annotation file"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
-	    	</g:form>  	
-	    	<g:form action="deleteAnno" controller="admin" params="[id: f.id]" >
-	    		<a href="#" onclick="parentNode.submit()" title="Delete annotation file"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
-	    	</g:form> 	
-	    </div>
-      		</td><td>${f.type}:</td><td>${f.source}</td><td>${f.anno_file}</td></tr>
-   	   </g:each>
-</g:each>
-</table>
-
+<g:if test="${fileData.file_type == 'Genes'}">
+	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
+	<h1>Edit / delete annotation files associated with this data set:</h1>
+	
+	<table>
+	<g:each var="res" in="${fileData}">
+		   <g:each var="f" in="${res.anno}">
+		   <tr><td>
+		   <div class="inline">
+				<g:form action= "editAnno" controller="admin" params="[id: f.id]" >
+					<a href="#" onclick="parentNode.submit()" title="Edit annotation file"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
+				</g:form>  	
+				<g:form action="deleteAnno" controller="admin" params="[id: f.id]" >
+					<a href="#" onclick="parentNode.submit()" title="Delete annotation file"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
+				</g:form> 	
+			</div>
+				</td><td>${f.type}:</td><td>${f.source}</td><td>${f.anno_file}</td></tr>
+		   </g:each>
+	</g:each>
+	</table>
+</g:if>
 </g:form>
 </body>
 </html>

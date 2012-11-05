@@ -96,7 +96,7 @@ function fnFormatDetails( oTable, nTr )
   </head>
 
   <body>
-
+<div class="bread"><g:link action="">Home</g:link> > <g:link action="publications">Publications</g:link> > Search results </div>
 <g:if test="${pub_results}">
 <h1>Your search for '<b>${searchId}</b>' returned ${pub_results.size()} publications</h1>
   <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">

@@ -374,7 +374,7 @@
   </head>
 
   <body>
-
+	<div class="bread"><g:link action="">Home</g:link> > Statistics</div>
  
  	<div id="chart3" class="jqplot-target" style="height: 400px; width: 100%; position: center;"></div>
  	<br>

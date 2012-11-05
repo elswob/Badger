@@ -9,6 +9,7 @@
   </head>
 
   <body>
+  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="addAnno" params="${[id:params.id]}">Add annotation file</g:link> > Added annotation file </div>
 	<g:if test = "${error == 'duplicate'}">
 		<br><h2>This annotation file name already exists for this file.<br> Please go <a href="previous.html" onClick="history.back();return false;">back</a> and edit the form.</h2>
 	</g:if>

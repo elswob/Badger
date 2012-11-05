@@ -74,7 +74,8 @@
     }
 
     <% 
-    def jsonData = chartData.encodeAsJSON();  
+    def jsonData = chartData.encodeAsJSON();
+    def jsonAnno = annoLinks.encodeAsJSON();  
     //println jsonData;
     %>
     var loadcheck = "no";
@@ -291,7 +292,6 @@
     </script>
   </head>
   <body>
-    
   <!-- check for errors -->
   <g:if test="${error == "empty"}">
     <h1>Please enter a search term</h1>
@@ -305,6 +305,7 @@
     <g:link action=''>Search Again</g:link>
   </g:if>
   
+  <g:link action="">Search</g:link> > <g:link action="all_search">Search all</g:link> > Search results 
   <div class="inline">
   <br><h1>Results for search of '<em>${searchId}</em>' across all data</h1> 
   <p>(searched all records in ${search_time})</p>
@@ -330,8 +331,14 @@
                 <tr>  
                   <td><g:link action="trans_info" params="${[contig_id: res.contig_id]}"> ${res.contig_id}</g:link></td>
                   <td>${res.anno_db}</td>
-                  <%res.anno_id = res.anno_id.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
-                  <%res.anno_id = res.anno_id.replaceAll(/lcl\|(.*)/, "<a href=\"http://www.uniprot.org/uniref/\$1\" target=\'_blank\'>\$1</a>")%>
+                  <%
+					//set links
+					annoLinks.each{
+						if (res.anno_db == it.key){
+							res.anno_id = res.anno_id.replaceAll(it.value[0], "<a href=\""+it.value[1]+"\$1\" target=\'_blank\'>\$1</a>") 
+						}
+					}
+				  %>
                   <td>${res.anno_id}</td>
                   <%res.descr = res.descr.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
                   <td>${res.descr}</td>
@@ -343,21 +350,21 @@
                </g:each>
               </tbody>
          </table> 
-         <br>
+         <hr size = 5 color="green" width="100%" style="margin-top:10px"> 
   </g:if>
   <g:else>
  	<g:if test = "${grailsApplication.config.seqData.Transcriptome}">
   		<h2>0 matches from the transcriptome data.</h2>
+  		<hr size = 5 color="green" width="100%" style="margin-top:10px"> 
   	</g:if>
   </g:else>
   
   <g:if test="${geneRes}">
-    <hr size = 5 color="green" width="100%" style="margin-top:10px"> 
     <h2>${geneRes.size()} matches from the gene data:</h2> 
         <table id="gene_table" class="display">
             <thead>
               <tr>
-                <th><b>Gene ID</b></th>
+                <th><b>Transcript ID</b></th>
                 <th><b>Database</b></th>
                 <th><b>Hit ID</b></th>
                 <th><b>Description</b></th>
@@ -370,10 +377,17 @@
              <tbody>
                <g:each var="res" in="${geneRes}">
                 <tr>  
-                  <td><g:link action="gene_info" params="${[gene_id: res.gene_id]}"> ${res.gene_id}</g:link></td>
+                  <td><g:link action="m_info" params="${[mid: res.mrna_id]}"> ${res.mrna_id}</g:link></td>
+                  <!-- <a href="m_info?Gid=${params.Gid}&mid=${res.mrna_id}">${res.mrna_id}</a>-->
                   <td>${res.anno_db}</td>
-                  <%res.anno_id = res.anno_id.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
-                  <%res.anno_id = res.anno_id.replaceAll(/lcl\|(.*)/, "<a href=\"http://www.uniprot.org/uniref/\$1\" target=\'_blank\'>\$1</a>")%>
+                   <%
+					//set links
+					annoLinks.each{
+						if (res.anno_db == it.key){
+							res.anno_id = res.anno_id.replaceAll(it.value[0], "<a href=\""+it.value[1]+"\$1\" target=\'_blank\'>\$1</a>") 
+						}
+					}
+				  %>
                   <td>${res.anno_id}</td>
                   <%res.descr = res.descr.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
                   <td>${res.descr}</td>

@@ -8,13 +8,14 @@
 </head>
 <body>
   	 <g:if test = "${meta}">
+  	 <g:link action="">Search</g:link> > Species
   	 	<br>
   	 	<g:each var="res" in="${meta}">
   	 		<h2><b><i>${res.genus} ${res.species}</i></b></h2> 		
   	 		<table>
   	 			<tr>
   	 				<td width=150> 
-	    				<a href = "species_search?id=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="150" style="float:left;"/></a>
+	    				<a href = "species_search?Gid=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="150" style="float:left;"/></a>
 	    			</td>
 	    			<td>
 	    				<div style="overflow:auto; padding-right:2px; height:150px">

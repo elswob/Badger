@@ -66,6 +66,8 @@
   
   <body>
     <g:if test="${info_results}">
+    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_search" params="${[Gid:params.Gid]}"><i> ${metaData.genus} ${metaData.species}</i></g:link> > Scaffold: ${info_results.contig_id[0]}
+    
     <h1>Information for <b>${info_results.contig_id[0]}</b>:</h1>
     <table>
       <tr>
@@ -121,7 +123,7 @@
 			  <thead>
 			  	<tr>
 					<th><b>Gene ID</b></th>
-					<th><b>Length</b></th>
+					<th><b>Length (bp)</b></th>
 					<th><b>Start</b></th>
 					<th><b>Stop</b></th>
 			   </tr>
@@ -129,8 +131,8 @@
 			  <tbody>
 			 	<g:each var="res" in="${gene_results}">
 			 		<tr>
-						<td><a href="g_info?gid=${res.gene_id}">${res.gene_id}</a></td>
-						<td>${res.pep.length()}</td>
+						<td><a href="g_info?Gid=${params.Gid}&gid=${res.gene_id}">${res.gene_id}</a></td>
+						<td>${res.nuc.length()}</td>
 						<td>${res.start}</td>
 						<td>${res.stop}</td>
 			  		</tr>  
@@ -139,11 +141,11 @@
 			</table>			
     	</g:if>    	
     	<br>
-		<g:if test ="${gbrowse}"> 
+		<g:if test ="${metaData.gbrowse}"> 
 			<hr size = 5 color="green" width="100%" style="margin-top:10px">
-			<h1>Browse on the genome <a href="${gbrowse}?name=${info_results.contig_id[0].trim()}" target='_blank'>(go to genome browser)</a>:</h1>
-			 <iframe src="${gbrowse}?name=${info_results.contig_id[0].trim()}" width="100%" height="700" frameborder="0">
-				<img src="${gbrowse}?name=${info_results.contig_id[0].trim()}"/>
+			<h1>Browse on the genome <a href="${metaData.gbrowse}?name=${info_results.contig_id[0].trim()}" target='_blank'>(go to genome browser)</a>:</h1>
+			 <iframe src="${metaData.gbrowse}?name=${info_results.contig_id[0].trim()}" width="100%" height="700" frameborder="0">
+				<img src="${metaData.gbrowse}?name=${info_results.contig_id[0].trim()}"/>
 			 </iframe>
 		</g:if>
     </g:if>

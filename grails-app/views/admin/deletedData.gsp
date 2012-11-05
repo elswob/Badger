@@ -9,7 +9,7 @@
   </head>
 
   <body>
-   
+ <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > Delete data set > Deleted data set</div>  
 <h1>The following data set and all dependencies are being deleted</h1>
 
 <h2>${params.genus} ${params.species}</h2>

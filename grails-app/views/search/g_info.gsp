@@ -64,28 +64,14 @@
  
   <body>
     <g:if test="${results}">
-    <h1>Information for gene <b>${results.gene_id[0]}</b>:</h1>
-    <table>
-      <tr>
-        <td><b>Scaffold:</b> </td>
-        <td><b>Start: </b> </td>
-        <td><b>End: </b> </td> 
-      </tr>
-      <tr>
-      <td><a href="genome_info?contig_id=${results.contig_id[0]}">${results.contig_id[0]}</a></td>
-      <td>${results.start[0]}</td>
-      <td>${results.stop[0]}</td>
-	  </tr>
-    </table>
+    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_search" params="${[Gid:params.Gid]}"><i> ${metaData.genus} ${metaData.species}</i></g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:params.Gid,contig_id:results.contig_id[0]]}"> ${results.contig_id[0]}</g:link> > Gene: ${results.gene_id[0]}
     	
     	<g:if test="${results}">
-    	<hr size = 5 color="green" width="100%" style="margin-top:10px">
     	<div class="inline">
     	<br>
-    	 <h1>${results.size()} transcripts</b>:</h1>
 			<!-- download genes form gets fileName value from get_table_data() -->		    		
 			 <div style="right:0px;">
-				 &nbsp;&nbsp;(Download transcript sequences:
+				 Download transcript sequences:
 					<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
 					<g:hiddenField name="nucFileId" value=""/>
 					<g:hiddenField name="fileName" value="${results.contig_id[0]}.genes"/>
@@ -99,7 +85,6 @@
 					<g:hiddenField name="seq" value="Peptides"/>
 					<a href="#" onclick="get_table_data('pepFileId');document.pepfileDownload.submit()">Peptides</a>
 				</g:form>
-				)	 
 			</div>   	
 		 </div>	
 		    		
@@ -115,7 +100,7 @@
 			  <tbody>
 			 	<g:each var="res" in="${results}">
 			 		<tr>
-						<td><a href="m_info?id=${res.mrna_id}">${res.mrna_id}</a></td>
+						<td><a href="m_info?Gid=${params.Gid}&mid=${res.mrna_id}">${res.mrna_id}</a></td>
 						<td>${res.nuc.length()}</td>
 						<td>${res.start}</td>
 						<td>${res.stop}</td>
@@ -125,11 +110,11 @@
 			</table>			
     	</g:if>    	
     	<br>
-			<g:if test ="${gbrowse}">
+			<g:if test ="${metaData.gbrowse}">
 				<hr size = 5 color="green" width="100%" style="margin-top:10px">
-		 		<h1>Browse on the genome <a href="${gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
-		 		<iframe src="${gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}" width="100%" height="700" frameborder="0">
-					<img src="${gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}"/>
+		 		<h1>Browse on the genome <a href="${metaData.gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
+		 		<iframe src="${metaData.gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}" width="100%" height="700" frameborder="0">
+					<img src="${metaData.gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}"/>
 		 		</iframe>
 			</g:if>
     </g:if>

@@ -15,7 +15,7 @@
     
   </head>
   <body>
-  
+  <div class="bread"><g:link action="">Blast</g:link> > Blast result</div>
   <script type="text/javascript">
   var contig_list=[];
   function get_contig_data(){

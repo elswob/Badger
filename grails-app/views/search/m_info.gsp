@@ -401,13 +401,12 @@
   </head>
   <body>
   <g:if test="${info_results}">
+    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_search" params="${[Gid:params.Gid]}"><i> ${metaData.genus} ${metaData.species}</i></g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:params.Gid,contig_id:info_results.contig_id[0]]}"> ${info_results.contig_id[0]}</g:link> > Gene: <g:link action="g_info" params="${[Gid:metaData.id,gid:info_results.gene_id[0]]}"> ${info_results.gene_id[0]}</g:link>  > Transcript: ${info_results.mrna_id[0]}
   	<div id="top_anchor"></div>
     <div id="info_anchor"><h1>Information for transcript ${info_results.mrna_id[0]}:</h1></div>
     <table width=100%>
       <tr><td width=40%>
 		<table>
-			<tr><td><b>Scaffold Id:</b></td><td><g:link action="genome_info" params="${[contig_id: info_results.contig_id[0].trim()]}">${info_results.contig_id[0]}</g:link></td></tr>
-			<tr><td><b>Gene:</b></td><td><g:link action="g_info" params="${[gid: info_results.gene_id[0]]}"> ${info_results.gene_id[0]}</g:link></td></tr>
 			<tr><td><b>Length:</b></td><td>${printf("%,d\n",info_results.nuc[0].length())} bp (${printf("%,d\n",info_results.pep[0].length())} aa)</td></tr>
 			<tr><td><b>Exons:</b></td><td>${exon_results.size()}</td></tr>
 			<tr><td><b>Source:</b></td><td>${info_results.source[0]}</td></tr>
@@ -437,7 +436,7 @@
     </td>
     
     <td width=60%>
-		<div id="aa_chart" class="jqplot-target" style="height: 330px;"></div>
+		<div id="aa_chart" class="jqplot-target" style="height: 270px;"></div>
     </td>
     </tr>
     </table>
@@ -570,12 +569,12 @@
 	   </g:if> 
      <br>
     
-   <g:if test ="${gbrowse}">
+   <g:if test ="${metaData.gbrowse}">
      	<div id="browse_anchor"><div></div>
          	<hr size = 5 color="green" width="100%" style="margin-top:10px">
-		 	<h1>Browse on the genome <a href="${gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
-		 	<iframe src="${gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" width="100%" height="700" frameborder="0">
-				<img src="${gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}"/>
+		 	<h1>Browse on the genome <a href="${metaData.gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
+		 	<iframe src="${metaData.gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" width="100%" height="700" frameborder="0">
+				<img src="${metaData.gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}"/>
 		 	</iframe>
 		 </div>
      </g:if>

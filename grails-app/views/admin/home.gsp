@@ -72,7 +72,7 @@
   </head>
   
   <body>
-   
+  <g:link action="home">Admin</g:link> > Home 
 <h1>Admin for the <i>${grailsApplication.config.projectID}</i> project:</h1>
 <p>This is where the administrator adds, edits and deletes the information for each of the data sets in the database.
 <br>

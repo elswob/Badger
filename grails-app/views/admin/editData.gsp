@@ -9,7 +9,7 @@
   </head>
 
   <body>
-   
+<g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > Edit data set   
 <h1>Edit data set:</h1>
 
 <g:form action="editedData" controller="admin">
@@ -33,7 +33,7 @@
 <hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 
 <h1>Add an annotation</h1>
-<g:link action="addAnno">Add me!</g:link>
+<g:link action="addAnno" params="${[Gid:metaData.id]}">Add me!</g:link>
 
 <hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 

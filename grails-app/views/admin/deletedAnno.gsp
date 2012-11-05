@@ -9,7 +9,7 @@
   </head>
 
   <body>
-   
+ <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > Delete annotation file > Deleted annotation file</div>     
 <h1>The following annotation file and all dependencies are being deleted</h1>
 
 <h2>${source} ${file}</h2>

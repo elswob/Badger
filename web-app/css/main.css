@@ -845,3 +845,11 @@ div.innerDetails { display: none }
 .highlight {
 	 background-color: bisque;
 }
+.bread {
+	background: #e1f2b6;
+	color: #000;
+	clear: both;
+	font-size: 1em;
+	z-index: 0; 
+	position: relative;
+}

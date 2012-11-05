@@ -9,6 +9,7 @@
   </head>
 
   <body>
+  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > Delete data set</div>
    
 <h1>Delete data set:</h1>
 

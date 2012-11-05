@@ -293,8 +293,9 @@
 		
 		$('#chart').bind('jqplotDataClick',
 		function (ev, seriesIndex, pointIndex, data) {
-			//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-			window.open("/search/genome_info?contig_id=" + data[2]);
+			alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+			alert("/search/genome_info?id=${params.Gid}&contig_id=" + data[2])
+			window.open("/search/genome_info?Gid=${params.Gid}&contig_id=" + data[2]);
 		}
 	);      
                     
@@ -345,11 +346,11 @@
     });
     $('#fun_chart').bind('jqplotDataClick',
 		function (ev, seriesIndex, pointIndex, data) {
-			//alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
+			alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
 			if (fDb[pointIndex] == 'BlastProDom' || fDb[pointIndex] == 'HMMTigr' || fDb[pointIndex] == 'SignalPHMM' || fDb[pointIndex] == 'FPrintScan' || fDb[pointIndex] == 'ProfileScan' || fDb[pointIndex] == 'TMHMM' || fDb[pointIndex] == 'HMMPIR' || fDb[pointIndex] == 'HAMAP' || fDb[pointIndex] == 'HMMPanther' || fDb[pointIndex] == 'HMMPfam' || fDb[pointIndex] == 'PatternScan' || fDb[pointIndex] == 'Gene3D' || fDb[pointIndex] == 'HMMSmart' || fDb[pointIndex] == 'SuperFamily'){
-				window.open("/search/gene_link?annoType=IPR&val="+fDb[pointIndex]+"&id="+data[0]);
+				//window.open("/search/gene_link?annoType=IPR&val="+fDb[pointIndex]+"&id="+data[0]);
 			}else{
-				window.open("/search/gene_link?annoType=Functional&val="+fDb[pointIndex]);
+				//window.open("/search/gene_link?annoType=Functional&val="+fDb[pointIndex]);
 			}
 		}
 	);
@@ -401,15 +402,15 @@
     
     $('#blast_chart').bind('jqplotDataClick',
 		function (ev, seriesIndex, pointIndex, data) {
-			//alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
-			window.open("/search/gene_link?annoType=Blast&val="+bDb[pointIndex],'_self');
+			alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
+			//window.open("/search/gene_link?annoType=Blast&val="+bDb[pointIndex]);
 		}
 	);
 	});
     </script>
 </head>
 <body>
-
+<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <i> ${meta.genus} ${meta.species}</i>
 <h1><b><i>${meta.genus} ${meta.species}</i></b></h1>
 
 <table width=100%>
@@ -530,6 +531,7 @@
 		<h1>Enter a search term:</h1>
 		<div id='selectedResult'></div>
 		<g:textField name="searchId"  size="30"/>
+		<input type="hidden" name="Gid" value="${params.Gid}">
 		<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
 		</g:form>
 		 </td>

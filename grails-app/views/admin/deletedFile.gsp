@@ -9,7 +9,8 @@
   </head>
 
   <body>
-   
+  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editData" params="${[id:fileData.meta.id]}">Edit data set</g:link> > Delete file > Deleted file</div>  
+  
 <h1>The following data file and all dependencies are being deleted</h1>
 
 <h2>${dir} / ${name}</h2>

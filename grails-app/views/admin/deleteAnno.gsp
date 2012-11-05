@@ -9,7 +9,8 @@
   </head>
 
   <body>
-   
+  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > Delete annotation file</div>
+  
 <h1>Delete annotation file data:</h1>
 
 <h2>Are you sure you wish to delete the following annotation file?</h2>

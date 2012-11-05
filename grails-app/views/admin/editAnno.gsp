@@ -9,6 +9,7 @@
   </head>
 
   <body>
+ <g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editFile" params="${[id:annoData.filedata.id]}">Edit file</g:link> > Edit annotation
    
 <h1>Edit annotation file data:</h1>
 

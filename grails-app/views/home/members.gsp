@@ -9,6 +9,7 @@
   </head>
 
   <body>
+  <div class="bread"><g:link action="">Home</g:link> > Members</div>
     <h1>Project members:</h1>
     <table class="table_basic">
     <g:each var="res" in="${memberData}">  

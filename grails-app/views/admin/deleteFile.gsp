@@ -9,7 +9,7 @@
   </head>
 
   <body>
-   
+   <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editData" params="${[id:fileData.meta.id]}">Edit data set</g:link> > Delete file</div>  
 <h1>Delete data file:</h1>
 
 <g:form action="deletedFile" controller="admin">

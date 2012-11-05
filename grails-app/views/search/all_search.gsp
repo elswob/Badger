@@ -11,50 +11,16 @@
     <script type="text/javascript"> 
     	$(window).unload(function() {});
     </script>
-    <script type="text/javascript">
-
-    function showSelected(val){
-		document.getElementById
-		('selectedResult').innerHTML = val;
-    }
-    $(function() {
-		$("[name=toggler]").click(function(){
-				$('.toHide').hide();
-				$("#blk_"+$(this).val()).show('slow');
-				$("#sel_"+$(this).val()).show('fast');
-				showSelected($("#sel_"+$(this).val()).val())
-		});
-    });
-
-    </script>
 	
 </head>
 <body>
   <div id="content">
      <h1>Search all the data by keyword:</h1>
 	<table>
-  	    <tr><td><g:link controller="home" action="publications">${printf("%,d\n",GDB.Publication.count())} publications</g:link></td><td>The title and abstract of publications matching the term <i>${grailsApplication.config.species}</i>.</td></tr>
-		<g:if test="${grailsApplication.config.annoData.Transcripts == 'y'}">
-			<g:if test = "${grailsApplication.config.i.links.trans == 'public'}">			
-				<tr><td><g:link controller="search" action="trans_search">${printf("%,d\n",GDB.TransInfo.count())} transcripts</g:link></td><td>The description of the current transcriptome annotations.</td></tr>
-			</g:if>
-			<g:else>
-				<sec:ifLoggedIn>
-					<tr><td><g:link controller="search" action="trans_search">${printf("%,d\n",GDB.TransInfo.count())} transcripts</g:link></td><td>The description of the current transcriptome annotations.</td></tr>
-				</sec:ifLoggedIn>
-			</g:else>	
-		</g:if>
-		
-  		<g:if test="${grailsApplication.config.annoData.Genes == 'y'}">
-  			<g:if test = "${grailsApplication.config.i.links.genes == 'public'}">
-  				<tr><td><g:link controller="search" action="gene_search">${printf("%,d\n",GDB.GeneInfo.count())} genes</g:link></td><td>The descriptions from the latest set of genes annotations.</td></tr>
-  			</g:if>
-  			<g:else>
-  				<sec:ifLoggedIn>
-  	  				<tr><td><g:link controller="search" action="gene_search">${printf("%,d\n",GDB.GeneInfo.count())} genes</g:link></td><td>The descriptions from the latest set of genes annotations.</td></tr>
-				</sec:ifLoggedIn>
-			</g:else>
-		</g:if>
+  	    <tr><td><g:link controller="home" action="publications">${printf("%,d\n",GDB.Publication.count())} publications</g:link></td><td>The title and abstract of publications matching the names of the species in the database</td></tr>
+		<g:each var="res" in="${genes}">	
+  			 <tr><td><g:link controller="search" action="species_search" params="${[Gid:res.id]}">${printf("%,d\n",res.g_count)} ${res.genus} ${res.species} genes</g:link> </td><td> Annotation descriptions from the ${res.genus} ${res.species} gene set</td></tr>
+			</g:each>
   	</td></tr>
   </table>
 	<br>

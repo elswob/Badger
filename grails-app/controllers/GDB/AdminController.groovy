@@ -232,7 +232,7 @@ class AdminController {
 					return [error: "no pep"]
 				}
 			}			
-			return [dataMap:dataMap]
+			return [dataMap:dataMap, Gid: meta.id]
 		}
 	}
 	
@@ -241,7 +241,7 @@ class AdminController {
 		def sql = new Sql(dataSource)
 		//def dataSetsSql = "select meta_data.data_id,genus,species,file_name, file_version, file_type, file_id from meta_data, file_data where meta_data.data_id = file_data.data_id and (file_type = 'Genes' or file_type = 'Transcriptome') ;";
 		//def dataSets = sql.rows(dataSetsSql)
-		def dataSets = MetaData.findAll()
+		def dataSets = MetaData.findAllById(params.Gid)
 		//print dataSets
 		return [dataSets:dataSets]
 	}

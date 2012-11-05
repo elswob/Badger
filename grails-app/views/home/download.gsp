@@ -8,6 +8,7 @@
   <parameter name="download" value="selected"></parameter>
   </head>
   <body>
+  <div class="bread"><g:link action="">Home</g:link> > Download</div>
     <table class="table_basic">    
     <tr><td><h1>Domain</h1></td><td><h1>Species</h1></td><td><h1>Data</h1></td><td><h1>Version</h1></td><td><h1>Download</h1></td></tr>
     <sec:ifNotLoggedIn>

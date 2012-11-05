@@ -61,7 +61,7 @@
   </head>
   
   <body>
-
+<div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editData" params="${[id:params.Gid]}">Edit data set</g:link> > Add annotation</div>
 <g:if test="${dataSets}">
 	   
 	<h1>Add an annotation file:</h1>   
