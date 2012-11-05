@@ -9,7 +9,7 @@
   </head>
 
   <body>
-  <g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editFile" params="${[id:params.id]}">Edit file</g:link> > Edited file
+  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editFile" params="${[id:params.id]}">Edit file</g:link> > Edited file</div>
   
 <h1>Edited file data:</h1>
 

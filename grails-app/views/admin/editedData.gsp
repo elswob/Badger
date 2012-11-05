@@ -9,7 +9,7 @@
   </head>
 
   <body>
- <g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editData" params="${[id:params.id]}">Edit data set</g:link> > Edited data set  
+ <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editData" params="${[id:params.id]}">Edit data set</g:link> > Edited data set <div>
 <h1>Edited data set:</h1>
 
 <p>Your data set has been edited successfully

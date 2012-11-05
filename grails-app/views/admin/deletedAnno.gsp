@@ -9,7 +9,7 @@
   </head>
 
   <body>
- <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > Delete annotation file > Deleted annotation file</div>     
+ <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> <g:link action="editData" params="${[id:annoData.filedata.meta.id]}">Edit data set</g:link>  > <g:link action="editFile" params="${[id:annoData.filedata.id]}">Edit file</g:link> > Deleted annotation file</div>     
 <h1>The following annotation file and all dependencies are being deleted</h1>
 
 <h2>${source} ${file}</h2>

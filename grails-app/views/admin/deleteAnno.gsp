@@ -9,7 +9,7 @@
   </head>
 
   <body>
-  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > Delete annotation file</div>
+  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editData" params="${[id:annoData.filedata.meta.id]}">Edit data set</g:link>  > <g:link action="editFile" params="${[id:annoData.filedata.id]}">Edit file</g:link> > Delete annotation file</div>
   
 <h1>Delete annotation file data:</h1>
 

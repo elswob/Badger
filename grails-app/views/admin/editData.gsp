@@ -33,7 +33,7 @@
 <hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 
 <h1>Add an annotation</h1>
-<g:link action="addAnno" params="${[Gid:metaData.id]}">Add me!</g:link>
+<div class="bread"><g:link action="addAnno" params="${[Gid:metaData.id]}">Add me!</g:link><div>
 
 <hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 

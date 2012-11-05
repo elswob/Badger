@@ -289,7 +289,7 @@
 				},
 				{ "mDataProp": "exon_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"/home/browse?link=${gbrowse}&contig_id="+oObj.aData["contig_id"]+"&start="+oObj.aData["start"]+"&stop="+oObj.aData["stop"]+"\">"+sVal+"</a>";
+					return "<a href=\"/home/browse?link=${metaData.gbrowse}&contig_id="+oObj.aData["contig_id"]+"&start="+oObj.aData["start"]+"&stop="+oObj.aData["stop"]+"\">"+sVal+"</a>";
 				}},
 				{ "mDataProp": "exon_number" },
 				{ "mDataProp": "length" },
@@ -401,7 +401,7 @@
   </head>
   <body>
   <g:if test="${info_results}">
-    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_search" params="${[Gid:params.Gid]}"><i> ${metaData.genus} ${metaData.species}</i></g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:params.Gid,contig_id:info_results.contig_id[0]]}"> ${info_results.contig_id[0]}</g:link> > Gene: <g:link action="g_info" params="${[Gid:metaData.id,gid:info_results.gene_id[0]]}"> ${info_results.gene_id[0]}</g:link>  > Transcript: ${info_results.mrna_id[0]}
+    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_search" params="${[Gid:metaData.id]}"><i> ${metaData.genus} ${metaData.species}</i></g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:metaData.id,contig_id:info_results.contig_id[0]]}"> ${info_results.contig_id[0]}</g:link> > Gene: <g:link action="g_info" params="${[Gid:metaData.id,gid:info_results.gene_id[0]]}"> ${info_results.gene_id[0]}</g:link>  > Transcript: ${info_results.mrna_id[0]}
   	<div id="top_anchor"></div>
     <div id="info_anchor"><h1>Information for transcript ${info_results.mrna_id[0]}:</h1></div>
     <table width=100%>
