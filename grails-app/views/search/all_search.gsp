@@ -14,6 +14,7 @@
 	
 </head>
 <body>
+<g:link action="">Search</g:link> > Search all
   <div id="content">
      <h1>Search all the data by keyword:</h1>
 	<table>
