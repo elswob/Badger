@@ -9,27 +9,30 @@ class PubService {
 	def matcher
 	def idlist = new File("/tmp/idlist.txt")
 	def pubdata = new File("/tmp/pubdata.txt")
+
 	
-	def getPub(){
+	def runPub(){
+		def getFiles = MetaData.findAll()
+		getFiles.each {  	
+			println new Date()
+			def query = it.genus+"+AND+"+it.species
+			println "Getting publication information for "+it.genus+" "+it.species
+			getPub(it.id,query)
+		}
+	}	
+	def getPub(data_id,query){
 		if (idlist.exists()){idlist.delete()}
 		if (pubdata.exists()){pubdata.delete()}
 		//get the pubmed data
 		def utils = "http://www.ncbi.nlm.nih.gov/entrez/eutils";
 		def db = 'PubMed';
-		def query = grailsApplication.config.species
-		//make sure all words are used in search
-		query = query.replace(" ","+AND+")
 		def esearch = "$utils/esearch.fcgi?db=$db&retmax=100000&term=$query";
-		println "Searching PubMed for all articles containing $query"
 		println "Getting IDs...";
 		println esearch
-		def idlist = new File("/tmp/idlist.txt")
 		idlist << new URL(esearch).getText()
 		def esearch_result=new File("/tmp/idlist.txt").text
-		
 		def counter=0
 		def efetch_ids=''
-		def pubdata = new File("/tmp/pubdata.txt")
 		esearch_result.split("\n").each{
 			if ((matcher = it =~ /.*?<Id>(\d+)<\/Id>/)){
 				efetch_ids += matcher[0][1] + ","
@@ -49,15 +52,17 @@ class PubService {
 		println "Fetching "+counter			
 		def efetch = "$utils/efetch.fcgi?db=$db&id=$efetch_ids&retmode=xml";
 		pubdata << new URL(efetch).getText()
-		addPub(pubdata) 
+		addPub(pubdata,data_id) 
 	}
 	//add info
-	def addPub(pubFile){
+	def addPub(pubFile,data_id){
+		MetaData meta = MetaData.findById(data_id)
+		def dataSource = ctx.getBean("dataSource")
 		def sql = new Sql(dataSource)
-		println "Deleting data..."
-		def delsql = "delete from Publication;";
-    	sql.execute(delsql)
-		println "Adding data to db..."
+		println "Deleting old data..."
+		def delsql = "delete from Publication where meta_id = '"+data_id+"';";
+		sql.execute(delsql)
+		println "Adding new data to db..."
 		def pubMap = [:]
 		int count_all = 0
 		def dateString = ''
@@ -125,22 +130,23 @@ class PubService {
 			}
 			//end of an entry
 			else if ((matcher = line =~ /<\/PubmedArticle>/)){
-				nameString = nameString[0..-3]
+				if (nameString.size() > 0){
+					nameString = nameString[0..-3]
+				}
 				pubMap.authors = nameString
 				nameString = ''
 				dateString = ''            
 				//println pubMap
+				Publication pub = new Publication(pubMap)
+				meta.addToPubs(pub)
 				if ((count_all % 100) ==  0){
 					println "Adding "+count_all
-					new Publication(pubMap).save(flush:true)
+					pub.save(flush:true)
 				}else{
-					new Publication(pubMap).save()
+					pub.save()
 				}
 			}
 		}
-	//remove the tmp pubmed files
-	println "deleting tmp pubmed files..."
-	idlist.delete()
-	pubdata.delete()
+		println "Added "+count_all 
 	}
 }

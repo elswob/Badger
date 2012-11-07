@@ -10,6 +10,6 @@ class PublicationUpdaterJob {
     	def today = new Date()
 		println today
     	println "Updating publications!"
-    	pubService.getPub()
+    	pubService.runPub()
     }
 }

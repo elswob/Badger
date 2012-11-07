@@ -666,7 +666,7 @@ class SearchController {
      		//def results = GeneInfo.findAllByGene_id(params.gid)
      		def genesql = "select gene_info.* from gene_info,file_data,meta_data where gene_info.gene_id = '"+params.gid+"' and meta_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
      		def gene_results = sql.rows(genesql)
-     		println "g = "+gene_results
+     		//println "g = "+gene_results
 			return [ results: gene_results, metaData:metaData]
 		}
     }

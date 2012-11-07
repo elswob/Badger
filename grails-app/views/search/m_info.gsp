@@ -200,7 +200,7 @@
 		'<div class="blast_res">'+
 		  '<table width="100%" cellpadding="5" cellspacing="0" border="0" style="table-layout:fixed; padding-left:10px; overflow:auto;">'+
 			'<tr><td><b>Alignment info:</b> Length='+oData.align+' Gaps='+oData.gaps+' Identity='+oData.identity+'</td></tr>'+
-			'<tr><td><b>'+oData.gene_id+'</b> '+oData.anno_start+' '+oData.anno_stop+'</td></tr>'+
+			'<tr><td><b>'+oData.mrna_id+'</b> '+oData.anno_start+' '+oData.anno_stop+'</td></tr>'+
 			'<tr><td>'+oData.qseq+'</td></tr>'+
 			'<tr><td>'+oData.midline+'</td></tr>'+
 			'<tr><td>'+oData.hseq+'</td></tr>'+
