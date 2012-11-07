@@ -39,156 +39,34 @@
         };
     </script> 
     <script>
-    function get_table_data(){
-    	    var table_scrape = [];
-	    var oTable = document.getElementById('table_data');
+    function get_table_data(type){
+    	var table_scrape = [];
+	    var oTable = document.getElementById('gene_table');
 	    //gets table
 	    var rowLength = oTable.rows.length;
 	    //gets rows of table
 	    for (i = 0; i < rowLength; i++){
-	    //loops through rows
+		   //loops through rows
 	       var oCells = oTable.rows.item(i).cells;
 	       var cellVal = oCells.item(0).innerHTML;
-	       var regex = /.*?contig.*/g;
-	       var matcher = cellVal.match(/.*?contig_id=(contig_\d+).*/);
+	       var matcher = cellVal.match(/.*?mid=(.*?)">.*/);
 	       if (matcher){
-	       	       table_scrape.push(matcher[1])
+	       		//alert('match = '+matcher[1])
+	       	   table_scrape.push(matcher[1])
 	       }
 	    }
-	    document.getElementById('fileId').value=table_scrape;
+	    if (type == 'pep'){
+		    document.getElementById('pepFileId').value=table_scrape;
+		}else{
+			document.getElementById('nucFileId').value=table_scrape;
+		}
 	    //alert(table_scrape)
     }
     </script>
     <script>
-    function zip(arrays) {
-            	    return arrays[0].map(function(_,i){
-            	    return arrays.map(function(array){return array[i]})
-           });
-    }
-    function toggleDiv(divId) {
-    	    $("#"+divId).slideToggle(20);
-    }
-    function changed(plot_type,params) {
-	$("#chart").html('Loading...<img src="${resource(dir: 'images', file: 'spinner.gif')}" />');
-	setTimeout(""+plot_type+"('"+params+"')", 1000);
-    }
 
     <% 
-    def jsonData = chartData.encodeAsJSON();
     def jsonAnno = annoLinks.encodeAsJSON();  
-    //println jsonData;
-    %>
-    var loadcheck = "no";
-    function loadPlotData(){ 
-    	     if (loadcheck == "no"){
-		    //load the jqplot data
-		    ContigData = ${jsonData};
-		    //alert("loading the data")
-		    for (var i = 0; i < ContigData.length; i++) {   		 	 
-			    var hit = ContigData[i];
-			    dlen.push(hit.length);
-			    dcov.push(hit.coverage);
-			    dgc.push(hit.gc);
-			    dcon.push(hit.contig_id);
-			    dsco.push(hit.score);
-		    }
-		    loadcheck = "yes";
-		    setTimeout("makeArrays('len_cov')", 1000);
-		    //add the click data here as adding it at the top causes multiple windows to open
-		    $('#chart').bind('jqplotDataClick',
-		    function (ev, seriesIndex, pointIndex, data) {
-			//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-			window.open("/search/trans_info?contig_id=" + data[3]);
-			}
-		    );
-	     }
-    }
-    //set the global variable for the plots
-    var dlen = [], dcov = [], dgc = [], dcon = [], dcum = [], dcou = [], dsco = [];
-    var joinArray = [];
-    var xaxis_label="", yaxis_label="", title_label="", xaxis_type="", yaxis_type="";
-    function makeArrays(arrayInfo){
-    	    $("#chart").text('');
-	    //alert(arrayInfo)	    
-	    if (arrayInfo == 'len_gc'){
-		    joinArray = zip([dgc,dlen,dsco,dcon,dlen,dgc,dcov]);
-		    xaxis_label = "GC";
-		    xaxis_type = $.jqplot.LinearAxisRenderer;
-		    yaxis_label = "Length";
-		    yaxis_type = $.jqplot.LogAxisRenderer;
-		    title_label = "Length vs GC";
-	    }else if (arrayInfo == 'cov_gc'){
-		    joinArray = zip([dgc,dcov,dsco,dcon,dlen,dgc,dcov]);
-		    xaxis_label = "GC";
-		    xaxis_type = $.jqplot.LinearAxisRenderer;
-		    yaxis_label = "Coverage";
-		    yaxis_type = $.jqplot.LogAxisRenderer;
-		    title_label = "Coverage vs GC";
-	    }else if (arrayInfo == 'len_cov'){
-		    joinArray = zip([dlen,dcov,dsco,dcon,dlen,dgc,dcov]);
-		    xaxis_label = "Length";
-		    xaxis_type = $.jqplot.LinearAxisRenderer;
-		    yaxis_label = "Coverage";
-		    yaxis_type = $.jqplot.LogAxisRenderer;
-		    title_label = "Length vs Coverage";
-	    }
-	    graphDraw()
-	    
-    }
-        function graphDraw(){
-            //alert(joinArray)
-    	    $('#chart').empty();
-	    plot = $.jqplot('chart',[joinArray],{
-		title: title_label, 
-		seriesDefaults:{
-		    renderer: $.jqplot.BubbleRenderer,
-		       rendererOptions: {
-			bubbleAlpha: 0.6,
-			highlightAlpha: 0.8,
-			showLabels: false,
-			autoscalePointsFactor: -0.15,
-			autoscaleMultiplier: 0.5,
-			varyBubbleColors: false,
-			color: 'green'
-		    },	
-		},
-		highlighter: {
-			 tooltipAxes: 'yx',
-			 yvalues: 6,
-			 show: true,
-			 sizeAdjust: 7.5,
-			 formatString: '<span style="display:none">%s</span>Score: %s<br>Contig ID: %s<br>Length: %s<br>GC: %.2f<br>Coverage: %.2f'
-	
-		 },
-		 cursor:{
-		 	 show: true,
-		 	 zoom:true,
-		 	 tooltipLocation:'nw'
-		 },
-		 axesDefaults: {
-			 labelRenderer: $.jqplot.CanvasAxisLabelRenderer
-		 },
-		 axes: {
-			xaxis: {
-				label: xaxis_label,
-				renderer: xaxis_type,
-				pad: 0
-			},
-			yaxis: {
-				label: yaxis_label,
-				renderer: yaxis_type,
-				pad: 0,
-				tickOptions: {
-					formatString: "%'i"
-				}
-			}
-		 },
-	    });
-	    $('.button-reset').click(function() { plot.resetZoom() });
-    }
-    </script>
-    <script>
-    <% 
     def pubjsonData = pubRes.encodeAsJSON(); 
     %>
     $(document).ready(function() {
@@ -308,8 +186,32 @@
   <g:link action="">Search</g:link> > <g:link action="all_search">Search all</g:link> > Search results 
   <div class="inline">
   <br><h1>Results for search of '<em>${searchId}</em>' across all data</h1> 
-  <p>(searched all records in ${search_time})</p>
   </div><br>
+  
+	<table class="table_border" width='100%'>
+		<tr><td>
+			Searched all records in ${search_time}.<br>
+			</td><td><center>
+			Download genes:
+			<!-- download genes form gets fileName value from get_table_data() -->
+			<div class="inline">
+				<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+				<g:hiddenField name="nucFileId" value=""/>
+				<g:hiddenField name="fileName" value="${searchId}"/>
+				<g:hiddenField name="seq" value="Nucleotides"/>
+				<a href="#" onclick="get_table_data('nuc');document.nucfileDownload.submit()">Nucleotides</a>
+			</g:form> 
+			|
+			<g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+				<g:hiddenField name="pepFileId" value=""/>
+				<g:hiddenField name="fileName" value="${searchId}"/>
+				<g:hiddenField name="seq" value="Peptides"/>
+				<a href="#" onclick="get_table_data('pep');document.pepfileDownload.submit()">Peptides</a>
+			</g:form>
+			</div>
+			</center>
+		</td></tr>
+	</table>
   
   <g:if test="${transRes}">
   	<h2>${transRes.size()} matches from the transcriptome data:</h2>   
@@ -360,6 +262,7 @@
   </g:else>
   
   <g:if test="${geneRes}">
+  <br>
     <h2>${geneRes.size()} matches from the gene data:</h2> 
         <table id="gene_table" class="display">
             <thead>

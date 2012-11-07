@@ -29,7 +29,7 @@
         };
     </script> 
     <script>
-    function get_table_data(fileId){
+    function get_table_data(type){
     	var table_scrape = [];
     	var rowNum
     	var regex
@@ -51,13 +51,16 @@
 	       var oCells = oTableData.rows.item(i).cells;
 	       var cellVal = oCells.item(rowNum).innerHTML;
 	       //alert(cellVal)
-	       var matcher = cellVal.match(/.*?mrna_id=(.*?)">.*/);
+	       var matcher = cellVal.match(/.*?mid=(.*?)">.*/);
 	       if (matcher){
 	       	  	table_scrape.push(matcher[1])
 	    	}
 	    }
-	    document.getElementById(fileId).value=table_scrape;
-	    //alert(table_scrape)
+	    if (type == 'pep'){
+		    document.getElementById('pepFileId').value=table_scrape;
+		}else{
+			document.getElementById('nucFileId').value=table_scrape;
+		}
     }
     </script>
     <script>
@@ -258,14 +261,14 @@
 		    			<g:hiddenField name="nucFileId" value=""/>
 		    			<g:hiddenField name="fileName" value="${term}"/>
 		    			<g:hiddenField name="seq" value="Nucleotides"/>
-		    			<a href="#" onclick="get_table_data('nucFileId');document.nucfileDownload.submit()">Nucleotides</a>
+		    			<a href="#" onclick="get_table_data('nuc');document.nucfileDownload.submit()">Nucleotides</a>
 		    		</g:form> 
 		    		|
 		    		<g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
 		    			<g:hiddenField name="pepFileId" value=""/>
 		    			<g:hiddenField name="fileName" value="${term}"/>
 		    			<g:hiddenField name="seq" value="Peptides"/>
-		    			<a href="#" onclick="get_table_data('pepFileId');document.pepfileDownload.submit()">Peptides</a>
+		    			<a href="#" onclick="get_table_data('pep');document.pepfileDownload.submit()">Peptides</a>
 		    		</g:form>
 		    		</div>
 		    		</center>

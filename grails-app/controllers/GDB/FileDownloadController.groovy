@@ -57,24 +57,25 @@ class FileDownloadController {
      	 	 object_list.add(it)
      	 }
      	 println "object_list = "+object_list
-     	 def results = GeneInfo.findAllByGene_idInList(object_list)
+     	 def results = GeneInfo.findAllByMrna_idInList(object_list)
 		 def pep_file_builder=""
 		 def nuc_file_builder=""
      	 results.each {
-     	 	println "gene_id = "+it.gene_id
-     	 	pep_file_builder = pep_file_builder + ">"+it.gene_id+"\n"+it.pep+"\n"
-     	 	nuc_file_builder = nuc_file_builder + ">"+it.gene_id+"\n"+it.nuc+"\n"
+     	 	println "gene_id = "+it.mrna_id
+     	 	pep_file_builder = pep_file_builder + ">"+it.mrna_id+"\n"+it.pep+"\n"
+     	 	nuc_file_builder = nuc_file_builder + ">"+it.mrna_id+"\n"+it.nuc+"\n"
 		 }
 		 println "seq = "+params.seq
+		 def name = params.fileName.replaceAll(' ','_')
 		 if (params.seq == 'Peptides'){
-		 	println "created download file "+params.fileName+".aa"
-     	 	response.setHeader "Content-disposition", "attachment; filename="+params.fileName+".aa"
+		 	println "created download file "+name+".aa"
+     	 	response.setHeader "Content-disposition", "attachment; filename="+name+".aa"
          	response.contentType = 'text/csv'
          	response.outputStream << pep_file_builder
          	response.outputStream.flush()
          }else{
-         	 println "created download files "+params.fileName+".fna"
-	    	 response.setHeader "Content-disposition", "attachment; filename="+params.fileName+".fna"
+         	 println "created download files "+name+".fna"
+	    	 response.setHeader "Content-disposition", "attachment; filename="+name+".fna"
     	     response.contentType = 'text/csv'
         	 response.outputStream << nuc_file_builder
          	 response.outputStream.flush()
