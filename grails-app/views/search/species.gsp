@@ -34,13 +34,13 @@
 			phylocanvas = new Smits.PhyloCanvas(
 				dataObject,
 				'svgCanvas1', 
-				800, 400
+				600, 600
 				//'circular'
 			);
 			phylocanvas = new Smits.PhyloCanvas(
 				dataObject,
 				'svgCanvas2', 
-				800, 700,
+				600, 600,
 				'circular'
 			);
 			init(); //unitip
@@ -76,7 +76,7 @@
 	
   	 <g:if test = "${meta}">
   	 <g:link action="">Search</g:link> > Species
-  	 
+  	 <!--
   	 <table>
       <tr>
         <td>
@@ -89,9 +89,11 @@
         </td>
       </tr>
     </table>
-  	 
-  	 <div align="center" id="svgCanvas1"> </div>
-  	  <div align="center" id="svgCanvas2"> </div>
+  	 -->
+  	 <table class="table_100" align="center"><tr>
+  	 <td><div id="svgCanvas1"> </div></td>
+  	  <td><div id="svgCanvas2"> </div></td>
+  	  </tr></table>
   	 	<br>
   	 	<g:each var="res" in="${meta}">
   	 		<a name="${res.genus} ${res.species}"><h2><b><i>${res.genus} ${res.species}</i></b></h2></a>		

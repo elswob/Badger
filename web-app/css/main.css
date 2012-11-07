@@ -522,8 +522,7 @@ input:invalid:focus, select:invalid:focus, textarea:invalid:focus {
 	vertical-align:middle;
 }
 
-table_100 {
-	border-top: 1px solid #DFDFDF;
+.table_100 {
 	border-collapse: collapse;
 	width: 100%;
 	margin-bottom: 1em;
@@ -599,9 +598,11 @@ th.desc a {
 	background: #ffffff;
 }
 
+/*
 th:hover, tr:hover {
 	background: #E1F2B6;
 }
+*/
 
 /* PAGINATION */
 

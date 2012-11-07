@@ -432,8 +432,15 @@
 				<td>
 					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','cum')" value="Cumulative length"/>
 					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','len_gc')" value="Length vs GC"/>
-					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','cov_gc')" value="Coverage vs GC"/>
-					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','len_cov')" value="Length vs Coverage"/>
+					<g:each var="f" in="${meta.files}">
+      					<g:if test="${f.file_type == 'Genome'}">
+      						<!--${f.file_type} ${f.file_name} ${f.cov}-->
+      						<g:if test="${f.cov == 'y'}">
+      							<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','cov_gc')" value="Coverage vs GC"/>
+								<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','len_cov')" value="Length vs Coverage"/>
+      						</g:if>
+      					</g:if>
+   					</g:each>
 				</td>
 			</tr>
 			<tr><td><p>Zoom in by dragging around an area. Reset by double clicking or clicking <font STYLE="cursor: pointer" color="green" class="button-reset">here</font></td></tr>
