@@ -1,4 +1,4 @@
-package GDB
+package badger
 
 import groovy.sql.Sql
 
@@ -14,26 +14,26 @@ def cleanUpGorm() {
 def a = AnnoData.findAllByType('blast')
 a.each{
 	AnnoData anno = it
-  	if (!anno.isAttached()) {
-   	 anno.attach()
+	if (anno.loaded == false){
+		if (!anno.isAttached()) {
+		 anno.attach()
+		}
+		//get FileData parent of AnnoData object
+		def b = anno.filedata
+		def fileLoc = b.file_dir+"/"+anno.anno_file
+		def blastFile = new File("data/"+fileLoc).text
+		println "Source = "+anno.source
+		println "File location = "+fileLoc
+		addGeneBlast(anno,blastFile)
 	}
-	//get FileData parent of AnnoData object
-	def b = anno.filedata
-	def fileLoc = b.file_dir+"/"+anno.anno_file
-	def blastFile = new File("data/"+fileLoc).text
-	println "Source = "+anno.source
-	println "File location = "+fileLoc
-	//if (b.file_dir != "A_viteae"){
-		addGeneBlast(anno.source,blastFile,anno.anno_file)
-	//}
 }
 
-//add Unigene annotations
-def addGeneBlast(db,blastFile,annoFile){
+//add blast annotations
+def addGeneBlast(anno,blastFile){
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
   	//println "Deleting old data..."
-	//def delsql = "delete from gene_blast,gene_info,file_data,anno_data where gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.id = anno_data.filedata_id and anno_data.anno_file = '"+annoFile+"';";
+	//def delsql = "delete from gene_blast,gene_info,file_data,anno_data where gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.id = anno_data.filedata_id and anno_data.anno_file = '"+anno.anno_file+"';";
 	//println delsql
 	//sql.execute(delsql)
 	println "Adding new...."
@@ -42,7 +42,7 @@ def addGeneBlast(db,blastFile,annoFile){
     def count_check = 0
     def count_all = 0
     def anno_id
-    annoMap.anno_db = db
+    annoMap.anno_db = anno.source
     def mrna_id
     blastFile.eachLine { line ->		
         if ((matcher = line =~ /<Iteration_query-def>(.*?)<\/Iteration_query-def>/)){
@@ -119,20 +119,28 @@ def addGeneBlast(db,blastFile,annoFile){
             		count_all++
             		GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
             		GeneBlast gb = new GeneBlast(annoMap)
-					geneFind.addToGblast(gb)
-					
-            		if ((count_all % 10000) ==  0){
-            			println count_all
-            			println new Date()
-            			gb.save(flush:true)
-            			cleanUpGorm()
-            			//println annoMap         			
-            		}else{
-            			gb.save()
-            		}
+					if (geneFind){
+						geneFind.addToGblast(gb)
+						if ((count_all % 10000) ==  0){
+							println count_all
+							println new Date()
+							gb.save(flush:true)
+							cleanUpGorm()
+							//println annoMap         			
+						}else{
+							gb.save()
+						}
+					}else{
+						println mrna_id+" does not exist!"
+					}
             	}
             }
         } 
     }
     println count_all
+    //mark as loaded
+    AnnoData a = AnnoData.findByAnno_file(anno.anno_file)
+	a.loaded = true
+	a.save(flush:true)
+	println a.anno_file+" is loaded"
 }

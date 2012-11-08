@@ -11,6 +11,7 @@ class FileData {
     String cov
     String search
     String download
+    Boolean loaded
 
     static mapping = {
         description type: "text"

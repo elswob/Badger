@@ -10,6 +10,21 @@
   
   <script>
   function demoData(sp){
+  	if (sp == "test"){
+		$("#genus").val("Test");
+		$("#species").val("species");
+		$("#description").val("Test data set.");
+		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/");
+		$("#image_f").val("a_viteae_lifecycle.jpg");
+		$("#image_s").val("A. viteae lifecycle; from http://www.uni-giessen.de");
+		
+		$("#dir").val("test");
+		//$("#trans").val("trans.fa"); $("#trans_v").val("1.1"); $("#trans_d").val("UniGenes"); $("select[name='trans_c']").val("n");
+		$("#genome").val("test_genome.fa"); $("#genome_v").val("1.0"); $("#genome_d").val("The A. viteae genome was sequenced from material supplied by Kenneth Pfarr. Sequencing was performed by the GenePool Genomics Facility, University of Edinburgh. Assembly and annotation of the genome was performed by Georgios Koutsovoulos (assisted by Sujai Kumar and Alex Marshall)."); $("select[name='genome_c']").val("n");
+		$("#genes").val("test.gff"); $("#genes_v").val("1.1"); $("#genes_d").val("Augustus");
+		$("#mrna_trans").val("nAv.1.0.1.aug.transcripts.fasta"); $("#mrna_trans_v").val("1.1"); $("#mrna_trans_d").val("Augustus");
+		$("#mrna_pep").val("nAv.1.0.1.aug.proteins.fasta"); $("#mrna_pep_v").val("1.1"); $("#mrna_pep_d").val("Augustus");
+	}
   	if (sp == "A_vit"){
 		$("#genus").val("Acanthocheilonema");
 		$("#species").val("viteae");
@@ -101,6 +116,7 @@
 	 | <a href = "javascript:void(0)" onclick="demoData('L_sig')">L. sigmodontis </a>
 	 | <a href = "javascript:void(0)" onclick="demoData('D_imm')">D. immitis </a>
 	 | <a href = "javascript:void(0)" onclick="demoData('O_och')">O. ochengi </a>
+	 | <a href = "javascript:void(0)" onclick="demoData('test')">Test </a>
 </div><br>
 
 <h2><b>Project data</b></h2>

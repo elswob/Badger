@@ -1,4 +1,4 @@
-package GDB
+package badger
 
 import groovy.sql.Sql
 

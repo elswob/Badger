@@ -135,6 +135,7 @@ class AdminController {
 			meta.save()
 			
 			def fileMap = [:]
+			fileMap.loaded = false
 			int genomeID
 			int geneID
 			if (params.trans){
@@ -154,7 +155,8 @@ class AdminController {
 					meta.addToFiles(file)
 					file.save()
 				}else{
-					return [error: "no trans"]
+					println "file does not exist!"
+					return [error: "no file", file: "data/"+params.dir+"/"+params.trans]
 				}
 				
 			}
@@ -175,7 +177,8 @@ class AdminController {
 					meta.addToFiles(file)
 					file.save()
 				}else{
-					return [error: "no genome"]
+					println "file does not exist!"
+					return [error: "no file", file: "data/"+params.dir+"/"+params.genome]
 				}
 			}
 			if (params.genes){
@@ -193,7 +196,8 @@ class AdminController {
 					meta.addToFiles(file)
 					file.save()
 				}else{
-					return [error: "no genes"]
+					println "file does not exist!"
+					return [error: "no file", file: "data/"+params.dir+"/"+params.genes]
 				}
 			}
 			if (params.mrna_trans){
@@ -211,7 +215,8 @@ class AdminController {
 					meta.addToFiles(file)
 					file.save()
 				}else{
-					return [error: "no mrna"]
+					println "file does not exist!"
+					return [error: "no file", file: "data/"+params.dir+"/"+params.mrna_trans]
 				}
 			}
 			if (params.mrna_pep){
@@ -229,7 +234,8 @@ class AdminController {
 					meta.addToFiles(file)
 					file.save()
 				}else{
-					return [error: "no pep"]
+					println "file does not exist!"
+					return [error: "no file", file: "data/"+params.dir+"/"+params.mrna_pep]
 				}
 			}			
 			return [dataMap:dataMap, Gid: meta.id]
@@ -263,7 +269,8 @@ class AdminController {
 				annoMap.link = params.b_link.trim()
 				annoMap.source = params.b_source.trim()
 				annoMap.regex = params.b_regex.trim()
-				annoMap.anno_file = params.b_anno_file.trim()	
+				annoMap.anno_file = params.b_anno_file.trim()
+				annoMap.loaded = false	
 				if (new File("data/"+filedir+"/"+params.b_anno_file.trim()).exists()){				
 					println annoMap
 					AnnoData anno = new AnnoData(annoMap)
@@ -286,6 +293,7 @@ class AdminController {
 				annoMap.source = params.f_source.trim()
 				annoMap.regex = params.f_regex.trim()	
 				annoMap.anno_file = params.f_anno_file.trim()
+				annoMap.loaded = false
 				if (new File("data/"+filedir+"/"+params.f_anno_file.trim()).exists()){		
 					println annoMap
 					AnnoData anno = new AnnoData(annoMap)
@@ -307,7 +315,8 @@ class AdminController {
 				annoMap.link = "http://www.ebi.ac.uk/interpro/IEntry?ac="
 				annoMap.regex = "(IPR\\d+).*?"
 				annoMap.source = "InteProScan"
-				annoMap.anno_file = params.i_anno_file.trim()	
+				annoMap.anno_file = params.i_anno_file.trim()
+				annoMap.loaded = false	
 				if (new File("data/"+filedir+"/"+params.i_anno_file.trim()).exists()){
 					println annoMap
 					AnnoData anno = new AnnoData(annoMap)

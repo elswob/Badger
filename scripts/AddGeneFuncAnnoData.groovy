@@ -1,4 +1,4 @@
-package GDB
+package badger
 
 import groovy.sql.Sql
 def grailsApplication
@@ -15,36 +15,40 @@ def cleanUpGorm() {
 def a = AnnoData.findAllByType('fun')
 a.each{
 	AnnoData anno = it
-  	if (!anno.isAttached()) {
-   	 anno.attach()
+	if (anno.loaded == false){
+		if (!anno.isAttached()) {
+		 anno.attach()
+		}
+		//get FileData parent of AnnoData object
+		def b = anno.filedata
+		def fileLoc = b.file_dir+"/"+anno.anno_file
+		def annoFile = new File("data/"+fileLoc).text
+		println "Source = "+anno.source
+		println "File = "+fileLoc
+		//println "type = "+a.type
+		addFunc(anno,annoFile)
 	}
-	//get FileData parent of AnnoData object
-	def b = anno.filedata
-	def fileLoc = b.file_dir+"/"+anno.anno_file
-	def annoFile = new File("data/"+fileLoc).text
-	println "Source = "+anno.source
-	println "File = "+fileLoc
-	//println "type = "+a.type
-	addFunc(anno.source,annoFile,anno.anno_file)
 }
 
 a = AnnoData.findAllByType('ipr')
 a.each{
 	AnnoData anno = it
-  	if (!anno.isAttached()) {
-   	 anno.attach()
+	if (anno.loaded == false){
+		if (!anno.isAttached()) {
+		 anno.attach()
+		}
+		//get FileData parent of AnnoData object
+		def b = anno.filedata
+		def fileLoc = b.file_dir+"/"+anno.anno_file
+		def annoFile = new File("data/"+fileLoc).text
+		println "Source = "+anno.source
+		println "File = "+fileLoc
+		//println "type = "+a.type
+		addInterProScan(anno,annoFile)
 	}
-	//get FileData parent of AnnoData object
-	def b = anno.filedata
-	def fileLoc = b.file_dir+"/"+anno.anno_file
-	def annoFile = new File("data/"+fileLoc).text
-	println "Source = "+anno.source
-	println "File = "+fileLoc
-	//println "type = "+a.type
-	addInterProScan(annoFile,anno.anno_file)
 }
 
-def addFunc(source,file,annoFile){
+def addFunc(anno,annoFile){
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
   	//println "Deleting old data..."
@@ -55,36 +59,43 @@ def addFunc(source,file,annoFile){
 	println new Date()
     def annoMap = [:]
     def count=0
-    file.eachLine { line ->
-      		count++
-    	    splitter = line.split("\t")
-    	    def mrna_id = splitter[0]
-    	    annoMap.anno_db = source
-    	    annoMap.anno_id = splitter[2]
-    	    annoMap.anno_start = splitter[3]
-    	    annoMap.anno_stop = splitter[4]
-    	    def score = splitter[5] as double
-    	    annoMap.score = score
-    	    annoMap.descr = splitter[6]
-    	    //println annoMap
-    	    GeneInfo geneFindFun = GeneInfo.findByMrna_id(mrna_id)
-            GeneAnno ga = new GeneAnno(annoMap)
+    annoFile.eachLine { line ->
+		count++
+		splitter = line.split("\t")
+		def mrna_id = splitter[0]
+		annoMap.anno_db = anno.source
+		annoMap.anno_id = splitter[2]
+		annoMap.anno_start = splitter[3]
+		annoMap.anno_stop = splitter[4]
+		def score = splitter[5] as double
+		annoMap.score = score
+		annoMap.descr = splitter[6]
+		//println annoMap
+		GeneInfo geneFindFun = GeneInfo.findByMrna_id(mrna_id)
+		GeneAnno ga = new GeneAnno(annoMap)
+		if (geneFindFun){
 			geneFindFun.addToGanno(ga)
-    	    if ((count % 5000) ==  0){
-            	println count
-            	println new Date()
-            	ga.save(flush:true)
-            	cleanUpGorm()            	
-            }else{
-            	ga.save()
-            }	
-    	    //new GeneAnno(annoMap).save()
+			if ((count % 5000) ==  0){
+				println count
+				println new Date()
+				ga.save(flush:true)
+				cleanUpGorm()            	
+			}else{
+				ga.save()
+			}	
+		}else{
+			println mrna_id+" does not exist"
+		}
     }
     println count
+    AnnoData a = AnnoData.findByAnno_file(anno.anno_file)
+	a.loaded = true
+	a.save(flush:true)
+	println a.anno_file+" is loaded"
 }
 
 // add the interposcan raw data 
-def addInterProScan(file,annoFile){
+def addInterProScan(anno,annoFile){
 	cleanUpGorm()
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
@@ -104,38 +115,46 @@ def addInterProScan(file,annoFile){
         }
     }
     def annoMap = [:]
-    file.eachLine { line ->
-      		count++
-      		def mrna_id
-    	    splitter = line.split("\t")
-    	    if (splitter[11] != 'NULL'){
-				if ((matcher = splitter[0] =~ /(.*)/)){
-					mrna_id = matcher[0][1]
-				}
-				annoMap.anno_db = splitter[3]
-				annoMap.anno_id = splitter[11]+" - "+splitter[4]
-				def start = splitter[6] as int
-				def stop = splitter[7] as int
-				annoMap.anno_start = start
-				annoMap.anno_stop = stop
-				def score = splitter[8] as float
-				annoMap.score = score
-				annoMap.descr = iprMap[splitter[11]]
-				if (score < 1e-5){
-					GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
-            		GeneAnno ga = new GeneAnno(annoMap)
-					geneFind.addToGanno(ga)
-                  	if ((count % 5000) ==  0){
-            			println count
-                      	//println annoMap
-                      	println new Date()          			
+    annoFile.eachLine { line ->
+		count++
+		def mrna_id
+		splitter = line.split("\t")
+		if (splitter[11] != 'NULL'){
+			if ((matcher = splitter[0] =~ /(.*)/)){
+				mrna_id = matcher[0][1]
+			}
+			annoMap.anno_db = splitter[3]
+			annoMap.anno_id = splitter[11]+" - "+splitter[4]
+			def start = splitter[6] as int
+			def stop = splitter[7] as int
+			annoMap.anno_start = start
+			annoMap.anno_stop = stop
+			def score = splitter[8] as float
+			annoMap.score = score
+			annoMap.descr = iprMap[splitter[11]]
+			if (score < 1e-5){
+				GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
+				GeneAnno ga = new GeneAnno(annoMap)
+				if (geneFind){
+				geneFind.addToGanno(ga)
+					if ((count % 5000) ==  0){
+						println count
+						//println annoMap
+						println new Date()          			
 						ga.save(flush:true)
 						cleanUpGorm()
-                    }else{
-                      	ga.save()
-                    }
+					}else{
+						ga.save()
+					}
+				}else{
+					println mrna_id+" does not exist!"
 				}
-		  }
+			}
+		}
     }
     println count
+	AnnoData a = AnnoData.findByAnno_file(anno.anno_file)
+	a.loaded = true
+	a.save(flush:true)
+	println a.anno_file+" is loaded"
 }

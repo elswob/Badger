@@ -1,4 +1,4 @@
-package GDB
+package badger
 
 import groovy.sql.Sql
 
@@ -20,43 +20,48 @@ def getBlast(){
 	return program
 }
 
-def getFiles = FileData.findAll(sort:"id")
-getFiles.each {  
-	def blastPath = getBlast()	
-	def fileLoc = it.file_dir+"/"+it.file_name
-	println "Processing "+fileLoc
-    println "Zipping up for download..."
-	def ant = new AntBuilder()
-	ant.zip(destfile: "data/"+it.file_dir+"/"+it.file_name+".zip", basedir: "data/"+it.file_dir, includes: it.file_name)
-	if (it.file_type == "Genome"){
-		println "Creating BLAST database..."
-		def comm = "$blastPath/makeblastdb -in data/"+fileLoc+" -dbtype nucl -out data/"+fileLoc
-		def p = comm.execute()   
-		addGenomeData(fileLoc, it.cov, it.file_name)
-	}else if (it.file_type == "Transcriptome"){
-		println "Creating BLAST database..."
-		def comm = "$blastPath/makeblastdb -in data/"+fileLoc+" -dbtype nucl -out data/"+fileLoc
-		def p = comm.execute()  
-		addTransData(fileLoc, it.cov, it.id)
-	}else if (it.file_type == "Genes"){
-      	def getSeqs = FileData.findAllByFile_link(it.file_name)
-      	def nuc
-      	def pep
-      	getSeqs.each{
-          	if (it.file_type == "mRNA"){
-          		nuc = it.file_dir+"/"+it.file_name
-          	  	println "Creating BLAST database..."
-				def comm = "$blastPath/makeblastdb -in data/"+nuc+" -dbtype nucl -out data/"+nuc
-				def p = comm.execute()               
-            }else if (it.file_type == "Peptide"){
-              	pep = it.file_dir+"/"+it.file_name
-                println "Creating BLAST database..."
-				def comm = "$blastPath/makeblastdb -in data/"+pep+" -dbtype prot -out data/"+pep
-				def p = comm.execute() 
-            }
-      	}
-		addGeneData(fileLoc, it.file_name, nuc, pep)
+def getFiles = FileData.findAllByLoaded(false,[sort:"id"])
+if (getFiles){
+	getFiles.each {  
+		def blastPath = getBlast()	
+		def fileLoc = it.file_dir+"/"+it.file_name
+		println "Processing "+fileLoc
+		println "Zipping up for download..."
+		def ant = new AntBuilder()
+		ant.zip(destfile: "data/"+it.file_dir+"/"+it.file_name+".zip", basedir: "data/"+it.file_dir, includes: it.file_name)
+		if (it.file_type == "Genome"){
+			println "Creating BLAST database..."
+			def comm = "$blastPath/makeblastdb -in data/"+fileLoc+" -dbtype nucl -out data/"+fileLoc
+			def p = comm.execute()   
+			addGenomeData(fileLoc, it.cov, it.file_name)
+		}else if (it.file_type == "Transcriptome"){
+			println "Creating BLAST database..."
+			def comm = "$blastPath/makeblastdb -in data/"+fileLoc+" -dbtype nucl -out data/"+fileLoc
+			def p = comm.execute()  
+			addTransData(fileLoc, it.cov, it.id)
+		}else if (it.file_type == "Genes"){
+			def getSeqs = FileData.findAllByFile_link(it.file_name)
+			def nuc
+			def pep
+			getSeqs.each{
+				def loc = it.file_dir+"/"+it.file_name
+				if (it.file_type == "mRNA"){
+					nuc = it
+					println "Creating BLAST database..."
+					def comm = "$blastPath/makeblastdb -in data/"+loc+" -dbtype nucl -out data/"+loc
+					def p = comm.execute()               
+				}else if (it.file_type == "Peptide"){
+					pep = it
+					println "Creating BLAST database..."
+					def comm = "$blastPath/makeblastdb -in data/"+loc+" -dbtype prot -out data/"+loc
+					def p = comm.execute() 
+				}
+			}
+			addGeneData(fileLoc, it.file_name, nuc, pep)
+		}
 	}
+}else{
+	println "There are no new data files to load into the database"
 }
 //add the Transcripts
 def addTransData(fileLoc, cov, data_id, file_id){
@@ -209,10 +214,13 @@ def addGenomeData(fileLoc, cov, file_name){
 	file.addToScaffold(genome)
 	genome.save(flush:true)
 	println count
+	//mark file as loaded
+	file.loaded = true
+	file.save(flush:true)
 }
 
 //add the Genes
-def addGeneData(fileLoc, file_name, trans, pep){
+def addGeneData(fileLoc, file_name, nuc, pep){
 	FileData file = FileData.findByFile_name(file_name)	
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
@@ -230,8 +238,8 @@ def addGeneData(fileLoc, file_name, trans, pep){
 	def gene_count_gc
 	def gene_start
 	println "Adding new gene data... "
-	println "Reading nucleotide data - "+trans
-	def nucFile = new File("data/"+trans).text
+	println "Reading nucleotide data - "+nuc.file_dir+"/"+nuc.file_name
+	def nucFile = new File("data/"+nuc.file_dir+"/"+nuc.file_name).text
 	def sequence=""
 	def count=0
 	nucFile.split("\n").each{
@@ -248,8 +256,8 @@ def addGeneData(fileLoc, file_name, trans, pep){
 	//catch the last one
 	nucData."${geneId}" = sequence.toUpperCase()
 	
-	println "Reading peptide data - "+pep
-	def pepFile = new File("data/"+pep).text
+	println "Reading peptide data - "+pep.file_dir+"/"+pep.file_name
+	def pepFile = new File("data/"+pep.file_dir+"/"+pep.file_name).text
 	sequence=""
 	pepFile.split("\n").each{
 		if ((matcher = it =~ /^>(.*)/)){
@@ -267,8 +275,8 @@ def addGeneData(fileLoc, file_name, trans, pep){
 	pepData."${geneId}" = sequence.toUpperCase()
   
 	println "Reading gff file - "+fileLoc
-	println new Date()
 	println "Adding gene data"
+	println new Date()
 	def dataFile = new File("data/"+fileLoc).text
 	//def dataFile = new File("data/A_viteae/test.gff".trim()).text
 	def gene_count=0
@@ -335,6 +343,18 @@ def addGeneData(fileLoc, file_name, trans, pep){
 		}
 	}
 	println gene_count
+	
+	//mark files as loaded    
+    FileData nucUp = FileData.findByFile_name(nuc.file_name)
+	nucUp.loaded = true
+	nucUp.save(flush:true)
+	println nuc.file_name+" is loaded"
+	
+	FileData pepUp = FileData.findByFile_name(pep.file_name)
+	pepUp.loaded = true
+	pepUp.save(flush:true)
+	println pep.file_name+" is loaded"
+	
 	
 	gene_count = 0
 	//read the file again as the gene tables need to be complete to use ids in exon tables
@@ -410,4 +430,8 @@ def addGeneData(fileLoc, file_name, trans, pep){
 	  	}    
 	}
 	println gene_count
+	file.loaded = true
+	file.save()
+	println file.file_name+" is loaded"
+    cleanUpGorm()
 }
