@@ -121,7 +121,7 @@
   		$('#chart1').bind('jqplotDataClick',
             function (ev, seriesIndex, pointIndex, data) {
             	//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-            	window.open("/search/gene_link?annoType=Exon_num&val=" + data[0]);
+            	//window.open("/search/gene_link?annoType=Exon_num&val=" + data[0]);
 	    	}
 	    );  
 	    
@@ -204,7 +204,7 @@
   		$('#chart2').bind('jqplotDataClick',
             function (ev, seriesIndex, pointIndex, data) {
             	//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-            	window.open("/search/gene_link?annoType=Exon_length&val=" + data[0]);
+            	//window.open("/search/gene_link?annoType=Exon_length&val=" + data[0]);
 	    	}
 	    );  
 	    
@@ -294,7 +294,7 @@
   		$('#chart3').bind('jqplotDataClick',
             function (ev, seriesIndex, pointIndex, data) {
             	//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-            	window.open("/search/gene_link?annoType=Length&val=" + data[0]);
+            	//window.open("/search/gene_link?annoType=Length&val=" + data[0]);
 	    	}
 	    );  
 	
