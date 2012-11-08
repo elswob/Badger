@@ -276,7 +276,7 @@ class AdminController {
 					AnnoData anno = new AnnoData(annoMap)
 					file.addToAnno(anno)
 					anno.save()
-					return [annoMap: annoMap]
+					return [annoMap: annoMap, Gid:params.Gid]
 				}else{
 					return [error: "no file", file: "data/"+filedir+"/"+params.b_anno_file]
 				}

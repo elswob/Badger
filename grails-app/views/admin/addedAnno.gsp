@@ -22,7 +22,7 @@
 			<tr><td><b>File:</b></td><td>${annoMap.anno_file}</td></tr>
 			<tr><td><b>Source:</b></td><td>${annoMap.source}</td></tr>
 		</table>
-		<p>Now <g:link action="addAnno">add</g:link> some more annotations</p> 
+		<p>Now <g:link action="addAnno" params="${[Gid:Gid]}">add</g:link> some more annotations</p> 
 	</g:else>	
 </body>
 </html>

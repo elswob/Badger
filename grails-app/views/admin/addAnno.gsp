@@ -133,6 +133,7 @@
 			</select>
 			<p>File name<font color="red">*</font></p>
 			<g:textArea name="i_anno_file" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+			<input type = "hidden" name="Gid" value="${dataSelect.id}">
 			<br><input class="mybuttons" type="button" value="Add data" onclick="submit()" >
 			<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 	</div>
