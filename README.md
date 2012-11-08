@@ -1,4 +1,4 @@
-GDB
+Badger
 ===
 
-Genome database
+A lightweight genome environment
