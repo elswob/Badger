@@ -1,4 +1,4 @@
-package GDB
+package badger
 
 class GeneBlast {
     String anno_db

@@ -1,4 +1,4 @@
-package GDB
+package badger
 import grails.plugins.springsecurity.Secured
 //@Secured(['ROLE_USER','ROLE_ADMIN'])
 

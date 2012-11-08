@@ -1,13 +1,13 @@
-package GDB
+package badger
 
-class TransInfo {
+class GenomeInfo {
     String contig_id
     String sequence
     Float gc
     Float coverage
     int length
     static constraints = {
-        contig_id(blank:false,unique: true)
+        contig_id(blank:false)
         sequence(blank:false)
         gc(blank:false)
         coverage(blank:false)
@@ -15,7 +15,6 @@ class TransInfo {
     }
     static mapping = {
         sequence type: "text"
-        contig_id index:'trans_contig'
     }
     static belongsTo = [ file: FileData ]
 }

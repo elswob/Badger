@@ -1,4 +1,4 @@
-package GDB
+package badger
 
 class PeptideService {
 	def getComp(def seq){

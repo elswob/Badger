@@ -1,4 +1,4 @@
-package GDB
+package badger
 
 class FileData {
     String file_type

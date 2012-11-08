@@ -454,7 +454,7 @@
 		 <table>
 		 <tr><td><b>Number genes</b></td><td>${printf("%,d\n",gene_stats.genenum)}</td></tr>
 		 <tr><td><b>Number transcripts</b></td><td>${printf("%,d\n",gene_stats.mrnanum)}</td></tr>
-		 <tr><td><b>Frequency (genes per Kb)</b></td><td>${printf("%.4g",(GDB.GeneInfo.count()/genome_stats.span)*1000)}</td></tr>
+		 <tr><td><b>Frequency (genes per Kb)</b></td><td>${printf("%.4g",(badger.GeneInfo.count()/genome_stats.span)*1000)}</td></tr>
 		 <tr><td><b>Mean transcript length (bp)</b></td><td>${printf("%,d\n",gene_stats.mean)}</td></tr>
 		 <tr><td><b>Smallest (bp)</b></td><td>${printf("%,d\n",gene_stats.min)}</td></tr>
 		 <tr><td><b>Largest (bp)</b></td><td>${printf("%,d\n",gene_stats.max)}</td></tr>

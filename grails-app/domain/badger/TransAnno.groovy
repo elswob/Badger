@@ -1,13 +1,16 @@
-package GDB
+package badger
 
-class GeneAnno {
+class TransAnno {
+    String contig_id
     String anno_db
     String anno_id
     int anno_start
     int anno_stop
     float score 
     String descr
+    int file_id
     static constraints = {
+        contig_id(blank:false)
         anno_db(blank:false)
         anno_id(blank:false)
         anno_start(blank:false)
@@ -18,5 +21,4 @@ class GeneAnno {
     static mapping = {
         descr type: "text"
     }
-    static belongsTo = [ gene: GeneInfo ]
 }

@@ -1,4 +1,4 @@
-package GDB
+package badger
 
 class GeneInfo {
     String gene_id

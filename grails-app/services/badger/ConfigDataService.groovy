@@ -1,4 +1,4 @@
-package GDB
+package badger
 
 class ConfigDataService {
 	def grailsApplication

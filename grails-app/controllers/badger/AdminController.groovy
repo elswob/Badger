@@ -1,4 +1,4 @@
-package GDB
+package badger
 import grails.plugins.springsecurity.Secured
 import groovy.time.*
 import groovy.sql.Sql

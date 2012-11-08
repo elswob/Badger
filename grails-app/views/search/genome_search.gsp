@@ -243,7 +243,7 @@
 	
 </head>
 <body>
-     <h1>Search the ${printf("%,d\n",GDB.GenomeInfo.count())} contigs by attribute:</h1>
+     <h1>Search the ${printf("%,d\n",badger.GenomeInfo.count())} contigs by attribute:</h1>
      <div>
      <table>
      	<tr>

@@ -29,7 +29,7 @@
 <body>
   <div id="content">
   <br>
-     <p>There are three methods to search the ${GDB.GeneInfo.count()} genes:</p><br>
+     <p>There are three methods to search the ${badger.GeneInfo.count()} genes:</p><br>
      1. By BLAST homology<br>
      2. By functional annoation<br>
      2. By domain annotation<br>

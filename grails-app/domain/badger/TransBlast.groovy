@@ -1,9 +1,18 @@
-package GDB
+package badger
 
-class TransAnno {
+class TransBlast {
     String contig_id
     String anno_db
     String anno_id
+    int hit_start
+    int hit_stop
+    int identity
+    int positive
+    int gaps
+    int align
+    String qseq
+    String hseq
+    String midline
     int anno_start
     int anno_stop
     float score 
@@ -20,5 +29,8 @@ class TransAnno {
     }
     static mapping = {
         descr type: "text"
+        qseq type: "text"
+        hseq type: "text"
+        midline type: "text"
     }
 }
