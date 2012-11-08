@@ -276,9 +276,9 @@ class AdminController {
 					AnnoData anno = new AnnoData(annoMap)
 					file.addToAnno(anno)
 					anno.save()
-					return [annoMap: annoMap, Gid:params.Gid]
+					return [annoMap: annoMap, file:file]
 				}else{
-					return [error: "no file", file: "data/"+filedir+"/"+params.b_anno_file]
+					return [error: "no file", fileLoc: "data/"+filedir+"/"+params.b_anno_file, file:file]
 				}
 			}
 		}else if (params.annoSelect == "2"){
@@ -299,9 +299,9 @@ class AdminController {
 					AnnoData anno = new AnnoData(annoMap)
 					file.addToAnno(anno)
 					anno.save()
-					return [annoMap: annoMap]
+					return [annoMap: annoMap, file:file]
 				}else{
-					return [error: "no file", file: "data/"+filedir+"/"+params.f_anno_file]
+					return [error: "no file", fileLoc: "data/"+filedir+"/"+params.f_anno_file, file:file]
 				}
 			}
 		}else if (params.annoSelect == "3"){
@@ -322,9 +322,9 @@ class AdminController {
 					AnnoData anno = new AnnoData(annoMap)
 					file.addToAnno(anno)
 					anno.save()
-					return [annoMap: annoMap]
+					return [annoMap: annoMap, file:file]
 				}else{
-					return [error: "no file", file: "data/"+filedir+"/"+params.i_anno_file]
+					return [error: "no file", fileLoc: "data/"+filedir+"/"+params.i_anno_file, file:file]
 				}
 			}
 		}
