@@ -13,6 +13,7 @@
   	if (sp == "test"){
 		$("#genus").val("Test");
 		$("#species").val("species");
+		$("#version").val("1.0.1");
 		$("#description").val("Test data set.");
 		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/");
 		$("#image_f").val("a_viteae_lifecycle.jpg");
@@ -28,6 +29,7 @@
   	if (sp == "A_vit"){
 		$("#genus").val("Acanthocheilonema");
 		$("#species").val("viteae");
+		$("#version").val("1.0.1");
 		$("#description").val("Acanthocheilonema viteae is a filarial nematode parasite of rodents. It is widely used as a model for human filariases. Importantly, A. viteae lacks the Wolbachia bacterial endosymbiont found in most human-infective filarial nematodes. Thus this species has become central in efforts to understand the role of the Wolbachia in the nematode-bacterial symbiosis, and in particular its possible role in immune evasion. The Wolbachia is also a drug target in nematodes that carry this symbiont, so work on A. viteae can also help to disentangle anti-nematode and anti-symbiont effects.");
 		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/");
 		$("#image_f").val("a_viteae_lifecycle.jpg");
@@ -43,6 +45,7 @@
 	if (sp == "L_sig"){
 		$("#genus").val("Litomosoides");
 		$("#species").val("sigmodontis");
+		$("#version").val("2.1.2");
 		$("#description").val("Litomosoides sigmodontis is a filarial nematode parasite of rodents. Found in cotton rats in the wild, it has been adapted to the laboratory mouse and is widely used as a model for human filariases. Beginning with work in Odile Bain's laboratory in Paris, this L. sigmodontis model has become central in efforts to develop vaccines against filarial infections, test new drugs before they are progressed to clinical trials, and to investigate the basic biology of the fascinating interactions between parasitic nematodes and their mammalian hosts.");
 		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nLs.2.1.2/");
 		$("#image_f").val("Litomosoides_sigmodontis.jpg");
@@ -57,6 +60,7 @@
 	if (sp == "D_imm"){
 		$("#genus").val("Dirofilaria");
 		$("#species").val("immitis");
+		$("#version").val("2.2.2");
 		$("#description").val("The heartworm Dirofilaria immitis is an important parasite of dogs. Transmitted by mosquitoes in warmer climatic zones, it is spreading across Southern Europe and the Americas at an alarming pace. There is no vaccine and chemotherapy is prone to complications. To learn more about this parasite, we have sequenced the genomes of D. immitis and its endosymbiont Wolbachia.");
 		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nDi.2.2.2/");
 		$("#image_f").val("D_immitis.jpg");
@@ -71,6 +75,7 @@
 	if (sp == "O_och"){
 		$("#genus").val("Onchocerca");
 		$("#species").val("ochengi");
+		$("#version").val("2.0.1");
 		$("#description").val("Onchocerca ochengi is a filarial nematode parasite of cattle, and is native to West Africa, including Cameroon, where the specimens used for this genome project were isolated. As well as being a significant disease of native (Bos indicus) cattle, O. ochengi is very closely related to the human-parasitic Onchocerca volvulus. O. volvulus causes river blindness and skin disease throughout West Africa, and is the subject of intense efforts by several international agencies and teams aiming at disease eradication. The relationship between O. ochengi and O. volvulus, and concern over the possibility of cattle acting as a zoonotic reservoir make understanding of the parasite of some importance. Additionally, the genetic closeness to O. volvulus and the tractability of the bovine host makes the O. ochengi-cattle model a useful one in vaccine and drug development work.");
 		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nOo.2.0.1/");
 		$("#image_f").val("O_ochengi.jpg");
@@ -132,6 +137,8 @@
 	</div>
 	<p><b>Species</b><font color="red">*</font></p>
 	<g:textField name="species" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+	<p><b>Version</b><font color="red">*</font></p>
+	<g:textField name="version" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<p><b>Description</b><font color="red">*</font></p>
 	<g:textArea name="description" style="width: 80%; height: 50px; border: 3px solid #cccccc; padding: 2px;"/><br>	
 	<p><b>GBrowse link</b></p>

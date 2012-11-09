@@ -73,9 +73,9 @@ def addTransData(fileLoc, cov, data_id, file_id){
 	if (cov == 'y'){
 		cov_check = true
 		println "Data has coverage info."
-		header_regex = "^>(.*?)_(.*)"
+		header_regex = /^>(\w+)_(.*)/
 	}else{
-		header_regex = "^>(.*)"
+		header_regex = /^>(\w+)/
 		println "Data has no coverage info."
 	}
 	def sequence=""
@@ -137,7 +137,7 @@ def addTransData(fileLoc, cov, data_id, file_id){
 
 //add the genome data (for coverage info header needs to be in format of >contigID_coverage)
 def addGenomeData(fileLoc, cov, file_name){
-	FileData file = FileData.findByFile_name(file_name)
+	FileData Gfile = FileData.findByFile_name(file_name)
   	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
 	println "Adding genome data for - "+fileLoc
@@ -151,9 +151,9 @@ def addGenomeData(fileLoc, cov, file_name){
 	if (cov == 'y'){
 		cov_check = true
 		println "Data has coverage info."
-		header_regex = "^>(.*?)_(.*)"
+		header_regex = /^>(\w+)_(.*)/
 	}else{
-		header_regex = "^>(.*)"
+		header_regex = /^>(\w+)/
 		println "Data has no coverage info."
 	}
 	def sequence=""
@@ -182,7 +182,7 @@ def addGenomeData(fileLoc, cov, file_name){
 				contigMap.sequence = sequence
 				//println contigMap
 				GenomeInfo genome = new GenomeInfo(contigMap)
-				file.addToScaffold(genome)				
+				Gfile.addToScaffold(genome)				
 				if ((count % 2000) ==  0){
 					println count
 					genome.save(flush:true)
@@ -211,17 +211,19 @@ def addGenomeData(fileLoc, cov, file_name){
 	contigMap.sequence = sequence
 	contigMap.coverage = coverage
 	GenomeInfo genome = new GenomeInfo(contigMap)
-	file.addToScaffold(genome)
+	Gfile.addToScaffold(genome)
 	genome.save(flush:true)
 	println count
 	//mark file as loaded
-	file.loaded = true
-	file.save(flush:true)
+	def gSql = "update file_data set loaded = true where file_name = '"+Gile.file_name+"'";
+	println gSql
+    sql.execute(gSql)
+	println Gfile.file_name+" is loaded"
 }
 
 //add the Genes
 def addGeneData(fileLoc, file_name, nuc, pep){
-	FileData file = FileData.findByFile_name(file_name)	
+	FileData gfile = FileData.findByFile_name(file_name)	
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
   	//println "Deleting any old gene and exon data..."
@@ -331,7 +333,7 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 			geneMap.nuc = nucData."${mrna_id}"
 			geneMap.pep = pepData."${mrna_id}"
 			GeneInfo gene = new GeneInfo(geneMap)
-			file.addToGene(gene)
+			gfile.addToGene(gene)
 			if ((gene_count % 5000) ==  0){
 					println gene_count
 					//println geneMap
@@ -344,17 +346,29 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 	}
 	println gene_count
 	
-	//mark files as loaded    
-    FileData nucUp = FileData.findByFile_name(nuc.file_name)
-	nucUp.loaded = true
-	nucUp.save(flush:true)
+	//mark files as loaded 
+	   
+    //FileData nucUp = FileData.findByFile_name(nuc.file_name)
+	//nucUp.loaded = true
+	//nucUp.save(flush:true)
+	
+    def nSql = "update file_data set loaded = true where file_name = '"+nuc.file_name+"'";
+    println nSql
+    sql.execute(nSql)
 	println nuc.file_name+" is loaded"
 	
-	FileData pepUp = FileData.findByFile_name(pep.file_name)
-	pepUp.loaded = true
-	pepUp.save(flush:true)
+	//FileData pepUp = FileData.findByFile_name(pep.file_name)
+	//pepUp.loaded = true
+	//pepUp.save(flush:true)
+	
+	def pSql = "update file_data set loaded = true where file_name = '"+pep.file_name+"'";
+	println pSql
+    sql.execute(pSql)
 	println pep.file_name+" is loaded"
 	
+	//gfile.loaded = true
+	//gfile.save(flush:true)
+	//println gfile.file_name+" is loaded"
 	
 	gene_count = 0
 	//read the file again as the gene tables need to be complete to use ids in exon tables
@@ -430,8 +444,9 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 	  	}    
 	}
 	println gene_count
-	file.loaded = true
-	file.save()
-	println file.file_name+" is loaded"
+	def fSql = "update file_data set loaded = true where file_name = '"+gfile.file_name+"'";
+	println fSql
+    sql.execute(fSql)
+	println gfile.file_name+" is loaded"
     cleanUpGorm()
 }

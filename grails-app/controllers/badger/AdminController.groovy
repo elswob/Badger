@@ -130,6 +130,7 @@ class AdminController {
 			dataMap.image_file = params.image_f.trim()
 			dataMap.image_source = params.image_s.trim()
 			dataMap.gbrowse = params.gbrowse.trim()
+			dataMap.Gversion = params.version.trim()
 			println dataMap
 			MetaData meta = new MetaData(dataMap)
 			meta.save()

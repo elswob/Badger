@@ -11,7 +11,7 @@ def cleanUpGorm() {
     propertyInstanceMap.get().clear() 
 }
 
-def a = AnnoData.findAllByType('blast')
+def a = AnnoData.findAllByType('blast'[sort:"id"])
 a.each{
 	AnnoData anno = it
 	if (anno.loaded == false){
@@ -139,8 +139,8 @@ def addGeneBlast(anno,blastFile){
     }
     println count_all
     //mark as loaded
-    AnnoData a = AnnoData.findByAnno_file(anno.anno_file)
-	a.loaded = true
-	a.save(flush:true)
-	println a.anno_file+" is loaded"
+    def aSql = "update anno_data set loaded = true where anno_id = '"+anno.id+"'";
+    println aSql
+    sql.execute(aSql)
+	println anno.anno_file+" is loaded"
 }

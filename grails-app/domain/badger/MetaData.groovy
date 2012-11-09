@@ -4,6 +4,7 @@ class MetaData {
     String genus
     String species
     String description
+    String Gversion
     String image_file
     String image_source
     String gbrowse

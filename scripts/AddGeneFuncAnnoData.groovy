@@ -88,10 +88,11 @@ def addFunc(anno,annoFile){
 		}
     }
     println count
-    AnnoData a = AnnoData.findByAnno_file(anno.anno_file)
-	a.loaded = true
-	a.save(flush:true)
-	println a.anno_file+" is loaded"
+    //mark as loaded
+    def aSql = "update anno_data set loaded = true where id = '"+anno.id+"'";
+    println aSql
+    sql.execute(aSql)
+	println anno.anno_file+" is loaded"
 }
 
 // add the interposcan raw data 
@@ -153,8 +154,9 @@ def addInterProScan(anno,annoFile){
 		}
     }
     println count
-	AnnoData a = AnnoData.findByAnno_file(anno.anno_file)
-	a.loaded = true
-	a.save(flush:true)
-	println a.anno_file+" is loaded"
+	//mark as loaded
+    def aSql = "update anno_data set loaded = true where id = '"+anno.id+"'";
+    println aSql
+    sql.execute(aSql)
+	println anno.anno_file+" is loaded"
 }
