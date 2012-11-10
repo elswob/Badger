@@ -103,8 +103,8 @@ function fnFormatDetails( oTable, nTr )
     <thead>
         <tr>
             <th></th>
-            <th width="40%">Title</th>
-            <th>Authors</th>
+            <th width="30%">Title</th>
+            <th width="40%">Authors</th>
             <th>Journal</th>
             <th>Date</th>
         </tr>

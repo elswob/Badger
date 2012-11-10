@@ -12,7 +12,7 @@ class GeneInfo {
     float gc
     String strand
     static constraints = {
-        gene_id(blank:false, unique: true)
+        mrna_id(blank:false, unique: true)
         source(blank:false)
         contig_id(blank:false)
         start(blank:false)

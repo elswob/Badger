@@ -20,6 +20,74 @@ def getBlast(){
 	return program
 }
 
+//edit phyloXMl file if present
+def editTree(){
+	def tree = new File("web-app/trees/badger_tree.xml")
+	if (tree.exists()){tree.delete()}
+	
+	def treeFile = new File("web-app/trees/GK_nem_rooted.xml").text
+	
+	def species = MetaData.findAll()
+	def sList = []
+	species.each{
+	  sList.push(it.genus+" "+it.species)
+	}
+	println "list = "+sList
+	
+	//<chart>
+	//  <component>bold</component>
+	//</chart>
+	//<annotation>
+	//  <desc>Dirofilaria immitis</desc>
+	//  <uri>#Dirofilaria immitis</uri>
+	//</annotation>
+	
+	treeFile.split("\n").each{
+	  if ((matcher = it =~ /^<phylogeny rooted=.*/)){
+		tree << it+"\n"
+		tree << " <render>\n"
+		tree << " <parameters>\n"
+		tree << "  <circular>\n"
+		tree << "   <bufferRadius>0.6</bufferRadius>\n"
+		tree << "  </circular>\n"
+		tree << "  <rectangular>\n"
+		tree << "   <bufferX>200</bufferX>\n"
+		tree << "  </rectangular>\n"
+		tree << " </parameters>\n"
+		tree << "  <charts>\n"
+		tree << "   <component type=\"binary\" thickness=\"0\" />\n"
+		tree << "  </charts>\n"
+		tree << "  <styles>\n"
+		tree << "   <bold fill=\"#e5bd94\" stroke=\"#e5bd94\" type=\"radialGradient\" font-size=\"12\">\n"        
+		tree << "    <stop offset=\"0%\" style=\"stop-color:#e5bd94; stop-opacity:0\"/>\n"
+		tree << "    <stop offset=\"93%\" style=\"stop-color:#e5bd94; stop-opacity:1\"/>\n"
+		tree << "    <stop offset=\"100%\" style=\"stop-color:#D1A373; stop-opacity:1\"/>\n"
+		tree << "   </bold>\n" 		
+		tree << "  </styles>\n"
+		tree << " </render>\n"
+	  }else if ((matcher = it =~ /(.*?)<name>(.*?)<\/name>/)){
+		def l = it
+		println "match = "+matcher[0][2]
+		if (matcher[0][2] in sList){
+		  tree << matcher[0][1]+"<name bgStyle=\"bold\">"+matcher[0][2]+"</name>\n"
+		  tree << matcher[0][1]+"<chart>\n"
+		  tree << " "+matcher[0][1]+"<component>bold</component>\n"
+		  tree << matcher[0][1]+"</chart>\n"
+		  tree << matcher[0][1]+"<annotation>\n"
+		  tree << " "+matcher[0][1]+"<desc>"+matcher[0][2]+"</desc>\n"
+		  tree << " "+matcher[0][1]+"<uri>#"+matcher[0][2]+"</uri>\n"
+		  tree << matcher[0][1]+"</annotation>\n" 
+		  println "in list"
+		}else{
+		  tree << it+"\n"
+		}
+	  }else{      
+		tree << it+"\n"
+	  }
+   }
+}
+editTree()
+
 def getFiles = FileData.findAllByLoaded(false,[sort:"id"])
 if (getFiles){
 	getFiles.each {  
@@ -107,6 +175,7 @@ def addTransData(fileLoc, cov, data_id, file_id){
 				if ((count % 1000) ==  0){
 					println count
 					new TransInfo(contigMap).save(flush:true)
+					cleanUpGorm()
 				}else{
 					new TransInfo(contigMap).save()
 				}					
@@ -183,9 +252,11 @@ def addGenomeData(fileLoc, cov, file_name){
 				//println contigMap
 				GenomeInfo genome = new GenomeInfo(contigMap)
 				Gfile.addToScaffold(genome)				
-				if ((count % 2000) ==  0){
+				if ((count % 200) ==  0){
 					println count
 					genome.save(flush:true)
+					println new Date()
+					cleanUpGorm()
 				}else{
 					genome.save()
 				}			
@@ -215,7 +286,7 @@ def addGenomeData(fileLoc, cov, file_name){
 	genome.save(flush:true)
 	println count
 	//mark file as loaded
-	def gSql = "update file_data set loaded = true where file_name = '"+Gile.file_name+"'";
+	def gSql = "update file_data set loaded = true where file_name = '"+Gfile.file_name+"'";
 	println gSql
     sql.execute(gSql)
 	println Gfile.file_name+" is loaded"
@@ -251,6 +322,7 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 				sequence=""
 			}
 			geneId = matcher[0][1].trim()
+			//println geneId
 		}else{
 			sequence += it
 		}               
@@ -318,7 +390,9 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 				mrna_id = matcher[0][1]
 			}
 			gene_start = dataArray[3].toInteger()
+			//println "mrna_id = "+mrna_id
 			gene_nuc = nucData."${mrna_id}"
+			//println gene_nuc
 			gene_count_gc = gene_nuc.toUpperCase().findAll({it=='G'|it=='C'}).size()
 			gene_gc = (gene_count_gc/gene_nuc.length())*100
 			gene_gc = sprintf("%.3f",gene_gc)
@@ -338,6 +412,7 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 					println gene_count
 					//println geneMap
 					gene.save(flush:true)
+					cleanUpGorm()
 				}else{
 					gene.save()
 				}

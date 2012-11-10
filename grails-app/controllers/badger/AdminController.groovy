@@ -127,8 +127,13 @@ class AdminController {
 			dataMap.genus = params.genus.trim()
 			dataMap.species = params.species.trim()
 			dataMap.description = params.description.trim()
-			dataMap.image_file = params.image_f.trim()
-			dataMap.image_source = params.image_s.trim()
+			if (params.image_f){
+				dataMap.image_file = params.image_f.trim()
+				dataMap.image_source = params.image_s.trim()
+			}else{
+				dataMap.image_file = "acrobelesrainbow.gif"
+				dataMap.image_source = "nematodes.org"
+			}
 			dataMap.gbrowse = params.gbrowse.trim()
 			dataMap.Gversion = params.version.trim()
 			println dataMap

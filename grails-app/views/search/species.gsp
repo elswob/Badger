@@ -25,7 +25,10 @@
 
 	$(document).ready(function(){
 		//$.get("/trees/10-coffee.xml", function(data) {
-		$.get("/trees/filarial_rooted.xml", function(data) {
+		//$.get("/trees/filarial_rooted.xml", function(data) {
+		//$.get("/trees/all_nem.xml", function(data) {
+		//$.get("/trees/GK_nem_rooted.xml", function(data) {
+		$.get("/trees/badger_tree.xml", function(data) {
 			var dataObject = {
 				xml: data,
 				fileSource: true
