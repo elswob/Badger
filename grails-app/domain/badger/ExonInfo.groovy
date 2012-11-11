@@ -11,7 +11,7 @@ class ExonInfo {
     String sequence
     String strand
     static constraints = {
-        exon_id(blank:false, unique: true)
+        exon_id(blank:false)
         start(blank:false)
         stop(blank:false)
     }

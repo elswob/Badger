@@ -32,15 +32,7 @@ def editTree(){
 	species.each{
 	  sList.push(it.genus+" "+it.species)
 	}
-	println "list = "+sList
-	
-	//<chart>
-	//  <component>bold</component>
-	//</chart>
-	//<annotation>
-	//  <desc>Dirofilaria immitis</desc>
-	//  <uri>#Dirofilaria immitis</uri>
-	//</annotation>
+	//println "list = "+sList
 	
 	treeFile.split("\n").each{
 	  if ((matcher = it =~ /^<phylogeny rooted=.*/)){
@@ -63,11 +55,13 @@ def editTree(){
 		tree << "    <stop offset=\"93%\" style=\"stop-color:#e5bd94; stop-opacity:1\"/>\n"
 		tree << "    <stop offset=\"100%\" style=\"stop-color:#D1A373; stop-opacity:1\"/>\n"
 		tree << "   </bold>\n" 		
+		tree << "   <none fill=\"#FFFFFF\" stroke=\"#FFFFFF\">\n"
+    	tree << "   </none>\n"
 		tree << "  </styles>\n"
 		tree << " </render>\n"
 	  }else if ((matcher = it =~ /(.*?)<name>(.*?)<\/name>/)){
 		def l = it
-		println "match = "+matcher[0][2]
+		//println "match = "+matcher[0][2]
 		if (matcher[0][2] in sList){
 		  tree << matcher[0][1]+"<name bgStyle=\"bold\">"+matcher[0][2]+"</name>\n"
 		  tree << matcher[0][1]+"<chart>\n"
@@ -77,9 +71,10 @@ def editTree(){
 		  tree << " "+matcher[0][1]+"<desc>"+matcher[0][2]+"</desc>\n"
 		  tree << " "+matcher[0][1]+"<uri>#"+matcher[0][2]+"</uri>\n"
 		  tree << matcher[0][1]+"</annotation>\n" 
-		  println "in list"
+		  //println "in list"
 		}else{
-		  tree << it+"\n"
+		  //tree << it+"\n"
+		  tree << matcher[0][1]+"<name bgStyle=\"none\">"+matcher[0][2]+"</name>\n"
 		}
 	  }else{      
 		tree << it+"\n"
@@ -252,7 +247,7 @@ def addGenomeData(fileLoc, cov, file_name){
 				//println contigMap
 				GenomeInfo genome = new GenomeInfo(contigMap)
 				Gfile.addToScaffold(genome)				
-				if ((count % 200) ==  0){
+				if ((count % 2000) ==  0){
 					println count
 					genome.save(flush:true)
 					println new Date()
@@ -451,6 +446,7 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 	println new Date()
 	dataFile = new File("data/"+fileLoc).text
 	GeneInfo geneFind
+	def parent = ""
 	dataFile.split("\n").each{
 		if ((matcher = it =~ /^#.*/)){
 		  //println "ignoring "+it
@@ -462,7 +458,6 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 				}else if ((matcher = dataArray[8] =~ /ID=(.*)/)){  
 					gene_id = matcher[0][1]
 				}
-				geneFind = GeneInfo.findByGene_id(gene_id)
 			}
 			if (dataArray[2] == 'mRNA' || dataArray[2] == 'transcript'){
 				exon_marker=0
@@ -474,18 +469,29 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 				}
 				if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
 					mrna_id = matcher[0][1]
+					geneFind = GeneInfo.findByMrna_id(mrna_id)
 				}
-				gene_nuc = nucData."${mrna_id}"
 			}
 			if (dataArray[2] == 'CDS'){				
 				exon_count++
 				exon_count_all++
-				if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){                
+				if ((matcher = dataArray[8] =~ /ID=(.*?);Parent=(.*)/)){                
 					exonMap.exon_id = matcher[0][1]
+					//println "id = "+matcher[0][2]
+					//check for alternative splicing
+					if (parent != matcher[0][2] && exon_marker != 0){
+						//println "alt trans"+parent+" - "+matcher[0][2]
+						exon_marker = 0
+					}
+					parent = matcher[0][2]
+					gene_nuc = nucData."${parent}"
 					//println "exon = "+exon_id+" - "+exon_count
 				}
 				exon_start = exon_marker
 				exon_end = dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()+1
+				//println mrna_id
+				//println gene_nuc
+				//println dataArray[4].toInteger()+"-"+dataArray[3].toInteger()+"+"+exon_marker.toInteger()
 				exon_sequence = gene_nuc[exon_marker..dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()]
 				exon_count_gc = exon_sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
 				exon_gc = (exon_count_gc/exon_sequence.length())*100
