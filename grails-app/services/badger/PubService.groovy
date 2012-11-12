@@ -84,6 +84,11 @@ class PubService {
 			else if ((matcher = line =~ /<AbstractText>(.*?)<\/AbstractText>/)){
 					pubMap.abstractText =  matcher[0][1]    
 			}
+			else if ((matcher = line =~ /<AbstractText Label=(.*?)>(.*?)<\/AbstractText>/)){
+				if ((matcher = line =~ /<AbstractText Label="(.*?)".*?>(.*?)<\/AbstractText>/)){
+					pubMap.abstractText += matcher[0][1]+": "+matcher[0][2]+"<br><br>"
+				}
+			}
 			else if ((matcher = line =~ /<Title>(.*?)<\/Title>/)){
 					pubMap.journal = matcher[0][1]
 			}
@@ -135,7 +140,11 @@ class PubService {
 				}
 				pubMap.authors = nameString
 				nameString = ''
-				dateString = ''            
+				dateString = ''  
+				//check for missing issues 
+				if (!pubMap.issue){
+            		pubMap.issue = "n/a"
+          		}         
 				//println pubMap
 				Publication pub = new Publication(pubMap)
 				meta.addToPubs(pub)

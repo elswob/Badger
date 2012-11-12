@@ -16,12 +16,48 @@ def blast,cov,download,file_dir,file_link,file_name,file_type,file_version,loade
 
 MetaData meta
 def addMeta(metaMap){
-	meta = new MetaData(metaMap)
-	meta.save(flush:true)
+	def check = MetaData.findByGenusAndSpecies(metaMap.genus, metaMap.species)
+	if (check){
+		println "species already exists - "+check
+	}else{  		
+		meta = new MetaData(metaMap)
+		meta.save(flush:true)
+	}
 }
 def addFile(fileMap){
-	FileData file = new FileData(fileMap) 
-	meta.addToFiles(file)
+	def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
+	if (check){
+		println "file name and type already exists - "+check
+	}
+	else if (new File("data/"+fileMap.file_dir+"/"+fileMap.file_name).exists()){
+		println fileMap
+		FileData file = new FileData(fileMap) 
+		meta.addToFiles(file)
+		file.save()
+		println fileMap.file_name+" was added"
+	}else{
+		println "file data/"+fileMap.file_dir+"/"+params.file_name+" does not exist!"
+	}
+}
+def addAnno(fileName,annoMap){
+	FileData file = FileData.findByFile_name(fileName)
+	def filedir = FileData.findByFile_name(fileName).file_dir
+	def check = FileData.findByFile_name(fileName).anno.anno_file			
+	println "check = "+check
+	
+	if (annoMap.anno_file in check){
+		println annoMap.anno_file+" already exists for "+fileName+" so not adding"
+	}else{
+		if (new File("data/"+filedir+"/"+annoMap.anno_file).exists()){				
+			println annoMap
+			AnnoData anno = new AnnoData(annoMap)
+			file.addToAnno(anno)
+			anno.save()
+			println annoMap.anno_file+" was added"
+		}else{
+			println "data/"+filedir+"/"+annoFile.anno_file+" doesn't exist"
+		}
+	}
 }
 
 ///////// test data
@@ -124,8 +160,66 @@ def A_vit(){
 	fileMap.description = "Augustus gene prediction"
 	fileMap.file_link = "nAv.1.0.1.aug.blast2go.gff"
 	addFile(fileMap)
+	
+	//annotations
+	def annoMap = [:]
+	
+	//blast
+	annoMap.type = "blast"				
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "SwissProt"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "sprot.xml"
+	annoMap.loaded = false	
+	addAnno("nAv.1.0.1.aug.blast2go.gff",annoMap)
+	
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "NCBI NR"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "nr_10.xml"
+	annoMap.loaded = false	
+	addAnno("nAv.1.0.1.aug.blast2go.gff",annoMap)
+	
+	annoMap.link = "http://www.nematodes.org/nembase4/cluster.php?cluster="
+	annoMap.source = "Nembase4"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "nembase_tblastn.xml"
+	annoMap.loaded = false	
+	addAnno("nAv.1.0.1.aug.blast2go.gff",annoMap)
+	
+	//functional
+	annoMap.type = "fun"				
+	annoMap.link = "http://enzyme.expasy.org/EC/"
+	annoMap.source = "Annot8r EC"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "ec.txt"
+	annoMap.loaded = false	
+	addAnno("nAv.1.0.1.aug.blast2go.gff",annoMap)
+	
+	annoMap.link = "http://www.ebi.ac.uk/QuickGO/GTerm?id="
+	annoMap.source = "Annot8r GO"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "go.txt"
+	annoMap.loaded = false	
+	addAnno("nAv.1.0.1.aug.blast2go.gff",annoMap)
+	
+	annoMap.link = "http://www.genome.jp/dbget-bin/www_bget?ko:"
+	annoMap.source = "Annot8r KEGG"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "kegg.txt"
+	annoMap.loaded = false	
+	addAnno("nAv.1.0.1.aug.blast2go.gff",annoMap)
+	
+	//interproscan
+	annoMap.type = "ipr"
+	annoMap.link = "http://www.ebi.ac.uk/interpro/IEntry?ac="
+	annoMap.source = "InterProScan"
+	annoMap.regex = "(IPR\\d+).*?"
+	annoMap.anno_file = "A_viteae.iprscan.raw"
+	annoMap.loaded = false	
+	addAnno("nAv.1.0.1.aug.blast2go.gff",annoMap)
 }
-//A_vit()
+A_vit()
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// L.sigmodontis
@@ -177,7 +271,7 @@ def L_sig(){
 	fileMap.file_link = "nLs.2.1.2.aug.gff"
 	addFile(fileMap)
 }
-//L_sig()
+L_sig()
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// D.immitis
@@ -229,7 +323,7 @@ def D_imm(){
 	fileMap.file_link = "nDi.2.2.2.aug.blast2go.gff"
 	addFile(fileMap)
 }
-//D_imm()
+D_imm()
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// O. ochengi
@@ -281,7 +375,7 @@ def O_och(){
 	fileMap.file_link = "nOo.2.0.1.aug.gff"
 	addFile(fileMap)
 }
-//O_och()
+O_och()
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// B. malayi

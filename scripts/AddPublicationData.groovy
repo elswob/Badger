@@ -3,13 +3,21 @@ package badger
 import groovy.sql.Sql
 
 def matcher
+def dataSource = ctx.getBean("dataSource")
+def sql = new Sql(dataSource)
 
 def getFiles = MetaData.findAll()
 getFiles.each {  	
-	println new Date()
-	def query = it.genus+"+AND+"+it.species
-	println "Getting publication information for "+it.genus+" "+it.species
-	getPub(it.id,query)
+	def checkSql = "select genus,species from meta_data,publication where genus='"+it.genus+"' and species = '"+it.species+"' and meta_data.id = publication.meta_id; "
+	def check = sql.rows(checkSql)
+	if (check){
+		println "Skipping "+it.genus+" "+it.species
+	}else{ 
+		println new Date()
+		def query = it.genus+"+AND+"+it.species
+		println "Getting publication information for "+it.genus+" "+it.species
+		getPub(it.id,query)
+	}
 }
 
 def getPub(data_id,query){
@@ -45,6 +53,7 @@ def getPub(data_id,query){
 	efetch_ids = efetch_ids[0..-2]
 	println "Fetching "+counter			
 	def efetch = "$utils/efetch.fcgi?db=$db&id=$efetch_ids&retmode=xml";
+	println efetch
 	pubdata << new URL(efetch).getText()
 	addPub(pubdata,data_id) 
 }
@@ -58,6 +67,7 @@ def addPub(pubFile,data_id){
 	sql.execute(delsql)
 	println "Adding new data to db..."
 	def pubMap = [:]
+	pubMap.abstractText = ""
 	int count_all = 0
 	def dateString = ''
 	def nameString = ''
@@ -76,7 +86,12 @@ def addPub(pubFile,data_id){
 				pubMap.title =  matcher[0][1]    
 		}
 		else if ((matcher = line =~ /<AbstractText>(.*?)<\/AbstractText>/)){
-				pubMap.abstractText =  matcher[0][1]    
+			pubMap.abstractText = matcher[0][1]
+		}else if ((matcher = line =~ /<AbstractText Label=(.*?)>(.*?)<\/AbstractText>/)){
+			if ((matcher = line =~ /<AbstractText Label="(.*?)".*?>(.*?)<\/AbstractText>/)){
+				pubMap.abstractText += matcher[0][1]+": "+matcher[0][2]+"<br><br>"
+				//println pubMap.abstractText
+			}
 		}
 		else if ((matcher = line =~ /<Title>(.*?)<\/Title>/)){
 				pubMap.journal = matcher[0][1]
@@ -129,15 +144,21 @@ def addPub(pubFile,data_id){
 			}
 			pubMap.authors = nameString
 			nameString = ''
-			dateString = ''            
-			//println pubMap
+			dateString = ''  
+			//check for missing issues           
+         	if (!pubMap.issue){
+            	pubMap.issue = "n/a"
+          	}
+          	//println pubMap
             Publication pub = new Publication(pubMap)
 			meta.addToPubs(pub)
+          	//println "meta = "+meta
 			if ((count_all % 100) ==  0){
 				println "Adding "+count_all
 				pub.save(flush:true)
 			}else{
-				pub.save()
+				pub.save(flush:true)
+              	//println "pub = "+pub
 			}
 		}
 	}

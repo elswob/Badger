@@ -24,6 +24,9 @@
     <script type="text/javascript">
 
 	$(document).ready(function(){
+		var paperWidth1 = $('#svgCanvas1').width();
+		var paperWidth2 = $('#svgCanvas2').width();
+		//alert(paperWidth1)
 		//$.get("/trees/10-coffee.xml", function(data) {
 		//$.get("/trees/filarial_rooted.xml", function(data) {
 		//$.get("/trees/all_nem.xml", function(data) {
@@ -37,15 +40,17 @@
 			phylocanvas = new Smits.PhyloCanvas(
 				dataObject,
 				'svgCanvas1', 
-				600, 600
+				paperWidth1/1.1, paperWidth1/1.1
 				//'circular'
 			);
 			phylocanvas = new Smits.PhyloCanvas(
 				dataObject,
 				'svgCanvas2', 
-				600, 600,
+				paperWidth2/1.1, paperWidth2/1.1,
 				'circular'
 			);
+			//Smits.ZoomCanvas.init($('#svgCanvas1 svg'), 2000, 2000);
+			//Smits.ZoomCanvas.scale(0.5);			
 			init(); //unitip
 		});
 		

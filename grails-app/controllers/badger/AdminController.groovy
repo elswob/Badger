@@ -260,7 +260,6 @@ class AdminController {
 	
 	@Secured(['ROLE_ADMIN'])
 	def addedAnno = {
-		def dataSplit = params.dataSelect.split(":")	
 		FileData file = FileData.findByFile_name(params.dataSelect)
 		def filedir = FileData.findByFile_name(params.dataSelect).file_dir
 		def annoMap = [:]			
