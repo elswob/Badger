@@ -2,6 +2,7 @@
 
 date
 grails prod run-script \
+scripts/AddFileData.groovy \
 scripts/AddPublicationData.groovy \
 scripts/AddSequenceData.groovy \
 scripts/AddTransBlastData.groovy \

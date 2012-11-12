@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phyloxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.phyloxml.org http://www.phyloxml.org/1.10/phyloxml.xsd" xmlns="http://www.phyloxml.org">
+<phylogeny rooted="false">
+  <clade>
+    <clade>
+      <name>Onchocercidae</name>
+      <clade>
+        <name>Monanema martini</name>
+      </clade>
+      <clade>
+        <name>Wuchereria</name>
+        <clade>
+          <name>Wuchereria bancrofti</name>
+        </clade>
+        <clade>
+          <name>Wuchereria kalimantani</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>Litomosoides</name>
+        <clade>
+          <name>Litomosoides yutajensis</name>
+        </clade>
+        <clade>
+          <name>Litomosoides carinii</name>
+        </clade>
+        <clade>
+          <name>Litomosoides galizai</name>
+        </clade>
+        <clade>
+          <name>Litomosoides sp. MIB ZPL 00164</name>
+        </clade>
+        <clade>
+          <name>Litomosoides hamletti</name>
+        </clade>
+        <clade>
+          <name>Litomosoides sigmodontis</name>
+        </clade>
+        <clade>
+          <name>Litomosoides scotti</name>
+        </clade>
+        <clade>
+          <name>Litomosoides brasiliensis</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>Cercopithifilaria</name>
+        <clade>
+          <name>Cercopithifilaria roussilhoni</name>
+        </clade>
+        <clade>
+          <name>Cercopithifilaria bulboidea</name>
+        </clade>
+        <clade>
+          <name>Cercopithifilaria minuta</name>
+        </clade>
+        <clade>
+          <name>Cercopithifilaria longa</name>
+        </clade>
+        <clade>
+          <name>Cercopithifilaria japonica</name>
+        </clade>
+        <clade>
+          <name>Cercopithifilaria grassii</name>
+        </clade>
+        <clade>
+          <name>Cercopithifilaria shohoi</name>
+        </clade>
+        <clade>
+          <name>Cercopithifilaria sp. DO-2011</name>
+        </clade>
+        <clade>
+          <name>Cercopithifilaria crassa</name>
+        </clade>
+        <clade>
+          <name>Cercopithifilaria tumidicervicata</name>
+        </clade>
+        <clade>
+          <name>Cercopithifilaria sp. II MSL-2012</name>
+        </clade>
+        <clade>
+          <name>Cercopithifilaria multicauda</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>Mansonella</name>
+        <clade>
+          <name>Mansonella atelensis amazonae</name>
+        </clade>
+        <clade>
+          <name>Mansonella ozzardi</name>
+        </clade>
+        <clade>
+          <name>Mansonella mariae</name>
+        </clade>
+        <clade>
+          <name>Mansonella perstans</name>
+        </clade>
+        <clade>
+          <name>Mansonella perforata</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>Chandlerella quiscali</name>
+      </clade>
+      <clade>
+        <name>Loa loa</name>
+      </clade>
+      <clade>
+        <name>Ochoterenella</name>
+        <clade>
+          <name>Ochoterenella sp. MIB Zpl 00161</name>
+        </clade>
+        <clade>
+          <name>Ochoterenella royi</name>
+        </clade>
+        <clade>
+          <name>Ochoterenella sp. MIB Zpl 00162</name>
+        </clade>
+        <clade>
+          <name>Ochoterenella sp. 56 CV</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>Dipetalonema</name>
+        <clade>
+          <name>Dipetalonema gracile</name>
+        </clade>
+        <clade>
+          <name>Dipetalonema dracunculoides</name>
+        </clade>
+        <clade>
+          <name>Dipetalonema sp. YQ-2006</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>Litomosa</name>
+        <clade>
+          <name>Litomosa westi</name>
+        </clade>
+        <clade>
+          <name>Litomosa chiropterorum</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>unclassified Onchocercidae</name>
+        <clade>
+          <name>Onchocercidae sp. WB-2005</name>
+        </clade>
+        <clade>
+          <name>Onchocercidae sp. AK-2011</name>
+        </clade>
+        <clade>
+          <name>Onchocercidae cf. Mansonella ozzardi LAM-2011</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>Brugia</name>
+        <clade>
+          <name>Brugia sp. LG-2012</name>
+        </clade>
+        <clade>
+          <name>Brugia cf. malayi ex canine Kadakkarappally 2</name>
+        </clade>
+        <clade>
+          <name>Brugia buckleyi</name>
+        </clade>
+        <clade>
+          <name>Brugia malayi</name>
+        </clade>
+        <clade>
+          <name>Brugia timori</name>
+        </clade>
+        <clade>
+          <name>Brugia cf. malayi ex canine Kadakkarappally 1</name>
+        </clade>
+        <clade>
+          <name>Brugia pahangi</name>
+        </clade>
+        <clade>
+          <name>Brugia patei</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>Onchocerca</name>
+        <clade>
+          <name>Onchocerca sp. type A</name>
+        </clade>
+        <clade>
+          <name>Onchocerca sp. Siisa</name>
+        </clade>
+        <clade>
+          <name>Onchocerca sp. wild boar</name>
+        </clade>
+        <clade>
+          <name>Onchocerca volvulus</name>
+        </clade>
+        <clade>
+          <name>Onchocerca cervicalis</name>
+        </clade>
+        <clade>
+          <name>Onchocerca sp. NP-2011</name>
+        </clade>
+        <clade>
+          <name>Onchocerca microfilariae</name>
+        </clade>
+        <clade>
+          <name>Onchocerca fasciata</name>
+        </clade>
+        <clade>
+          <name>Onchocerca lupi</name>
+        </clade>
+        <clade>
+          <name>Onchocerca suzukii</name>
+        </clade>
+        <clade>
+          <name>Onchocerca eberhardi</name>
+        </clade>
+        <clade>
+          <name>Onchocerca gutturosa</name>
+        </clade>
+        <clade>
+          <name>Onchocerca ochengi</name>
+        </clade>
+        <clade>
+          <name>Onchocerca cervipedis</name>
+        </clade>
+        <clade>
+          <name>Onchocerca armillata</name>
+        </clade>
+        <clade>
+          <name>Onchocerca jakutensis</name>
+        </clade>
+        <clade>
+          <name>Onchocerca flexuosa</name>
+        </clade>
+        <clade>
+          <name>Onchocerca skrjabini</name>
+        </clade>
+        <clade>
+          <name>Onchocerca lienalis</name>
+        </clade>
+        <clade>
+          <name>Onchocerca dukei</name>
+        </clade>
+        <clade>
+          <name>Onchocerca gibsoni</name>
+        </clade>
+        <clade>
+          <name>Onchocerca dewittei japonica</name>
+        </clade>
+        <clade>
+          <name>Onchocerca sp. bushbuck</name>
+        </clade>
+        <clade>
+          <name>Onchocerca ramachandrini</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>Loxodontofilaria caprini</name>
+      </clade>
+      <clade>
+        <name>Acanthocheilonema</name>
+        <clade>
+          <name>Acanthocheilonema sp. PAMAR-2010</name>
+        </clade>
+        <clade>
+          <name>Acanthocheilonema sp. RAZI Marand</name>
+        </clade>
+        <clade>
+          <name>Acanthocheilonema reconditum</name>
+        </clade>
+        <clade>
+          <name>Acanthocheilonema viteae</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>Dirofilaria</name>
+        <clade>
+          <name>Dirofilaria immitis</name>
+        </clade>
+        <clade>
+          <name>Dirofilaria ursi</name>
+        </clade>
+        <clade>
+          <name>Dirofilaria repens</name>
+        </clade>
+        <clade>
+          <name>Dirofilaria sp. MK-2010</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>Waltonella sp. MC-2003</name>
+      </clade>
+      <clade>
+        <name>Filaria martis</name>
+      </clade>
+      <clade>
+        <name>Aproctella</name>
+        <clade>
+          <name>Aproctella sp. MIB ZPL 01521</name>
+        </clade>
+        <clade>
+          <name>Aproctella sp. MIB ZPL 01524</name>
+        </clade>
+        <clade>
+          <name>Aproctella sp. MIB ZPL 02720</name>
+        </clade>
+        <clade>
+          <name>Aproctella sp. MIB ZPL 01522</name>
+        </clade>
+        <clade>
+          <name>Aproctella sp. MIB ZPL 02719</name>
+        </clade>
+        <clade>
+          <name>Aproctella sp. MIB ZPL 01523</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>Foleyella</name>
+        <clade>
+          <name>Foleyella candezei</name>
+        </clade>
+        <clade>
+          <name>Foleyella furcata</name>
+        </clade>
+      </clade>
+      <clade>
+        <name>Piratuba scaffi</name>
+      </clade>
+      <clade>
+        <name>Sarconema eurycerca</name>
+      </clade>
+      <clade>
+        <name>Breinlia mundayi</name>
+      </clade>
+    </clade>
+  </clade>
+</phylogeny>
+
+</phyloxml>

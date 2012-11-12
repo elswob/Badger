@@ -61,6 +61,7 @@ def addAnno(fileName,annoMap){
 }
 
 ///////// test data
+//test()
 def test(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -109,10 +110,10 @@ def test(){
 	fileMap.file_link = "test.gff"
 	addFile(fileMap)
 }
-//test()
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// A. viteae
+A_vit()
 def A_vit(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -219,10 +220,10 @@ def A_vit(){
 	annoMap.loaded = false	
 	addAnno("nAv.1.0.1.aug.blast2go.gff",annoMap)
 }
-A_vit()
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// L.sigmodontis
+L_sig()
 def L_sig(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -270,11 +271,46 @@ def L_sig(){
 	fileMap.description = "Augustus gene prediction"
 	fileMap.file_link = "nLs.2.1.2.aug.gff"
 	addFile(fileMap)
+	
+	//annotations
+	def annoMap = [:]
+	
+	//blast
+	annoMap.type = "blast"				
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "SwissProt"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "sprot.xml"
+	annoMap.loaded = false	
+	addAnno("nLs.2.1.2.aug.gff",annoMap)
+	
+	//functional
+	annoMap.type = "fun"				
+	annoMap.link = "http://enzyme.expasy.org/EC/"
+	annoMap.source = "Annot8r EC"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "ec.txt"
+	annoMap.loaded = false	
+	addAnno("nLs.2.1.2.aug.gff",annoMap)
+	
+	annoMap.link = "http://www.ebi.ac.uk/QuickGO/GTerm?id="
+	annoMap.source = "Annot8r GO"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "go.txt"
+	annoMap.loaded = false	
+	addAnno("nLs.2.1.2.aug.gff",annoMap)
+	
+	annoMap.link = "http://www.genome.jp/dbget-bin/www_bget?ko:"
+	annoMap.source = "Annot8r KEGG"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "kegg.txt"
+	annoMap.loaded = false	
+	addAnno("nLs.2.1.2.aug.gff",annoMap)
 }
-L_sig()
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// D.immitis
+D_imm()
 def D_imm(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -322,11 +358,46 @@ def D_imm(){
 	fileMap.description = "Augustus gene prediction"
 	fileMap.file_link = "nDi.2.2.2.aug.blast2go.gff"
 	addFile(fileMap)
+	
+	//annotations
+	def annoMap = [:]
+	
+	//blast
+	annoMap.type = "blast"				
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "SwissProt"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "sprot.xml"
+	annoMap.loaded = false	
+	addAnno("nDi.2.2.2.aug.blast2go.gff",annoMap)
+	
+	//functional
+	annoMap.type = "fun"				
+	annoMap.link = "http://enzyme.expasy.org/EC/"
+	annoMap.source = "Annot8r EC"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "ec.txt"
+	annoMap.loaded = false	
+	addAnno("nDi.2.2.2.aug.blast2go.gff",annoMap)
+	
+	annoMap.link = "http://www.ebi.ac.uk/QuickGO/GTerm?id="
+	annoMap.source = "Annot8r GO"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "go.txt"
+	annoMap.loaded = false	
+	addAnno("nDi.2.2.2.aug.blast2go.gff",annoMap)
+	
+	annoMap.link = "http://www.genome.jp/dbget-bin/www_bget?ko:"
+	annoMap.source = "Annot8r KEGG"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "kegg.txt"
+	annoMap.loaded = false	
+	addAnno("nDi.2.2.2.aug.blast2go.gff",annoMap)
 }
-D_imm()
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// O. ochengi
+O_och()
 def O_och(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -374,11 +445,46 @@ def O_och(){
 	fileMap.description = "Augustus gene prediction"
 	fileMap.file_link = "nOo.2.0.1.aug.gff"
 	addFile(fileMap)
+	
+	//annotations
+	def annoMap = [:]
+	
+	//blast
+	annoMap.type = "blast"				
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "SwissProt"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "sprot.xml"
+	annoMap.loaded = false	
+	addAnno("nOo.2.0.1.aug.gff",annoMap)
+	
+	//functional
+	annoMap.type = "fun"				
+	annoMap.link = "http://enzyme.expasy.org/EC/"
+	annoMap.source = "Annot8r EC"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "ec.txt"
+	annoMap.loaded = false	
+	addAnno("nOo.2.0.1.aug.gff",annoMap)
+	
+	annoMap.link = "http://www.ebi.ac.uk/QuickGO/GTerm?id="
+	annoMap.source = "Annot8r GO"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "go.txt"
+	annoMap.loaded = false	
+	addAnno("nOo.2.0.1.aug.gff",annoMap)
+	
+	annoMap.link = "http://www.genome.jp/dbget-bin/www_bget?ko:"
+	annoMap.source = "Annot8r KEGG"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "kegg.txt"
+	annoMap.loaded = false	
+	addAnno("nOo.2.0.1.aug.gff",annoMap)
 }
-O_och()
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// B. malayi
+B_mal()
 def B_mal(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -427,11 +533,11 @@ def B_mal(){
 	fileMap.file_link = "b_malayi.WS234.annotations_trim.gff3"
 	addFile(fileMap)
 }
-B_mal()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// C. angaria
+C_ang()
 def C_ang(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -480,4 +586,263 @@ def C_ang(){
 	fileMap.file_link = "c_angaria.WS234.annotations_trim.gff3"
 	addFile(fileMap)
 }
-C_ang()
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////// B. xylophilus
+B_xyl()
+def B_xyl(){
+	def metaMap = [:]
+	def fileMap = [:]
+	metaMap.genus = "Bursaphelenchus";
+	metaMap.species = "xylophilus";
+	metaMap.gversion = "234"
+	metaMap.description = "Bursaphelenchus xylophilus is a gonochoristic species of the Clade IV nematodes. It is a parasite of Pine trees thought to originate from North America, but has spread through East Asia and Portugal. It is also known as Pine Wilt Nematode (PWN)."
+	metaMap.gbrowse = "http://www.wormbase.org/tools/genome/gbrowse/b_xylophilus/"
+	metaMap.image_file = "B_xylophilus.jpg"
+	metaMap.image_source = "http://plpnemweb.ucdavis.edu/nemaplex/Taxadata/G145S1.HTM"
+	addMeta(metaMap)
+	
+	//global
+	fileMap.file_dir = "B_xylophilus"
+	fileMap.loaded = false
+	fileMap.blast = "pub"
+	fileMap.search = "pub"
+	fileMap.download = "pub"
+	fileMap.cov = "n"
+	//genome
+	fileMap.file_type = "Genome"
+	fileMap.file_name = "b_xylophilus.WS234.genomic.fa"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase."
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//gff
+	fileMap.file_type = "Genes"
+	fileMap.file_name = "b_xylophilus.WS234.annotations_trim.gff3"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//mRNA
+	fileMap.file_type = "mRNA"
+	fileMap.file_name = "b_xylophilus.WS234.cds_transcripts_edit.fa"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "b_xylophilus.WS234.annotations_trim.gff3"
+	addFile(fileMap)
+	//Peptide
+	fileMap.file_type = "Peptide"
+	fileMap.file_name = "b_xylophilus.WS234.protein_edit.fa"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "b_xylophilus.WS234.annotations_trim.gff3"
+	addFile(fileMap)
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////// H. contortus
+H_con()
+def H_con(){
+	def metaMap = [:]
+	def fileMap = [:]
+	metaMap.genus = "Haemonchus";
+	metaMap.species = "contortus";
+	metaMap.gversion = "234"
+	metaMap.description = "Haemonchus contortus is an animal endoparasite infecting ruminants worldwide also known as red stomach worm, wire worm or Barber's pole worm, is very common parasite and one the most pathogenic nematodes of ruminants. Adult worms are attached to abomasal mucosa and feed on the blood."
+	metaMap.gbrowse = "http://www.wormbase.org/tools/genome/gbrowse/h_contortus/"
+	metaMap.image_file = "H_contortus.jpg"
+	metaMap.image_source = "Nembase4"
+	addMeta(metaMap)
+	
+	//global
+	fileMap.file_dir = "H_contortus"
+	fileMap.loaded = false
+	fileMap.blast = "pub"
+	fileMap.search = "pub"
+	fileMap.download = "pub"
+	fileMap.cov = "n"
+	//genome
+	fileMap.file_type = "Genome"
+	fileMap.file_name = "h_contortus.WS234.genomic.fa"
+	fileMap.file_version = "234"
+	fileMap.description = "The current assembly shown at WormBase is from August 2009 and provided by a collaboration of the Wellcome Trust Sanger Institute and the University of Calgary. It is a combination of capillary and 454 sequence reads assembled into a draft 59707 supercontigs of a total size of 297 975 349 bp. The experimentally determined genome size is ~60 million bp. In addition RNAseq reads were used to determine the structures of 6201 genes using the [http://www.ensembl.org EnsEMBL] pipeline. A first analysis found that for ~50% of them ortholog ''C.elegans'' genes could be determined."
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//gff
+	fileMap.file_type = "Genes"
+	fileMap.file_name = "h_contortus.WS234.annotations_trim.gff3"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//mRNA
+	fileMap.file_type = "mRNA"
+	fileMap.file_name = "h_contortus.WS234.cds_transcripts_edit.fa"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "h_contortus.WS234.annotations_trim.gff3"
+	addFile(fileMap)
+	//Peptide
+	fileMap.file_type = "Peptide"
+	fileMap.file_name = "h_contortus.WS234.protein_edit.fa"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "h_contortus.WS234.annotations_trim.gff3"
+	addFile(fileMap)
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////// M. incognita
+M_inc()
+def M_inc(){
+	def metaMap = [:]
+	def fileMap = [:]
+	metaMap.genus = "Meloidogyne";
+	metaMap.species = "incognita";
+	metaMap.gversion = "234"
+	metaMap.description = "Meloidogyne incognita is an important plant parasite attacking the root of its host plant."
+	metaMap.gbrowse = "http://www.wormbase.org/tools/genome/gbrowse/m_incognita/"
+	metaMap.image_file = "M_incognita.jpg"
+	metaMap.image_source = "http://en.wikipedia.org/wiki/Meloidogyne_incognita"
+	addMeta(metaMap)
+	
+	//global
+	fileMap.file_dir = "M_incognita"
+	fileMap.loaded = false
+	fileMap.blast = "pub"
+	fileMap.search = "pub"
+	fileMap.download = "pub"
+	fileMap.cov = "n"
+	//genome
+	fileMap.file_type = "Genome"
+	fileMap.file_name = "m_incognita.WS234.genomic.fa"
+	fileMap.file_version = "234"
+	fileMap.description = "Sex Determination: gonochoristic. Haploid No. chromosomes: 21 (20 autosomes, XY)"
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//gff
+	fileMap.file_type = "Genes"
+	fileMap.file_name = "m_incognita.WS234.annotations_trim.gff3"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//mRNA
+	fileMap.file_type = "mRNA"
+	fileMap.file_name = "m_incognita.WS228.cds_transcripts_edit.fa"
+	fileMap.file_version = "228"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "m_incognita.WS234.annotations_trim.gff3"
+	addFile(fileMap)
+	//Peptide
+	fileMap.file_type = "Peptide"
+	fileMap.file_name = "m_incognita.WS228.protein_edit.fa"
+	fileMap.file_version = "228"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "m_incognita.WS234.annotations_trim.gff3"
+	addFile(fileMap)
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////// S. ratti
+S_rat()
+def S_rat(){
+	def metaMap = [:]
+	def fileMap = [:]
+	metaMap.genus = "Strongyloides";
+	metaMap.species = "ratti";
+	metaMap.gversion = "234"
+	metaMap.description = "Strongyloides ratti is a common gastro-intestinal parasite of the rat. The adult parasites are female only, about 2mm long and live in the mucosa of the small intestine. These parasites produce eggs that pass out of the host in its faeces. In the environment infective larval stages develop either directly or after a facultative sexual free-living adult generation. Infective larvae infect hosts by skin penetration. "
+	metaMap.gbrowse = ""
+	metaMap.image_file = "Strongyloides_ratti.jpg"
+	metaMap.image_source = "http://lemur.amu.edu.pl/share/php/mirnest/browse.php?species=Strongyloides%20ratti"
+	addMeta(metaMap)
+	
+	//global
+	fileMap.file_dir = "S_ratti"
+	fileMap.loaded = false
+	fileMap.blast = "pub"
+	fileMap.search = "pub"
+	fileMap.download = "pub"
+	fileMap.cov = "n"
+	//genome
+	fileMap.file_type = "Genome"
+	fileMap.file_name = "s_ratti.WS234.genomic.fa"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//gff
+	fileMap.file_type = "Genes"
+	fileMap.file_name = "s_ratti.WS234.annotations_trim.gff3"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//mRNA
+	fileMap.file_type = "mRNA"
+	fileMap.file_name = "s_ratti.WS234.cds_transcripts_edit.fa"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "s_ratti.WS234.annotations_trim.gff3"
+	addFile(fileMap)
+	//Peptide
+	fileMap.file_type = "Peptide"
+	fileMap.file_name = "s_ratti.WS234.protein_edit.fa"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "s_ratti.WS234.annotations_trim.gff3"
+	addFile(fileMap)
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////// T. spiralis
+T_spi()
+def T_spi(){
+	def metaMap = [:]
+	def fileMap = [:]
+	metaMap.genus = "Trichinella";
+	metaMap.species = "spiralis";
+	metaMap.gversion = "234"
+	metaMap.description = "Trichinella spiralis is a gonochoristic species in Clade I."
+	metaMap.gbrowse = "http://www.wormbase.org/tools/genome/gbrowse/t_spiralis/"
+	metaMap.image_file = "T_spiralis.jpg"
+	metaMap.image_source = "www.trichinella.org"
+	addMeta(metaMap)
+	
+	//global
+	fileMap.file_dir = "T_spiralis"
+	fileMap.loaded = false
+	fileMap.blast = "pub"
+	fileMap.search = "pub"
+	fileMap.download = "pub"
+	fileMap.cov = "n"
+	//genome
+	fileMap.file_type = "Genome"
+	fileMap.file_name = "t_spiralis.WS234.genomic.fa"
+	fileMap.file_version = "234"
+	fileMap.description = "Sex Determination: gonochoristic. Haploid No. chromosomes: 3 (2 autosomes, XO)"
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//gff
+	fileMap.file_type = "Genes"
+	fileMap.file_name = "t_spiralis.WS234.annotations_trim.gff3"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//mRNA
+	fileMap.file_type = "mRNA"
+	fileMap.file_name = "t_spiralis.WS234.cds_transcripts_edit.fa"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "t_spiralis.WS234.annotations_trim.gff3"
+	addFile(fileMap)
+	//Peptide
+	fileMap.file_type = "Peptide"
+	fileMap.file_name = "t_spiralis.WS234.protein_edit.fa"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "t_spiralis.WS234.annotations_trim.gff3"
+	addFile(fileMap)
+}

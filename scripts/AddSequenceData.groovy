@@ -57,6 +57,8 @@ def editTree(){
 		tree << "   </bold>\n" 		
 		tree << "   <none fill=\"#FFFFFF\" stroke=\"#FFFFFF\">\n"
     	tree << "   </none>\n"
+    	tree << "   <out fill=\"#7798CF\" stroke=\"#7798CF\">\n"
+    	tree << "   </out>"
 		tree << "  </styles>\n"
 		tree << " </render>\n"
 	  }else if ((matcher = it =~ /(.*?)<name>(.*?)<\/name>/)){

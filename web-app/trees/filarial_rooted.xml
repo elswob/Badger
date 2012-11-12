@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phyloxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.phyloxml.org http://www.phyloxml.org/1.10/phyloxml.xsd" xmlns="http://www.phyloxml.org">
+<phylogeny rooted="false">
+	<render>
+	<parameters>
+		<circular>
+			<bufferRadius>0.6</bufferRadius>
+		</circular>
+		<rectangular>
+			<bufferX>200</bufferX>
+		</rectangular>
+	</parameters>
+	<charts>
+		<component type="binary" thickness="0" />
+	</charts>
+	<styles>
+		<bold fill="#e5bd94" stroke="#e5bd94" type="radialGradient" font-size="12">        
+			<stop offset="0%" style="stop-color:#e5bd94; stop-opacity:0"/>
+			<stop offset="93%" style="stop-color:#e5bd94; stop-opacity:1"/>
+			<stop offset="100%" style="stop-color:#D1A373; stop-opacity:1"/>
+		</bold>  		
+	</styles>
+	</render>
+  <clade>
+    <clade>
+      <branch_length>0.1</branch_length>
+      <clade>
+        <branch_length>0.1</branch_length>
+        <clade>
+        	<name bgStyle="bold">Onchocerca ochengi</name>
+        	<branch_length>0.1</branch_length>
+	       	<chart>
+            	<component>bold</component>
+            </chart>
+			<annotation>
+				<desc>Onchocerca ochengi</desc>
+		 		<uri>#Onchocerca ochengi</uri>
+            </annotation> 
+        </clade>
+        <clade>
+        	<name bgStyle="bold">Dirofilaria immitis</name>
+			<branch_length>0.1</branch_length>
+			<chart>
+				<component>bold</component>
+			</chart>
+			<annotation>
+				<desc>Dirofilaria immitis</desc>
+				<uri>#Dirofilaria immitis</uri>
+			</annotation>
+        </clade>
+      </clade>
+      <clade>
+        <branch_length>0.1</branch_length>
+        <clade>
+          <branch_length>0.1</branch_length>
+          <clade>
+          	<name bgStyle="bold">Litomosoides sigmodontis</name>
+			<branch_length>0.1</branch_length>
+			<chart>
+				<component>bold</component>
+			</chart>
+			<annotation>
+				<desc>Litomosoides sigmodontis</desc>
+				<uri>#Litomosoides sigmodontis</uri>
+			</annotation>
+          </clade>
+          <clade>
+            <name bgStyle="bold">Acanthocheilonema viteae</name>
+			<branch_length>0.1</branch_length>
+			<chart>
+				<component>bold</component>
+			</chart>
+			<annotation>
+				<desc>Acanthocheilonema viteae</desc>
+				<uri>#Acanthocheilonema viteae</uri>
+			</annotation>  
+          </clade>
+        </clade>
+        <clade>
+          <branch_length>0.1</branch_length>
+          <clade>
+            <name>Loa loa</name>
+            <branch_length>0.1</branch_length>
+          </clade>
+          <clade>
+            <branch_length>0.1</branch_length>
+            <clade>
+              <name>Brugia malayi</name>
+              <branch_length>0.1</branch_length>
+            </clade>
+            <clade>
+              <name>Wuchereria bancrofti</name>
+              <branch_length>0.1</branch_length>
+            </clade>
+          </clade>
+        </clade>
+      </clade>
+    </clade>
+    <clade>
+      <name>Ascaris suum</name>
+      <branch_length>0.1</branch_length>
+    </clade>
+  </clade>
+</phylogeny>
+
+</phyloxml>
