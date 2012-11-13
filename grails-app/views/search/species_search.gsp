@@ -122,7 +122,8 @@
 					 //formatString: "%d"
 					 //formatString: ContigData[0].contig_id +" length: " + ContigData[1].length
 					 formatString: '<span style="display:none">%s</span>Contig ID: %s<br>Length: %s<br>GC: %.2f<br>Coverage: %.2f'
-			
+					 //formatString:'<table class="jqplot-highlighter"><tr><td><span style="display:none">%s</span></td><td></td><tr><td>Contig ID</td><td>%s</td></tr><tr><td>Length</td><td>%s</td></tr><tr><td>GC</td><td>%.2f</td></tr><tr><td>Coverage</td><td>%.2f</td></tr></table>',
+					 //useAxesFormatters: true 
 				 },
 			 },
 			 {

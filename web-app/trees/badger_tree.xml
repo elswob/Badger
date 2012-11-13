@@ -92,7 +92,14 @@
                     <clade>
                       <branch_length>0.06643</branch_length>
                       <clade>
-                        <name bgStyle="none">Caenorhabditis elegans</name>
+                        <name bgStyle="bold">Caenorhabditis elegans</name>
+                        <chart>
+                         <component>bold</component>
+                        </chart>
+                        <annotation>
+                         <desc>Caenorhabditis elegans</desc>
+                         <uri>#Caenorhabditis elegans</uri>
+                        </annotation>
                         <branch_length>0.039636</branch_length>
                       </clade>
                       <clade>
@@ -132,14 +139,7 @@
                   <clade>
                     <branch_length>0.488557</branch_length>
                     <clade>
-                      <name bgStyle="bold">Meloidogyne incognita</name>
-                      <chart>
-                       <component>bold</component>
-                      </chart>
-                      <annotation>
-                       <desc>Meloidogyne incognita</desc>
-                       <uri>#Meloidogyne incognita</uri>
-                      </annotation>
+                      <name bgStyle="none">Meloidogyne incognita</name>
                       <branch_length>0.037251</branch_length>
                     </clade>
                     <clade>
@@ -256,23 +256,23 @@
     <clade>
       <branch_length>0.142544</branch_length>
       <clade>
-        <name bgStyle="out">Milnesium tardigradum</name>
+        <name bgStyle="none">Milnesium tardigradum</name>
         <branch_length>0.823228</branch_length>
       </clade>
       <clade>
         <branch_length>0.073716</branch_length>
         <clade>
-          <name bgStyle="out">Tetranychus urticae</name>
+          <name bgStyle="none">Tetranychus urticae</name>
           <branch_length>0.653504</branch_length>
         </clade>
         <clade>
           <branch_length>0.228838</branch_length>
           <clade>
-            <name bgStyle="out">Drosophila melanogaster</name>
+            <name bgStyle="none">Drosophila melanogaster</name>
             <branch_length>0.380144</branch_length>
           </clade>
           <clade>
-            <name bgStyle="out">Bombyx mori</name>
+            <name bgStyle="none">Bombyx mori</name>
             <branch_length>0.422239</branch_length>
           </clade>
         </clade>

@@ -3,6 +3,7 @@ import grails.plugins.springsecurity.Secured
 import groovy.time.*
 import groovy.sql.Sql
 import grails.plugin.cache.Cacheable
+import grails.plugin.cache.CacheEvict
 
 class HomeController {
  def grailsApplication
@@ -130,7 +131,8 @@ class HomeController {
 	 }
   }
   
-  @Cacheable('stats_cache') 
+  //@Cacheable('stats_cache') 
+  @CacheEvict(value='stats_cache', allEntries=true)
   def stats() {  	 
      //check the privacy setting
      if (grailsApplication.config.i.links.priv.stats && !isLoggedIn()) {

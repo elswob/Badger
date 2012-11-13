@@ -854,3 +854,9 @@ div.innerDetails { display: none }
 	z-index: 0; 
 	position: relative;
 }
+
+/* jqplot highlight table */
+table.jqplot-highlighter {
+	font-size: 15px;
+	line-height:50%;
+}

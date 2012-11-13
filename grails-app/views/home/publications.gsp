@@ -75,6 +75,12 @@
 			window.open("/home/publication_search?year=" + year[pointIndex],'_self');
 		}
 	);
+	$(".jqplot-xaxis-label")
+    .css({
+        cursor: "pointer",
+        zIndex: "1"
+    })
+    .click(function(){ location.href = "http://google.com"; });
 });	  
  </script>
   

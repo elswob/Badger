@@ -693,7 +693,7 @@ def H_con(){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// M. incognita
-M_inc()
+//M_inc()
 def M_inc(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -844,5 +844,57 @@ def T_spi(){
 	fileMap.file_version = "234"
 	fileMap.description = "WormBase"
 	fileMap.file_link = "t_spiralis.WS234.annotations_trim.gff3"
+	addFile(fileMap)
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////// C. elegans
+C_ele()
+def C_ele(){
+	def metaMap = [:]
+	def fileMap = [:]
+	metaMap.genus = "Caenorhabditis";
+	metaMap.species = "elegans";
+	metaMap.gversion = "233"
+	metaMap.description = "Caenorhabditis elegans is the best-characterized species in the Caenorhabditis genus, or, for that matter, in the nematode phylum of animals. Its evolutionary relationship to other Caenorhabditis species and to all other nematodes is described in WormBook, as is what little is known of its ecology. Although C. elegans belongs to a set of highly similar species (the Elegans group), it has no known sister species (i.e., there exists no known Caenorhabditis species that is more closely related to C. elegans than to C. briggsae et al.)."
+	metaMap.gbrowse = "http://www.wormbase.org/tools/genome/gbrowse/c_elegans/"
+	metaMap.image_file = "c-elegans-worms.jpg"
+	metaMap.image_source = "NIH"
+	addMeta(metaMap)
+	
+	//global
+	fileMap.file_dir = "C_elegans"
+	fileMap.loaded = false
+	fileMap.blast = "pub"
+	fileMap.search = "pub"
+	fileMap.download = "pub"
+	fileMap.cov = "n"
+	//genome
+	fileMap.file_type = "Genome"
+	fileMap.file_name = "c_elegans.WS233.genomic.fa"
+	fileMap.file_version = "233"
+	fileMap.description = "Sex Determination: hermaphrodite or male. Haploid No. chromosomes: 6 chromosomes (named I, II, III, IV, V and X) and a Mitochondrion."
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//gff
+	fileMap.file_type = "Genes"
+	fileMap.file_name = "c_elegans.WS233.annotations_trim.sorted.gff3"
+	fileMap.file_version = "234"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//mRNA
+	fileMap.file_type = "mRNA"
+	fileMap.file_name = "c_elegans.WS233.cds_transcripts_edit.fa"
+	fileMap.file_version = "233"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "c_elegans.WS233.annotations_trim.sorted.gff3"
+	addFile(fileMap)
+	//Peptide
+	fileMap.file_type = "Peptide"
+	fileMap.file_name = "c_elegans.WS233.protein_edit.fa"
+	fileMap.file_version = "233"
+	fileMap.description = "WormBase"
+	fileMap.file_link = "c_elegans.WS233.annotations_trim.sorted.gff3"
 	addFile(fileMap)
 }

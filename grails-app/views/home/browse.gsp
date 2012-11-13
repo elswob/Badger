@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name='layout' content='main'/>
   <title>${grailsApplication.config.projectID} browse</title>
-  <parameter name="browse" value="selected"></parameter>
+  <parameter name="search" value="selected"></parameter>
   </head>
   <body>
 		<g:if test="${params.start && params.stop && params.contig_id}">
