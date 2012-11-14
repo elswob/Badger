@@ -33,7 +33,7 @@ def addFile(fileMap){
 		println fileMap
 		FileData file = new FileData(fileMap) 
 		meta.addToFiles(file)
-		file.save()
+		file.save(flush:true)
 		println fileMap.file_name+" was added"
 	}else{
 		println "file data/"+fileMap.file_dir+"/"+params.file_name+" does not exist!"
@@ -41,10 +41,14 @@ def addFile(fileMap){
 }
 def addAnno(fileName,annoMap){
 	FileData file = FileData.findByFile_name(fileName)
+	println "file = "+file
 	def filedir = FileData.findByFile_name(fileName).file_dir
-	def check = FileData.findByFile_name(fileName).anno.anno_file			
+	println "filedir = "+filedir
+	def check = []
+	if (FileData.findByFile_name(fileName).anno){
+		check = FileData.findByFile_name(fileName).anno.anno_file			
+	}
 	println "check = "+check
-	
 	if (annoMap.anno_file in check){
 		println annoMap.anno_file+" already exists for "+fileName+" so not adding"
 	}else{
@@ -52,7 +56,7 @@ def addAnno(fileName,annoMap){
 			println annoMap
 			AnnoData anno = new AnnoData(annoMap)
 			file.addToAnno(anno)
-			anno.save()
+			anno.save(flush:true)
 			println annoMap.anno_file+" was added"
 		}else{
 			println "data/"+filedir+"/"+annoFile.anno_file+" doesn't exist"
@@ -532,6 +536,41 @@ def B_mal(){
 	fileMap.description = "WormBase"
 	fileMap.file_link = "b_malayi.WS234.annotations_trim.gff3"
 	addFile(fileMap)
+	
+	//annotations
+	def annoMap = [:]
+	
+	//blast
+	annoMap.type = "blast"				
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "SwissProt"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "sprot.xml"
+	annoMap.loaded = false	
+	addAnno("b_malayi.WS234.annotations_trim.gff3",annoMap)
+	
+	//functional
+	annoMap.type = "fun"				
+	annoMap.link = "http://enzyme.expasy.org/EC/"
+	annoMap.source = "Annot8r EC"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "ec.txt"
+	annoMap.loaded = false	
+	addAnno("b_malayi.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.ebi.ac.uk/QuickGO/GTerm?id="
+	annoMap.source = "Annot8r GO"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "go.txt"
+	annoMap.loaded = false	
+	addAnno("b_malayi.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.genome.jp/dbget-bin/www_bget?ko:"
+	annoMap.source = "Annot8r KEGG"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "kegg.txt"
+	annoMap.loaded = false	
+	addAnno("b_malayi.WS234.annotations_trim.gff3",annoMap)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -585,6 +624,41 @@ def C_ang(){
 	fileMap.description = "WormBase"
 	fileMap.file_link = "c_angaria.WS234.annotations_trim.gff3"
 	addFile(fileMap)
+	
+	//annotations
+	def annoMap = [:]
+	
+	//blast
+	annoMap.type = "blast"				
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "SwissProt"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "sprot.xml"
+	annoMap.loaded = false	
+	addAnno("c_angaria.WS234.annotations_trim.gff3",annoMap)
+	
+	//functional
+	annoMap.type = "fun"				
+	annoMap.link = "http://enzyme.expasy.org/EC/"
+	annoMap.source = "Annot8r EC"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "ec.txt"
+	annoMap.loaded = false	
+	addAnno("c_angaria.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.ebi.ac.uk/QuickGO/GTerm?id="
+	annoMap.source = "Annot8r GO"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "go.txt"
+	annoMap.loaded = false	
+	addAnno("c_angaria.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.genome.jp/dbget-bin/www_bget?ko:"
+	annoMap.source = "Annot8r KEGG"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "kegg.txt"
+	annoMap.loaded = false	
+	addAnno("c_angaria.WS234.annotations_trim.gff3",annoMap)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -637,6 +711,41 @@ def B_xyl(){
 	fileMap.description = "WormBase"
 	fileMap.file_link = "b_xylophilus.WS234.annotations_trim.gff3"
 	addFile(fileMap)
+	
+	//annotations
+	def annoMap = [:]
+	
+	//blast
+	annoMap.type = "blast"				
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "SwissProt"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "sprot.xml"
+	annoMap.loaded = false	
+	addAnno("b_xylophilus.WS234.annotations_trim.gff3",annoMap)
+	
+	//functional
+	annoMap.type = "fun"				
+	annoMap.link = "http://enzyme.expasy.org/EC/"
+	annoMap.source = "Annot8r EC"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "ec.txt"
+	annoMap.loaded = false	
+	addAnno("b_xylophilus.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.ebi.ac.uk/QuickGO/GTerm?id="
+	annoMap.source = "Annot8r GO"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "go.txt"
+	annoMap.loaded = false	
+	addAnno("b_xylophilus.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.genome.jp/dbget-bin/www_bget?ko:"
+	annoMap.source = "Annot8r KEGG"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "kegg.txt"
+	annoMap.loaded = false	
+	addAnno("b_xylophilus.WS234.annotations_trim.gff3",annoMap)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -689,6 +798,41 @@ def H_con(){
 	fileMap.description = "WormBase"
 	fileMap.file_link = "h_contortus.WS234.annotations_trim.gff3"
 	addFile(fileMap)
+	
+	//annotations
+	def annoMap = [:]
+	
+	//blast
+	annoMap.type = "blast"				
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "SwissProt"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "sprot.xml"
+	annoMap.loaded = false	
+	addAnno("h_contortus.WS234.annotations_trim.gff3",annoMap)
+	
+	//functional
+	annoMap.type = "fun"				
+	annoMap.link = "http://enzyme.expasy.org/EC/"
+	annoMap.source = "Annot8r EC"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "ec.txt"
+	annoMap.loaded = false	
+	addAnno("h_contortus.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.ebi.ac.uk/QuickGO/GTerm?id="
+	annoMap.source = "Annot8r GO"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "go.txt"
+	annoMap.loaded = false	
+	addAnno("h_contortus.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.genome.jp/dbget-bin/www_bget?ko:"
+	annoMap.source = "Annot8r KEGG"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "kegg.txt"
+	annoMap.loaded = false	
+	addAnno("h_contortus.WS234.annotations_trim.gff3",annoMap)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -741,6 +885,41 @@ def M_inc(){
 	fileMap.description = "WormBase"
 	fileMap.file_link = "m_incognita.WS234.annotations_trim.gff3"
 	addFile(fileMap)
+	
+	//annotations
+	def annoMap = [:]
+	
+	//blast
+	annoMap.type = "blast"				
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "SwissProt"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "sprot.xml"
+	annoMap.loaded = false	
+	addAnno("m_incognita.WS234.annotations_trim.gff3",annoMap)
+	
+	//functional
+	annoMap.type = "fun"				
+	annoMap.link = "http://enzyme.expasy.org/EC/"
+	annoMap.source = "Annot8r EC"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "ec.txt"
+	annoMap.loaded = false	
+	addAnno("m_incognita.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.ebi.ac.uk/QuickGO/GTerm?id="
+	annoMap.source = "Annot8r GO"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "go.txt"
+	annoMap.loaded = false	
+	addAnno("m_incognita.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.genome.jp/dbget-bin/www_bget?ko:"
+	annoMap.source = "Annot8r KEGG"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "kegg.txt"
+	annoMap.loaded = false	
+	addAnno("m_incognita.WS234.annotations_trim.gff3",annoMap)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -793,6 +972,41 @@ def S_rat(){
 	fileMap.description = "WormBase"
 	fileMap.file_link = "s_ratti.WS234.annotations_trim.gff3"
 	addFile(fileMap)
+	
+	//annotations
+	def annoMap = [:]
+	
+	//blast
+	annoMap.type = "blast"				
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "SwissProt"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "sprot.xml"
+	annoMap.loaded = false	
+	addAnno("s_ratti.WS234.annotations_trim.gff3",annoMap)
+	
+	//functional
+	annoMap.type = "fun"				
+	annoMap.link = "http://enzyme.expasy.org/EC/"
+	annoMap.source = "Annot8r EC"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "ec.txt"
+	annoMap.loaded = false	
+	addAnno("s_ratti.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.ebi.ac.uk/QuickGO/GTerm?id="
+	annoMap.source = "Annot8r GO"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "go.txt"
+	annoMap.loaded = false	
+	addAnno("s_ratti.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.genome.jp/dbget-bin/www_bget?ko:"
+	annoMap.source = "Annot8r KEGG"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "kegg.txt"
+	annoMap.loaded = false	
+	addAnno("s_ratti.WS234.annotations_trim.gff3",annoMap)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -845,6 +1059,41 @@ def T_spi(){
 	fileMap.description = "WormBase"
 	fileMap.file_link = "t_spiralis.WS234.annotations_trim.gff3"
 	addFile(fileMap)
+	
+		//annotations
+	def annoMap = [:]
+	
+	//blast
+	annoMap.type = "blast"				
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "SwissProt"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "sprot.xml"
+	annoMap.loaded = false	
+	addAnno("t_spiralis.WS234.annotations_trim.gff3",annoMap)
+	
+	//functional
+	annoMap.type = "fun"				
+	annoMap.link = "http://enzyme.expasy.org/EC/"
+	annoMap.source = "Annot8r EC"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "ec.txt"
+	annoMap.loaded = false	
+	addAnno("t_spiralis.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.ebi.ac.uk/QuickGO/GTerm?id="
+	annoMap.source = "Annot8r GO"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "go.txt"
+	annoMap.loaded = false	
+	addAnno("t_spiralis.WS234.annotations_trim.gff3",annoMap)
+	
+	annoMap.link = "http://www.genome.jp/dbget-bin/www_bget?ko:"
+	annoMap.source = "Annot8r KEGG"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "kegg.txt"
+	annoMap.loaded = false	
+	addAnno("t_spiralis.WS234.annotations_trim.gff3",annoMap)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////

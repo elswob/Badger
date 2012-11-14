@@ -450,120 +450,145 @@
 		  	<div id="chart" class="jqplot-target" style="height: 300px; width: 100%; position: center;">Loading...<img src="${resource(dir: 'images', file: 'spinner.gif')}"</div>
 		 
 		 </td></tr>
-		 <tr><td>
-		 <h1>Genes:</h1>
-		 <table>
-		 <tr><td><b>Number genes</b></td><td>${printf("%,d\n",gene_stats.genenum)}</td></tr>
-		 <tr><td><b>Number transcripts</b></td><td>${printf("%,d\n",gene_stats.mrnanum)}</td></tr>
-		 <tr><td><b>Frequency (genes per Kb)</b></td><td>${printf("%.4g",(badger.GeneInfo.count()/genome_stats.span)*1000)}</td></tr>
-		 <tr><td><b>Mean transcript length (bp)</b></td><td>${printf("%,d\n",gene_stats.mean)}</td></tr>
-		 <tr><td><b>Smallest (bp)</b></td><td>${printf("%,d\n",gene_stats.min)}</td></tr>
-		 <tr><td><b>Largest (bp)</b></td><td>${printf("%,d\n",gene_stats.max)}</td></tr>
-		 <tr><td><b>GC (%)</b></td><td>${printf("%.4g",gene_stats.gc)}</td></tr>
-		 <tr><td><b>Non ATGC (bp)</b></td><td>${printf("%,d\n",gene_stats.nonATGC)}</td></tr>
-		 </table>
-	 </td><td>
-	 	<br>
- 		<div id="blast_chart" class="jqplot-target" style="height: 200px; width: 100%; position: center;"></div>
- 		<br>
- 		<div id="fun_chart" class="jqplot-target" style="height: 250px; width: 100%; position: center;"></div>
- 	 </td></tr>
+		 <g:if test = "${gene_stats.size() > 0}">
+		   <tr><td>
+			 <h1>Genes:</h1>
+			 <table>
+			 <tr><td><b>Number genes</b></td><td>${printf("%,d\n",gene_stats.genenum)}</td></tr>
+			 <tr><td><b>Number transcripts</b></td><td>${printf("%,d\n",gene_stats.mrnanum)}</td></tr>
+			 <tr><td><b>Frequency (genes per Kb)</b></td><td>${printf("%.4g",(gene_stats.genenum/genome_stats.span)*1000)}</td></tr>
+			 <tr><td><b>Mean transcript length (bp)</b></td><td>${printf("%,d\n",gene_stats.mean)}</td></tr>
+			 <tr><td><b>Smallest (bp)</b></td><td>${printf("%,d\n",gene_stats.min)}</td></tr>
+			 <tr><td><b>Largest (bp)</b></td><td>${printf("%,d\n",gene_stats.max)}</td></tr>
+			 <tr><td><b>GC (%)</b></td><td>${printf("%.4g",gene_stats.gc)}</td></tr>
+			 <tr><td><b>Non ATGC (bp)</b></td><td>${printf("%,d\n",gene_stats.nonATGC)}</td></tr>
+			 </table>
+		 </td><td>
+			<br>
+			<div id="blast_chart" class="jqplot-target" style="height: 200px; width: 100%; position: center;"></div>
+			<br>
+			<div id="fun_chart" class="jqplot-target" style="height: 250px; width: 100%; position: center;"></div>
+		 </td></tr>
+		</g:if>
  </table>
-  
-  <g:if test = "${meta}">
-  <div id="content">
-  	<g:form action="gene_search_results">	
-  	<h2><b>Select a data set</b></h2>
-	<select name="dataSelect">
-		<g:each var="f" in="${meta.files}">
-			<g:if test="${f.file_type == 'Genes'}">
-				<option value=${f.id}>${meta.genus} ${meta.species}: ${f.file_type} (${f.file_version}) - ${f.file_name}
-			</g:if>
-		</g:each>
-	</select>	
-		<div id = "showAnno">
-		<table>
-		<tr><td>
-		<h1>Choose an annotation:</h1>
-		<g:each var="t" in="${meta.files.anno}">
-			<g:if test="${'blast' in t.type}">
-				<label><input name="toggler" type="radio" id="blast" checked="checked" value="1"> 1. BLAST homology</label><br>
-				<div class="toHide" id="blk_1" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
-					<g:each var="a" in="${t}">
-						<g:if test="${a.type == 'blast'}">
-							<label><input type="checkbox" checked="yes" name="blastAnno" value="${a.source}" /> ${a.source}</label><br>
-						</g:if>
-					</g:each> 
-				</div> 
-			</g:if>
-			<g:if test="${'fun' in t.type}">
-				<label><input name="toggler" type="radio" id="anno" value="2"> 2. Functional annotation </label><br>  			
-				<div class="toHide" id="blk_2" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
-					<g:each var="a" in="${t}">
-						<g:if test="${a.type == 'fun'}">
-							<label><input type="checkbox" checked="yes" name="funAnno" value="${a.source}" /> ${a.source}</label><br>
-						</g:if>
-					</g:each>	
-				</div> 
-			</g:if>
-			<g:if test="${'ipr' in t.type}">
-				<label><input name="toggler" type="radio" id="ipr" value="3"> 3. InterPro domains</label><br>
-				<div class="toHide" id="blk_3" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
-					<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMPanther" /> PANTHER <a href="http://www.pantherdb.org/" style="text-decoration:none" target="_blank">?</a></label><br>
-					<label><input type="checkbox" checked="yes" name="iprAnno" value="BlastProDom" /> ProDom <a href="http://prodom.prabi.fr/prodom/current/html/home.php" style="text-decoration:none" target="_blank">?</a></label><br>
-					<label><input type="checkbox" checked="yes" name="iprAnno" value="Gene3D" /> Gene3D <a href="http://gene3d.biochem.ucl.ac.uk/Gene3D/" style="text-decoration:none" target="_blank">?</a></label><br>
-					<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMSmart" /> SMART <a href="http://smart.embl-heidelberg.de/" style="text-decoration:none" target="_blank">?</a></label><br>
-					<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMPfam" /> Pfam <a href="http://pfam.sanger.ac.uk/" style="text-decoration:none" target="_blank">?</a></label><br>
-					<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMTigr" /> TIGRFAMs <a href="http://www.jcvi.org/cgi-bin/tigrfams/index.cgi" style="text-decoration:none" target="_blank">?</a></label><br>
-				</div> 
-			</g:if>
-		</g:each>
-	
-		<td>  
+ <g:if test = "${gene_stats.size() > 0}">
+	<div id="content">
+	  <table><tr>
+	  <td><h1>Search annotations:</h1>
+	  <table><tr><td>
+		<g:form action="gene_search_results">	
+		<h2><b>Select a data set:</b></h2>
+		<select name="dataSelect">
+			<g:each var="f" in="${meta.files}">
+				<g:if test="${f.file_type == 'Genes'}">
+					<option value=${f.id}>${meta.genus} ${meta.species}: ${f.file_type} (${f.file_version}) - ${f.file_name}
+				</g:if>
+			</g:each>
+		</select>
+		</td></tr>
+		</table>	
+			<div id = "showAnno">
+			<table>
+			<tr><td>
+			<h1>Choose an annotation:</h1>
+			<g:each var="t" in="${meta.files.anno}">
+				<g:if test="${'blast' in t.type}">
+					<label><input name="toggler" type="radio" id="blast" checked="checked" value="1"> 1. BLAST homology</label><br>
+					<div class="toHide" id="blk_1" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
+						<g:each var="a" in="${t}">
+							<g:if test="${a.type == 'blast'}">
+								<label><input type="checkbox" checked="yes" name="blastAnno" value="${a.source}" /> ${a.source}</label><br>
+							</g:if>
+						</g:each> 
+					</div> 
+				</g:if>
+				<g:if test="${'fun' in t.type}">
+					<label><input name="toggler" type="radio" id="anno" value="2"> 2. Functional annotation </label><br>  			
+					<div class="toHide" id="blk_2" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
+						<g:each var="a" in="${t}">
+							<g:if test="${a.type == 'fun'}">
+								<label><input type="checkbox" checked="yes" name="funAnno" value="${a.source}" /> ${a.source}</label><br>
+							</g:if>
+						</g:each>	
+					</div> 
+				</g:if>
+				<g:if test="${'ipr' in t.type}">
+					<label><input name="toggler" type="radio" id="ipr" value="3"> 3. InterPro domains</label><br>
+					<div class="toHide" id="blk_3" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
+						<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMPanther" /> PANTHER <a href="http://www.pantherdb.org/" style="text-decoration:none" target="_blank">?</a></label><br>
+						<label><input type="checkbox" checked="yes" name="iprAnno" value="BlastProDom" /> ProDom <a href="http://prodom.prabi.fr/prodom/current/html/home.php" style="text-decoration:none" target="_blank">?</a></label><br>
+						<label><input type="checkbox" checked="yes" name="iprAnno" value="Gene3D" /> Gene3D <a href="http://gene3d.biochem.ucl.ac.uk/Gene3D/" style="text-decoration:none" target="_blank">?</a></label><br>
+						<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMSmart" /> SMART <a href="http://smart.embl-heidelberg.de/" style="text-decoration:none" target="_blank">?</a></label><br>
+						<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMPfam" /> Pfam <a href="http://pfam.sanger.ac.uk/" style="text-decoration:none" target="_blank">?</a></label><br>
+						<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMTigr" /> TIGRFAMs <a href="http://www.jcvi.org/cgi-bin/tigrfams/index.cgi" style="text-decoration:none" target="_blank">?</a></label><br>
+					</div> 
+				</g:if>
+			</g:each>
+		
+			<td>  
+			<h1>Choose what to search:</h1>
+			<select class="toHide" name = "tableSelect_1" id ="sel_1" onChange='showSelected(this.value)'>
+			  <option value="e.g. ATPase">Description</option>
+			  <option value="e.g. 215283796 or P31409">ID</option>    
+			</select>
+			<select class="toHide" name = "tableSelect_2" id ="sel_2" onChange='showSelected(this.value)'>
+			  <option value="e.g. Calcium-transportingATPase">Description</option>
+			  <option value="e.g. GO:0008094 or 3.6.3.8 or K02147">ID</option>    
+			</select>
+			<select class="toHide" name = "tableSelect_3" id ="sel_3" onChange='showSelected(this.value)'>
+			  <option value="e.g. Vacuolar (H+)-ATPase G subunit">Description</option>
+			  <option value="e.g. IPR023298 or PF01813">ID</option>    
+			</select>
+			  </td>
+			  
+			  <td>
+			<h1>Enter a search term:</h1>
+			<div id='selectedResult'></div>
+			<g:textField name="searchId"  size="30"/>
+			<input type="hidden" name="Gid" value="${params.Gid}">
+			<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
+			</g:form>
+			 </td>
+		  </tr>
+		   </table>
+		   <br>
+		   </div>
+		   
+			<table>
+				<tr><td width=15%><b>Data type</b></td><td><b>Version</b></td><td><b>Description</b></td><td><b>Number</b></td></tr>
+				<g:each var="f" in="${meta.files}">
+					<tr><td>${f.file_type}</td><td>${f.file_version}</td><td>${f.description}</td><td>${stats."${f.file_type}"}</td></tr>
+				</g:each>
+			</table>
+		 </td></tr>
+		</td></tr></table>
+	</g:if>
+	<table>
+	 <tr><td><h1>Search <i>${meta.genus} ${meta.species}</i> publications:</h1>
+	 
+	 <g:form controller="home" action="publication_search">
+	 <table><tr><td>
+
 		<h1>Choose what to search:</h1>
-		<select class="toHide" name = "tableSelect_1" id ="sel_1" onChange='showSelected(this.value)'>
-		  <option value="e.g. ATPase">Description</option>
-		  <option value="e.g. 215283796 or P31409">ID</option>    
-		</select>
-		<select class="toHide" name = "tableSelect_2" id ="sel_2" onChange='showSelected(this.value)'>
-		  <option value="e.g. Calcium-transportingATPase">Description</option>
-		  <option value="e.g. GO:0008094 or 3.6.3.8 or K02147">ID</option>    
-		</select>
-		<select class="toHide" name = "tableSelect_3" id ="sel_3" onChange='showSelected(this.value)'>
-		  <option value="e.g. Vacuolar (H+)-ATPase G subunit">Description</option>
-		  <option value="e.g. IPR023298 or PF01813">ID</option>    
-		</select>
-		  </td>
-		  
-		  <td>
-		<h1>Enter a search term:</h1>
+		<label><input type="checkbox" checked="yes" name="pubVal" value="title" /> Title</label><br>
+		<label><input type="checkbox" checked="yes" name="pubVal" value="abstract_text" /> Abstract</label><br>
+		<label><input type="checkbox" checked="yes" name="pubVal" value="authors" /> Authors</label><br>
+		<label><input type="checkbox" checked="yes" name="pubVal" value="journal" /> Journal</label><br>
+		<input type="hidden" name="speciesId" value="${meta.id}">
+		
+	   </td>
+	   <td>
+		<h1>Enter a search term:</h1>(To see all ${meta.genus} ${meta.species} publications leave the box blank)<br>
 		<div id='selectedResult'></div>
 		<g:textField name="searchId"  size="30"/>
-		<input type="hidden" name="Gid" value="${params.Gid}">
 		<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
-		</g:form>
 		 </td>
-	  </tr>
-	   </table>
-	   <br>
-	   </div>
 	   
-	   <g:if test = "${meta}">
-  	 	<table>
-  	 		<tr><td width=15%><b>Data type</b></td><td><b>Version</b></td><td><b>Description</b></td><td><b>Number</b></td></tr>
-  	 		<g:each var="f" in="${meta.files}">
-  	 			<tr><td>${f.file_type}</td><td>${f.file_version}</td><td>${f.description}</td><td>${stats."${f.file_type}"}</td></tr>
-  	 		</g:each>
-  	 	</table>
-  	 </g:if>
-  	 <g:else>
-  	 	<h2>There are no species in the database at present, please add some</h2>
-  	 </g:else>
-	   
-	</g:if>
-	<g:else>
-		<h2>There are no annotations for this species</h2>
-	</g:else>
+	   </tr>
+	 </table>
+	 </g:form>
+
+   </td></tr></table>
    
    <script>
           $(document).ready(function(){

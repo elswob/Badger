@@ -3,6 +3,7 @@ import grails.plugins.springsecurity.Secured
 import groovy.time.*
 import groovy.sql.Sql
 import grails.plugin.cache.Cacheable
+import grails.plugin.cache.CacheEvict
 
 class SearchController {
 	def matcher
@@ -17,12 +18,13 @@ class SearchController {
     	return [metaData: metaData]
     }
     def species = {
-    	def metaData = MetaData.findAll()
+    	def metaData = MetaData.findAll(sort:"genus")
     	def fileData = FileData.findAll()
     	return [meta: metaData, file: fileData]
     	
     }
-    @Cacheable('species_cache')
+    //@Cacheable('species_cache')
+    //@CacheEvict(value='species_cache', allEntries=true)
     def species_search() {
     	def sql = new Sql(dataSource)
     	def Gid = params.Gid
@@ -120,33 +122,35 @@ class SearchController {
 	 	 gc=0
 		 def gene_stats = [:]
 		 
-	 	 geneInfo.each {
-	 	 	genenum++
-	 	 	if (it.mrna_id){
-	 	 		mrnanum++
-	 	 	}
-			mean += it.nuc.length()
-			gc += it.gc
-			nonATGC += it.nuc.toUpperCase().count("N")
-			//nonATGC += it.sequence.toUpperCase().findAll(/G|C|A|T/).size()
-			if (it.nuc.length() < min){
-				min = it.nuc.length()
-			}
-			if (it.nuc.length() > max){
-				max = it.nuc.length()
-			}
+		 if (geneInfo){
+			 geneInfo.each {
+				genenum++
+				if (it.mrna_id){
+					mrnanum++
+				}
+				mean += it.nuc.length()
+				gc += it.gc
+				nonATGC += it.nuc.toUpperCase().count("N")
+				//nonATGC += it.sequence.toUpperCase().findAll(/G|C|A|T/).size()
+				if (it.nuc.length() < min){
+					min = it.nuc.length()
+				}
+				if (it.nuc.length() > max){
+					max = it.nuc.length()
+				}
+			 }
+			 //nonATGC = span-nonATGC
+			 mean = mean/geneInfo.size()
+			 gc = gc/geneInfo.size()
+			 gene_stats.genenum = genenum
+			 gene_stats.mrnanum = mrnanum
+			 gene_stats.mean = mean
+			 gene_stats.gc = gc
+			 gene_stats.min = min
+			 gene_stats.max = max
+			 gene_stats.nonATGC = nonATGC
+			 println gene_stats
 		 }
-		 //nonATGC = span-nonATGC
-		 mean = mean/geneInfo.size()
-		 gc = gc/geneInfo.size()
-		 gene_stats.genenum = genenum
-		 gene_stats.mrnanum = mrnanum
-	 	 gene_stats.mean = mean
-	 	 gene_stats.gc = gc
-	 	 gene_stats.min = min
-	 	 gene_stats.max = max
-	 	 gene_stats.nonATGC = nonATGC
-	 	 println gene_stats
 		 
 		 //get data for plots
 		 //def funAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_anno,gene_info,file_data,meta_data where gene_anno.gene_id = gene_info.id and gene_info.file_id = file_data.id and meta_id = '"+params.id+"' group by anno_db;";

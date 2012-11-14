@@ -73,6 +73,10 @@ class HomeController {
 					pubSearch = pubSearch[0..-5]			
 				}
 				pubSearch += ")"
+				//check for species specific searches
+				if (params.speciesId){
+					pubSearch += " and meta_id = '"+params.speciesId+"' "
+				}
 				def pub_search = "select *,to_char(date_string,'yyyy Mon dd') as date_out from publication where "+pubSearch+" order by date_string desc;"
 				def pub_results = sql.rows(pub_search)
 				println pub_search
