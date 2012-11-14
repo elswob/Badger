@@ -53,7 +53,64 @@
     <br>Enter here your input data as sequence in <g:link controller="blast" action="info" fragment="fasta">FASTA</g:link> format or upload a file <input type="file" name="myFile"/><br>
     <g:textArea name="blastId" style="width: 90%; height: 200px; border: 3px solid #cccccc; padding: 5px;"/><br>
     <p align="center">
-
+	
+	
+	<sec:ifLoggedIn>
+	<table><tr><td><h2>Genomes</h2></td>
+    	<g:each var="res" in="${blastFiles}">
+    		<g:if test="${res.file_type == 'Genome'}">			
+    			<table><tr>
+    			<td>${res.meta.genus} ${res.meta.species}</td><td>${res.file_version}</td><td>${res.file_name}</td></tr>
+    		</g:if>
+		</g:each>
+		</table></td></tr>
+		<tr><td><h2>Transcripts</h2></td>
+		<g:each var="res" in="${blastFiles}">
+    		<g:if test="${res.file_type == 'mRNA'}">
+    			<table><tr>
+    			<td>${res.meta.genus} ${res.meta.species}</td><td>${res.file_version}</td><td>${res.file_name}</td></tr>
+    		</g:if>
+		</g:each>
+		</table></td></tr>
+		<tr><td><h2>Proteins</h2></td>
+		<g:each var="res" in="${blastFiles}">
+    		<g:if test="${res.file_type == 'Peptide'}">
+    			<table><tr>
+    			<td>${res.meta.genus} ${res.meta.species}</td><td>${res.file_version}</td><td>${res.file_name}</td></tr>
+    		</g:if>
+		</g:each>
+		</table></td></tr>
+	</table>
+    </sec:ifLoggedIn>
+    
+    <sec:ifNotLoggedIn>
+	   	<table><tr><td><h2>Genomes</h2></td>
+    	<g:each var="res" in="${blastFiles}">
+    		<g:if test="${res.file_type == 'Genome' && res.blast == 'pub'}">			
+    			<table><tr>
+    			<td>${res.meta.genus} ${res.meta.species}</td><td>${res.file_version}</td><td>${res.file_name}</td></tr>
+    		</g:if>
+		</g:each>
+		</table></td></tr>
+		<tr><td><h2>Transcripts</h2></td>
+		<g:each var="res" in="${blastFiles}">
+    		<g:if test="${res.file_type == 'mRNA' && res.blast == 'pub'}">
+    			<table><tr>
+    			<td>${res.meta.genus} ${res.meta.species}</td><td>${res.file_version}</td><td>${res.file_name}</td></tr>
+    		</g:if>
+		</g:each>
+		</table></td></tr>
+		<tr><td><h2>Proteins</h2></td>
+		<g:each var="res" in="${blastFiles}">
+    		<g:if test="${res.file_type == 'Peptide' && res.blast == 'pub'}">
+    			<table><tr>
+    			<td>${res.meta.genus} ${res.meta.species}</td><td>${res.file_version}</td><td>${res.file_name}</td></tr>
+    		</g:if>
+		</g:each>
+		</table></td></tr>
+	</table>
+	</sec:ifNotLoggedIn>
+	</table>
     <br>Alignment view
     <select name = "ALIGNMENT_VIEW">
     <option value=0 selected> Full
