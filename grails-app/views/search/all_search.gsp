@@ -3,7 +3,7 @@
 <head>
     <meta name='layout' content='main'/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${grailsApplication.config.projectID} transcript search</title>
+    <title>${grailsApplication.config.projectID} search all</title>
     <parameter name="search" value="selected"></parameter>
     <link rel="stylesheet" href="${resource(dir: 'js', file: 'jquery.loadmask.css')}" type="text/css"></link>
     <script src="${resource(dir: 'js', file: 'jqplot/jquery.min.js')}" type="text/javascript"></script>

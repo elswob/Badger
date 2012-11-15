@@ -57,26 +57,27 @@
 	
 	<sec:ifLoggedIn>
 	<table><tr><td><h2>Genomes</h2></td>
+	<table><tr>
     	<g:each var="res" in="${blastFiles}">
-    		<g:if test="${res.file_type == 'Genome'}">			
-    			<table><tr>
-    			<td>${res.meta.genus} ${res.meta.species}</td><td>${res.file_version}</td><td>${res.file_name}</td></tr>
+    		<g:if test="${res.file_type == 'Genome' && !isLoggedIn()}">		
+    			<g:if test="${isLoggedIn()}">	
+    			<td><i>${res.meta.genus} ${res.meta.species}</td><td>Version ${res.file_version}</td><td>${res.file_name}</td></tr>
     		</g:if>
 		</g:each>
 		</table></td></tr>
 		<tr><td><h2>Transcripts</h2></td>
+		<table><tr>
 		<g:each var="res" in="${blastFiles}">
     		<g:if test="${res.file_type == 'mRNA'}">
-    			<table><tr>
-    			<td>${res.meta.genus} ${res.meta.species}</td><td>${res.file_version}</td><td>${res.file_name}</td></tr>
+    			<td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td><td>${res.file_name}</td></tr>
     		</g:if>
 		</g:each>
 		</table></td></tr>
 		<tr><td><h2>Proteins</h2></td>
+		<table><tr>
 		<g:each var="res" in="${blastFiles}">
     		<g:if test="${res.file_type == 'Peptide'}">
-    			<table><tr>
-    			<td>${res.meta.genus} ${res.meta.species}</td><td>${res.file_version}</td><td>${res.file_name}</td></tr>
+    			<td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td><td>${res.file_name}</td></tr>
     		</g:if>
 		</g:each>
 		</table></td></tr>
@@ -85,26 +86,26 @@
     
     <sec:ifNotLoggedIn>
 	   	<table><tr><td><h2>Genomes</h2></td>
+	   	<table><tr>
     	<g:each var="res" in="${blastFiles}">
-    		<g:if test="${res.file_type == 'Genome' && res.blast == 'pub'}">			
-    			<table><tr>
-    			<td>${res.meta.genus} ${res.meta.species}</td><td>${res.file_version}</td><td>${res.file_name}</td></tr>
+    		<g:if test="${res.file_type == 'Genome' && res.blast == 'pub'}">			 			
+    			<td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td><td>${res.file_name}</td></tr>
     		</g:if>
 		</g:each>
 		</table></td></tr>
 		<tr><td><h2>Transcripts</h2></td>
+		<table><tr>
 		<g:each var="res" in="${blastFiles}">
     		<g:if test="${res.file_type == 'mRNA' && res.blast == 'pub'}">
-    			<table><tr>
-    			<td>${res.meta.genus} ${res.meta.species}</td><td>${res.file_version}</td><td>${res.file_name}</td></tr>
+    			<td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td><td>${res.file_name}</td></tr>
     		</g:if>
 		</g:each>
 		</table></td></tr>
 		<tr><td><h2>Proteins</h2></td>
+		<table><tr>
 		<g:each var="res" in="${blastFiles}">
     		<g:if test="${res.file_type == 'Peptide' && res.blast == 'pub'}">
-    			<table><tr>
-    			<td>${res.meta.genus} ${res.meta.species}</td><td>${res.file_version}</td><td>${res.file_name}</td></tr>
+    			<td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td><td>${res.file_name}</td></tr>
     		</g:if>
 		</g:each>
 		</table></td></tr>

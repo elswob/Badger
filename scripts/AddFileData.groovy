@@ -46,6 +46,7 @@ def addAnno(fileName,annoMap){
 	println "filedir = "+filedir
 	def check = []
 	if (FileData.findByFile_name(fileName).anno){
+		println "anno = "+FileData.findByFile_name(fileName).anno
 		check = FileData.findByFile_name(fileName).anno.anno_file			
 	}
 	println "check = "+check
@@ -59,7 +60,7 @@ def addAnno(fileName,annoMap){
 			anno.save(flush:true)
 			println annoMap.anno_file+" was added"
 		}else{
-			println "data/"+filedir+"/"+annoFile.anno_file+" doesn't exist"
+			println "data/"+filedir+"/"+annoMap.anno_file+" doesn't exist"
 		}
 	}
 }
