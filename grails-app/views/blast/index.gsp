@@ -8,116 +8,140 @@
     <link rel="stylesheet" href="${resource(dir: 'js', file: 'jquery.loadmask.css')}" type="text/css"></link>
     <script type="text/javascript"> 
     	$(window).unload(function() {});
+    	
+		function toggleDiv(divId) {
+			//$('.toHide').hide();
+            $("#"+divId).slideToggle(400);
+    	}
+
     </script>
+    <script>
+     $(document).ready( function() {
+ 
+        // Select all
+        $("A[href='#select_all']").click( function() {
+            $("#" + $(this).attr('rel') + " INPUT[type='checkbox']").attr('checked', true);
+            return false;
+        });
+ 
+        // Select none
+        $("A[href='#select_none']").click( function() {
+            $("#" + $(this).attr('rel') + " INPUT[type='checkbox']").attr('checked', false);
+            return false;
+        });
+ 
+        // Invert selection
+        $("A[href='#invert_selection']").click( function() {
+            $("#" + $(this).attr('rel') + " INPUT[type='checkbox']").each( function() {
+                $(this).attr('checked', !$(this).attr('checked'));
+            });
+            return false;
+        });
+ 
+    });
+    function demoSeq(){
+    	$("#blastId").val(">gi|1256569|gb|AAA96502.1| lumbrokinase-1T4 precursor [Lumbricus rubellus]\nMLLLALASLVAVGFAQPPVWYPGGQCSVSQYSDAGDMELPPGTKIVGGIEARPYEFPWQVSVRRKSSDSH\nFCGGSIINDRWVVCAAHCMQGESPALVSLVVGEHDSSAASTVRQTHDVDSIFVHEDYNGNTFENDVSVIK\nTVNAIAIDINDGPICAPDPANDYVYRKSQCSGWGTINSGGVCCPNVLRYVTLNVTTNAFCDDIYSPLYTI\nTSDMICATDNTGQNERDSCQGDSGGPLSVKDGSGIFSLIGIVSWGIGCASGYPGVYARVGSQTGWITDII\nTNN");
+    }
+    </script>
+    
 </head>
 
 <!--body onload="stopSpin();"-->
 <body>
-<div class="bread">Blast</div>  
+<div class="bread">BLAST</div>  
 
 <!--body onunload=""-->
 
   <div id="content">
     <g:uploadForm action="runBlast" method="post">
-      <br>
-    <p align="center"><g:link controller="blast" action="info" fragment="program">Program</g:link>
-    <select name = "PROGRAM">
-    <option>blastn</option>
-    <option>tblastx</option>
-    <option>tblastn</option>
-    <option>blastx</option>
-    <option>blastp</option>
-    </select>
-
-    <g:link controller="blast" action="info" fragment="db">Database</g:link>
-    <select name = "datalib">
-    <sec:ifLoggedIn>
-    	<g:each var="res" in="${blastFiles}">
-    		<option value="${res.file_name}"/> ${res.meta.genus} ${res.meta.species}: ${res.file_type} (${res.file_name})</option>
-		</g:each>
-    </sec:ifLoggedIn>
-    <sec:ifNotLoggedIn>
-	    <g:each var="res" in="${blastFiles}">
-    		<g:if test = "${res.blast == 'pub'}">
-    			<option value="${res.file_name}" /> ${res.meta.genus} ${res.meta.species}: ${res.file_type} (${res.file_name})</option>
-    		</g:if>
-		</g:each>
-	</sec:ifNotLoggedIn>
-    </select>
-    <input TYPE="checkbox" NAME="UNGAPPED_ALIGNMENT" VALUE="is_set">
-    Perform ungapped alignment
-    <br>&nbsp;
-    <p align="center">The query sequence is&nbsp;<input TYPE="checkbox" NAME="FILTER" VALUE="L" CHECKED>
-    <g:link controller="blast" action="info" fragment="filt">filtered</g:link>
-    for low complexity regions by default.
-    <br>Enter here your input data as sequence in <g:link controller="blast" action="info" fragment="fasta">FASTA</g:link> format or upload a file <input type="file" name="myFile"/><br>
-    <g:textArea name="blastId" style="width: 90%; height: 200px; border: 3px solid #cccccc; padding: 5px;"/><br>
-    <p align="center">
+	<h1>Choose a database:</h1>
+    <table><tr><td>
+    <label><input name="blastDB" type="radio" id="genomeRadio" value="1" STYLE="cursor: pointer" onclick="toggleDiv('blk_1');$('#blk_2').hide();$('#blk_3').hide();">Genomes</label>
+	<label><input name="blastDB" type="radio" id="transRadio" value="2" STYLE="cursor: pointer" onclick="toggleDiv('blk_2');$('#blk_1').hide();$('#blk_3').hide();">Transcripts</label>
+	<label><input name="blastDB" type="radio" id="proteinRadio" checked="checked" value="3" STYLE="cursor: pointer" onclick="toggleDiv('blk_3');$('#blk_1').hide();$('#blk_2').hide();">Proteins</label>
+	(click to show/hide available data sets)
+	<fieldset id="blast_dbs">	
+		<div class="toHide" id="blk_1" style="display:none">
+		<table><tr><td>
+		Select <a rel="blast_dbs" href="#select_all">All</a> | 
+		<a rel="blast_dbs" href="#select_none">None</a> | 
+		<a rel="blast_dbs" href="#invert_selection">Invert</a>
+			<table class="blast"><tr>
+				<g:each var="res" in="${blastFiles}">
+					<g:if test="${res.file_type == 'Genome'}">		
+						<g:if test="${res.blast == 'priv' && isLoggedIn()}">	
+							<td><g:checkBox name="genomeCheck" value="${res.file_name}" /></td><td><i>${res.meta.genus} ${res.meta.species}</td><td>Version ${res.file_version}</td></tr>
+						</g:if>
+						<g:elseif test="${res.blast == 'pub'}">
+							<td><g:checkBox name="genomeCheck" value="${res.file_name}" /></td><td><i>${res.meta.genus} ${res.meta.species}</td><td>Version ${res.file_version}</td></tr>
+						</g:elseif>
+					</g:if>
+				</g:each>
+			</table>
+		</td></tr></table>
+		</div>
+		
+		<div class="toHide" id="blk_2" style="display:none">
+		<table><tr><td>
+		Select <a rel="blast_dbs" href="#select_all">All</a> | 
+		<a rel="blast_dbs" href="#select_none">None</a> | 
+		<a rel="blast_dbs" href="#invert_selection">Invert</a>
+			<table class="blast"><tr>
+				<g:each var="res" in="${blastFiles}">
+					<g:if test="${res.file_type == 'mRNA'}">
+						<g:if test="${res.blast == 'priv' && isLoggedIn()}">
+							<td><g:checkBox name="transCheck" value="${res.file_name}" /></td><td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td></tr>
+						</g:if>
+						<g:elseif test="${res.blast == 'pub'}">
+							<td><g:checkBox name="transCheck" value="${res.file_name}" /></td><td><i>${res.meta.genus} ${res.meta.species}</td><td>Version ${res.file_version}</td></tr>
+						</g:elseif>
+					</g:if>
+				</g:each>
+			</table>
+		</td></tr></table>
+		</div>
+		
+		<div class="toHide" id="blk_3" style="display:none">
+		<table><tr><td>
+		Select <a rel="blast_dbs" href="#select_all">All</a> | 
+		<a rel="blast_dbs" href="#select_none">None</a> | 
+		<a rel="blast_dbs" href="#invert_selection">Invert</a>
+			<table class="blast"><tr>
+				<g:each var="res" in="${blastFiles}">
+					<g:if test="${res.file_type == 'Peptide'}">
+						<g:if test="${res.blast == 'priv' && isLoggedIn()}">
+							<td><g:checkBox name="protCheck" value="${res.file_name}" /></td><td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td></tr>
+						</g:if>
+						<g:elseif test="${res.blast == 'pub'}">
+							<td><g:checkBox name="protCheck" value="${res.file_name}" /></td><td><i>${res.meta.genus} ${res.meta.species}</td><td>Version ${res.file_version}</td></tr>
+						</g:elseif>
+					</g:if>
+				</g:each>
+			</table>
+		</td></tr></table>	
+		</div>
 	
-	
-	<sec:ifLoggedIn>
-	<table><tr><td><h2>Genomes</h2></td>
-	<table><tr>
-    	<g:each var="res" in="${blastFiles}">
-    		<g:if test="${res.file_type == 'Genome' && !isLoggedIn()}">		
-    			<g:if test="${isLoggedIn()}">	
-    			<td><i>${res.meta.genus} ${res.meta.species}</td><td>Version ${res.file_version}</td><td>${res.file_name}</td></tr>
-    		</g:if>
-		</g:each>
-		</table></td></tr>
-		<tr><td><h2>Transcripts</h2></td>
-		<table><tr>
-		<g:each var="res" in="${blastFiles}">
-    		<g:if test="${res.file_type == 'mRNA'}">
-    			<td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td><td>${res.file_name}</td></tr>
-    		</g:if>
-		</g:each>
-		</table></td></tr>
-		<tr><td><h2>Proteins</h2></td>
-		<table><tr>
-		<g:each var="res" in="${blastFiles}">
-    		<g:if test="${res.file_type == 'Peptide'}">
-    			<td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td><td>${res.file_name}</td></tr>
-    		</g:if>
-		</g:each>
-		</table></td></tr>
-	</table>
-    </sec:ifLoggedIn>
+	</fieldset>
+    </td></tr></table>
     
-    <sec:ifNotLoggedIn>
-	   	<table><tr><td><h2>Genomes</h2></td>
-	   	<table><tr>
-    	<g:each var="res" in="${blastFiles}">
-    		<g:if test="${res.file_type == 'Genome' && res.blast == 'pub'}">			 			
-    			<td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td><td>${res.file_name}</td></tr>
-    		</g:if>
-		</g:each>
-		</table></td></tr>
-		<tr><td><h2>Transcripts</h2></td>
-		<table><tr>
-		<g:each var="res" in="${blastFiles}">
-    		<g:if test="${res.file_type == 'mRNA' && res.blast == 'pub'}">
-    			<td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td><td>${res.file_name}</td></tr>
-    		</g:if>
-		</g:each>
-		</table></td></tr>
-		<tr><td><h2>Proteins</h2></td>
-		<table><tr>
-		<g:each var="res" in="${blastFiles}">
-    		<g:if test="${res.file_type == 'Peptide' && res.blast == 'pub'}">
-    			<td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td><td>${res.file_name}</td></tr>
-    		</g:if>
-		</g:each>
-		</table></td></tr>
-	</table>
-	</sec:ifNotLoggedIn>
-	</table>
-    <br>Alignment view
+    <h1>Set your parameters:</h1>
+    <table><tr><td>
+	<g:link controller="blast" action="info" fragment="program">Program</g:link>
+	<select name = "PROGRAM">
+		<option>blastn</option>
+		<option>tblastx</option>
+		<option>tblastn</option>
+		<option>blastx</option>
+		<option>blastp</option>
+	</select>	
+
+    <g:link controller="blast" action="info" fragment="out">Output</g:link>
     <select name = "ALIGNMENT_VIEW">
     <option value=0 selected> Full
     <option value=6> Tabular
     </select>
-    <br><g:link controller="blast" action="info" fragment="exp">Expect</g:link>
+    
+    <g:link controller="blast" action="info" fragment="exp">Expect</g:link>
     <select name = "EXPECT">
     <option> 1e-50 
     <option> 1e-20 
@@ -146,13 +170,31 @@
     <option>250
     <option>500
     </select>
-    <br>
+    
+	<br><br><input TYPE="checkbox" NAME="UNGAPPED_ALIGNMENT" VALUE="is_set">
+	Perform ungapped alignment
+    </td></tr></table>
+    
+    <h1>Enter your sequence:</h1>
+    <table><tr><td>
+    <p>The query sequence is&nbsp;<input TYPE="checkbox" NAME="FILTER" VALUE="L" CHECKED>
+    <g:link controller="blast" action="info" fragment="filt">filtered</g:link>
+    for low complexity regions by default.
+    <p>This is not a batch BLAST server, if a multi-FASTA file is used only the first sequence will be used.
+    <p>Enter here your input data as sequence in <g:link controller="blast" action="info" fragment="fasta">FASTA</g:link> format or upload a file <input type="file" name="myFile"/>
+    <p>Click <a href = "javascript:void(0)" onclick="demoSeq()">here</a> for an example FASTA file.
+    <g:textArea name="blastId" style="width: 100%; height: 200px; border: 3px solid #cccccc; padding: 5px;"/>
+	</td></tr></table>
+	
+	<h1>BLAST:</h1>
+	<table><tr><td>
     <!--input TYPE="submit" VALUE="Search" id="button"-->
     <!--input TYPE="RESET" VALUE="Reset" id="button"-->
-    <div id="buttons" align="center">
+    <div id="buttons">
       <input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
       <!--input type="reset" value="Cancel" id="cancel"-->
     </div>
+    </td></tr></table>
     
   </g:uploadForm>
 </div>

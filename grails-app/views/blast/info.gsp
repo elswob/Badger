@@ -31,14 +31,7 @@ the six-frame translations of a nucleotide sequence database.</p>
 <h1><A name=db>Databases available for BLAST search</h1></center></A>
 <hr>
 <p>
-   <sec:ifLoggedIn>
-    	<g:each var="res" in="${privBlastFiles}">
-    		<option value="${res.key}"/> ${res.key}</option>
-		</g:each>
-    </sec:ifLoggedIn>
-    <g:each var="res" in="${pubBlastFiles}">
-    	<option value="${res.key}" /> ${res.key}</option>
-	</g:each>
+The databases available to search are split into genomes, transcripts and proteins. Availability can be controlled by setting each data set to public or private.
 <p>
 <hr>
 <h1><A name=filt>Low complexity filtering</h1></center></A>
@@ -87,6 +80,12 @@ descriptions. See also EXPECT.
 Restricts database sequences to the number specified for which high-scoring segment pairs (HSPs) are reported; the
 default limit is 100. If more database sequences than this happen to satisfy the statistical significance threshold for
 reporting (see EXPECT below), only the matches ascribed the greatest statistical significance are reported. 
+<p>
+<hr>
+<h1><A name=out>Output</h1></A>
+<hr>
+<p> 
+Two options, full format is the standard BLAST alignment output and tabular is the tabular based output.
 <p>
 <hr>
 <h1><A name=exp>Expect</h1></A>

@@ -218,8 +218,9 @@ def addGenomeData(fileLoc, cov, file_name){
 		cov_check = true
 		println "Data has coverage info."
 		header_regex = /^>(\w+)_(.*)/
+		header_regex = /^>(\w+)_(.*)/
 	}else{
-		header_regex = /^>(\w+)/
+		header_regex = /^>(.*)/
 		println "Data has no coverage info."
 	}
 	def sequence=""
@@ -249,7 +250,7 @@ def addGenomeData(fileLoc, cov, file_name){
 				//println contigMap
 				GenomeInfo genome = new GenomeInfo(contigMap)
 				Gfile.addToScaffold(genome)				
-				if ((count % 2000) ==  0){
+				if ((count % 200) ==  0){
 					println count
 					genome.save(flush:true)
 					println new Date()

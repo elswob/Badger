@@ -860,3 +860,13 @@ table.jqplot-highlighter {
 	font-size: 15px;
 	line-height:50%;
 }
+
+/* jqplot highlight table */
+table.blast {
+	font-size: 15px;
+  	border-collapse:collapse;
+}
+table.blast td, table.blast th
+{
+    padding: 2px; /* 'cellpadding' equivalent */
+}

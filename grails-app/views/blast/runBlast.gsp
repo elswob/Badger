@@ -15,7 +15,7 @@
     
   </head>
   <body>
-  <div class="bread"><g:link action="">Blast</g:link> > Blast result</div>
+  <div class="bread"><g:link action="">BLAST</g:link> > BLAST result</div>
   <script type="text/javascript">
   var contig_list=[];
   function get_contig_data(){
@@ -141,8 +141,8 @@ ${line}<br>
       </div>
     </g:if>
   <g:else test="${term}">
-    <h1>Your BLAST of produced no results</h1>
-    <p>Perhaps you used the wrong BLAST program, please go <g:link controller="blast">back</g:link> and try again.</p>  
+    <h1>Your BLAST produced no results</h1>
+    <p>Perhaps you used the wrong BLAST program, please go <a href="previous.html" onClick="history.back();return false;">back</a> and try again.</p>  
   </g:else>
   </body>
   

@@ -7,24 +7,44 @@ class BlastController {
 	def configDataService
 	
     def info = {
-    	def blastFiles = configDataService.getBlastLinks()
-    	return[pubBlastFiles: blastFiles[0], privBlastFiles: blastFiles[1]]
     }
     def index() { 
     	def blastFiles = FileData.findAllByFile_typeInList(["mRNA","Peptide","Genome"],[sort:"id"])
     	return [blastFiles:blastFiles]
-    	//def blastFiles = configDataService.getBlastLinks()
-    	//return[pubBlastFiles: blastFiles[0], privBlastFiles: blastFiles[1]]
     }
     def blastError = {
     }
     def runBlast = {
     	// set the database files
-    	def fileInfo = FileData.findByFile_name(params.datalib)
-    	def dbfile = fileInfo.file_dir+"/"+fileInfo.file_name
-     	println "dbfile = "+dbfile
-        def db = "data/"+dbfile
-        def blast_file = dbfile
+    	def select 
+    	def type 
+    	if (params.blastDB =="genomeRadio"){
+    		select = params.genomeCheck
+    		type = "Genome"
+    	}else if (params.blastDB =="transRadio"){
+    		select = params.transCheck
+    		type = "Transcriptome"
+    	}else{
+    		select = params.protCheck
+    		type = "Genes"
+    	}
+    	println "select = "+select
+    	def dbString = ""
+    	if (select instanceof String){
+    		def fileInfo = FileData.findByFile_name(select)
+			def dbfile = fileInfo.file_dir+"/"+fileInfo.file_name
+			println "dbfile = "+dbfile
+    		dbString = "data/"+dbfile
+    	}else{
+			select.each{
+				def fileInfo = FileData.findByFile_name(it)
+				def dbfile = fileInfo.file_dir+"/"+fileInfo.file_name
+				println "dbfile = "+dbfile
+				dbString += "data/"+dbfile+" "
+			}
+		}
+		dbString = dbString.trim()
+        println "dbString = "+dbString
         def program = grailsApplication.config.blastPath+params.PROGRAM
         def eval = params.EXPECT
         def blastSeq = params.blastId
@@ -91,12 +111,27 @@ class BlastController {
 				f.write(blastSeq)
 				def BlastOutFile = new File(blastJobId+".out")       
 				println "running BLAST"
-				def comm = "$program -db $db -outfmt $outFmt -num_threads 1 -query $blastJobId -evalue $eval -num_descriptions $numDesc -num_alignments $numAlign -out $BlastOutFile $unGap"
-				println "blast command = "+comm
-				def p = comm.execute()   
+				def comm = """$program -db \"$dbString\" -outfmt $outFmt -num_threads 1 -query $blastJobId -evalue $eval -num_descriptions $numDesc -num_alignments $numAlign -out $BlastOutFile $unGap"""
+				//["$program outfmt $outFmt"].execute().text 
+				println "comm = "+comm
+				//def comm = "/home/elswob/software/blast+/ncbi-blast-2.2.26+/bin/blastp -db \"data/A_viteae/nAv.1.0.1.aug.proteins.fasta data/L_sigmodontis/nLs.2.1.2.aug.proteins.fasta data/D_immitis/nDi.2.2.2.aug.proteins.fasta data/O_ochengi/nOo.2.0.1.aug.proteins.fasta data/B_malayi/b_malayi.WS234.protein_edit.fa data/C_angaria/c_angaria.WS234.protein_edit.fa data/B_xylophilus/b_xylophilus.WS234.protein_edit.fa data/H_contortus/h_contortus.WS234.protein_edit.fa data/S_ratti/s_ratti.WS234.protein_edit.fa data/T_spiralis/t_spiralis.WS234.protein_edit.fa data/C_elegans/c_elegans.WS233.protein_edit.fa\" -outfmt 0 -num_threads 1 -query /tmp/blast_job_e4889ba3-2b90-422e-a9fc-0619f50f6529 -evalue 1e-5 -num_descriptions 20 -num_alignments 20 -out /tmp/blast_job_e4889ba3-2b90-422e-a9fc-0619f50f6529.out"
+				//println "blast command = "+comm
 				
+				def p = comm.execute()
 				//wait until the blast has finished     
 				p.waitFor()
+				
+				//def blastProcess = new ProcessBuilder("${grailsApplication.config.blastxPath} -db ${grailsApplication.config.sprotPath} -outfmt 5 -window_size 0 -num_threads 4 -max_target_seqs 10".split(" "))
+				//def blastCom = ("$program", "-outfmt", "$outFmt", "-num_threads", "1", "-query", "$blastJobId", "-evalue", "$eval", "-num_descriptions", "$numDesc", "-num_alignments", "$numAlign", "-out", "$BlastOutFile", "$unGap", "-db", "\"$dbString\"")
+				//blastCom.last("-db \"$dbString\"")
+				//println "blastCom = "+blastCom
+				//def blastProcess = new ProcessBuilder("$program", "-outfmt $outFmt", "-num_threads 1", "-query $blastJobId", "-evalue $eval", "-num_descriptions $numDesc", "-num_alignments $numAlign", "-out $BlastOutFile", "$unGap", "-db \"$dbString\"")
+                //println "blast = "+blastProcess
+                //blastProcess.redirectErrorStream(true)
+                //Process p = blastProcess.start()
+				//blastProcess.waitFor()
+				//p.waitFor()
+				
 				println "finished BLAST"
 				println "open BLAST output"
 				//def blastOut = p.text
@@ -119,9 +154,9 @@ class BlastController {
 								
 								//add anchor and internal links
 								def linker = matcher[0][2].replaceAll(/-\./, '') 
-								if (fileInfo.file_type == 'Peptide' || 'Genes' || 'mRNA'){
+								if (type == 'Peptide' || 'Genes' || 'mRNA'){
 									it = "<a name=\"$linker\"></a>"+matcher[0][1]+"<a href=\"/search/m_info?mid="+matcher[0][2]+"\">"+matcher[0][2]+"</a>\t"+matcher[0][3]+"\t"+matcher[0][4]+"\t"+matcher[0][5]+"\t"+matcher[0][6]+"\t"+matcher[0][7]+"\t"+matcher[0][8]+"\t"+matcher[0][9]+"\t"+matcher[0][10]+"\t"+matcher[0][11]+"\t"+matcher[0][12]
-								}else if (fileInfo.file_type == 'Genome'){
+								}else if (type == 'Genome'){
 									it = "<a name=\"$linker\"></a>"+matcher[0][1]+"<a href=\"/search/genome_info?contig_id="+matcher[0][2]+"\">"+matcher[0][2]+"</a>\t"+matcher[0][3]+"\t"+matcher[0][4]+"\t"+matcher[0][5]+"\t"+matcher[0][6]+"\t"+matcher[0][7]+"\t"+matcher[0][8]+"\t"+matcher[0][9]+"\t"+matcher[0][10]+"\t"+matcher[0][11]+"\t"+matcher[0][12]
 								}	
 								
@@ -139,7 +174,7 @@ class BlastController {
 						queryInfo.add(seq_length)
 						def sortedHitInfo = hitInfo.sort{it.score as double}.reverse()
 						def jsonData = sortedHitInfo.encodeAsJSON();
-						return[blast_file: params.datalib, blast_result: blastRes, term: blastName, command: comm, blastId: blastJobId, hitData: sortedHitInfo, queryInfo: queryInfo, jsonData: jsonData]
+						return[blast_file: type, blast_result: blastRes, term: blastName, command: comm, blastId: blastJobId, hitData: sortedHitInfo, queryInfo: queryInfo, jsonData: jsonData]
 					//check for full format		
 					}else if (outFmt == '0'){              
 						def blastOut = new File("$BlastOutFile").text
@@ -161,10 +196,10 @@ class BlastController {
 								//add name attribute to alignment for anchor
 								def linker = matcher[0][1].replaceAll(/\.|-/, "") 								                     
 								//create internal links
-								println "file type = "+fileInfo.file_type
-								if (fileInfo.file_type == 'Peptide' || fileInfo.file_type == 'Genes' || fileInfo.file_type == 'mRNA'){
+								//println "file type = "+type
+								if (type == 'Peptide' || type == 'Genes' || type == 'mRNA'){
 									it = "><a href=\"/search/m_info?mid="+matcher[0][1]+"\">"+matcher[0][1]+"</a>"
-								}else if (fileInfo.file_type == 'Genome'){
+								}else if (type == 'Genome'){
 									it = "><a href=\"/search/genome_info?contig_id="+matcher[0][1]+"\">"+matcher[0][1]+"</a>"
 								}
 								//transform IDs to links but not before the first alignment
@@ -222,7 +257,7 @@ class BlastController {
 						//def sortedHitInfo = hitInfo.sort{it.id}.reverse()
 						def jsonData = sortedHitInfo.encodeAsJSON();
 						//println "jsonData = "+jsonData
-						return[blast_file: params.datalib, blast_result: blastRes, term: blastName, command: comm, blastId: blastJobId, hitData: sortedHitInfo, queryInfo: queryInfo, jsonData: jsonData]
+						return[blast_file: type, blast_result: blastRes, term: blastName, command: comm, blastId: blastJobId, hitData: sortedHitInfo, queryInfo: queryInfo, jsonData: jsonData]
 					}	
 				}else{
 					println "BLAST result is empty"
