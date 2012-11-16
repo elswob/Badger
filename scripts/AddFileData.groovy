@@ -1034,7 +1034,7 @@ def T_spi(){
 	fileMap.cov = "n"
 	//genome
 	fileMap.file_type = "Genome"
-	fileMap.file_name = "t_spiralis.WS234.genomic.fa"
+	fileMap.file_name = "t_spiralis.WS234.genomic_single.fa"
 	fileMap.file_version = "234"
 	fileMap.description = "Sex Determination: gonochoristic. Haploid No. chromosomes: 3 (2 autosomes, XO)"
 	fileMap.file_link = "n"
@@ -1121,7 +1121,7 @@ def C_ele(){
 	fileMap.cov = "n"
 	//genome
 	fileMap.file_type = "Genome"
-	fileMap.file_name = "c_elegans.WS233.genomic.fa"
+	fileMap.file_name = "c_elegans.WS233.genomic_single.fa"
 	fileMap.file_version = "233"
 	fileMap.description = "Sex Determination: hermaphrodite or male. Haploid No. chromosomes: 6 chromosomes (named I, II, III, IV, V and X) and a Mitochondrion."
 	fileMap.file_link = "n"

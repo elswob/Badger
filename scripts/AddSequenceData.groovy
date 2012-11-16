@@ -217,9 +217,9 @@ def addGenomeData(fileLoc, cov, file_name){
 	if (cov == 'y'){
 		cov_check = true
 		println "Data has coverage info."
-		header_regex = /^>(\w+)_(.*)/
+		header_regex = /^>(\S+)_(.*)/
 	}else{
-		header_regex = /^>(.*)/
+		header_regex = /^>(\S+)/
 		println "Data has no coverage info."
 	}
 	def sequence=""
@@ -239,12 +239,14 @@ def addGenomeData(fileLoc, cov, file_name){
 				gc = sprintf("%.2f",gc)
 				//add data to map
 				contigMap.contig_id = contig_id.trim()
+				//println "id = "+contig_id
 				contigMap.gc = gc
 				if (cov_check == true){
 					coverage = sprintf("%.2f",coverage)
 				}
 				contigMap.coverage = coverage
 				contigMap.length = sequence.length()
+				contigMap.sequence = sequence
 				//println contigMap
 				GenomeInfo genome = new GenomeInfo(contigMap)
 				Gfile.addToScaffold(genome)				
