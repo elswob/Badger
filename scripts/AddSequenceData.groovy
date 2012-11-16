@@ -132,7 +132,7 @@ if (getFiles){
 def addTransData(fileLoc, cov, data_id, file_id){
 	println "Adding transcript data - "+fileLoc
 	println new Date()
-	def contigFile = new File("data/"+fileLoc).text
+	def contigFile = new File("data/"+fileLoc)
 	def cov_check = false
 	def header_regex
 	if (cov == 'y'){
@@ -148,7 +148,7 @@ def addTransData(fileLoc, cov, data_id, file_id){
 	def count=0
 	def count_gc		
 	def contigMap = [:]
-	contigFile.split("\n").each{
+	contigFile.eachLine{
 		if ((matcher = it =~ header_regex)){
 			if (sequence != ""){
 				//println "Adding $contig_id - $count"
@@ -211,13 +211,12 @@ def addGenomeData(fileLoc, cov, file_name){
   	//println "Deleting old data..."
 	//def delsql = "delete from genome_info where data_id = '"+data_id+"' and file_id = '"+file_id+"';";
 	//sql.execute(delsql)
-	def contigFile = new File("data/"+fileLoc).text
+	def contigFile = new File("data/"+fileLoc)
 	def cov_check = false
 	def header_regex
 	if (cov == 'y'){
 		cov_check = true
 		println "Data has coverage info."
-		header_regex = /^>(\w+)_(.*)/
 		header_regex = /^>(\w+)_(.*)/
 	}else{
 		header_regex = /^>(.*)/
@@ -229,7 +228,7 @@ def addGenomeData(fileLoc, cov, file_name){
 	def count_gc		
 	def coverage
 	def contigMap = [:]
-	contigFile.split("\n").each{
+	contigFile.eachLine{
 		if ((matcher = it =~ header_regex)){
 			if (sequence != ""){
 				//println "Adding $contig_id - $count"
@@ -246,11 +245,10 @@ def addGenomeData(fileLoc, cov, file_name){
 				}
 				contigMap.coverage = coverage
 				contigMap.length = sequence.length()
-				contigMap.sequence = sequence
 				//println contigMap
 				GenomeInfo genome = new GenomeInfo(contigMap)
 				Gfile.addToScaffold(genome)				
-				if ((count % 200) ==  0){
+				if ((count % 2000) ==  0){
 					println count
 					genome.save(flush:true)
 					println new Date()
@@ -310,10 +308,10 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 	def gene_start
 	println "Adding new gene data... "
 	println "Reading nucleotide data - "+nuc.file_dir+"/"+nuc.file_name
-	def nucFile = new File("data/"+nuc.file_dir+"/"+nuc.file_name).text
+	def nucFile = new File("data/"+nuc.file_dir+"/"+nuc.file_name)
 	def sequence=""
 	def count=0
-	nucFile.split("\n").each{
+	nucFile.eachLine{
 		if ((matcher = it =~ /^>(.*)/)){
 			if (sequence != ""){
 				nucData."${geneId}" = sequence.toUpperCase()
@@ -329,9 +327,9 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 	nucData."${geneId}" = sequence.toUpperCase()
 	
 	println "Reading peptide data - "+pep.file_dir+"/"+pep.file_name
-	def pepFile = new File("data/"+pep.file_dir+"/"+pep.file_name).text
+	def pepFile = new File("data/"+pep.file_dir+"/"+pep.file_name)
 	sequence=""
-	pepFile.split("\n").each{
+	pepFile.eachLine{
 		if ((matcher = it =~ /^>(.*)/)){
 			if (sequence != ""){
 				pepData."${geneId}" = sequence.toUpperCase()
@@ -349,8 +347,7 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 	println "Reading gff file - "+fileLoc
 	println "Adding gene data"
 	println new Date()
-	def dataFile = new File("data/"+fileLoc).text
-	//def dataFile = new File("data/A_viteae/test.gff".trim()).text
+	def dataFile = new File("data/"+fileLoc)
 	def gene_count=0
 	def gene_id
 	def mrna_id
@@ -367,7 +364,7 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 	def exon_count_gc
 	def exon_sequence
 	def exon_gc
-	dataFile.split("\n").each{		
+	dataFile.eachLine{		
 		//ignore comment lines
 		if ((matcher = it =~ /^#.*/)){
 		  //println "ignoring "+it
@@ -450,7 +447,7 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 	dataFile = new File("data/"+fileLoc).text
 	GeneInfo geneFind
 	def parent = ""
-	dataFile.split("\n").each{
+	dataFile.eachLine{
 		if ((matcher = it =~ /^#.*/)){
 		  //println "ignoring "+it
 		}else{

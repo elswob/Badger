@@ -22,7 +22,7 @@ a.each{
 		//get FileData parent of AnnoData object
 		def b = anno.filedata
 		def fileLoc = b.file_dir+"/"+anno.anno_file
-		def annoFile = new File("data/"+fileLoc).text
+		def annoFile = new File("data/"+fileLoc)
 		println "Source = "+anno.source
 		println "File = "+fileLoc
 		//println "type = "+a.type
@@ -40,7 +40,7 @@ a.each{
 		//get FileData parent of AnnoData object
 		def b = anno.filedata
 		def fileLoc = b.file_dir+"/"+anno.anno_file
-		def annoFile = new File("data/"+fileLoc).text
+		def annoFile = new File("data/"+fileLoc)
 		println "Source = "+anno.source
 		println "File = "+fileLoc
 		//println "type = "+a.type
@@ -109,7 +109,7 @@ def addInterProScan(anno,annoFile){
   	def count=0
 	// get the ipr descriptions
 	def iprMap = [:]
-	iprFile = new File('data/entry.list').text
+	iprFile = new File('data/entry.list')
  	iprFile.eachLine { line ->
         if ((matcher = line =~ /(IPR\d+)\s+(.*)/)){
     		iprMap[matcher[0][1]] = matcher[0][2]

@@ -54,10 +54,6 @@ class SearchController {
 	 	 //def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"
 	 	 println genomeInfoSql
 	 	 def genomeInfo = sql.rows(genomeInfoSql)
-	 	 def genomeSeqSql = "select sequence,contig_id,gc,length,coverage from genome_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id and meta_data.id = '"+Gid+"' order by length desc;"
-	 	 //def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"
-	 	 println genomeSeqSql
-	 	 def genomeSeq = sql.rows(genomeSeqSql) 
 		 int span=0, min=10000000000, max=0, n50=0, halfSpan=0, checkSpan=0, nonATGC=0, num=0, ninetySpan=0, counter=0;
 		 def n50_list = [], n90_list = [];
 		 float gc
@@ -65,7 +61,7 @@ class SearchController {
 		 def n50check = false, n90check = false;
 		 def genome_stats = [:]
 	 	 //span
-	 	 genomeSeq.each {
+	 	 genomeInfo.each {
 	 	 	num ++
 			span += it.length
 			gc += it.gc
@@ -85,7 +81,7 @@ class SearchController {
 		 //n50
 		 halfSpan = span/2
 		 ninetySpan = span/100*90
-		 genomeSeq.each {
+		 genomeInfo.each {
 		 	counter++
 			checkSpan += it.length
 			if (checkSpan >= halfSpan && n50check !=true){

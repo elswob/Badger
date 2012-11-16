@@ -1,6 +1,8 @@
 package badger
 import grails.plugins.springsecurity.Secured
 //@Secured(['ROLE_USER','ROLE_ADMIN'])
+import javax.xml.parsers.SAXParserFactory
+import org.xml.sax.InputSource
 
 class BlastController { 
 	def grailsApplication
@@ -18,16 +20,17 @@ class BlastController {
     	// set the database files
     	def select 
     	def type 
-    	if (params.blastDB =="genomeRadio"){
+    	if (params.blastDB =="1"){
     		select = params.genomeCheck
     		type = "Genome"
-    	}else if (params.blastDB =="transRadio"){
+    	}else if (params.blastDB =="2"){
     		select = params.transCheck
-    		type = "Transcriptome"
+    		type = "Genes"
     	}else{
     		select = params.protCheck
     		type = "Genes"
     	}
+    	println "params.blastDB = "+params.blastDB
     	println "select = "+select
     	def dbString = ""
     	if (select instanceof String){
@@ -39,11 +42,13 @@ class BlastController {
 			select.each{
 				def fileInfo = FileData.findByFile_name(it)
 				def dbfile = fileInfo.file_dir+"/"+fileInfo.file_name
-				println "dbfile = "+dbfile
+				//println "dbfile = "+dbfile
+				//dbString += "data/"+dbfile+"\\ "
 				dbString += "data/"+dbfile+" "
 			}
 		}
-		dbString = dbString.trim()
+		//dbString = dbString[0..-3]
+        dbString = dbString.trim()
         println "dbString = "+dbString
         def program = grailsApplication.config.blastPath+params.PROGRAM
         def eval = params.EXPECT
@@ -111,26 +116,13 @@ class BlastController {
 				f.write(blastSeq)
 				def BlastOutFile = new File(blastJobId+".out")       
 				println "running BLAST"
-				def comm = """$program -db \"$dbString\" -outfmt $outFmt -num_threads 1 -query $blastJobId -evalue $eval -num_descriptions $numDesc -num_alignments $numAlign -out $BlastOutFile $unGap"""
-				//["$program outfmt $outFmt"].execute().text 
-				println "comm = "+comm
-				//def comm = "/home/elswob/software/blast+/ncbi-blast-2.2.26+/bin/blastp -db \"data/A_viteae/nAv.1.0.1.aug.proteins.fasta data/L_sigmodontis/nLs.2.1.2.aug.proteins.fasta data/D_immitis/nDi.2.2.2.aug.proteins.fasta data/O_ochengi/nOo.2.0.1.aug.proteins.fasta data/B_malayi/b_malayi.WS234.protein_edit.fa data/C_angaria/c_angaria.WS234.protein_edit.fa data/B_xylophilus/b_xylophilus.WS234.protein_edit.fa data/H_contortus/h_contortus.WS234.protein_edit.fa data/S_ratti/s_ratti.WS234.protein_edit.fa data/T_spiralis/t_spiralis.WS234.protein_edit.fa data/C_elegans/c_elegans.WS233.protein_edit.fa\" -outfmt 0 -num_threads 1 -query /tmp/blast_job_e4889ba3-2b90-422e-a9fc-0619f50f6529 -evalue 1e-5 -num_descriptions 20 -num_alignments 20 -out /tmp/blast_job_e4889ba3-2b90-422e-a9fc-0619f50f6529.out"
-				//println "blast command = "+comm
 				
-				def p = comm.execute()
-				//wait until the blast has finished     
+				String[] comm = ["${program}", "-outfmt", "${outFmt}", "-num_threads", "1", "-query", "${blastJobId}", "-evalue", "${eval}", "-num_descriptions", "${numDesc}", "-num_alignments", "${numAlign}", "-out", "${BlastOutFile}", "-db", "$dbString"]
+				ProcessBuilder blastProcess = new ProcessBuilder(comm)  
+				blastProcess.redirectErrorStream(true)
+                Process p = blastProcess.start()
 				p.waitFor()
-				
-				//def blastProcess = new ProcessBuilder("${grailsApplication.config.blastxPath} -db ${grailsApplication.config.sprotPath} -outfmt 5 -window_size 0 -num_threads 4 -max_target_seqs 10".split(" "))
-				//def blastCom = ("$program", "-outfmt", "$outFmt", "-num_threads", "1", "-query", "$blastJobId", "-evalue", "$eval", "-num_descriptions", "$numDesc", "-num_alignments", "$numAlign", "-out", "$BlastOutFile", "$unGap", "-db", "\"$dbString\"")
-				//blastCom.last("-db \"$dbString\"")
-				//println "blastCom = "+blastCom
-				//def blastProcess = new ProcessBuilder("$program", "-outfmt $outFmt", "-num_threads 1", "-query $blastJobId", "-evalue $eval", "-num_descriptions $numDesc", "-num_alignments $numAlign", "-out $BlastOutFile", "$unGap", "-db \"$dbString\"")
-                //println "blast = "+blastProcess
-                //blastProcess.redirectErrorStream(true)
-                //Process p = blastProcess.start()
-				//blastProcess.waitFor()
-				//p.waitFor()
+				println "Error = "+p.text
 				
 				println "finished BLAST"
 				println "open BLAST output"

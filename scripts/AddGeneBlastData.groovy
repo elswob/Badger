@@ -22,7 +22,7 @@ a.each{
 		//get FileData parent of AnnoData object
 		def b = anno.filedata
 		def fileLoc = b.file_dir+"/"+anno.anno_file
-		def blastFile = new File("data/"+fileLoc).text
+		def blastFile = new File("data/"+fileLoc)
 		println "Source = "+anno.source
 		println "File location = "+fileLoc
 		addGeneBlast(anno,blastFile)

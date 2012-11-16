@@ -124,7 +124,7 @@
 	</fieldset>
     </td></tr></table>
     
-    <h1>Set your parameters:</h1>
+    <h1>Set parameters:</h1>
     <table><tr><td>
 	<g:link controller="blast" action="info" fragment="program">Program</g:link>
 	<select name = "PROGRAM">
@@ -175,7 +175,7 @@
 	Perform ungapped alignment
     </td></tr></table>
     
-    <h1>Enter your sequence:</h1>
+    <h1>Enter a sequence:</h1>
     <table><tr><td>
     <p>The query sequence is&nbsp;<input TYPE="checkbox" NAME="FILTER" VALUE="L" CHECKED>
     <g:link controller="blast" action="info" fragment="filt">filtered</g:link>
