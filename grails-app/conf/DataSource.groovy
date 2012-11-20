@@ -20,7 +20,8 @@ environments {
 	}
 	production {
 		dataSource {
-			dbCreate = "update"
+			//dbCreate = "update"
+			dbCreate = "validate"
 		}
 	}
 }

@@ -122,16 +122,16 @@ class FileDownloadController {
      	 object_list.unique()
      	 println "object_list = "+object_list
      	 def results
-     	 if (table == 'Genes'){ println "Getting gene seqs"; results = GeneInfo.findAllByGene_idInList(object_list)}
+     	 if (table == 'Genes'){ println "Getting gene seqs"; results = GeneInfo.findAllByMrna_idInList(object_list)}
      	 if (table == 'Genome'){ println "Getting genome seqs"; results = GenomeInfo.findAllByContig_idInList(object_list)}
      	 if (table == 'Transcriptome'){ println "Getting transcriptome seqs"; results = TransInfo.findAllByContig_idInList(object_list)}
      	 //def results = Contig.findAllByContig_idInList(object_list)
      	 println "results = "+results
 		 def file_builder=""
      	 results.each {
-     	 	println "contig_id = "+it.contig_id
+     	 	println "id = "+it.id
      	 	if (table == 'Genes'){
-     	 		file_builder = file_builder + ">"+it.gene_id+"\n"+it.pep+"\n"
+     	 		file_builder = file_builder + ">"+it.mrna_id+"\n"+it.pep+"\n"
      	 	}else{
  	    	 	file_builder = file_builder + ">"+it.contig_id+"\n"+it.sequence+"\n"
  	    	 }

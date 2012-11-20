@@ -98,7 +98,7 @@
     	<hr size = 5 color="green" width="100%" style="margin-top:10px">
     	<div class="inline">
     	<br>
-    	 <h1>${gene_results.size()} genes</b>:</h1>
+    	 <h1>${printf("%,d\n",gene_results.size())} genes</b>:</h1>
 			<!-- download genes form gets fileName value from get_table_data() -->		    		
 			 <div style="right:0px;">
 				 &nbsp;&nbsp;(Download gene sequences:
