@@ -29,30 +29,8 @@ class SearchController {
     	def sql = new Sql(dataSource)
     	def Gid = params.Gid
     	def metaData = MetaData.findById(Gid)	
-    	def stats = [:]
-    	def gene_stats = [:]
-    	for (a in metaData.files){
-    		if (a.file_type == "Genes"){
-    			def msql = "select count(distinct(gene_id)) as g, count(distinct(mrna_id)) as m, count(distinct(pep)) as p from gene_info,file_data where file_id = file_data.id and file_data.id = '"+a.id+"' ;";
-    			println msql
-    			def m = sql.rows(msql)
-    			stats.Genes = m.g[0]
-    			stats.mRNA = m.m[0]
-    			stats.Peptide = m.p[0]
-    			gene_stats.genenum = m.g[0]
-			 	gene_stats.mrnanum = m.m[0]
-    		}else if (a.file_type == "Transcriptome"){
-    			def msql = "select count(contig_id) as t from trans_info,file_data where file_id = file_data.id and file_data.id = '"+a.id+"' ;";
-    			def m = sql.rows(msql)
-    			stats.Transcriptome = m.t[0]
-    		}else if (a.file_type == "Genome"){
-    		    def msql = "select count(contig_id) as c from genome_info,file_data where file_id = file_data.id and file_data.id = '"+a.id+"' ;";
-    			def m = sql.rows(msql)
-    			stats.Genome = m.c[0]
-    		}
-    	}
     	
-    	 //get genome stats
+    	 //get genome info and stats
     	 def genomeInfoSql = "select contig_id,gc,length,coverage from genome_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id and meta_data.id = '"+Gid+"' order by length desc;"
 	 	 //def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"
 	 	 println genomeInfoSql
@@ -107,6 +85,11 @@ class SearchController {
 		 println "n50 = "+n50_list
 		 println "n90 = "+n90_list
 		 
+		 def genomeDescSql = "select file_version,file_data.description from file_data,meta_data where file_data.meta_id = meta_data.id and meta_data.id = '"+Gid+"' and file_type = 'Genome';";
+		 def genomeDesc = sql.rows(genomeDescSql)
+		 
+		 genome_stats.version = genomeDesc.file_version[0]
+    	 genome_stats.description = genomeDesc.description[0]
 		 genome_stats.num = num
 	 	 genome_stats.span = span
 	 	 genome_stats.n50 = n50
@@ -117,12 +100,15 @@ class SearchController {
 		 
 		 //get gene stats
 		 def geneInfoSql = "select nuc,gc from gene_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id and  meta_data.id = '"+Gid+"';";
+	 	 println geneInfoSql
 	 	 def geneInfo = sql.rows(geneInfoSql) 
 	 	 int mean=0
 	 	 min=10000000000
 	 	 max=0
 	 	 nonATGC=0
 	 	 gc=0
+		 def stats = [:]
+		 def gene_stats = [:]
 		 
 		 if (geneInfo){
 			 geneInfo.each {
@@ -146,6 +132,27 @@ class SearchController {
 			 gene_stats.max = max
 			 gene_stats.nonATGC = nonATGC
 			 println gene_stats
+			 
+			for (a in metaData.files){
+				if (a.file_type == "Genes"){
+					def msql = "select count(distinct(gene_id)) as g, count(distinct(mrna_id)) as m, count(distinct(pep)) as p from gene_info,file_data where file_id = file_data.id and file_data.id = '"+a.id+"' ;";
+					println msql
+					def m = sql.rows(msql)
+					stats.Genes = m.g[0]
+					stats.mRNA = m.m[0]
+					stats.Peptide = m.p[0]
+					gene_stats.genenum = m.g[0]
+					gene_stats.mrnanum = m.m[0]
+				}else if (a.file_type == "Transcriptome"){
+					def msql = "select count(contig_id) as t from trans_info,file_data where file_id = file_data.id and file_data.id = '"+a.id+"' ;";
+					def m = sql.rows(msql)
+					stats.Transcriptome = m.t[0]
+				}else if (a.file_type == "Genome"){
+					def msql = "select count(contig_id) as c from genome_info,file_data where file_id = file_data.id and file_data.id = '"+a.id+"' ;";
+					def m = sql.rows(msql)
+					stats.Genome = m.c[0]
+				}
+			}
 		 }
 		 
 		 //get data for plots

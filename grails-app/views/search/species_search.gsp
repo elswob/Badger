@@ -413,12 +413,13 @@
 <body>
 <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <i> ${meta.genus} ${meta.species}</i>
 <h1><b><i>${meta.genus} ${meta.species}</i></b></h1>
-
+${genome_stats.description}
 <table width=100%>
       <tr><td width=30%>
 			 <h1>Genome:</h1>
 			<table>
-			<tr><td><b>Span (bp):</b></td><td>${printf("%,d\n",genome_stats.span)}</td></tr>
+			 <tr><td><b>Verstion:</b></td><td>${genome_stats.version}</td></tr>
+			 <tr><td><b>Span (bp):</b></td><td>${printf("%,d\n",genome_stats.span)}</td></tr>
 			 <tr><td><b>Scaffolds:</b></td><td>${printf("%,d\n",genome_stats.num)}</td></tr>
 			 <tr><td><b>N50:</b></td><td>${printf("%,d\n",genome_stats.n50)}</td></tr>
 			 <tr><td><b>Smallest (bp)</b></td><td>${printf("%,d\n",genome_stats.min)}</td></tr>
@@ -554,12 +555,12 @@
 		   <br>
 		   </div>
 		   
-			<table>
+			<!--table>
 				<tr><td width=15%><b>Data type</b></td><td><b>Version</b></td><td><b>Description</b></td><td><b>Number</b></td></tr>
 				<g:each var="f" in="${meta.files}">
 					<tr><td>${f.file_type}</td><td>${f.file_version}</td><td>${f.description}</td><td>${stats."${f.file_type}"}</td></tr>
 				</g:each>
-			</table>
+			</table-->
 		 </td></tr>
 		</td></tr></table>
 	</g:if>

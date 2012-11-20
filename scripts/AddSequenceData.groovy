@@ -222,12 +222,15 @@ def addGenomeData(fileLoc, cov, file_name){
 		header_regex = /^>(\S+)/
 		println "Data has no coverage info."
 	}
-	def sequence=""
+	//def sequence=""
 	def contig_id=""
 	def count=0
 	def count_gc		
 	def coverage
 	def contigMap = [:]
+	//use string buffer for sequence as concatenating large strings in java is bad 
+	def sequence = new StringBuffer()
+
 	contigFile.eachLine{
 		if ((matcher = it =~ header_regex)){
 			if (sequence != ""){
@@ -268,7 +271,8 @@ def addGenomeData(fileLoc, cov, file_name){
 			}
 			count_gc = 0
 		}else{
-			sequence += it
+			//sequence += it
+			sequence << it
 		}
 	} 
 	//catch the last one

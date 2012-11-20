@@ -23,7 +23,7 @@
             @import "${resource(dir: 'js', file: 'TableTools-2.0.2/media/css/TableTools.css')}";
     </style>
     
-            	  <% 
+            	  <% 	
 		  def iprjsonData = ipr_results.encodeAsJSON();
 		  def blastjsonData = blast_results.encodeAsJSON();
 		  def funjsonData = fun_results.encodeAsJSON();
@@ -445,26 +445,26 @@
 		<div class="mid" role="contentinfo">
 			<div class="nav_float">
 			<ul>
-			   <li><a href="#" onclick="$.scrollTo('#top_anchor', 800, {offset : -50});">Top</a></li>
-			   <li><a href="#" onclick="$.scrollTo('#info_anchor', 800, {offset : -50});">Info</a></li>
+			   <li><a href="javascript:void(0);" onclick="$.scrollTo('#top_anchor', 800, {offset : -50});">Top</a></li>
+			   <li><a href="javascript:void(0);" onclick="$.scrollTo('#info_anchor', 800, {offset : -50});">Info</a></li>
 			   <g:if test="${blast_results || ipr_results || fun_results}">
 				   <!--li><a href="#anno_anchor" class="scroll">Annotations</a></li-->
-				    <li><a href="#" onclick="$.scrollTo('#anno_anchor', 800, {offset : -50});">Annotations</a></li>
+				    <li><a href="javascript:void(0);" onclick="$.scrollTo('#anno_anchor', 800, {offset : -50});">Annotations</a></li>
 			   </g:if>
 			   <g:if test="${blast_results}">
-				   <li><a href="#" onclick="$.scrollTo('#blast_anchor', 800, {offset : -50});">BLAST</a></li>
+				   <li><a href="javascript:void(0);" onclick="$.scrollTo('#blast_anchor', 800, {offset : -50});">BLAST</a></li>
 			   </g:if>
 			   <g:if test="${fun_results}">
-				   <li><a href="#" onclick="$.scrollTo('#fun_anchor', 800, {offset : -50});">Functional</a></li>
+				   <li><a href="javascript:void(0);" onclick="$.scrollTo('#fun_anchor', 800, {offset : -50});">Functional</a></li>
 			   </g:if>
 			   <g:if test="${ipr_results}">
-				   <li><a href="#" onclick="$.scrollTo('#ipr_anchor', 800, {offset : -50});">InterPro</a></li>
+				   <li><a href="javascript:void(0);" onclick="$.scrollTo('#ipr_anchor', 800, {offset : -50});">InterPro</a></li>
 			   </g:if>
 			   <g:if test = "${gbrowse}"> 
-					<li><a href="#" onclick="$.scrollTo('#browse_anchor', 800, {offset : -50});">Browse</a></li>
+					<li><a href="javascript:void(0);" onclick="$.scrollTo('#browse_anchor', 800, {offset : -50});">Browse</a></li>
 			   </g:if>
-			   <li><a href="#" onclick="$.scrollTo('#files_anchor', 800, {offset : -50});">Sequence data</a></li>
-			   <li><a href="#" onclick="$.scrollTo('#exon_anchor', 800, {offset : -50});">Exons</a></li>
+			   <li><a href="javascript:void(0);" onclick="$.scrollTo('#files_anchor', 800, {offset : -50});">Sequence data</a></li>
+			   <li><a href="javascript:void(0);" onclick="$.scrollTo('#exon_anchor', 800, {offset : -50});">Exons</a></li>
 			</ul>
 			</div>
 		</div>
