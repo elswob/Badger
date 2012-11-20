@@ -9,7 +9,7 @@ use warnings;
 
 while(<>){
 	chomp;
-	if ($_ =~ /^>.*?\t(.*?)\t.*/){
+	if ($_ =~ /^>(.*?)\t(.*?)\t.*/){
 		print ">$1\n";
 	}elsif ($_ =~ /^>(.*?)\s.*/){
 		print ">$1\n";

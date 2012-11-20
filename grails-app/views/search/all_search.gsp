@@ -17,6 +17,23 @@
 <g:link action="">Search</g:link> > Search all
   <div id="content">
      <h1>Search all the data by keyword:</h1>
+ 
+   <g:form action="all_searched">
+    <table>
+    	<tr><td>
+    		<g:textField name="searchId"  size="100"/>
+    		<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
+    
+     </td></tr>
+    </table>
+   </g:form>
+   <br>
+       
+    <p>Keyword search will find related terms, for example searching for 'tolerate' will also match 'tolerance'.</p><br>
+    <p>Query text can contain the Boolean operators & (and), | (or) and ! (not), e.g. 'atpase & zinc', '!metal', 'atpase & zinc | !metal'    </p>
+   <br>
+   <h2>Sources of data:</h2>
+     
 	<table>
   	    <tr><td><g:link controller="home" action="publications">${printf("%,d\n",badger.Publication.count())} publications</g:link></td><td>The title and abstract of publications matching the names of the species in the database</td></tr>
 		<g:each var="res" in="${genes}">	
@@ -24,19 +41,6 @@
 			</g:each>
   	</td></tr>
   </table>
-	<br>
-    <p>Keyword search will find related terms, for example searching for 'tolerate' will also match 'tolerance'.</p><br>
-    <p>Query text can contain the Boolean operators & (and), | (or) and ! (not), e.g. 'atpase & zinc', '!metal', 'atpase & zinc | !metal'    </p>
-    <g:form action="all_searched">
-    <table>
-    	<tr><td>
-    		<g:textField name="searchId"  size="100"/>
-    		<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
-    </g:form>
-     </td>
-  </tr>
-   </table>
-   <br>
    </div>
    
   </div>

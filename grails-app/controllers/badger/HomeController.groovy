@@ -135,8 +135,8 @@ class HomeController {
 	 }
   }
   
-  //@Cacheable('stats_cache') 
-  @CacheEvict(value='stats_cache', allEntries=true)
+  @Cacheable('stats_cache') 
+  //@CacheEvict(value='stats_cache', allEntries=true)
   def stats() {  	 
      //check the privacy setting
      if (grailsApplication.config.i.links.priv.stats && !isLoggedIn()) {

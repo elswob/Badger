@@ -24,24 +24,27 @@ class SearchController {
     	
     }
     //@Cacheable('species_cache')
-    //@CacheEvict(value='species_cache', allEntries=true)
+    @CacheEvict(value='species_cache', allEntries=true)
     def species_search() {
     	def sql = new Sql(dataSource)
     	def Gid = params.Gid
     	def metaData = MetaData.findById(Gid)	
     	def stats = [:]
+    	def gene_stats = [:]
     	for (a in metaData.files){
     		if (a.file_type == "Genes"){
-    			def msql = "select count(gene_id) as g, count(mrna_id) as m, count(pep) as p from gene_info,file_data where file_id = file_data.id and file_data.id = '"+a.id+"' ;";
+    			def msql = "select count(distinct(gene_id)) as g, count(distinct(mrna_id)) as m, count(distinct(pep)) as p from gene_info,file_data where file_id = file_data.id and file_data.id = '"+a.id+"' ;";
     			println msql
     			def m = sql.rows(msql)
     			stats.Genes = m.g[0]
     			stats.mRNA = m.m[0]
     			stats.Peptide = m.p[0]
+    			gene_stats.genenum = m.g[0]
+			 	gene_stats.mrnanum = m.m[0]
     		}else if (a.file_type == "Transcriptome"){
     			def msql = "select count(contig_id) as t from trans_info,file_data where file_id = file_data.id and file_data.id = '"+a.id+"' ;";
     			def m = sql.rows(msql)
-    			stast.Transcriptome = m.t[0]
+    			stats.Transcriptome = m.t[0]
     		}else if (a.file_type == "Genome"){
     		    def msql = "select count(contig_id) as c from genome_info,file_data where file_id = file_data.id and file_data.id = '"+a.id+"' ;";
     			def m = sql.rows(msql)
@@ -54,6 +57,10 @@ class SearchController {
 	 	 //def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"
 	 	 println genomeInfoSql
 	 	 def genomeInfo = sql.rows(genomeInfoSql)
+	 	 def genomeSeqSql = "select sequence,contig_id,gc,length,coverage from genome_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id and meta_data.id = '"+Gid+"' order by length desc;"
+	 	 //def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"
+	 	 println genomeSeqSql
+	 	 def genomeSeq = sql.rows(genomeSeqSql) 
 		 int span=0, min=10000000000, max=0, n50=0, halfSpan=0, checkSpan=0, nonATGC=0, num=0, ninetySpan=0, counter=0;
 		 def n50_list = [], n90_list = [];
 		 float gc
@@ -61,7 +68,7 @@ class SearchController {
 		 def n50check = false, n90check = false;
 		 def genome_stats = [:]
 	 	 //span
-	 	 genomeInfo.each {
+	 	 genomeSeq.each {
 	 	 	num ++
 			span += it.length
 			gc += it.gc
@@ -81,7 +88,7 @@ class SearchController {
 		 //n50
 		 halfSpan = span/2
 		 ninetySpan = span/100*90
-		 genomeInfo.each {
+		 genomeSeq.each {
 		 	counter++
 			checkSpan += it.length
 			if (checkSpan >= halfSpan && n50check !=true){
@@ -109,21 +116,16 @@ class SearchController {
 		 genome_stats.nonATGC = nonATGC
 		 
 		 //get gene stats
-		 def geneInfoSql = "select * from gene_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id and  meta_data.id = '"+Gid+"';";
+		 def geneInfoSql = "select nuc,gc from gene_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id and  meta_data.id = '"+Gid+"';";
 	 	 def geneInfo = sql.rows(geneInfoSql) 
-	 	 int mean=0, genenum=0, mrnanum=0
+	 	 int mean=0
 	 	 min=10000000000
 	 	 max=0
 	 	 nonATGC=0
 	 	 gc=0
-		 def gene_stats = [:]
 		 
 		 if (geneInfo){
 			 geneInfo.each {
-				genenum++
-				if (it.mrna_id){
-					mrnanum++
-				}
 				mean += it.nuc.length()
 				gc += it.gc
 				nonATGC += it.nuc.toUpperCase().count("N")
@@ -138,8 +140,6 @@ class SearchController {
 			 //nonATGC = span-nonATGC
 			 mean = mean/geneInfo.size()
 			 gc = gc/geneInfo.size()
-			 gene_stats.genenum = genenum
-			 gene_stats.mrnanum = mrnanum
 			 gene_stats.mean = mean
 			 gene_stats.gc = gc
 			 gene_stats.min = min
@@ -545,20 +545,21 @@ class SearchController {
 			def blast_results
 			def fun_results
 			def ipr_results
-			if (grailsApplication.config.g.blast.size()>0){			
+			//if (grailsApplication.config.g.blast.size()>0){			
 				def blastsql = "select gene_info.mrna_id,gene_info.gene_id,gene_blast.* from gene_blast,gene_info where gene_blast.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score desc;";
 				println blastsql
 				blast_results = sql.rows(blastsql)
-			}
-			if (grailsApplication.config.g.IPR){
+			//}
+			//if (grailsApplication.config.g.IPR){
 				def iprsql = "select gene_anno.* from gene_anno,gene_info where anno_id ~ '^IPR' and gene_anno.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score;";
+				println iprsql
 				ipr_results = sql.rows(iprsql)
-			}
-			if (grailsApplication.config.g.fun.size()>0){
+			//}
+			//if (grailsApplication.config.g.fun.size()>0){
 				def funsql = "select gene_anno.* from gene_anno,gene_info where anno_id !~ '^IPR' and gene_anno.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score desc;";
 				println funsql
 				fun_results = sql.rows(funsql)
-			}
+			//}
 			//get exon info
 			def exonsql = "select contig_id,exon_info.*,length(exon_info.sequence) as length from exon_info,gene_info where exon_info.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by exon_number;"
 			def exon_results = sql.rows(exonsql)
