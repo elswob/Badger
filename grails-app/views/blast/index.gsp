@@ -42,6 +42,18 @@
     function demoSeq(){
     	$("#blastId").val(">gi|1256569|gb|AAA96502.1| lumbrokinase-1T4 precursor [Lumbricus rubellus]\nMLLLALASLVAVGFAQPPVWYPGGQCSVSQYSDAGDMELPPGTKIVGGIEARPYEFPWQVSVRRKSSDSH\nFCGGSIINDRWVVCAAHCMQGESPALVSLVVGEHDSSAASTVRQTHDVDSIFVHEDYNGNTFENDVSVIK\nTVNAIAIDINDGPICAPDPANDYVYRKSQCSGWGTINSGGVCCPNVLRYVTLNVTTNAFCDDIYSPLYTI\nTSDMICATDNTGQNERDSCQGDSGGPLSVKDGSGIFSLIGIVSWGIGCASGYPGVYARVGSQTGWITDII\nTNN");
     }
+    function programCheck(type){
+		$("#program").empty();
+		var select = $("#program")[0];	
+		if (type == 'nuc'){
+			select.add(new Option("BLASTN (DNA vs DNA)", "blastn"));
+			select.add(new Option("TBLASTN (protein vs translated DNA)", "tblastn"));
+			select.add(new Option("TBLASTX (translated DNA vs translated DNA)", "tblastx"));
+		}else{
+			select.add(new Option("BLASTP (protein vs protein)", "blastp"));
+			select.add(new Option("BLASTX (translated DNA vs protein)", "blastx"));		
+		}
+    }
     </script>
     
 </head>
@@ -56,9 +68,9 @@
     <g:uploadForm action="runBlast" method="post">
 	<h1>Choose a database:</h1>
     <table><tr><td>
-    <label><input name="blastDB" type="radio" id="genomeRadio" value="1" STYLE="cursor: pointer" onclick="toggleDiv('blk_1');$('#blk_2').hide();$('#blk_3').hide();">Genomes</label>
-	<label><input name="blastDB" type="radio" id="transRadio" value="2" STYLE="cursor: pointer" onclick="toggleDiv('blk_2');$('#blk_1').hide();$('#blk_3').hide();">Transcripts</label>
-	<label><input name="blastDB" type="radio" id="proteinRadio" checked="checked" value="3" STYLE="cursor: pointer" onclick="toggleDiv('blk_3');$('#blk_1').hide();$('#blk_2').hide();">Proteins</label>
+    <label><input name="blastDB" type="radio" id="genomeRadio" value="1" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_1');$('#blk_2').hide();$('#blk_3').hide();">Genomes</label>
+	<label><input name="blastDB" type="radio" id="transRadio" value="2" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_2');$('#blk_1').hide();$('#blk_3').hide();">Transcripts</label>
+	<label><input name="blastDB" type="radio" id="proteinRadio" checked="checked" value="3" STYLE="cursor: pointer" onclick="programCheck('pep');toggleDiv('blk_3');$('#blk_1').hide();$('#blk_2').hide();">Proteins</label>
 	(click to show/hide available data sets)
 	<fieldset id="blast_dbs">	
 		<div class="toHide" id="blk_1" style="display:none">
@@ -127,12 +139,9 @@
     <h1>Set parameters:</h1>
     <table><tr><td>
 	<g:link controller="blast" action="info" fragment="program">Program</g:link>
-	<select name = "PROGRAM">
-		<option>blastn</option>
-		<option>tblastx</option>
-		<option>tblastn</option>
-		<option>blastx</option>
-		<option>blastp</option>
+	<select name = "PROGRAM" id = "program">
+		<option value="blastp">BLASTP (protein vs protein)</option>
+		<option value="blastx">BLASTX (translated DNA vs protein)</option>
 	</select>	
 
     <g:link controller="blast" action="info" fragment="out">Output</g:link>
