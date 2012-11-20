@@ -188,11 +188,11 @@ class HomeController {
 			exonGCNum.add(bb)
 		}
 		
-		//exons per gene
-		//def exonPerGeneSql = "select num,count(num),species from (select count(exon_id) as num ,gene_info.gene_id,species from exon_info,gene_info,file_data,meta_data where exon_info.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by gene_info.gene_id,species) as foo group by species,num;";
-		//def exonPerGene = sql.rows(exonPerGeneSql
-		 
-		//return [geneDistData:geneDistData, geneCount: geneCount, exonCountData: exonCountData, exonDistData:exonDistData, exonCount:exonCount, exonLenNum: exonLenNum, exonGCNum: exonGCNum]
+		//genome plots
+		//def genomeInfoSql = "select contig_id,gc,length,coverage,species from genome_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id order by species,length desc;"
+	 	//println genomeInfoSql
+	 	//def genomeInfo = sql.rows(genomeInfoSql)
+		
 		return [geneDistData:geneDistData, geneCountData:geneCountAll, exonCountData: exonCountData, exonDistData:exonDistData, exonCount:exonCount, exonLenNum: exonLenNum, exonGCNum: exonGCNum]
 	 }
 	 sql.close()

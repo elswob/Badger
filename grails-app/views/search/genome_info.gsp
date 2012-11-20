@@ -98,10 +98,10 @@
     	<hr size = 5 color="green" width="100%" style="margin-top:10px">
     	<div class="inline">
     	<br>
-    	 <h1>${printf("%,d\n",gene_results.size())} genes</b>:</h1>
+    	 <h1>${printf("%,d\n",gene_results.size())} transcripts</b>:</h1>
 			<!-- download genes form gets fileName value from get_table_data() -->		    		
-			 <div style="right:0px;">
-				 &nbsp;&nbsp;(Download gene sequences:
+			 <!--div style="right:0px;">
+				 &nbsp;&nbsp;(Download sequences:
 					<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
 					<g:hiddenField name="nucFileId" value=""/>
 					<g:hiddenField name="fileName" value="${info_results.contig_id[0]}.genes"/>
@@ -116,25 +116,27 @@
 					<a href="#" onclick="get_table_data('pepFileId');document.pepfileDownload.submit()">Peptides</a>
 				</g:form>
 				)	 
-			</div>   	
+			</div-->   	
 		 </div>	
 		    		
     		<table id="gene_table_data" class="display">
 			  <thead>
 			  	<tr>
 					<th><b>Gene ID</b></th>
-					<th><b>Length (bp)</b></th>
-					<th><b>Start</b></th>
-					<th><b>Stop</b></th>
+					<th><b># transcripts</b></th>
+					<th><b>Mean length</b></th>
+					<th><b>Mean start</b></th>
+					<th><b>Mean end</b></th>
 			   </tr>
 			  </thead>
 			  <tbody>
 			 	<g:each var="res" in="${gene_results}">
 			 		<tr>
 						<td><a href="g_info?Gid=${params.Gid}&gid=${res.gene_id}">${res.gene_id}</a></td>
-						<td>${res.nuc.length()}</td>
-						<td>${res.start}</td>
-						<td>${res.stop}</td>
+						<td>${res.count}</td>
+						<td>${sprintf("%.0f",res.a_nuc)}</td>
+						<td>${sprintf("%.0f",res.a_start)}</td>
+						<td>${sprintf("%.0f",res.a_stop)}</td>
 			  		</tr>  
 			 	</g:each>
 			  </tbody>

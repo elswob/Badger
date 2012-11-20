@@ -23,8 +23,8 @@ class SearchController {
     	return [meta: metaData, file: fileData]
     	
     }
-    //@Cacheable('species_cache')
-    @CacheEvict(value='species_cache', allEntries=true)
+    @Cacheable('species_cache')
+    //@CacheEvict(value='species_cache', allEntries=true)
     def species_search() {
     	def sql = new Sql(dataSource)
     	def Gid = params.Gid
@@ -654,9 +654,10 @@ class SearchController {
      		def Gid = params.Gid;
      		def metaData = MetaData.findById(Gid); 
      		//def gene_results = GeneInfo.findAllByContig_id(params.contig_id)
-     		def genesql = "select gene_info.* from gene_info,file_data,meta_data where gene_info.contig_id = '"+params.contig_id+"' and meta_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
+     		//def genesql = "select gene_info.* from gene_info,file_data,meta_data where gene_info.contig_id = '"+params.contig_id+"' and meta_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
+     		def genesql = "select gene_info.gene_id, count(mrna_id), avg(length(nuc)) as a_nuc, avg(start) as a_start, avg(stop) as a_stop from gene_info,file_data,meta_data where gene_info.contig_id = '"+params.contig_id+"' and meta_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by gene_info.gene_id order by a_start;";
      		def gene_results = sql.rows(genesql)
-     		//println "gene_results = "+gene_results
+     		println genesql
      		//println "contig_id ="+params.contig_id
 			//def info_results = GenomeInfo.findAllByContig_id(params.contig_id)
 			def infosql = "select genome_info.* from genome_info,file_data,meta_data where genome_info.contig_id = '"+params.contig_id+"' and meta_data.id = '"+Gid+"' and genome_info.file_id = file_data.id and file_data.meta_id = meta_data.id;";
