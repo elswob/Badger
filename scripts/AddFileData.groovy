@@ -6,9 +6,6 @@ def grailsApplication
 def dataSource = ctx.getBean("dataSource")
 def sql = new Sql(dataSource)
 
-
-
-
 //MetaData 
 def genus,species,gversion,description,gbrowse,image_file,image_source
 //FileData
@@ -65,8 +62,22 @@ def addAnno(fileName,annoMap){
 	}
 }
 
-///////// test data
+//add data
 //test()
+A_vit()
+L_sig()
+D_imm()
+O_och()
+B_mal()
+C_ang()
+B_xyl()
+H_con()
+////M_inc()
+S_rat()
+T_spi()
+C_ele()
+
+///////// test data
 def test(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -118,7 +129,6 @@ def test(){
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// A. viteae
-A_vit()
 def A_vit(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -228,7 +238,6 @@ def A_vit(){
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// L.sigmodontis
-L_sig()
 def L_sig(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -315,7 +324,6 @@ def L_sig(){
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// D.immitis
-D_imm()
 def D_imm(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -402,7 +410,6 @@ def D_imm(){
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// O. ochengi
-O_och()
 def O_och(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -489,7 +496,6 @@ def O_och(){
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// B. malayi
-B_mal()
 def B_mal(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -577,7 +583,6 @@ def B_mal(){
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// C. angaria
-C_ang()
 def C_ang(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -664,7 +669,6 @@ def C_ang(){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// B. xylophilus
-B_xyl()
 def B_xyl(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -751,7 +755,6 @@ def B_xyl(){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// H. contortus
-H_con()
 def H_con(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -838,7 +841,6 @@ def H_con(){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// M. incognita
-//M_inc()
 def M_inc(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -925,7 +927,6 @@ def M_inc(){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// S. ratti
-S_rat()
 def S_rat(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -1012,7 +1013,6 @@ def S_rat(){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// T. spiralis
-T_spi()
 def T_spi(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -1034,7 +1034,7 @@ def T_spi(){
 	fileMap.cov = "n"
 	//genome
 	fileMap.file_type = "Genome"
-	fileMap.file_name = "t_spiralis.WS234.genomic_single.fa"
+	fileMap.file_name = "t_spiralis.WS234.genomic.fa"
 	fileMap.file_version = "234"
 	fileMap.description = "Sex Determination: gonochoristic. Haploid No. chromosomes: 3 (2 autosomes, XO)"
 	fileMap.file_link = "n"
@@ -1099,7 +1099,6 @@ def T_spi(){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// C. elegans
-C_ele()
 def C_ele(){
 	def metaMap = [:]
 	def fileMap = [:]
@@ -1121,7 +1120,7 @@ def C_ele(){
 	fileMap.cov = "n"
 	//genome
 	fileMap.file_type = "Genome"
-	fileMap.file_name = "c_elegans.WS233.genomic_single.fa"
+	fileMap.file_name = "c_elegans.WS233.genomic.fa"
 	fileMap.file_version = "233"
 	fileMap.description = "Sex Determination: hermaphrodite or male. Haploid No. chromosomes: 6 chromosomes (named I, II, III, IV, V and X) and a Mitochondrion."
 	fileMap.file_link = "n"

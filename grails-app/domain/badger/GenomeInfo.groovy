@@ -5,6 +5,7 @@ class GenomeInfo {
     String sequence
     Float gc
     Float coverage
+    Float non_atgc
     int length
     static constraints = {
         contig_id(blank:false)

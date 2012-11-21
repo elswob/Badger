@@ -509,6 +509,33 @@ input:invalid:focus, select:invalid:focus, textarea:invalid:focus {
 
 /* TABLES */
 
+/* compact */
+
+table.compact {
+	width: 100%;
+	font-size: 15px;
+  	border-collapse:collapse;
+}
+table.compact td {
+    padding:3px 7px 2px 7px;
+}
+
+/* jqplot highlight table */
+table.jqplot-highlighter {
+	font-size: 15px;
+	line-height:50%;
+}
+
+/* jqplot highlight table */
+table.blast {
+	font-size: 15px;
+  	border-collapse:collapse;
+}
+table.blast td, table.blast th
+{
+    padding: 2px; /* 'cellpadding' equivalent */
+}
+
 .table_border{
 	border:3px solid;
 	border-color: #EFEFEF;
@@ -855,18 +882,3 @@ div.innerDetails { display: none }
 	position: relative;
 }
 
-/* jqplot highlight table */
-table.jqplot-highlighter {
-	font-size: 15px;
-	line-height:50%;
-}
-
-/* jqplot highlight table */
-table.blast {
-	font-size: 15px;
-  	border-collapse:collapse;
-}
-table.blast td, table.blast th
-{
-    padding: 2px; /* 'cellpadding' equivalent */
-}

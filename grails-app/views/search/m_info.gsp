@@ -287,11 +287,10 @@
 				   "sClass": "control center",
 				   "sDefaultContent": '<img src="'+sImageUrl+'details_open.png'+'">'
 				},
-				{ "mDataProp": "exon_id",
+				{ "mDataProp": "exon_number",
 				"fnRender": function ( oObj, sVal ){
 					return "<a href=\"/home/browse?link=${metaData.gbrowse}&contig_id="+oObj.aData["contig_id"]+"&start="+oObj.aData["start"]+"&stop="+oObj.aData["stop"]+"\">"+sVal+"</a>";
 				}},
-				{ "mDataProp": "exon_number" },
 				{ "mDataProp": "length" },
 				{ "mDataProp": "gc"},
 				{ "mDataProp": "phase"},
@@ -349,7 +348,7 @@
   //aa chart
   var aa_plot = $.jqplot('aa_chart', [aa_data[0],aa_data[1],aa_data[2],aa_data[3]], {
   		animate: !$.jqplot.use_excanvas,
-  		title: 'Amino acid composition',
+  		//title: 'Amino acid composition',
   		seriesColors: [ "green"],
         seriesDefaults: {
             renderer:$.jqplot.BarRenderer,
@@ -406,8 +405,9 @@
     <div id="info_anchor"><h1>Information for transcript ${info_results.mrna_id[0]}:</h1></div>
     <table width=100%>
       <tr><td width=40%>
-		<table>
+		<table class="compact">
 			<tr><td><b>Length:</b></td><td>${printf("%,d\n",info_results.nuc[0].length())} bp (${printf("%,d\n",info_results.pep[0].length())} aa)</td></tr>
+			<tr><td><b>GC:</b></td><td>${sprintf("%.1f",info_results.gc[0])}</td></tr>
 			<tr><td><b>Exons:</b></td><td>${exon_results.size()}</td></tr>
 			<tr><td><b>Source:</b></td><td>${info_results.source[0]}</td></tr>
 			<tr><td><b>Scaffold start:</b></td><td>${printf("%,d\n",info_results.start[0])}</td></tr>
@@ -436,7 +436,7 @@
     </td>
     
     <td width=60%>
-		<div id="aa_chart" class="jqplot-target" style="height: 270px;"></div>
+		<div id="aa_chart" class="jqplot-target" style="height: 250px;"></div>
     </td>
     </tr>
     </table>
@@ -602,7 +602,6 @@
 		 <thead>
 			<tr>
 				<th></th>
-				<th width=30%>ID</th>
 				<th>Number</th>
 				<th>Length</th>
 				<th>GC</th>

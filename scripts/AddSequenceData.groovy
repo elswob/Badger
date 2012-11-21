@@ -228,40 +228,48 @@ def addGenomeData(fileLoc, cov, file_name){
 	def count_gc		
 	def coverage
 	def contigMap = [:]
+	float nonATGC 
 	//use string buffer for sequence as concatenating large strings in java is bad 
-	def sequence = new StringBuffer()
-
+	//def sequence = new StringBuffer()
+    def sequence = ""
 	contigFile.eachLine{
 		if ((matcher = it =~ header_regex)){
 			if (sequence != ""){
+				//println "seq = "+sequence
 				//println "Adding $contig_id - $count"
+				String seqString = sequence.toString();
 				count++
 				//get gc
-				count_gc = sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
-				def gc = (count_gc/sequence.length())*100
+				count_gc = seqString.toUpperCase().findAll({it=='G'|it=='C'}).size()
+				def gc = (count_gc/seqString.length())*100
 				gc = sprintf("%.2f",gc)
+				contigMap.gc = gc
+				//get Ns
+				nonATGC += seqString.toUpperCase().count("N")
+				contigMap.non_atgc = nonATGC
 				//add data to map
 				contigMap.contig_id = contig_id.trim()
 				//println "id = "+contig_id
-				contigMap.gc = gc
+				
 				if (cov_check == true){
 					coverage = sprintf("%.2f",coverage)
 				}
 				contigMap.coverage = coverage
-				contigMap.length = sequence.length()
-				contigMap.sequence = sequence
+				contigMap.length = seqString.length()
+				contigMap.sequence = seqString
 				//println contigMap
 				GenomeInfo genome = new GenomeInfo(contigMap)
 				Gfile.addToScaffold(genome)				
 				if ((count % 2000) ==  0){
 					println count
 					genome.save(flush:true)
-					println new Date()
+					//println new Date()
 					cleanUpGorm()
 				}else{
 					genome.save()
 				}			
-				sequence=""
+				sequence = ""
+				nonATGC = 0
 			}
 			contig_id = matcher[0][1]
 			if (cov_check == true){
@@ -272,16 +280,19 @@ def addGenomeData(fileLoc, cov, file_name){
 			count_gc = 0
 		}else{
 			//sequence += it
-			sequence << it
+			sequence <<= it
 		}
 	} 
 	//catch the last one
-	count_gc = sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
-	def gc = (count_gc/sequence.length())*100
+	String seqString = sequence.toString();
+	count_gc = seqString.toUpperCase().findAll({it=='G'|it=='C'}).size()
+	def gc = (count_gc/seqString.length())*100
+	nonATGC += seqString.toUpperCase().count("N")
+	contigMap.non_atgc = nonATGC
 	contigMap.contig_id = contig_id
 	contigMap.gc = gc
-	contigMap.length = sequence.length()
-	contigMap.sequence = sequence
+	contigMap.length = seqString.length()
+	contigMap.sequence = seqString
 	contigMap.coverage = coverage
 	GenomeInfo genome = new GenomeInfo(contigMap)
 	Gfile.addToScaffold(genome)
@@ -360,7 +371,7 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 	
 	def exonMap = [:]
 	def exon_id
-	int exon_count
+	int exon_count = 1
 	int exon_count_all = 0
 	int exon_start
 	int exon_marker
@@ -384,8 +395,6 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 				}	
 		  }
 		  if (dataArray[2] == 'mRNA' || dataArray[2] == 'transcript'){
-			exon_marker=0
-			exon_count=0
 			gene_count++
 			if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
 				mrna_id = matcher[0][1]
@@ -421,30 +430,18 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 		}
 	}
 	println gene_count
-	
+	cleanUpGorm()
 	//mark files as loaded 
-	   
-    //FileData nucUp = FileData.findByFile_name(nuc.file_name)
-	//nucUp.loaded = true
-	//nucUp.save(flush:true)
-	
+
     def nSql = "update file_data set loaded = true where file_name = '"+nuc.file_name+"'";
     println nSql
     sql.execute(nSql)
 	println nuc.file_name+" is loaded"
-	
-	//FileData pepUp = FileData.findByFile_name(pep.file_name)
-	//pepUp.loaded = true
-	//pepUp.save(flush:true)
-	
+
 	def pSql = "update file_data set loaded = true where file_name = '"+pep.file_name+"'";
 	println pSql
     sql.execute(pSql)
 	println pep.file_name+" is loaded"
-	
-	//gfile.loaded = true
-	//gfile.save(flush:true)
-	//println gfile.file_name+" is loaded"
 	
 	gene_count = 0
 	//read the file again as the gene tables need to be complete to use ids in exon tables
@@ -473,26 +470,29 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 					println gene_count
 					//println new Date()
 				}
-				if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
+				if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){
 					mrna_id = matcher[0][1]
-					geneFind = GeneInfo.findByMrna_id(mrna_id)
+					//geneFind = GeneInfo.findByMrna_id(mrna_id)
 				}
 			}
 			if (dataArray[2] == 'CDS'){				
 				exon_count++
 				exon_count_all++
-				if ((matcher = dataArray[8] =~ /ID=(.*?);Parent=(.*)/)){                
-					exonMap.exon_id = matcher[0][1]
-					//println "id = "+matcher[0][2]
+				if ((matcher = dataArray[8] =~ /Parent=(\S+)/)){
 					//check for alternative splicing
-					if (parent != matcher[0][2] && exon_marker != 0){
-						//println "alt trans"+parent+" - "+matcher[0][2]
+					if (parent != matcher[0][1] && exon_marker != 0){
+						//println "alt trans: "+parent+" - "+matcher[0][1]
 						exon_marker = 0
+						exon_count = 1
 					}
-					parent = matcher[0][2]
+					parent = matcher[0][1]
+					//println "parent = "+parent
+					//geneFind = GeneInfo.findByMrna_id(parent)
 					gene_nuc = nucData."${parent}"
 					//println "exon = "+exon_id+" - "+exon_count
 				}
+				geneFind = GeneInfo.findByMrna_id(parent)
+				//println dataArray[8]+" parent = "+parent
 				exon_start = exon_marker
 				exon_end = dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()+1
 				//println mrna_id
@@ -516,9 +516,10 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 				exonMap.gc = exon_gc
 				
 				ExonInfo exon = new ExonInfo(exonMap)
+				//println exonMap
 				geneFind.addToExon(exon)
 				
-				if ((exon_count_all % 10000) ==  0){
+				if ((exon_count_all % 1000) ==  0){
 					exon.save(flush:true)
 					cleanUpGorm()
 					//println exonMap
@@ -531,7 +532,7 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 	  	}    
 	}
 	println gene_count
-	def fSql = "update file_data set loaded = true where file_name = '"+gfile.file_name+"'";
+	def fSql = "update file_data set loaded = true where file_name = '"+gfile.file_name+"';";
 	println fSql
     sql.execute(fSql)
 	println gfile.file_name+" is loaded"
