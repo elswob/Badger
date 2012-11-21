@@ -36,7 +36,14 @@
         <clade>
           <branch_length>0.052296</branch_length>
           <clade>
-            <name bgStyle="none">Trichinella spiralis</name>
+            <name bgStyle="bold">Trichinella spiralis</name>
+            <chart>
+             <component>bold</component>
+            </chart>
+            <annotation>
+             <desc>Trichinella spiralis</desc>
+             <uri>#Trichinella spiralis</uri>
+            </annotation>
             <branch_length>0.911917</branch_length>
           </clade>
           <clade>
@@ -70,7 +77,14 @@
                 <clade>
                   <branch_length>0.051001</branch_length>
                   <clade>
-                    <name bgStyle="none">Haemonchus contortus</name>
+                    <name bgStyle="bold">Haemonchus contortus</name>
+                    <chart>
+                     <component>bold</component>
+                    </chart>
+                    <annotation>
+                     <desc>Haemonchus contortus</desc>
+                     <uri>#Haemonchus contortus</uri>
+                    </annotation>
                     <branch_length>0.177749</branch_length>
                   </clade>
                   <clade>
@@ -87,7 +101,14 @@
                       </clade>
                     </clade>
                     <clade>
-                      <name bgStyle="none">Caenorhabditis angaria</name>
+                      <name bgStyle="bold">Caenorhabditis angaria</name>
+                      <chart>
+                       <component>bold</component>
+                      </chart>
+                      <annotation>
+                       <desc>Caenorhabditis angaria</desc>
+                       <uri>#Caenorhabditis angaria</uri>
+                      </annotation>
                       <branch_length>0.135761</branch_length>
                     </clade>
                   </clade>
@@ -96,7 +117,14 @@
               <clade>
                 <branch_length>0.075621</branch_length>
                 <clade>
-                  <name bgStyle="none">Strongyloides ratti</name>
+                  <name bgStyle="bold">Strongyloides ratti</name>
+                  <chart>
+                   <component>bold</component>
+                  </chart>
+                  <annotation>
+                   <desc>Strongyloides ratti</desc>
+                   <uri>#Strongyloides ratti</uri>
+                  </annotation>
                   <branch_length>0.689603</branch_length>
                 </clade>
                 <clade>
@@ -119,7 +147,14 @@
                       <branch_length>0.286824</branch_length>
                     </clade>
                     <clade>
-                      <name bgStyle="none">Bursaphelenchus xylophilus</name>
+                      <name bgStyle="bold">Bursaphelenchus xylophilus</name>
+                      <chart>
+                       <component>bold</component>
+                      </chart>
+                      <annotation>
+                       <desc>Bursaphelenchus xylophilus</desc>
+                       <uri>#Bursaphelenchus xylophilus</uri>
+                      </annotation>
                       <branch_length>0.242674</branch_length>
                     </clade>
                   </clade>
@@ -139,18 +174,39 @@
                   <clade>
                     <branch_length>0.01204</branch_length>
                     <clade>
-                      <name bgStyle="none">Onchocerca ochengi</name>
+                      <name bgStyle="bold">Onchocerca ochengi</name>
+                      <chart>
+                       <component>bold</component>
+                      </chart>
+                      <annotation>
+                       <desc>Onchocerca ochengi</desc>
+                       <uri>#Onchocerca ochengi</uri>
+                      </annotation>
                       <branch_length>0.035437</branch_length>
                     </clade>
                     <clade>
-                      <name bgStyle="none">Dirofilaria immitis</name>
+                      <name bgStyle="bold">Dirofilaria immitis</name>
+                      <chart>
+                       <component>bold</component>
+                      </chart>
+                      <annotation>
+                       <desc>Dirofilaria immitis</desc>
+                       <uri>#Dirofilaria immitis</uri>
+                      </annotation>
                       <branch_length>0.038667</branch_length>
                     </clade>
                   </clade>
                   <clade>
                     <branch_length>0.006599</branch_length>
                     <clade>
-                      <name bgStyle="none">Litomosoides sigmodontis</name>
+                      <name bgStyle="bold">Litomosoides sigmodontis</name>
+                      <chart>
+                       <component>bold</component>
+                      </chart>
+                      <annotation>
+                       <desc>Litomosoides sigmodontis</desc>
+                       <uri>#Litomosoides sigmodontis</uri>
+                      </annotation>
                       <branch_length>0.057921</branch_length>
                     </clade>
                     <clade>
