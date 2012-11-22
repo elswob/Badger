@@ -651,7 +651,14 @@ class SearchController {
      		redirect(controller: "home", action: "index")
      	}else{
      		def sql = new Sql(dataSource)
-     		def Gid = params.Gid;
+     		def Gid
+     		//coming out from the blast result there is no easy way to get the species id, so use the contig_id (very risky as possible duplicate ids!) 
+     		if (params.Gid){
+     			Gid = params.Gid;
+     		}else{
+     			def getGidSql = "select file_data.meta_id from file_data,genome_info where genome_info.file_id = file_data.id and genome_info.contig_id = '"+params.contig_id+"';";
+     			Gid = sql.rows(getGidSql).meta_id[0]
+     		}
      		def metaData = MetaData.findById(Gid); 
      		//def gene_results = GeneInfo.findAllByContig_id(params.contig_id)
      		//def genesql = "select gene_info.* from gene_info,file_data,meta_data where gene_info.contig_id = '"+params.contig_id+"' and meta_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
@@ -662,7 +669,7 @@ class SearchController {
 			//def info_results = GenomeInfo.findAllByContig_id(params.contig_id)
 			def infosql = "select genome_info.* from genome_info,file_data,meta_data where genome_info.contig_id = '"+params.contig_id+"' and meta_data.id = '"+Gid+"' and genome_info.file_id = file_data.id and file_data.meta_id = meta_data.id;";
 			def info_results = sql.rows(infosql)
-			return [ info_results: info_results, gene_results: gene_results, metaData:metaData]
+			return [ info_results: info_results, gene_results: gene_results, metaData:metaData, Gid:Gid]
 		}
     }
     def g_info = {

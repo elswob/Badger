@@ -52,7 +52,7 @@ class HomeController {
 		//get the year from the bar chart 
 		if (params.year){
 			def yearbefore = params.year-1
-			def yearsql = "select *,to_char(date_string,'yyyy Mon dd') as date_out from publication where date_string between \'01/01/" +params.year+ "\' and \'31/12/"+params.year+"\';"
+			def yearsql = "select distinct on (pubmed_id,date_out) pubmed_id,abstract_text,title,authors,journal_short,to_char(date_string,'yyyy Mon dd') as date_out from publication where date_string between \'01/01/" +params.year+ "\' and \'31/12/"+params.year+"\' order by date_out,pubmed_id;"
 			println yearsql
 			def pub_results = sql.rows(yearsql)
 			return [ pub_results: pub_results, searchId: params.year]
@@ -77,7 +77,8 @@ class HomeController {
 				if (params.speciesId){
 					pubSearch += " and meta_id = '"+params.speciesId+"' "
 				}
-				def pub_search = "select *,to_char(date_string,'yyyy Mon dd') as date_out from publication where "+pubSearch+" order by date_string desc;"
+				//def pub_search = "select distinct(pubmed_id,abstract_text,title,authors,journal_short,to_char(date_string,'yyyy Mon dd') as date_out) from publication where "+pubSearch+" order by date_string desc;"
+				def pub_search = "select distinct on (pubmed_id,date_out) pubmed_id,abstract_text,title,authors,journal_short,to_char(date_string,'yyyy Mon dd') as date_out from publication where "+pubSearch+" order by date_out,pubmed_id desc;"								
 				def pub_results = sql.rows(pub_search)
 				println pub_search
 				println "number of results = "+pub_results.size()

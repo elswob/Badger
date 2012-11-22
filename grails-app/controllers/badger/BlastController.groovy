@@ -146,6 +146,10 @@ class BlastController {
 								
 								//add anchor and internal links
 								def linker = matcher[0][2].replaceAll(/-\./, '') 
+								//header_regex = /^>(\S+)/
+								if ((linker = it =~ /^>(\S+)/)){
+									linker = matcher[0][1]
+								}
 								if (type == 'Peptide' || 'Genes' || 'mRNA'){
 									it = "<a name=\"$linker\"></a>"+matcher[0][1]+"<a href=\"/search/m_info?mid="+matcher[0][2]+"\">"+matcher[0][2]+"</a>\t"+matcher[0][3]+"\t"+matcher[0][4]+"\t"+matcher[0][5]+"\t"+matcher[0][6]+"\t"+matcher[0][7]+"\t"+matcher[0][8]+"\t"+matcher[0][9]+"\t"+matcher[0][10]+"\t"+matcher[0][11]+"\t"+matcher[0][12]
 								}else if (type == 'Genome'){
@@ -174,9 +178,13 @@ class BlastController {
 						blastOut.split("\n").each{  
 							//create internal links markers
 							if ((matcher = it =~ /^\s{2}(.*?)(\s+.*?\s{4}(\d{1}[e\.].*?)$)/)){
+								def text = matcher[0][2]
 								def linker_rep = matcher[0][1].replaceAll(/\.|-|\||:/, "")
 								def linker = matcher[0][1]
-								it = "<a href=\"#\" onclick=\"\$.scrollTo('#$linker_rep', 800, {offset : -10});\">$linker</a>"+"  "+matcher[0][2]
+								if ((matcher = linker =~ /^>(\S+)/)){
+									linker = matcher[0][1]
+								}
+								it = "<a href=\"#\" onclick=\"\$.scrollTo('#$linker_rep', 800, {offset : -10});\">$linker</a>"+"  "+text
 							}
 							//get the query length
 							if ((matcher = it =~ /^Length=(.*)/)){
@@ -184,9 +192,9 @@ class BlastController {
 									queryInfo.add(matcher[0][1])
 								}
 							 }
-							if ((matcher = it =~ /^>\s(.*)/)){
+							if ((matcher = it =~ /^>\s(\S+)/)){
 								//add name attribute to alignment for anchor
-								def linker = matcher[0][1].replaceAll(/\.|-/, "") 								                     
+								def linker = matcher[0][1].replaceAll(/\.|-/, "") 							                     
 								//create internal links
 								//println "file type = "+type
 								if (type == 'Peptide' || type == 'Genes' || type == 'mRNA'){

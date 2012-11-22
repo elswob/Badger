@@ -98,7 +98,7 @@
     	<hr size = 5 color="green" width="100%" style="margin-top:10px">
     	<div class="inline">
     	<br>
-    	 <h1>${printf("%,d\n",gene_results.size())} transcripts</b>:</h1>
+    	 <h1>${printf("%,d\n",gene_results.size())} genes</b>:</h1>
 			<!-- download genes form gets fileName value from get_table_data() -->		    		
 			 <!--div style="right:0px;">
 				 &nbsp;&nbsp;(Download sequences:
@@ -132,7 +132,7 @@
 			  <tbody>
 			 	<g:each var="res" in="${gene_results}">
 			 		<tr>
-						<td><a href="g_info?Gid=${params.Gid}&gid=${res.gene_id}">${res.gene_id}</a></td>
+						<td><a href="g_info?Gid=${Gid}&gid=${res.gene_id}">${res.gene_id}</a></td>
 						<td>${res.count}</td>
 						<td>${sprintf("%.0f",res.a_nuc)}</td>
 						<td>${sprintf("%.0f",res.a_start)}</td>
