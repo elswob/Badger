@@ -218,6 +218,7 @@
         <table id="trans_table" class="display">
             <thead>
               <tr>
+              	<th><b>Species</b></th>
                 <th><b>Transcript</b></th>
                 <th><b>Database</b></th>
                 <th><b>Hit</b></th>
@@ -231,6 +232,7 @@
              <tbody>
                <g:each var="res" in="${transRes}">
                 <tr>  
+                  <td>${res.genus} ${res.species}</td>
                   <td><g:link action="trans_info" params="${[contig_id: res.contig_id]}"> ${res.contig_id}</g:link></td>
                   <td>${res.anno_db}</td>
                   <%
@@ -267,10 +269,11 @@
         <table id="gene_table" class="display">
             <thead>
               <tr>
+              	<th><b>Species</b></th>
                 <th><b>Transcript ID</b></th>
                 <th><b>Database</b></th>
                 <th><b>Hit ID</b></th>
-                <th><b>Description</b></th>
+                <th width="40%"><b>Description</b></th>
                 <th><b>Start</b></th>
                 <th><b>Stop</b></th>
                 <th><b>Score</b></th>
@@ -280,6 +283,7 @@
              <tbody>
                <g:each var="res" in="${geneRes}">
                 <tr>  
+                  <td><g:link action="species_search" params="${[Gid: res.gid]}">${res.genus} ${res.species}</g:link></td>
                   <td><g:link action="m_info" params="${[mid: res.mrna_id]}"> ${res.mrna_id}</g:link></td>
                   <!-- <a href="m_info?Gid=${params.Gid}&mid=${res.mrna_id}">${res.mrna_id}</a>-->
                   <td>${res.anno_db}</td>
@@ -290,7 +294,9 @@
 							res.anno_id = res.anno_id.replaceAll(it.value[0], "<a href=\""+it.value[1]+"\$1\" target=\'_blank\'>\$1</a>") 
 						}
 					}
-				  %>
+				  //interpro	
+				  res.anno_id = res.anno_id.replaceAll(/(IPR\d+)/, "<a href=\"http://www.ebi.ac.uk/interpro/IEntry?ac=\$1\" target=\'_blank\'>\$1</a>")
+				   %>
                   <td>${res.anno_id}</td>
                   <%res.descr = res.descr.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
                   <td>${res.descr}</td>
