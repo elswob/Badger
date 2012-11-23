@@ -436,7 +436,7 @@
     </td>
     
     <td width=60%>
-		<div id="aa_chart" class="jqplot-target" style="height: 250px;"></div>
+		<div id="aa_chart" class="jqplot-target" style="height: 230px;"></div>
     </td>
     </tr>
     </table>
