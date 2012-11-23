@@ -172,7 +172,7 @@ class HomeController {
 		 println exonCountSql
 		 def exonCountData = sql.rows(exonCountSql)
 		
-		 def exonDist = "select num,count(num),species from (select exon_id, length(sequence) as num,species from exon_info,gene_info,file_data,meta_data where exon_info.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by species,exon_id,sequence) as foo group by species,num order by species,num;"
+		 def exonDist = "select num,count(num),species from (select exon_number, length(sequence) as num,species from exon_info,gene_info,file_data,meta_data where exon_info.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by species,exon_number,sequence) as foo group by species,num order by species,num;"
 		 println exonDist
 		 def exonDistData = sql.rows(exonDist)
 		 

@@ -23,8 +23,8 @@ class SearchController {
     	return [meta: metaData, file: fileData]
     	
     }
-    //@Cacheable('species_cache')
-    @CacheEvict(value='species_cache', allEntries=true)
+    @Cacheable('species_cache')
+    //@CacheEvict(value='species_cache', allEntries=true)
     def species_search() {
     	def sql = new Sql(dataSource)
     	def Gid = params.Gid
@@ -187,7 +187,7 @@ class SearchController {
 			def sql = new Sql(dataSource)
 			println "Searching all databases for "+params.searchId
 			
-			//def transsearch = "SELECT distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score FROM trans_anno WHERE to_tsvector(descr || ' ' || anno_id) @@ to_tsquery('"+params.searchId+"')";
+			//search transcriptome annotations
 			def transannosearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM trans_anno, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query;"      
 			println "Trans anno search = "+transannosearch
 			def transanno = sql.rows(transannosearch)
@@ -195,8 +195,7 @@ class SearchController {
 			def transblast = sql.rows(transblastsearch)
 			def transRes = transanno + transblast
 			
-			//def genesearch = "SELECT distinct on (anno_db,gene_id) gene_id,anno_id,anno_db,anno_start,anno_stop,descr,score FROM gene_anno WHERE to_tsvector(descr || ' ' || anno_id) @@ to_tsquery('"+params.searchId+"')";
-			//def geneannosearch = "select distinct on (anno_db,gene_id) gene_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM gene_anno, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query;"
+			//search gene annotations
 			def geneannosearch = "select distinct on (anno_db,mrna_id) mrna_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM gene_anno,gene_info,plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query and gene_anno.gene_id = gene_info.id;"
 			println "Gene anno search = "+geneannosearch
 			def geneanno = sql.rows(geneannosearch)
@@ -205,9 +204,8 @@ class SearchController {
 			def geneblast = sql.rows(geneblastsearch)
 			def geneRes = geneanno + geneblast
 			
-			
-			//def pubsearch = "SELECT * FROM publication WHERE textsearchable_index_col @@ to_tsquery('"+params.searchId+"')";
-			def pubsearch = "SELECT *, to_char(date_string,'yyyy Mon dd') as date_out, ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM publication, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query ORDER BY rank DESC;"
+			//search publications
+			def pubsearch = "select distinct on (pubmed_id,date_out) pubmed_id,abstract_text,title,authors,journal_short,to_char(date_string,'yyyy Mon dd') as date_out,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank from publication , plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query order by date_out,pubmed_id desc, rank desc;"								
 			def pubRes = sql.rows(pubsearch)
 			println "Publication search = "+pubsearch
 			
