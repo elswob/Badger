@@ -89,9 +89,9 @@
 		    graphDraw()
 	    }else if (arrayInfo == 'cum'){          	    	    
 		    joinArray = zip([dcou,dcum,dcon,dlen,dgc,dcov]);
-		    xaxis_label = "Contigs ranked by size";
+		    xaxis_label = "Scaffolds ranked by size";
 		    xaxis_type = $.jqplot.LinearAxisRenderer;
-		    yaxis_label = "Cumulative contig length (bp)";
+		    yaxis_label = "Cumulative scaffolds length (bp)";
 		    yaxis_type = $.jqplot.LinearAxisRenderer;
 		    title_label = "Cumulative contig length";
 		    cumDraw()

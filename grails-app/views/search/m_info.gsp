@@ -75,6 +75,23 @@
         	var y = parseFloat(b);
         	return ((x < y) ? 1 : ((x > y) ?  -1 : 0));
         };
+        
+        /* numbers in html sorting */
+		jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+			"num-html-pre": function ( a ) {
+				var x = a.replace( /<.*?>/g, "" );
+				return parseFloat( x );
+			},
+		 
+			"num-html-asc": function ( a, b ) {
+				return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+			},
+		 
+			"num-html-desc": function ( a, b ) {
+				return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+			}
+		} );
+		
     </script> 
     <script type="text/javascript">  
  		$(function() {
@@ -287,10 +304,13 @@
 				   "sClass": "control center",
 				   "sDefaultContent": '<img src="'+sImageUrl+'details_open.png'+'">'
 				},
-				{ "mDataProp": "exon_number",
-				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"/home/browse?link=${metaData.gbrowse}&contig_id="+oObj.aData["contig_id"]+"&start="+oObj.aData["start"]+"&stop="+oObj.aData["stop"]+"\">"+sVal+"</a>";
-				}},
+				{ 
+					"sType": "num-html",
+					"mDataProp": "exon_number",
+					"fnRender": function ( oObj, sVal ){
+						return "<a href=\"/home/browse?link=${metaData.gbrowse}&contig_id="+oObj.aData["contig_id"]+"&start="+oObj.aData["start"]+"&stop="+oObj.aData["stop"]+"\">"+sVal+"</a>";
+					}
+				},
 				{ "mDataProp": "length" },
 				{ "mDataProp": "gc"},
 				{ "mDataProp": "phase"},
@@ -309,6 +329,7 @@
 				}
 		} );
 		
+	 	
 	   
 	  $('#exon_table td.control').live( 'click', function () {
 	  var nTr = this.parentNode;

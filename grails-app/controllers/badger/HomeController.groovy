@@ -153,15 +153,26 @@ class HomeController {
 		 //get global counts data
 		 //println "size 1 = "+params.speciesCheck.length()
 		 def meta 		
+		 def speciesString = ""
+		 println "species selected = "+params.speciesCheck
 		 if (params.speciesCheck instanceof String){
 		 	meta = MetaData.findAllBySpecies(params.speciesCheck)
+		 	speciesString += "species = '"+params.speciesCheck+"'"
 		 }else{	 
+		 	speciesString += "";
 			def speciesList = []
 			params.speciesCheck.each{
 		 		speciesList.add(it)
+		 		if (speciesString == ""){
+		 			speciesString += "(species = '"+it+"'"
+		 		}else{
+		 			speciesString += " or species = '"+it+"'"
+		 		}
 		 	}
+		 	speciesString += ")"
 		 	meta = MetaData.findAllBySpeciesInList(speciesList)
 		 }
+		 println "speciesString = "+speciesString
 		 def geneCountAll = []
 		 def geneCountData
 		 
@@ -177,10 +188,68 @@ class HomeController {
 		 
 		 //get data individual for plots
 		 
+		 //scaffold length/gc/coverage
+		 def genomeInfo 
+		 def n50_list
+		 def n90_list
+		 if (params.figure == "1"){
+			 def genomeInfoSql = "select contig_id,gc,length,coverage,species from genome_info,file_data,meta_data where "+speciesString+" and file_id = file_data.id and meta_id = meta_data.id group by species,non_atgc,contig_id,gc,length,coverage order by species,length desc;"
+			 println genomeInfoSql
+			 genomeInfo = sql.rows(genomeInfoSql)
+			 int span=0, min=10000000000, max=0, n50=0, halfSpan=0, checkSpan=0, nonATGC=0, num=0, ninetySpan=0, counter=0;
+			 n50_list = []; n90_list = [];
+			 float gc
+				 
+			 def n50check = false, n90check = false;
+			 def spanList = [:]
+			 def old_species = ""
+			 //span
+			 genomeInfo.each {
+			 	if (it.species != old_species){
+			 		if (old_species != ""){
+			 			spanList[old_species] = span
+			 		}
+			 		old_species = it.species
+			 		span=0
+					
+				}
+				span += it.length
+			 }		
+			 spanList[old_species] = span
+			 println "spans = "+spanList
+			 
+			 //N50/90s
+			 old_species = ""
+			 genomeInfo.each {
+			 	if (it.species != old_species){
+			 		def currentSpecies = it.species
+			 		halfSpan = spanList."${currentSpecies}"/2
+			 		ninetySpan = spanList."${currentSpecies}"/100*90
+			 		old_species = it.species
+			 		counter=0;checkSpan=0;n50check = false;n90check = false;	
+				}
+				counter++
+				checkSpan += it.length
+				if (checkSpan >= halfSpan && n50check !=true){
+					def aa = [counter,checkSpan,it.length,it.species]
+					n50 = it.length
+					n50check = true
+					n50_list.add(aa)
+				}
+				if (checkSpan >= ninetySpan && n90check !=true){
+					def aa = [counter,checkSpan,it.length,it.species]
+					n90_list.add(aa)
+					n90check = true
+				}
+			}
+			println "n50 = "+n50_list
+		 	println "n90 = "+n90_list
+		 }
+		 
 		 //gene lengths
 		 def geneDistData 
 		 if (params.figure == "2"){
-			 def geneDist = "select num,count(num),species from (select gene_id, length(pep) as num,species from gene_info,file_data,meta_data where gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by gene_id,pep,meta_data.species) as foo group by species,num order by species,num;";
+			 def geneDist = "select num,count(num),species from (select gene_id, length(pep) as num,species from gene_info,file_data,meta_data where "+speciesString+" and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by gene_id,pep,meta_data.species) as foo group by species,num order by species,num;";
 			 println geneDist
 			 geneDistData = sql.rows(geneDist)
 		 }
@@ -189,7 +258,7 @@ class HomeController {
 		 def exonCountData
 		 if (params.figure == "3"){
 			 //def exonCountSql = "select num,count(num) from (select gene_id, count(gene_id) as num from exon_info group by gene_id) as foo group by num order by num;"
-			 def exonCountSql = "select num,count(num),species from (select gene_info.gene_id, count(gene_info.gene_id) as num,species from exon_info,gene_info,file_data,meta_data where exon_info.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by gene_info.gene_id,species) as foo group by species,num order by species,num;";
+			 def exonCountSql = "select num,count(num),species from (select gene_info.gene_id, count(gene_info.gene_id) as num,species from exon_info,gene_info,file_data,meta_data where "+speciesString+" and exon_info.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id and "+speciesString+" group by gene_info.gene_id,species) as foo group by species,num order by species,num;";
 			 println exonCountSql
 			 exonCountData = sql.rows(exonCountSql)
 		 }
@@ -197,7 +266,7 @@ class HomeController {
 		 //exon distribution
 		 def exonDistData
 		 if (params.figure == "4"){
-			 def exonDist = "select num,count(num),species from (select exon_number, length(sequence) as num,species from exon_info,gene_info,file_data,meta_data where exon_info.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by species,exon_number,sequence) as foo group by species,num order by species,num;"
+			 def exonDist = "select num,count(num),species from (select exon_number, length(sequence) as num,species from exon_info,gene_info,file_data,meta_data where "+speciesString+" and exon_info.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by species,exon_number,sequence) as foo group by species,num order by species,num;"
 			 println exonDist
 			 exonDistData = sql.rows(exonDist)
 		 }
@@ -217,12 +286,7 @@ class HomeController {
 				exonGCNum.add(bb)
 			}
 		}
-		//genome plots
-		//def genomeInfoSql = "select contig_id,gc,length,coverage,species from genome_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id order by species,length desc;"
-	 	//println genomeInfoSql
-	 	//def genomeInfo = sql.rows(genomeInfoSql)
-		
-		return [geneDistData:geneDistData, geneCountData:geneCountAll, exonCountData: exonCountData, exonDistData:exonDistData, exonLenNum: exonLenNum, exonGCNum: exonGCNum]
+		return [genomeInfo: genomeInfo, n50_list: n50_list, n90_list: n90_list, geneDistData:geneDistData, geneCountData:geneCountAll, exonCountData: exonCountData, exonDistData:exonDistData, exonLenNum: exonLenNum, exonGCNum: exonGCNum]
 	 }
 	 sql.close()
   }
