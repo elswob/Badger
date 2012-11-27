@@ -141,8 +141,8 @@ class HomeController {
     	return [species:species]
   	}
   
-  //@Cacheable('stats_cache') 
-  @CacheEvict(value='stats_cache', allEntries=true)
+  @Cacheable('stats_cache') 
+  //@CacheEvict(value='stats_cache', allEntries=true)
   def stats_results() {  	 
      //check the privacy setting
      if (grailsApplication.config.i.links.priv.stats && !isLoggedIn()) {

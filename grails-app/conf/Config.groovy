@@ -118,10 +118,10 @@ grails.cache.config = {
       name 'stats_cache'
    }
    cache {
-      name 'genome_cache'
+      name 'species_cache'
    }
    cache {
-      name 'species_cache'
+      name 'm_cache'
    }
 }
 // Added by the JQuery Validation UI plugin:

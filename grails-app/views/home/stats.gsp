@@ -47,7 +47,7 @@
   <body>
 	<div class="bread"><g:link action="">Home</g:link> > Statistics</div>	
  	<div id="content">
-		<g:form action="stats_results" method="post">
+		<g:form action="stats_results" method="get">
 		<table><tr><td>
 			<div class="inline">
 				<label><a href = "" STYLE="cursor: pointer" onclick="toggleDiv('blk_1');"><h1>Choose species:</h1></a></label>
