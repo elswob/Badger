@@ -49,11 +49,13 @@
  	<div id="content">
 		<g:form action="stats_results" method="post">
 		<table><tr><td>
-			<label><a href = "" STYLE="cursor: pointer" onclick="toggleDiv('blk_1');"><h1>Choose species:</h1></a></label>
-			(click to show/hide available species)
+			<div class="inline">
+				<label><a href = "" STYLE="cursor: pointer" onclick="toggleDiv('blk_1');"><h1>Choose species:</h1></a></label>
+				(click to show/hide available species)
+			</div>
 			<fieldset id="speciesSelect">	
 				<!--div id="blk_1" style="display:none"-->
-				<div class="toHide" id="blk_1">
+				<div id="blk_1">
 					<table class="compact">
 						<tr>
 							</td>Select <a rel="speciesSelect" href="#select_all">All</a> | 
@@ -78,11 +80,11 @@
 		<tr><td><h1>Choose figure type:</h1>
 		<fieldset>
 			<table class="compact">
-				<tr><td> <label><input checked="checked" name="figure" type="radio" id="fig" value="1" STYLE="cursor: pointer">Scaffold metrics</label></td></tr>
-				<tr><td> <label><input name="figure" type="radio" id="fig" value="2" STYLE="cursor: pointer">Distribution of gene lengths</label></td></tr>
-				<tr><td> <label><input name="figure" type="radio" id="fig" value="3" STYLE="cursor: pointer">Distribution of exons per gene</label></td></tr>
-				<tr><td> <label><input name="figure" type="radio" id="fig" value="4" STYLE="cursor: pointer">Distribution of exon lengths</label></td></tr>
-				<tr><td> <label><input name="figure" type="radio" id="fig" value="5" STYLE="cursor: pointer">Mean length and GC content by exon number</label></td></tr>
+				<tr><td> <label><input checked="checked" name="figure" type="radio" id="fig" value="1" STYLE="cursor: pointer"> Scaffold metrics</label></td></tr>
+				<tr><td> <label><input name="figure" type="radio" id="fig" value="2" STYLE="cursor: pointer"> Distribution of gene lengths</label></td></tr>
+				<tr><td> <label><input name="figure" type="radio" id="fig" value="3" STYLE="cursor: pointer"> Distribution of exons per gene</label></td></tr>
+				<tr><td> <label><input name="figure" type="radio" id="fig" value="4" STYLE="cursor: pointer"> Distribution of exon lengths</label></td></tr>
+				<tr><td> <label><input name="figure" type="radio" id="fig" value="5" STYLE="cursor: pointer"> Mean length and GC content by exon number</label></td></tr>
 			</table>
 		</fieldset>
 		</td></tr>

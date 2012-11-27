@@ -80,7 +80,7 @@
 		<a rel="blast_dbs" href="#invert_selection">Invert</a>
 			<table class="blast"><tr>
 				<g:each var="res" in="${blastFiles}">
-					<g:if test="${res.file_type == 'Genome'}">		
+					<g:if test="${res.file_type == 'Genome' && res.loaded == true}">		
 						<g:if test="${res.blast == 'priv' && isLoggedIn()}">	
 							<td><g:checkBox name="genomeCheck" value="${res.file_name}" /></td><td><i>${res.meta.genus} ${res.meta.species}</td><td>Version ${res.file_version}</td></tr>
 						</g:if>
@@ -100,7 +100,7 @@
 		<a rel="blast_dbs" href="#invert_selection">Invert</a>
 			<table class="blast"><tr>
 				<g:each var="res" in="${blastFiles}">
-					<g:if test="${res.file_type == 'mRNA'}">
+					<g:if test="${res.file_type == 'mRNA' && res.loaded == true}">
 						<g:if test="${res.blast == 'priv' && isLoggedIn()}">
 							<td><g:checkBox name="transCheck" value="${res.file_name}" /></td><td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td></tr>
 						</g:if>
@@ -120,7 +120,7 @@
 		<a rel="blast_dbs" href="#invert_selection">Invert</a>
 			<table class="blast"><tr>
 				<g:each var="res" in="${blastFiles}">
-					<g:if test="${res.file_type == 'Peptide'}">
+					<g:if test="${res.file_type == 'Peptide' && res.loaded == true}">
 						<g:if test="${res.blast == 'priv' && isLoggedIn()}">
 							<td><g:checkBox name="protCheck" value="${res.file_name}" /></td><td><i>${res.meta.genus} ${res.meta.species}</i></td><td>Version ${res.file_version}</td></tr>
 						</g:if>

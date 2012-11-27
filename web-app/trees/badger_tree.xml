@@ -92,7 +92,14 @@
                     <clade>
                       <branch_length>0.06643</branch_length>
                       <clade>
-                        <name bgStyle="none">Caenorhabditis elegans</name>
+                        <name bgStyle="bold">Caenorhabditis elegans</name>
+                        <chart>
+                         <component>bold</component>
+                        </chart>
+                        <annotation>
+                         <desc>Caenorhabditis elegans</desc>
+                         <uri>#Caenorhabditis elegans</uri>
+                        </annotation>
                         <branch_length>0.039636</branch_length>
                       </clade>
                       <clade>

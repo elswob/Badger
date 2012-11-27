@@ -137,7 +137,7 @@ class HomeController {
   }
   
   def stats(){
-  	def species = FileData.findAllByFile_typeInList(["Genome"],[sort:"id"])
+  	def species = FileData.findAllByFile_typeInList(["Genome"],[sort:"meta.genus"])
     	return [species:species]
   	}
   
