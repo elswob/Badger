@@ -16,32 +16,32 @@
     	<g:each var="res" in="${files}">
     		<g:if test = "${res.blast == 'pub'}">
     		<% if (sp == ""){ 
-    			println "<tr><td colspan=2><h1>${res.meta.genus} ${res.meta.species}</h1></td></tr><tr><td width=120><br><a href = \"/search/species_search?Gid=${res.meta.id}\"><img src=\"${resource(dir: 'images', file: res.meta.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>"
-    		}else if (sp != res.meta.species){ 
-    			println "</table></td><tr><td colspan=2><h1>${res.meta.genus} ${res.meta.species}</h1></td></tr>"
-    			println "<tr><td width=120><a href = \"/search/species_search?Gid=${res.meta.id}\"><img src=\"${resource(dir: 'images', file: res.meta.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>" 
+    			println "<tr><td colspan=2><h1>${res.genus} ${res.species}</h1></td></tr><tr><td width=120><br><a href = \"/search/species_search?Gid=${res.id}\"><img src=\"${resource(dir: 'images', file: res.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>"
+    		}else if (sp != res.species){ 
+    			println "</table></td><tr><td colspan=2><h1>${res.genus} ${res.species}</h1></td></tr>"
+    			println "<tr><td width=120><a href = \"/search/species_search?Gid=${res.id}\"><img src=\"${resource(dir: 'images', file: res.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>" 
     		}%>
 				<tr>
 					<td>${res.file_type}</td><td>Version ${res.file_version}</td>
 					<td><g:link controller="FileDownload" action="zip_download" params="${[fileName: res.file_name]}">${res.file_name}</g:link></td>
 				</tr>
 			</g:if>
-			<% sp = res.meta.species %>
+			<% sp = res.species %>
     	</g:each>
     	</table>
     </sec:ifNotLoggedIn>
     <sec:ifLoggedIn>
     	<g:each var="res" in="${files}">
     		<% if (sp == ""){ 
-    			println "<tr><td width=120><a href = \"/search/species_search?Gid=${res.meta.id}\"><img src=\"${resource(dir: 'images', file: res.meta.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>"
-    		}else if (sp != res.meta.species){ 
-    			println "</table></td><tr><td width=120><a href = \"/search/species_search?Gid=${res.meta.id}\"><img src=\"${resource(dir: 'images', file: res.meta.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>" 
+    			println "<tr><td width=120><a href = \"/search/species_search?Gid=${res.id}\"><img src=\"${resource(dir: 'images', file: res.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>"
+    		}else if (sp != res.species){ 
+    			println "</table></td><tr><td width=120><a href = \"/search/species_search?Gid=${res.id}\"><img src=\"${resource(dir: 'images', file: res.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>" 
     		}%>
     		<tr>
     			<td>${res.file_type}</td><td>Version ${res.file_version}</td>
     			<td><g:link controller="FileDownload" action="zip_download" params="${[fileName: res.file_name]}">${res.file_name}</g:link></td>
     		</tr>
-    		<% sp = res.meta.species %>
+    		<% sp = res.species %>
     	</g:each>
     	</table>
     </sec:ifLoggedIn>

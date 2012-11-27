@@ -131,7 +131,10 @@ class HomeController {
      	redirect(controller: "home", action: "index")
      }
      else{
-		 def files = FileData.findAll(sort:"id")
+       	 def sql = new Sql(dataSource)
+		 //def files = FileData.findAll(sort:"meta.genus")
+		 def fileSql = "select file_data.*,genus,species,image_file from file_data,meta_data where file_data.meta_id = meta_data.id order by genus,species,file_type;"
+		 def files = sql.rows(fileSql)
 		 return [ files: files]
 	 }
   }

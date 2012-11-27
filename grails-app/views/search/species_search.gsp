@@ -91,7 +91,7 @@
 		    joinArray = zip([dcou,dcum,dcon,dlen,dgc,dcov]);
 		    xaxis_label = "Scaffolds ranked by size";
 		    xaxis_type = $.jqplot.LinearAxisRenderer;
-		    yaxis_label = "Cumulative scaffolds length (bp)";
+		    yaxis_label = "Cumulative scaffolds length (Mb)";
 		    yaxis_type = $.jqplot.LinearAxisRenderer;
 		    title_label = "Cumulative contig length";
 		    cumDraw()
@@ -180,6 +180,7 @@
 		 //seriesColors: pointcolours,
 		 highlighter: {
 			 tooltipAxes: 'yx',
+			 tooltipLocation: 'ne',
 			 yvalues: 5,
 			 show: true,
 			 sizeAdjust: 7.5,
@@ -280,7 +281,7 @@
 		for (var i = 0; i < ContigData.length; i++) {   		 	 
 				var hit = ContigData[i];
 				counter++;
-				cum += hit.length;
+				cum += hit.length/1000000;
 				dlen.push(hit.length);
 				dcov.push(hit.coverage);
 				dgc.push(hit.gc);
