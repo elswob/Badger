@@ -639,7 +639,14 @@ class SearchController {
      		redirect(controller: "home", action: "index")
      	}else{
      		def sql = new Sql(dataSource)
-     		def Gid = params.Gid;
+     		def Gid
+			if (!params.Gid){
+				def GidSql = "select meta_data.id from gene_info,file_data,meta_data where gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id and gene_id = '"+params.gid+"';";
+				print "Getting species id "+GidSql
+				Gid = sql.rows(GidSql).id[0]
+			}else{
+				Gid = params.Gid
+			}	
      		def metaData = MetaData.findById(Gid); 
      		//def results = GeneInfo.findAllByGene_id(params.gid)
      		def genesql = "select gene_info.* from gene_info,file_data,meta_data where gene_info.gene_id = '"+params.gid+"' and meta_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
