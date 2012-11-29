@@ -196,7 +196,8 @@ class HomeController {
 		 def n50_list
 		 def n90_list
 		 if (params.figure == "1"){
-			 def genomeInfoSql = "select contig_id,gc,length,coverage,species from genome_info,file_data,meta_data where "+speciesString+" and file_id = file_data.id and meta_id = meta_data.id group by species,non_atgc,contig_id,gc,length,coverage order by species,length desc;"
+			 def genomeInfoSql = "select contig_id,gc,length,coverage,genus,species from genome_info,file_data,meta_data where "+speciesString+" and file_id = file_data.id and meta_id = meta_data.id group by genus,species,non_atgc,contig_id,gc,length,coverage order by genus,species,length desc;"
+			 //def genomeInfoSql = "select contig_id,gc,length,coverage,species from genome_info,file_data,meta_data where "+speciesString+" and file_id = file_data.id and meta_id = meta_data.id group by species,non_atgc,contig_id,gc,length,coverage order by species,length desc;"			
 			 println genomeInfoSql
 			 genomeInfo = sql.rows(genomeInfoSql)
 			 int span=0, min=10000000000, max=0, n50=0, halfSpan=0, checkSpan=0, nonATGC=0, num=0, ninetySpan=0, counter=0;
