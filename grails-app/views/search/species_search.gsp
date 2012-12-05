@@ -419,7 +419,7 @@ ${genome_stats.description}
       <tr><td width=30%>
 			 <h1>Genome:</h1>
 			<table>
-			 <tr><td><b>Verstion:</b></td><td>${genome_stats.version}</td></tr>
+			 <tr><td><b>Version:</b></td><td>${genome_stats.version}</td></tr>
 			 <tr><td><b>Span (bp):</b></td><td>${printf("%,d\n",genome_stats.span)}</td></tr>
 			 <tr><td><b>Scaffolds:</b></td><td>${printf("%,d\n",genome_stats.num)}</td></tr>
 			 <tr><td><b>N50:</b></td><td>${printf("%,d\n",genome_stats.n50)}</td></tr>
