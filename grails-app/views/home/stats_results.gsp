@@ -139,7 +139,7 @@
 				//seriesColors: pointcolours,
 				 highlighter: {
 					 tooltipAxes: 'yx',
-					 tooltipLocation: 'ne',
+					 tooltipLocation: 'se',
 					 yvalues: 5,
 					 show: true,
 					 sizeAdjust: 7.5,

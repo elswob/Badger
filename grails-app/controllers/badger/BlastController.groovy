@@ -184,7 +184,7 @@ class BlastController {
 								if ((matcher = linker =~ /^>(\S+)/)){
 									linker = matcher[0][1]
 								}
-								it = "<a href=\"#\" onclick=\"\$.scrollTo('#$linker_rep', 800, {offset : -10});\">$linker</a>"+"  "+text
+								it = "<a href=\"javascript:void(0);\" onclick=\"\$.scrollTo('#$linker_rep', 800, {offset : -10});\">$linker</a>"+"  "+text
 							}
 							//get the query length
 							if ((matcher = it =~ /^Length=(.*)/)){
