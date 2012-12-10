@@ -432,7 +432,7 @@
 			<tr><td><b>Exons:</b></td><td>${exon_results.size()}</td></tr>
 			<tr><td><b>Source:</b></td><td>${info_results.source[0]}</td></tr>
 			<tr><td><b>Scaffold start:</b></td><td>${printf("%,d\n",info_results.start[0])}</td></tr>
-			<tr><td><b>Scaffold stop:</b></td><td>${printf("%,d\n",info_results.stop[0])}</td></tr>
+			<tr><td><b>Scaffold end:</b></td><td>${printf("%,d\n",info_results.stop[0])}</td></tr>
 			<tr><td><b>Strand:</b></td><td>${info_results.strand[0]}</td></tr>
 			<tr><td><b>Download:</b></td>
 					<td>
@@ -707,53 +707,68 @@
 				 var start=''
 				 var stop=''
 				 var score=''
+				 var addSpace
 				 var matched = new Array();
-				 for (var i = 0; i < Anno.length; i++) {   		 	 
-					 var hit = Anno[i];
-					 //get rid of all strange characters
-					 var stringy = String(name);
-					 var idPattern = hit.anno_id
-					 if (AnnoData[hit.anno_db]){
-						var regex = new RegExp(AnnoData[hit.anno_db][0]);
-						idPattern = idPattern.replace(regex,"$1")
-					 }					 
-					 //catch the interpro hits
-					 idPattern = idPattern.replace(/(^IPR\d+).*/,"$1");
-					 if (stringy.match(idPattern)){
-					 	 //alert('stringy = '+stringy+' and idPattern = '+idPattern)
-						 start = parseFloat(hit.anno_start)
-						 stop = parseFloat(hit.anno_stop)
-						 if (start > stop){
-							 start = parseFloat(hit.anno_stop)
-							 stop = parseFloat(hit.anno_start)
+				 for (var c = 0; c < Anno.length; c++) {  
+				  	 addSpace = false	 	 	
+					 var hit_check = Anno[c];
+					 for (var i = 0; i < Anno.length; i++) {   		 	 
+						 var hit = Anno[i];						 
+						 if (hit.anno_id == hit_check.anno_id){
+						 	//alert('hitid = '+hit.anno_id+' check = '+hit_check.anno_id)
+							 //get rid of all strange characters
+							 var stringy = String(name);
+							 var idPattern = hit.anno_id
+							 if (AnnoData[hit.anno_db]){
+								var regex = new RegExp(AnnoData[hit.anno_db][0]);
+								idPattern = idPattern.replace(regex,"$1")
+							 }					 
+							 //catch the interpro hits
+							 idPattern = idPattern.replace(/(^IPR\d+).*/,"$1");
+							 if (stringy.match(idPattern)){
+							 	addSpace = true
+								 //alert('stringy = '+stringy+' and idPattern = '+idPattern)
+								 start = parseFloat(hit.anno_start)
+								 stop = parseFloat(hit.anno_stop)
+								 if (start > stop){
+									 start = parseFloat(hit.anno_stop)
+									 stop = parseFloat(hit.anno_start)
+								 }
+								 score = parseFloat(hit.score) 
+								 var hitColour = drawing.getBLASTColour(score,type);
+								 var blastRect = drawing.drawBar(start, stop, 7, hitColour, hit.anno_db + ": " + hit.anno_id + "\n" + hit.descr, '');
+								 var link_id = hit.id
+								 blastRect.click(function(id){
+										 return function(event){ 
+											var link = $('#' + id);
+											link.effect("highlight", {}, 10000);
+											$.scrollTo('#'+id, 800, {offset : -100});
+											}
+										 }(hit.id));
+								 blastRect.hover(
+									 function(event) {
+										this.attr({stroke: 'black', 'stroke-width' : '2'});
+										$('#' + hit.anno_id).css("background-color", "bisque");
+						
+										},
+										function(event) {
+										this.attr({stroke: 'black', 'stroke-width' : '0'});
+										$('#' + hit.anno_id).css("background-color", "white");
+										}
+								)
+							 matched.push(idPattern);	
+							 }	
+						 //remove entry
+					 	 Anno.splice(i,1);
+					 	 //go back one element of the json array
+					 	 i--;    	    
 						 }
-						 score = parseFloat(hit.score) 
-						 var hitColour = drawing.getBLASTColour(score,type);
-						 var blastRect = drawing.drawBar(start, stop, 7, hitColour, hit.anno_db + ": " + hit.anno_id + "\n" + hit.descr, '');
-						 var link_id = hit.id
-						 blastRect.click(function(id){
-						 		 return function(event){ 
-						 		 	var link = $('#' + id);
-						 		 	link.effect("highlight", {}, 10000);
-						 		 	$.scrollTo('#'+id, 800, {offset : -100});
-						 		 	}
-								 }(hit.id));
-						 blastRect.hover(
-							 function(event) {
-								this.attr({stroke: 'black', 'stroke-width' : '2'});
-								$('#' + hit.anno_id).css("background-color", "bisque");
-				
-								},
-								function(event) {
-								this.attr({stroke: 'black', 'stroke-width' : '0'});
-								$('#' + hit.anno_id).css("background-color", "white");
-								}
-						)
-					 drawing.drawSpacer(10);
-					 matched.push(idPattern);	
-					 }	    	    
+					}
+				 if (addSpace == true){
+				 	drawing.drawSpacer(10);
 				 }
-				 
+				 c--
+		 		}
 		 	}
 		 }
 
