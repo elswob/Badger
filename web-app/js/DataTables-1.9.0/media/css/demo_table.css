@@ -29,13 +29,13 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables features
  */
-/*
+
 .dataTables_wrapper {
 	position: relative;
 	clear: both;
 	zoom: 1; /* Feeling sorry for IE */
 }
-*/
+
 .dataTables_processing {
 	position: absolute;
 	top: 50%;

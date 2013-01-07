@@ -493,8 +493,8 @@ class SearchController {
 			sql.close()
 		}
       }
-    @Cacheable('m_cache')
-    //@CacheEvict(value='m_cache', allEntries=true)
+    //@Cacheable('m_cache')
+    @CacheEvict(value='m_cache', allEntries=true)
     def m_info() {
     	if (grailsApplication.config.i.links.genes == 'private' && !isLoggedIn()) {
      		redirect(controller: "home", action: "index")
