@@ -15,21 +15,38 @@ MetaData meta
 def addMeta(metaMap){
 	def check = MetaData.findByGenusAndSpecies(metaMap.genus, metaMap.species)
 	if (check){
-		println "species already exists - "+check
+		println metaMap.genus+" "+metaMap.species+" already exists - "+check
+		meta = check
 	}else{  		
 		meta = new MetaData(metaMap)
 		meta.save(flush:true)
 	}
 }
+
+//set the new genome to global to be picked up by addFile
+GenomeData new_genome
+def addGenome(genomeMap){
+	def check = GenomeData.findByGversion(genomeMap.gversion)
+	if (check){
+		println "genome version "+genomeMap.gversion+" already exists - "+check
+	}else{
+		println genomeMap
+		new_genome = new GenomeData(genomeMap) 
+		meta.addToGenome(new_genome)
+		new_genome.save(flush:true)
+		println "Genome "+new_genome.meta.genus+" "+new_genome.meta.species+" version "+genomeMap.gversion+" was added"
+	}
+}
+
 def addFile(fileMap){
 	def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
 	if (check){
-		println "file name and type already exists - "+check
+		println "file name "+fileMap.file_name+" type "+fileMap.file_type+" already exists - "+check
 	}
 	else if (new File("data/"+fileMap.file_dir+"/"+fileMap.file_name).exists()){
-		println fileMap
+		println "Adding "+fileMap
 		FileData file = new FileData(fileMap) 
-		meta.addToFiles(file)
+		new_genome.addToFiles(file)
 		file.save(flush:true)
 		println fileMap.file_name+" was added"
 	}else{
@@ -38,15 +55,15 @@ def addFile(fileMap){
 }
 def addAnno(fileName,annoMap){
 	FileData file = FileData.findByFile_name(fileName)
-	println "file = "+file
+	//println "file = "+file
 	def filedir = FileData.findByFile_name(fileName).file_dir
-	println "filedir = "+filedir
+	//println "filedir = "+filedir
 	def check = []
 	if (FileData.findByFile_name(fileName).anno){
-		println "anno = "+FileData.findByFile_name(fileName).anno
+		//println "anno = "+FileData.findByFile_name(fileName).anno
 		check = FileData.findByFile_name(fileName).anno.anno_file			
 	}
-	println "check = "+check
+	//println "check = "+check
 	if (annoMap.anno_file in check){
 		println annoMap.anno_file+" already exists for "+fileName+" so not adding"
 	}else{
@@ -65,17 +82,17 @@ def addAnno(fileName,annoMap){
 //add data
 //test()
 A_vit()
-L_sig()
-D_imm()
-O_och()
-B_mal()
-C_ang()
-B_xyl()
-H_con()
-//M_inc()
-S_rat()
-T_spi()
-C_ele()
+//L_sig()
+//D_imm()
+//O_och()
+//B_mal()
+//C_ang()
+//B_xyl()
+//H_con()
+////M_inc()
+//S_rat()
+//T_spi()
+//C_ele()
 
 ///////// test data
 def test(){
@@ -132,14 +149,32 @@ def test(){
 def A_vit(){
 	def metaMap = [:]
 	def fileMap = [:]
+	def genomeMap = [:]
+	
 	metaMap.genus = "Acanthocheilonema";
 	metaMap.species = "viteae";
-	metaMap.gversion = "1.0.1"
 	metaMap.description = "Acanthocheilonema viteae is a filarial nematode parasite of rodents. It is widely used as a model for human filariases. Importantly, A. viteae lacks the Wolbachia bacterial endosymbiont found in most human-infective filarial nematodes. Thus this species has become central in efforts to understand the role of the Wolbachia in the nematode-bacterial symbiosis, and in particular its possible role in immune evasion. The Wolbachia is also a drug target in nematodes that carry this symbiont, so work on A. viteae can also help to disentangle anti-nematode and anti-symbiont effects."
-	metaMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/"
 	metaMap.image_file = "a_viteae_lifecycle.jpg"
 	metaMap.image_source = "A. viteae lifecycle; from http://www.uni-giessen.de"
 	addMeta(metaMap)
+	
+	genomeMap.gversion = "1.0.1"
+	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/"
+	genomeMap.description = "Version 1.0.1 of the genome"
+	genomeMap.dateString = Date.parse("dd/MM/yyyy","01/02/2012")
+	addGenome(genomeMap)
+	
+	genomeMap.gversion = "1.0.2"
+	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/"
+	genomeMap.description = "Version 1.0.2 of the genome"
+	genomeMap.dateString = Date.parse("dd/MM/yyyy","02/02/2012")
+	addGenome(genomeMap)
+	
+	genomeMap.gversion = "1.1.2"
+	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/"
+	genomeMap.description = "Version 1.1.2 of the genome"
+	genomeMap.dateString = Date.parse("dd/MM/yyyy","02/01/2013")
+	addGenome(genomeMap)
 	
 	//global
 	fileMap.file_dir = "A_viteae"
@@ -160,7 +195,7 @@ def A_vit(){
 	fileMap.file_name = "nAv.1.0.1.aug.blast2go.gff"
 	fileMap.file_version = "1.0.1"
 	fileMap.description = "Augustus gene prediction"
-	fileMap.file_link = "n"
+	fileMap.file_link = "Acanthocheilonema_viteae_v1.0.fna"
 	addFile(fileMap)
 	//mRNA
 	fileMap.file_type = "mRNA"

@@ -4,10 +4,8 @@ class MetaData {
     String genus
     String species
     String description
-    String Gversion
     String image_file
     String image_source
-    String gbrowse
     static constraints = {
         genus(blank:false)
         species(blank:false)
@@ -16,5 +14,5 @@ class MetaData {
     static mapping = {
         description type: "text"
     }    
-    static hasMany = [files: FileData, pubs: Publication]
+    static hasMany = [genome: GenomeData, pubs: Publication]
 }

@@ -108,7 +108,7 @@
   	 		<table>
   	 			<tr>
   	 				<td width=150> 
-	    				<a href = "species_search?Gid=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="150" style="float:left;"/></a>
+	    				<a href = "species_v?Gid=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="150" style="float:left;"/></a>
 	    			</td>
 	    			<td>
 	    				<div style="overflow:auto; padding-right:2px; height:150px">
