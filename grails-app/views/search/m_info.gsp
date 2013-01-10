@@ -556,7 +556,7 @@
   </head>
   <body>
   <g:if test="${info_results}">
-    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_search" params="${[Gid:metaData.id]}"><i> ${metaData.genus} ${metaData.species}</i></g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:metaData.id,contig_id:info_results.contig_id[0]]}"> ${info_results.contig_id[0]}</g:link> > Gene: <g:link action="g_info" params="${[Gid:metaData.id,gid:info_results.gene_id[0]]}"> ${info_results.gene_id[0]}</g:link>  > Transcript: ${info_results.mrna_id[0]}
+    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Gid:metaData.meta.id]}"><i> ${metaData.meta.genus} ${metaData.meta.species}</i></g:link> > <g:link action="species_search" params="${[Gid:params.Gid,GFFid:params.GFFid]}">${metaData.gversion}</g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:metaData.id,contig_id:info_results.contig_id[0]]}"> ${info_results.contig_id[0]}</g:link> > Gene: <g:link action="g_info" params="${[Gid:metaData.id,gid:info_results.gene_id[0]]}"> ${info_results.gene_id[0]}</g:link>  > Transcript: ${info_results.mrna_id[0]}
   	<div id="top_anchor"></div>
     <div id="info_anchor"><h1>Information for transcript ${info_results.mrna_id[0]}:</h1></div>
     <table width=100%>

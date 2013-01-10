@@ -160,6 +160,8 @@ def addPub(pubFile,data_id){
 				pub.save(flush:true)
               	//println "pub = "+pub
 			}
+			//clear abstract text
+			pubMap.abstractText = ''
 		}
 	}
 	println "Added "+count_all 

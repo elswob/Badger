@@ -412,12 +412,14 @@
     </script>
 </head>
 <body>
-<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <i> ${meta.genus} ${meta.species}</i>
-<h1><b><i>${meta.genus} ${meta.species}</i></b></h1>
+<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Gid:meta.id]}"><i>${meta.genus} ${meta.species}</i></g:link> > ${genome.gversion}
+<h1><b><i>${meta.genus} ${meta.species}</i></b> ${genome.id}</h1>    
 ${genome_stats.description}
 <table width=100%>
+	  
       <tr><td width=30%>
 			 <h1>Genome:</h1>
+			 <g:if test = "${genome_stats.span > 0}">
 			<table>
 			 <tr><td><b>Version:</b></td><td>${genome_stats.version}</td></tr>
 			 <tr><td><b>Span (bp):</b></td><td>${printf("%,d\n",genome_stats.span)}</td></tr>
@@ -435,7 +437,7 @@ ${genome_stats.description}
 				<td>
 					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','cum')" value="Cumulative length"/>
 					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','len_gc')" value="Length vs GC"/>
-					<g:each var="f" in="${meta.files}">
+					<g:each var="f" in="${genome.files}">
       					<g:if test="${f.file_type == 'Genome'}">
       						<!--${f.file_type} ${f.file_name} ${f.cov}-->
       						<g:if test="${f.cov == 'y'}">
@@ -451,11 +453,16 @@ ${genome_stats.description}
 		 
 		  	<div id="chart" class="jqplot-target" style="height: 300px; width: 100%; position: center;">Loading...<img src="${resource(dir: 'images', file: 'spinner.gif')}"</div>
 		 
+			 </g:if>
+			 <g:else>
+			 <h2>No genome data is in the database for this genome</h2>
+			 </g:else>
 		 </td></tr>
-		 <g:if test = "${gene_stats.size() > 0}">
 		   <tr><td>
 			 <h1>Genes:</h1>
+			 <g:if test = "${gene_stats.size() > 0}">
 			 <table>
+			 <tr><td><b>GFF3 version</b></td><td>${geneData.file_version}</td></tr>
 			 <tr><td><b>Number genes</b></td><td>${printf("%,d\n",gene_stats.genenum)}</td></tr>
 			 <tr><td><b>Number transcripts</b></td><td>${printf("%,d\n",gene_stats.mrnanum)}</td></tr>
 			 <tr><td><b>Frequency (genes per Kb)</b></td><td>${printf("%.4g",(gene_stats.genenum/genome_stats.span)*1000)}</td></tr>
@@ -470,8 +477,12 @@ ${genome_stats.description}
 			<div id="blast_chart" class="jqplot-target" style="height: 200px; width: 100%; position: center;"></div>
 			<br>
 			<div id="fun_chart" class="jqplot-target" style="height: 250px; width: 100%; position: center;"></div>
+		 	</g:if>
+		 	<g:else>
+		 	<h2>No gene data is in the database for this genome</h2>
+		 	</g:else>
 		 </td></tr>
-		</g:if>
+		
  </table>
  <g:if test = "${gene_stats.size() > 0}">
 	<div id="content">
@@ -479,21 +490,13 @@ ${genome_stats.description}
 	  <td><h1>Search annotations:</h1>
 	  <table><tr><td>
 		<g:form action="gene_search_results">	
-		<h2><b>Select a data set:</b></h2>
-		<select name="dataSelect">
-			<g:each var="f" in="${meta.files}">
-				<g:if test="${f.file_type == 'Genes'}">
-					<option value=${f.id}>${meta.genus} ${meta.species}: ${f.file_type} (${f.file_version}) - ${f.file_name}
-				</g:if>
-			</g:each>
-		</select>
-		</td></tr>
+		<input type="hidden" name="dataSelect" value="${geneData.id}">
 		</table>	
 			<div id = "showAnno">
 			<table>
 			<tr><td>
 			<h1>Choose an annotation:</h1>
-			<g:each var="t" in="${meta.files.anno}">
+			<g:each var="t" in="${genome.files.anno}">
 				<g:if test="${'blast' in t.type}">
 					<label><input name="toggler" type="radio" id="blast" checked="checked" value="1"> 1. BLAST homology</label><br>
 					<div class="toHide" id="blk_1" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
@@ -548,6 +551,7 @@ ${genome_stats.description}
 			<div id='selectedResult'></div>
 			<g:textField name="searchId"  size="30"/>
 			<input type="hidden" name="Gid" value="${params.Gid}">
+			<input type="hidden" name="GFFid" value="${geneData.id}">
 			<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
 			</g:form>
 			 </td>
@@ -555,18 +559,12 @@ ${genome_stats.description}
 		   </table>
 		   <br>
 		   </div>
-		   
-			<!--table>
-				<tr><td width=15%><b>Data type</b></td><td><b>Version</b></td><td><b>Description</b></td><td><b>Number</b></td></tr>
-				<g:each var="f" in="${meta.files}">
-					<tr><td>${f.file_type}</td><td>${f.file_version}</td><td>${f.description}</td><td>${stats."${f.file_type}"}</td></tr>
-				</g:each>
-			</table-->
+
 		 </td></tr>
 		</td></tr></table>
 	</g:if>
 	<table>
-	 <tr><td><h1>Search <i>${meta.genus} ${meta.species}</i> publications:</h1>
+	 <tr><td><h1>Publications (<i>${meta.genus} ${meta.species}</i> only):</h1>
 	 
 	 <g:form controller="home" action="publication_search">
 	 <table><tr><td>
