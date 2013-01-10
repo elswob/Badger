@@ -11,7 +11,7 @@ class BlastController {
     def info = {
     }
     def index() { 
-    	def blastFiles = FileData.findAllByFile_typeInList(["mRNA","Peptide","Genome"],[sort:"meta.genus"])
+    	def blastFiles = FileData.findAllByFile_typeInList(["mRNA","Peptide","Genome"],[sort:"genome.meta.genus"])
     	return [blastFiles:blastFiles]
     }
     def blastError = {

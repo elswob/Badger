@@ -534,13 +534,19 @@ class SearchController {
 			def sql = new Sql(dataSource)
 			def mrna_id = params.mid
 			def Gid
+			def GFFid
+			//coming in from blast results
 			if (!params.Gid){
-				def GidSql = "select meta_data.id from gene_info,file_data,meta_data where gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id and mrna_id = '"+mrna_id+"';";
-				print "Getting species id "+GidSql
-				Gid = sql.rows(GidSql).id[0]
+				def mrna_details = GeneInfo.findAllByMrna_id(mrna_id)
+				println "md = "+mrna_details.file.genome.id[0]
+				Gid = mrna_details.file.genome.id[0]
+				GFFid = mrna_details.file.id[0]
 			}else{
 				Gid = params.Gid
+				GFFid = params.GFFid
 			}	
+			println "Gid = "+Gid
+			println "GFFid = "+GFFid
 			def metaData = GenomeData.findById(Gid);
 			println "metaData = "+metaData
 			def blast_results
