@@ -66,10 +66,10 @@
 						<g:each var="res" in="${species}">
 							<g:if test="${res.file_type == 'Genome'}">		
 								<g:if test="${res.search == 'priv' && isLoggedIn()}">	
-									<tr><td><g:checkBox name="speciesCheck" value="${res.meta.species}" /></td><td><i>${res.meta.genus} ${res.meta.species}</td></tr>
+									<tr><td><g:checkBox name="speciesCheck" value="${res.genome.meta.species}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</td></tr>
 								</g:if>
 								<g:elseif test="${res.search == 'pub'}">
-									<tr><td><g:checkBox name="speciesCheck" value="${res.meta.species}" /></td><td><i>${res.meta.genus} ${res.meta.species}</td></tr>
+									<tr><td><g:checkBox name="speciesCheck" value="${res.genome.meta.species}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</td></tr>
 								</g:elseif>
 							</g:if>
 						</g:each>

@@ -66,7 +66,7 @@
   
   <body>
     <g:if test="${info_results}">
-    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_search" params="${[Gid:params.Gid]}"><i> ${metaData.genus} ${metaData.species}</i></g:link> > Scaffold: ${info_results.contig_id[0]}
+    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Gid:Gid]}"><i> ${metaData.meta.genus} ${metaData.meta.species}</i></g:link> > <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">${metaData.gversion}</g:link> > Scaffold: ${info_results.contig_id[0]}
     
     <h1>Information for <b>${info_results.contig_id[0]}</b>:</h1>
     <table>
@@ -132,7 +132,7 @@
 			  <tbody>
 			 	<g:each var="res" in="${gene_results}">
 			 		<tr>
-						<td><a href="g_info?Gid=${Gid}&gid=${res.gene_id}">${res.gene_id}</a></td>
+						<td><a href="g_info?Gid=${Gid}&GFFid=${GFFid}&gid=${res.gene_id}">${res.gene_id}</a></td>
 						<td>${res.count}</td>
 						<td>${sprintf("%.0f",res.a_nuc)}</td>
 						<td>${sprintf("%.0f",res.a_start)}</td>

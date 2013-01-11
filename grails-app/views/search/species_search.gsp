@@ -488,10 +488,10 @@ ${genome_stats.description}
 	<div id="content">
 	  <table><tr>
 	  <td><h1>Search annotations:</h1>
-	  <table><tr><td>
+
 		<g:form action="gene_search_results">	
 		<input type="hidden" name="dataSelect" value="${geneData.id}">
-		</table>	
+	
 			<div id = "showAnno">
 			<table>
 			<tr><td>

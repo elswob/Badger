@@ -31,7 +31,7 @@ class SearchController {
     	def genomes = sql.rows(genomesSql)
     	//def genesSql = "select file_data.* from file_data,genome_data where file_data.file_type = 'Genes' and file_data.genome_id = genome_data.id and genome_data.meta_id = "+params.Gid+" order by file_version;"
     	println "meta = "+meta
-    	println "genomes = "+genomes
+    	println "genomes size = "+genomes.size
     	return [meta: meta, genomes:genomes] 	
     }
     
@@ -40,6 +40,7 @@ class SearchController {
     	println "link = "+params.link
     	//def genes = GenomeData.findAllByGenome_idAndFile_type(params.link,'Genes')
     	def genesSql = "select * from file_data where genome_id = "+params.link+" and file_type = 'Genes';"
+    	print genesSql
     	def genes = sql.rows(genesSql)
     	println "gff number = "+genes.size
     	println "link = "+params.link
@@ -538,7 +539,6 @@ class SearchController {
 			//coming in from blast results
 			if (!params.Gid){
 				def mrna_details = GeneInfo.findAllByMrna_id(mrna_id)
-				println "md = "+mrna_details.file.genome.id[0]
 				Gid = mrna_details.file.genome.id[0]
 				GFFid = mrna_details.file.id[0]
 			}else{
@@ -593,7 +593,7 @@ class SearchController {
 				aaData = peptideService.getComp(it.pep)
 				//println "service = "+service
 			}	
-			return [mrna_id: mrna_id, info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, metaData: metaData]
+			return [Gid:Gid, GFFid:GFFid, mrna_id: mrna_id, info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, metaData: metaData]
     	sql.close()
     	}
     }
@@ -652,24 +652,32 @@ class SearchController {
      	}else{
      		def sql = new Sql(dataSource)
      		def Gid
+     		def GFFid
      		//coming out from the blast result there is no easy way to get the species id, so use the contig_id (very risky as possible duplicate ids!) 
      		if (params.Gid){
      			Gid = params.Gid;
+     			GFFid = params.GFFid
      		}else{
-     			def getGidSql = "select file_data.genome_id from file_data,genome_info where genome_info.file_id = file_data.id and genome_info.contig_id = '"+params.contig_id+"';";
-     			Gid = sql.rows(getGidSql)[0]
+     			def genome_details = GenomeInfo.findAllByContig_id(params.contig_id)
+				Gid = genome_details.file.genome.id[0]
+				//GFFid = genome_details.file.id[0]
+				println "g = "+genome_details.file.file_name[0]
+				GFFid = FileData.findAllByFile_link(genome_details.file.file_name[0]).id[0]
      		}
+     		println "Gid = "+Gid
+     		println "GFFid = "+GFFid
      		def metaData = GenomeData.findById(Gid); 
      		//def gene_results = GeneInfo.findAllByContig_id(params.contig_id)
      		//def genesql = "select gene_info.* from gene_info,file_data,meta_data where gene_info.contig_id = '"+params.contig_id+"' and meta_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
-     		def genesql = "select gene_info.gene_id, count(mrna_id), avg(length(nuc)) as a_nuc, avg(start) as a_start, avg(stop) as a_stop from gene_info,file_data,genome_data where gene_info.contig_id = '"+params.contig_id+"' and genome_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id group by gene_info.gene_id order by a_start;";
+     		def genesql = "select gene_info.gene_id, count(mrna_id), avg(length(nuc)) as a_nuc, avg(start) as a_start, avg(stop) as a_stop from gene_info,file_data where gene_info.contig_id = '"+params.contig_id+"' and file_data.id = '"+GFFid+"' and gene_info.file_id = file_data.id group by gene_info.gene_id order by a_start;";
+     		println genesql
      		def gene_results = sql.rows(genesql)
      		println genesql
      		//println "contig_id ="+params.contig_id
 			//def info_results = GenomeInfo.findAllByContig_id(params.contig_id)
 			def infosql = "select genome_info.* from genome_info,file_data,genome_data where genome_info.contig_id = '"+params.contig_id+"' and genome_data.id = '"+Gid+"' and genome_info.file_id = file_data.id and file_data.genome_id = genome_data.id;";
 			def info_results = sql.rows(infosql)
-			return [ info_results: info_results, gene_results: gene_results, metaData:metaData, Gid:Gid]
+			return [ Gid:Gid, GFFid:GFFid, info_results: info_results, gene_results: gene_results, metaData:metaData, Gid:Gid]
 		}
     }
     def g_info = {
@@ -678,19 +686,23 @@ class SearchController {
      	}else{
      		def sql = new Sql(dataSource)
      		def Gid
+     		def GFFid
 			if (!params.Gid){
-				def GidSql = "select meta_data.id from gene_info,file_data,meta_data where gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id and gene_id = '"+params.gid+"';";
-				print "Getting species id "+GidSql
-				Gid = sql.rows(GidSql).id[0]
+				def gene_details = GeneInfo.findAllByGene_id(params.gid)
+				println "md = "+gene_details.file.genome.id[0]
+				Gid = gene_details.file.genome.id[0]
+				GFFid = gene_details.file.id[0]
 			}else{
 				Gid = params.Gid
+				GFFid = params.GFFid
 			}	
-     		def metaData = MetaData.findById(Gid); 
+     		def metaData = GenomeData.findById(Gid); 
      		//def results = GeneInfo.findAllByGene_id(params.gid)
-     		def genesql = "select gene_info.* from gene_info,file_data,meta_data where gene_info.gene_id = '"+params.gid+"' and meta_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
+     		def genesql = "select gene_info.* from gene_info,file_data where gene_info.gene_id = '"+params.gid+"' and file_data.id = "+GFFid+" and gene_info.file_id = file_data.id;"
+     		println genesql
      		def gene_results = sql.rows(genesql)
      		//println "g = "+gene_results
-			return [ results: gene_results, metaData:metaData]
+			return [ Gid:Gid, GFFid:GFFid, results: gene_results, metaData:metaData]
 		}
     }
 	def gene_link = {

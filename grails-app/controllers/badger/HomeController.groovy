@@ -133,18 +133,18 @@ class HomeController {
      else{
        	 def sql = new Sql(dataSource)
 		 //def files = FileData.findAll(sort:"meta.genus")
-		 def fileSql = "select file_data.*,genus,species,image_file from file_data,meta_data where file_data.meta_id = meta_data.id order by genus,species,file_type;"
+		 def fileSql = "select file_data.*,genus,species,image_file from file_data,genome_data,meta_data where file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id order by genus,species,file_type;"
 		 def files = sql.rows(fileSql)
 		 return [ files: files]
 	 }
   }
   
   def stats(){
-  	def species = FileData.findAllByFile_typeInList(["Genome"],[sort:"meta.genus"])
+  	def species = FileData.findAllByFile_typeInList(["Genome"],[sort:"genome.meta.genus"])
     	return [species:species]
   	}
   
-  @Cacheable('stats_cache') 
+  //@Cacheable('stats_cache') 
   //@CacheEvict(value='stats_cache', allEntries=true)
   def stats_results() {  	 
      //check the privacy setting
@@ -180,7 +180,7 @@ class HomeController {
 		 def geneCountData
 		 
 		 meta.each{		 
-			 def geneCount = "select count(mrna_id) from gene_info,file_data,meta_data where gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id and meta_data.id = '"+it.id+"';";
+			 def geneCount = "select count(mrna_id) from gene_info,file_data,genome_data where gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id and meta_data.id = '"+it.id+"';";
 		 	 println geneCount
 		 	 geneCountData = sql.rows(geneCount)
 		 	 geneCountAll.add([genus:it.genus,species:it.species,count:geneCountData.count[0]])

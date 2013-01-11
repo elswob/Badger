@@ -11,9 +11,6 @@
             @import "${resource(dir: 'css', file: 'unitip.css')}";
     </style>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'unitip.js')}"></script>
-    <script src="https://raw.github.com/mbostock/d3/master/d3.v2.js" type="text/javascript"></script>
-    <script src="https://raw.github.com/jasondavies/newick.js/master/src/newick.js" type="text/javascript"></script>
-    <script type="text/javascript" src="${resource(dir: 'js', file: 'd3.phylogram.js')}"></script>
 
     <style type="text/css" media="screen">
       body { font-family: "Helvetica Neue", Helvetica, sans-serif; }
@@ -53,29 +50,6 @@
 			//Smits.ZoomCanvas.scale(0.5);			
 			init(); //unitip
 		});
-		
-		
-		var newick = Newick.parse("(((OOC:0.0844943664275285,DIM:0.09129505569410035):0.025706590829786657,((LSI:0.12409961518541279,AVI:0.07446234568224375):0.030236339669637013,(LOA:0.0790916403236126,(BMA:0.034560373576475234,WBA:0.032161008868150875):0.06628725081120457):0.014654633492007463):0.01829852483759431):0.43704282407212874,ASC:0.43704282407212874);")
-        var newickNodes = []
-        function buildNewickNodes(node, callback) {
-          newickNodes.push(node)
-          if (node.branchset) {
-            for (var i=0; i < node.branchset.length; i++) {
-              buildNewickNodes(node.branchset[i])
-            }
-          }
-        }
-        buildNewickNodes(newick)
-        
-        d3.phylogram.buildRadial('#radialtree', newick, {
-          width: 400,
-          skipLabels: true
-        })
-        
-        d3.phylogram.build('#phylogram', newick, {
-          width: 300,
-          height: 400
-        });
 	});
 	</script>
     

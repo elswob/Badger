@@ -80,9 +80,8 @@ def addAnno(fileName,annoMap){
 }
 
 //add data
-//test()
 A_vit()
-//L_sig()
+L_sig()
 //D_imm()
 //O_och()
 //B_mal()
@@ -94,55 +93,6 @@ A_vit()
 //T_spi()
 //C_ele()
 
-///////// test data
-def test(){
-	def metaMap = [:]
-	def fileMap = [:]
-	metaMap.genus = "Test";
-	metaMap.species = "test";
-	metaMap.gversion = "1.0.1"
-	metaMap.description = "Test data set"
-	metaMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/"
-	metaMap.image_file = "a_viteae_lifecycle.jpg"
-	metaMap.image_source = "A. viteae lifecycle; from http://www.uni-giessen.de"
-	addMeta(metaMap)
-	
-	//global
-	fileMap.file_dir = "test"
-	fileMap.loaded = false
-	fileMap.blast = "pub"
-	fileMap.search = "pub"
-	fileMap.download = "pub"
-	fileMap.cov = "n"
-	//genome
-	fileMap.file_type = "Genome"
-	fileMap.file_name = "test_genome.fa"
-	fileMap.file_version = "1.0"
-	fileMap.description = "Test genome"
-	fileMap.file_link = "n"
-	addFile(fileMap)
-	//gff
-	fileMap.file_type = "Genes"
-	fileMap.file_name = "test.gff"
-	fileMap.file_version = "1.0"
-	fileMap.description = "Test gff"
-	fileMap.file_link = "n"
-	addFile(fileMap)
-	//mRNA
-	fileMap.file_type = "mRNA"
-	fileMap.file_name = "nAv.1.0.1.aug.transcripts.fasta"
-	fileMap.file_version = "1.0"
-	fileMap.description = "Test mRNA"
-	fileMap.file_link = "test.gff"
-	addFile(fileMap)
-	//Peptide
-	fileMap.file_type = "Peptide"
-	fileMap.file_name = "nAv.1.0.1.aug.proteins.fasta"
-	fileMap.file_version = "1.0"
-	fileMap.description = "Test peptide"
-	fileMap.file_link = "test.gff"
-	addFile(fileMap)
-}
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// A. viteae
@@ -151,6 +101,7 @@ def A_vit(){
 	def fileMap = [:]
 	def genomeMap = [:]
 	
+// --- Species Data ---	
 	metaMap.genus = "Acanthocheilonema";
 	metaMap.species = "viteae";
 	metaMap.description = "Acanthocheilonema viteae is a filarial nematode parasite of rodents. It is widely used as a model for human filariases. Importantly, A. viteae lacks the Wolbachia bacterial endosymbiont found in most human-infective filarial nematodes. Thus this species has become central in efforts to understand the role of the Wolbachia in the nematode-bacterial symbiosis, and in particular its possible role in immune evasion. The Wolbachia is also a drug target in nematodes that carry this symbiont, so work on A. viteae can also help to disentangle anti-nematode and anti-symbiont effects."
@@ -158,25 +109,15 @@ def A_vit(){
 	metaMap.image_source = "A. viteae lifecycle; from http://www.uni-giessen.de"
 	addMeta(metaMap)
 	
+// --- Genome Data ---	
 	genomeMap.gversion = "1.0.1"
 	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/"
 	genomeMap.description = "Version 1.0.1 of the genome"
 	genomeMap.dateString = Date.parse("dd/MM/yyyy","01/02/2012")
 	addGenome(genomeMap)
 	
-	genomeMap.gversion = "1.0.2"
-	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/"
-	genomeMap.description = "Version 1.0.2 of the genome"
-	genomeMap.dateString = Date.parse("dd/MM/yyyy","02/02/2012")
-	addGenome(genomeMap)
-	
-	genomeMap.gversion = "1.1.2"
-	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/"
-	genomeMap.description = "Version 1.1.2 of the genome"
-	genomeMap.dateString = Date.parse("dd/MM/yyyy","02/01/2013")
-	addGenome(genomeMap)
-	
-	//global
+// --- File Data --- 	
+	//globals (blast,search,download and cov need to be added to each file type if the values differ)
 	fileMap.file_dir = "A_viteae"
 	fileMap.loaded = false
 	fileMap.blast = "pub"
@@ -211,10 +152,9 @@ def A_vit(){
 	fileMap.description = "Augustus gene prediction"
 	fileMap.file_link = "nAv.1.0.1.aug.blast2go.gff"
 	addFile(fileMap)
-	
-	//annotations
+
+// --- Annotation files and data ---	
 	def annoMap = [:]
-	
 	//blast
 	annoMap.type = "blast"				
 	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
@@ -269,6 +209,19 @@ def A_vit(){
 	annoMap.anno_file = "A_viteae.iprscan.raw"
 	annoMap.loaded = false	
 	addAnno("nAv.1.0.1.aug.blast2go.gff",annoMap)
+	
+// --- another genome starts here ---		
+	genomeMap.gversion = "1.0.2"
+	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/"
+	genomeMap.description = "Version 1.0.2 of the genome"
+	genomeMap.dateString = Date.parse("dd/MM/yyyy","02/02/2012")
+	addGenome(genomeMap)
+// --- another genome ... ---	
+	genomeMap.gversion = "1.1.2"
+	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/"
+	genomeMap.description = "Version 1.1.2 of the genome"
+	genomeMap.dateString = Date.parse("dd/MM/yyyy","02/01/2013")
+	addGenome(genomeMap)
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -276,22 +229,31 @@ def A_vit(){
 def L_sig(){
 	def metaMap = [:]
 	def fileMap = [:]
+	def genomeMap = [:]
+	
+// --- Species Data ---	
 	metaMap.genus = "Litomosoides";
 	metaMap.species = "sigmodontis";
-	metaMap.gversion = "2.1"
-	metaMap.description = "Litomosoides sigmodontis is a filarial nematode parasite of rodents. Found in cotton rats in the wild, it has been adapted to the laboratory mouse and is widely used as a model for human filariases. Beginning with work in Odile Bain's laboratory in Paris, this L. sigmodontis model has become central in efforts to develop vaccines against filarial infections, test new drugs before they are progressed to clinical trials, and to investigate the basic biology of the fascinating interactions between parasitic nematodes and their mammalian hosts."
-	metaMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nLs.2.1.2/"
 	metaMap.image_file = "Litomosoides_sigmodontis.jpg"
 	metaMap.image_source = "tails of male L. sigmodontis; by L. LeGeoff"
+	metaMap.description = "Litomosoides sigmodontis is a filarial nematode parasite of rodents. Found in cotton rats in the wild, it has been adapted to the laboratory mouse and is widely used as a model for human filariases. Beginning with work in Odile Bain's laboratory in Paris, this L. sigmodontis model has become central in efforts to develop vaccines against filarial infections, test new drugs before they are progressed to clinical trials, and to investigate the basic biology of the fascinating interactions between parasitic nematodes and their mammalian hosts."
 	addMeta(metaMap)
 	
-	//global
+// --- Genome Data ---	
+	genomeMap.gversion = "2.1"
+	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nLs.2.1.2/"
+	genomeMap.description = "Version 2.1 of the genome"
+	genomeMap.dateString = Date.parse("dd/MM/yyyy","11/01/2013")
+	addGenome(genomeMap)
+	
+// --- File Data --- 
 	fileMap.file_dir = "L_sigmodontis"
 	fileMap.loaded = false
 	fileMap.blast = "pub"
 	fileMap.search = "pub"
 	fileMap.download = "pub"
 	fileMap.cov = "n"
+	
 	//genome
 	fileMap.file_type = "Genome"
 	fileMap.file_name = "Litomosoides_sigmodontis_2.1.fna"
@@ -321,7 +283,7 @@ def L_sig(){
 	fileMap.file_link = "nLs.2.1.2.aug.gff"
 	addFile(fileMap)
 	
-	//annotations
+//annotation files and data
 	def annoMap = [:]
 	
 	//blast

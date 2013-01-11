@@ -64,8 +64,7 @@
  
   <body>
     <g:if test="${results}">
-    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_search" params="${[Gid:params.Gid]}"><i> ${metaData.genus} ${metaData.species}</i></g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:params.Gid,contig_id:results.contig_id[0]]}"> ${results.contig_id[0]}</g:link> > Gene: ${results.gene_id[0]}
-    	
+    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Gid:Gid]}"><i> ${metaData.meta.genus} ${metaData.meta.species}</i></g:link> > <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">${metaData.gversion}</g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:results.contig_id[0]]}"> ${results.contig_id[0]}</g:link> > Gene: ${results.gene_id[0]}
     	<g:if test="${results}">
     	<div class="inline">
     	<br>
@@ -100,7 +99,7 @@
 			  <tbody>
 			 	<g:each var="res" in="${results}">
 			 		<tr>
-						<td><a href="m_info?Gid=${params.Gid}&mid=${res.mrna_id}">${res.mrna_id}</a></td>
+						<td><a href="m_info?Gid=${Gid}&GFFid=${GFFid}&mid=${res.mrna_id}">${res.mrna_id}</a></td>
 						<td>${res.nuc.length()}</td>
 						<td>${res.start}</td>
 						<td>${res.stop}</td>

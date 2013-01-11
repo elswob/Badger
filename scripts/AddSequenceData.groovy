@@ -22,6 +22,7 @@ def getBlast(){
 
 //edit phyloXMl file if present
 def editTree(){
+	println "Editing phyloXML tree..."
 	def tree = new File("web-app/trees/badger_tree.xml")
 	if (tree.exists()){tree.delete()}
 	
@@ -83,11 +84,11 @@ def editTree(){
 	  }
    }
 }
-editTree()
 
 def getFiles = FileData.findAllByLoaded(false,[sort:"id"])
 if (getFiles){
-	getFiles.each {  
+	getFiles.each { 
+		editTree() 
 		def blastPath = getBlast()	
 		def fileLoc = it.file_dir+"/"+it.file_name
 		println "Processing "+fileLoc
@@ -127,6 +128,8 @@ if (getFiles){
 	}
 }else{
 	println "There are no new data files to load into the database"
+	println "Running tree editor just in case..."
+	editTree()
 }
 //add the Transcripts
 def addTransData(fileLoc, cov, data_id, file_id){
