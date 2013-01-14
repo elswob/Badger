@@ -297,7 +297,7 @@
 		function (ev, seriesIndex, pointIndex, data) {
 			//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
 			//alert("/search/genome_info?id=${params.Gid}&contig_id=" + data[2])
-			window.open("/search/genome_info?Gid=${params.Gid}&contig_id=" + data[2]);
+			window.open("/search/genome_info?Gid=${params.Gid}&GFFid=${params.GFFid}&contig_id=" + data[2]);
 		}
 	);      
                     
@@ -413,7 +413,7 @@
 </head>
 <body>
 <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Gid:meta.id]}"><i>${meta.genus} ${meta.species}</i></g:link> > ${genome.gversion}
-<h1><b><i>${meta.genus} ${meta.species}</i></b> ${genome.id}</h1>    
+<h1><b><i>${meta.genus} ${meta.species}</i></b> ${genome.gversion}</h1>    
 ${genome_stats.description}
 <table width=100%>
 	  

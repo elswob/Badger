@@ -150,7 +150,14 @@
                   <clade>
                     <branch_length>0.006599</branch_length>
                     <clade>
-                      <name bgStyle="none">Litomosoides sigmodontis</name>
+                      <name bgStyle="bold">Litomosoides sigmodontis</name>
+                      <chart>
+                       <component>bold</component>
+                      </chart>
+                      <annotation>
+                       <desc>Litomosoides sigmodontis</desc>
+                       <uri>#Litomosoides sigmodontis</uri>
+                      </annotation>
                       <branch_length>0.057921</branch_length>
                     </clade>
                     <clade>
