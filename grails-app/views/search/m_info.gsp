@@ -415,7 +415,7 @@
      		}
     
     //orthomcl
-    $('#ortho_table').dataTable({
+    $('#orthomcl_table').dataTable({
 		"sPaginationType": "full_numbers",
 		"iDisplayLength": 10,
 		"oLanguage": {
@@ -788,28 +788,26 @@
      <br>
      
     <g:if test="${orthologs}">
-    	<table id="orthomcl_table" class="display">
+    	<div id="ortho_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
+    	<h1>Orthologs</h1>
+    	<table id="orthomcl_table" class="display" >
 			  <thead>
 			  	<tr>
 					<th><b>Species</b></th>
 					<th><b>Transcript ID</b></th>
-					<th><b>Mean length</b></th>
-					<th><b>Mean start</b></th>
-					<th><b>Mean end</b></th>
+					<th><b>Length</b></th>
 			   </tr>
 			  </thead>
 			  <tbody>
-			 	<g:each var="res" in="${gene_results}">
+			 	<g:each var="res" in="${orthologs}">
 			 		<tr>
-						<td><a href="g_info?Gid=${Gid}&GFFid=${GFFid}&gid=${res.gene_id}">${res.gene_id}</a></td>
-						<td>${res.count}</td>
-						<td>${sprintf("%.0f",res.a_nuc)}</td>
-						<td>${sprintf("%.0f",res.a_start)}</td>
-						<td>${sprintf("%.0f",res.a_stop)}</td>
+						<td>${res.gene.file.genome.meta.genus} ${res.gene.file.genome.meta.species}</td>
+						<td><a href="g_info?Gid=${Gid}&GFFid=${GFFid}&gid=${res.trans_name}">${res.trans_name}</a></td>
+						<td>${sprintf("%,d\n",res.gene.nuc.length())}</td>
 			  		</tr>  
 			 	</g:each>
 			  </tbody>
-			</table>			
+		</table>			
     </g:if>
     
 	<g:if test="${blast_results || ipr_results || fun_results}">
