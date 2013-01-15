@@ -309,7 +309,7 @@
 					"sType": "num-html",
 					"mDataProp": "exon_number",
 					"fnRender": function ( oObj, sVal ){
-						return "<a href=\"/home/browse?link=${metaData.gbrowse}&contig_id="+oObj.aData["contig_id"]+"&start="+oObj.aData["start"]+"&stop="+oObj.aData["stop"]+"\">"+sVal+"</a>";
+						return "<a href=\"/home/browse?link=${metaData.genome.gbrowse}&contig_id="+oObj.aData["contig_id"]+"&start="+oObj.aData["start"]+"&stop="+oObj.aData["stop"]+"\">"+sVal+"</a>";
 					}
 				},
 				{ "mDataProp": "length" },
@@ -412,7 +412,25 @@
     if (blast_data.length > 0 || fun_data.length > 0 || ipr_data.length > 0 ){
      			//draw the figure
      			drawAnno(); 
-     		} 
+     		}
+    
+    //orthomcl
+    $('#ortho_table').dataTable({
+		"sPaginationType": "full_numbers",
+		"iDisplayLength": 10,
+		"oLanguage": {
+			"sSearch": "Filter records:"
+		},
+		"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+		"aaSorting": [[3, "asc" ]],
+		"sDom": 'T<"clear">lfrtip',
+		"oTableTools": {
+			"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+		}
+	});     
+    
+     		 
+    //end of document ready
     });
     
     
@@ -556,7 +574,7 @@
   </head>
   <body>
   <g:if test="${info_results}">
-    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Gid:metaData.meta.id]}"><i> ${metaData.meta.genus} ${metaData.meta.species}</i></g:link> > <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">${metaData.gversion}</g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:info_results.contig_id[0]]}"> ${info_results.contig_id[0]}</g:link> > Gene: <g:link action="g_info" params="${[Gid:Gid,GFFid:GFFid,gid:info_results.gene_id[0]]}"> ${info_results.gene_id[0]}</g:link>  > Transcript: ${info_results.mrna_id[0]}
+    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Gid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus} ${metaData.genome.meta.species}</i></g:link> > <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">${metaData.file_version}</g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:info_results.contig_id[0]]}"> ${info_results.contig_id[0]}</g:link> > Gene: <g:link action="g_info" params="${[Gid:Gid,GFFid:GFFid,gid:info_results.gene_id[0]]}"> ${info_results.gene_id[0]}</g:link>  > Transcript: ${info_results.mrna_id[0]}
   	<div id="top_anchor"></div>
     <div id="info_anchor"><h1>Information for transcript ${info_results.mrna_id[0]}:</h1></div>
     <table width=100%>
@@ -725,12 +743,12 @@
 	   </g:if> 
      <br>
     
-   <g:if test ="${metaData.gbrowse}">
+   <g:if test ="${metaData.genome.gbrowse}">
      	<div id="browse_anchor"><div></div>
          	<hr size = 5 color="green" width="100%" style="margin-top:10px">
-		 	<h1>Browse on the genome <a href="${metaData.gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
-		 	<iframe src="${metaData.gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" width="100%" height="700" frameborder="0">
-				<img src="${metaData.gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}"/>
+		 	<h1>Browse on the genome <a href="${metaData.genome.gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
+		 	<iframe src="${metaData.genome.gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" width="100%" height="700" frameborder="0">
+				<img src="${metaData.genome.gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}"/>
 		 	</iframe>
 		 </div>
      </g:if>
@@ -768,6 +786,32 @@
 		 <tbody></tbody>
 	     </table> 
      <br>
+     
+    <g:if test="${orthologs}">
+    	<table id="orthomcl_table" class="display">
+			  <thead>
+			  	<tr>
+					<th><b>Species</b></th>
+					<th><b>Transcript ID</b></th>
+					<th><b>Mean length</b></th>
+					<th><b>Mean start</b></th>
+					<th><b>Mean end</b></th>
+			   </tr>
+			  </thead>
+			  <tbody>
+			 	<g:each var="res" in="${gene_results}">
+			 		<tr>
+						<td><a href="g_info?Gid=${Gid}&GFFid=${GFFid}&gid=${res.gene_id}">${res.gene_id}</a></td>
+						<td>${res.count}</td>
+						<td>${sprintf("%.0f",res.a_nuc)}</td>
+						<td>${sprintf("%.0f",res.a_start)}</td>
+						<td>${sprintf("%.0f",res.a_stop)}</td>
+			  		</tr>  
+			 	</g:each>
+			  </tbody>
+			</table>			
+    </g:if>
+    
 	<g:if test="${blast_results || ipr_results || fun_results}">
 	</g:if>
 	<g:else>

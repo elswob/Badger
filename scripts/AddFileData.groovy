@@ -26,16 +26,16 @@ def addMeta(metaMap){
 //set the new genome to global to be picked up by addFile
 GenomeData new_genome
 def addGenome(genomeMap){
-	def check = GenomeData.findByGversion(genomeMap.gversion)
-	if (check){
-		println "genome version "+genomeMap.gversion+" already exists - "+check
-	}else{
+	//def check = FileData.findByGversion(genomeMap.gversion)
+	//if (check){
+	//	println "genome version "+genomeMap.gversion+" already exists - "+check
+	//}else{
 		println genomeMap
 		new_genome = new GenomeData(genomeMap) 
 		meta.addToGenome(new_genome)
 		new_genome.save(flush:true)
-		println "Genome "+new_genome.meta.genus+" "+new_genome.meta.species+" version "+genomeMap.gversion+" was added"
-	}
+		println "New genome for "+new_genome.meta.genus+" "+new_genome.meta.species+" date "+genomeMap.date_string+" was added"
+	//}
 }
 
 def addFile(fileMap){
@@ -110,9 +110,7 @@ def A_vit(){
 	addMeta(metaMap)
 	
 // --- Genome Data ---	
-	genomeMap.gversion = "1.0.1"
 	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/"
-	genomeMap.description = "Version 1.0.1 of the genome"
 	genomeMap.dateString = Date.parse("dd/MM/yyyy","01/02/2012")
 	addGenome(genomeMap)
 	
@@ -211,15 +209,11 @@ def A_vit(){
 	addAnno("nAv.1.0.1.aug.blast2go.gff",annoMap)
 	
 // --- another genome starts here ---		
-	genomeMap.gversion = "1.0.2"
 	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/"
-	genomeMap.description = "Version 1.0.2 of the genome"
 	genomeMap.dateString = Date.parse("dd/MM/yyyy","02/02/2012")
 	addGenome(genomeMap)
 // --- another genome ... ---	
-	genomeMap.gversion = "1.1.2"
 	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/"
-	genomeMap.description = "Version 1.1.2 of the genome"
 	genomeMap.dateString = Date.parse("dd/MM/yyyy","02/01/2013")
 	addGenome(genomeMap)
 }

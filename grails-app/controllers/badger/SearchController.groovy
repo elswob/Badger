@@ -27,7 +27,8 @@ class SearchController {
     def species_v = {
     	def sql = new Sql(dataSource)
     	def meta = MetaData.findAllById(params.Gid)
-    	def genomesSql = "select * from genome_data where meta_id = "+params.Gid+" order by date_string desc;"
+    	def genomesSql = "select genome_data.*,file_data.description,file_data.file_version from genome_data,file_data where genome_data.meta_id = "+params.Gid+" and genome_data.id = file_data.genome_id and file_data.file_type = 'Genome' order by date_string desc;"
+    	println genomesSql
     	def genomes = sql.rows(genomesSql)
     	//def genesSql = "select file_data.* from file_data,genome_data where file_data.file_type = 'Genes' and file_data.genome_id = genome_data.id and genome_data.meta_id = "+params.Gid+" order by file_version;"
     	println "meta = "+meta
@@ -118,7 +119,7 @@ class SearchController {
 		 def genomeDescSql = "select file_version,file_data.description from file_data,genome_data where file_data.genome_id = genome_data.id and genome_data.id = '"+Gid+"' and file_type = 'Genome';";
 		 def genomeDesc = sql.rows(genomeDescSql)
 		 
-		 genome_stats.version = genomeData.gversion
+		 genome_stats.version = geneData.file_version
     	 genome_stats.description = genomeDesc.description[0]
 		 genome_stats.num = num
 	 	 genome_stats.span = span
@@ -205,9 +206,9 @@ class SearchController {
      		redirect(controller: "home", action: "index")
      	}else{
      		def sql = new Sql(dataSource)
-     		def gsql = "select count(gene_id) as g_count,count(mrna_id) as m_count,genus,species,meta_data.id from gene_info,file_data,meta_data where gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by genus,species,meta_data.id;"
+     		def gsql = "select count(gene_id) as g_count,count(mrna_id) as m_count,genus,species,genome_data.id from gene_info,file_data,genome_data,meta_data where gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by genus,species,genome_data.id;"
      		def genes = sql.rows(gsql)
-     		def tsql = "select count(contig_id) as t_count,genus,species,meta_data.id from trans_info,file_data,meta_data where trans_info.file_id = file_data.id and file_data.meta_id = meta_data.id group by genus,species,meta_data.id;"
+     		def tsql = "select count(contig_id) as t_count,genus,species,genome_data.id from trans_info,file_data,genome_data,meta_data where trans_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by genus,species,genome_data.id;"
      		def trans = sql.rows(tsql)
      		return [genes:genes,trans:trans]
      	}
@@ -229,10 +230,10 @@ class SearchController {
 			def transRes = transanno + transblast
 			
 			//search gene annotations
-			def geneannosearch = "select distinct on (anno_db,mrna_id) mrna_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank, genus, species, meta_data.id as gid FROM gene_anno,gene_info,file_data,meta_data,plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query and gene_anno.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
+			def geneannosearch = "select distinct on (anno_db,mrna_id) mrna_id,anno_id,anno_db,anno_start,anno_stop,descr,score,genus,species,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank, genome_data.id as gid FROM gene_anno,gene_info,file_data,genome_data,meta_data,plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query and gene_anno.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id;"
 			println "Gene anno search = "+geneannosearch
 			def geneanno = sql.rows(geneannosearch)
-			def geneblastsearch = "select distinct on (anno_db,mrna_id) mrna_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank, genus, species, meta_data.id as gid FROM gene_blast,gene_info,file_data,meta_data,plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query and gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
+			def geneblastsearch = "select distinct on (anno_db,mrna_id) mrna_id,anno_id,anno_db,anno_start,anno_stop,descr,score,genus,species,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank, genome_data.id as gid FROM gene_blast,gene_info,file_data,genome_data,meta_data,plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query and gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id;"
 			println "Gene blast search = "+geneblastsearch
 			//select distinct on (anno_db,mrna_id) mrna_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM gene_anno,gene_info,plainto_tsquery('globin') AS query WHERE textsearchable_index_col @@ query and gene_anno.gene_id = gene_info.id;
 			def geneblast = sql.rows(geneblastsearch)
@@ -428,7 +429,7 @@ class SearchController {
 			def sql = new Sql(dataSource)
 			//set up some global search things
 			def timeStart = new Date()
-			def metaData = GenomeData.findById(params.Gid)
+			def metaData = FileData.findById(params.GFFid)
 			def searchfile_id = params.dataSelect
 			def table = params.dataSet
 			def searchId = params.searchId   
@@ -547,7 +548,7 @@ class SearchController {
 			}	
 			println "Gid = "+Gid
 			println "GFFid = "+GFFid
-			def metaData = GenomeData.findById(Gid);
+			def metaData = FileData.findById(GFFid);
 			println "metaData = "+metaData
 			def blast_results
 			def fun_results
@@ -593,7 +594,13 @@ class SearchController {
 				aaData = peptideService.getComp(it.pep)
 				//println "service = "+service
 			}	
-			return [Gid:Gid, GFFid:GFFid, mrna_id: mrna_id, info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, metaData: metaData]
+			
+			//get orthomcl info
+			def orthoId = Ortho.findByTrans_name(mrna_id).group_id
+			println "orthoId = "+orthoId
+			def orthoGet = Ortho.findAllByGroup_id(orthoId)
+			println "ortho = "+orthoGet
+			return [orthologs:orthoGet, Gid:Gid, GFFid:GFFid, mrna_id: mrna_id, info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, metaData: metaData]
     	sql.close()
     	}
     }
@@ -666,7 +673,7 @@ class SearchController {
      		}
      		println "Gid = "+Gid
      		println "GFFid = "+GFFid
-     		def metaData = GenomeData.findById(Gid); 
+     		def metaData = FileData.findById(GFFid); 
      		//def gene_results = GeneInfo.findAllByContig_id(params.contig_id)
      		//def genesql = "select gene_info.* from gene_info,file_data,meta_data where gene_info.contig_id = '"+params.contig_id+"' and meta_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
      		def genesql = "select gene_info.gene_id, count(mrna_id), avg(length(nuc)) as a_nuc, avg(start) as a_start, avg(stop) as a_stop from gene_info,file_data where gene_info.contig_id = '"+params.contig_id+"' and file_data.id = '"+GFFid+"' and gene_info.file_id = file_data.id group by gene_info.gene_id order by a_start;";
@@ -696,7 +703,7 @@ class SearchController {
 				Gid = params.Gid
 				GFFid = params.GFFid
 			}	
-     		def metaData = GenomeData.findById(Gid); 
+     		def metaData = FileData.findById(GFFid); 
      		//def results = GeneInfo.findAllByGene_id(params.gid)
      		def genesql = "select gene_info.* from gene_info,file_data where gene_info.gene_id = '"+params.gid+"' and file_data.id = "+GFFid+" and gene_info.file_id = file_data.id;"
      		println genesql

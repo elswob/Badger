@@ -30,7 +30,7 @@
 		<g:javascript>var genomeId = ${genomes.id[0]}; ${remoteFunction(action:'ajax_gff',update:'gffSelect',params:'\'link=\' + genomeId ')};</g:javascript>
 			<tr>
 				<td><input type="radio" name="genomeSelect" id="${genomes.id[0]}" value="${genomes.id[0]}" checked onclick="${remoteFunction(action:'ajax_gff',update:'gffSelect',params:'\'link=\' + this.value')};"/></td>
-				<td><b>${genomes.gversion[0]}</b></td><td></td></td><td>${genomes.description[0]}</td><td><g:formatDate format="yyyy MMM d" date="${genomes.date_string[0]}"/></td>
+				<td><b>${genomes.file_version[0]}</b></td><td><g:formatDate format="yyyy MMM d" date="${genomes.date_string[0]}"/></td><td></td></td><td>${genomes.description[0]}</td>
 			</tr>
 			<!--g:remoteFunction action="ajax_gff" update="gffSelect" params="['link':genomes.id[0]]" /-->
 		</g:if>
@@ -38,7 +38,7 @@
 			<g:each var="g" in="${genomes}">
 				<tr>
 					<td><input type="radio" name="genomeSelect" id="${g.id}" value="${g.id}" onclick="${remoteFunction(action:'ajax_gff',update:'gffSelect',params:'\'link=\' + this.value')};"/></td>
-					<td><label for="${g.id}"><b>${g.gversion}</b></label></td><td><label for="${g.id}">${g.description}</label></td></td><td><label for="${g.id}"><g:formatDate format="yyyy MMM d" date="${g.date_string}"/></label></td>
+					<td><label for="${g.id}"><b>${g.gversion}</b></label></td><td><label for="${g.id}"><g:formatDate format="yyyy MMM d" date="${g.date_string}"/></label></td><td><label for="${g.id}">${g.description}</label></td></td>
 				</tr>			
 			</g:each>
 		</g:else>

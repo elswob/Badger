@@ -412,8 +412,8 @@
     </script>
 </head>
 <body>
-<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Gid:meta.id]}"><i>${meta.genus} ${meta.species}</i></g:link> > ${genome.gversion}
-<h1><b><i>${meta.genus} ${meta.species}</i></b> ${genome.gversion}</h1>    
+<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Gid:meta.id]}"><i>${meta.genus} ${meta.species}</i></g:link> > ${geneData.file_version}
+<h1><b><i>${meta.genus} ${meta.species}</i></b> ${geneData.file_version}</h1>    
 ${genome_stats.description}
 <table width=100%>
 	  
