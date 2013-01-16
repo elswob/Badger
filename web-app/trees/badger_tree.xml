@@ -139,11 +139,25 @@
                   <clade>
                     <branch_length>0.01204</branch_length>
                     <clade>
-                      <name bgStyle="none">Onchocerca ochengi</name>
+                      <name bgStyle="bold">Onchocerca ochengi</name>
+                      <chart>
+                       <component>bold</component>
+                      </chart>
+                      <annotation>
+                       <desc>Onchocerca ochengi</desc>
+                       <uri>#Onchocerca ochengi</uri>
+                      </annotation>
                       <branch_length>0.035437</branch_length>
                     </clade>
                     <clade>
-                      <name bgStyle="none">Dirofilaria immitis</name>
+                      <name bgStyle="bold">Dirofilaria immitis</name>
+                      <chart>
+                       <component>bold</component>
+                      </chart>
+                      <annotation>
+                       <desc>Dirofilaria immitis</desc>
+                       <uri>#Dirofilaria immitis</uri>
+                      </annotation>
                       <branch_length>0.038667</branch_length>
                     </clade>
                   </clade>

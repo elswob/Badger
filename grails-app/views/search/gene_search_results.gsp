@@ -90,7 +90,7 @@
 				},
 				{ "mDataProp": "mrna_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"m_info?Gid=${metaData.genome.id}&GFFid=${params.GFFid}&mid="+oObj.aData["mrna_id"]+"\">"+sVal+"</a>";				}},
+					return "<a href=\"m_info?Gid=${params.Gid}&GFFid=${params.GFFid}&mid="+oObj.aData["mrna_id"]+"\">"+sVal+"</a>";				}},
 				{ "mDataProp": "anno_db" },
 				{ "mDataProp": "anno_id",
 				"fnRender": function ( oObj, sVal ){
@@ -165,7 +165,7 @@
         "aoColumns": [
           	{ "mDataProp": "mrna_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"m_info?Gid=${metaData.genome.id}&GFFid=${params.GFFid}&mid="+oObj.aData["mrna_id"]+"\">"+sVal+"</a>";
+					return "<a href=\"m_info?Gid=${params.Gid}&GFFid=${params.GFFid}&mid="+oObj.aData["mrna_id"]+"\">"+sVal+"</a>";
 			}},
             { "mDataProp": "anno_db" },
             { "mDataProp": "anno_id",
@@ -201,7 +201,7 @@
 			"aoColumns": [
 				{ "mDataProp": "mrna_id",
 				"fnRender": function ( oObj, sVal ){
-					return "<a href=\"m_info?Gid=${metaData.genome.id}&GFFid=${params.GFFid}&mid="+oObj.aData["mrna_id"]+"\">"+sVal+"</a>";
+					return "<a href=\"m_info?Gid=${params.Gid}&GFFid=${params.GFFid}&mid="+oObj.aData["mrna_id"]+"\">"+sVal+"</a>";
 				}},
 				{ "mDataProp": "anno_db" },
 				{ "mDataProp": "anno_id" ,
@@ -246,7 +246,7 @@
     <h1>Please select some annotations</h1>
     <g:link action=''>Search Again</g:link>
   </g:if>
-  <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Gid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus} ${metaData.genome.meta.species}</i></g:link> > <g:link action="species_search" params="${[Gid:params.Gid,GFFid:params.GFFid]}">${metaData.file_version}</g:link> > Search results
+  <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus} ${metaData.genome.meta.species}</i></g:link> > <g:link action="species_search" params="${[Gid:params.Gid,GFFid:params.GFFid]}">${metaData.file_version}</g:link> > Search results
     <h1>Results for gene annotation descriptions matching '<em>${term}</em>'.</h1>
 		<g:if test="${results}">
 		    <table class="table_border" width='100%'>

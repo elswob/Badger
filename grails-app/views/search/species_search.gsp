@@ -412,8 +412,8 @@
     </script>
 </head>
 <body>
-<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Gid:meta.id]}"><i>${meta.genus} ${meta.species}</i></g:link> > ${geneData.file_version}
-<h1><b><i>${meta.genus} ${meta.species}</i></b> ${geneData.file_version}</h1>    
+<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:genomeFile.genome.meta.id]}"><i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i></g:link> > ${genomeFile.file_version}
+<h1><b><i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i></b> ${genomeFile.file_version}</h1>    
 ${genome_stats.description}
 <table width=100%>
 	  
@@ -437,7 +437,7 @@ ${genome_stats.description}
 				<td>
 					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','cum')" value="Cumulative length"/>
 					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','len_gc')" value="Length vs GC"/>
-					<g:each var="f" in="${genome.files}">
+					<g:each var="f" in="${genome}">
       					<g:if test="${f.file_type == 'Genome'}">
       						<!--${f.file_type} ${f.file_name} ${f.cov}-->
       						<g:if test="${f.cov == 'y'}">
@@ -496,7 +496,7 @@ ${genome_stats.description}
 			<table>
 			<tr><td>
 			<h1>Choose an annotation:</h1>
-			<g:each var="t" in="${genome.files.anno}">
+			<g:each var="t" in="${geneData.genome.files.anno}">
 				<g:if test="${'blast' in t.type}">
 					<label><input name="toggler" type="radio" id="blast" checked="checked" value="1"> 1. BLAST homology</label><br>
 					<div class="toHide" id="blk_1" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
@@ -551,7 +551,7 @@ ${genome_stats.description}
 			<div id='selectedResult'></div>
 			<g:textField name="searchId"  size="30"/>
 			<input type="hidden" name="Gid" value="${params.Gid}">
-			<input type="hidden" name="GFFid" value="${geneData.id}">
+			<input type="hidden" name="GFFid" value="${params.GFFid}">
 			<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
 			</g:form>
 			 </td>
@@ -564,7 +564,7 @@ ${genome_stats.description}
 		</td></tr></table>
 	</g:if>
 	<table>
-	 <tr><td><h1>Publications (<i>${meta.genus} ${meta.species}</i> only):</h1>
+	 <tr><td><h1>Publications (<i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> only):</h1>
 	 
 	 <g:form controller="home" action="publication_search">
 	 <table><tr><td>
@@ -574,11 +574,11 @@ ${genome_stats.description}
 		<label><input type="checkbox" checked="yes" name="pubVal" value="abstract_text" /> Abstract</label><br>
 		<label><input type="checkbox" checked="yes" name="pubVal" value="authors" /> Authors</label><br>
 		<label><input type="checkbox" checked="yes" name="pubVal" value="journal" /> Journal</label><br>
-		<input type="hidden" name="speciesId" value="${meta.id}">
+		<input type="hidden" name="speciesId" value="${genomeFile.genome.meta.id}">
 		
 	   </td>
 	   <td>
-		<h1>Enter a search term:</h1>(To see all ${meta.genus} ${meta.species} publications leave the box blank)<br>
+		<h1>Enter a search term:</h1>(To see all ${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species} publications leave the box blank)<br>
 		<div id='selectedResult'></div>
 		<g:textField name="searchId"  size="30"/>
 		<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >

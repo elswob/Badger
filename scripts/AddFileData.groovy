@@ -82,8 +82,8 @@ def addAnno(fileName,annoMap){
 //add data
 A_vit()
 L_sig()
-//D_imm()
-//O_och()
+D_imm()
+O_och()
 //B_mal()
 //C_ang()
 //B_xyl()
@@ -234,9 +234,7 @@ def L_sig(){
 	addMeta(metaMap)
 	
 // --- Genome Data ---	
-	genomeMap.gversion = "2.1"
 	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nLs.2.1.2/"
-	genomeMap.description = "Version 2.1 of the genome"
 	genomeMap.dateString = Date.parse("dd/MM/yyyy","11/01/2013")
 	addGenome(genomeMap)
 	
@@ -316,17 +314,25 @@ def L_sig(){
 
 /////// D.immitis
 def D_imm(){
+
 	def metaMap = [:]
 	def fileMap = [:]
+	def genomeMap = [:]
+
+// --- Species Data ---	
 	metaMap.genus = "Dirofilaria";
 	metaMap.species = "immitis";
-	metaMap.gversion = "2.2.2"
 	metaMap.description = "The heartworm Dirofilaria immitis is an important parasite of dogs. Transmitted by mosquitoes in warmer climatic zones, it is spreading across Southern Europe and the Americas at an alarming pace. There is no vaccine and chemotherapy is prone to complications. To learn more about this parasite, we have sequenced the genomes of D. immitis and its endosymbiont Wolbachia."
-	metaMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nDi.2.2.2/"
 	metaMap.image_file = "D_immitis.jpg"
 	metaMap.image_source = "heartworm in situ; photo from S. Williams"
 	addMeta(metaMap)
 	
+// --- Genome Data ---	
+	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nDi.2.2.2/"
+	genomeMap.dateString = Date.parse("dd/MM/yyyy","016/01/2012")
+	addGenome(genomeMap)
+
+// --- File Data --- 	
 	//global
 	fileMap.file_dir = "D_immitis"
 	fileMap.loaded = false
@@ -401,18 +407,26 @@ def D_imm(){
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// O. ochengi
+
 def O_och(){
 	def metaMap = [:]
 	def fileMap = [:]
+	def genomeMap = [:]
+	
+// --- Species Data ---	
 	metaMap.genus = "Onchocerca";
 	metaMap.species = "ochengi";
-	metaMap.gversion = "2.2.2"
 	metaMap.description = "Onchocerca ochengi is a filarial nematode parasite of cattle, and is native to West Africa, including Cameroon, where the specimens used for this genome project were isolated. As well as being a significant disease of native (Bos indicus) cattle, O. ochengi is very closely related to the human-parasitic Onchocerca volvulus. O. volvulus causes river blindness and skin disease throughout West Africa, and is the subject of intense efforts by several international agencies and teams aiming at disease eradication. The relationship between O. ochengi and O. volvulus, and concern over the possibility of cattle acting as a zoonotic reservoir make understanding of the parasite of some importance. Additionally, the genetic closeness to O. volvulus and the tractability of the bovine host makes the O. ochengi-cattle model a useful one in vaccine and drug development work."
-	metaMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nOo.2.0.1/"
 	metaMap.image_file = "O_ochengi.jpg"
 	metaMap.image_source = "O. ochengi larva; from Sandy Trees and colleagues http://ars.sciencedirect.com"
 	addMeta(metaMap)
 	
+// --- Genome Data ---	
+	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nOo.2.0.1/"
+	genomeMap.dateString = Date.parse("dd/MM/yyyy","01/02/2012")
+	addGenome(genomeMap)	
+	
+// --- File Data --- 	
 	//global
 	fileMap.file_dir = "O_ochengi"
 	fileMap.loaded = false

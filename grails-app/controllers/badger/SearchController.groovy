@@ -26,8 +26,8 @@ class SearchController {
     }
     def species_v = {
     	def sql = new Sql(dataSource)
-    	def meta = MetaData.findAllById(params.Gid)
-    	def genomesSql = "select genome_data.*,file_data.description,file_data.file_version from genome_data,file_data where genome_data.meta_id = "+params.Gid+" and genome_data.id = file_data.genome_id and file_data.file_type = 'Genome' order by date_string desc;"
+    	def meta = MetaData.findAllById(params.Sid)
+    	def genomesSql = "select genome_data.*,file_data.description,file_data.file_version,file_data.id as Gid from genome_data,file_data where genome_data.meta_id = "+params.Sid+" and genome_data.id = file_data.genome_id and file_data.file_type = 'Genome' order by date_string desc;"
     	println genomesSql
     	def genomes = sql.rows(genomesSql)
     	//def genesSql = "select file_data.* from file_data,genome_data where file_data.file_type = 'Genes' and file_data.genome_id = genome_data.id and genome_data.meta_id = "+params.Gid+" order by file_version;"
@@ -44,12 +44,14 @@ class SearchController {
     	print genesSql
     	def genes = sql.rows(genesSql)
     	println "gff number = "+genes.size
-    	println "link = "+params.link
+    	def genomeSql = "select id from file_data where genome_id = "+params.link+" and file_type = 'Genome';"
+    	def genome = sql.rows(genomeSql)
+    	println "Gid = "+genome.id[0]
     	//render genes
     	//render(template: 'gffDiv', model:  [gene: genes.file_name])
     	//render genes as JSON
     	//render g.select(optionKey:'id', optionValue:'file_name', from: genes, id: 'gffSelect', name: 'file_name') 
-    	render(template:"gffSelectResponse", model: [genes:genes,genome:params.link])
+    	render(template:"gffSelectResponse", model: [genes:genes,genome:genome.id[0]])
     }
     
     //@Cacheable('species_cache')
@@ -57,12 +59,11 @@ class SearchController {
     def species_search() {
     	def sql = new Sql(dataSource)
     	def Gid = params.Gid
-    	def genomeData = GenomeData.findById(Gid)	
-    	def metaData = genomeData.meta
+    	def genomeData = FileData.findById(Gid)	
     	def geneData = FileData.findById(params.GFFid)
     	println "genome_id = "+params.genome_id
     	 //get genome info and stats
-    	 def genomeInfoSql = "select non_atgc,contig_id,gc,length,coverage from genome_info,file_data,genome_data where file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.id = '"+Gid+"' order by length desc;"
+    	 def genomeInfoSql = "select non_atgc,contig_id,gc,length,coverage from genome_info,file_data where file_id = file_data.id and file_data.id = '"+Gid+"' order by length desc;"
 	 	 //def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"
 	 	 println genomeInfoSql
 	 	 def genomeInfo = sql.rows(genomeInfoSql)
@@ -119,7 +120,7 @@ class SearchController {
 		 def genomeDescSql = "select file_version,file_data.description from file_data,genome_data where file_data.genome_id = genome_data.id and genome_data.id = '"+Gid+"' and file_type = 'Genome';";
 		 def genomeDesc = sql.rows(genomeDescSql)
 		 
-		 genome_stats.version = geneData.file_version
+		 genome_stats.version = genomeData.file_version
     	 genome_stats.description = genomeDesc.description[0]
 		 genome_stats.num = num
 	 	 genome_stats.span = span
@@ -130,7 +131,7 @@ class SearchController {
 		 genome_stats.nonATGC = nonATGC
 		 
 		 //get gene stats
-		 def geneInfoSql = "select nuc,gc from gene_info,file_data,genome_data where file_id = file_data.id and genome_id = genome_data.id and  genome_data.id = '"+Gid+"';";
+		 def geneInfoSql = "select nuc,gc from gene_info,file_data where file_id = file_data.id and file_data.id = '"+params.GFFid+"';";
 	 	 println geneInfoSql
 	 	 def geneInfo = sql.rows(geneInfoSql) 
 	 	 int mean=0
@@ -174,7 +175,7 @@ class SearchController {
 			gene_stats.genenum = m.g[0]
 			gene_stats.mrnanum = m.m[0]
 			
-			for (a in genomeData.files){
+			for (a in genomeData){
 				if (a.file_type == "Transcriptome"){
 					msql = "select count(contig_id) as t from trans_info,file_data where file_id = file_data.id and file_data.id = '"+a.id+"' ;";
 					println msql
@@ -191,15 +192,15 @@ class SearchController {
 		 
 		 //get data for plots
 		 //def funAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_anno,gene_info,file_data,meta_data where gene_anno.gene_id = gene_info.id and gene_info.file_id = file_data.id and meta_id = '"+params.id+"' group by anno_db;";
-		 def funAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_info left outer join gene_anno on (gene_info.id = gene_anno.gene_id),file_data,genome_data where gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.id = '"+Gid+"' group by anno_db;";
+		 def funAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_info left outer join gene_anno on (gene_info.id = gene_anno.gene_id),file_data where gene_info.file_id = file_data.id and file_data.id = '"+params.GFFid+"' group by anno_db;";
 		 println funAnnoSql
 		 def funAnnoData = sql.rows(funAnnoSql)
 		 //def blastAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_blast,gene_info,file_data,meta_data where gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and meta_id = '"+params.id+"' group by anno_db;";
-		 def blastAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_info left outer join gene_blast on (gene_info.id = gene_blast.gene_id),file_data,genome_data where gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.id = '"+Gid+"' group by anno_db;";		
+		 def blastAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_info left outer join gene_blast on (gene_info.id = gene_blast.gene_id),file_data where gene_info.file_id = file_data.id and file_data.id = '"+params.GFFid+"'group by anno_db;";		
 		 println blastAnnoSql
 		 def blastAnnoData = sql.rows(blastAnnoSql)
     	//return [n50: n50_list, n90: n90_list, meta: metaData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats]
-    	 return [geneData: geneData, n50: n50_list, n90: n90_list, meta: metaData, genome:genomeData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats, genomeInfo: genomeInfo]
+    	 return [geneData: geneData, n50: n50_list, n90: n90_list, genomeFile:genomeData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats, genomeInfo: genomeInfo]
     }
     def all_search = {
          if (grailsApplication.config.i.links.all == 'private' && !isLoggedIn()) {
@@ -429,7 +430,9 @@ class SearchController {
 			def sql = new Sql(dataSource)
 			//set up some global search things
 			def timeStart = new Date()
-			def metaData = FileData.findById(params.GFFid)
+			def metaData = FileData.findById(params.Gid)
+			println "m = "+metaData.genome.id
+			println "species = "+metaData.genome.meta.species
 			def searchfile_id = params.dataSelect
 			def table = params.dataSet
 			def searchId = params.searchId   
@@ -522,6 +525,7 @@ class SearchController {
 				}
 				def timeStop = new Date()
 				def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
+				println "meta check = "+metaData.genome.meta.id
 				return [metaData:metaData, results: results, term : searchId , search_time: duration, uniques:uniques.size(),sql:sqlsearch, annoType: annoType, annoLinks: annoLinks]         
 			}
 			sql.close()
@@ -539,16 +543,18 @@ class SearchController {
 			def GFFid
 			//coming in from blast results
 			if (!params.Gid){
-				def mrna_details = GeneInfo.findAllByMrna_id(mrna_id)
-				Gid = mrna_details.file.genome.id[0]
-				GFFid = mrna_details.file.id[0]
+				def mrna_details = GeneInfo.findByMrna_id(mrna_id)
+				GFFid = mrna_details.file.id
+				def genomeSql = "select file_data.id from file_data where file_type = 'Genome' and genome_id = "+mrna_details.file.genome.id+";";
+				println genomeSql
+				Gid = sql.rows(genomeSql).id[0]
 			}else{
 				Gid = params.Gid
 				GFFid = params.GFFid
 			}	
 			println "Gid = "+Gid
 			println "GFFid = "+GFFid
-			def metaData = FileData.findById(GFFid);
+			def metaData = FileData.findById(Gid);
 			println "metaData = "+metaData
 			def blast_results
 			def fun_results
@@ -596,10 +602,15 @@ class SearchController {
 			}	
 			
 			//get orthomcl info
-			def orthoId = Ortho.findByTrans_name(mrna_id).group_id
-			println "orthoId = "+orthoId
-			def orthoGet = Ortho.findAllByGroup_id(orthoId)
-			println "ortho = "+orthoGet
+			def orthoId = Ortho.findByTrans_name(mrna_id)
+			def orthoGet
+			if (orthoId != null){
+				println "orthoId = "+orthoId.group_id
+				orthoGet = Ortho.findAllByGroup_id(orthoId.group_id)
+				println "ortho = "+orthoGet
+			}else{
+				println "no orthoog!"
+			}
 			return [orthologs:orthoGet, Gid:Gid, GFFid:GFFid, mrna_id: mrna_id, info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, metaData: metaData]
     	sql.close()
     	}
@@ -665,15 +676,20 @@ class SearchController {
      			Gid = params.Gid;
      			GFFid = params.GFFid
      		}else{
-     			def genome_details = GenomeInfo.findAllByContig_id(params.contig_id)
-				Gid = genome_details.file.genome.id[0]
+     			def genome_details = GenomeInfo.findByContig_id(params.contig_id)
+				Gid = genome_details.file.id
 				//GFFid = genome_details.file.id[0]
-				println "g = "+genome_details.file.file_name[0]
-				GFFid = FileData.findAllByFile_link(genome_details.file.file_name[0]).id[0]
+				
+				def geneSql = "select file_data.id from file_data where file_type = 'Genes' and genome_id = "+genome_details.file.genome.id+";";
+				println geneSql
+				GFFid = sql.rows(geneSql).id[0]
+				
+				//println "g = "+genome_details.file.file_name[0]
+				//GFFid = FileData.findAllByFile_link(genome_details.file_name[0]).id[0]
      		}
      		println "Gid = "+Gid
      		println "GFFid = "+GFFid
-     		def metaData = FileData.findById(GFFid); 
+     		def metaData = FileData.findById(Gid); 
      		//def gene_results = GeneInfo.findAllByContig_id(params.contig_id)
      		//def genesql = "select gene_info.* from gene_info,file_data,meta_data where gene_info.contig_id = '"+params.contig_id+"' and meta_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
      		def genesql = "select gene_info.gene_id, count(mrna_id), avg(length(nuc)) as a_nuc, avg(start) as a_start, avg(stop) as a_stop from gene_info,file_data where gene_info.contig_id = '"+params.contig_id+"' and file_data.id = '"+GFFid+"' and gene_info.file_id = file_data.id group by gene_info.gene_id order by a_start;";
@@ -682,7 +698,7 @@ class SearchController {
      		println genesql
      		//println "contig_id ="+params.contig_id
 			//def info_results = GenomeInfo.findAllByContig_id(params.contig_id)
-			def infosql = "select genome_info.* from genome_info,file_data,genome_data where genome_info.contig_id = '"+params.contig_id+"' and genome_data.id = '"+Gid+"' and genome_info.file_id = file_data.id and file_data.genome_id = genome_data.id;";
+			def infosql = "select genome_info.* from genome_info,file_data where genome_info.contig_id = '"+params.contig_id+"' and file_data.id = '"+Gid+"' and genome_info.file_id = file_data.id;";
 			def info_results = sql.rows(infosql)
 			return [ Gid:Gid, GFFid:GFFid, info_results: info_results, gene_results: gene_results, metaData:metaData, Gid:Gid]
 		}
@@ -703,7 +719,7 @@ class SearchController {
 				Gid = params.Gid
 				GFFid = params.GFFid
 			}	
-     		def metaData = FileData.findById(GFFid); 
+     		def metaData = FileData.findById(Gid); 
      		//def results = GeneInfo.findAllByGene_id(params.gid)
      		def genesql = "select gene_info.* from gene_info,file_data where gene_info.gene_id = '"+params.gid+"' and file_data.id = "+GFFid+" and gene_info.file_id = file_data.id;"
      		println genesql

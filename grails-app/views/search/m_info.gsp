@@ -422,7 +422,7 @@
 			"sSearch": "Filter records:"
 		},
 		"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-		"aaSorting": [[3, "asc" ]],
+		"aaSorting": [[2, "desc" ]],
 		"sDom": 'T<"clear">lfrtip',
 		"oTableTools": {
 			"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
@@ -574,7 +574,7 @@
   </head>
   <body>
   <g:if test="${info_results}">
-    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Gid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus} ${metaData.genome.meta.species}</i></g:link> > <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">${metaData.file_version}</g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:info_results.contig_id[0]]}"> ${info_results.contig_id[0]}</g:link> > Gene: <g:link action="g_info" params="${[Gid:Gid,GFFid:GFFid,gid:info_results.gene_id[0]]}"> ${info_results.gene_id[0]}</g:link>  > Transcript: ${info_results.mrna_id[0]}
+    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus} ${metaData.genome.meta.species}</i></g:link> > <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">${metaData.file_version}</g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:info_results.contig_id[0]]}"> ${info_results.contig_id[0]}</g:link> > Gene: <g:link action="g_info" params="${[Gid:Gid,GFFid:GFFid,gid:info_results.gene_id[0]]}"> ${info_results.gene_id[0]}</g:link>  > Transcript: ${info_results.mrna_id[0]}
   	<div id="top_anchor"></div>
     <div id="info_anchor"><h1>Information for transcript ${info_results.mrna_id[0]}:</h1></div>
     <table width=100%>
@@ -639,6 +639,7 @@
 			   </g:if>
 			   <li><a href="javascript:void(0);" onclick="$.scrollTo('#files_anchor', 800, {offset : -50});">Sequence data</a></li>
 			   <li><a href="javascript:void(0);" onclick="$.scrollTo('#exon_anchor', 800, {offset : -50});">Exons</a></li>
+			   <li><a href="javascript:void(0);" onclick="$.scrollTo('#ortho_anchor', 800, {offset : -50});">Orthologs</a></li>
 			</ul>
 			</div>
 		</div>
@@ -786,35 +787,51 @@
 		 <tbody></tbody>
 	     </table> 
      <br>
-     
+    
+    <div id="ortho_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
+    <h1>Orthologs</h1> 
     <g:if test="${orthologs}">
-    	<div id="ortho_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
-    	<h1>Orthologs</h1>
-    	<table id="orthomcl_table" class="display" >
-			  <thead>
-			  	<tr>
-					<th><b>Species</b></th>
-					<th><b>Transcript ID</b></th>
-					<th><b>Length</b></th>
-			   </tr>
-			  </thead>
-			  <tbody>
-			 	<g:each var="res" in="${orthologs}">
-			 		<tr>
-						<td>${res.gene.file.genome.meta.genus} ${res.gene.file.genome.meta.species}</td>
-						<td><a href="g_info?Gid=${Gid}&GFFid=${GFFid}&gid=${res.trans_name}">${res.trans_name}</a></td>
-						<td>${sprintf("%,d\n",res.gene.nuc.length())}</td>
-			  		</tr>  
-			 	</g:each>
-			  </tbody>
-		</table>			
+    	<g:if test="${orthologs.size() == 1}">
+    		<h3>This transcript is a singleton and therefore has no orthologs</h3>
+    	</g:if>
+    	<g:else>
+			<table id="orthomcl_table" class="display" >
+				  <thead>
+					<tr>
+						<th><b>Species</b></th>
+						<th><b>Transcript ID</b></th>
+						<th><b>Length</b></th>
+						<th><b># Exons</b></th>
+				   </tr>
+				  </thead>
+				  <tbody>
+					<g:each var="res" in="${orthologs}">
+						<g:if test="${res.trans_name != params.mid}">
+							<tr>						
+								<td>${res.gene.file.genome.meta.genus} ${res.gene.file.genome.meta.species}</td>
+								<td><a href="m_info?Gid=${Gid}&GFFid=${GFFid}&mid=${res.trans_name}">${res.trans_name}</a></td>
+								<td>${sprintf("%,d\n",res.gene.nuc.length())}</td>
+								<td>${sprintf("%,d\n",res.gene.exon.size())}</td>
+							</tr>  
+						</g:if>
+					</g:each>
+				  </tbody>
+			</table>		
+		</g:else>	
     </g:if>
+    <g:else>
+    	<h2>This transcript has no orthology information which is due to one of three reasons.</h2>
+    	1. No orthology analysis has been added.<br>
+    	2. The transcript was not included in the analysis.<br>
+    	3. The protein sequence was not good enough.
+    </g:else>
     
 	<g:if test="${blast_results || ipr_results || fun_results}">
 	</g:if>
 	<g:else>
+		<br>
 	  	<hr size = 5 color="green" width="100%" style="margin-top:10px">
-		<h1>There are no annotations for this transcript</h1>
+		<h1>There are currently no annotations for this transcript</h1>
 	</g:else>
   </g:if>
   <g:else>

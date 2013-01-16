@@ -64,7 +64,7 @@
  
   <body>
     <g:if test="${results}">
-    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Gid:Gid]}"><i> ${metaData.genome.meta.genus} ${metaData.genome.meta.species}</i></g:link> > <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">${metaData.file_version}</g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:results.contig_id[0]]}"> ${results.contig_id[0]}</g:link> > Gene: ${results.gene_id[0]}
+    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus} ${metaData.genome.meta.species}</i></g:link> > <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">${metaData.file_version}</g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:results.contig_id[0]]}"> ${results.contig_id[0]}</g:link> > Gene: ${results.gene_id[0]}
     	<g:if test="${results}">
     	<div class="inline">
     	<br>
