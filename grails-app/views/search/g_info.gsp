@@ -33,7 +33,7 @@
 	       var oCells = oTableData.rows.item(i).cells;
 	       var cellVal = oCells.item(rowNum).innerHTML;
 	       //alert(cellVal)
-	       var matcher = cellVal.match(/.*?id=(.*?)">.*/);
+	       var matcher = cellVal.match(/.*?mid=(.*?)">.*/);
 	       if (matcher){
 	       	  	table_scrape.push(matcher[1])
 	    	}
