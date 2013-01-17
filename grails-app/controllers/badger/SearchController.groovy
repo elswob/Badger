@@ -11,6 +11,7 @@ class SearchController {
 	javax.sql.DataSource dataSource
 	def peptideService
 	def configDataService
+	def alignService
     //@Secured(['ROLE_USER'])
     
     def index = {
@@ -773,4 +774,15 @@ class SearchController {
 			sql.close()
 		}
     }
+    def runCluster = {
+    	def align 
+    	if (params.seq == 'nuc'){
+    		println "clustering with "+params.seq+" "+params.fileName+" and "+params.orthoClusterNucFileId
+    		align = alignService.runMuscle(params.seq,params.fileName,params.orthoClusterNucFileId)
+    	}else{
+    		println "clustering with "+params.seq+" "+params.fileName+" and "+params.orthoClusterPepFileId
+    		align = alignService.runMuscle(params.seq,params.fileName,params.orthoClusterPepFileId)	
+    	}
+    	return [align:align]
+	}
 }

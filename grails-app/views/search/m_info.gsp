@@ -47,7 +47,7 @@
 	    }else if (table == 'ipr'){ 
 	    	var oTableData = document.getElementById('ipr_table_data');
 	    	rowNum = 1
-	    }else if (table == 'orthoNuc' || table == 'orthoPep'){
+	    }else if (table == 'orthoNuc' || table == 'orthoPep' || table == 'orthoClusterNuc' || table == 'orthoClusterPep'){
 	    	table_scrape.push("${info_results.mrna_id}")
 	    	var oTableData = document.getElementById('orthomcl_table');
 	    	rowNum = 1
@@ -60,7 +60,7 @@
 	       var oCells = oTableData.rows.item(i).cells;
 	       var cellVal = oCells.item(rowNum).innerHTML;
 	       //alert(cellVal)
-	       if (table == 'orthoNuc' || table == 'orthoPep'){
+	       if (table == 'orthoNuc' || table == 'orthoPep' || table == 'orthoClusterNuc' || table == 'orthoClusterPep'){
 	       		var matcher = cellVal.match(/.*?mid=(.*?)">.*/);
 	       		if (matcher){
 	       	  		table_scrape.push(matcher[1])
@@ -71,9 +71,14 @@
 	    }
 	    
 	    if (table == 'orthoPep'){
+	    	//alert('adding '+table_scrape+' to orthoPepFileId')
 		    document.getElementById('orthoPepFileId').value=table_scrape;
 		}else if (table == 'orthoNuc'){
 			document.getElementById('orthoNucFileId').value=table_scrape;
+		}else if (table == 'orthoClusterNuc'){
+			document.getElementById('orthoClusterNucFileId').value=table_scrape;
+		}else if (table == 'orthoClusterPep'){
+			document.getElementById('orthoClusterPepFileId').value=table_scrape;
 		}
 	    
 	    //alert(table_scrape)
@@ -817,17 +822,34 @@
     		<div class="inline">
     			Download: 
 				<g:form name="orthonucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-					<g:hiddenField name="orthoNucFileId" value="${info_results.mrna_id}.orthologs"/>
+					<g:hiddenField name="orthoNucFileId" value=""/>
 					<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
 					<g:hiddenField name="seq" value="OrthoNucleotides"/>
 					<a href="javascript:void(0);" onclick="get_table_data('orthoNuc');document.orthonucfileDownload.submit()">Nucleotides</a>
 				</g:form> 
 				|
 				<g:form name="orthopepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-					<g:hiddenField name="orthoPepFileId" value="${info_results.mrna_id}.orthologs"/>
+					<g:hiddenField name="orthoPepFileId" value=""/>
 					<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
 					<g:hiddenField name="seq" value="OrthoPeptides"/>
 					<a href="javascript:void(0);" onclick="get_table_data('orthoPep');document.orthopepfileDownload.submit()">Peptides</a>
+				</g:form>
+			</div>	
+			
+			<div class="inline">
+    			Cluster: 
+				<g:form name="orthoNucCluster" url="[action:'runCluster']">
+					<g:hiddenField name="orthoClusterNucFileId" value=""/>
+					<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
+					<g:hiddenField name="seq" value="nuc"/>
+					<a href="javascript:void(0);" onclick="get_table_data('orthoClusterNuc');document.orthoNucCluster.submit()">Nucleotides</a>
+				</g:form> 
+				|
+				<g:form name="orthoPepCluster" url="[action:'runCluster']">
+					<g:hiddenField name="orthoClusterPepFileId" value=""/>
+					<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
+					<g:hiddenField name="seq" value="pep"/>
+					<a href="javascript:void(0);" onclick="get_table_data('orthoClusterPep');document.orthoPepCluster.submit()">Peptides</a>
 				</g:form>
 			</div>	
 			
