@@ -10,8 +10,7 @@
 
   <body>
 	  <sec:ifNotLoggedIn>
-	  	<h1>Welcome to the home of the <b>${grailsApplication.config.projectID} project</b></h1> 
-	  	<h3>This is the public side.</h3>
+	  	<h1>Welcome to the home of <b>${grailsApplication.config.projectID}</b></h1> 
 	  	
 	  	<g:if test="${grailsApplication.config.news.status == 'public'}">
 	  	
