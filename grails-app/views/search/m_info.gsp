@@ -47,6 +47,10 @@
 	    }else if (table == 'ipr'){ 
 	    	var oTableData = document.getElementById('ipr_table_data');
 	    	rowNum = 1
+	    }else if (table == 'orthoNuc' || table == 'orthoPep'){
+	    	table_scrape.push("${info_results.mrna_id}")
+	    	var oTableData = document.getElementById('orthomcl_table');
+	    	rowNum = 1
 	    }
 	    //gets table
 	    var rowLength = oTableData.rows.length;
@@ -56,8 +60,22 @@
 	       var oCells = oTableData.rows.item(i).cells;
 	       var cellVal = oCells.item(rowNum).innerHTML;
 	       //alert(cellVal)
-	       table_scrape.push(cellVal)
+	       if (table == 'orthoNuc' || table == 'orthoPep'){
+	       		var matcher = cellVal.match(/.*?mid=(.*?)">.*/);
+	       		if (matcher){
+	       	  		table_scrape.push(matcher[1])
+	    		}
+	    	}else{
+	       		table_scrape.push(cellVal)
+	       	}
 	    }
+	    
+	    if (table == 'orthoPep'){
+		    document.getElementById('orthoPepFileId').value=table_scrape;
+		}else if (table == 'orthoNuc'){
+			document.getElementById('orthoNucFileId').value=table_scrape;
+		}
+	    
 	    //alert(table_scrape)
 	    return table_scrape;
 	    
@@ -455,9 +473,9 @@
 				 drawing.start(paperWidth, 'blast_fig');
 				 drawing.drawSpacer(40);
 				 //add scale bars
-				 drawing.drawScoreScale(${info_results.pep[0].length()});	
+				 drawing.drawScoreScale(${info_results.pep.length()});	
 				 drawing.drawSpacer(20);
-				 drawing.drawScale(${info_results.pep[0].length()});			 
+				 drawing.drawScale(${info_results.pep.length()});			 
 				 drawing.drawSpacer(10);
 				 
 				 // add exon boundaries
@@ -467,12 +485,12 @@
 					var marker=0
 					for (var i = 0; i < exon_data.length; i++) {   		 	 
 						var exon = exon_data[i];
-						drawing.drawExon(${info_results.pep[0].length()},exon.length/3,marker,exon.exon_number)
+						drawing.drawExon(${info_results.pep.length()},exon.length/3,marker,exon.exon_number)
 						marker = marker + exon.length/3
 						//alert('marker='+marker)
 					}
 					drawing.drawSpacer(20);
-					drawing.drawLine(${info_results.pep[0].length()});
+					drawing.drawLine(${info_results.pep.length()});
 				 }
 				 //alert('length = '+blast_data.length)
 				 if (blast_data.length > 0){
@@ -481,7 +499,7 @@
 					 var tableData = get_table_data('blast')
 					 drawBars(blast_data,tableData,'blast')
 					 drawing.drawSpacer(10);
-					 drawing.drawLine(${info_results.pep[0].length()});
+					 drawing.drawLine(${info_results.pep.length()});
 				 }
 				 if (fun_data.length > 0){
 					 drawing.drawSpacer(10);
@@ -489,7 +507,7 @@
 					 var tableData = get_table_data('fun')
 					 drawBars(fun_data,tableData,'fun')
 					 drawing.drawSpacer(10);
-					 drawing.drawLine(${info_results.pep[0].length()});
+					 drawing.drawLine(${info_results.pep.length()});
 				 }
 				 if (ipr_data.length > 0){
 					 drawing.drawSpacer(10);
@@ -574,34 +592,34 @@
   </head>
   <body>
   <g:if test="${info_results}">
-    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus} ${metaData.genome.meta.species}</i></g:link> > <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">${metaData.file_version}</g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:info_results.contig_id[0]]}"> ${info_results.contig_id[0]}</g:link> > Gene: <g:link action="g_info" params="${[Gid:Gid,GFFid:GFFid,gid:info_results.gene_id[0]]}"> ${info_results.gene_id[0]}</g:link>  > Transcript: ${info_results.mrna_id[0]}
+    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus} ${metaData.genome.meta.species}</i></g:link> > <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">${metaData.file_version}</g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:info_results.contig_id]}"> ${info_results.contig_id}</g:link> > Gene: <g:link action="g_info" params="${[Gid:Gid,GFFid:GFFid,gid:info_results.gene_id]}"> ${info_results.gene_id}</g:link>  > Transcript: ${info_results.mrna_id}
   	<div id="top_anchor"></div>
-    <div id="info_anchor"><h1>Information for transcript ${info_results.mrna_id[0]}:</h1></div>
+    <div id="info_anchor"><h1>Information for transcript ${info_results.mrna_id}:</h1></div>
     <table width=100%>
       <tr><td width=40%>
 		<table class="compact">
-			<tr><td><b>Length:</b></td><td>${printf("%,d\n",info_results.nuc[0].length())} bp (${printf("%,d\n",info_results.pep[0].length())} aa)</td></tr>
-			<tr><td><b>GC:</b></td><td>${sprintf("%.1f",info_results.gc[0])}</td></tr>
+			<tr><td><b>Length:</b></td><td>${printf("%,d\n",info_results.nuc.length())} bp (${printf("%,d\n",info_results.pep.length())} aa)</td></tr>
+			<tr><td><b>GC:</b></td><td>${sprintf("%.1f",info_results.gc)}</td></tr>
 			<tr><td><b>Exons:</b></td><td>${exon_results.size()}</td></tr>
-			<tr><td><b>Source:</b></td><td>${info_results.source[0]}</td></tr>
-			<tr><td><b>Scaffold start:</b></td><td>${printf("%,d\n",info_results.start[0])}</td></tr>
-			<tr><td><b>Scaffold end:</b></td><td>${printf("%,d\n",info_results.stop[0])}</td></tr>
-			<tr><td><b>Strand:</b></td><td>${info_results.strand[0]}</td></tr>
+			<tr><td><b>Source:</b></td><td>${info_results.source}</td></tr>
+			<tr><td><b>Scaffold start:</b></td><td>${printf("%,d\n",info_results.start)}</td></tr>
+			<tr><td><b>Scaffold end:</b></td><td>${printf("%,d\n",info_results.stop)}</td></tr>
+			<tr><td><b>Strand:</b></td><td>${info_results.strand}</td></tr>
 			<tr><td><b>Download:</b></td>
 					<td>
 				<div class="inline">
 				<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-					<g:hiddenField name="nucFileId" value="${info_results.gene_id[0]}"/>
-					<g:hiddenField name="fileName" value="${info_results.gene_id[0]}"/>
+					<g:hiddenField name="nucFileId" value="${info_results.mrna_id}"/>
+					<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
 					<g:hiddenField name="seq" value="Nucleotides"/>
-					<a href="#" onclick="document.nucfileDownload.submit()">Nucleotides</a>
+					<a href="javascript:void(0);" onclick="document.nucfileDownload.submit()">Nucleotides</a>
 				</g:form> 
 				|
 				<g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-					<g:hiddenField name="pepFileId" value="${info_results.gene_id[0]}"/>
-					<g:hiddenField name="fileName" value="${info_results.gene_id[0]}"/>
+					<g:hiddenField name="pepFileId" value="${info_results.mrna_id}"/>
+					<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
 					<g:hiddenField name="seq" value="Peptides"/>
-					<a href="#" onclick="document.pepfileDownload.submit()">Peptides</a>
+					<a href="javascript:void(0);" onclick="document.pepfileDownload.submit()">Peptides</a>
 				</g:form>
 				</div>
 			</td>
@@ -747,9 +765,9 @@
    <g:if test ="${metaData.genome.gbrowse}">
      	<div id="browse_anchor"><div></div>
          	<hr size = 5 color="green" width="100%" style="margin-top:10px">
-		 	<h1>Browse on the genome <a href="${metaData.genome.gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
-		 	<iframe src="${metaData.genome.gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}" width="100%" height="700" frameborder="0">
-				<img src="${metaData.genome.gbrowse}?name=${info_results.contig_id[0].trim()}:${info_results.start[0]}..${info_results.stop[0]}"/>
+		 	<h1>Browse on the genome <a href="${metaData.genome.gbrowse}?name=${info_results.contig_id.trim()}:${info_results.start}..${info_results.stop}" target='_blank'>(go to genome browser)</a>:</h1>
+		 	<iframe src="${metaData.genome.gbrowse}?name=${info_results.contig_id.trim()}:${info_results.start}..${info_results.stop}" width="100%" height="700" frameborder="0">
+				<img src="${metaData.genome.gbrowse}?name=${info_results.contig_id.trim()}:${info_results.start}..${info_results.stop}"/>
 		 	</iframe>
 		 </div>
      </g:if>
@@ -759,14 +777,14 @@
       <div style="overflow:auto; max-height:200px;">
 	      <table style="table-layout: fixed; width:100%">
 	      <tr><td style="word-wrap: break-word">
-	      >${info_results.gene_id[0]}<br>${info_results.pep[0]}
+	      >${info_results.gene_id}<br>${info_results.pep}
 	      </td></tr>
 	      </table>
       </div>    
       <div style="overflow:auto; max-height:200px;">
 	      <table style="table-layout: fixed; width:100%">
 	      <tr><td style="word-wrap: break-word">
-	      >${info_results.gene_id[0]}<br>${info_results.nuc[0]}
+	      >${info_results.gene_id}<br>${info_results.nuc}
 	      </td></tr>
 	      </table>
       </div>      
@@ -795,6 +813,26 @@
     		<h3>This transcript is a singleton and therefore has no orthologs</h3>
     	</g:if>
     	<g:else>
+    		
+    		<div class="inline">
+    			Download: 
+				<g:form name="orthonucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+					<g:hiddenField name="orthoNucFileId" value="${info_results.mrna_id}.orthologs"/>
+					<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
+					<g:hiddenField name="seq" value="OrthoNucleotides"/>
+					<a href="javascript:void(0);" onclick="get_table_data('orthoNuc');document.orthonucfileDownload.submit()">Nucleotides</a>
+				</g:form> 
+				|
+				<g:form name="orthopepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+					<g:hiddenField name="orthoPepFileId" value="${info_results.mrna_id}.orthologs"/>
+					<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
+					<g:hiddenField name="seq" value="OrthoPeptides"/>
+					<a href="javascript:void(0);" onclick="get_table_data('orthoPep');document.orthopepfileDownload.submit()">Peptides</a>
+				</g:form>
+			</div>	
+			
+				
+    		
 			<table id="orthomcl_table" class="display" >
 				  <thead>
 					<tr>
@@ -809,7 +847,7 @@
 						<g:if test="${res.trans_name != params.mid}">
 							<tr>						
 								<td>${res.gene.file.genome.meta.genus} ${res.gene.file.genome.meta.species}</td>
-								<td><a href="m_info?Gid=${Gid}&GFFid=${GFFid}&mid=${res.trans_name}">${res.trans_name}</a></td>
+								<td><a href="m_info?mid=${res.trans_name}">${res.trans_name}</a></td>
 								<td>${sprintf("%,d\n",res.gene.nuc.length())}</td>
 								<td>${sprintf("%,d\n",res.gene.exon.size())}</td>
 							</tr>  

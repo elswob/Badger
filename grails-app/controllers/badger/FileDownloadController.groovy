@@ -46,8 +46,12 @@ class FileDownloadController {
 		def object_array
 		if (params.seq == 'Peptides'){
      		object_array = params.pepFileId
-     	}else{
+     	}else if (params.seq == 'Nucleotides'){
      		object_array = params.nucFileId
+     	}else if (params.seq == 'OrthoPeptides'){
+     		object_array = params.orthoPepFileId
+     	}else if (params.seq == 'OrthoNucleotides'){
+     		object_array = params.orthoNucFileId
      	}
      	 object_array = object_array.replaceAll(/\[/, '')
      	 object_array = object_array.replaceAll(/\]/, '')
@@ -56,8 +60,15 @@ class FileDownloadController {
      	 object_array.split(",").each{
      	 	 object_list.add(it)
      	 }
+     	 println "object_array = "+object_array
      	 println "object_list = "+object_list
-     	 def results = GeneInfo.findAllByMrna_idInList(object_list)
+     	 println "size = "+object_list.size()
+     	 def results
+     	 if (object_list.size() == 1){
+     	 	results = GeneInfo.findByMrna_id(object_array)
+     	 }else{
+     	 	results = GeneInfo.findAllByMrna_idInList(object_list)
+		 }
 		 def pep_file_builder=""
 		 def nuc_file_builder=""
      	 results.each {
@@ -67,7 +78,7 @@ class FileDownloadController {
 		 }
 		 println "seq = "+params.seq
 		 def name = params.fileName.replaceAll(' ','_')
-		 if (params.seq == 'Peptides'){
+		 if (params.seq == 'Peptides' || params.seq == 'OrthoPeptides'){
 		 	println "created download file "+name+".aa"
      	 	response.setHeader "Content-disposition", "attachment; filename="+name+".aa"
          	response.contentType = 'text/csv'

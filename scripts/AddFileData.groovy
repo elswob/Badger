@@ -134,7 +134,7 @@ def A_vit(){
 	fileMap.file_name = "nAv.1.0.1.aug.blast2go.gff"
 	fileMap.file_version = "1.0.1"
 	fileMap.description = "Augustus gene prediction"
-	fileMap.file_link = "Acanthocheilonema_viteae_v1.0.fna"
+	fileMap.file_link = "n"
 	addFile(fileMap)
 	//mRNA
 	fileMap.file_type = "mRNA"

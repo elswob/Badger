@@ -54,7 +54,7 @@ class SearchController {
     	render(template:"gffSelectResponse", model: [genes:genes,genome:genome.id[0]])
     }
     
-    //@Cacheable('species_cache')
+    @Cacheable('species_cache')
     //@CacheEvict(value='species_cache', allEntries=true)
     def species_search() {
     	def sql = new Sql(dataSource)
@@ -594,7 +594,7 @@ class SearchController {
 			println "Anno links =  "+annoLinks
 
 			//get amino acid info`
-			def info_results = GeneInfo.findAllByMrna_id(mrna_id)
+			def info_results = GeneInfo.findByMrna_id(mrna_id)
 			def aaData
 			info_results.each {
 				aaData = peptideService.getComp(it.pep)
