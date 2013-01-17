@@ -461,22 +461,22 @@ ${genome_stats.description}
 		   <tr><td>
 			 <h1>Genes:</h1>
 			 <g:if test = "${gene_stats.size() > 0}">
-			 <table>
-			 <tr><td><b>GFF3 version</b></td><td>${geneData.file_version}</td></tr>
-			 <tr><td><b>Number genes</b></td><td>${printf("%,d\n",gene_stats.genenum)}</td></tr>
-			 <tr><td><b>Number transcripts</b></td><td>${printf("%,d\n",gene_stats.mrnanum)}</td></tr>
-			 <tr><td><b>Frequency (genes per Kb)</b></td><td>${printf("%.4g",(gene_stats.genenum/genome_stats.span)*1000)}</td></tr>
-			 <tr><td><b>Mean transcript length (bp)</b></td><td>${printf("%,d\n",gene_stats.mean)}</td></tr>
-			 <tr><td><b>Smallest (bp)</b></td><td>${printf("%,d\n",gene_stats.min)}</td></tr>
-			 <tr><td><b>Largest (bp)</b></td><td>${printf("%,d\n",gene_stats.max)}</td></tr>
-			 <tr><td><b>GC (%)</b></td><td>${printf("%.4g",gene_stats.gc)}</td></tr>
-			 <tr><td><b>Non ATGC (bp)</b></td><td>${printf("%,d\n",gene_stats.nonATGC)}</td></tr>
-			 </table>
-		 </td><td>
-			<br>
-			<div id="blast_chart" class="jqplot-target" style="height: 200px; width: 100%; position: center;"></div>
-			<br>
-			<div id="fun_chart" class="jqplot-target" style="height: 250px; width: 100%; position: center;"></div>
+				 <table>
+				 <tr><td><b>GFF3 version</b></td><td>${geneData.file_version}</td></tr>
+				 <tr><td><b>Number genes</b></td><td>${printf("%,d\n",gene_stats.genenum)}</td></tr>
+				 <tr><td><b>Number transcripts</b></td><td>${printf("%,d\n",gene_stats.mrnanum)}</td></tr>
+				 <tr><td><b>Frequency (genes per Kb)</b></td><td>${printf("%.4g",(gene_stats.genenum/genome_stats.span)*1000)}</td></tr>
+				 <tr><td><b>Mean transcript length (bp)</b></td><td>${printf("%,d\n",gene_stats.mean)}</td></tr>
+				 <tr><td><b>Smallest (bp)</b></td><td>${printf("%,d\n",gene_stats.min)}</td></tr>
+				 <tr><td><b>Largest (bp)</b></td><td>${printf("%,d\n",gene_stats.max)}</td></tr>
+				 <tr><td><b>GC (%)</b></td><td>${printf("%.4g",gene_stats.gc)}</td></tr>
+				 <tr><td><b>Non ATGC (bp)</b></td><td>${printf("%,d\n",gene_stats.nonATGC)}</td></tr>
+				 </table>
+			 </td><td>
+				<br>
+				<div id="blast_chart" class="jqplot-target" style="height: 200px; width: 100%; position: center;"></div>
+				<br>
+				<div id="fun_chart" class="jqplot-target" style="height: 250px; width: 100%; position: center;"></div>
 		 	</g:if>
 		 	<g:else>
 		 	<h2>No gene data is in the database for this genome</h2>
@@ -484,8 +484,9 @@ ${genome_stats.description}
 		 </td></tr>
 		
  </table>
- <g:if test = "${gene_stats.size() > 0}">
+ <g:if test = "${funAnnoData.size() > 1 || blastAnnoData.size() > 1}">
 	<div id="content">
+	
 	  <table><tr>
 	  <td><h1>Search annotations:</h1>
 

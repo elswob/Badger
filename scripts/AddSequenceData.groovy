@@ -392,52 +392,62 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 		  //println "ignoring "+it
 		}else{
 		  def dataArray = it.split("\t")
-		  if (dataArray[2] == 'gene'){
-		  		if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
-					gene_id = matcher[0][1]
-				}else if ((matcher = dataArray[8] =~ /ID=(.*)/)){  
-					gene_id = matcher[0][1]
-				}	
-		  }
-		  if (dataArray[2] == 'mRNA' || dataArray[2] == 'transcript'){
-			gene_count++
-			if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
-				mrna_id = matcher[0][1]
-			}
-			gene_start = dataArray[3].toInteger()
-			//println "mrna_id = "+mrna_id
-			gene_nuc = nucData."${mrna_id}"
-			//println gene_nuc
-			gene_count_gc = gene_nuc.toUpperCase().findAll({it=='G'|it=='C'}).size()
-			gene_gc = (gene_count_gc/gene_nuc.length())*100
-			gene_gc = sprintf("%.3f",gene_gc)
-			geneMap.gc = gene_gc
-			geneMap.gene_id = gene_id
-			geneMap.mrna_id = mrna_id
-			geneMap.start = dataArray[3]
-			geneMap.stop = dataArray[4]
-			geneMap.source = dataArray[1]
-			geneMap.contig_id = dataArray[0]
-			geneMap.strand = dataArray[6]
-			geneMap.nuc = nucData."${mrna_id}"
-			geneMap.pep = pepData."${mrna_id}"
-			GeneInfo gene = new GeneInfo(geneMap)
-			gfile.addToGene(gene)
-			if ((gene_count % 5000) ==  0){
-					println gene_count
-					//println geneMap
-					gene.save(flush:true)
-					cleanUpGorm()
-				}else{
-					gene.save()
+		  //check it is gff and not sequence
+		  if (dataArray.size() == 9){ 
+			  if (dataArray[2] == 'gene'){
+					if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
+						gene_id = matcher[0][1]
+					}else if ((matcher = dataArray[8] =~ /ID=(.*)/)){  
+						gene_id = matcher[0][1]
+					}	
+			  }
+			  //println "gene_id = "+gene_id
+			  if (dataArray[2] == 'mRNA' || dataArray[2] == 'transcript'){
+					gene_count++
+					if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
+						mrna_id = matcher[0][1]
+					}
+					gene_start = dataArray[3].toInteger()
+					//println "mrna_id = "+mrna_id
+					gene_nuc = nucData."${mrna_id}"
+					//println "gene_nuc = "+gene_nuc
+					//check for matches between the GFF IDs and the FASTA headers
+					if (gene_nuc){
+						gene_count_gc = gene_nuc.toUpperCase().findAll({it=='G'|it=='C'}).size()
+						gene_gc = (gene_count_gc/gene_nuc.length())*100
+						gene_gc = sprintf("%.3f",gene_gc)
+						geneMap.gc = gene_gc
+						geneMap.gene_id = gene_id
+						geneMap.mrna_id = mrna_id
+						geneMap.start = dataArray[3]
+						geneMap.stop = dataArray[4]
+						geneMap.source = dataArray[1]
+						geneMap.contig_id = dataArray[0]
+						geneMap.strand = dataArray[6]
+						geneMap.nuc = nucData."${mrna_id}"
+						geneMap.pep = pepData."${mrna_id}"
+						GeneInfo gene = new GeneInfo(geneMap)
+						gfile.addToGene(gene)
+						if ((gene_count % 5000) ==  0){
+							println gene_count
+							//println geneMap
+							gene.save(flush:true)
+							cleanUpGorm()
+						}else{
+							gene.save()
+						}
+					}else{
+						//println "Something is wrong! Perhaps your fasta file headers don't match your gff IDs...?"
+						throw new RuntimeException("Something is wrong! Perhaps your fasta file headers don't match your GFF IDs...?")
+					}
 				}
-		  	}
+			}
 		}
 	}
 	println gene_count
 	cleanUpGorm()
+	
 	//mark files as loaded 
-
     def nSql = "update file_data set loaded = true where file_name = '"+nuc.file_name+"'";
     println nSql
     sql.execute(nSql)
@@ -452,86 +462,91 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 	//read the file again as the gene tables need to be complete to use ids in exon tables
 	println "Adding exon data"
 	println new Date()
-	dataFile = new File("data/"+fileLoc).text
+	dataFile = new File("data/"+fileLoc)
 	GeneInfo geneFind
 	def parent = ""
 	dataFile.eachLine{
+	//lines = dataFile.readLines()
+	//for (it in lines){
 		if ((matcher = it =~ /^#.*/)){
 		  //println "ignoring "+it
 		}else{
 			def dataArray = it.split("\t")
-			if (dataArray[2] == 'gene'){
-		  		if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
-					gene_id = matcher[0][1]
-				}else if ((matcher = dataArray[8] =~ /ID=(.*)/)){  
-					gene_id = matcher[0][1]
-				}
-			}
-			if (dataArray[2] == 'mRNA' || dataArray[2] == 'transcript'){
-				exon_marker=0
-				exon_count=0
-				gene_count++
-				if ((gene_count % 1000) ==  0){
-					println gene_count
-					//println new Date()
-				}
-				if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){
-					mrna_id = matcher[0][1]
-					//geneFind = GeneInfo.findByMrna_id(mrna_id)
-				}
-			}
-			if (dataArray[2] == 'CDS'){				
-				exon_count++
-				exon_count_all++
-				if ((matcher = dataArray[8] =~ /Parent=(\S+)/)){
-					//check for alternative splicing
-					if (parent != matcher[0][1] && exon_marker != 0){
-						//println "alt trans: "+parent+" - "+matcher[0][1]
-						exon_marker = 0
-						exon_count = 1
+			//check it is gff and not sequence
+		  	if (dataArray.size() == 9){ 
+				if (dataArray[2] == 'gene'){
+					if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){  
+						gene_id = matcher[0][1]
+					}else if ((matcher = dataArray[8] =~ /ID=(.*)/)){  
+						gene_id = matcher[0][1]
 					}
-					parent = matcher[0][1]
-					//println "parent = "+parent
-					//geneFind = GeneInfo.findByMrna_id(parent)
-					gene_nuc = nucData."${parent}"
-					//println "exon = "+exon_id+" - "+exon_count
 				}
-				geneFind = GeneInfo.findByMrna_id(parent)
-				//println dataArray[8]+" parent = "+parent
-				exon_start = exon_marker
-				exon_end = dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()+1
-				//println mrna_id
-				//println gene_nuc
-				//println dataArray[4].toInteger()+"-"+dataArray[3].toInteger()+"+"+exon_marker.toInteger()
-				exon_sequence = gene_nuc[exon_marker..dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()]
-				exon_count_gc = exon_sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
-				exon_gc = (exon_count_gc/exon_sequence.length())*100
-				exon_gc = sprintf("%.3f",exon_gc)
-				exonMap.sequence = exon_sequence
-				exon_marker = exon_start + dataArray[4].toInteger()-dataArray[3].toInteger()+1
-				
-				exonMap.exon_number = exon_count
-				exonMap.start = dataArray[3].toInteger()
-				exonMap.stop = dataArray[4].toInteger()
-				exonMap.score = dataArray[5]
-				exonMap.strand = dataArray[6]
-				exonMap.phase = dataArray[7].toInteger()
-				exonMap.gene = geneFind
-				//exonMap.gene_id = geneFind.id.toBigInteger()
-				exonMap.gc = exon_gc
-				
-				ExonInfo exon = new ExonInfo(exonMap)
-				//println exonMap
-				geneFind.addToExon(exon)
-				
-				if ((exon_count_all % 1000) ==  0){
-					exon.save(flush:true)
-					cleanUpGorm()
+				if (dataArray[2] == 'mRNA' || dataArray[2] == 'transcript'){
+					exon_marker=0
+					exon_count=0
+					gene_count++
+					if ((gene_count % 1000) ==  0){
+						println gene_count
+						//println new Date()
+					}
+					if ((matcher = dataArray[8] =~ /ID=(.*?);.*/)){
+						mrna_id = matcher[0][1]
+						//geneFind = GeneInfo.findByMrna_id(mrna_id)
+					}
+				}
+				if (dataArray[2] == 'CDS'){				
+					exon_count++
+					exon_count_all++
+					if ((matcher = dataArray[8] =~ /Parent=(\S+)/)){
+						//check for alternative splicing
+						if (parent != matcher[0][1] && exon_marker != 0){
+							//println "alt trans: "+parent+" - "+matcher[0][1]
+							exon_marker = 0
+							exon_count = 1
+						}
+						parent = matcher[0][1]
+						//println "parent = "+parent
+						//geneFind = GeneInfo.findByMrna_id(parent)
+						gene_nuc = nucData."${parent}"
+						//println "exon = "+exon_id+" - "+exon_count
+					}
+					geneFind = GeneInfo.findByMrna_id(parent)
+					//println dataArray[8]+" parent = "+parent
+					exon_start = exon_marker
+					exon_end = dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()+1
+					//println mrna_id
+					//println gene_nuc
+					//println dataArray[4].toInteger()+"-"+dataArray[3].toInteger()+"+"+exon_marker.toInteger()
+					exon_sequence = gene_nuc[exon_marker..dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()]
+					exon_count_gc = exon_sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
+					exon_gc = (exon_count_gc/exon_sequence.length())*100
+					exon_gc = sprintf("%.3f",exon_gc)
+					exonMap.sequence = exon_sequence
+					exon_marker = exon_start + dataArray[4].toInteger()-dataArray[3].toInteger()+1
+					
+					exonMap.exon_number = exon_count
+					exonMap.start = dataArray[3].toInteger()
+					exonMap.stop = dataArray[4].toInteger()
+					exonMap.score = dataArray[5]
+					exonMap.strand = dataArray[6]
+					exonMap.phase = dataArray[7].toInteger()
+					exonMap.gene = geneFind
+					//exonMap.gene_id = geneFind.id.toBigInteger()
+					exonMap.gc = exon_gc
+					
+					ExonInfo exon = new ExonInfo(exonMap)
 					//println exonMap
-					//new ExonInfo(exonMap).save(flush:true)
-				}else{
-					//new ExonInfo(exonMap).save()
-					exon.save()
+					geneFind.addToExon(exon)
+					
+					if ((exon_count_all % 1000) ==  0){
+						exon.save(flush:true)
+						cleanUpGorm()
+						//println exonMap
+						//new ExonInfo(exonMap).save(flush:true)
+					}else{
+						//new ExonInfo(exonMap).save()
+						exon.save()
+					}
 				}
 			}
 	  	}    

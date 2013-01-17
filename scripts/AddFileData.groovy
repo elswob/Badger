@@ -34,7 +34,7 @@ def addGenome(genomeMap){
 		new_genome = new GenomeData(genomeMap) 
 		meta.addToGenome(new_genome)
 		new_genome.save(flush:true)
-		println "New genome for "+new_genome.meta.genus+" "+new_genome.meta.species+" date "+genomeMap.date_string+" was added"
+		println "New genome for "+new_genome.meta.genus+" "+new_genome.meta.species+" date "+genomeMap.dateString+" was added"
 	//}
 }
 
@@ -50,7 +50,7 @@ def addFile(fileMap){
 		file.save(flush:true)
 		println fileMap.file_name+" was added"
 	}else{
-		println "file data/"+fileMap.file_dir+"/"+params.file_name+" does not exist!"
+		println "file data/"+fileMap.file_dir+"/"+fileMap.file_name+" does not exist!"
 	}
 }
 def addAnno(fileName,annoMap){
@@ -80,10 +80,12 @@ def addAnno(fileName,annoMap){
 }
 
 //add data
-A_vit()
-L_sig()
-D_imm()
-O_och()
+H_duj()
+//A_vit()
+//L_sig()
+//D_imm()
+//O_och()
+
 //B_mal()
 //C_ang()
 //B_xyl()
@@ -94,6 +96,123 @@ O_och()
 //C_ele()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////// H. dujardini
+def H_duj(){
+	def metaMap = [:]
+	def fileMap = [:]
+	def genomeMap = [:]
+	
+// --- Species Data ---	
+	metaMap.genus = "Hypsibius";
+	metaMap.species = "dujardini";
+	metaMap.description = "Hypsibius dujardinia are members of the phylum Tardigrada. These species can also be known as water bears or moss piglets. They are microscopic invertebrates, and their body lengths are only between 0.05-1.2mm. long. These organisms have four pairs of legs which have four to eight claws on each. Usually they live between four months to one year. However, they can survive in difficult conditions. They shut down their metabolisms which allows them to survive in extreme temperatures, pressure, and radiation for a long time. They feed on the fluids of plant cells, animal cells, and bacteria.."
+	metaMap.image_file = "H_dujardini.jpg"
+	metaMap.image_source = "http://mrrohanbio.wikispaces.com/Hypsibius+dujardini"
+	addMeta(metaMap)
+	
+// --- Genome Data ---	
+	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nHd.2.3.1"
+	genomeMap.dateString = Date.parse("dd/MM/yyyy","17/01/2012")
+	addGenome(genomeMap)
+	
+// --- File Data --- 	
+	//globals (blast,search,download and cov need to be added to each file type if the values differ)
+	fileMap.file_dir = "H_dujardini"
+	fileMap.loaded = false
+	fileMap.blast = "pub"
+	fileMap.search = "pub"
+	fileMap.download = "pub"
+	fileMap.cov = "n"
+	//genome
+	fileMap.file_type = "Genome"
+	fileMap.file_name = "nHd.2.3.abv500.fna"
+	fileMap.file_version = "2.3"
+	fileMap.description = "The H. dujardini genome was sequenced by ...."
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//gff
+	fileMap.file_type = "Genes"
+	fileMap.file_name = "maker1.gff3"
+	fileMap.file_version = "1.0"
+	fileMap.description = "MAKER gene prediction"
+	fileMap.file_link = "n"
+	addFile(fileMap)
+	//mRNA
+	fileMap.file_type = "mRNA"
+	fileMap.file_name = "all.maker.transcripts.edit.fasta"
+	fileMap.file_version = "1.0"
+	fileMap.description = "MAKER gene prediction"
+	fileMap.file_link = "maker1.gff3"
+	addFile(fileMap)
+	//Peptide
+	fileMap.file_type = "Peptide"
+	fileMap.file_name = "all.maker.proteins.edit.fasta"
+	fileMap.file_version = "1.0"
+	fileMap.description = "MAKER gene prediction"
+	fileMap.file_link = "maker1.gff3"
+	addFile(fileMap)
+
+// --- Annotation files and data ---	
+	def annoMap = [:]
+	//blast
+	annoMap.type = "blast"				
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "SwissProt"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "sprot.xml"
+	annoMap.loaded = false	
+	addAnno("maker1.gff3",annoMap)
+	
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
+	annoMap.source = "NCBI NR"
+	annoMap.regex = "gi\\|(\\d+)\\|.*"
+	annoMap.anno_file = "nr_10.xml"
+	annoMap.loaded = false	
+	addAnno("maker1.gff3",annoMap)
+	
+	annoMap.link = "http://www.nematodes.org/nembase4/cluster.php?cluster="
+	annoMap.source = "Nembase4"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "nembase_tblastn.xml"
+	annoMap.loaded = false	
+	addAnno("maker1.gff3",annoMap)
+	
+	//functional
+	annoMap.type = "fun"				
+	annoMap.link = "http://enzyme.expasy.org/EC/"
+	annoMap.source = "Annot8r EC"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "ec.txt"
+	annoMap.loaded = false	
+	addAnno("maker1.gff3",annoMap)
+	
+	annoMap.link = "http://www.ebi.ac.uk/QuickGO/GTerm?id="
+	annoMap.source = "Annot8r GO"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "go.txt"
+	annoMap.loaded = false	
+	addAnno("maker1.gff3",annoMap)
+	
+	annoMap.link = "http://www.genome.jp/dbget-bin/www_bget?ko:"
+	annoMap.source = "Annot8r KEGG"
+	annoMap.regex = "(.*)"
+	annoMap.anno_file = "kegg.txt"
+	annoMap.loaded = false	
+	addAnno("maker1.gff3",annoMap)
+	
+	//interproscan
+	annoMap.type = "ipr"
+	annoMap.link = "http://www.ebi.ac.uk/interpro/IEntry?ac="
+	annoMap.source = "InterProScan"
+	annoMap.regex = "(IPR\\d+).*?"
+	annoMap.anno_file = "A_viteae.iprscan.raw"
+	annoMap.loaded = false	
+	addAnno("maker1.gff3",annoMap)
+	
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 /////// A. viteae
 def A_vit(){

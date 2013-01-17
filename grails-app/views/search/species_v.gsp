@@ -14,7 +14,12 @@
 	<table>
 		<tr>
 			<td width=150> 
-				<a href = "species_search?Gid=${meta.id[0]}"><img src="${resource(dir: 'images', file: meta.image_file[0])}" width="150" style="float:left;"/></a>
+				<g:if test="${grailsApplication.mainContext.getResource('images/meta.image_file[0]').exists()}"> 
+	    			<a href = "species_search?Gid=${meta.id[0]}"><img src="${resource(dir: 'images', file: meta.image_file[0])}" width="150" style="float:left;"/></a>
+	    		</g:if>
+	    		<g:else>
+	    			<a href = "species_search?Gid=${meta.id[0]}"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" width="150" style="float:left;"/></a>
+	    		</g:else>
 			</td>
 			<td>
 				<div style="overflow:auto; padding-right:2px; height:150px">

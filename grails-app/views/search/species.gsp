@@ -83,8 +83,13 @@
   	 		<a name="${res.genus} ${res.species}"><h2><b><i>${res.genus} ${res.species}</i></b></h2></a>		
   	 		<table>
   	 			<tr>
-  	 				<td width=150> 
-	    				<a href = "species_v?Sid=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="150" style="float:left;"/></a>
+  	 				<td width=150>
+  	 					<g:if test="${grailsApplication.mainContext.getResource('images/res.image_file').exists()}"> 
+	    					<a href = "species_v?Sid=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="150" style="float:left;"/></a>
+	    				</g:if>
+	    				<g:else>
+	    					<a href = "species_v?Sid=${res.id}"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" width="150" style="float:left;"/></a>
+	    				</g:else>
 	    			</td>
 	    			<td>
 	    				<div style="overflow:auto; padding-right:2px; height:150px">
