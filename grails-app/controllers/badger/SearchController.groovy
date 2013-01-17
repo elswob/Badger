@@ -55,14 +55,13 @@ class SearchController {
     	render(template:"gffSelectResponse", model: [genes:genes,genome:genome.id[0]])
     }
     
-    @Cacheable('species_cache')
+    //@Cacheable('species_cache')
     //@CacheEvict(value='species_cache', allEntries=true)
     def species_search() {
     	def sql = new Sql(dataSource)
     	def Gid = params.Gid
     	def genomeData = FileData.findById(Gid)	
     	def geneData = FileData.findById(params.GFFid)
-    	println "genome_id = "+params.genome_id
     	 //get genome info and stats
     	 def genomeInfoSql = "select non_atgc,contig_id,gc,length,coverage from genome_info,file_data where file_id = file_data.id and file_data.id = '"+Gid+"' order by length desc;"
 	 	 //def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"

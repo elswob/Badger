@@ -73,8 +73,10 @@
     </table>
   	 -->
   	 <table class="table_100" align="center"><tr>
-  	 <td><div id="svgCanvas1"> </div></td>
-  	  <td><div id="svgCanvas2"> </div></td>
+  	 <g:if test="${grailsApplication.config.t.file}">
+  	 	<td><div id="svgCanvas1"> </div></td>
+  	  	<td><div id="svgCanvas2"> </div></td>
+  	  </g:if>
   	  </tr></table>
   	 	<br>
   	 	<g:each var="res" in="${meta}">

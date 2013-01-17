@@ -22,67 +22,69 @@ def getBlast(){
 
 //edit phyloXMl file if present
 def editTree(){
-	println "Editing phyloXML tree..."
-	def tree = new File("web-app/trees/badger_tree.xml")
-	if (tree.exists()){tree.delete()}
-	
-	def treeFile = new File("web-app/trees/GK_nem_rooted.xml").text
-	
-	def species = MetaData.findAll()
-	def sList = []
-	species.each{
-	  sList.push(it.genus+" "+it.species)
-	}
-	//println "list = "+sList
-	
-	treeFile.split("\n").each{
-	  if ((matcher = it =~ /^<phylogeny rooted=.*/)){
-		tree << it+"\n"
-		tree << " <render>\n"
-		tree << " <parameters>\n"
-		tree << "  <circular>\n"
-		tree << "   <bufferRadius>0.6</bufferRadius>\n"
-		tree << "  </circular>\n"
-		tree << "  <rectangular>\n"
-		tree << "   <bufferX>200</bufferX>\n"
-		tree << "  </rectangular>\n"
-		tree << " </parameters>\n"
-		tree << "  <charts>\n"
-		tree << "   <component type=\"binary\" thickness=\"0\" />\n"
-		tree << "  </charts>\n"
-		tree << "  <styles>\n"
-		tree << "   <bold fill=\"#e5bd94\" stroke=\"#e5bd94\" type=\"radialGradient\" font-size=\"12\">\n"        
-		tree << "    <stop offset=\"0%\" style=\"stop-color:#e5bd94; stop-opacity:0\"/>\n"
-		tree << "    <stop offset=\"93%\" style=\"stop-color:#e5bd94; stop-opacity:1\"/>\n"
-		tree << "    <stop offset=\"100%\" style=\"stop-color:#D1A373; stop-opacity:1\"/>\n"
-		tree << "   </bold>\n" 		
-		tree << "   <none fill=\"#FFFFFF\" stroke=\"#FFFFFF\">\n"
-    	tree << "   </none>\n"
-    	tree << "   <out fill=\"#7798CF\" stroke=\"#7798CF\">\n"
-    	tree << "   </out>"
-		tree << "  </styles>\n"
-		tree << " </render>\n"
-	  }else if ((matcher = it =~ /(.*?)<name>(.*?)<\/name>/)){
-		def l = it
-		//println "match = "+matcher[0][2]
-		if (matcher[0][2] in sList){
-		  tree << matcher[0][1]+"<name bgStyle=\"bold\">"+matcher[0][2]+"</name>\n"
-		  tree << matcher[0][1]+"<chart>\n"
-		  tree << " "+matcher[0][1]+"<component>bold</component>\n"
-		  tree << matcher[0][1]+"</chart>\n"
-		  tree << matcher[0][1]+"<annotation>\n"
-		  tree << " "+matcher[0][1]+"<desc>"+matcher[0][2]+"</desc>\n"
-		  tree << " "+matcher[0][1]+"<uri>#"+matcher[0][2]+"</uri>\n"
-		  tree << matcher[0][1]+"</annotation>\n" 
-		  //println "in list"
-		}else{
-		  //tree << it+"\n"
-		  tree << matcher[0][1]+"<name bgStyle=\"none\">"+matcher[0][2]+"</name>\n"
+	if (grailsApplication.config.t.file){
+		println "Editing phyloXML tree..."
+		def tree = new File("web-app/trees/badger_tree.xml")
+		if (tree.exists()){tree.delete()}
+		def treeFile = new File(grailsApplication.config.t.file).text
+		def species = MetaData.findAll()
+		def sList = []
+		species.each{
+		  sList.push(it.genus+" "+it.species)
 		}
-	  }else{      
-		tree << it+"\n"
-	  }
-   }
+		//println "list = "+sList
+		
+		treeFile.split("\n").each{
+		  if ((matcher = it =~ /^<phylogeny rooted=.*/)){
+			tree << it+"\n"
+			tree << " <render>\n"
+			tree << " <parameters>\n"
+			tree << "  <circular>\n"
+			tree << "   <bufferRadius>0.6</bufferRadius>\n"
+			tree << "  </circular>\n"
+			tree << "  <rectangular>\n"
+			tree << "   <bufferX>200</bufferX>\n"
+			tree << "  </rectangular>\n"
+			tree << " </parameters>\n"
+			tree << "  <charts>\n"
+			tree << "   <component type=\"binary\" thickness=\"0\" />\n"
+			tree << "  </charts>\n"
+			tree << "  <styles>\n"
+			tree << "   <bold fill=\"#e5bd94\" stroke=\"#e5bd94\" type=\"radialGradient\" font-size=\"12\">\n"        
+			tree << "    <stop offset=\"0%\" style=\"stop-color:#e5bd94; stop-opacity:0\"/>\n"
+			tree << "    <stop offset=\"93%\" style=\"stop-color:#e5bd94; stop-opacity:1\"/>\n"
+			tree << "    <stop offset=\"100%\" style=\"stop-color:#D1A373; stop-opacity:1\"/>\n"
+			tree << "   </bold>\n" 		
+			tree << "   <none fill=\"#FFFFFF\" stroke=\"#FFFFFF\">\n"
+			tree << "   </none>\n"
+			tree << "   <out fill=\"#7798CF\" stroke=\"#7798CF\">\n"
+			tree << "   </out>"
+			tree << "  </styles>\n"
+			tree << " </render>\n"
+		  }else if ((matcher = it =~ /(.*?)<name>(.*?)<\/name>/)){
+			def l = it
+			//println "match = "+matcher[0][2]
+			if (matcher[0][2] in sList){
+			  tree << matcher[0][1]+"<name bgStyle=\"bold\">"+matcher[0][2]+"</name>\n"
+			  tree << matcher[0][1]+"<chart>\n"
+			  tree << " "+matcher[0][1]+"<component>bold</component>\n"
+			  tree << matcher[0][1]+"</chart>\n"
+			  tree << matcher[0][1]+"<annotation>\n"
+			  tree << " "+matcher[0][1]+"<desc>"+matcher[0][2]+"</desc>\n"
+			  tree << " "+matcher[0][1]+"<uri>#"+matcher[0][2]+"</uri>\n"
+			  tree << matcher[0][1]+"</annotation>\n" 
+			  //println "in list"
+			}else{
+			  //tree << it+"\n"
+			  tree << matcher[0][1]+"<name bgStyle=\"none\">"+matcher[0][2]+"</name>\n"
+			}
+		  }else{      
+			tree << it+"\n"
+		  }
+	   }
+	}else{
+		println "No phylogenetic tree provided!"
+	}
 }
 
 def getFiles = FileData.findAllByLoaded(false,[sort:"id"])
