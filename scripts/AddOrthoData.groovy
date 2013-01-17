@@ -7,9 +7,13 @@ def grailsApplication
 orthoCheck()
 def orthoCheck(){
 	if (grailsApplication.config.o.file){
-    	def  orthoFile = new File("data/"+grailsApplication.config.o.file.trim()).text
-    	println "Adding orthoMCL fole - "+grailsApplication.config.o.file
-    	addOrtho(orthoFile)
+		if (new File("data/"+grailsApplication.config.o.file.trim()).exists()){
+    		def  orthoFile = new File("data/"+grailsApplication.config.o.file.trim()).text
+    		println "Adding orthoMCL fole - "+grailsApplication.config.o.file
+    		addOrtho(orthoFile)
+    	}else{
+    		println "Orthomcl file data/"+grailsApplication.config.o.file+" does not exist!"
+    	}
     }else{
     	println "No orthoMCL file provided"
     }
