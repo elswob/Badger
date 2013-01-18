@@ -8,7 +8,7 @@ orthoCheck()
 def orthoCheck(){
 	if (grailsApplication.config.o.file){
 		if (new File("data/"+grailsApplication.config.o.file.trim()).exists()){
-    		def  orthoFile = new File("data/"+grailsApplication.config.o.file.trim()).text
+    		def  orthoFile = new File("data/"+grailsApplication.config.o.file.trim())
     		println "Adding orthoMCL fole - "+grailsApplication.config.o.file
     		addOrtho(orthoFile)
     	}else{
