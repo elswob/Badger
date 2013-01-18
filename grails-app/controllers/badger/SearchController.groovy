@@ -55,7 +55,7 @@ class SearchController {
     	render(template:"gffSelectResponse", model: [genes:genes,genome:genome.id[0]])
     }
     
-    //@Cacheable('species_cache')
+    @Cacheable('species_cache')
     //@CacheEvict(value='species_cache', allEntries=true)
     def species_search() {
     	def sql = new Sql(dataSource)
@@ -531,7 +531,7 @@ class SearchController {
 			sql.close()
 		}
       }
-    //@Cacheable('m_cache')
+    @Cacheable('m_cache')
     //@CacheEvict(value='m_cache', allEntries=true)
     def m_info() {
     	if (grailsApplication.config.i.links.genes == 'private' && !isLoggedIn()) {
