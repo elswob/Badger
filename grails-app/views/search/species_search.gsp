@@ -348,7 +348,7 @@
     });
     $('#fun_chart').bind('jqplotDataClick',
 		function (ev, seriesIndex, pointIndex, data) {
-			alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
+			//alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
 			if (fDb[pointIndex] == 'BlastProDom' || fDb[pointIndex] == 'HMMTigr' || fDb[pointIndex] == 'SignalPHMM' || fDb[pointIndex] == 'FPrintScan' || fDb[pointIndex] == 'ProfileScan' || fDb[pointIndex] == 'TMHMM' || fDb[pointIndex] == 'HMMPIR' || fDb[pointIndex] == 'HAMAP' || fDb[pointIndex] == 'HMMPanther' || fDb[pointIndex] == 'HMMPfam' || fDb[pointIndex] == 'PatternScan' || fDb[pointIndex] == 'Gene3D' || fDb[pointIndex] == 'HMMSmart' || fDb[pointIndex] == 'SuperFamily'){
 				//window.open("/search/gene_link?annoType=IPR&val="+fDb[pointIndex]+"&id="+data[0]);
 			}else{
@@ -404,7 +404,7 @@
     
     $('#blast_chart').bind('jqplotDataClick',
 		function (ev, seriesIndex, pointIndex, data) {
-			alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
+			//alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
 			//window.open("/search/gene_link?annoType=Blast&val="+bDb[pointIndex]);
 		}
 	);
