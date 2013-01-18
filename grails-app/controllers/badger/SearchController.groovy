@@ -729,8 +729,12 @@ class SearchController {
      		def genesql = "select gene_info.* from gene_info,file_data where gene_info.gene_id = '"+params.gid+"' and file_data.id = "+GFFid+" and gene_info.file_id = file_data.id;"
      		println genesql
      		def gene_results = sql.rows(genesql)
-     		//println "g = "+gene_results
-			return [ Gid:Gid, GFFid:GFFid, results: gene_results, metaData:metaData]
+     		println "only one transcript, skipping the gene page!"
+     		if (gene_results.size() == 1){
+     			redirect(action: "m_info", params: [Gid: Gid, GFFid: GFFid, mid:gene_results.mrna_id])
+     		}else{	
+				return [ Gid:Gid, GFFid:GFFid, results: gene_results, metaData:metaData]
+			}
 		}
     }
 	def gene_link = {
