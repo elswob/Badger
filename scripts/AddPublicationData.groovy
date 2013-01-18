@@ -145,10 +145,20 @@ def addPub(pubFile,data_id){
 			pubMap.authors = nameString
 			nameString = ''
 			dateString = ''  
-			//check for missing issues           
-         	if (!pubMap.issue){
-            	pubMap.issue = "n/a"
-          	}
+
+          	//check for missing abstracts, e.g. http://www.ncbi.nlm.nih.gov/pubmed?term=5594788           
+         	if (!pubMap.abstractText){println "No abstract available for "+pubMap.pubmedId ; pubMap.abstractText = "Not available"} 
+          	//other checks
+          	if (!pubMap.issue){println "No issue available for "+pubMap.pubmedId ; pubMap.issue = "Not available"} 
+          	if (!pubMap.journal){ println "No journal available for "+pubMap.pubmedId; pubMap.journal = "Not available"}
+          	if (!pubMap.journal_short){ println "No journal_short available for "+pubMap.pubmedId; pubMap.journal_short = "Not available"}          	
+          	if (!pubMap.volume){ println "No volume available for "+pubMap.pubmedId; pubMap.volume = "Not available"}
+          	if (!pubMap.title){ println "No title available for "+pubMap.pubmedId; pubMap.title = "Not available"}
+          	if (!pubMap.authors){ println "No authors available for "+pubMap.pubmedId; pubMap.authors = "Not available"}
+          	if (!pubMap.dateString){ println "No dateString available for "+pubMap.pubmedId; pubMap.dateString = "Not available"}
+          	if (!pubMap.doi){ println "No doi available for "+pubMap.pubmedId; pubMap.doi = "Not available"}
+          	if (!pubMap.pubmedId){ println "No pubmedId available!"}
+
           	//println pubMap
             Publication pub = new Publication(pubMap)
 			meta.addToPubs(pub)
@@ -161,7 +171,7 @@ def addPub(pubFile,data_id){
               	//println "pub = "+pub
 			}
 			//clear abstract text
-			pubMap.abstractText = ''
+			pubMap.abstractText = ""
 		}
 	}
 	println "Added "+count_all 
