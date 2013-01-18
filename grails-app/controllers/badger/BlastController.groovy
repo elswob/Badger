@@ -99,10 +99,17 @@ class BlastController {
         	println "no sequence, redirecting...";
         	redirect(action:"blastError", params:[error:"no_seq"])
         //check to see if first line doesn't start with > (not the best way to do this i'm sure)
-        }else if (blastName =~ /^\w+/){
-        	println "incorrect header, redirecting... "+blastName
-        	redirect(action:"blastError", params:[error:"no_header"])
+        //}else if (blastName =~ /^\w+/){
+        //	println "incorrect header, redirecting... "+blastName
+        //	blastName = ">blast"
+        //	redirect(action:"blastError", params:[error:"no_header"])
         }else{
+        	if (blastName =~ /^>\w+/){
+        		println "header is ok"
+        	}else{
+        		println "incorrect header, renaming "+blastName
+        		blastName = ">blastJob"
+        	}
 			//get rid of the >	
 			blastName = blastName.replaceAll(/>/, "") 
 			//generate unique id

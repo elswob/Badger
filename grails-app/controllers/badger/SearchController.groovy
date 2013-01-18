@@ -22,7 +22,12 @@ class SearchController {
     	def metaData = MetaData.findAll(sort:"genus")
     	def genomes = GenomeData.findAll()
     	//def fileData = FileData.findAll()
-    	return [meta: metaData, genomes: genomes]
+    	println "Number of species = "+metaData.size()
+    	if (metaData.size() == 1){
+    		redirect(action: "species_v", params: [Sid: metaData.id])
+    	}else{
+    		return [meta: metaData, genomes: genomes]
+    	}
     	
     }
     def species_v = {
