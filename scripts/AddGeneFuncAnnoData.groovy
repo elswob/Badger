@@ -133,7 +133,7 @@ def addInterProScan(anno,annoFile){
 			def score = splitter[8] as float
 			annoMap.score = score
 			//annoMap.descr = iprMap[splitter[11]]
-			annoMap.descr = splitter[5]
+			annoMap.descr = splitter[12]
 			if (score < 1e-5){
 				GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
 				GeneAnno ga = new GeneAnno(annoMap)

@@ -81,7 +81,7 @@
 			document.getElementById('orthoClusterPepFileId').value=table_scrape;
 		}
 	    
-	    //alert(table_scrape)
+	    alert(table_scrape)
 	    return table_scrape;
 	    
     }
