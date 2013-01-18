@@ -1,6 +1,8 @@
 package badger
+import groovy.sql.Sql
 
 class FileDownloadController {
+	javax.sql.DataSource dataSource
 
     def index() { }
     def blast_download = {
@@ -40,6 +42,26 @@ class FileDownloadController {
          response.contentType = 'text/csv'
          response.outputStream << file_builder
          response.outputStream.flush()
+    }
+    
+    def exon_download = {
+    	def sql = new Sql(dataSource)
+    	def m_id = params.fileName
+    	def getExonSql = "select exon_info.* from exon_info,gene_info where exon_info.gene_id = gene_info.id and gene_info.mrna_id = '"+m_id+"' order by exon_number;";
+    	println getExonSql
+    	def getExon = sql.rows(getExonSql)
+    	def file_builder=""
+     	getExon.each {
+     	 	println "number = "+it.exon_number
+     	 	file_builder = file_builder + ">"+it.exon_number+"\n"+it.sequence+"\n"
+		}
+		println "seq = "+params.seq
+		def name = m_id.replaceAll(' ','_')
+		println "created download file "+name+".exons.fna"
+     	response.setHeader "Content-disposition", "attachment; filename="+name+".exons.fna"
+        response.contentType = 'text/csv'
+        response.outputStream << file_builder
+        response.outputStream.flush()
     }
     
 	def gene_download = {

@@ -81,7 +81,7 @@
 			document.getElementById('orthoClusterPepFileId').value=table_scrape;
 		}
 	    
-	    alert(table_scrape)
+	    //alert(table_scrape)
 	    return table_scrape;
 	    
     }
@@ -798,6 +798,13 @@
      
     <div id="exon_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
 		<h1>Exons</h1>
+		<div class="inline">
+			Download: 
+			<g:form name="exonDownload" url="[controller:'FileDownload', action:'exon_download']">
+				<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
+				<a href="javascript:void(0);" onclick="document.exonDownload.submit()">exon sequences</a>
+			</g:form>
+		</div>
 		 <table cellpadding="0" cellspacing="0" border="0" class="display" id="exon_table">
 		 <thead>
 			<tr>
