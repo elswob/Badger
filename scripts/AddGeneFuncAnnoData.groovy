@@ -108,13 +108,13 @@ def addInterProScan(anno,annoFile){
 	println new Date()
   	def count=0
 	// get the ipr descriptions
-	def iprMap = [:]
-	iprFile = new File('data/entry.list')
- 	iprFile.eachLine { line ->
-        if ((matcher = line =~ /(IPR\d+)\s+(.*)/)){
-    		iprMap[matcher[0][1]] = matcher[0][2]
-        }
-    }
+	//def iprMap = [:]
+	//iprFile = new File('data/entry.list')
+ 	//iprFile.eachLine { line ->
+    //   if ((matcher = line =~ /(IPR\d+)\s+(.*)/)){
+    //		iprMap[matcher[0][1]] = matcher[0][2]
+    //    }
+    //}
     def annoMap = [:]
     annoFile.eachLine { line ->
 		count++
@@ -132,7 +132,8 @@ def addInterProScan(anno,annoFile){
 			annoMap.anno_stop = stop
 			def score = splitter[8] as float
 			annoMap.score = score
-			annoMap.descr = iprMap[splitter[11]]
+			//annoMap.descr = iprMap[splitter[11]]
+			annoMap.descr = splitter[5]
 			if (score < 1e-5){
 				GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
 				GeneAnno ga = new GeneAnno(annoMap)
