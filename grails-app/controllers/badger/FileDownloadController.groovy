@@ -55,7 +55,6 @@ class FileDownloadController {
      	 	println "number = "+it.exon_number
      	 	file_builder = file_builder + ">"+it.exon_number+"\n"+it.sequence+"\n"
 		}
-		println "seq = "+params.seq
 		def name = m_id.replaceAll(' ','_')
 		println "created download file "+name+".exons.fna"
      	response.setHeader "Content-disposition", "attachment; filename="+name+".exons.fna"

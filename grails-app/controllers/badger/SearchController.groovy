@@ -212,7 +212,8 @@ class SearchController {
      		redirect(controller: "home", action: "index")
      	}else{
      		def sql = new Sql(dataSource)
-     		def gsql = "select count(gene_id) as g_count,count(mrna_id) as m_count,genus,species,genome_data.id from gene_info,file_data,genome_data,meta_data where gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by genus,species,genome_data.id;"
+     		def gsql = "select count(gene_id) as g_count,count(mrna_id) as m_count,genus,species,genome_data.id,meta_data.id as sid from gene_info,file_data,genome_data,meta_data where gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by genus,species,genome_data.id,meta_data.id;"
+     		println gsql
      		def genes = sql.rows(gsql)
      		def tsql = "select count(contig_id) as t_count,genus,species,genome_data.id from trans_info,file_data,genome_data,meta_data where trans_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by genus,species,genome_data.id;"
      		def trans = sql.rows(tsql)

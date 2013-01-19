@@ -37,7 +37,7 @@
 	<table>
   	    <tr><td><g:link controller="home" action="publications">${printf("%,d\n",badger.Publication.count())} publications</g:link></td><td>The title and abstract of publications matching the names of the species in the database</td></tr>
 		<g:each var="res" in="${genes}">	
-  			 <tr><td><g:link controller="search" action="species_search" params="${[Gid:res.id]}">${printf("%,d\n",res.g_count)} ${res.genus} ${res.species} genes</g:link> </td><td> Annotation descriptions from the ${res.genus} ${res.species} gene set</td></tr>
+  			 <tr><td><g:link controller="search" action="species_v" params="${[Sid:res.sid]}">${printf("%,d\n",res.g_count)} ${res.genus} ${res.species} genes</g:link> </td><td> Annotation descriptions from the ${res.genus} ${res.species} gene set</td></tr>
 			</g:each>
   	</td></tr>
   </table>
