@@ -96,6 +96,9 @@
 <h1>Admin for the <i>${grailsApplication.config.projectID}</i> project:</h1>
 <p>This is where the administrator adds, edits and deletes the information for each of the data sets in the database.
 <br>
+<h1>Edit the home page</h1>
+Click <g:link controller="home" action="index" params="${[edit: 'y']}">here</g:link>.
+<br>
 <h1>Edit or delete a data set:</h1>
 <g:if test = "${metaData}">	
 	<g:each var="res" in="${metaData}">

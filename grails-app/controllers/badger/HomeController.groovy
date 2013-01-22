@@ -12,8 +12,27 @@ class HomeController {
  //@Secured(['ROLE_ADMIN','ROLE_USER'])
  def index = {
  	 def newsData = News.findAll(sort:"dateString",order:"desc")
- 	 return [newsData: newsData] 	 
+ 	 def edits = PageEdits.findAllByPage("/home/index",[sort:"dateString", order: "desc", max: 1])
+ 	 println "top edit for /home/index = "+edits
+ 	 return [newsData: newsData, edits:edits] 	 
  }
+ 
+ def editPage = {
+ 		def sql = new Sql(dataSource)
+ 		if (params.reset == "y"){
+ 			def dSql = "delete from page_edits where page = '"+params.page+"'";
+ 			def del = sql.execute(dSql)
+ 			println "deleted page edits for "+params.page
+ 		}else{
+			def editMap = [:]
+			editMap.edit = params.edits
+			editMap.page = params.pageName
+			editMap.dateString = new Date()
+			new PageEdits(editMap).save()
+		}
+		redirect(controller: "home", action: "index")
+	}
+ 
  def browse = {
  	  //check the privacy setting
      if (grailsApplication.config.i.links.priv.browse && !isLoggedIn()) {
