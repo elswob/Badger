@@ -537,7 +537,7 @@ class SearchController {
 			sql.close()
 		}
       }
-    @Cacheable('m_cache')
+    //@Cacheable('m_cache')
     //@CacheEvict(value='m_cache', allEntries=true)
     def m_info() {
     	if (grailsApplication.config.i.links.genes == 'private' && !isLoggedIn()) {
@@ -787,10 +787,10 @@ class SearchController {
     	def align 
     	if (params.seq == 'nuc'){
     		println "clustering with "+params.seq+" "+params.fileName+" and "+params.orthoClusterNucFileId
-    		align = alignService.runMuscle(params.seq,params.fileName,params.orthoClusterNucFileId)
+    		align = alignService.runAlign(params.seq,params.fileName,params.orthoClusterNucFileId)
     	}else{
     		println "clustering with "+params.seq+" "+params.fileName+" and "+params.orthoClusterPepFileId
-    		align = alignService.runMuscle(params.seq,params.fileName,params.orthoClusterPepFileId)	
+    		align = alignService.runAlign(params.seq,params.fileName,params.orthoClusterPepFileId)	
     	}
     	return [align:align]
 	}

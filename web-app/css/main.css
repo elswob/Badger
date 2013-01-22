@@ -786,6 +786,18 @@ a.skip {
   white-space: pre;
   overflow: auto 
 }
+
+.align_res{
+  line-height: 100%;
+  font-family:courier;
+  font-size: 10pt;
+  margin: 0px;
+  padding: 5px;
+  /* border: 1px solid black; */
+  white-space: pre;
+  overflow: auto 
+}
+
 .page_num{
   letter-spacing:3px
 }

@@ -10,7 +10,12 @@
 <body>
   	 <g:if test = "${align}">
   	 	<h1>Alignment results</h1>
-  	 	${align.type}
+  	 	Data type = ${align.type}<br>
+  	 	Name = ${align.name}<br>
+  	 	Outfile = ${align.OutFile}<br>
+  	 	<div class="align_res">
+	  	 	Alignment = ${align.alignOut}<br>
+	  	</div>
   	 </g:if>
 </body>
 </html>

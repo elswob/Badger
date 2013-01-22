@@ -6,7 +6,7 @@ class AlignService {
 	javax.sql.DataSource dataSource
 	def grailsApplication
 	
-	def runMuscle(type,name,fileList){
+	def runAlign(type,name,fileList){
 		//params.seq,params.fileName,params.orthoFileId
 		def object_array = fileList
 		object_array = object_array.replaceAll(/\[/, '')
@@ -42,16 +42,25 @@ class AlignService {
 		println "writing fasta to file"
 		File f = new File(JobId)
 		f.write(file_builder)
-		def OutFile = new File(JobId+".out")       
-		println "running alignment"
-		return [type:type, name:name]
-				
-		//String[] comm = ["${program}", "-outfmt", "${outFmt}", "-num_threads", "1", "-query", "${blastJobId}", "-evalue", "${eval}", "-num_descriptions", "${numDesc}", "-num_alignments", "${numAlign}", "-out", "${BlastOutFile}", "-db", "$dbString"]
-		//ProcessBuilder blastProcess = new ProcessBuilder(comm)  
-		//blastProcess.redirectErrorStream(true)
-        //Process p = blastProcess.start()
-		//p.waitFor()
-		//println "Error = "+p.text
+		def OutFile = new File(JobId+".out")   
+		//def aligner = grailsApplication.config.clustaloPath.trim()
+		def aligner = grailsApplication.config.musclePath.trim()
+		    
+		println "running alignment - ${aligner} -infile ${f} -outfile ${OutFile}"
+		
+		//clustal omega		
+		//String[] comm = ["${aligner}", "-i", "${f}", "-o", "${OutFile}", "--outfmt", "clu"]		
+		//muscle
+		String[] comm = ["${aligner}","-in", "${f}", "-out", "${OutFile}", "-html"]
+		
+		ProcessBuilder alignProcess = new ProcessBuilder(comm)  
+		alignProcess.redirectErrorStream(true)
+        Process p = alignProcess.start()
+		p.waitFor()
+		println "Error = "+p.text
+		def alignOut = new File("$OutFile").text
+		
+		return [type:type, name:name, OutFile:OutFile, alignOut:alignOut]
 
 	}
 }

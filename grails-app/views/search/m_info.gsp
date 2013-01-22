@@ -861,7 +861,7 @@
 						<g:hiddenField name="seq" value="pep"/>
 						<a href="javascript:void(0);" onclick="get_table_data('orthoClusterPep');document.orthoPepCluster.submit()">Peptides</a>
 					</g:form>
-				
+				</div>
 				<table id="orthomcl_table" class="display" >
 					  <thead>
 						<tr>
