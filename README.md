@@ -183,14 +183,14 @@ Add all files for M. meles in here, e.g:
 * InterProScan RAW files
 * Custom tabular annotation files
 
-Custom tabular format is defined as such:
+Custom tabular format is defined as 6 tab delimited columns:
 
-Column 1 = transcript ID
-Column 2 = source
-Column 3 = annotation ID
-Column 4 = start base of annotation on transcript
-Column 5 = end base of annotation on transctipt
-Column 6 = score
+1 = the transcript ID  
+2 = the source of the annotation  
+3 = the annotation ID  
+4 = the start base of annotation on transcript  
+5 = the end base of annotation on transctipt  
+6 = the score  
 
 e.g.
 
