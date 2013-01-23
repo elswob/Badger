@@ -311,10 +311,8 @@
          <br>
   </g:if>
   <g:else>
-  	<g:if test = "${grailsApplication.config.seqData.GenePep}">
     	<hr size = 5 color="green" width="100%" style="margin-top:10px">
   		<h2>0 matches from the gene data.</h2>
-  	</g:if>
   </g:else>
   
     <g:if test="${pubRes}">
