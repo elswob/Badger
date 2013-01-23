@@ -255,16 +255,8 @@ The naming convention expected is that each transcript ID is preceded by an Orth
 
 ## Data rules
 
-####Database rules
-
-1. Each species can only have one genome sequence and scaffolds IDs do not have to be unique (e.g. contig_1 is ok)
-2. Each genome sequnece can have multiple gff files (gene sets) and transcriptomes
-3. All annotation is associated with a gff file
-4. Each gene id has to be unique even across species (this rule can be removed with a little tweaking)
-
-####Data input rules
-
-1. GFF3 files should follow this format:
+1. All chromosme/scaffold/contig IDs must be unique, e.g. Mmeles_v1.0_scaffold_1
+2. GFF3 files should follow this format:
 
 ```
 http://rice.bio.indiana.edu:7082/annot/gff3.html
@@ -281,39 +273,27 @@ bp upstream from the transcriptional start site of EDEN.1 and EDEN2.
 
 Here is how this gene should be described using GFF3:
 
- 0  ##gff-version   3
- 1  ##sequence-region   ctg123 1 1497228       
- 2  ctg123 . gene            1000  9000  .  +  .  ID=gene00001;Name=EDEN
- 3  ctg123 . TF_binding_site 1000  1012  .  +  .  ID=tfbs00001;Parent=gene00001
-
- 4  ctg123 . mRNA            1050  9000  .  +  .  ID=mRNA00001;Parent=gene00001;Name=EDEN.1
- 5  ctg123 . five_prime_UTR  1050  1200  .  +  .  Parent=mRNA0001
- 6  ctg123 . CDS             1201  1500  .  +  0  Parent=mRNA0001
- 7  ctg123 . CDS             3000  3902  .  +  0  Parent=mRNA0001
- 8  ctg123 . CDS             5000  5500  .  +  0  Parent=mRNA0001
- 9  ctg123 . CDS             7000  7600  .  +  0  Parent=mRNA0001
-10  ctg123 . three_prime_UTR 7601  9000  .  +  .  Parent=mRNA0001
-
-11  ctg123 . mRNA            1050  9000  .  +  .  ID=mRNA00002;Parent=gene00001;Name=EDEN.2
-12  ctg123 . five_prime_UTR  1050  1200  .  +  .  Parent=mRNA0002
-13  ctg123 . CDS             1201  1500  .  +  0  Parent=mRNA0002
-14  ctg123 . CDS             5000  5500  .  +  0  Parent=mRNA0002
-15  ctg123 . CDS       7000  7600	 .  +  0  Parent=mRNA0002
-16  ctg123 . three_prime_UTR 7601  9000	 .  +  .  Parent=mRNA0002
-
-17  ctg123 . mRNA            1300  9000  .  +  .  ID=mRNA00003;Parent=gene00001;Name=EDEN.3
-18  ctg123 . five_prime_UTR  1300  1500	 .  +  .  Parent=mRNA0003
-19  ctg123 . five_prime_UTR  3000  3300	 .  +  .  Parent=mRNA0003
-20  ctg123 . CDS             3301  3902  .  +  0  Parent=mRNA0003
-21  ctg123 . CDS	     5000  5500	 .  +  2  Parent=mRNA0003
-22  ctg123 . CDS	     7000  7600	 .  +  2  Parent=mRNA0003
-23  ctg123 . three_prime_UTR 7601  9000	 .  +  .  Parent=mRNA0003
+##gff-version   3
+##sequence-region   ctg123 1 1497228       
+ctg123 . gene            1000  9000  .  +  .  ID=gene00001;Name=EDEN
+ctg123 . mRNA            1050  9000  .  +  .  ID=mRNA00001;Parent=gene00001;Name=EDEN.1
+ctg123 . CDS             1201  1500  .  +  0  Parent=mRNA0001
+ctg123 . CDS             3000  3902  .  +  0  Parent=mRNA0001
+ctg123 . CDS             5000  5500  .  +  0  Parent=mRNA0001
+ctg123 . CDS             7000  7600  .  +  0  Parent=mRNA0001
+ctg123 . mRNA            1050  9000  .  +  .  ID=mRNA00002;Parent=gene00001;Name=EDEN.2
+ctg123 . CDS             1201  1500  .  +  0  Parent=mRNA0002
+ctg123 . CDS             5000  5500  .  +  0  Parent=mRNA0002
+ctg123 . CDS       7000  7600	 .  +  0  Parent=mRNA0002
+ctg123 . mRNA            1300  9000  .  +  .  ID=mRNA00003;Parent=gene00001;Name=EDEN.3
+ctg123 . CDS             3301  3902  .  +  0  Parent=mRNA0003
+ctg123 . CDS	     5000  5500	 .  +  2  Parent=mRNA0003
+ctg123 . CDS	     7000  7600	 .  +  2  Parent=mRNA0003
 ```
-
-2. Each transcript and protein must have a unique ID and match the ID tag in the GFF file
-3. GFF3 files need to be sorted with respect to the proteins, e.g. gene -> mRNA -> CDS. This can be achieved with gffsort.pl (see wormbase section below).
-4. GFF3 files are for gene predictions only, any term matching gene, mRNA or CDS in the third column will be picked up, so remove anything that isn't a gene, e.g. ncRNA in some of the wormbase files
-5. Genome FASTA files, in particular well scaffolded ones, should be single line sequence as it will be quicker to load rather than using StringBuilder
-6. All images go in web-app/images not in the user generated data/directores
+3. All gene IDs must be unique, e.g. Mmeles_v_1.0_g_1 / Mmeles_v_1.0_t_1 and match the ID in the GFF3 file
+4. Alternate transcripts are fine as long as names are unique and CDS follows mRNA
+5. GFF3 files need to be sorted with respect to the proteins, e.g. gene -> mRNA -> CDS. This can be achieved with gffsort.pl (see wormbase section below).
+6. GFF3 files are for gene predictions only, any term matching gene, mRNA or CDS in the third column will be picked up, so remove anything that isn't a gene, e.g. ncRNA in some of the wormbase files
+7. All images go in web-app/images not in the user generated data/directores
 
 
