@@ -234,7 +234,7 @@ This tree needs to be in the [phyloXML](http://www.phyloxml.org/) format. A newi
 
 #### OrthoMCL analysis
 
-Orthologs of gene trancripts can be displayed if an OrthoMCL groups file is provided. This is the file produced during step 13 od the OrthoMCL process:
+Orthologs of gene trancripts can be displayed if an OrthoMCL groups file is provided in the badger.config.properties file. This is the file produced during step 13 of the OrthoMCL process:
 
 ```
 ========== Step 13: orthomclMclToGroups ==========
