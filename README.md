@@ -204,11 +204,15 @@ nAv.1.0.1.t00021-RA     EC      3.1.3.16        4       316      295    Phosphop
 
 ## Start it up
 
-#### Start grails
+#### Start grails 
 
-From within root directory of Badger:
+To run on port 8080, run the following command as normal user from within root directory of Badger:
 
 `grails prod run-app`
+
+Or to run on port 80, run as root:
+
+`grails run-app -Dserver.port=80`
 
 If during start up there is a warning about the version of the app being older than the version of Grails installed, just upgrade the version of the app.
 
