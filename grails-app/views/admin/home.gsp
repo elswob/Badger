@@ -10,14 +10,14 @@
   
   <script>
   function demoData(sp){
-  	if (sp == "test"){
-		$("#genus").val("Test");
-		$("#species").val("species");
-		$("#version").val("1.0.1");
-		$("#description").val("Test data set.");
+  	if (sp == "badger"){
+		$("#genus").val("Meles");
+		$("#species").val("meles");
+		$("#version").val("1.0");
+		$("#description").val("Badger genome.");
 		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/");
-		$("#image_f").val("a_viteae_lifecycle.jpg");
-		$("#image_s").val("A. viteae lifecycle; from http://www.uni-giessen.de");
+		$("#image_f").val("badger.jpg");
+		$("#image_s").val("Taken from google");
 		
 		$("#dir").val("test");
 		//$("#trans").val("trans.fa"); $("#trans_v").val("1.1"); $("#trans_d").val("UniGenes"); $("select[name='trans_c']").val("n");
@@ -93,7 +93,6 @@
   
   <body>
   <g:link action="home">Admin</g:link> > Home 
-<h1>Admin for the <i>${grailsApplication.config.projectID}</i> project:</h1>
 <p>This is where the administrator adds, edits and deletes the information for each of the data sets in the database.
 <br>
 <h1>Edit the home page</h1>
@@ -119,12 +118,12 @@ Click <g:link controller="home" action="index" params="${[edit: 'y']}">here</g:l
 
 <br>
 <div class="inline">
-	<h1>Add a data set:</h1> Examples: 
+	<h1>Add a species:</h1> Examples: 
 	 <a href = "javascript:void(0)" onclick="demoData('A_vit')">A. viteae </a>
 	 | <a href = "javascript:void(0)" onclick="demoData('L_sig')">L. sigmodontis </a>
 	 | <a href = "javascript:void(0)" onclick="demoData('D_imm')">D. immitis </a>
 	 | <a href = "javascript:void(0)" onclick="demoData('O_och')">O. ochengi </a>
-	 | <a href = "javascript:void(0)" onclick="demoData('test')">Test </a>
+	 | <a href = "javascript:void(0)" onclick="demoData('badger')">Badger </a>
 </div><br>
 
 <h2><b>Project data</b></h2>
