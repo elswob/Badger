@@ -234,6 +234,21 @@ This tree needs to be in the [phyloXML](http://www.phyloxml.org/) format. A newi
 
 #### OrthoMCL analysis
 
+Orthologs of gene trancripts can be displayed if an OrthoMCL groups file is provided. This is the file produced during step 13 od the OrthoMCL process:
+
+```
+========== Step 13: orthomclMclToGroups ==========
+Input:
+  - mclOutput file
+Output:
+  - groups.txt
+
+Change to my_orthomcl_dir and run:
+  orthomclMclToGroups my_prefix 1000 < mclOutput > groups.txt
+```
+
+The naming convention expected is that each transcript ID is preceded by an OrthoMCL ID, e.g. Mmeles|gene1234
+
 ## Data rules
 
 ####Database rules
