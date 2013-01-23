@@ -172,6 +172,8 @@ Create directory for each species/genome
 
 `mkdir /home/user/Badger/data/M_meles`
 
+Note, all data must adhere to the [data rules](https://github.com/elswob/Badger/blob/master/README.md#data-rules)
+
 Add all files for M. meles in here, e.g:
 
 * Genome FASTA files
@@ -179,7 +181,20 @@ Add all files for M. meles in here, e.g:
 * Transcript and protein FASTA files 
 * BLAST XML files
 * InterProScan RAW files
-* Custom tabular annotatin files
+* Custom tabular annotation files
+
+Custom tabular format is defined as such:
+
+Column 1 = transcript ID
+Column 2 = source
+Column 3 = annotation ID
+Column 4 = start base of annotation on transcript
+Column 5 = end base of annotation on transctipt
+Column 6 = score
+
+e.g.
+
+nAv.1.0.1.t00006-RA     EC      3.1.3.2 31      369      201    Acidphosphatase.
 
 ## Start it up
 
