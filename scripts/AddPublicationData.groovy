@@ -32,10 +32,11 @@ def getPub(data_id,query){
 	println "Getting IDs...";
 	println esearch
 	idlist << new URL(esearch).getText()
-	def esearch_result=new File("/tmp/idlist.txt").text()
+	def esearch_result=new File("/tmp/idlist.txt")
 	def counter=0
 	def efetch_ids=''
-	esearch_result.split("\n").each{
+	esearch_result.eachLine {
+	//esearch_result.split("\n").each{
 		if ((matcher = it =~ /.*?<Id>(\d+)<\/Id>/)){
 			efetch_ids += matcher[0][1] + ","
 			counter++
