@@ -194,7 +194,13 @@ Custom tabular format is defined as 6 tab delimited columns:
 
 e.g.
 
+```
 nAv.1.0.1.t00006-RA     EC      3.1.3.2 31      369      201    Acidphosphatase.
+nAv.1.0.1.t00006-RA     EC      3.1.3.5 31      369      178    5{prime}-nucleotidase.
+nAv.1.0.1.t00011-RA     EC      3.6.4.6 237     377     58.2    Vesicle-fusingATPase.
+nAv.1.0.1.t00015-RA     EC      2.7.7.56        246     485     62.0    tRNAnucleotidyltransferase.
+nAv.1.0.1.t00021-RA     EC      3.1.3.16        4       316      295    Phosphoproteinphosphatase.
+```
 
 ## Start it up
 
