@@ -23,6 +23,7 @@ class HomeController {
  			def dSql = "delete from page_edits where page = '"+params.page+"'";
  			def del = sql.execute(dSql)
  			println "deleted page edits for "+params.page
+ 			sql.close()
  		}else{
 			def editMap = [:]
 			editMap.edit = params.edits
