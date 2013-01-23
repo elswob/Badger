@@ -170,9 +170,9 @@
 		    		<table class="table_border" width='100%'>
 		    		<tr><td>
 		    		<% if (annoType == '1'){ %>
-		    			Searched ${printf("%,d\n",badger.TransBlast.count())} records in ${search_time}.<br>
+		    			Searched ${sprintf("%,d\n",badger.TransBlast.count())} records in ${search_time}.<br>
 		    		<% }else{ %>
-		    			Searched ${printf("%,d\n",badger.TransAnno.count())} records in ${search_time}.<br>
+		    			Searched ${sprintf("%,d\n",badger.TransAnno.count())} records in ${search_time}.<br>
 		    		<% } %>
 		    			Found ${uniques} contigs with ${results.size()} top hits from distinct databases
 		    		</td><td><center>

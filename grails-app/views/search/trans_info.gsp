@@ -153,11 +153,11 @@
     <a name="info_anchor"><h1>Information for transcript <b>${info_results.contig_id[0]}</b>:</h1></a>
     <table>
       <tr>
-        <td><b>Length:</b> ${printf("%,d\n",info_results.sequence[0].length())}</td>
+        <td><b>Length:</b> ${sprintf("%,d\n",info_results.sequence[0].length())}</td>
         <g:if test = "${grailsApplication.config.coverage.Transcriptome == 'y'}">
         	<td><b>Coverage: </b> ${info_results.coverage[0]}</td>
         </g:if>
-        <td><b>GC: </b> ${sprintf("%.2f",info_results.gc[0])}</td>
+        <td><b>GC: </b> ${ssprintf("%.2f",info_results.gc[0])}</td>
         <td><b>Sequence: </b> <g:link controller="FileDownload" action="contig_download" params="${[fileId : nuc_fasta, fileName: info_results.contig_id[0]+'.fa']}">Download</g:link></td>
       </tr>
     </table>

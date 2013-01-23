@@ -79,11 +79,11 @@
         <td><b>Sequence: </b> </td> 
       </tr>
       <tr>
-      <td>${printf("%,d\n",info_results.sequence[0].length())}</td>
+      <td>${sprintf("%,d\n",info_results.sequence[0].length())}</td>
       <g:if test = "${grailsApplication.config.coverage.Genome == 'y'}">
       	<td>${info_results.coverage[0]}</td>
       </g:if>
-      <td>${sprintf("%.2f",info_results.gc[0])}</td>
+      <td>${ssprintf("%.2f",info_results.gc[0])}</td>
       <td>        
       	<g:form name="fileDownload" url="[controller:'FileDownload', action:'genome_contig_download']" style="display: inline" >
         	<g:hiddenField name="fileId" value="${info_results.contig_id[0]}"/>
@@ -98,7 +98,7 @@
     	<hr size = 5 color="green" width="100%" style="margin-top:10px">
     	<div class="inline">
     	<br>
-    	 <h1>${printf("%,d\n",gene_results.size())} genes</b>:</h1>
+    	 <h1>${sprintf("%,d\n",gene_results.size())} genes</b>:</h1>
 			<!-- download genes form gets fileName value from get_table_data() -->		    		
 			 <!--div style="right:0px;">
 				 &nbsp;&nbsp;(Download sequences:
@@ -134,9 +134,9 @@
 			 		<tr>
 						<td><a href="g_info?Gid=${Gid}&GFFid=${GFFid}&gid=${res.gene_id}">${res.gene_id}</a></td>
 						<td>${res.count}</td>
-						<td>${sprintf("%.0f",res.a_nuc)}</td>
-						<td>${sprintf("%.0f",res.a_start)}</td>
-						<td>${sprintf("%.0f",res.a_stop)}</td>
+						<td>${ssprintf("%.0f",res.a_nuc)}</td>
+						<td>${ssprintf("%.0f",res.a_start)}</td>
+						<td>${ssprintf("%.0f",res.a_stop)}</td>
 			  		</tr>  
 			 	</g:each>
 			  </tbody>

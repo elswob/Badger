@@ -90,7 +90,7 @@
  <div class="bread"><g:link action="">Home</g:link> > Publications</div>
  <table><tr><td>
  <h1>Publication search</h1>
- Search the ${printf("%,d\n",distinct.count[0])} unique publications from PubMed which contain terms matching the species present in the <b>${grailsApplication.config.projectID}</b> project (updated weekly):<br>
+ Search the ${sprintf("%,d\n",distinct.count[0])} unique publications from PubMed which contain terms matching the species present in the <b>${grailsApplication.config.projectID}</b> project (updated weekly):<br>
  - To search by year click on a bar in the chart below<br>
  - To search by keyword use the search box.
  </td>

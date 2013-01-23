@@ -251,7 +251,7 @@
 		<g:if test="${results}">
 		    <table class="table_border" width='100%'>
 		    	<tr><td>
-		    		Searched ${printf("%,d\n",badger.GeneBlast.count() + badger.GeneAnno.count())} records in ${search_time}.<br>
+		    		Searched ${sprintf("%,d\n",badger.GeneBlast.count() + badger.GeneAnno.count())} records in ${search_time}.<br>
 		    		Found ${uniques} genes with ${results.size()} top hits from distinct databases
 		    		</td><td><center>
 		    		Download genes:

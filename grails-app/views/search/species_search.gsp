@@ -422,13 +422,13 @@ ${genome_stats.description}
 			 <g:if test = "${genome_stats.span > 0}">
 			<table>
 			 <tr><td><b>Version:</b></td><td>${genome_stats.version}</td></tr>
-			 <tr><td><b>Span (bp):</b></td><td>${printf("%,d\n",genome_stats.span)}</td></tr>
-			 <tr><td><b>Scaffolds:</b></td><td>${printf("%,d\n",genome_stats.num)}</td></tr>
-			 <tr><td><b>N50:</b></td><td>${printf("%,d\n",genome_stats.n50)}</td></tr>
-			 <tr><td><b>Smallest (bp)</b></td><td>${printf("%,d\n",genome_stats.min)}</td></tr>
-			 <tr><td><b>Largest (bp)</b></td><td>${printf("%,d\n",genome_stats.max)}</td></tr>
-			 <tr><td><b>GC (%)</b></td><td>${printf("%.4g",genome_stats.gc)}</td></tr>
-			 <tr><td><b>Non ATGC (bp)</b></td><td>${printf("%,d\n",genome_stats.nonATGC)}</td></tr>
+			 <tr><td><b>Span (bp):</b></td><td>${sprintf("%,d\n",genome_stats.span)}</td></tr>
+			 <tr><td><b>Scaffolds:</b></td><td>${sprintf("%,d\n",genome_stats.num)}</td></tr>
+			 <tr><td><b>N50:</b></td><td>${sprintf("%,d\n",genome_stats.n50)}</td></tr>
+			 <tr><td><b>Smallest (bp)</b></td><td>${sprintf("%,d\n",genome_stats.min)}</td></tr>
+			 <tr><td><b>Largest (bp)</b></td><td>${sprintf("%,d\n",genome_stats.max)}</td></tr>
+			 <tr><td><b>GC (%)</b></td><td>${sprintf("%.4g",genome_stats.gc)}</td></tr>
+			 <tr><td><b>Non ATGC (bp)</b></td><td>${sprintf("%,d\n",genome_stats.nonATGC)}</td></tr>
 			  </table>
 		</td>
 		<td>
@@ -463,14 +463,14 @@ ${genome_stats.description}
 			 <g:if test = "${gene_stats.size() > 0}">
 				 <table>
 				 <tr><td><b>GFF3 version</b></td><td>${geneData.file_version}</td></tr>
-				 <tr><td><b>Number genes</b></td><td>${printf("%,d\n",gene_stats.genenum)}</td></tr>
-				 <tr><td><b>Number transcripts</b></td><td>${printf("%,d\n",gene_stats.mrnanum)}</td></tr>
-				 <tr><td><b>Frequency (genes per Kb)</b></td><td>${printf("%.4g",(gene_stats.genenum/genome_stats.span)*1000)}</td></tr>
-				 <tr><td><b>Mean transcript length (bp)</b></td><td>${printf("%,d\n",gene_stats.mean)}</td></tr>
-				 <tr><td><b>Smallest (bp)</b></td><td>${printf("%,d\n",gene_stats.min)}</td></tr>
-				 <tr><td><b>Largest (bp)</b></td><td>${printf("%,d\n",gene_stats.max)}</td></tr>
-				 <tr><td><b>GC (%)</b></td><td>${printf("%.4g",gene_stats.gc)}</td></tr>
-				 <tr><td><b>Non ATGC (bp)</b></td><td>${printf("%,d\n",gene_stats.nonATGC)}</td></tr>
+				 <tr><td><b>Number genes</b></td><td>${sprintf("%,d\n",gene_stats.genenum)}</td></tr>
+				 <tr><td><b>Number transcripts</b></td><td>${sprintf("%,d\n",gene_stats.mrnanum)}</td></tr>
+				 <tr><td><b>Frequency (genes per Kb)</b></td><td>${sprintf("%.4g",(gene_stats.genenum/genome_stats.span)*1000)}</td></tr>
+				 <tr><td><b>Mean transcript length (bp)</b></td><td>${sprintf("%,d\n",gene_stats.mean)}</td></tr>
+				 <tr><td><b>Smallest (bp)</b></td><td>${sprintf("%,d\n",gene_stats.min)}</td></tr>
+				 <tr><td><b>Largest (bp)</b></td><td>${sprintf("%,d\n",gene_stats.max)}</td></tr>
+				 <tr><td><b>GC (%)</b></td><td>${sprintf("%.4g",gene_stats.gc)}</td></tr>
+				 <tr><td><b>Non ATGC (bp)</b></td><td>${sprintf("%,d\n",gene_stats.nonATGC)}</td></tr>
 				 </table>
 			 </td><td>
 				<br>
