@@ -223,7 +223,11 @@ This will run a number of scripts which adds the rest of the data to the databas
 
 If you need to add more data just follow one of the two steps above and run the same command `./run_me.sh`. This will identify the new files and add the data accordingly.
 
-## Additional options
+## Additional features
+
+#### Cusomise home page
+
+By logging in as admin, an option to modify the home page is available.
 
 #### Phylogenetic tree
 
