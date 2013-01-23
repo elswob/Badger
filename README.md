@@ -225,7 +225,7 @@ If you need to add more data just follow one of the two steps above and run the 
 
 ## Additional features
 
-#### Cusomise home page
+#### Customise home page
 
 By logging in as admin, an option to modify the home page is available.
 
