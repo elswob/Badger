@@ -604,7 +604,7 @@
       <tr><td width=40%>
 		<table class="compact">
 			<tr><td><b>Length:</b></td><td>${sprintf("%,d\n",info_results.nuc.length())} bp (${sprintf("%,d\n",info_results.pep.length())} aa)</td></tr>
-			<tr><td><b>GC:</b></td><td>${ssprintf("%.1f",info_results.gc)}</td></tr>
+			<tr><td><b>GC:</b></td><td>${sprintf("%.1f",info_results.gc)}</td></tr>
 			<tr><td><b>Exons:</b></td><td>${exon_results.size()}</td></tr>
 			<tr><td><b>Source:</b></td><td>${info_results.source}</td></tr>
 			<tr><td><b>Scaffold start:</b></td><td>${sprintf("%,d\n",info_results.start)}</td></tr>
@@ -877,8 +877,8 @@
 								<tr>						
 									<td>${res.gene.file.genome.meta.genus} ${res.gene.file.genome.meta.species}</td>
 									<td><a href="m_info?mid=${res.trans_name}">${res.trans_name}</a></td>
-									<td>${ssprintf("%,d\n",res.gene.nuc.length())}</td>
-									<td>${ssprintf("%,d\n",res.gene.exon.size())}</td>
+									<td>${sprintf("%,d\n",res.gene.nuc.length())}</td>
+									<td>${sprintf("%,d\n",res.gene.exon.size())}</td>
 								</tr>  
 							</g:if>
 						</g:each>

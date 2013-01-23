@@ -83,7 +83,7 @@
       <g:if test = "${grailsApplication.config.coverage.Genome == 'y'}">
       	<td>${info_results.coverage[0]}</td>
       </g:if>
-      <td>${ssprintf("%.2f",info_results.gc[0])}</td>
+      <td>${sprintf("%.2f",info_results.gc[0])}</td>
       <td>        
       	<g:form name="fileDownload" url="[controller:'FileDownload', action:'genome_contig_download']" style="display: inline" >
         	<g:hiddenField name="fileId" value="${info_results.contig_id[0]}"/>
@@ -134,9 +134,9 @@
 			 		<tr>
 						<td><a href="g_info?Gid=${Gid}&GFFid=${GFFid}&gid=${res.gene_id}">${res.gene_id}</a></td>
 						<td>${res.count}</td>
-						<td>${ssprintf("%.0f",res.a_nuc)}</td>
-						<td>${ssprintf("%.0f",res.a_start)}</td>
-						<td>${ssprintf("%.0f",res.a_stop)}</td>
+						<td>${sprintf("%.0f",res.a_nuc)}</td>
+						<td>${sprintf("%.0f",res.a_start)}</td>
+						<td>${sprintf("%.0f",res.a_stop)}</td>
 			  		</tr>  
 			 	</g:each>
 			  </tbody>
