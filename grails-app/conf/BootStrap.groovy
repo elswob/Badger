@@ -53,7 +53,6 @@ class BootStrap {
                 if (!adminUser.authorities.contains(adminRole)) {
                 	Security.SecUserSecRole.create adminUser, adminRole
                 }
-                Security.SecUserSecRole.create testUser, userRole
                 //add some first data to news
                 def firstNews = new badger.News(titleString: 'Database and site created', dataString: 'The database and web site were created', dateString: new Date(),enabled: true).save(failOnError: true)
             }
