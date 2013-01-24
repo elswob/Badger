@@ -115,6 +115,186 @@ class AdminController {
 	}
 	
 	@Secured(['ROLE_ADMIN'])
+	def addedSpecies = {
+		def dataMap = [:]		
+		//check if name and version are unique
+		def check = MetaData.findByGenusAndSpecies(params.genus.trim(), params.species.trim())
+		if (check){
+			println "species already exists - "+check
+			return [error: "duplicate"]	
+		}else{  		
+			dataMap.genus = params.genus.trim()
+			dataMap.species = params.species.trim()
+			dataMap.description = params.description.trim()
+			if (params.image_f){
+				dataMap.image_file = params.image_f.trim()
+				dataMap.image_source = params.image_s.trim()
+			}else{
+				dataMap.image_file = ""
+				dataMap.image_source = ""
+			}
+			println dataMap
+			MetaData meta = new MetaData(dataMap)
+			meta.save()
+			return [dataMap:dataMap, Gid: meta.id]
+		}
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def editSpecies = {
+		def metaData = MetaData.findById(params.Gid)
+		return [metaData: metaData]	 
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def addedGenome = {
+		def dataMap = [:]
+		def meta = MetaData.findById(params.meta)		
+		//check if version is unique
+		def check = GenomeData.findByGversion(params.genome_version.trim())
+		if (check){
+			println "genome version already exists - "+check
+			return [error: "duplicate"]	
+		}else{  		
+			dataMap.gversion = params.genome_version.trim()			
+			if (params.gbrowse){
+				dataMap.gbrowse = params.gbrowse.trim()
+			}else{
+				dataMap.gbrowse = ""
+			}
+			def date
+			if (params.genome_date){
+				def matcher
+			 	//check the date format is ok
+			 	if ((matcher = params.genome_date =~ /^\d{2}\/\d{2}\/\d{4}/)){
+					date = Date.parse("dd/MM/yyyy",params.genome_date)
+			 	}else{
+				 	date = null
+			 	}
+		 	}else{	 
+				date = new Date()
+		 	}
+		 	dataMap.dateString = date
+			println dataMap
+			def new_genome = new GenomeData(dataMap) 
+			meta.addToGenome(new_genome)
+			new_genome.save(flush:true)
+			println "New genome for "+new_genome.meta.genus+" "+new_genome.meta.species+" date "+date+" was added"
+			return [dataMap:dataMap, genome: new_genome]
+		}
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def editGenome = {
+		def genomeData = GenomeData.findById(params.gid)
+		return [genome: genomeData]	 
+	}
+	
+	
+	@Secured(['ROLE_ADMIN'])
+	def addedFiles = {
+		def fileMap = [:]		
+		def genome = GenomeData.findById(params.gid)
+		println "genome = "+genome		
+		fileMap.loaded = false
+		if (params.genome){
+			fileMap.file_type = "Genome"
+			fileMap.file_dir = params.dir.trim()
+			fileMap.file_name = params.genome.trim()	
+			fileMap.blast = params.blast_genome
+			fileMap.search = params.search_genome
+			fileMap.download = params.down_genome
+			fileMap.file_version = params.genome_v.trim()
+			fileMap.description = params.genome_d.trim()
+			fileMap.cov = params.genome_c.trim()		
+			fileMap.file_link = "n"
+			def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
+			if (check){
+				println "file name "+fileMap.file_name+" type "+fileMap.file_type+" already exists - "+check
+			}
+			else if (new File("data/"+params.dir.trim()+"/"+params.genome.trim()).exists()){
+				println "Adding genome "+fileMap
+				FileData file = new FileData(fileMap) 
+				genome.addToFiles(file)
+				file.save()
+			}else{
+				println "file does not exist!"
+				return [error: "no file", file: "data/"+params.dir+"/"+params.genome]
+			}
+		}
+		if (params.genes){
+			fileMap.file_type = "Genes"
+			fileMap.file_dir = params.dir.trim()
+			fileMap.file_name = params.genes.trim()
+			fileMap.search = params.search_genes
+			fileMap.download = params.down_genes
+			fileMap.file_version = params.genes_v.trim()
+			fileMap.description = params.genes_d.trim()
+			fileMap.file_link = params.genome.trim()
+			def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
+			if (check){
+				println "file name "+fileMap.file_name+" type "+fileMap.file_type+" already exists - "+check
+			}else if (new File("data/"+params.dir.trim()+"/"+params.genes.trim()).exists()){
+				println "Adding GFF3 file "+fileMap
+				FileData file = new FileData(fileMap) 
+				genome.addToFiles(file)
+				file.save()
+			}else{
+				println "file does not exist!"
+				return [error: "no file", file: "data/"+params.dir+"/"+params.genes]
+			}
+		}
+		if (params.mrna_trans){
+			fileMap.file_type = "mRNA"
+			fileMap.file_dir = params.dir.trim()
+			fileMap.file_name = params.mrna_trans.trim()
+			fileMap.blast = params.blast_mrna
+			fileMap.download = params.down_mrna
+			fileMap.file_version = params.mrna_trans_v.trim()
+			fileMap.description = params.mrna_trans_d.trim()
+			fileMap.file_link = params.genes.trim()
+			def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
+			if (check){
+				println "file name "+fileMap.file_name+" type "+fileMap.file_type+" already exists - "+check
+			}else if (new File("data/"+params.dir.trim()+"/"+params.mrna_trans.trim()).exists()){
+				println "Adding transcript file "+fileMap
+				FileData file = new FileData(fileMap) 
+				genome.addToFiles(file)
+				file.save()
+			}else{
+				println "file does not exist!"
+				return [error: "no file", file: "data/"+params.dir+"/"+params.mrna_trans]
+			}
+		}
+		if (params.mrna_pep){
+			fileMap.file_type = "Peptide"
+			fileMap.file_dir = params.dir.trim()
+			fileMap.file_name = params.mrna_pep.trim()
+			fileMap.blast = params.blast_pep
+			fileMap.download = params.down_pep
+			fileMap.file_version = params.mrna_pep_v.trim()
+			fileMap.description = params.mrna_pep_d.trim()
+			fileMap.file_link = params.genes.trim()
+			def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
+			if (check){
+				println "file name "+fileMap.file_name+" type "+fileMap.file_type+" already exists - "+check
+				return [error: "no file", file: "data/"+params.dir+"/"+params.mrna_pep]
+			}else if (new File("data/"+params.dir.trim()+"/"+params.mrna_pep.trim()).exists()){
+				println "Adding protein file "+fileMap
+				FileData file = new FileData(fileMap) 
+				genome.addToFiles(file)
+				file.save()
+			}else{
+				println "file does not exist!"
+				return [error: "no file", file: "data/"+params.dir+"/"+params.mrna_pep]
+			}
+		}			
+		return [gid: genome.id]
+	}
+	
+	/////////////////////////
+	
+	@Secured(['ROLE_ADMIN'])
 	def addedData = {
 		def dataMap = [:]		
 
@@ -380,6 +560,8 @@ class AdminController {
 		def metaData = MetaData.findById(params.id)
 		return [metaData: metaData]	 
 	}
+	
+
 	
 	@Secured(['ROLE_ADMIN'])
 	def editedData = {

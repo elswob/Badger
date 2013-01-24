@@ -14,7 +14,7 @@
 		$("#genus").val("Meles");
 		$("#species").val("meles");
 		$("#version").val("1.0");
-		$("#description").val("Badger genome.");
+		$("#description").val("The badger is the king of all animals.");
 		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/");
 		$("#image_f").val("badger.jpg");
 		$("#image_s").val("Taken from google");
@@ -102,10 +102,10 @@ Click <g:link controller="home" action="index" params="${[edit: 'y']}">here</g:l
 <g:if test = "${metaData}">	
 	<g:each var="res" in="${metaData}">
 		<div class="inline">	    
-	    	<g:form action="editData" controller="admin" params="[id: res.id]" >
+	    	<g:form action="editSpecies" controller="admin" params="[Gid: res.id]" >
 	    		<a href="#" onclick="parentNode.submit()" title="Edit data"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
 	    	</g:form>  	
-	    	<g:form action="deleteData" controller="admin" params="[id: res.id]" >
+	    	<g:form action="deleteSpecies" controller="admin" params="[Gid: res.id]" >
 	    		<a href="#" onclick="parentNode.submit()" title="Delete data"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
 	    	</g:form> 	
 	    	${res.genus} ${res.species}
@@ -123,179 +123,28 @@ Click <g:link controller="home" action="index" params="${[edit: 'y']}">here</g:l
 	 | <a href = "javascript:void(0)" onclick="demoData('L_sig')">L. sigmodontis </a>
 	 | <a href = "javascript:void(0)" onclick="demoData('D_imm')">D. immitis </a>
 	 | <a href = "javascript:void(0)" onclick="demoData('O_och')">O. ochengi </a>
-	 | <a href = "javascript:void(0)" onclick="demoData('badger')">Badger </a>
+	 | <a href = "javascript:void(0)" onclick="demoData('badger')">M. meles </a>
 </div><br>
 
 <h2><b>Project data</b></h2>
-<g:form action="addedData" controller="admin">
-	<label for="genus" class="control-label"><g:message code="person.name.label" default="Genus" /><span class="required-indicator">*</span></label>
-	<div class="control-group fieldcontain ${hasErrors(bean: meta_data, field: 'genus', 'error')} required">
-	
-	<div class="controls">	
-		
-		<g:textField style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;" name="genus" required="" value="${meta_data?.genus}"/>
-		<span class="help-inline">${hasErrors(bean: mete_data, field: 'genus', 'error')}</span>
-	</div>
-	</div>
+<g:form action="addedSpecies" controller="admin">
+	<p><b>Genus</b><font color="red">*</font></p>
+	<g:textField name="genus" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<p><b>Species</b><font color="red">*</font></p>
 	<g:textField name="species" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
-	<p><b>Version</b><font color="red">*</font></p>
-	<g:textField name="version" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<p><b>Description</b><font color="red">*</font></p>
 	<g:textArea name="description" style="width: 80%; height: 50px; border: 3px solid #cccccc; padding: 2px;"/><br>	
-	<p><b>GBrowse link</b></p>
-	<g:textField name="gbrowse" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<p><b>Image file</b></p>
 	<g:textField name="image_f" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	<p><b>Image source</b></p>
 	<g:textField name="image_s" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
-	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
-	
-	<h2><b>Data files</b></h2>	
-	<p><b>Location (directory within data folder)</b><font color="red">*</font></p>
-	<g:textField name="dir" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
-	<table width=100%>
-		<tr>
-			<td width="40%"><b>Transcriptome (FASTA file)</b><br>
-				<g:textField name="trans" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-			<td width="10%"><b>Version</b><br>
-				<g:textField name="trans_v" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-			<td><b>Coverage</b><br>
-				<select name="trans_c">
-					<option selected="selected" value="n">No</option>
-					<option value="y">Yes</option>
-				</select>
-			</td>
-			<td width="45%"><b>Description</b><br>
-				<g:textField name="trans_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-		</tr>
-		<tr>
-			<td width="40%"><b>Genome (FASTA file)</b><font color="red">*</font><br>
-				<g:textField name="genome" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-			<td width="10%"><b>Version</b><font color="red">*</font><br>
-				<g:textField name="genome_v" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-			<td><b>Coverage</b><br>
-				<select name="genome_c">
-					<option selected="selected" value="n">No</option>
-					<option value="y">Yes</option>				
-				</select>
-			</td>
-			<td><b>Description</b><font color="red">*</font><br>
-				<g:textField name="genome_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-		</tr>
-		<tr>
-			<td width="40%"><b>Genes (GFF3 file)</b><font color="red">*</font><br>
-				<g:textField name="genes" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-			<td width="10%"><b>Version</b><font color="red">*</font><br>
-				<g:textField name="genes_v" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-			<td colspan=2><b>Description</b><font color="red">*</font><br>
-				<g:textField name="genes_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-		</tr>
-		<tr>
-			<td width="40%"><b>mRNA transcripts (FASTA file)</b><font color="red">*</font><br>
-				<g:textField name="mrna_trans" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-			<td width="10%"><b>Version</b><font color="red">*</font><br>
-				<g:textField name="mrna_trans_v" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-			<td colspan=2><b>Description</b><font color="red">*</font><br>
-				<g:textField name="mrna_trans_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-		</tr>
-		<tr>
-			<td width="40%"><b>Peptide sequences (FASTA file)</b><font color="red">*</font><br>
-				<g:textField name="mrna_pep" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-			<td width="10%"><b>Version</b><font color="red">*</font><br>
-				<g:textField name="mrna_pep_v" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-			<td colspan=2><b>Description</b><font color="red">*</font><br>
-				<g:textField name="mrna_pep_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
-			</td>
-		</tr>
-	</table>
-	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
-	
-	<h2><b>Privacy</b></h2>	
-	<table>
-	<tr><td></td><td><b>Search</b></td><td><b>BLAST</b></td><td><b>Download</b></td></tr>
-	<tr><td><b>Transcriptome</b></td>
-	<td><select name="search_trans">
-		<option value="pub">Public</option>
-		<option value="priv">Private</option>
-	</select></td>	
-	<td><select name="blast_trans">
-		<option value="pub">Public</option>
-		<option value="priv">Private</option>
-	</select></td>	
-	<td><select name="down_trans">
-		<option value="pub">Public</option>
-		<option value="priv">Private</option>
-	</select></td></tr>	
-	
-	<tr><td><b>Genome</b></td>
-	<td><select name="search_genome">
-		<option value="pub">Public</option>
-		<option value="priv">Private</option>
-	</select></td>	
-	<td><select name="blast_genome">
-		<option value="pub">Public</option>
-		<option value="priv">Private</option>
-	</select></td>	
-	<td><select name="down_genome">
-		<option value="pub">Public</option>
-		<option value="priv">Private</option>
-	</select></td></tr>	
-	
-	<tr><td><b>Genes</b></td>
-	<td><select name="search_genes">
-		<option value="pub">Public</option>
-		<option value="priv">Private</option>
-	</select></td>	
-	<td></td>	
-	<td><select name="down_genes">
-		<option value="pub">Public</option>
-		<option value="priv">Private</option>
-	</select></td></tr>	
-	
-	<tr><td><b>mRNA</b></td>
-	<td></td>
-	<td><select name="blast_mrna">
-		<option value="pub">Public</option>
-		<option value="priv">Private</option>
-	</select></td>	
-	<td><select name="down_mrna">
-		<option value="pub">Public</option>
-		<option value="priv">Private</option>
-	</select></td></tr>	
-	
-	<tr><td><b>Peptide</b></td>
-		<td></td>
-	<td><select name="blast_pep">
-		<option value="pub">Public</option>
-		<option value="priv">Private</option>
-	</select></td>
-	<td><select name="down_pep">
-		<option value="pub">Public</option>
-		<option value="priv">Private</option>
-	</select></td></tr>	
-	</table>
-	
-	
-	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
+	<br>	
 	<div class="form-actions">
     	<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
     </div>
-</g:form>
+    
+	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
+</g:form>	
 	
 
 </body>
