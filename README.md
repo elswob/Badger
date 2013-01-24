@@ -206,6 +206,8 @@ nAv.1.0.1.t00021-RA     EC      3.1.3.16        4       316      295    Phosphop
 
 #### Start grails 
 
+For ease of control it may be wise to run this command using [screen](https://help.ubuntu.com/community/Screen).
+
 To run on port 8080, run the following command as normal user from within root directory of Badger:
 
 `grails prod run-app`
@@ -237,6 +239,8 @@ Log in as admin and fill in the forms as necessary.
 Edit the script `scripts/AddFileData.groovy` in compliance with the demo data already there. 
 
 #### Load data
+
+As this can take a while it may be wise to run this command using [screen](https://help.ubuntu.com/community/Screen).
 
 When all the file information is successfully loaded into the database, open a terminal, go to the root directory of Badger, and type:
 
@@ -321,4 +325,33 @@ ctg123 . CDS	     7000  7600	 .  +  2  Parent=mRNA0003
 6. GFF3 files are for gene predictions only, any term matching gene, mRNA or CDS in the third column will be picked up, so remove anything that isn't a gene, e.g. ncRNA in some of the wormbase files
 7. All images go in web-app/images not in the user generated data/directores
 
+## Troubleshooting
 
+#### Strange page behaviour
+
+If either the species_search or m_info pages appear to be wrong, it may be because they are cached. To remove this cache simply stop grails and restart it. By killing this command and then starting it again.
+
+`grails prod run-app`
+
+#### Errors on start up
+
+Errors relating to the postgres indexing such as:
+
+```
+| Error 2013-01-24 15:35:53,254 [localhost-startStop-1] ERROR context.GrailsContextLoader  - Error executing bootstraps: org.h2.jdbc.JdbcSQLException: Unkno
+wn data type: "TSVECTOR"; SQL statement:
+ALTER TABLE trans_anno ADD COLUMN textsearchable_index_col tsvector; [50004-164]
+```
+
+Generally means grails can't link to the postgres database, so check your badger.config.properties file carefully
+
+#### Loading file data
+
+Error:
+
+```
+xxxxxxx.xml was added
+| Error Error executing script RunScript: java.lang.NullPointerException: Cannot get property 'file_dir' on null object (Use --stacktrace to see the full trace)
+```
+
+Could mean that the GFF Id used in the addAnno() function does not match the GFF file from which this annotation is linked.
