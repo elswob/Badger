@@ -297,7 +297,7 @@
 		function (ev, seriesIndex, pointIndex, data) {
 			//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
 			//alert("/search/genome_info?id=${params.Gid}&contig_id=" + data[2])
-			window.open("/search/genome_info?Gid=${params.Gid}&GFFid=${params.GFFid}&contig_id=" + data[2]);
+			window.open("genome_info?Gid=${params.Gid}&GFFid=${params.GFFid}&contig_id=" + data[2]);
 		}
 	);      
                     
