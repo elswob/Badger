@@ -71,8 +71,14 @@ class HomeController {
 		def sql = new Sql(dataSource)
 		//get the year from the bar chart 
 		if (params.year){
-			def yearbefore = params.year-1
-			def yearsql = "select distinct on (pubmed_id,date_out) pubmed_id,abstract_text,title,authors,journal_short,to_char(date_string,'yyyy Mon dd') as date_out from publication where date_string between \'01/01/" +params.year+ "\' and \'31/12/"+params.year+"\' order by date_out,pubmed_id;"
+			def searchDate = "01/01/" +params.year
+			searchDate = Date.parse("dd/MM/yyyy",searchDate)
+			println "searchDate = "+searchDate
+			def yearafter
+			use(TimeCategory) {
+				yearafter = searchDate + 1.year
+			}
+			def yearsql = "select distinct on (pubmed_id,date_out) pubmed_id,abstract_text,title,authors,journal_short,to_char(date_string,'yyyy Mon dd') as date_out from publication where date_string between \'01/01/" +params.year+ "\' and \'"+yearafter+"\' order by date_out,pubmed_id;"
 			println yearsql
 			def pub_results = sql.rows(yearsql)
 			return [ pub_results: pub_results, searchId: params.year]
