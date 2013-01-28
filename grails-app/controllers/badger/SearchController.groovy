@@ -60,8 +60,8 @@ class SearchController {
     	render(template:"gffSelectResponse", model: [genes:genes,genome:genome.id[0]])
     }
     
-    //@Cacheable('species_cache')
-    @CacheEvict(value='species_cache', allEntries=true)
+    @Cacheable('species_cache')
+    //@CacheEvict(value='species_cache', allEntries=true)
     def species_search() {
     	def sql = new Sql(dataSource)
     	def Gid = params.Gid
