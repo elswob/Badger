@@ -72,7 +72,7 @@
     $('#chart').bind('jqplotDataClick',
 		function (ev, seriesIndex, pointIndex, data) {
 			//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+year[pointIndex]);
-			window.open("/home/publication_search?year=" + year[pointIndex],'_self');
+			window.open("publication_search?year=" + year[pointIndex],'_self');
 		}
 	);
 	$(".jqplot-xaxis-label")
