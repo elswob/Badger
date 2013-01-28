@@ -67,6 +67,8 @@ class SearchController {
     	def Gid = params.Gid
     	def genomeData = FileData.findById(Gid)	
     	def geneData = FileData.findById(params.GFFid)
+    	def annoTypesSql = "select distinct(type) from anno_data where filedata_id = "+params.GFFid+";";
+    	def annoTypes = sql.rows(annoTypesSql)
     	 //get genome info and stats
     	 def genomeInfoSql = "select non_atgc,contig_id,gc,length,coverage from genome_info,file_data where file_id = file_data.id and file_data.id = '"+Gid+"' order by length desc;"
 	 	 //def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"
@@ -205,7 +207,7 @@ class SearchController {
 		 println blastAnnoSql
 		 def blastAnnoData = sql.rows(blastAnnoSql)
     	//return [n50: n50_list, n90: n90_list, meta: metaData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats]
-    	 return [geneData: geneData, n50: n50_list, n90: n90_list, genomeFile:genomeData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats, genomeInfo: genomeInfo]
+    	 return [annoTypes:annoTypes, geneData: geneData, n50: n50_list, n90: n90_list, genomeFile:genomeData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats, genomeInfo: genomeInfo]
     }
     def all_search = {
          if (grailsApplication.config.i.links.all == 'private' && !isLoggedIn()) {
@@ -439,7 +441,7 @@ class SearchController {
 			def metaData = FileData.findById(params.Gid)
 			println "m = "+metaData.genome.id
 			println "species = "+metaData.genome.meta.species
-			def searchfile_id = params.dataSelect
+			def searchfile_id = params.GFFid
 			def table = params.dataSet
 			def searchId = params.searchId   
 			def annoSearch = "(anno_db = "
@@ -474,6 +476,7 @@ class SearchController {
 			//def annoLinks = configDataService.getGeneAnnoLinks()
 			//def annoLinks = AnnoDataFindByFiledata_id(file_id)
 			def annoLinksSql = "select source,regex,link from anno_data where filedata_id = '"+searchfile_id+"';";
+			println annoLinksSql
 			def annoLinksAll = sql.rows(annoLinksSql)
 			def annoLinks = [:]
 			annoLinksAll.each{

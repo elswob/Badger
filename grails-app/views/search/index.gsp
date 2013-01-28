@@ -7,7 +7,7 @@
     <parameter name="search" value="selected"></parameter>
 </head>
 <body>
-<div class="bread">Search</div>
+Search
   <h1>Search the <b>${grailsApplication.config.projectID}</b> data:</h1>
   <table>
   	    <tr><td><g:link controller="home" action="publications">${sprintf("%,d\n",badger.Publication.count())} publications</g:link></td><td>Publications matching the names of the species in the database.</td></tr>

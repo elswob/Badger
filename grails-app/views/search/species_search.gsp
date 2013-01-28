@@ -490,35 +490,32 @@ ${genome_stats.description}
 	  <table><tr>
 	  <td><h1>Search annotations:</h1>
 
-		<g:form action="gene_search_results">	
-		<input type="hidden" name="dataSelect" value="${geneData.id}">
-	
+		<g:form action="gene_search_results">		
 			<div id = "showAnno">
 			<table>
 			<tr><td>
 			<h1>Choose an annotation:</h1>
-			<g:each var="t" in="${geneData.genome.files.anno}">
-				<g:if test="${'blast' in t.type}">
+				<g:if test="${'blast' in annoTypes.type}">
 					<label><input name="toggler" type="radio" id="blast" checked="checked" value="1"> 1. BLAST homology</label><br>
 					<div class="toHide" id="blk_1" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
-						<g:each var="a" in="${t}">
+						<g:each var="a" in="${geneData.anno}">
 							<g:if test="${a.type == 'blast'}">
 								<label><input type="checkbox" checked="yes" name="blastAnno" value="${a.source}" /> ${a.source}</label><br>
 							</g:if>
 						</g:each> 
 					</div> 
 				</g:if>
-				<g:if test="${'fun' in t.type}">
+				<g:if test="${'fun' in annoTypes.type}">
 					<label><input name="toggler" type="radio" id="anno" value="2"> 2. Functional annotation </label><br>  			
 					<div class="toHide" id="blk_2" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
-						<g:each var="a" in="${t}">
+						<g:each var="a" in="${geneData.anno}">
 							<g:if test="${a.type == 'fun'}">
 								<label><input type="checkbox" checked="yes" name="funAnno" value="${a.source}" /> ${a.source}</label><br>
 							</g:if>
 						</g:each>	
 					</div> 
 				</g:if>
-				<g:if test="${'ipr' in t.type}">
+				<g:if test="${'ipr' in annoTypes.type}">
 					<label><input name="toggler" type="radio" id="ipr" value="3"> 3. InterPro domains</label><br>
 					<div class="toHide" id="blk_3" style="height:150;width:200px;overflow:auto;border:3px solid green;display:none">
 						<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMPanther" /> PANTHER <a href="http://www.pantherdb.org/" style="text-decoration:none" target="_blank">?</a></label><br>
@@ -529,7 +526,6 @@ ${genome_stats.description}
 						<label><input type="checkbox" checked="yes" name="iprAnno" value="HMMTigr" /> TIGRFAMs <a href="http://www.jcvi.org/cgi-bin/tigrfams/index.cgi" style="text-decoration:none" target="_blank">?</a></label><br>
 					</div> 
 				</g:if>
-			</g:each>
 		
 			<td>  
 			<h1>Choose what to search:</h1>
