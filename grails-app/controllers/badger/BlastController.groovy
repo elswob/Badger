@@ -158,9 +158,9 @@ class BlastController {
 									linker = matcher[0][1]
 								}
 								if (type == 'Peptide' || 'Genes' || 'mRNA'){
-									it = "<a name=\"$linker\"></a>"+matcher[0][1]+"<a href=\"m_info?mid="+matcher[0][2]+"\">"+matcher[0][2]+"</a>\t"+matcher[0][3]+"\t"+matcher[0][4]+"\t"+matcher[0][5]+"\t"+matcher[0][6]+"\t"+matcher[0][7]+"\t"+matcher[0][8]+"\t"+matcher[0][9]+"\t"+matcher[0][10]+"\t"+matcher[0][11]+"\t"+matcher[0][12]
+									it = "<a name=\"$linker\"></a>"+matcher[0][1]+"<a href=\"../search/m_info?mid="+matcher[0][2]+"\">"+matcher[0][2]+"</a>\t"+matcher[0][3]+"\t"+matcher[0][4]+"\t"+matcher[0][5]+"\t"+matcher[0][6]+"\t"+matcher[0][7]+"\t"+matcher[0][8]+"\t"+matcher[0][9]+"\t"+matcher[0][10]+"\t"+matcher[0][11]+"\t"+matcher[0][12]
 								}else if (type == 'Genome'){
-									it = "<a name=\"$linker\"></a>"+matcher[0][1]+"<a href=\"genome_info?contig_id="+matcher[0][2]+"\">"+matcher[0][2]+"</a>\t"+matcher[0][3]+"\t"+matcher[0][4]+"\t"+matcher[0][5]+"\t"+matcher[0][6]+"\t"+matcher[0][7]+"\t"+matcher[0][8]+"\t"+matcher[0][9]+"\t"+matcher[0][10]+"\t"+matcher[0][11]+"\t"+matcher[0][12]
+									it = "<a name=\"$linker\"></a>"+matcher[0][1]+"<a href=\"../search/genome_info?contig_id="+matcher[0][2]+"\">"+matcher[0][2]+"</a>\t"+matcher[0][3]+"\t"+matcher[0][4]+"\t"+matcher[0][5]+"\t"+matcher[0][6]+"\t"+matcher[0][7]+"\t"+matcher[0][8]+"\t"+matcher[0][9]+"\t"+matcher[0][10]+"\t"+matcher[0][11]+"\t"+matcher[0][12]
 								}	
 								
 								//get id, score start and stop
@@ -205,9 +205,9 @@ class BlastController {
 								//create internal links
 								//println "file type = "+type
 								if (type == 'Peptide' || type == 'Genes' || type == 'mRNA'){
-									it = "><a href=\"m_info?mid="+matcher[0][1]+"\">"+matcher[0][1]+"</a>"
+									it = "><a href=\"../search/m_info?mid="+matcher[0][1]+"\">"+matcher[0][1]+"</a>"
 								}else if (type == 'Genome'){
-									it = "><a href=\"genome_info?contig_id="+matcher[0][1]+"\">"+matcher[0][1]+"</a>"
+									it = "><a href=\"../search/genome_info?contig_id="+matcher[0][1]+"\">"+matcher[0][1]+"</a>"
 								}
 								//transform IDs to links but not before the first alignment
 								it = it.replaceAll(/^>/,"<span id=\"$linker\">></span>")
