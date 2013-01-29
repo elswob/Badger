@@ -657,7 +657,7 @@
 			   <g:if test="${ipr_results}">
 				   <li><a href="javascript:void(0);" onclick="$.scrollTo('#ipr_anchor', 800, {offset : -50});">InterPro</a></li>
 			   </g:if>
-			   <g:if test = "${gbrowse}"> 
+			   <g:if test = "${metaData.genome.gbrowse}"> 
 					<li><a href="javascript:void(0);" onclick="$.scrollTo('#browse_anchor', 800, {offset : -50});">Browse</a></li>
 			   </g:if>
 			   <li><a href="javascript:void(0);" onclick="$.scrollTo('#files_anchor', 800, {offset : -50});">Sequence data</a></li>
