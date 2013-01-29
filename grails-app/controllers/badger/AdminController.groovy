@@ -50,14 +50,15 @@ class AdminController {
 	 @Secured(['ROLE_ADMIN'])
 	 def editNews = {
 		 println "Editing "+params.titleString
-		 def newsData = News.findAllByTitleString(params.titleString)
+		 def newsData = News.findByTitleString(params.titleString)
 		 return [newsData: newsData] 
 	 }
 	 @Secured(['ROLE_ADMIN'])
 	 def editedNews = {
 		 //delete old entry
-		 def newsData = News.findAllByTitleString(params.newsTitle)
-		 def delData = News.get(newsData.id[0])
+		 def newsData = News.findById(params.newsId)
+		 println "deleting "+params.newsId
+		 def delData = News.get(newsData.id)
 		 delData.delete(flush: true)
 		 
 		 def dataMap = [:]

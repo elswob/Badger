@@ -13,7 +13,7 @@
   	  <sec:ifAnyGranted roles="ROLE_ADMIN">
   	  <div class="inline">
   	  Edit page:
-  	  <form name="ediCheck" value="yes" method="post">
+  	  <form name="editCheck" value="yes" method="post">
       		<input type="hidden" name="edit" value="y">
       		<a href="#" onclick="parentNode.submit()">modify </a>|
       </form>

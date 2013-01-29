@@ -16,7 +16,7 @@ class HomeController {
  	 def edits
  	 def editCheckSql = "select * from page_edits";
  	 def editCheck = sql.rows(editCheckSql)
- 	 println "editCheck = "+editCheck
+ 	 //println "editCheck = "+editCheck
  	 if (editCheck){
  	 	edits = PageEdits.findAllByPage("/home/index",[sort:"dateString", order: "desc", max: 1])
  	 	println "top edit for /home/index = "+edits
