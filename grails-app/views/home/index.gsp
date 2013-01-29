@@ -61,7 +61,7 @@
 														<a href="#" onclick="parentNode.submit()" title="Delete news item"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
 													</g:form> 
 												</sec:ifAnyGranted>
-											<b><g:formatDate format="yyyy MMM d" date="${res.dateString}"/>:</b>
+											<b><g:formatDate format="d MMM yyyy" date="${res.dateString}"/>:</b>
 			
 										</td>
 										<td>
@@ -120,7 +120,7 @@
 												<a href="#" onclick="parentNode.submit()" title="Delete news item"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
 											</g:form> 
 										</sec:ifAnyGranted>
-									<b><g:formatDate format="yyyy MMM d" date="${res.dateString}"/>:</b>
+									<b><g:formatDate format="d MMM yyyy" date="${res.dateString}"/>:</b>
 	
 								</td>
 								<td>
