@@ -11,9 +11,16 @@ class HomeController {
 
  //@Secured(['ROLE_ADMIN','ROLE_USER'])
  def index = {
+ 	 def sql = new Sql(dataSource)
  	 def newsData = News.findAll(sort:"dateString",order:"desc")
- 	 def edits = PageEdits.findAllByPage("/home/index",[sort:"dateString", order: "desc", max: 1])
- 	 println "top edit for /home/index = "+edits
+ 	 def edits
+ 	 def editCheckSql = "select * from page_edits";
+ 	 def editCheck = sql.rows(editCheckSql)
+ 	 println "editCheck = "+editCheck
+ 	 if (editCheck){
+ 	 	edits = PageEdits.findAllByPage("/home/index",[sort:"dateString", order: "desc", max: 1])
+ 	 	println "top edit for /home/index = "+edits
+ 	 }
  	 return [newsData: newsData, edits:edits] 	 
  }
  
