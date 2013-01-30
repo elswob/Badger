@@ -830,7 +830,7 @@
 			<g:else>
 				
 				<div class="inline">
-					Download: 
+					Download (sequences in table only): 
 					<g:form name="orthonucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
 						<g:hiddenField name="orthoNucFileId" value=""/>
 						<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
@@ -845,23 +845,24 @@
 						<a href="javascript:void(0);" onclick="get_table_data('orthoPep');document.orthopepfileDownload.submit()">Peptides</a>
 					</g:form>
 				</div>	
-				
-				<div class="inline">
-					Cluster: 
-					<g:form name="orthoNucCluster" url="[action:'runCluster']">
-						<g:hiddenField name="orthoClusterNucFileId" value=""/>
-						<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
-						<g:hiddenField name="seq" value="nuc"/>
-						<a href="javascript:void(0);" onclick="get_table_data('orthoClusterNuc');document.orthoNucCluster.submit()">Nucleotides</a>
-					</g:form> 
-					|
-					<g:form name="orthoPepCluster" url="[action:'runCluster']">
-						<g:hiddenField name="orthoClusterPepFileId" value=""/>
-						<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
-						<g:hiddenField name="seq" value="pep"/>
-						<a href="javascript:void(0);" onclick="get_table_data('orthoClusterPep');document.orthoPepCluster.submit()">Peptides</a>
-					</g:form>
-				</div>
+				<g:if test = "${grailsApplication.config.musclePath}">
+					<div class="inline">
+						Cluster (sequences in table only): 
+						<g:form name="orthoNucCluster" url="[action:'runCluster']">
+							<g:hiddenField name="orthoClusterNucFileId" value=""/>
+							<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
+							<g:hiddenField name="seq" value="nuc"/>
+							<a href="javascript:void(0);" onclick="get_table_data('orthoClusterNuc');document.orthoNucCluster.submit()">Nucleotides</a>
+						</g:form> 
+						|
+						<g:form name="orthoPepCluster" url="[action:'runCluster']">
+							<g:hiddenField name="orthoClusterPepFileId" value=""/>
+							<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
+							<g:hiddenField name="seq" value="pep"/>
+							<a href="javascript:void(0);" onclick="get_table_data('orthoClusterPep');document.orthoPepCluster.submit()">Peptides</a>
+						</g:form>
+					</div>
+				</g:if>
 				<table id="orthomcl_table" class="display" >
 					  <thead>
 						<tr>

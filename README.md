@@ -284,6 +284,8 @@ Change to my_orthomcl_dir and run:
 
 The naming convention expected is that each transcript ID is preceded by an OrthoMCL ID, e.g. Mmeles|gene1234
 
+If this file is added after the initial data, the ortholog data will need to be loaded into the database. This can be done simply by running `./run_me.sh` again.
+
 ## Data rules
 
 1. All chromosme/scaffold/contig IDs must be unique, e.g. Mmeles_v1.0_scaffold_1
