@@ -894,3 +894,13 @@ div.innerDetails { display: none }
 	position: relative;
 }
 
+.sidebar {
+	float: right;
+	width: 300px;
+	padding: 10px 3px 3px 3px;
+	border:3px solid #ABBF78;
+	margin:10px;
+	margin-right:0px;
+	overflow: auto;
+	white-space:nowrap;
+}

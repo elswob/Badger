@@ -22,119 +22,99 @@
       		<a href="#" onclick="parentNode.submit()">reset </a>
       </g:form>
       </div>
+      
 	  <g:if test="${params.edit == 'y'}">
-	  	<g:form name="editPage" url="[controller:'Home', action:'editPage']">
+		<div class="sidebar">  
+			<div class="inline">  
+				<h1>Latest News</h1>
+				<sec:ifAnyGranted roles="ROLE_ADMIN">
+					<g:form action="addNews" controller="admin">
+						(<a href="#" onclick="parentNode.submit()">add news item</a>)
+					</g:form><br>
+				</sec:ifAnyGranted>
+			</div>			  
+			<table>	  
+			<g:each var="res" in="${newsData}">
+				<tr>
+					<td>
+						<div class="inline">
+							<sec:ifAnyGranted roles="ROLE_ADMIN">	    
+								<g:form action="editNews" controller="admin" params="[titleString: res.titleString]" >
+									<a href="#" onclick="parentNode.submit()" title="Edit news item"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
+								</g:form>  	
+								<g:form action="deleteNews" controller="admin" params="[titleString: res.titleString]" >
+									<a href="#" onclick="parentNode.submit()" title="Delete news item"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
+								</g:form> 
+							</sec:ifAnyGranted>
+						<b><g:formatDate format="d MMM yyyy" date="${res.dateString}"/>:</b>
+					</td>
+					<td>
+						<g:link action="news" params="${[newsTitle : res.titleString]}">${res.titleString}</g:link>
+					</div>
+					</td>
+				</tr>
+			</g:each>
+			</table>
+		</div>
+		<div>
+		<g:form name="editPage" url="[controller:'Home', action:'editPage']">
 			<ckeditor:editor name="edits" height="400px" width="100%">
 				<g:if test="${edits}">
 					${edits.edit[0]}
 				</g:if>
 				<g:else>
 					<h1>Welcome to the home of <b>${grailsApplication.config.projectID}</b></h1>
-					<div style="overflow:auto; padding-right:2px; height:380px">
-						<table>
-							<tr>
-								<td>
-									<img src="${resource(dir: 'images', file: grailsApplication.config.mainImage)}" height="300" style="padding:10px; float:left;margin:0 5px 0 0;"/>
-									 <br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
-								</td>
-								<td>
-									<div style="overflow:auto; padding-right:2px; max-height:200px">  
-										<div class="inline">  
-											<h1>Latest News</h1>
-												<sec:ifAnyGranted roles="ROLE_ADMIN">
-													<g:form action="addNews" controller="admin">
-														(<a href="#" onclick="parentNode.submit()">add news item</a>)
-													</g:form><br>
-												</sec:ifAnyGranted>
-										</div>
-							  
-								<table>	  
-								<g:each var="res" in="${newsData}">
-									<tr>
-										<td>
-											<div class="inline">
-												<sec:ifAnyGranted roles="ROLE_ADMIN">	    
-													<g:form action="editNews" controller="admin" params="[titleString: res.titleString]" >
-														<a href="#" onclick="parentNode.submit()" title="Edit news item"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
-													</g:form>  	
-													<g:form action="deleteNews" controller="admin" params="[titleString: res.titleString]" >
-														<a href="#" onclick="parentNode.submit()" title="Delete news item"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
-													</g:form> 
-												</sec:ifAnyGranted>
-											<b><g:formatDate format="d MMM yyyy" date="${res.dateString}"/>:</b>
-			
-										</td>
-										<td>
-											<g:link action="news" params="${[newsTitle : res.titleString]}">${res.titleString}</g:link>
-										</div>
-										</td>
-									</tr>
-								</g:each>
-								</table>
-							</div>
-							</td>
-						</tr>
-						</table>
-					</div>
+					<img src="${resource(dir: 'images', file: grailsApplication.config.mainImage)}" height="300" style="padding:10px; float:left;margin:0 5px 0 0;"/>
+					<br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
 				</g:else>
 			</ckeditor:editor>
 			<input type = "hidden" name="pageName" value="/home/index">
 		</g:form>
+		</div>
 	  </g:if>
 	  </sec:ifAnyGranted>
 	  
       <g:if test="${params.edit != 'y'}">
-	    <g:if test="${edits}">
+		<div class="sidebar">  
+			<div class="inline">  
+				<h1>Latest News</h1>
+				<sec:ifAnyGranted roles="ROLE_ADMIN">
+					<g:form action="addNews" controller="admin">
+						(<a href="#" onclick="parentNode.submit()">add news item</a>)
+					</g:form><br>
+				</sec:ifAnyGranted>
+			</div>			  
+			<table>	  
+			<g:each var="res" in="${newsData}">
+				<tr>
+					<td>
+						<div class="inline">
+							<sec:ifAnyGranted roles="ROLE_ADMIN">	    
+								<g:form action="editNews" controller="admin" params="[titleString: res.titleString]" >
+									<a href="#" onclick="parentNode.submit()" title="Edit news item"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
+								</g:form>  	
+								<g:form action="deleteNews" controller="admin" params="[titleString: res.titleString]" >
+									<a href="#" onclick="parentNode.submit()" title="Delete news item"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
+								</g:form> 
+							</sec:ifAnyGranted>
+						<b><g:formatDate format="d MMM yyyy" date="${res.dateString}"/>:</b>
+
+					</td>
+					<td>
+						<g:link action="news" params="${[newsTitle : res.titleString]}">${res.titleString}</g:link>
+					</div>
+					</td>
+				</tr>
+			</g:each>
+			</table>
+		</div>
+		<g:if test="${edits}">
 			${edits.edit[0]}
 		</g:if>
 		<g:else>
 	  		<h1>Welcome to the home of <b>${grailsApplication.config.projectID}</b></h1>	
-			<div style="overflow:auto; padding-right:2px; height:380px">
-				<table>
-					<tr>
-						<td>
-							<img src="${resource(dir: 'images', file: grailsApplication.config.mainImage)}" height="300" style="padding:10px; float:left;margin:0 5px 0 0;"/>
-							 <br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
-						</td>
-						<td>
-							<div style="overflow:auto; padding-right:2px; max-height:200px">  
-								<div class="inline">  
-									<h1>Latest News</h1>
-										<sec:ifAnyGranted roles="ROLE_ADMIN">
-											<g:form action="addNews" controller="admin">
-												(<a href="#" onclick="parentNode.submit()">add news item</a>)
-											</g:form><br>
-										</sec:ifAnyGranted>
-								</div>
-					  
-						<table>	  
-						<g:each var="res" in="${newsData}">
-							<tr>
-								<td>
-									<div class="inline">
-										<sec:ifAnyGranted roles="ROLE_ADMIN">	    
-											<g:form action="editNews" controller="admin" params="[titleString: res.titleString]" >
-												<a href="#" onclick="parentNode.submit()" title="Edit news item"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
-											</g:form>  	
-											<g:form action="deleteNews" controller="admin" params="[titleString: res.titleString]" >
-												<a href="#" onclick="parentNode.submit()" title="Delete news item"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
-											</g:form> 
-										</sec:ifAnyGranted>
-									<b><g:formatDate format="d MMM yyyy" date="${res.dateString}"/>:</b>
-	
-								</td>
-								<td>
-									<g:link action="news" params="${[newsTitle : res.titleString]}">${res.titleString}</g:link>
-								</div>
-								</td>
-							</tr>
-						</g:each>
-						</table>
-					</div>
-					</td>
-				</tr>
-				</table>
-			</div>
+			<img src="${resource(dir: 'images', file: grailsApplication.config.mainImage)}" height="300" style="padding:10px; float:left;margin:0 5px 0 0;"/>
+			<br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
 		</g:else>
 	 </g:if>
   </body>
