@@ -846,8 +846,8 @@
 					</g:form>
 				</div>	
 				<g:if test = "${grailsApplication.config.musclePath}">
-					<g:if test="${orthologs.size() < 21}"
-						<div class="inline">
+					<div class="inline">
+						<g:if test="${orthologs.size() < 21}">
 							Cluster (sequences in table only): 
 							<g:form name="orthoNucCluster" url="[action:'runCluster']">
 								<g:hiddenField name="orthoClusterNucFileId" value=""/>
@@ -861,12 +861,12 @@
 								<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
 								<g:hiddenField name="seq" value="pep"/>
 								<a href="javascript:void(0);" onclick="get_table_data('orthoClusterPep');document.orthoPepCluster.submit()">Peptides</a>
-							</g:form>
-						</div>
-					</g:if>
-					<g:else>
-						Clustering only available for groups of 20 or less
-					</g:else>
+							</g:form>					
+						</g:if>
+						<g:else>
+							Clustering only available for groups of 20 or less
+						</g:else>
+					</div>
 				</g:if>
 				<table id="orthomcl_table" class="display" >
 					  <thead>

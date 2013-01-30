@@ -148,6 +148,14 @@ class AdminController {
 	}
 	
 	@Secured(['ROLE_ADMIN'])
+	def editedSpecies = {
+		def sql = new Sql(dataSource)
+		def upsql = "update meta_data set genus = '"+params.genus.trim()+"', species = '"+params.species.trim()+"', description = '"+params.description.trim()+"', image_file = '"+params.image_f.trim()+"', image_source = '"+params.image_s.trim()+"' where id = '"+params.id+"';";
+		println "upsql = "+upsql
+		def update = sql.execute(upsql)
+	}
+	
+	@Secured(['ROLE_ADMIN'])
 	def addedGenome = {
 		def dataMap = [:]
 		def meta = MetaData.findById(params.meta)		

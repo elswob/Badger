@@ -29,9 +29,9 @@
 			</td>
 		</tr>
 	</table>
-	<h1>Genome versions</h1>
 	<table>
 		<g:if test="${genomes.size == 1}">
+		<h1>Genome version</h1>
 		<g:javascript>var genomeId = ${genomes.id[0]}; ${remoteFunction(action:'ajax_gff',update:'gffSelect',params:'\'link=\' + genomeId ')};</g:javascript>
 			<tr>
 				<td><input type="radio" name="genomeSelect" id="${genomes.id[0]}" value="${genomes.id[0]}" checked onclick="${remoteFunction(action:'ajax_gff',update:'gffSelect',params:'\'link=\' + this.value')};"/></td>
@@ -40,6 +40,7 @@
 			<!--g:remoteFunction action="ajax_gff" update="gffSelect" params="['link':genomes.id[0]]" /-->
 		</g:if>
 		<g:else>
+			<h1>Choose a genome version</h1>
 			<g:each var="g" in="${genomes}">
 				<tr>
 					<td><input type="radio" name="genomeSelect" id="${g.id}" value="${g.id}" onclick="${remoteFunction(action:'ajax_gff',update:'gffSelect',params:'\'link=\' + this.value')};"/></td>

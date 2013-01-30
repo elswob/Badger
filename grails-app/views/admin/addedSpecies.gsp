@@ -13,7 +13,7 @@
 	<g:if test = "${error == 'duplicate'}">
 		<br><h2>This species already exists.<br> Please go <a href="previous.html" onClick="history.back();return false;">back</a> and edit the data set.</h2>
 	</g:if>
-	<g:else>
+	<g:else>`
 		<h1>You have successfully added the following species:</h1>
 		<table>
 		<tr><td><b>Species:</b></td><td><i>${dataMap.genus} ${dataMap.species}</i></td></tr>

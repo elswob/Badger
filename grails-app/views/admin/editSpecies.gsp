@@ -12,7 +12,7 @@
 <g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > Edit species data
 <h1>Edit species data:</h1>
 
-<g:form action="editedData" controller="admin">
+<g:form action="editedSpecies" controller="admin">
 
 <p><b>Genus</b><font color="red">*</font></p>
 <g:textField value="${metaData.genus}" name="genus" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
