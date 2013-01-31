@@ -136,9 +136,9 @@ def addInterProScan(anno,annoFile){
 			annoMap.descr = splitter[12]
 			if (score < 1e-5){
 				GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
-				GeneAnno ga = new GeneAnno(annoMap)
+				GeneInterpro ga = new GeneInterpro(annoMap)
 				if (geneFind){
-				geneFind.addToGanno(ga)
+				geneFind.addToGinter(ga)
 					if ((count % 5000) ==  0){
 						println count
 						//println annoMap

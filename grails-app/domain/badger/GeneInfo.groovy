@@ -25,6 +25,6 @@ class GeneInfo {
         pep type: "text"
     }
     //static hasOne = [ortholog: Ortho]
-    static hasMany = [exon:ExonInfo, gblast:GeneBlast, ganno: GeneAnno]
+    static hasMany = [exon:ExonInfo, gblast:GeneBlast, ganno: GeneAnno, ginter: GeneInterpro]
     static belongsTo = [ file: FileData ]
 }

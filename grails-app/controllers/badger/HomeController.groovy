@@ -168,7 +168,18 @@ class HomeController {
 		 //def files = FileData.findAll(sort:"meta.genus")
 		 def fileSql = "select file_data.*,genus,species,image_file from file_data,genome_data,meta_data where file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id order by genus,species,file_type;"
 		 def files = sql.rows(fileSql)
-		 return [ files: files]
+		 def gffAnno = [:]
+		 files.each{
+		 	if (it.file_type == 'Genes'){
+		 		def anno = new File("data/"+it.file_dir+"/"+it.file_name+".anno.csv")
+		 		if (anno.exists()){
+		 			gffAnno."${it.file_name}" = true
+		 		}else{
+		 			gffAnno."${it.file_name}" = false
+		 		}
+		 	}
+		 }
+		 return [ files: files, gffAnno: gffAnno]
 	 }
   }
   

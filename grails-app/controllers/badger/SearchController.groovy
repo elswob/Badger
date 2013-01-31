@@ -69,6 +69,8 @@ class SearchController {
     	def geneData = FileData.findById(params.GFFid)
     	def annoTypesSql = "select distinct(type) from anno_data where filedata_id = "+params.GFFid+";";
     	def annoTypes = sql.rows(annoTypesSql)
+    	def interSql = "select distinct(anno_db) from gene_interpro;";
+    	def inter = sql.rows(interSql)
     	 //get genome info and stats
     	 def genomeInfoSql = "select non_atgc,contig_id,gc,length,coverage from genome_info,file_data where file_id = file_data.id and file_data.id = '"+Gid+"' order by length desc;"
 	 	 //def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"
@@ -207,7 +209,7 @@ class SearchController {
 		 println blastAnnoSql
 		 def blastAnnoData = sql.rows(blastAnnoSql)
     	//return [n50: n50_list, n90: n90_list, meta: metaData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats]
-    	 return [annoTypes:annoTypes, geneData: geneData, n50: n50_list, n90: n90_list, genomeFile:genomeData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats, genomeInfo: genomeInfo]
+    	 return [inter:inter, annoTypes:annoTypes, geneData: geneData, n50: n50_list, n90: n90_list, genomeFile:genomeData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats, genomeInfo: genomeInfo]
     }
     def all_search = {
          if (grailsApplication.config.i.links.all == 'private' && !isLoggedIn()) {
@@ -231,14 +233,17 @@ class SearchController {
 			println "Searching all databases for "+params.searchId
 			
 			//search transcriptome annotations
-			def transannosearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM trans_anno, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query;"      
-			println "Trans anno search = "+transannosearch
-			def transanno = sql.rows(transannosearch)
-			def transblastsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM trans_blast, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query;"      
-			def transblast = sql.rows(transblastsearch)
-			def transRes = transanno + transblast
+			//def transannosearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM trans_anno, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query;"      
+			//println "Trans anno search = "+transannosearch
+			//def transanno = sql.rows(transannosearch)
+			//def transblastsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM trans_blast, plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query;"      
+			//def transblast = sql.rows(transblastsearch)
+			//def transRes = transanno + transblast
 			
 			//search gene annotations
+			def geneintersearch = "select distinct on (anno_db,mrna_id) mrna_id,anno_id,anno_db,anno_start,anno_stop,descr,score,genus,species,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank, meta_data.id as gid FROM gene_interpro,gene_info,file_data,genome_data,meta_data,plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query and gene_interpro.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id;"
+			println "Gene inter search = "+geneintersearch
+			def geneinter = sql.rows(geneintersearch)
 			def geneannosearch = "select distinct on (anno_db,mrna_id) mrna_id,anno_id,anno_db,anno_start,anno_stop,descr,score,genus,species,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank, meta_data.id as gid FROM gene_anno,gene_info,file_data,genome_data,meta_data,plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query and gene_anno.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id;"
 			println "Gene anno search = "+geneannosearch
 			def geneanno = sql.rows(geneannosearch)
@@ -246,7 +251,7 @@ class SearchController {
 			println "Gene blast search = "+geneblastsearch
 			//select distinct on (anno_db,mrna_id) mrna_id,anno_id,anno_db,anno_start,anno_stop,descr,score,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank FROM gene_anno,gene_info,plainto_tsquery('globin') AS query WHERE textsearchable_index_col @@ query and gene_anno.gene_id = gene_info.id;
 			def geneblast = sql.rows(geneblastsearch)
-			def geneRes = geneanno + geneblast
+			def geneRes = geneinter + geneanno + geneblast
 			
 			//search publications
 			def pubsearch = "select distinct on (pubmed_id,date_out) pubmed_id,abstract_text,title,authors,journal_short,to_char(date_string,'yyyy Mon dd') as date_out,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank from publication , plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query order by date_out,pubmed_id desc, rank desc;"								
@@ -265,7 +270,7 @@ class SearchController {
 			}
 			println "Anno links =  "+annoLinks
 			
-			return [searchId: params.searchId, search_time: duration, transRes: transRes, geneRes: geneRes, pubRes: pubRes, annoLinks:annoLinks]
+			return [searchId: params.searchId, search_time: duration, geneRes: geneRes, pubRes: pubRes, annoLinks:annoLinks]
 		}
 		sql.close()
     }

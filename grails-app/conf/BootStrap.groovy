@@ -30,6 +30,11 @@ class BootStrap {
                 sql.execute("CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON trans_blast FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(textsearchable_index_col, 'pg_catalog.english', descr);")
                 sql.execute("CREATE INDEX transblastsearch_idx ON trans_blast USING gin(textsearchable_index_col);")
                 
+                //gene_inter
+                sql.execute("ALTER TABLE gene_interpro ADD COLUMN textsearchable_index_col tsvector;")
+                sql.execute("CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON gene_interpro FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(textsearchable_index_col, 'pg_catalog.english', descr);")
+                sql.execute("CREATE INDEX geneinterprosearch_idx ON gene_interpro USING gin(textsearchable_index_col);")
+                
                 //gene_anno
                 sql.execute("ALTER TABLE gene_anno ADD COLUMN textsearchable_index_col tsvector;")
                 sql.execute("CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON gene_anno FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(textsearchable_index_col, 'pg_catalog.english', descr);")

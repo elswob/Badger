@@ -3,8 +3,7 @@ package badger
 import groovy.sql.Sql
 
 def grailsApplication
-def dataSource = ctx.getBean("dataSource")
-def sql = new Sql(dataSource)
+
 
 def cleanUpGorm() { 
 	def sessionFactory = ctx.getBean("sessionFactory")
@@ -17,52 +16,82 @@ def cleanUpGorm() {
 
 def getFiles = FileData.findAllByFile_type("Genes")
 if (getFiles){
-	getFiles.each { 
+	getFiles.each {
 		createAnnoFile(it.id)
 	}
 }else{
 	println "There are no genes to create an annotation file with"
 }
 
-//create annotation spreadsheet
-def createAnnoFile(gffId){
-	println "### GFF id "+gffId+" ###"
+def createAnnoFile(gff){
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
-	def blastData = [:]
-	def funData = [:]
-	def iprData = [:]
+  	println "### "+gff+" ###"
+  	
+  	//create output file
+  	def gffInfo = FileData.findById(gff)
+  	def outfile = new File("data/"+gffInfo.file_dir+"/"+gffInfo.file_name+".anno.csv")
+	if (outfile.exists()){outfile.delete()}
 	
-	println "Getting BLAST data ..."
-	def blastSQL = "select distinct on (anno_db,mrna_id) mrna_id,anno_db,anno_id,score from gene_blast,gene_info where gene_blast.gene_id = gene_info.id and gene_info.file_id = "+gffId+" and anno_id !~ '^IPR' order by mrna_id,anno_db,score desc limit 100;";
-	def blastOut = sql.rows(blastSQL)
-	blastOut.each{
-		blastData."${it.mrna_id}" = it            
-	}
-	println blastData
+  	def asql = "select * from anno_data where filedata_id = "+gff+" order by type;"
+    def a = sql.rows(asql)
 	
-	println "Getting non InterPro functional annotation data ..."
-	def funSQL = "select distinct on (anno_db,mrna_id) mrna_id,anno_db,anno_id,score from gene_anno,gene_info where gene_anno.gene_id = gene_info.id and gene_info.file_id = "+gffId+" and anno_id !~ '^IPR' order by mrna_id,anno_db,score desc limit 100;";
-	def funOut = sql.rows(funSQL)
-	funOut.each{
-		funData."${it.mrna_id}" = it            
-	}
-	
-	println "Getting InterPro functional annotation data ..."
-	def iprSQL = "select distinct on (mrna_id) mrna_id,anno_db,anno_id,score from gene_anno,gene_info where gene_anno.gene_id = gene_info.id and gene_info.file_id = "+gffId+" and anno_id ~ '^IPR' order by mrna_id,anno_db,score asc limit 100;";
-	def iprOut = sql.rows(iprSQL)
-	iprOut.each{
-		iprData."${it.mrna_id}" = it            
-	}
-	
-	//create file
-	println "Creating file ..."
-	def trans = GeneInfo.findAll()
-	trans.each{
-		if (blastData."${it.mrna_id}"){
-			println "BLAST!!! - "+blastData."${it.mrna_id}"
-		}else{
-			//println "no blast for "+mid
+	//get list of interpro databases
+	//def iSql = "select distinct(anno_db) from gene_anno where anno_id ~ '^IPR';";
+	//def i = sql.rows(iSql).anno_db
+
+	//add headers for file
+	outfile << "\t"
+	a.each{anno->
+  	  	outfile << "\t"+anno.source+"\t\t"
+  	}
+  	outfile << "\n"
+  	outfile << "Transcript ID"
+  	a.each{anno->
+  		outfile << "\tAnnotation ID\tDescription\tScore"
+  	}
+  	outfile << "\n"
+  	def count = 0
+  	gffInfo.gene.sort({it.mrna_id}).each{g->
+  		count++
+  		def gMap = [:]
+  	  	a.each{anno->
+  	  		if (anno.type == 'blast'){
+				if (g.gblast.findAll({it.anno_db == anno.source})){
+					def top = g.gblast.findAll({it.anno_db == anno.source}).sort({-it.score})[0]
+					gMap."${anno.source}" = [top.anno_id,top.descr,top.score]
+				}else{
+					gMap."${anno.source}" = ["","",""]
+				}
+			}else if (anno.type == 'fun'){
+				if (g.ganno.findAll({it.anno_db == anno.source})){
+					def top = g.ganno.findAll({it.anno_db == anno.source}).sort({-it.score})[0]
+					gMap."${anno.source}" = [top.anno_id,top.descr,top.score]
+				}else{
+					gMap."${anno.source}" = ["","",""]
+				}
+			}else if (anno.type == 'ipr'){
+				if (g.ginter.findAll()){
+					def top = g.ginter.findAll().sort({it.score})[0]
+					gMap."${anno.source}" = [top.anno_id,top.descr,top.score]
+				}else{
+					gMap."${anno.source}" = ["","",""]
+				}
+			}
+      	}
+      	if ((count % 1000) ==  0){
+			println count
+			cleanUpGorm()
 		}
-	}
+      	//println "m = "+g.mrna_id
+      	outfile << g.mrna_id
+      	gMap.each{
+      		//println it.key+" -> "+it.value[0]+"\t"+it.value[1]+"\t"+it.value[2]+"\n"
+      		outfile << "\t"+it.value[0]+"\t"+it.value[1]+"\t"+it.value[2]
+      	}
+      	outfile << "\n"
+    }
+    println "Zipping up for download..."
+	def ant = new AntBuilder()
+	ant.zip(destfile: "data/"+gffInfo.file_dir+"/"+gffInfo.file_name+".anno.csv.zip", basedir: "data/"+gffInfo.file_dir, includes: gffInfo.file_name)
 }
