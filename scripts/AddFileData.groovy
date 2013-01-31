@@ -133,7 +133,7 @@ def H_duj(){
 	annoMap.link = "http://www.ebi.ac.uk/interpro/IEntry?ac="
 	annoMap.source = "InterProScan"
 	annoMap.regex = "(IPR\\d+).*?"
-	annoMap.anno_file = "A_viteae.iprscan.raw"
+	annoMap.anno_file = "H_dujardini_maker.ipr.out"
 	annoMap.loaded = false	
 	addAnno("maker1.gff3",annoMap)
 	
@@ -222,7 +222,7 @@ def H_duj(){
 	annoMap.link = "http://www.ebi.ac.uk/interpro/IEntry?ac="
 	annoMap.source = "InterProScan"                              
 	annoMap.regex = "(IPR\\d+).*?"
-	annoMap.anno_file = "H_dujardini_aug_ipr.out"
+	annoMap.anno_file = "H_duj_aug_ipr.raw"
 	annoMap.loaded = false
 	addAnno("nHd.2.3.1.aug.gff",annoMap)
 	

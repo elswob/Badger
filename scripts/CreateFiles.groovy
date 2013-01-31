@@ -26,10 +26,11 @@ if (getFiles){
 def createAnnoFile(gff){
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
-  	println "### "+gff+" ###"
   	
   	//create output file
   	def gffInfo = FileData.findById(gff)
+  	println "### Getting data for "+gffInfo.file_name+" ###"
+  	println new Date()
   	def outfile = new File("data/"+gffInfo.file_dir+"/"+gffInfo.file_name+".anno.csv")
 	if (outfile.exists()){outfile.delete()}
 	
@@ -81,7 +82,7 @@ def createAnnoFile(gff){
       	}
       	if ((count % 1000) ==  0){
 			println count
-			cleanUpGorm()
+			//cleanUpGorm()
 		}
       	//println "m = "+g.mrna_id
       	outfile << g.mrna_id
