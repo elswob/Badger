@@ -191,4 +191,15 @@ class FileDownloadController {
 			println "data/"+params.fileName+" does not exists"
 		}
     }
+    def zip_anno_download = {
+    	if (new File(params.fileName).exists()){
+    		def fileOut = new File(params.fileName+".zip")
+			response.setHeader "Content-disposition", "attachment; filename="+params.file_name+".zip"
+			response.contentType = 'application/zip'
+			response.outputStream << fileOut.newInputStream()
+			response.outputStream.flush()
+		}else{
+			println params.fileName+" does not exists"
+		}
+    }
 }

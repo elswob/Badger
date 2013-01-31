@@ -26,9 +26,9 @@
 					<td><g:link controller="FileDownload" action="zip_download" params="${[fileName: res.file_name]}">${res.file_name}</g:link></td>
 				</tr>
 				<g:if test="${res.file_type == 'Genes'}">
-					<% if (gffAnno."${res.file_name}" == true){ %>
+					<% if (gffAnno."${res.file_name}" == true){ def annoFile = "data/"+res.file_dir+"/"+res.file_name+".anno.csv"%>
     					<tr><td>Genes (annotated file)</td><td>Version ${res.file_version}</td>
-    					<td><g:link controller="FileDownload" action="zip_download" params="${[fileName: res.file_name]}">${res.file_name}.anno.csv</g:link></td>
+    					<td><g:link controller="FileDownload" action="zip_anno_download" params="${[fileName: annoFile]}">${res.file_name}.anno.csv</g:link></td>
     				<%}%>
     			</tr>
     			</g:if>
