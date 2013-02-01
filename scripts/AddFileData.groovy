@@ -24,11 +24,7 @@ def H_duj(){
 // --- Species Data ---	
 	metaMap.genus = "Hypsibius";
 	metaMap.species = "dujardini";
-	metaMap.description = "Hypsibius dujardinia are members of the phylum Tardigrada. These species can also be known as water bears or moss piglets. Th
-ey are microscopic invertebrates, and their body lengths are only between 0.05-1.2mm. long. These organisms have four pairs of legs which have four to eight
- claws on each. Usually they live between four months to one year. However, they can survive in difficult conditions. They shut down their metabolisms which
- allows them to survive in extreme temperatures, pressure, and radiation for a long time. They feed on the fluids of plant cells, animal cells, and bacteria
-.."
+	metaMap.description = "Hypsibius dujardinia are members of the phylum Tardigrada. These species can also be known as water bears or moss piglets. They are microscopic invertebrates, and their body lengths are only between 0.05-1.2mm. long. These organisms have four pairs of legs which have four to eight claws on each. Usually they live between four months to one year. However, they can survive in difficult conditions. They shut down their metabolisms which allows them to survive in extreme temperatures, pressure, and radiation for a long time. They feed on the fluids of plant cells, animal cells, and bacteria."
 	metaMap.image_file = "H_dujardini.jpg"
 	metaMap.image_source = "http://mrrohanbio.wikispaces.com/Hypsibius+dujardini"
 	addMeta(metaMap)
@@ -139,11 +135,7 @@ ey are microscopic invertebrates, and their body lengths are only between 0.05-1
 	// --- Species Data ---	
 	metaMap.genus = "Hypsibius";
 	metaMap.species = "dujardini";
-	metaMap.description = "Hypsibius dujardinia are members of the phylum Tardigrada. These species can also be known as water bears or moss piglets. Th
-ey are microscopic invertebrates, and their body lengths are only between 0.05-1.2mm. long. These organisms have four pairs of legs which have four to eight
- claws on each. Usually they live between four months to one year. However, they can survive in difficult conditions. They shut down their metabolisms which
- allows them to survive in extreme temperatures, pressure, and radiation for a long time. They feed on the fluids of plant cells, animal cells, and bacteria
-.."
+	metaMap.description = "Hypsibius dujardinia are members of the phylum Tardigrada. These species can also be known as water bears or moss piglets. They are microscopic invertebrates, and their body lengths are only between 0.05-1.2mm. long. These organisms have four pairs of legs which have four to eight claws on each. Usually they live between four months to one year. However, they can survive in difficult conditions. They shut down their metabolisms which allows them to survive in extreme temperatures, pressure, and radiation for a long time. They feed on the fluids of plant cells, animal cells, and bacteria."
 	metaMap.image_file = "H_dujardini.jpg"
 	metaMap.image_source = "http://mrrohanbio.wikispaces.com/Hypsibius+dujardini"
 	addMeta(metaMap)
