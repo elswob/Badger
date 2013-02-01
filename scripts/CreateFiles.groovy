@@ -94,5 +94,5 @@ def createAnnoFile(gff){
     }
     println "Zipping up for download..."
 	def ant = new AntBuilder()
-	ant.zip(destfile: "data/"+gffInfo.file_dir+"/"+gffInfo.file_name+".anno.csv.zip", basedir: "data/"+gffInfo.file_dir, includes: gffInfo.file_name)
+	ant.zip(destfile: "data/"+gffInfo.file_dir+"/"+gffInfo.file_name+".anno.csv.zip", basedir: "data/"+gffInfo.file_dir, includes: gffInfo.file_name+".anno.csv)
 }
