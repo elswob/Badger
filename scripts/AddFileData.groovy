@@ -24,7 +24,11 @@ def H_duj(){
 // --- Species Data ---	
 	metaMap.genus = "Hypsibius";
 	metaMap.species = "dujardini";
-	metaMap.description = "Hypsibius dujardinia are members of the phylum Tardigrada. These species can also be known as water bears or moss piglets. They are microscopic invertebrates, and their body lengths are only between 0.05-1.2mm. long. These organisms have four pairs of legs which have four to eight claws on each. Usually they live between four months to one year. However, they can survive in difficult conditions. They shut down their metabolisms which allows them to survive in extreme temperatures, pressure, and radiation for a long time. They feed on the fluids of plant cells, animal cells, and bacteria.."
+	metaMap.description = "Hypsibius dujardinia are members of the phylum Tardigrada. These species can also be known as water bears or moss piglets. Th
+ey are microscopic invertebrates, and their body lengths are only between 0.05-1.2mm. long. These organisms have four pairs of legs which have four to eight
+ claws on each. Usually they live between four months to one year. However, they can survive in difficult conditions. They shut down their metabolisms which
+ allows them to survive in extreme temperatures, pressure, and radiation for a long time. They feed on the fluids of plant cells, animal cells, and bacteria
+.."
 	metaMap.image_file = "H_dujardini.jpg"
 	metaMap.image_source = "http://mrrohanbio.wikispaces.com/Hypsibius+dujardini"
 	addMeta(metaMap)
@@ -58,14 +62,14 @@ def H_duj(){
 	//gff
 	fileMap.file_type = "Genes"
 	fileMap.file_name = "maker1.gff3"
-	fileMap.file_version = "1.0"
+	fileMap.file_version = "2.3.0"
 	fileMap.description = "MAKER gene prediction"
 	addFile(fileMap)
 	
 	//mRNA
 	fileMap.file_type = "mRNA"
 	fileMap.file_name = "all.maker.transcripts.edit.fasta"
-	fileMap.file_version = "1.0"
+	fileMap.file_version = "2.3.0"
 	fileMap.description = "MAKER gene prediction"
 	fileMap.file_link = "maker1.gff3"
 	addFile(fileMap)
@@ -73,7 +77,7 @@ def H_duj(){
 	//Peptide
 	fileMap.file_type = "Peptide"
 	fileMap.file_name = "all.maker.proteins.edit.fasta"
-	fileMap.file_version = "1.0"
+	fileMap.file_version = "2.3.0"
 	fileMap.description = "MAKER gene prediction"
 	fileMap.file_link = "maker1.gff3"
 	addFile(fileMap)
@@ -87,23 +91,16 @@ def H_duj(){
 	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
 	annoMap.source = "SwissProt"
 	annoMap.regex = "gi\\|(\\d+)\\|.*"
-	annoMap.anno_file = "sprot.xml"
+	annoMap.anno_file = "all.maker.proteins.edit.fasta.swiss.xml"
 	annoMap.loaded = false	
 	addAnno("maker1.gff3",annoMap)
 	
-	annoMap.link = "http://www.ncbi.nlm.nih.gov/protein/"
-	annoMap.source = "NCBI NR"
-	annoMap.regex = "gi\\|(\\d+)\\|.*"
-	annoMap.anno_file = "nr_10.xml"
-	annoMap.loaded = false	
-	addAnno("maker1.gff3",annoMap)
-	
-	annoMap.link = "http://www.nematodes.org/nembase4/cluster.php?cluster="
-	annoMap.source = "Nembase4"
-	annoMap.regex = "(.*)"
-	annoMap.anno_file = "nembase_tblastn.xml"
-	annoMap.loaded = false	
-	addAnno("maker1.gff3",annoMap)
+	annoMap.link = "http://www.ncbi.nlm.nih.gov/nucest/"
+        annoMap.source = "Tardigrade ESTs"
+        annoMap.regex = "gi\\|(\\d+)\\|.*"
+        annoMap.anno_file = "tard_est.xml"
+        annoMap.loaded = false
+        addAnno("maker1.gff3",annoMap)
 	
 	//functional data
 	annoMap.type = "fun"				
@@ -133,7 +130,7 @@ def H_duj(){
 	annoMap.link = "http://www.ebi.ac.uk/interpro/IEntry?ac="
 	annoMap.source = "InterProScan"
 	annoMap.regex = "(IPR\\d+).*?"
-	annoMap.anno_file = "H_dujardini_maker.ipr.out"
+	annoMap.anno_file = "H_dujardini_ipr.out"
 	annoMap.loaded = false	
 	addAnno("maker1.gff3",annoMap)
 	
@@ -142,7 +139,11 @@ def H_duj(){
 	// --- Species Data ---	
 	metaMap.genus = "Hypsibius";
 	metaMap.species = "dujardini";
-	metaMap.description = "Hypsibius dujardinia are members of the phylum Tardigrada. These species can also be known as water bears or moss piglets. They are microscopic invertebrates, and their body lengths are only between 0.05-1.2mm. long. These organisms have four pairs of legs which have four to eight claws on each. Usually they live between four months to one year. However, they can survive in difficult conditions. They shut down their metabolisms which allows them to survive in extreme temperatures, pressure, and radiation for a long time. They feed on the fluids of plant cells, animal cells, and bacteria.."
+	metaMap.description = "Hypsibius dujardinia are members of the phylum Tardigrada. These species can also be known as water bears or moss piglets. Th
+ey are microscopic invertebrates, and their body lengths are only between 0.05-1.2mm. long. These organisms have four pairs of legs which have four to eight
+ claws on each. Usually they live between four months to one year. However, they can survive in difficult conditions. They shut down their metabolisms which
+ allows them to survive in extreme temperatures, pressure, and radiation for a long time. They feed on the fluids of plant cells, animal cells, and bacteria
+.."
 	metaMap.image_file = "H_dujardini.jpg"
 	metaMap.image_source = "http://mrrohanbio.wikispaces.com/Hypsibius+dujardini"
 	addMeta(metaMap)
