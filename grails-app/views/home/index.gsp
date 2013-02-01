@@ -86,6 +86,7 @@
 			</div>			  
 			<table>	  
 			<g:each var="res" in="${newsData}">
+			
 				<tr>
 					<td>
 						<div class="inline">

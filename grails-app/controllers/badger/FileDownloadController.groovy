@@ -173,7 +173,7 @@ class FileDownloadController {
 		 file_builder = file_builder + blastIn
 		 def downloadName = params.fileName.trim()
 		 println "created download file "+downloadName+".fna"
-     	 response.setHeader "Content-disposition", "attachment; filename="+downloadName+".fna"
+     	 response.setHeader "Content-disposition", "attachment; filename="+downloadName+".sequences.fna"
          response.contentType = 'text/csv'
          response.outputStream << file_builder
          response.outputStream.flush()
