@@ -156,6 +156,24 @@ class AdminController {
 	}
 	
 	@Secured(['ROLE_ADMIN'])
+	def deleteSpecies = {
+		def metaData = MetaData.findById(params.Gid)
+		return [metaData: metaData]	
+	}
+	@Secured(['ROLE_ADMIN'])
+	def deletedSpecies = {
+		def metaData = MetaData.findById(params.Gid)
+		def genus = metaData.genus
+		def species = metaData.species
+		println "Deleting "+genus+" "+species		
+		//runAsync {
+	 		metaData.delete()
+	 	//}
+	 	return [genus:genus, species:species]
+	 	
+	}
+	
+	@Secured(['ROLE_ADMIN'])
 	def addedGenome = {
 		def dataMap = [:]
 		def meta = MetaData.findById(params.meta)		
