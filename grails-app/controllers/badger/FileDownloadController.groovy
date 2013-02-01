@@ -193,15 +193,15 @@ class FileDownloadController {
     }
     def zip_anno_download = {
     	def f = FileData.findByFile_name(params.fileName)
-    	if (new File("data/"+f.file_dir+"/"+f.file_name+".anno.csv.zip").exists()){
-    		def fileOut = new File("data/"+f.file_dir+"/"+f.file_name+".anno.csv.zip")
+    	if (new File("data/"+f.file_dir+"/"+f.file_name+".anno.tsv.zip").exists()){
+    		def fileOut = new File("data/"+f.file_dir+"/"+f.file_name+".anno.tsv.zip")
     		println "fileOut = "+fileOut
-			response.setHeader "Content-disposition", "attachment; filename="+f.file_name+".anno.csv.zip"
+			response.setHeader "Content-disposition", "attachment; filename="+f.file_name+".anno.tsv.zip"
 			response.contentType = 'application/zip'
 			response.outputStream << fileOut.newInputStream()
 			response.outputStream.flush()
 		}else{
-			println params.fileName+".anno.csv.zip does not exist"
+			println params.fileName+".anno.tsv.zip does not exist"
 		}
     }
 }
