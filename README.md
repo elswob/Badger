@@ -267,6 +267,8 @@ This tree needs to be in the [phyloXML](http://www.phyloxml.org/) format. A newi
 
 `java -cp forester.jar org.forester.application.phyloxml_converter -f=nn -ru tree.newick tree.xml`
 
+To add the file, simply copy the tree to a directory within your data folder and add its whereabouts to the appropriate secion of the badger.config.properties file
+
 #### OrthoMCL analysis
 
 Orthologs of gene trancripts can be displayed if an OrthoMCL groups file is provided in the badger.config.properties file. This is the file produced during step 13 of the OrthoMCL process:
