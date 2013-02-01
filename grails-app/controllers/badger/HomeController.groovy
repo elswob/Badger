@@ -171,7 +171,7 @@ class HomeController {
 		 def gffAnno = [:]
 		 files.each{
 		 	if (it.file_type == 'Genes'){
-		 		def anno = new File("data/"+it.file_dir+"/"+it.file_name+".anno.csv.zip")
+		 		def anno = new File("data/"+it.file_dir+"/"+it.file_name+".anno.tsv.zip")
 		 		if (anno.exists()){
 		 			gffAnno."${it.file_name}" = true
 		 		}else{
