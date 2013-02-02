@@ -126,7 +126,6 @@ Click <g:link controller="home" action="index" params="${[edit: 'y']}">here</g:l
 	 | <a href = "javascript:void(0)" onclick="demoData('badger')">M. meles </a>
 </div><br>
 
-<h2><b>Project data</b></h2>
 <g:form action="addedSpecies" controller="admin">
 	<p><b>Genus</b><font color="red">*</font></p>
 	<g:textField name="genus" style="width: 80%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>

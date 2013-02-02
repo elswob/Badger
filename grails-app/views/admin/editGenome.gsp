@@ -32,7 +32,7 @@
 <table>
 	<tr>
 		<td width="45%"><b>Date (leave blank for today's date)</b><font color="red">*</font><br>
-			<g:textField value="${genome.dateString}" name="genome_date" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
+			<g:textField value="${formatDate(format:'dd/MM/yyyy',date:genome.dateString)}" name="genome_date" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 		</td>
 		<td width="50%"><b>Version (a unique ID for the genome)</b><font color="red">*</font><br>
 			<g:textField value="${genome.gversion}" name="genome_version" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
@@ -42,6 +42,7 @@
 <p><b>URL of Gbrowse2 instance</b></p>
 <g:textField value="${genome.gbrowse}" name="gbrowse" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br><br>
 <br>
+<input type = "hidden" name="id" value="${genome.id}">
 <input class="mybuttons" type="button" value="Update genome data" onclick="submit()" >
 </g:form>
 <hr size = 5 color="green" width="100%" style="margin-top:10px"><br>

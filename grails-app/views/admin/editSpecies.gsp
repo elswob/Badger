@@ -37,14 +37,14 @@
 	<g:each var="f" in="${metaData.genome}">
 	   <tr><td>
 	   <div class="inline">
-	   		<g:form action= "editGenome" controller="admin" params="[gid: metaData.genome.id]" >
+	   		<g:form action= "editGenome" controller="admin" params="[gid: f.id]" >
 	    		<a href="#" onclick="parentNode.submit()" title="Edit file"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
 	    	</g:form>  	
-	    	<g:form action="deleteGenome" controller="admin" params="[gid: metaData.genome.id]" >
+	    	<g:form action="deleteGenome" controller="admin" params="[gid: f.id]" >
 	    		<a href="#" onclick="parentNode.submit()" title="Delete file"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
 	    	</g:form> 	
 	    </div>
-      		</td><td>Version ${f.gversion}:</td><td>${f.dateString}</td></tr>
+      		</td><td>Version ${f.gversion}:</td><td><g:formatDate format="d MMM yyyy" date="${f.dateString}"/></td></tr>
    	   </g:each>
 </g:if>
 <g:else>

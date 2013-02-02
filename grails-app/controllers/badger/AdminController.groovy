@@ -217,6 +217,29 @@ class AdminController {
 		return [genome: genomeData]	 
 	}
 	
+	@Secured(['ROLE_ADMIN'])
+	def editedGenome = {
+		def sql = new Sql(dataSource)
+		def upsql = "update genome_data set date_string = '"+params.genome_date.trim()+"', gversion = '"+params.genome_version.trim()+"', gbrowse = '"+params.gbrowse.trim()+"' where id = '"+params.id+"';";
+		println "upsql = "+upsql
+		def update = sql.execute(upsql)
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def deleteGenome = {
+		def genomeData = GenomeData.findById(params.gid)
+		return [genome: genomeData]	
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def deletedGenome = {
+		def genomeData = GenomeData.findById(params.gid)
+		def genomeV = genomeData.gversion
+		//runAsync {
+	 		genomeData.delete()
+	 	//}
+	 	return [genomeV:genomeV] 	
+	}
 	
 	@Secured(['ROLE_ADMIN'])
 	def addedFiles = {
