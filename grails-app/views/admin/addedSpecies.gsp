@@ -9,7 +9,7 @@
   </head>
 
   <body>
-   <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > Added data set </div>
+   <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > Added species </div>
 	<g:if test = "${error == 'duplicate'}">
 		<br><h2>This species already exists.<br> Please go <a href="previous.html" onClick="history.back();return false;">back</a> and edit the data set.</h2>
 	</g:if>
@@ -20,7 +20,7 @@
 		<tr><td><b>Description:</b></td><td>${dataMap.description}</td></tr>
 		</table>
 		<!--p>Go <g:link action="home">back</g:link> and add or edit data</p-->
-		<p>Now <g:link action="addAnno" params="${[Gid:Gid]}">add</g:link> some genes to this genome</p> 
+		<p>Now <g:link action="editSpecies" params="${[Gid:Gid]}">add</g:link> a genome for this species</p> 
 	</g:else>	
 </body>
 </html>

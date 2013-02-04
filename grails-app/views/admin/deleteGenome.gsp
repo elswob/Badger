@@ -9,7 +9,7 @@
   </head>
 
   <body>
-  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > Delete genome</div>
+  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editSpecies" params="${[Gid:genome.meta.id]}"><i>${genome.meta.genus} ${genome.meta.species}</i></g:link> > Delete genome</div>
    
 <h1>Delete genome:</h1>
 

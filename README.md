@@ -98,6 +98,8 @@ Try this:
 
 `createdb Badger -O xxx -E UTF8 -T template0;`
 
+Edit your pg_hba.conf file to allow local and host md5 authentication.
+
 #### Badger config
 
 Create a badger.config.properties file and edit where necessary, e.g. the paths to the executables...
