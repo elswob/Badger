@@ -181,7 +181,7 @@ class AdminController {
 		def check = GenomeData.findByGversion(params.genome_version.trim())
 		if (check){
 			println "genome version already exists - "+check
-			return [error: "duplicate"]	
+			return [error: "duplicate",genome:check]	
 		}else{  		
 			dataMap.gversion = params.genome_version.trim()			
 			if (params.gbrowse){
@@ -342,163 +342,23 @@ class AdminController {
 		return [gid: genome.id]
 	}
 	
-	/////////////////////////
-	
-	@Secured(['ROLE_ADMIN'])
-	def addedData = {
-		def dataMap = [:]		
-
-		//check if name and version are unique
-		def check = MetaData.findByGenusAndSpecies(params.genus.trim(), params.species.trim())
-		if (check){
-			println "species already exists - "+check
-			return [error: "duplicate"]	
-		}else{  		
-			dataMap.genus = params.genus.trim()
-			dataMap.species = params.species.trim()
-			dataMap.description = params.description.trim()
-			if (params.image_f){
-				dataMap.image_file = params.image_f.trim()
-				dataMap.image_source = params.image_s.trim()
-			}else{
-				dataMap.image_file = ""
-				dataMap.image_source = ""
-			}
-			dataMap.gbrowse = params.gbrowse.trim()
-			dataMap.Gversion = params.version.trim()
-			println dataMap
-			MetaData meta = new MetaData(dataMap)
-			meta.save()
-			
-			def fileMap = [:]
-			fileMap.loaded = false
-			int genomeID
-			int geneID
-			if (params.trans){
-				fileMap.file_type = "Transcriptome"
-				fileMap.file_dir = params.dir.trim()
-				fileMap.file_name = params.trans.trim()
-				fileMap.blast = params.blast_trans
-				fileMap.search = params.search_trans
-				fileMap.download = params.down_trans
-				fileMap.file_version = params.trans_v.trim()
-				fileMap.description = params.trans_d.trim()
-				fileMap.cov = params.trans_c.trim()
-				fileMap.file_link = "n"
-				if (new File("data/"+params.dir.trim()+"/"+params.trans.trim()).exists()){
-					println fileMap
-					FileData file = new FileData(fileMap) 
-					meta.addToFiles(file)
-					file.save()
-				}else{
-					println "file does not exist!"
-					return [error: "no file", file: "data/"+params.dir+"/"+params.trans]
-				}
-				
-			}
-			if (params.genome){
-				fileMap.file_type = "Genome"
-				fileMap.file_dir = params.dir.trim()
-				fileMap.file_name = params.genome.trim()	
-				fileMap.blast = params.blast_genome
-				fileMap.search = params.search_genome
-				fileMap.download = params.down_genome
-				fileMap.file_version = params.genome_v.trim()
-				fileMap.description = params.genome_d.trim()
-				fileMap.cov = params.genome_c.trim()
-				fileMap.file_link = "n"
-				if (new File("data/"+params.dir.trim()+"/"+params.genome.trim()).exists()){
-					println fileMap
-					FileData file = new FileData(fileMap) 
-					meta.addToFiles(file)
-					file.save()
-				}else{
-					println "file does not exist!"
-					return [error: "no file", file: "data/"+params.dir+"/"+params.genome]
-				}
-			}
-			if (params.genes){
-				fileMap.file_type = "Genes"
-				fileMap.file_dir = params.dir.trim()
-				fileMap.file_name = params.genes.trim()
-				fileMap.search = params.search_genes
-				fileMap.download = params.down_genes
-				fileMap.file_version = params.genes_v.trim()
-				fileMap.description = params.genes_d.trim()
-				fileMap.file_link = params.genome.trim()
-				if (new File("data/"+params.dir.trim()+"/"+params.genes.trim()).exists()){
-					println fileMap
-					FileData file = new FileData(fileMap) 
-					meta.addToFiles(file)
-					file.save()
-				}else{
-					println "file does not exist!"
-					return [error: "no file", file: "data/"+params.dir+"/"+params.genes]
-				}
-			}
-			if (params.mrna_trans){
-				fileMap.file_type = "mRNA"
-				fileMap.file_dir = params.dir.trim()
-				fileMap.file_name = params.mrna_trans.trim()
-				fileMap.blast = params.blast_mrna
-				fileMap.download = params.down_mrna
-				fileMap.file_version = params.mrna_trans_v.trim()
-				fileMap.description = params.mrna_trans_d.trim()
-				fileMap.file_link = params.genes.trim()
-				if (new File("data/"+params.dir.trim()+"/"+params.mrna_trans.trim()).exists()){
-					println fileMap
-					FileData file = new FileData(fileMap) 
-					meta.addToFiles(file)
-					file.save()
-				}else{
-					println "file does not exist!"
-					return [error: "no file", file: "data/"+params.dir+"/"+params.mrna_trans]
-				}
-			}
-			if (params.mrna_pep){
-				fileMap.file_type = "Peptide"
-				fileMap.file_dir = params.dir.trim()
-				fileMap.file_name = params.mrna_pep.trim()
-				fileMap.blast = params.blast_pep
-				fileMap.download = params.down_pep
-				fileMap.file_version = params.mrna_pep_v.trim()
-				fileMap.description = params.mrna_pep_d.trim()
-				fileMap.file_link = params.genes.trim()
-				if (new File("data/"+params.dir.trim()+"/"+params.mrna_pep.trim()).exists()){
-					println fileMap
-					FileData file = new FileData(fileMap) 
-					meta.addToFiles(file)
-					file.save()
-				}else{
-					println "file does not exist!"
-					return [error: "no file", file: "data/"+params.dir+"/"+params.mrna_pep]
-				}
-			}			
-			return [dataMap:dataMap, Gid: meta.id]
-		}
-	}
-	
 	@Secured(['ROLE_ADMIN'])
 	def addAnno = {
-		def sql = new Sql(dataSource)
-		//def dataSetsSql = "select meta_data.data_id,genus,species,file_name, file_version, file_type, file_id from meta_data, file_data where meta_data.data_id = file_data.data_id and (file_type = 'Genes' or file_type = 'Transcriptome') ;";
-		//def dataSets = sql.rows(dataSetsSql)
-		def dataSets = MetaData.findAllById(params.Gid)
-		//print dataSets
-		return [dataSets:dataSets]
+		def gff = FileData.findById(params.gid)
+		return [gff:gff]
 	}
 	
 	@Secured(['ROLE_ADMIN'])
 	def addedAnno = {
-		FileData file = FileData.findByFile_name(params.dataSelect)
-		def filedir = FileData.findByFile_name(params.dataSelect).file_dir
+		def gff = FileData.findById(params.gff)
+		println "gff = "+gff
 		def annoMap = [:]			
 		if (params.annoSelect == "1"){
-			def check = FileData.findByFile_name(params.dataSelect).anno.anno_file			
+			def check = FileData.findById(gff.id).anno.anno_file			
 			println "check = "+check
 			if (params.b_anno_file.trim() in check){
 				println "check exists : "+check
-				return [error: "duplicate"]	
+				return [error: "duplicate", file:gff]	
 			}else{
 				annoMap.type = "blast"				
 				annoMap.link = params.b_link.trim()
@@ -506,22 +366,23 @@ class AdminController {
 				annoMap.regex = params.b_regex.trim()
 				annoMap.anno_file = params.b_anno_file.trim()
 				annoMap.loaded = false	
-				if (new File("data/"+filedir+"/"+params.b_anno_file.trim()).exists()){				
+				if (new File("data/"+gff.file_dir+"/"+params.b_anno_file.trim()).exists()){				
 					println annoMap
 					AnnoData anno = new AnnoData(annoMap)
-					file.addToAnno(anno)
+					gff.addToAnno(anno)
 					anno.save()
-					return [annoMap: annoMap, file:file]
+					return [annoMap: annoMap, file:gff]
+					//redirect(action: "editGenome", params: [gid: gff.id])
 				}else{
-					return [error: "no file", fileLoc: "data/"+filedir+"/"+params.b_anno_file, file:file]
+					return [error: "no file", fileLoc: "data/"+gff.file_dir+"/"+params.b_anno_file, file:gff]
 				}
 			}
 		}else if (params.annoSelect == "2"){
-			def check = FileData.findByFile_name(params.dataSelect).anno.anno_file
+			def check = FileData.findById(gff.id).anno.anno_file
 			println "check = "+check
 			if (params.f_anno_file.trim() in check){
 				println "check exists : "+check
-				return [error: "duplicate"]	
+				return [error: "duplicate", file:gff]	
 			}else{
 				annoMap.type = "fun"
 				annoMap.link = params.f_link.trim()
@@ -529,22 +390,22 @@ class AdminController {
 				annoMap.regex = params.f_regex.trim()	
 				annoMap.anno_file = params.f_anno_file.trim()
 				annoMap.loaded = false
-				if (new File("data/"+filedir+"/"+params.f_anno_file.trim()).exists()){		
+				if (new File("data/"+gff.file_dir+"/"+params.f_anno_file.trim()).exists()){		
 					println annoMap
 					AnnoData anno = new AnnoData(annoMap)
-					file.addToAnno(anno)
+					gff.addToAnno(anno)
 					anno.save()
-					return [annoMap: annoMap, file:file]
+					return [annoMap: annoMap, file:gff]
 				}else{
-					return [error: "no file", fileLoc: "data/"+filedir+"/"+params.f_anno_file, file:file]
+					return [error: "no file", fileLoc: "data/"+gff.file_dir+"/"+params.f_anno_file, file:gff]
 				}
 			}
 		}else if (params.annoSelect == "3"){
-			def check = FileData.findByFile_name(params.dataSelect).anno.anno_file
+			def check = FileData.findById(gff.id).anno.anno_file
 			println "check = "+check
 			if (params.i_anno_file.trim() in check){
 				println "check exists : "+check
-				return [error: "duplicate"]	
+				return [error: "duplicate", file:gff]	
 			}else{
 				annoMap.type = "ipr"
 				annoMap.link = "http://www.ebi.ac.uk/interpro/IEntry?ac="
@@ -552,14 +413,14 @@ class AdminController {
 				annoMap.source = "InteProScan"
 				annoMap.anno_file = params.i_anno_file.trim()
 				annoMap.loaded = false	
-				if (new File("data/"+filedir+"/"+params.i_anno_file.trim()).exists()){
+				if (new File("data/"+gff.file_dir+"/"+params.i_anno_file.trim()).exists()){
 					println annoMap
 					AnnoData anno = new AnnoData(annoMap)
-					file.addToAnno(anno)
+					gff.addToAnno(anno)
 					anno.save()
-					return [annoMap: annoMap, file:file]
+					return [annoMap: annoMap, file:gff]
 				}else{
-					return [error: "no file", fileLoc: "data/"+filedir+"/"+params.i_anno_file, file:file]
+					return [error: "no file", fileLoc: "data/"+gff.file_dir+"/"+params.i_anno_file, file:gff]
 				}
 			}
 		}
@@ -567,12 +428,13 @@ class AdminController {
 	
 	@Secured(['ROLE_ADMIN'])
 	def editAnno = {
-		def annoData = AnnoData.findById(params.id)
+		def annoData = AnnoData.findById(params.gid)
 		return [annoData: annoData]	 
 	}
 	
 	@Secured(['ROLE_ADMIN'])
 	def editedAnno = {
+		def anno = AnnoData.findById(params.id)
 		def sql = new Sql(dataSource)
 		def upsql 
 		if (params.b_anno_file){
@@ -585,96 +447,25 @@ class AdminController {
 		
 		println "upsql = "+upsql
 		def update = sql.execute(upsql)
+		return [anno:anno]
 	}
 	
 	@Secured(['ROLE_ADMIN'])
 	def deleteAnno = {
-		def annoData = AnnoData.findById(params.id)
+		def annoData = AnnoData.findById(params.gid)
 		return [annoData: annoData]	
 	}
 	@Secured(['ROLE_ADMIN'])
 	def deletedAnno = {
 		def annoData = AnnoData.findById(params.id)
+		def gff = annoData.filedata
 		def source = annoData.source
 		def file = annoData.anno_file
 		println "Deleting "+source+" "+file		
 		//runAsync {
 	 		annoData.delete()
 	 	//}
-	 	return [source:source, file:file]
+	 	return [source:source, file:file, gff:gff]
 	 	
-	}
-	
-	@Secured(['ROLE_ADMIN'])
-	def editData = {
-		def metaData = MetaData.findById(params.id)
-		return [metaData: metaData]	 
-	}
-	
-
-	
-	@Secured(['ROLE_ADMIN'])
-	def editedData = {
-		def sql = new Sql(dataSource)
-		def upsql = "update meta_data set genus = '"+params.genus.trim()+"', species = '"+params.species.trim()+"', description = '"+params.description.trim()+"', image_file = '"+params.image_f.trim()+"', image_source = '"+params.image_s.trim()+"', gbrowse = '"+params.gbrowse.trim()+"' where id = '"+params.id+"';";
-		println "upsql = "+upsql
-		def update = sql.execute(upsql)
-	}
-	
-	@Secured(['ROLE_ADMIN'])
-	def deleteData = {
-		def metaData = MetaData.findById(params.id)
-		return [metaData: metaData]	
-	}
-	@Secured(['ROLE_ADMIN'])
-	def deletedData = {
-		def metaData = MetaData.findById(params.id)
-		def genus = metaData.genus
-		def species = metaData.species
-		println "Deleting "+genus+" "+species		
-		//runAsync {
-	 		metaData.delete()
-	 	//}
-	 	return [genus:genus, species:species]
-	 	
-	}
-	@Secured(['ROLE_ADMIN'])
-	def editFile = {
-		def fileData = FileData.findById(params.id)
-		return [fileData: fileData]	 
-	}
-	@Secured(['ROLE_ADMIN'])
-	def editedFile = {
-		def sql = new Sql(dataSource)
-		def upsql
-		if (params.trans){
-			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.trans.trim()+"', blast = '"+params.blast_trans+"', search = '"+params.search_trans+"', download = '"+params.down_trans+"', file_version = '"+params.trans_v.trim()+"', description = '"+params.trans_d.trim()+"', cov = '"+params.trans_c.trim()+"' where id = '"+params.id+"';";
-		}else if (params.genome){
-			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.genome.trim()+"', blast = '"+params.blast_genome+"', search = '"+params.search_genome+"', download = '"+params.down_genome+"', file_version = '"+params.genome_v.trim()+"', description = '"+params.genome_d.trim()+"', cov = '"+params.genome_c.trim()+"' where id = '"+params.id+"';";
-		}else if (params.genes){
-			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.genes.trim()+"', search = '"+params.search_genes+"', download = '"+params.down_genes+"', file_version = '"+params.genes_v.trim()+"', description = '"+params.genes_d.trim()+"' where id = '"+params.id+"';";
-		}else if (params.mrna_trans){
-			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.mrna_trans.trim()+"', blast = '"+params.blast_mrna+"', download = '"+params.down_mrna+"', file_version = '"+params.mrna_trans_v.trim()+"', description = '"+params.mrna_trans_d.trim()+"' where id = '"+params.id+"';";		
-		}else if (params.mrna_pep){
-			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.mrna_pep.trim()+"', blast = '"+params.blast_pep+"', download = '"+params.down_pep+"', file_version = '"+params.mrna_pep_v.trim()+"', description = '"+params.mrna_pep_d.trim()+"' where id = '"+params.id+"';";				
-		}
-		println "upsql = "+upsql
-		def update = sql.execute(upsql)
-	}
-	@Secured(['ROLE_ADMIN'])
-	def deleteFile = {
-		def fileData = FileData.findById(params.id)
-		return [fileData: fileData]	 	
-	}
-	@Secured(['ROLE_ADMIN'])
-	def deletedFile = {
-		def fileData = FileData.findById(params.id)
-		def dir = fileData.file_dir
-		def name = fileData.file_name
-		println "Deleting "+dir+"/"+name
-		//runAsync {
-	 		fileData.delete()
-	 	//}
-	 	return [dir:dir,name:name]
 	}
 }

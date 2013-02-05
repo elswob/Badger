@@ -47,15 +47,17 @@
 </g:form>
 <hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 
-<h1>Edit / delete gene annotation data:</h1>
-
-<table>
 <g:if test="${genome.files.anno}">
+	<h1>Add / edit / delete gene annotation data:</h1>
+	<table class="compact">
 	<g:each var="f" in="${genome.files}">
 		<g:if test="${f.file_type == 'Genes'}">
 			<g:if test="${f.anno.size() > 0}">
-				<tr><td colspan="3">GFF file <b>${f.file_name}</b> has ${f.anno.size()} annotation files:</td></tr>
-				<g:each var="a" in="${f.anno}">
+				<tr><td>GFF file <b>${f.file_name}</b> has ${f.anno.size()} annotation files:</td></tr>
+				<tr><td>Click <g:link action="addAnno" params="${[gid:f.id]}">here</g:link> to add more</td></tr>
+				<tr><td>
+				<table class="compact">
+				<g:each var="a" in="${f.anno.sort({it.type})}">
 	   				<tr><td>
 	   					<div class="inline">
 	   						<g:form action= "editAnno" params="[gid: a.id]" >
@@ -65,27 +67,25 @@
 	    						<a href="#" onclick="parentNode.submit()" title="Delete file"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
 	    					</g:form> 	
 	    				</div>
-      				</td><td></td><td>${a.source}</td><td><b>${a.anno_file}</td></tr>
+      				</td><td>${a.source}</td><td><b>${a.anno_file}</td></tr>
       			</g:each>
+      			</table>
+      			</td></tr>
       		</g:if>
       		<g:else>
-      			<td>GFF file</td><td><b>${f.file_name}</b> has no annotations, <g:link action="editSpecies" params="${[Gid:genome.meta.id]}">add some</g:link></td></tr>
+      			<tr><td>GFF file</td><td><b>${f.file_name}</b> has no annotations, <g:link action="addAnno" params="${[gid:f.id]}">add some</g:link></td></tr>
       		</g:else>
+      		
       	</g:if>
    	 </g:each>
-</g:if>
-<g:else>
-	There are no GFF files for this genome
-</g:else>
-</table>
+	</table>
 <hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
+</g:if>
 
-
-<h1>Edit / delete a file set:</h1>
-
-<table>
 <g:if test="${genome.files}">
-	<g:each var="f" in="${genome.files}">
+	<table class="compact">
+	<h1>Edit / delete a file set:</h1>
+	<g:each var="f" in="${genome.files.sort({it.file_type})}">
 	   <tr><td>
 	   <div class="inline">
 	   		<g:form action= "editFile" params="[gid: genome.id]" >
@@ -95,15 +95,12 @@
 	    		<a href="#" onclick="parentNode.submit()" title="Delete file"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
 	    	</g:form> 	
 	    </div>
-      		</td><td>File type ${f.file_type}:</td><td>${f.file_name}</td></tr>
+      		</td><td>${f.file_type}:</td><td>${f.file_name}</td></tr>
    	   </g:each>
-</g:if>
-<g:else>
-	There are no files for this genome
-</g:else>
-</table>
-
 <hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
+</table>
+</g:if>
+
 
 <g:form action="addedFiles">
 

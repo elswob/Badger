@@ -9,11 +9,11 @@
   </head>
 
   <body>
-  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editData" params="${[id:annoData.filedata.meta.id]}">Edit data set</g:link>  > <g:link action="editFile" params="${[id:annoData.filedata.id]}">Edit file</g:link> > Delete annotation file</div>
-  
+  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editSpecies" params="${[Gid:annoData.filedata.genome.meta.id]}"><i>${annoData.filedata.genome.meta.genus} ${annoData.filedata.genome.meta.species}</i></g:link> > <g:link action="editGenome" params="${[gid:annoData.filedata.genome.id]}">Edit genome</g:link> > Delete annotation file</div>
+
 <h1>Delete annotation file data:</h1>
 
-<h2>Are you sure you wish to delete the following annotation file?</h2>
+<h2>Are you sure you wish to delete the following annotation file? All data associated with this file will be deleted.</h2>
 
 <g:form action="deletedAnno" controller="admin">
 
@@ -41,10 +41,6 @@
 </g:if>
 <g:if test = "${annoData.type == 'ipr'}"> 		
 	<h2><b>InterProScan</b></h2>
-	<select id="iprSelect" name="iprSelect">
-		<option value="ipr_raw">Raw</option>
-		<option value="ipr_xml">XML</option>
-	</select>
 	<p>File name<font color="red">*</font></p>
 	<g:textArea value="${annoData.anno_file}" name="i_anno_file" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 	

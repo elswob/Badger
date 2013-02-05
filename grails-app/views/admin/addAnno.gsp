@@ -61,25 +61,13 @@
   </head>
   
   <body>
-<div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editData" params="${[id:params.Gid]}">Edit data set</g:link> > Add annotation</div>
-<g:if test="${dataSets}">
+<div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editSpecies" params="${[Gid:gff.genome.meta.id]}"><i>${gff.genome.meta.genus} ${gff.genome.meta.species}</i></g:link> > <g:link action="editGenome" params="${[gid:gff.genome.id]}">Edit genome</g:link> > Add annotation</div>
+<g:if test="${gff}">
 	   
 	<h1>Add an annotation file:</h1>   
 	
 	<g:form action="addedAnno" controller="admin">
-	
-	<h2><b>Select your data set</b></h2>
-	<select name="dataSelect">
-		<g:each var="res" in="${dataSets}">
-			<g:each var="f" in="${res.files}">
-				<g:if test="${f.file_type == 'Genes' || f.file_type == 'Transcriptome'}">
-					<option value=${f.file_name}>${res.genus} ${res.species}: ${f.file_type} (${f.file_version}) - ${f.file_name}
-				</g:if>
-			</g:each>
-		</g:each>
-	</select>
-	<br><br>
-	
+	<input type="hidden" name="gff" value="${gff.id}">
 	<h2><b>Choose annotation type</b></h2>
 	<select id="annoSelect" name="annoSelect">
 		<option value="1">BLAST</option>

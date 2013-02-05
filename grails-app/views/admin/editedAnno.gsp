@@ -9,10 +9,10 @@
   </head>
 
   <body>
- <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editAnno" params="${[id:params.id]}">Edit annotation file</g:link> > Edited annotation file</div>  
-<h1>Edited annotation file data:</h1>
+  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editSpecies" params="${[Gid:anno.filedata.genome.meta.id]}"><i>${anno.filedata.genome.meta.genus} ${anno.filedata.genome.meta.species}</i></g:link> > <g:link action="editGenome" params="${[gid:anno.filedata.genome.id]}">Edit genome</g:link> > <g:link action="editAnno" params="${[gid:anno.id]}">Edit annotation</g:link> > Edited annotation</div>
+ <h1>Edited annotation file data:</h1>
 
-<p>Your file data has been edited successfully
+<p>Your annotation file data has been edited successfully
 
 </body>
 </html>
