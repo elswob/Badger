@@ -9,7 +9,7 @@
   </head>
 
   <body>
-  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editFile" params="${[id:params.id]}">Edit file</g:link> > Edited file</div>
+  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editSpecies" params="${[Gid:fileData.genome.meta.id]}"><i>${fileData.genome.meta.genus} ${fileData.genome.meta.species}</i></g:link> > <g:link action="editGenome" params="${[gid:fileData.genome.id]}">Edit genome</g:link> > <g:link action="editFile" params="${[fid:fileData.id]}">Edit file</g:link> > Edited file</div>
   
 <h1>Edited file data:</h1>
 

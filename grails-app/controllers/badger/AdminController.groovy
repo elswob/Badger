@@ -107,7 +107,7 @@ class AdminController {
 		 println "Deleted "+params.newsTitle
 	 }
  
- //species
+ 	//species
 	
 	@Secured(['ROLE_ADMIN'])
 	def home = {
@@ -247,9 +247,21 @@ class AdminController {
 		def genome = GenomeData.findById(params.gid)
 		println "genome = "+genome		
 		fileMap.loaded = false
+		def extraGff
+		def fileDir
+		fileMap.search = "pub"
+		fileMap.blast = "pub"
+		fileMap.download = "pub"
+		if (params.extra){
+			println "extra gff file for genome = "+params.extra
+			extraGff = FileData.findById(params.extra)
+			fileDir = extraGff.file_dir
+		}else{
+			fileDir = params.dir.trim()
+		}
+		fileMap.file_dir = fileDir
 		if (params.genome){
 			fileMap.file_type = "Genome"
-			fileMap.file_dir = params.dir.trim()
 			fileMap.file_name = params.genome.trim()	
 			fileMap.blast = params.blast_genome
 			fileMap.search = params.search_genome
@@ -261,42 +273,48 @@ class AdminController {
 			def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
 			if (check){
 				println "file name "+fileMap.file_name+" type "+fileMap.file_type+" already exists - "+check
+				return [error: "already", file: "data/"+fileDir+"/"+params.genome, genome:genome]
 			}
-			else if (new File("data/"+params.dir.trim()+"/"+params.genome.trim()).exists()){
+			else if (new File("data/"+fileDir+"/"+params.genome.trim()).exists()){
 				println "Adding genome "+fileMap
 				FileData file = new FileData(fileMap) 
 				genome.addToFiles(file)
 				file.save()
 			}else{
 				println "file does not exist!"
-				return [error: "no file", file: "data/"+params.dir+"/"+params.genome]
+				return [error: "no file", file: "data/"+fileDir+"/"+params.genome, genome:genome]
 			}
 		}
 		if (params.genes){
 			fileMap.file_type = "Genes"
-			fileMap.file_dir = params.dir.trim()
 			fileMap.file_name = params.genes.trim()
 			fileMap.search = params.search_genes
 			fileMap.download = params.down_genes
 			fileMap.file_version = params.genes_v.trim()
 			fileMap.description = params.genes_d.trim()
-			fileMap.file_link = params.genome.trim()
+			//check for extra gene sets and get the genome id
+			if (params.extra){
+				fileMap.file_link = extraGff.file_name.trim()
+			}else{	
+				fileMap.file_link = params.genome.trim()
+			}
 			def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
 			if (check){
 				println "file name "+fileMap.file_name+" type "+fileMap.file_type+" already exists - "+check
-			}else if (new File("data/"+params.dir.trim()+"/"+params.genes.trim()).exists()){
+				return [error: "already", file: "data/"+fileDir+"/"+params.genes, genome:genome]
+			}else if (new File("data/"+fileDir+"/"+params.genes.trim()).exists()){
 				println "Adding GFF3 file "+fileMap
 				FileData file = new FileData(fileMap) 
 				genome.addToFiles(file)
 				file.save()
+				return [genome: genome]
 			}else{
 				println "file does not exist!"
-				return [error: "no file", file: "data/"+params.dir+"/"+params.genes]
+				return [error: "no file", file: "data/"+fileDir+"/"+params.genes, genome:genome]
 			}
 		}
 		if (params.mrna_trans){
 			fileMap.file_type = "mRNA"
-			fileMap.file_dir = params.dir.trim()
 			fileMap.file_name = params.mrna_trans.trim()
 			fileMap.blast = params.blast_mrna
 			fileMap.download = params.down_mrna
@@ -306,40 +324,92 @@ class AdminController {
 			def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
 			if (check){
 				println "file name "+fileMap.file_name+" type "+fileMap.file_type+" already exists - "+check
-			}else if (new File("data/"+params.dir.trim()+"/"+params.mrna_trans.trim()).exists()){
+				return [error: "already", file: "data/"+fileDir+"/"+params.mrna_trans, genome:genome]
+			}else if (new File("data/"+fileDir+"/"+params.mrna_trans.trim()).exists()){
 				println "Adding transcript file "+fileMap
 				FileData file = new FileData(fileMap) 
 				genome.addToFiles(file)
 				file.save()
+				return [genome: genome]
 			}else{
 				println "file does not exist!"
-				return [error: "no file", file: "data/"+params.dir+"/"+params.mrna_trans]
+				return [error: "no file", file: "data/"+fileDir+"/"+params.mrna_trans, genome:genome]
 			}
 		}
 		if (params.mrna_pep){
 			fileMap.file_type = "Peptide"
-			fileMap.file_dir = params.dir.trim()
 			fileMap.file_name = params.mrna_pep.trim()
 			fileMap.blast = params.blast_pep
 			fileMap.download = params.down_pep
 			fileMap.file_version = params.mrna_pep_v.trim()
 			fileMap.description = params.mrna_pep_d.trim()
-			fileMap.file_link = params.genes.trim()
+			//check for extra gene sets and get the genome id
+			if (params.extra){
+				fileMap.file_link = params.extra	
+			}else{
+				fileMap.file_link = params.genes.trim()
+			}
 			def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
 			if (check){
 				println "file name "+fileMap.file_name+" type "+fileMap.file_type+" already exists - "+check
-				return [error: "no file", file: "data/"+params.dir+"/"+params.mrna_pep]
-			}else if (new File("data/"+params.dir.trim()+"/"+params.mrna_pep.trim()).exists()){
+				return [error: "already", file: "data/"+fileDir+"/"+params.mrna_pep, genome:genome]
+			}else if (new File("data/"+fileDir+"/"+params.mrna_pep.trim()).exists()){
 				println "Adding protein file "+fileMap
 				FileData file = new FileData(fileMap) 
 				genome.addToFiles(file)
 				file.save()
+				return [genome: genome]
 			}else{
 				println "file does not exist!"
-				return [error: "no file", file: "data/"+params.dir+"/"+params.mrna_pep]
+				return [error: "no file", file: "data/"+fileDir+"/"+params.mrna_pep, genome:genome]
 			}
 		}			
-		return [gid: genome.id]
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def editFile = {
+		def file = FileData.findById(params.fid)
+		return [fileData:file]
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def editedFile = {
+		def sql = new Sql(dataSource)
+		def upsql
+		def file = FileData.findById(params.id)
+		if (params.trans){
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.trans.trim()+"', blast = '"+params.blast_trans+"', search = '"+params.search_trans+"', download = '"+params.down_trans+"', file_version = '"+params.trans_v.trim()+"', description = '"+params.trans_d.trim()+"', cov = '"+params.trans_c.trim()+"' where id = '"+params.id+"';";
+		}else if (params.genome){
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.genome.trim()+"', blast = '"+params.blast_genome+"', search = '"+params.search_genome+"', download = '"+params.down_genome+"', file_version = '"+params.genome_v.trim()+"', description = '"+params.genome_d.trim()+"', cov = '"+params.genome_c.trim()+"' where id = '"+params.id+"';";
+		}else if (params.genes){
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.genes.trim()+"', search = '"+params.search_genes+"', download = '"+params.down_genes+"', file_version = '"+params.genes_v.trim()+"', description = '"+params.genes_d.trim()+"' where id = '"+params.id+"';";
+		}else if (params.mrna_trans){
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.mrna_trans.trim()+"', blast = '"+params.blast_mrna+"', download = '"+params.down_mrna+"', file_version = '"+params.mrna_trans_v.trim()+"', description = '"+params.mrna_trans_d.trim()+"' where id = '"+params.id+"';";	
+		}else if (params.mrna_pep){
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.mrna_pep.trim()+"', blast = '"+params.blast_pep+"', download = '"+params.down_pep+"', file_version = '"+params.mrna_pep_v.trim()+"', description = '"+params.mrna_pep_d.trim()+"' where id = '"+params.id+"';";	
+		}
+		println "upsql = "+upsql
+		def update = sql.execute(upsql)
+		return [fileData:file]
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def deleteFile = {
+		def fileData = FileData.findById(params.fid)
+		return [fileData: fileData]	
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def deletedFile = {
+		def fileData = FileData.findById(params.id)
+		def genome = fileData.genome
+		def dir = fileData.file_dir
+		def name = fileData.file_name
+		println "Deleting "+dir+"/"+name
+		//runAsync {
+		fileData.delete()
+		//}
+		return [dir:dir,name:name, genome:genome]
 	}
 	
 	@Secured(['ROLE_ADMIN'])

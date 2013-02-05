@@ -236,7 +236,7 @@ Two ways, the first option is ideal for one or two species/genomes, the second i
 
 1. Via the GUI
 
-Log in as admin and fill in the forms as necessary. Not all sections need to be completed to create a working site. For example, if your functional annotation files are not ready you can still just load up the genome and genes. 
+Log in as admin and fill in the forms as necessary. 
 
 2. Using the AddFileData.groovy script
 

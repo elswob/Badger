@@ -9,7 +9,7 @@
   </head>
 
   <body>
-   <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editData" params="${[id:fileData.meta.id]}">Edit data set</g:link> > Delete file</div>  
+  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editSpecies" params="${[Gid:fileData.genome.meta.id]}"><i>${fileData.genome.meta.genus} ${fileData.genome.meta.species}</i></g:link> > <g:link action="editGenome" params="${[gid:fileData.genome.id]}">Edit genome</g:link> > Delete file</div>
 <h1>Delete data file:</h1>
 
 <g:form action="deletedFile" controller="admin">
@@ -96,79 +96,7 @@
 			</td>
 		</tr>
 	</g:if>
-	</table>
-	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
-	
-	<h2><b>Privacy</b></h2>	
-	<table>
-	<tr><td></td><td><b>Search</b></td><td><b>BLAST</b></td><td><b>Download</b></td></tr>
-	<g:if test = "${fileData.file_type == 'Transcriptome'}">
-		<tr><td><b>Transcriptome</b></td>
-		<td><select name="search_trans">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td>	
-		<td><select name="blast_trans">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td>	
-		<td><select name="down_trans">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td></tr>	
-	</g:if>
-	<g:if test = "${fileData.file_type == 'Genome'}">
-		<tr><td><b>Genome</b></td>
-		<td><select name="search_genome">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td>	
-		<td><select name="blast_genome">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td>	
-		<td><select name="down_genome">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td></tr>	
-	</g:if>	
-	<g:if test = "${fileData.file_type == 'Genes'}">
-		<tr><td><b>Genes</b></td>
-		<td><select name="search_genes">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td>	
-		<td></td>	
-		<td><select name="down_genes">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td></tr>	
-	</g:if>
-	<g:if test = "${fileData.file_type == 'mRNA'}">
-		<tr><td><b>mRNA</b></td>
-		<td></td>
-		<td><select name="blast_mrna">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td>	
-		<td><select name="down_mrna">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td></tr>	
-	</g:if>
-	<g:if test = "${fileData.file_type == 'Peptide'}">
-		<tr><td><b>Peptide</b></td>
-		<td></td>
-		<td><select name="blast_pep">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td>
-		<td><select name="down_pep">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td></tr>	
-	</g:if>
-	</table>
+	</table>	
 	<input type = "hidden" name="id" value="${fileData.id}">
 <input class="mybuttons" type="button" value="Delete data file" onclick="submit()" >
 <hr size = 5 color="green" width="100%" style="margin-top:10px"><br>

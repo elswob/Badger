@@ -9,7 +9,7 @@
   </head>
 
   <body>
-  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editData" params="${[id:fileData.meta.id]}">Edit data set</g:link> > Edit file</div>
+  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editSpecies" params="${[Gid:fileData.genome.meta.id]}"><i>${fileData.genome.meta.genus} ${fileData.genome.meta.species}</i></g:link> > <g:link action="editGenome" params="${[gid:fileData.genome.id]}">Edit genome</g:link> > Edit file</div>
   
 <h1>Edit data file:</h1>
 
@@ -174,19 +174,19 @@
 	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 	<h1>Edit / delete annotation files associated with this data set:</h1>
 	
-	<table>
+	<table class="compact">
 	<g:each var="res" in="${fileData}">
-		   <g:each var="f" in="${res.anno}">
+		   <g:each var="f" in="${res.anno.sort({it.type})}">
 		   <tr><td>
 		   <div class="inline">
-				<g:form action= "editAnno" controller="admin" params="[id: f.id]" >
+				<g:form action= "editAnno" controller="admin" params="[gid: f.id]" >
 					<a href="#" onclick="parentNode.submit()" title="Edit annotation file"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
 				</g:form>  	
-				<g:form action="deleteAnno" controller="admin" params="[id: f.id]" >
+				<g:form action="deleteAnno" controller="admin" params="[gid: f.id]" >
 					<a href="#" onclick="parentNode.submit()" title="Delete annotation file"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
 				</g:form> 	
 			</div>
-				</td><td>${f.type}:</td><td>${f.source}</td><td>${f.anno_file}</td></tr>
+				</td><td>${f.source}</td><td><b>${f.anno_file}</b></td></tr>
 		   </g:each>
 	</g:each>
 	</table>
