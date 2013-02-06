@@ -7,12 +7,20 @@ import org.xml.sax.InputSource
 class BlastController { 
 	def grailsApplication
 	def configDataService
+	def springSecurityService
 	
     def info = {
     }
     def index() { 
+    	def roles = springSecurityService.getPrincipal()
+    	def user
+    	if (roles == 'anonymousUser'){
+    		user = "anon"
+    	}else{
+    		user = "user"
+    	}
     	def blastFiles = FileData.findAllByFile_typeInList(["mRNA","Peptide","Genome"],[sort:"genome.meta.genus"])
-    	return [blastFiles:blastFiles]
+    	return [blastFiles:blastFiles, roles:roles]
     }
     def blastError = {
     }

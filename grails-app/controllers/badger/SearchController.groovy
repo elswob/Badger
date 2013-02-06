@@ -12,6 +12,7 @@ class SearchController {
 	def peptideService
 	def configDataService
 	def alignService
+	def springSecurityService
     //@Secured(['ROLE_USER'])
     
     def index = {
@@ -31,15 +32,23 @@ class SearchController {
     	
     }
     def species_v = {
-    	def sql = new Sql(dataSource)
+    	def sql = new Sql(dataSource)   	
+    	def roles = springSecurityService.getPrincipal()
+    	def user
+    	if (roles == 'anonymousUser'){
+    		user = "anon"
+    	}else{
+    		user = "user"
+    	}
+    	println "user = "+user
     	def meta = MetaData.findAllById(params.Sid)
-    	def genomesSql = "select genome_data.*,file_data.description,file_data.file_version,file_data.id as Gid from genome_data,file_data where genome_data.meta_id = "+params.Sid+" and genome_data.id = file_data.genome_id and file_data.file_type = 'Genome' order by date_string desc;"
+    	def genomesSql = "select genome_data.*,file_data.description,file_data.file_version,file_data.id as Gid, file_data.search from genome_data,file_data where genome_data.meta_id = "+params.Sid+" and genome_data.id = file_data.genome_id and file_data.file_type = 'Genome' order by date_string desc;"
     	println genomesSql
     	def genomes = sql.rows(genomesSql)
     	//def genesSql = "select file_data.* from file_data,genome_data where file_data.file_type = 'Genes' and file_data.genome_id = genome_data.id and genome_data.meta_id = "+params.Gid+" order by file_version;"
     	println "meta = "+meta
     	println "genomes size = "+genomes.size
-    	return [meta: meta, genomes:genomes] 	
+    	return [meta: meta, genomes:genomes, user:user] 	
     }
     
     def ajax_gff = {

@@ -81,12 +81,9 @@
 			<table class="blast"><tr>
 				<g:each var="res" in="${blastFiles}">
 					<g:if test="${res.file_type == 'Genome' && res.loaded == true}">		
-						<g:if test="${res.blast == 'priv' && isLoggedIn()}">	
+						<g:if test="${res.blast == 'priv' && user == 'user' || res.blast == 'pub'}">	
 							<td><g:checkBox name="genomeCheck" value="${res.file_name}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</td><td>Version ${res.file_version}</td></tr>
 						</g:if>
-						<g:elseif test="${res.blast == 'pub'}">
-							<td><g:checkBox name="genomeCheck" value="${res.file_name}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</td><td>Version ${res.file_version}</td></tr>
-						</g:elseif>
 					</g:if>
 				</g:each>
 			</table>
@@ -101,12 +98,9 @@
 			<table class="blast"><tr>
 				<g:each var="res" in="${blastFiles}">
 					<g:if test="${res.file_type == 'mRNA' && res.loaded == true}">
-						<g:if test="${res.blast == 'priv' && isLoggedIn()}">
+						<g:if test="${res.blast == 'priv' && user == 'user' || res.blast == 'pub'}">
 							<td><g:checkBox name="transCheck" value="${res.file_name}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</i></td><td>Version ${res.file_version}</td></tr>
 						</g:if>
-						<g:elseif test="${res.blast == 'pub'}">
-							<td><g:checkBox name="transCheck" value="${res.file_name}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</td><td>Version ${res.file_version}</td></tr>
-						</g:elseif>
 					</g:if>
 				</g:each>
 			</table>
@@ -121,12 +115,9 @@
 			<table class="blast"><tr>
 				<g:each var="res" in="${blastFiles}">
 					<g:if test="${res.file_type == 'Peptide' && res.loaded == true}">
-						<g:if test="${res.blast == 'priv' && isLoggedIn()}">
+						<g:if test="${res.blast == 'priv' && user == 'user' || res.blast == 'pub'}">
 							<td><g:checkBox name="protCheck" value="${res.file_name}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</i></td><td>Version ${res.file_version}</td></tr>
 						</g:if>
-						<g:elseif test="${res.blast == 'pub'}">
-							<td><g:checkBox name="protCheck" value="${res.file_name}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</td><td>Version ${res.file_version}</td></tr>
-						</g:elseif>
 					</g:if>
 				</g:each>
 			</table>

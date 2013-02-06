@@ -252,6 +252,7 @@ class AdminController {
 		fileMap.search = "pub"
 		fileMap.blast = "pub"
 		fileMap.download = "pub"
+		fileMap.cov = "n"
 		if (params.extra){
 			println "extra gff file for genome = "+params.extra
 			extraGff = FileData.findById(params.extra)
@@ -307,7 +308,6 @@ class AdminController {
 				FileData file = new FileData(fileMap) 
 				genome.addToFiles(file)
 				file.save()
-				return [genome: genome]
 			}else{
 				println "file does not exist!"
 				return [error: "no file", file: "data/"+fileDir+"/"+params.genes, genome:genome]
@@ -330,7 +330,6 @@ class AdminController {
 				FileData file = new FileData(fileMap) 
 				genome.addToFiles(file)
 				file.save()
-				return [genome: genome]
 			}else{
 				println "file does not exist!"
 				return [error: "no file", file: "data/"+fileDir+"/"+params.mrna_trans, genome:genome]
@@ -343,12 +342,7 @@ class AdminController {
 			fileMap.download = params.down_pep
 			fileMap.file_version = params.mrna_pep_v.trim()
 			fileMap.description = params.mrna_pep_d.trim()
-			//check for extra gene sets and get the genome id
-			if (params.extra){
-				fileMap.file_link = params.extra	
-			}else{
-				fileMap.file_link = params.genes.trim()
-			}
+			fileMap.file_link = params.genes.trim()
 			def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
 			if (check){
 				println "file name "+fileMap.file_name+" type "+fileMap.file_type+" already exists - "+check
@@ -358,12 +352,12 @@ class AdminController {
 				FileData file = new FileData(fileMap) 
 				genome.addToFiles(file)
 				file.save()
-				return [genome: genome]
 			}else{
 				println "file does not exist!"
 				return [error: "no file", file: "data/"+fileDir+"/"+params.mrna_pep, genome:genome]
 			}
-		}			
+		}
+		return [genome: genome]			
 	}
 	
 	@Secured(['ROLE_ADMIN'])

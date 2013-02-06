@@ -100,70 +100,100 @@
 	<h2><b>Privacy</b></h2>	
 	<table>
 	<tr><td></td><td><b>Search</b></td><td><b>BLAST</b></td><td><b>Download</b></td></tr>
-	<g:if test = "${fileData.file_type == 'Transcriptome'}">
-		<tr><td><b>Transcriptome</b></td>
-		<td><select name="search_trans">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td>	
-		<td><select name="blast_trans">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td>	
-		<td><select name="down_trans">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td></tr>	
-	</g:if>
 	<g:if test = "${fileData.file_type == 'Genome'}">
 		<tr><td><b>Genome</b></td>
 		<td><select name="search_genome">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
+			<g:if test="${fileData.search == 'pub'}">
+				<option value="pub" selected>Public</option>
+				<option value="priv">Private</option>
+			</g:if>
+			<g:else>
+				<option value="pub">Public</option>
+				<option value="priv" selected>Private</option>
+			</g:else>
 		</select></td>	
 		<td><select name="blast_genome">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
+			<g:if test="${fileData.blast == 'pub'}">
+				<option value="pub" selected>Public</option>
+				<option value="priv">Private</option>
+			</g:if>
+			<g:else>
+				<option value="pub">Public</option>
+				<option value="priv" selected>Private</option>
+			</g:else>
 		</select></td>	
 		<td><select name="down_genome">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
+			<g:if test="${fileData.download == 'pub'}">
+				<option value="pub" selected>Public</option>
+				<option value="priv">Private</option>
+			</g:if>
+			<g:else>
+				<option value="pub">Public</option>
+				<option value="priv" selected>Private</option>
+			</g:else>
 		</select></td></tr>	
 	</g:if>	
 	<g:if test = "${fileData.file_type == 'Genes'}">
 		<tr><td><b>Genes</b></td>
-		<td><select name="search_genes">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
-		</select></td>	
-		<td></td>	
+		<td>n/a</td>	
+		<td>n/a</td>	
 		<td><select name="down_genes">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
+			<g:if test="${fileData.download == 'pub'}">
+				<option value="pub" selected>Public</option>
+				<option value="priv">Private</option>
+			</g:if>
+			<g:else>
+				<option value="pub">Public</option>
+				<option value="priv" selected>Private</option>
+			</g:else>
 		</select></td></tr>	
 	</g:if>
 	<g:if test = "${fileData.file_type == 'mRNA'}">
 		<tr><td><b>mRNA</b></td>
-		<td></td>
+		<td>n/a</td>
 		<td><select name="blast_mrna">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
+			<g:if test="${fileData.blast == 'pub'}">
+				<option value="pub" selected>Public</option>
+				<option value="priv">Private</option>
+			</g:if>
+			<g:else>
+				<option value="pub">Public</option>
+				<option value="priv" selected>Private</option>
+			</g:else>
 		</select></td>	
 		<td><select name="down_mrna">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
+			<g:if test="${fileData.download == 'pub'}">
+				<option value="pub" selected>Public</option>
+				<option value="priv">Private</option>
+			</g:if>
+			<g:else>
+				<option value="pub">Public</option>
+				<option value="priv" selected>Private</option>
+			</g:else>
 		</select></td></tr>	
 	</g:if>
 	<g:if test = "${fileData.file_type == 'Peptide'}">
 		<tr><td><b>Peptide</b></td>
-		<td></td>
+		<td>n/a</td>
 		<td><select name="blast_pep">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
+			<g:if test="${fileData.blast == 'pub'}">
+				<option value="pub" selected>Public</option>
+				<option value="priv">Private</option>
+			</g:if>
+			<g:else>
+				<option value="pub">Public</option>
+				<option value="priv" selected>Private</option>
+			</g:else>
 		</select></td>
 		<td><select name="down_pep">
-			<option value="pub">Public</option>
-			<option value="priv">Private</option>
+			<g:if test="${fileData.download == 'pub'}">
+				<option value="pub" selected>Public</option>
+				<option value="priv">Private</option>
+			</g:if>
+			<g:else>
+				<option value="pub">Public</option>
+				<option value="priv" selected>Private</option>
+			</g:else>
 		</select></td></tr>	
 	</g:if>
 	</table>
@@ -171,25 +201,27 @@
 <input class="mybuttons" type="button" value="Update data file" onclick="submit()" >
 
 <g:if test="${fileData.file_type == 'Genes'}">
-	<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
-	<h1>Edit / delete annotation files associated with this data set:</h1>
-	
-	<table class="compact">
-	<g:each var="res" in="${fileData}">
-		   <g:each var="f" in="${res.anno.sort({it.type})}">
-		   <tr><td>
-		   <div class="inline">
-				<g:form action= "editAnno" controller="admin" params="[gid: f.id]" >
-					<a href="#" onclick="parentNode.submit()" title="Edit annotation file"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
-				</g:form>  	
-				<g:form action="deleteAnno" controller="admin" params="[gid: f.id]" >
-					<a href="#" onclick="parentNode.submit()" title="Delete annotation file"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
-				</g:form> 	
-			</div>
-				</td><td>${f.source}</td><td><b>${f.anno_file}</b></td></tr>
-		   </g:each>
-	</g:each>
-	</table>
+	<g:if test="${fileData.anno}">
+		<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
+		<h1>Edit / delete annotation files associated with this data set:</h1>
+		
+		<table class="compact">
+		<g:each var="res" in="${fileData}">
+			   <g:each var="f" in="${res.anno.sort({it.type})}">
+			   <tr><td>
+			   <div class="inline">
+					<g:form action= "editAnno" controller="admin" params="[gid: f.id]" >
+						<a href="#" onclick="parentNode.submit()" title="Edit annotation file"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
+					</g:form>  	
+					<g:form action="deleteAnno" controller="admin" params="[gid: f.id]" >
+						<a href="#" onclick="parentNode.submit()" title="Delete annotation file"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
+					</g:form> 	
+				</div>
+					</td><td>${f.source}</td><td><b>${f.anno_file}</b></td></tr>
+			   </g:each>
+		</g:each>
+		</table>
+	</g:if>
 </g:if>
 </g:form>
 </body>
