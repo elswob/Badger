@@ -33,7 +33,7 @@
     	$("#f_link").val("http://www.genome.jp/dbget-bin/www_bget?ko:");
    	 	$("#f_regex").val("(.*)");
    	 }if (db == 'ipr_raw'){
-    	$("#i_anno_file").val("A_viteae.iprscan.raw");
+    	$("#i_anno_file").val("M_meles.iprscan.raw");
     	$("select[name='iprSelect']").val("ipr_raw");
    	 }if (db == 'ipr_xml'){
     	$("#i_anno_file").val("A_viteae.iprscan.xml");
@@ -110,7 +110,7 @@
 			<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 	</div>
 	
-	<div id="ipr" style="display:none"> 
+	<!--div id="ipr" style="display:none"> 
 		<div class="inline">	
 			<h2><b>InterProScan</b></h2>
 			<p>Examples: <a href = "javascript:void(0)" onclick="demoData('ipr_raw')">Raw output</a> | <a href = "javascript:void(0)" onclick="demoData('ipr_xml')">XML</a><br>
@@ -119,6 +119,17 @@
 				<option value="ipr_raw">Raw</option>
 				<option value="ipr_xml">XML</option>
 			</select>
+			<p>File name<font color="red">*</font></p>
+			<g:textArea name="i_anno_file" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
+			<br><input class="mybuttons" type="button" value="Add data" onclick="submit()" >
+			<hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
+	</div-->
+	
+	<div id="ipr" style="display:none"> 
+		<div class="inline">	
+			<h2><b>InterProScan</b></h2>
+			<p>Examples: <a href = "javascript:void(0)" onclick="demoData('ipr_raw')">Meles meles</a><br>
+		</div>
 			<p>File name<font color="red">*</font></p>
 			<g:textArea name="i_anno_file" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>
 			<br><input class="mybuttons" type="button" value="Add data" onclick="submit()" >
