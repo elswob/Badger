@@ -216,7 +216,7 @@ To run on port 8080, run the following command as normal user from within root d
 
 Or to run on port 80, run as root:
 
-`grails run-app -Dserver.port=80`
+`grails prod run-app -Dserver.port=80`
 
 If during start up there is a warning about the version of the app being older than the version of Grails installed, just upgrade the version of the app.
 
