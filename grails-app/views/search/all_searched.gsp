@@ -48,7 +48,7 @@
 	    for (i = 0; i < rowLength; i++){
 		   //loops through rows
 	       var oCells = oTable.rows.item(i).cells;
-	       var cellVal = oCells.item(0).innerHTML;
+	       var cellVal = oCells.item(1).innerHTML;
 	       var matcher = cellVal.match(/.*?mid=(.*?)">.*/);
 	       if (matcher){
 	       		//alert('match = '+matcher[1])
@@ -60,7 +60,7 @@
 		}else{
 			document.getElementById('nucFileId').value=table_scrape;
 		}
-	    //alert(table_scrape)
+	    alert(table_scrape)
     }
     </script>
     <script>

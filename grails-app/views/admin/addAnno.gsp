@@ -10,34 +10,43 @@
   function demoData(db){
   	if (db == 'nr'){
     	$("#b_source").val("NCBI NR");
+    	$("#b_anno_file").val("");
     	$("#b_link").val("http://www.ncbi.nlm.nih.gov/protein/");
+   	 	$("#b_regex").val("gi\\|(\\d+)\\|.*");
+   	}if (db == 'est'){
+    	$("#b_source").val("NCBI EST");
+    	$("#b_anno_file").val("M_meles_1.blast2.100.xml");
+    	$("#b_link").val("http://www.ncbi.nlm.nih.gov/nucest/");
    	 	$("#b_regex").val("gi\\|(\\d+)\\|.*");
    	}if (db == 'swiss'){
     	$("#b_source").val("SwissProt");
+    	$("#b_anno_file").val("M_meles_1.blast1.100.xml");
     	$("#b_link").val("http://www.ncbi.nlm.nih.gov/protein/");
    	 	$("#b_regex").val("gi\\|(\\d+)\\|.*");
     }if (db == 'nembase4'){
     	$("#b_source").val("Nembase4");
+    	$("#b_anno_file").val("");
     	$("#b_link").val("http://www.nematodes.org/nembase4/cluster.php?cluster=");
    	 	$("#b_regex").val("(.*)");
     }if (db == 'a8r_ec'){
     	$("#f_source").val("Annot8r EC");
+    	$("#f_anno_file").val("M_meles_1.ec.100.txt");
     	$("#f_link").val("http://enzyme.expasy.org/EC/");
    	 	$("#f_regex").val("(.*)");
    	 }if (db == 'a8r_go'){
     	$("#f_source").val("Annot8r GO");
+    	$("#f_anno_file").val("M_meles_1.go.100.txt");
     	$("#f_link").val("http://www.ebi.ac.uk/QuickGO/GTerm?id=");
    	 	$("#f_regex").val("(.*)");
    	 }if (db == 'a8r_kegg'){
     	$("#f_source").val("Annot8r KEGG");
+    	$("#f_anno_file").val("M_meles_1.kegg.100.txt");
     	$("#f_link").val("http://www.genome.jp/dbget-bin/www_bget?ko:");
    	 	$("#f_regex").val("(.*)");
    	 }if (db == 'ipr_raw'){
     	$("#i_anno_file").val("M_meles.iprscan.raw");
+    	$("#i_anno_file").val("M_meles_1.ipr.100.txt");
     	$("select[name='iprSelect']").val("ipr_raw");
-   	 }if (db == 'ipr_xml'){
-    	$("#i_anno_file").val("A_viteae.iprscan.xml");
-    	$("select[name='iprSelect']").val("ipr_xml");
    	 }
   }
   $(function() {
@@ -79,7 +88,7 @@
 	<div id="blast">  
 		<div class="inline">   
 			<h2><b>BLAST file (xml blast output)</b></h2>
-			<p>Examples: <a href = "javascript:void(0)" onclick="demoData('nr')">NR</a> | <a href = "javascript:void(0)" onclick="demoData('swiss')">SwissProt</a> | <a href = "javascript:void(0)" onclick="demoData('nembase4')">Nembase4</a><br>
+			<p>Examples: <a href = "javascript:void(0)" onclick="demoData('swiss')">SwissProt</a> | <a href = "javascript:void(0)" onclick="demoData('est')">EST</a>  | <a href = "javascript:void(0)" onclick="demoData('nembase4')">Nembase4</a> | <a href = "javascript:void(0)" onclick="demoData('nr')">NR</a><br>
 		</div>
 			<p>Database<font color="red">*</font></p>
 			<g:textArea name="b_source" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>

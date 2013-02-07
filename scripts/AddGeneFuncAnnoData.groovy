@@ -27,6 +27,8 @@ a.each{
 		println "File = "+fileLoc
 		//println "type = "+a.type
 		addFunc(anno,annoFile)
+	}else{
+		println anno.source+": "+anno.anno_file+" already loaded";
 	}
 }
 
@@ -45,16 +47,14 @@ a.each{
 		println "File = "+fileLoc
 		//println "type = "+a.type
 		addInterProScan(anno,annoFile)
+	}else{
+		println anno.source+": "+anno.anno_file+" already loaded";
 	}
 }
 
 def addFunc(anno,annoFile){
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
-  	//println "Deleting old data..."
-	//def delsql = "delete from gene_anno,gene_info,file_data,anno_data where gene_anno.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.id = anno_data.filedata_id and anno_data.anno_file = '"+annoFile+"';";
-	//println delsql
-	//sql.execute(delsql)
 	println "Adding new...."
 	println new Date()
     def annoMap = [:]
@@ -90,7 +90,7 @@ def addFunc(anno,annoFile){
     println count
     //mark as loaded
     def aSql = "update anno_data set loaded = true where id = '"+anno.id+"'";
-    println aSql
+    //println aSql
     sql.execute(aSql)
 	println anno.anno_file+" is loaded"
 }
@@ -100,21 +100,9 @@ def addInterProScan(anno,annoFile){
 	cleanUpGorm()
 	def dataSource = ctx.getBean("dataSource")
   	def sql = new Sql(dataSource)
-  	//println "Deleting old data..."
-	//def delsql = "delete from gene_anno,gene_info,file_data,anno_data where gene_anno.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.id = anno_data.filedata_id and anno_data.anno_file = '"+annoFile+"';";
-	//println delsql
-	//sql.execute(delsql)
 	println "Adding new...."
 	println new Date()
   	def count=0
-	// get the ipr descriptions
-	//def iprMap = [:]
-	//iprFile = new File('data/entry.list')
- 	//iprFile.eachLine { line ->
-    //   if ((matcher = line =~ /(IPR\d+)\s+(.*)/)){
-    //		iprMap[matcher[0][1]] = matcher[0][2]
-    //    }
-    //}
     def annoMap = [:]
     annoFile.eachLine { line ->
 		count++
@@ -134,6 +122,7 @@ def addInterProScan(anno,annoFile){
 			annoMap.score = score
 			//annoMap.descr = iprMap[splitter[11]]
 			annoMap.descr = splitter[12]
+			//println annoMap
 			if (score < 1e-5){
 				GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
 				GeneInterpro ga = new GeneInterpro(annoMap)
@@ -157,7 +146,7 @@ def addInterProScan(anno,annoFile){
     println count
 	//mark as loaded
     def aSql = "update anno_data set loaded = true where id = '"+anno.id+"'";
-    println aSql
+    //println aSql
     sql.execute(aSql)
 	println anno.anno_file+" is loaded"
 }

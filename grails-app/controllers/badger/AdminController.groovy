@@ -289,7 +289,6 @@ class AdminController {
 		if (params.genes){
 			fileMap.file_type = "Genes"
 			fileMap.file_name = params.genes.trim()
-			fileMap.search = params.search_genes
 			fileMap.download = params.down_genes
 			fileMap.file_version = params.genes_v.trim()
 			fileMap.description = params.genes_d.trim()

@@ -58,14 +58,18 @@
 		</div>
 		<div>
 		<g:form name="editPage" url="[controller:'Home', action:'editPage']">
-			<ckeditor:editor name="edits" height="400px" width="100%">
+			<ckeditor:editor name="edits" height="500px" width="100%">
 				<g:if test="${edits}">
 					${edits.edit[0]}
 				</g:if>
 				<g:else>
-					<h1>Welcome to the home of <b>${grailsApplication.config.projectID}</b></h1>
-					<img src="${resource(dir: 'images', file: grailsApplication.config.mainImage)}" height="300" style="padding:10px; float:left;margin:0 5px 0 0;"/>
-					<br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
+					<h1>Welcome to the home of <b>${grailsApplication.config.projectID}</b></h1>	
+					<table><tr><td>
+						<img src="${resource(dir: 'images', file: grailsApplication.config.mainImage)}"/>
+						<br><br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
+						</td><td>
+						This is the home page for your project. Here you can edit this page by logging in as the admin user and using the built in editor. You can also add items to the news section on the right, again by loggin in as the admin user.
+					</td></tr></table>
 				</g:else>
 			</ckeditor:editor>
 			<input type = "hidden" name="pageName" value="/home/index">
@@ -113,9 +117,13 @@
 			${edits.edit[0]}
 		</g:if>
 		<g:else>
-	  		<h1>Welcome to the home of <b>${grailsApplication.config.projectID}</b></h1>	
-			<img src="${resource(dir: 'images', file: grailsApplication.config.mainImage)}" height="300" style="padding:10px; float:left;margin:0 5px 0 0;"/>
-			<br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
+			<h1>Welcome to the home of <b>${grailsApplication.config.projectID}</b></h1>	
+			<table><tr><td>
+				<img src="${resource(dir: 'images', file: grailsApplication.config.mainImage)}"/>
+				<br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
+				</td><td><br><br>
+				This is the home page for your project. Here you can edit this page by logging in as the admin user and using the built in editor. You can also add items to the news section on the right, again by loggin in as the admin user.
+			</td></tr></table>
 		</g:else>
 	 </g:if>
   </body>

@@ -25,6 +25,7 @@
     
     <% 
   	def jsonAnnoData = funAnnoData.encodeAsJSON(); 
+  	def jsonInterData = interAnnoData.encodeAsJSON();
   	def jsonBlastData = blastAnnoData.encodeAsJSON();
   	def jsonGenomeData = genomeInfo.encodeAsJSON();
   	//println jsonAnnoData;
@@ -338,7 +339,59 @@
 		    }
         },
         axes: {
-        	xaxis: {
+            yaxis: {
+                renderer: $.jqplot.CategoryAxisRenderer
+            }
+        }
+    });
+    $('#fun_chart').bind('jqplotDataClick',
+		function (ev, seriesIndex, pointIndex, data) {
+			//alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
+			if (fDb[pointIndex] == 'BlastProDom' || fDb[pointIndex] == 'HMMTigr' || fDb[pointIndex] == 'SignalPHMM' || fDb[pointIndex] == 'FPrintScan' || fDb[pointIndex] == 'ProfileScan' || fDb[pointIndex] == 'TMHMM' || fDb[pointIndex] == 'HMMPIR' || fDb[pointIndex] == 'HAMAP' || fDb[pointIndex] == 'HMMPanther' || fDb[pointIndex] == 'HMMPfam' || fDb[pointIndex] == 'PatternScan' || fDb[pointIndex] == 'Gene3D' || fDb[pointIndex] == 'HMMSmart' || fDb[pointIndex] == 'SuperFamily'){
+				//window.open("/search/gene_link?annoType=IPR&val="+fDb[pointIndex]+"&id="+data[0]);
+			}else{
+				//window.open("/search/gene_link?annoType=Functional&val="+fDb[pointIndex]);
+			}
+		}
+	);
+	
+	InterData = ${jsonInterData}; 
+	var iCount = [], iDb = [], iPer =[];
+    
+    var InterArray = [];
+    for (var i = 0; i < InterData.length; i++) {   		 	 
+		var hit = InterData[i];
+		if (hit.anno_db == null){
+			hit.anno_db = "None"
+		}	
+		iPer.push((hit.count/"${geneCount}")*100);
+		iDb.push(hit.anno_db);
+		iCount.push(hit.count)
+    }
+    InterArray = zip([iCount,iDb]);
+    
+    var ipr_plot = $.jqplot('ipr_chart', [InterArray], {
+		title: 'InterPro Domains', 
+  		animate: !$.jqplot.use_excanvas,
+  		seriesColors: [ "red"],
+        seriesDefaults: {
+            renderer:$.jqplot.BarRenderer,
+            // Show point labels to the right ('e'ast) of each bar.
+            // edgeTolerance of -15 allows labels flow outside the grid
+            // up to 15 pixels.  If they flow out more than that, they 
+            // will be hidden.
+            pointLabels: { show: true, location: 'e', edgeTolerance: -15 },
+            // Rotate the bar shadow as if bar is lit from top right.
+            shadowAngle: 135,
+            // Here's where we tell the chart it is oriented horizontally.
+            rendererOptions: {
+                barDirection: 'horizontal',
+				//shadowDepth: 2,
+        		//barMargin: 4,
+		    }
+        },
+        axes: {
+            xaxis: {
 				label: 'Number of transcripts with annotation',
 			},
             yaxis: {
@@ -346,7 +399,7 @@
             }
         }
     });
-    $('#fun_chart').bind('jqplotDataClick',
+    $('#ipr_chart').bind('jqplotDataClick',
 		function (ev, seriesIndex, pointIndex, data) {
 			//alert('series: '+seriesIndex+', point: '+fDb[pointIndex]+', data: '+data);
 			if (fDb[pointIndex] == 'BlastProDom' || fDb[pointIndex] == 'HMMTigr' || fDb[pointIndex] == 'SignalPHMM' || fDb[pointIndex] == 'FPrintScan' || fDb[pointIndex] == 'ProfileScan' || fDb[pointIndex] == 'TMHMM' || fDb[pointIndex] == 'HMMPIR' || fDb[pointIndex] == 'HAMAP' || fDb[pointIndex] == 'HMMPanther' || fDb[pointIndex] == 'HMMPfam' || fDb[pointIndex] == 'PatternScan' || fDb[pointIndex] == 'Gene3D' || fDb[pointIndex] == 'HMMSmart' || fDb[pointIndex] == 'SuperFamily'){
@@ -393,9 +446,6 @@
 		    }
         },
         axes: {
-        	xaxis: {
-				label: 'Number of transcripts with annotation',
-			},
             yaxis: {
                 renderer: $.jqplot.CategoryAxisRenderer
             }
@@ -474,9 +524,11 @@ ${genome_stats.description}
 				 </table>
 			 </td><td>
 				<br>
-				<div id="blast_chart" class="jqplot-target" style="height: 200px; width: 100%; position: center;"></div>
+				<div id="blast_chart" class="jqplot-target" style="height: 150px; width: 100%; position: center;"></div>
 				<br>
-				<div id="fun_chart" class="jqplot-target" style="height: 250px; width: 100%; position: center;"></div>
+				<div id="fun_chart" class="jqplot-target" style="height: 150px; width: 100%; position: center;"></div>
+				<br>
+				<div id="ipr_chart" class="jqplot-target" style="height: 150px; width: 100%; position: center;"></div>
 		 	</g:if>
 		 	<g:else>
 		 	<h2>No gene data is in the database for this genome</h2>
@@ -484,7 +536,7 @@ ${genome_stats.description}
 		 </td></tr>
 		
  </table>
- <g:if test = "${funAnnoData.size() > 1 || blastAnnoData.size() > 1}">
+ <g:if test = "${funAnnoData.size() > 1 || blastAnnoData.size() > 1 || interAnnoData.size() > 1}">
 	<div id="content">
 	
 	  <table><tr>

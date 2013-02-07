@@ -209,16 +209,17 @@ class SearchController {
 		 }
 		 
 		 //get data for plots
-		 //def funAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_anno,gene_info,file_data,meta_data where gene_anno.gene_id = gene_info.id and gene_info.file_id = file_data.id and meta_id = '"+params.id+"' group by anno_db;";
 		 def funAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_info left outer join gene_anno on (gene_info.id = gene_anno.gene_id),file_data where gene_info.file_id = file_data.id and file_data.id = '"+params.GFFid+"' group by anno_db;";
 		 println funAnnoSql
 		 def funAnnoData = sql.rows(funAnnoSql)
-		 //def blastAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_blast,gene_info,file_data,meta_data where gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and meta_id = '"+params.id+"' group by anno_db;";
+		 def interAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_info left outer join gene_interpro on (gene_info.id = gene_interpro.gene_id),file_data where gene_info.file_id = file_data.id and file_data.id = '"+params.GFFid+"'group by anno_db;";		
+		 println interAnnoSql
+		 def interAnnoData = sql.rows(interAnnoSql)
 		 def blastAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_info left outer join gene_blast on (gene_info.id = gene_blast.gene_id),file_data where gene_info.file_id = file_data.id and file_data.id = '"+params.GFFid+"'group by anno_db;";		
 		 println blastAnnoSql
 		 def blastAnnoData = sql.rows(blastAnnoSql)
     	//return [n50: n50_list, n90: n90_list, meta: metaData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats]
-    	 return [inter:inter, annoTypes:annoTypes, geneData: geneData, n50: n50_list, n90: n90_list, genomeFile:genomeData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats, genomeInfo: genomeInfo]
+    	 return [interAnnoData:interAnnoData, inter:inter, annoTypes:annoTypes, geneData: geneData, n50: n50_list, n90: n90_list, genomeFile:genomeData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats, genomeInfo: genomeInfo]
     }
     def all_search = {
          if (grailsApplication.config.i.links.all == 'private' && !isLoggedIn()) {
@@ -528,9 +529,12 @@ class SearchController {
 				if (params.toggler == "1"){
 					println "Searching blast data"
 					sqlsearch = "select distinct on (anno_db,gene_info.mrna_id) mrna_id,anno_id,anno_db,anno_start,anno_stop,descr,score,gaps,hit_start,hit_stop,hseq,identity,midline,positive,qseq,align from gene_blast,gene_info,file_data where "+annoSearch+" and "+whatSearch+ "'${searchId}' and gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.id = '"+searchfile_id+"';"       		        		
-				}else{
-					println "Searching anno data"
+				}else if (params.toggler == "2"){
+					println "Searching functional anno data"
 					sqlsearch = "select distinct on (anno_db,gene_info.mrna_id) anno_db,mrna_id,anno_id,anno_start,anno_stop,descr,score from gene_anno,gene_info,file_data where "+annoSearch+" and "+whatSearch+ "'${searchId}' and gene_anno.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.id = '"+searchfile_id+"';";
+				}else if (params.toggler == "3"){
+					println "Searching interpro data"
+					sqlsearch = "select distinct on (anno_db,gene_info.mrna_id) anno_db,mrna_id,anno_id,anno_start,anno_stop,descr,score from gene_interpro,gene_info,file_data where "+annoSearch+" and "+whatSearch+ "'${searchId}' and gene_interpro.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.id = '"+searchfile_id+"';";
 				}
 				println sqlsearch
 				def results_all = sql.rows(sqlsearch)
@@ -554,8 +558,8 @@ class SearchController {
 			sql.close()
 		}
       }
-    @Cacheable('m_cache')
-    //@CacheEvict(value='m_cache', allEntries=true)
+    //@Cacheable('m_cache')
+    @CacheEvict(value='m_cache', allEntries=true)
     def m_info() {
     	if (grailsApplication.config.i.links.genes == 'private' && !isLoggedIn()) {
      		redirect(controller: "home", action: "index")
@@ -588,7 +592,7 @@ class SearchController {
 				blast_results = sql.rows(blastsql)
 			//}
 			//if (grailsApplication.config.g.IPR){
-				def iprsql = "select gene_anno.* from gene_anno,gene_info where anno_id ~ '^IPR' and gene_anno.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score;";
+				def iprsql = "select gene_interpro.* from gene_interpro,gene_info where anno_id ~ '^IPR' and gene_interpro.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score;";
 				println iprsql
 				ipr_results = sql.rows(iprsql)
 			//}
