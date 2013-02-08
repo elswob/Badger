@@ -10,9 +10,6 @@ class BootStrap {
             production {
                 servletContext.setAttribute("env", "prod")
             }
-            data_load {
-                servletContext.setAttribute("env", "data")
-            }
             development {
             	//create some indexes
             	def sql = new Sql(dataSource)

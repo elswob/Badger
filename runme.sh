@@ -1,7 +1,7 @@
 #!/bin/bash
 
 date
-grails -Dgrails.env=data_load run-script \
+grails prod run-script \
 scripts/AddFileData.groovy \
 scripts/AddPublicationData.groovy \
 scripts/AddSequenceData.groovy \

@@ -14,19 +14,12 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			dbCreate = "create" // one of 'create', 'create-drop','update'
+			dbCreate = "create" // one of 'create (drops data)', 'create-drop (drops tables)','update (will create if not done already)'
             loggingSql = true
 		}
 	}
 	production {
 		dataSource {
-			//dbCreate = "update"
-			dbCreate = "create"
-		}
-	}
-	data_load {
-		dataSource {
-			//dbCreate = "update"
 			dbCreate = "update"
 		}
 	}
