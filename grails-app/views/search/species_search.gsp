@@ -391,9 +391,9 @@
 		    }
         },
         axes: {
-            xaxis: {
-				label: 'Number of transcripts with annotation',
-			},
+            //xaxis: {
+			//	label: 'Number of transcripts with annotation',
+			//},
             yaxis: {
                 renderer: $.jqplot.CategoryAxisRenderer
             }
@@ -442,7 +442,7 @@
             rendererOptions: {
                 barDirection: 'horizontal',
 				//shadowDepth: 2,
-        		//barMargin: 4,
+        		barMargin: 6,
 		    }
         },
         axes: {
@@ -462,7 +462,7 @@
     </script>
 </head>
 <body>
-<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:genomeFile.genome.meta.id]}"><i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i></g:link> > ${genomeFile.file_version}
+<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:genomeFile.genome.meta.id]}"><i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i></g:link> > Genome: v${genomeFile.file_version}
 <h1><b><i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i></b> ${genomeFile.file_version}</h1>    
 ${genome_stats.description}
 <table width=100%>
@@ -524,11 +524,11 @@ ${genome_stats.description}
 				 </table>
 			 </td><td>
 				<br>
-				<div id="blast_chart" class="jqplot-target" style="height: 150px; width: 100%; position: center;"></div>
+				<div id="blast_chart" class="jqplot-target" style="height: 120px; width: 100%; position: center;"></div>
 				<br>
-				<div id="fun_chart" class="jqplot-target" style="height: 150px; width: 100%; position: center;"></div>
+				<div id="fun_chart" class="jqplot-target" style="height: 120px; width: 100%; position: center;"></div>
 				<br>
-				<div id="ipr_chart" class="jqplot-target" style="height: 150px; width: 100%; position: center;"></div>
+				<div id="ipr_chart" class="jqplot-target" style="height: 120px; width: 100%; position: center;"></div>
 		 	</g:if>
 		 	<g:else>
 		 	<h2>No gene data is in the database for this genome</h2>
