@@ -10,8 +10,8 @@ class BootStrap {
             production {
                 servletContext.setAttribute("env", "prod")
             }
-            test {
-                servletContext.setAttribute("env", "test")
+            data_load {
+                servletContext.setAttribute("env", "data")
             }
             development {
             	//create some indexes

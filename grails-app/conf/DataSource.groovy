@@ -24,4 +24,10 @@ environments {
 			dbCreate = "create"
 		}
 	}
+	data_load {
+		dataSource {
+			//dbCreate = "update"
+			dbCreate = "update"
+		}
+	}
 }
