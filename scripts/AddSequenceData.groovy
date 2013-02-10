@@ -27,6 +27,7 @@ def editTree(){
 		def tree = new File("web-app/trees/badger_tree.xml")
 		if (tree.exists()){tree.delete()}
 		def treeFile = new File(grailsApplication.config.t.file)
+		println "treeFile = "+treeFile
 		def species = MetaData.findAll()
 		def sList = []
 		species.each{
