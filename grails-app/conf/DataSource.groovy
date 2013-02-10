@@ -14,7 +14,7 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			dbCreate = "create" // one of 'create (drops data)', 'create-drop (drops tables)','update (will create if not done already)'
+			dbCreate = "create" // one of 'create', 'create-drop','update'
             loggingSql = true
 		}
 	}

@@ -3,8 +3,8 @@ package badger
 import groovy.sql.Sql
 
 class PubService {
-	javax.sql.DataSource dataSource
 	def grailsApplication
+	def sql = Sql.newInstance("jdbc:postgresql://localhost:5432/b_anynana", 'ben', '', 'org.postgresql.Driver')
 	
 	def matcher
 	def idlist = new File("/tmp/idlist.txt")
@@ -57,7 +57,6 @@ class PubService {
 	//add info
 	def addPub(pubFile,data_id){
 		MetaData meta = MetaData.findById(data_id)
-		def dataSource = ctx.getBean("dataSource")
 		def sql = new Sql(dataSource)
 		println "Deleting old data..."
 		def delsql = "delete from Publication where meta_id = '"+data_id+"';";
