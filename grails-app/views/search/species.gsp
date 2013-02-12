@@ -17,23 +17,16 @@
       td { vertical-align: top; }
     </style>
     
-    
     <script type="text/javascript">
-
+	
 	$(document).ready(function(){
 		var paperWidth1 = $('#svgCanvas1').width();
 		var paperWidth2 = $('#svgCanvas2').width();
-		//alert(paperWidth1)
-		//$.get("/trees/10-coffee.xml", function(data) {
-		//$.get("/trees/filarial_rooted.xml", function(data) {
-		//$.get("/trees/all_nem.xml", function(data) {
-		//$.get("/trees/GK_nem_rooted.xml", function(data) {
-		$.get("/trees/badger_tree.xml", function(data) {
+		$.get("${resource(dir: 'trees', file: 'badger_tree.xml')}", function(data) {
 			var dataObject = {
 				xml: data,
 				fileSource: true
 			};		
-			//Smits.PhyloCanvas.Render.Style.text["font-size"] = 12;
 			phylocanvas = new Smits.PhyloCanvas(
 				dataObject,
 				'svgCanvas1', 
@@ -45,9 +38,7 @@
 				'svgCanvas2', 
 				paperWidth2/1.1, paperWidth2/1.1,
 				'circular'
-			);
-			//Smits.ZoomCanvas.init($('#svgCanvas1 svg'), 2000, 2000);
-			//Smits.ZoomCanvas.scale(0.5);			
+			);		
 			init(); //unitip
 		});
 	});
@@ -58,20 +49,7 @@
 	
   	 <g:if test = "${meta}">
   	 <g:link action="">Search</g:link> > Species
-  	 <!--
-  	 <table>
-      <tr>
-        <td>
-          <h2>Circular Dendrogram</h2>
-          <div id='radialtree'></div>
-        </td>
-        <td>
-          <h2>Phylogram</h2>
-          <div id='phylogram'></div>
-        </td>
-      </tr>
-    </table>
-  	 -->
+  	 	  	 	
   	 <table class="table_100" align="center"><tr>
   	 <g:if test="${grailsApplication.config.t.file}">
   	 	<td><div id="svgCanvas1"> </div></td>

@@ -1,34 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phyloxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.phyloxml.org http://www.phyloxml.org/1.10/phyloxml.xsd" xmlns="http://www.phyloxml.org">
 <phylogeny rooted="false">
- <render>
- <parameters>
-  <circular>
-   <bufferRadius>0.6</bufferRadius>
-  </circular>
-  <rectangular>
-   <bufferX>200</bufferX>
-  </rectangular>
- </parameters>
-  <charts>
-   <component type="binary" thickness="0" />
-  </charts>
-  <styles>
-   <bold fill="#e5bd94" stroke="#e5bd94" type="radialGradient" font-size="12">
-    <stop offset="0%" style="stop-color:#e5bd94; stop-opacity:0"/>
-    <stop offset="93%" style="stop-color:#e5bd94; stop-opacity:1"/>
-    <stop offset="100%" style="stop-color:#D1A373; stop-opacity:1"/>
-   </bold>
-   <none fill="#FFFFFF" stroke="#FFFFFF">
-   </none>
-   <out fill="#7798CF" stroke="#7798CF">
-   </out>  </styles>
- </render>
   <clade>
     <clade>
       <branch_length>0.142544</branch_length>
       <clade>
-        <name bgStyle="none">Enoplus brevis</name>
+        <name>Enoplus brevis</name>
         <branch_length>0.621519</branch_length>
       </clade>
       <clade>
@@ -36,17 +13,17 @@
         <clade>
           <branch_length>0.052296</branch_length>
           <clade>
-            <name bgStyle="none">Trichinella spiralis</name>
+            <name>Trichinella spiralis</name>
             <branch_length>0.911917</branch_length>
           </clade>
           <clade>
             <branch_length>0.116283</branch_length>
             <clade>
-              <name bgStyle="none">Romanomermis culicivorax</name>
+              <name>Romanomermis culicivorax</name>
               <branch_length>0.7023</branch_length>
             </clade>
             <clade>
-              <name bgStyle="none">Prionchulus punctatus</name>
+              <name>Prionchulus punctatus</name>
               <branch_length>0.179713</branch_length>
             </clade>
           </clade>
@@ -54,7 +31,7 @@
         <clade>
           <branch_length>0.042334</branch_length>
           <clade>
-            <name bgStyle="none">Laxus oneistus</name>
+            <name>Laxus oneistus</name>
             <branch_length>0.35843</branch_length>
           </clade>
           <clade>
@@ -64,13 +41,13 @@
               <clade>
                 <branch_length>0.110124</branch_length>
                 <clade>
-                  <name bgStyle="none">Pristionchus pacificus</name>
+                  <name>Pristionchus pacificus</name>
                   <branch_length>0.355935</branch_length>
                 </clade>
                 <clade>
                   <branch_length>0.051001</branch_length>
                   <clade>
-                    <name bgStyle="none">Haemonchus contortus</name>
+                    <name>Haemonchus contortus</name>
                     <branch_length>0.177749</branch_length>
                   </clade>
                   <clade>
@@ -78,16 +55,16 @@
                     <clade>
                       <branch_length>0.06643</branch_length>
                       <clade>
-                        <name bgStyle="none">Caenorhabditis elegans</name>
+                        <name>Caenorhabditis elegans</name>
                         <branch_length>0.039636</branch_length>
                       </clade>
                       <clade>
-                        <name bgStyle="none">Caenorhabditis briggsae</name>
+                        <name>Caenorhabditis briggsae</name>
                         <branch_length>0.03729</branch_length>
                       </clade>
                     </clade>
                     <clade>
-                      <name bgStyle="none">Caenorhabditis angaria</name>
+                      <name>Caenorhabditis angaria</name>
                       <branch_length>0.135761</branch_length>
                     </clade>
                   </clade>
@@ -96,7 +73,7 @@
               <clade>
                 <branch_length>0.075621</branch_length>
                 <clade>
-                  <name bgStyle="none">Strongyloides ratti</name>
+                  <name>Strongyloides ratti</name>
                   <branch_length>0.689603</branch_length>
                 </clade>
                 <clade>
@@ -104,22 +81,22 @@
                   <clade>
                     <branch_length>0.488557</branch_length>
                     <clade>
-                      <name bgStyle="none">Meloidogyne incognita</name>
+                      <name>Meloidogyne incognita</name>
                       <branch_length>0.037251</branch_length>
                     </clade>
                     <clade>
-                      <name bgStyle="none">Meloidogyne hapla</name>
+                      <name>Meloidogyne hapla</name>
                       <branch_length>0.049028</branch_length>
                     </clade>
                   </clade>
                   <clade>
                     <branch_length>0.155223</branch_length>
                     <clade>
-                      <name bgStyle="none">Pseudaphelenchus vindai</name>
+                      <name>Pseudaphelenchus vindai</name>
                       <branch_length>0.286824</branch_length>
                     </clade>
                     <clade>
-                      <name bgStyle="none">Bursaphelenchus xylophilus</name>
+                      <name>Bursaphelenchus xylophilus</name>
                       <branch_length>0.242674</branch_length>
                     </clade>
                   </clade>
@@ -129,7 +106,7 @@
             <clade>
               <branch_length>0.050748</branch_length>
               <clade>
-                <name bgStyle="none">Anguillicoloides crassus</name>
+                <name>Anguillicoloides crassus</name>
                 <branch_length>0.291942</branch_length>
               </clade>
               <clade>
@@ -139,34 +116,34 @@
                   <clade>
                     <branch_length>0.01204</branch_length>
                     <clade>
-                      <name bgStyle="none">Onchocerca ochengi</name>
+                      <name>Onchocerca ochengi</name>
                       <branch_length>0.035437</branch_length>
                     </clade>
                     <clade>
-                      <name bgStyle="none">Dirofilaria immitis</name>
+                      <name>Dirofilaria immitis</name>
                       <branch_length>0.038667</branch_length>
                     </clade>
                   </clade>
                   <clade>
                     <branch_length>0.006599</branch_length>
                     <clade>
-                      <name bgStyle="none">Litomosoides sigmodontis</name>
+                      <name>Litomosoides sigmodontis</name>
                       <branch_length>0.057921</branch_length>
                     </clade>
                     <clade>
                       <branch_length>0.008453</branch_length>
                       <clade>
-                        <name bgStyle="none">Loa loa</name>
+                        <name>Loa loa</name>
                         <branch_length>0.037188</branch_length>
                       </clade>
                       <clade>
                         <branch_length>0.023552</branch_length>
                         <clade>
-                          <name bgStyle="none">Wuchereria bancrofti</name>
+                          <name>Wuchereria bancrofti</name>
                           <branch_length>0.031078</branch_length>
                         </clade>
                         <clade>
-                          <name bgStyle="none">Brugia malayi</name>
+                          <name>Brugia malayi</name>
                           <branch_length>0.017769</branch_length>
                         </clade>
                       </clade>
@@ -174,7 +151,7 @@
                   </clade>
                 </clade>
                 <clade>
-                  <name bgStyle="none">Ascaris suum</name>
+                  <name>Ascaris suum</name>
                   <branch_length>0.144485</branch_length>
                 </clade>
               </clade>
@@ -186,23 +163,23 @@
     <clade>
       <branch_length>0.142544</branch_length>
       <clade>
-        <name bgStyle="none">Milnesium tardigradum</name>
+        <name>Milnesium tardigradum</name>
         <branch_length>0.823228</branch_length>
       </clade>
       <clade>
         <branch_length>0.073716</branch_length>
         <clade>
-          <name bgStyle="none">Tetranychus urticae</name>
+          <name>Tetranychus urticae</name>
           <branch_length>0.653504</branch_length>
         </clade>
         <clade>
           <branch_length>0.228838</branch_length>
           <clade>
-            <name bgStyle="none">Drosophila melanogaster</name>
+            <name>Drosophila melanogaster</name>
             <branch_length>0.380144</branch_length>
           </clade>
           <clade>
-            <name bgStyle="none">Bombyx mori</name>
+            <name>Bombyx mori</name>
             <branch_length>0.422239</branch_length>
           </clade>
         </clade>
