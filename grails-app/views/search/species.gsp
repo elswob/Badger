@@ -84,7 +84,7 @@
   	 		<table>
   	 			<tr>
   	 				<td width=150>
-  	 					<g:if test="${grailsApplication.mainContext.getResource('images/'+res.image_file[0]).exists()}"> 
+  	 					<g:if test="${grailsApplication.mainContext.getResource('images/'+res.image_file).exists()}"> 
 	    					<a href = "species_v?Sid=${res.id}"><img src="${resource(dir: 'images', file: res.image_file)}" width="150" style="float:left;"/></a>
 	    				</g:if>
 	    				<g:else>
