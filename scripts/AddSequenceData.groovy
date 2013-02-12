@@ -26,7 +26,7 @@ def editTree(){
 		println "Editing phyloXML tree..."
 		def tree = new File("web-app/trees/badger_tree.xml")
 		if (tree.exists()){tree.delete()}
-		def treeFile = new File(grailsApplication.config.t.file)
+		def treeFile = new File("data/"+grailsApplication.config.t.file.trim())
 		println "treeFile = "+treeFile
 		def species = MetaData.findAll()
 		def sList = []
@@ -35,7 +35,7 @@ def editTree(){
 		}
 		//println "list = "+sList
 		
-		treeFile.split("\n").each{
+		treeFile.eachLine {
 		  if ((matcher = it =~ /^<phylogeny rooted=.*/)){
 			tree << it+"\n"
 			tree << " <render>\n"
