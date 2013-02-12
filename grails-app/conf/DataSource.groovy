@@ -23,9 +23,4 @@ environments {
 			dbCreate = "update"
 		}
 	}
-	data_load {
-		dataSource {
-			dbCreate = "validate"
-		}
-	}
 }
