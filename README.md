@@ -240,7 +240,7 @@ Log in as admin and fill in the forms as necessary.
 
 2. Using the AddFileData.groovy script
 
-Edit the script `scripts/AddFileData.groovy` in compliance with the demo data already there. 
+Edit the script `scripts/AddFileData.groovy` in compliance with the demo data already there, and make sure the data will be loaded by removing the '//' at the start of the section.  
 
 #### Load data
 
@@ -342,6 +342,10 @@ ctg123 . CDS	     7000  7600	 .  +  2  Parent=mRNA0003
 7. All images go in web-app/images not in the user generated data/directores
 
 ## Troubleshooting
+
+#### No data loaded
+
+If you are using the AddFileData.groovy script make sure the `//` have been removed from line 15 or so where the method call is made
 
 #### Strange page behaviour
 

@@ -12,9 +12,9 @@ def sql = new Sql(dataSource)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // This just allows each data set to be turned on and off simply by commenting out the function call
-M_meles()
+//M_meles()
 
-/////// H. dujardini
+/////// M. meles
 def M_meles(){
 	def metaMap = [:]
 	def genomeMap = [:]
