@@ -9,7 +9,7 @@
 
 </head>
 <body>
-	<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > ${meta.genus[0]} ${meta.species[0]} ${meta.image_file[0]}
+	<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > ${meta.genus[0]} ${meta.species[0]}
 	<table>
 		<tr>
 			<td width=150> 
@@ -17,7 +17,6 @@
 	    			<a href = "species_search?Gid=${meta.id[0]}"><img src="${resource(dir: 'images', file: meta.image_file[0])}" width="150" style="float:left;"/></a>
 	    		</g:if>
 	    		<g:else>
-	    			No pic
 	    			<a href = "species_search?Gid=${meta.id[0]}"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" width="150" style="float:left;"/></a>
 	    		</g:else>
 			</td>
