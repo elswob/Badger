@@ -183,7 +183,14 @@
 					}
 					return link
 				}},
-				{ "mDataProp": "descr"},
+				{ "mDataProp": "descr",
+				"fnRender": function ( oObj, sVal ){
+					if (oObj.aData["descr"].length>200){
+						return oObj.aData["descr"].substring(0,200)+" ..."
+					}else{
+						return oObj.aData["descr"]
+					}
+				}},
 				{ "mDataProp": "anno_start"},
 				{ "mDataProp": "anno_stop"},
 				{ "mDataProp": "score"},
@@ -723,6 +730,7 @@
 			}
 		%>
 		<td>${res.anno_id}</td>
+		<%if (res.descr.size()>200){ res.descr = res.descr[0..200]+" ... "};%>
 		<td>${res.descr}</td>
 		<td>${res.anno_start}</td>
 		<td>${res.anno_stop}</td>
@@ -758,6 +766,7 @@
 			res.anno_id = res.anno_id.replaceAll(/(^IPR\d+)/, "<a href=\"http://www.ebi.ac.uk/interpro/IEntry?ac=\$1\" target=\'_blank\'>\$1</a>")
 			%>
 			<td>${res.anno_id}</td>
+			<%if (res.descr.size()>200){ res.descr = res.descr[0..200]+" ... "};%>
 			<td>${res.descr}</td>
 			<td>${res.anno_start}</td>
 			<td>${res.anno_stop}</td>

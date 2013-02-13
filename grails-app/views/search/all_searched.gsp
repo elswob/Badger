@@ -243,7 +243,7 @@
 					}
 				  %>
                   <td>${res.anno_id}</td>
-                  <%res.descr = res.descr.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
+                  <%if (res.descr.size()>200){ res.descr = res.descr[0..200]+" ... "};%>
                   <td>${res.descr}</td>
                   <td>${res.anno_start}</td>
                   <td>${res.anno_stop}</td>
@@ -297,7 +297,7 @@
 				  res.anno_id = res.anno_id.replaceAll(/(IPR\d+)/, "<a href=\"http://www.ebi.ac.uk/interpro/IEntry?ac=\$1\" target=\'_blank\'>\$1</a>")
 				   %>
                   <td>${res.anno_id}</td>
-                  <%res.descr = res.descr.replaceAll(/\|([A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9]*[A-Z0-9])\|/, "<a href=\"http://www.ncbi.nlm.nih.gov/protein/\$1\" target=\'_blank\'>|\$1|</a>")%>
+                  <%if (res.descr.size()>200){ res.descr = res.descr[0..200]+" ... "};%>
                   <td>${res.descr}</td>
                   <td>${res.anno_start}</td>
                   <td>${res.anno_stop}</td>

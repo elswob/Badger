@@ -102,7 +102,14 @@
 					}
 					return link
 				}},
-				{ "mDataProp": "descr"},
+				{ "mDataProp": "descr",
+				"fnRender": function ( oObj, sVal ){
+					if (oObj.aData["descr"].length>200){
+						return oObj.aData["descr"].substring(0,200)+" ..."
+					}else{
+						return oObj.aData["descr"]
+					}
+				}},
 				{ "mDataProp": "score"},
 			],
 			"sPaginationType": "full_numbers",
@@ -178,7 +185,14 @@
 					}
 					return link
 				}},
-            { "mDataProp": "descr"},
+            { "mDataProp": "descr",
+				"fnRender": function ( oObj, sVal ){
+					if (oObj.aData["descr"].length>200){
+						return oObj.aData["descr"].substring(0,200)+" ..."
+					}else{
+						return oObj.aData["descr"]
+					}
+				}},
             { "mDataProp": "score"},
         ],
         "sPaginationType": "full_numbers",
@@ -213,7 +227,14 @@
 						return "<a href=\"http://www.ebi.ac.uk/QuickGO/GTerm?id="+sVal+ "\"target='_blank'>"+sVal+"</a>";
 					}
 				}},
-				{ "mDataProp": "descr"},
+				{ "mDataProp": "descr",
+				"fnRender": function ( oObj, sVal ){
+					if (oObj.aData["descr"].length>200){
+						return oObj.aData["descr"].substring(0,200)+" ..."
+					}else{
+						return oObj.aData["descr"]
+					}
+				}},
 				{ "mDataProp": "score", "sType": "scientific"},
 			],
 			"sPaginationType": "full_numbers",
