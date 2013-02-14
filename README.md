@@ -12,7 +12,7 @@ A linux server with at least 2 CPUs and 4 GB RAM
 
 * [Grails](http://grails.org/) version 2.1.0 or above and a Java Development Kit (JDK) installed version 1.6 or above.
 * [BLAST+](http://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
-* [Clustal-omega](http://www.clustal.org/omega/) (Optional)
+* [Muscle](http://www.drive5.com/muscle/) (Optional)
 
 #### Data
 
@@ -62,11 +62,11 @@ Download BLAST+
 
 `sudo apt-get install ncbi-blast+`
 
-Download Clustal-omega (Optional)
+Download Muscle (Optional)
 
 ```
-wget http://www.clustal.org/omega/clustal-omega-1.1.0.tar.gz
-tar zxvf clustal-omega-1.1.0.tar.gz
+wget http://www.drive5.com/muscle/downloads3.8.31/muscle3.8.31_i86linux64.tar.gz
+tar zxvf muscle3.8.31_i86linux64.tar.gz
 ```
 
 ## Configure
@@ -118,7 +118,7 @@ dataSource.url = jdbc:postgresql://127.0.0.1:5432/Badger
 
 /*** executables ***/
 blastPath = /usr/local/bin/
-clustaloPath = /home/yourname/software/clustal_omega/clustalo-1.1.0-linux-64 
+musclePath = /path/to/muscle/muscle3.8.31_i86linux64
 
 /*** web images for front page and favicon (need to be in grails web-app/images) ***/
 headerImage = My_species_header.jpg
@@ -145,7 +145,7 @@ e.links.pub.4 = OpenWorm, http://www.openworm.org/
 
 /*** project members ***/       
 mem.person.1 = Your name, your_email_address, Location1, 
-mem.person.2 = <a href ="http://www.nematodes.org">Mark Blaxter</a>, mark.blaxter.ed.ac.uk, Edinburgh, 
+mem.person.2 = <a href ="http://www.badger.bio.org">Ben Elsworth</a>, ben.elsworth.ed.ac.uk, Edinburgh, 
 mem.location.Location1 = homecrest.gif, http://www.ed.ac.uk
 
 /*** news ***/
