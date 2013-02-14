@@ -903,8 +903,8 @@
 		</g:if>
 		<g:else>
 			<h2>This transcript has no orthology information which is due to one of three reasons.</h2>
-			1. No orthology analysis has been added.<br>
-			2. The transcript was not included in the analysis.<br>
+			1. It has no orthologs with any of the other transcripts.<br>
+			2. The transcript was not included in the ortholog analysis.<br>
 			3. The protein sequence was not good enough.
 		</g:else>
 	</g:if>
