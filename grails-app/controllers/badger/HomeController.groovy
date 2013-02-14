@@ -11,6 +11,7 @@ class HomeController {
 
  //@Secured(['ROLE_ADMIN','ROLE_USER'])
  def index = {
+ 	 println "Date = "+new Date()
  	 def sql = new Sql(dataSource)
  	 def newsData = News.findAll(sort:"dateString",order:"desc")
  	 def edits

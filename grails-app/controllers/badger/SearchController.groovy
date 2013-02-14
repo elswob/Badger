@@ -632,9 +632,9 @@ class SearchController {
 			def orthoId = Ortho.findByTrans_name(mrna_id)
 			def orthoGet
 			if (orthoId != null){
-				println "orthoId = "+orthoId.group_id
+				//println "orthoId = "+orthoId.group_id
 				orthoGet = Ortho.findAllByGroup_id(orthoId.group_id)
-				println "ortho = "+orthoGet
+				//println "ortho = "+orthoGet
 			}else{
 				println "no orthoog!"
 			}
