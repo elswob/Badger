@@ -24,11 +24,12 @@ class SearchController {
     	def genomes = GenomeData.findAll()
     	//def fileData = FileData.findAll()
     	println "Number of species = "+metaData.size()
-    	if (metaData.size() == 1){
+    	if (metaData.size() == 1 && !grailsApplication.config.t.file){
     		redirect(action: "species_v", params: [Sid: metaData.id])
     	}else{
     		return [meta: metaData, genomes: genomes]
     	}
+    	//return [meta: metaData, genomes: genomes]
     }
     def species_v = {
     	def sql = new Sql(dataSource)   	
