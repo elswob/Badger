@@ -51,16 +51,23 @@ class AlignService {
 		//clustal omega		
 		//String[] comm = ["${aligner}", "-i", "${f}", "-o", "${OutFile}", "--outfmt", "clu"]		
 		//muscle
-		String[] comm = ["${aligner}","-in", "${f}", "-out", "${OutFile}", "-html"]
+		String[] comm_html = ["${aligner}","-in", "${f}", "-out", "${OutFile}.html", "-html"]
+		String[] comm_clustal = ["${aligner}","-in", "${f}", "-out", "${OutFile}.aln", "-clwstrict"]
 		
-		ProcessBuilder alignProcess = new ProcessBuilder(comm)  
-		alignProcess.redirectErrorStream(true)
-        Process p = alignProcess.start()
-		p.waitFor()
-		println "Error = "+p.text
-		def alignOut = new File("$OutFile").text
+		ProcessBuilder alignProcess_html = new ProcessBuilder(comm_html)  
+		alignProcess_html.redirectErrorStream(true)
+        Process p_html = alignProcess_html.start()
+		p_html.waitFor()
 		
-		return [type:type, name:name, OutFile:OutFile, alignOut:alignOut]
+		ProcessBuilder alignProcess_clu = new ProcessBuilder(comm_clustal)  
+		alignProcess_clu.redirectErrorStream(true)
+        Process p_clu = alignProcess_clu.start()
+		p_clu.waitFor()
+		
+		def htmlOut = new File("$OutFile"+".html").text
+		def alnOut = new File("$OutFile"+".aln").text
+		
+		return [type:type, name:name, OutFile:OutFile, htmlOut:htmlOut, alnOut:alnOut]
 
 	}
 }

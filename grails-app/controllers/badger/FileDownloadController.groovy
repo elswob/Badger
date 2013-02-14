@@ -12,6 +12,18 @@ class FileDownloadController {
         response.outputStream << fileOut
         response.outputStream.flush()
     }
+    def align_download = {
+    	def fileOut
+    	if (params.type == 'aln'){
+        	fileOut = new File(params.fileId + '.aln').text
+        }else if (params.type == 'html'){
+        	fileOut = new File(params.fileId + '.html').text
+        }
+        response.setHeader "Content-disposition", "attachment; filename="+params.fileName
+        response.contentType = 'text/csv'
+        response.outputStream << fileOut
+        response.outputStream.flush()
+    }
     
     def contig_download = {
         def fileOut = new File(params.fileId)

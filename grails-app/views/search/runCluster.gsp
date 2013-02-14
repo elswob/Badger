@@ -10,11 +10,24 @@
 <body>
   	 <g:if test = "${align}">
   	 	<h1>Alignment results</h1>
-  	 	Data type = ${align.type}<br>
-  	 	Name = ${align.name}<br>
-  	 	Outfile = ${align.OutFile}<br>
+  	 	<div class="inline">
+  	 	  Download: 
+		  <g:form name="alnDownload" url="[controller:'FileDownload', action:'align_download']">
+				<g:hiddenField name="fileId" value="${align.OutFile}"/>
+				<g:hiddenField name="fileName" value="${align.name}.aln"/>
+				<g:hiddenField name="type" value="aln"/>
+				<a href="#" onclick="document.alnDownload.submit()">Clustal</a>
+		  </g:form>
+		  |
+		  <g:form name="htmlDownload" url="[controller:'FileDownload', action:'align_download']">
+				<g:hiddenField name="fileId" value="${align.OutFile}"/>
+				<g:hiddenField name="fileName" value="${align.name}.html"/>
+				<g:hiddenField name="type" value="html"/>
+				<a href="#" onclick="document.htmlDownload.submit()"> HTML</a>
+		  </g:form>
+		</div>
   	 	<div class="align_res">
-	  	 	Alignment = ${align.alignOut}<br>
+	  	 	${align.htmlOut}<br>
 	  	</div>
   	 </g:if>
 </body>
