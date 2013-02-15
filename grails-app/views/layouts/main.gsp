@@ -42,6 +42,11 @@
 			    		<li><g:link controller="search" action="species" class="${pageProperty(name:'page.search')}">Species</g:link></li>
 				</g:if>
 				<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>
+				<g:if test = "${grailsApplication.config.i.links.ortho == 'public'}">
+					<g:if test = "${grailsApplication.config.o.file}">
+			    		<li><g:link controller="search" action="ortho" class="${pageProperty(name:'page.search')}">Orthologs</g:link></li>
+			    	</g:if>
+				</g:if>
 				<g:if test = "${grailsApplication.config.i.links.all == 'public'}">
 			    	<li><g:link controller="search" action="all_search" class="${pageProperty(name:'page.search')}">All</g:link></li>
 				</g:if>
@@ -83,6 +88,9 @@
 			<ul>
 				<li><g:link controller="search" action="species" class="${pageProperty(name:'page.search')}">Species</g:link></li>
 				<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>				
+				<g:if test = "${grailsApplication.config.o.file}">
+			    	<li><g:link controller="search" action="ortho" class="${pageProperty(name:'page.search')}">Orthologs</g:link></li>
+			    </g:if>
 				<li><g:link controller="search" action="all_search" class="${pageProperty(name:'page.search')}">All</g:link></li>
 			</ul>
 		</li> 

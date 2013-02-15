@@ -686,12 +686,12 @@ div.inline *  { display: inline; }
 .mybuttons {
 	background-color: #efefef;
 	overflow: hidden;
-	padding: 0.3em;
 	-moz-box-shadow: 0 0 3px 1px #aaaaaa;
 	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
 	        box-shadow: 0 0 3px 1px #aaaaaa;
 	margin: 0 0 0 0;
 	border: 0em;
+	height: 22.0px;
 }
 
 .mybuttons:hover {
@@ -705,6 +705,47 @@ div.inline *  { display: inline; }
      color:#00c;
   }
 
+.smallbuttons {
+	background-color: #efefef;
+	overflow: hidden;
+	padding: 0;
+	-moz-box-shadow: 0 0 3px 1px #aaaaaa;
+	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
+	        box-shadow: 0 0 3px 1px #aaaaaa;
+	margin: 0 0 0 0;
+	border: 0em;
+	width: 55.0px;
+    height: 22.0px;
+}
+
+.smallbuttons:hover {
+	color:green;
+	border-color:#3278BE;
+}
+ 
+.smallbuttons:focus 
+ {
+     border:0.5em solid #00c; /* here configure as your needs */
+     color:#00c;
+  }
+
+.tabbuttons {
+	background-color: #efefef;
+	overflow: hidden;
+	padding: 0;
+	-moz-box-shadow: 0 0 2px 0px #aaaaaa;
+	-webkit-box-shadow: 0 0 2px 0px #aaaaaa;
+	        box-shadow: 0 0 2px 0px #aaaaaa;
+	margin: 0 0 0 0;
+	border: 0em;
+	width: 55.0px;
+    height: 22.0px;
+}
+
+.tabbuttons:hover {
+	color:green;
+	border-color:#3278BE;
+}
 
 
 .buttons {

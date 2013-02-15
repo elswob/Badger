@@ -32,7 +32,24 @@
   	%>	
     
     <script type="text/javascript">
-
+    
+    $(document).ready(function(){
+        $('.toHide').hide();
+        $("#blk_1").show('slow');
+	    $("#sel_1").show('fast');
+	    showSelected($("#sel_1").val())
+	    
+	    $("#contig_attribute").show('slow');
+	    
+        $("#process").bind("click", function () {
+              $("#content").mask("Searching the database...");
+        });
+				
+        $("#cancel").bind("click", function () {
+			$("#content").unmask();
+        });               
+    });
+	
     function showSelected(val){
 		document.getElementById
 		('selectedResult').innerHTML = val;
@@ -45,6 +62,11 @@
 				showSelected($("#sel_"+$(this).val()).val())
 		});
     });
+    
+    function switchTab(tabShow,tabHide) {
+		$("#tab_"+tabHide).hide();
+		$("#tab_"+tabShow).show();
+    }
     
     function changed(plot_type,params) {
 		$("#chart").html('Loading...<img src="${resource(dir: 'images', file: 'spinner.gif')}" />');
@@ -426,7 +448,7 @@
     BlastArray = zip([bCount,bDb]);
     
 	var blast_plot = $.jqplot('blast_chart', [BlastArray], {
-		title: 'BLAST homology', 
+		title: 'BLAST similarity', 
   		animate: !$.jqplot.use_excanvas,
   		seriesColors: [ "#3366CC"],
         seriesDefaults: {
@@ -463,12 +485,16 @@
 </head>
 <body>
 <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:genomeFile.genome.meta.id]}"><i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i></g:link> > Genome: v${genomeFile.file_version}
-<h1><b><i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i></b> ${genomeFile.file_version}</h1>    
-${genome_stats.description}
-<table width=100%>
-	  
+<br><br>
+
+
+<div id="tab_1">
+<input type="button" class="tabbuttons" id="show_metrics" value="Metrics" style="color:#BFBFBF"/>
+<input type="button" class="tabbuttons" id="show_search" onclick="switchTab('2','1')" value="Search"/>
+<div style="border:2px solid; border-color:#BFBFBF">
+<table width=100%>  
       <tr><td width=30%>
-			 <h1>Genome:</h1>
+			 <h1>Genome metrics:</h1>
 			 <g:if test = "${genome_stats.span > 0}">
 			<table>
 			 <tr><td><b>Version:</b></td><td>${genome_stats.version}</td></tr>
@@ -491,14 +517,14 @@ ${genome_stats.description}
       					<g:if test="${f.file_type == 'Genome'}">
       						<!--${f.file_type} ${f.file_name} ${f.cov}-->
       						<g:if test="${f.cov == 'y'}">
-      							<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','cov_gc')" value="Coverage vs GC"/>
-								<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','len_cov')" value="Length vs Coverage"/>
+      							<input type="button" class="smallbuttons" id="process_graph" onclick="changed('makeArrays','cov_gc')" value="Coverage vs GC"/>
+								<input type="button" class="smallbuttons" id="process_graph" onclick="changed('makeArrays','len_cov')" value="Length vs Coverage"/>
       						</g:if>
       					</g:if>
    					</g:each>
 				</td>
 			</tr>
-			<tr><td><p>Zoom in by dragging around an area. Reset by double clicking or clicking <font STYLE="cursor: pointer" color="green" class="button-reset">here</font></td></tr>
+			<tr><td><p>Select a scaffold by clicking on a point on the chart.<p>Zoom in by dragging around an area. Reset by double clicking or clicking <font STYLE="cursor: pointer" color="green" class="button-reset">here</font></td></tr>
 		 	</table>   
 		 
 		  	<div id="chart" class="jqplot-target" style="height: 300px; width: 100%; position: center;">Loading...<img src="${resource(dir: 'images', file: 'spinner.gif')}"</div>
@@ -509,7 +535,7 @@ ${genome_stats.description}
 			 </g:else>
 		 </td></tr>
 		   <tr><td>
-			 <h1>Genes:</h1>
+			 <h1>Gene metrics:</h1>
 			 <g:if test = "${gene_stats.size() > 0}">
 				 <table>
 				 <tr><td><b>GFF3 version</b></td><td>${geneData.file_version}</td></tr>
@@ -536,6 +562,12 @@ ${genome_stats.description}
 		 </td></tr>
 		
  </table>
+ </div>
+ </div>
+ <div id="tab_2" display:none">
+ <input type="button" class="tabbuttons" id="show_metrics" onclick="switchTab('1','2')" value="Metrics" />
+ <input type="button" class="tabbuttons" id="show_search" value="Search" style="color:#BFBFBF"/>
+ <div style="border:2px solid; border-color:#BFBFBF">
  <g:if test = "${funAnnoData.size() > 1 || blastAnnoData.size() > 1 || interAnnoData.size() > 1}">
 	<div id="content">
 	
@@ -635,25 +667,8 @@ ${genome_stats.description}
 	 </g:form>
 
    </td></tr></table>
-   
-   <script>
-          $(document).ready(function(){
-            $('.toHide').hide();
-            $("#blk_1").show('slow');
-	    $("#sel_1").show('fast');
-	    showSelected($("#sel_1").val())
-	    
-	    $("#contig_attribute").show('slow');
-	    
-            $("#process").bind("click", function () {
-              $("#content").mask("Searching the database...");
-            });
-				
-            $("#cancel").bind("click", function () {
-		$("#content").unmask();
-            });               
-          });
-        </script>
+   </div>
+   </div>
         
 </body>
 </html>

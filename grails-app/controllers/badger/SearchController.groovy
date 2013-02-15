@@ -69,8 +69,8 @@ class SearchController {
     	render(template:"gffSelectResponse", model: [genes:genes,genome:genome.id[0]])
     }
     
-    @Cacheable('species_cache')
-    //@CacheEvict(value='species_cache', allEntries=true)
+    //@Cacheable('species_cache')
+    @CacheEvict(value='species_cache', allEntries=true)
     def species_search() {
     	def sql = new Sql(dataSource)
     	def Gid = params.Gid
@@ -135,7 +135,8 @@ class SearchController {
 		 println "n50 = "+n50_list
 		 println "n90 = "+n90_list
 		 
-		 def genomeDescSql = "select file_version,file_data.description from file_data,genome_data where file_data.genome_id = genome_data.id and genome_data.id = '"+Gid+"' and file_type = 'Genome';";
+		 def genomeDescSql = "select file_data.description from file_data,genome_data where file_data.id = '"+Gid+"' and file_type = 'Genome';";
+		 println genomeDescSql
 		 def genomeDesc = sql.rows(genomeDescSql)
 		 
 		 genome_stats.version = genomeData.file_version
@@ -814,5 +815,8 @@ class SearchController {
     		align = alignService.runAlign(params.seq,params.fileName,params.orthoClusterPepFileId)	
     	}
     	return [align:align]
+	}
+	
+	def ortho = {
 	}
 }

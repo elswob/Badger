@@ -26,9 +26,10 @@
 				<a href="#" onclick="document.htmlDownload.submit()"> HTML</a>
 		  </g:form>
 		</div>
-  	 	<div class="align_res">
+		<br>
+  	 	<!--div class="align_res"-->
 	  	 	${align.htmlOut}<br>
-	  	</div>
+	  	<!--/div-->
   	 </g:if>
 </body>
 </html>

@@ -58,7 +58,12 @@
   	  </tr></table>
   	 	<br>
   	 	<g:each var="res" in="${meta}">
-  	 		<a name="${res.genus} ${res.species}"><h2><b><i>${res.genus} ${res.species}</i></b></h2></a>		
+  	 		<div class="inline">
+  	 			<a name="${res.genus} ${res.species}"><h2><b><i>${res.genus} ${res.species}</i></b></h2></a>	
+  	 			<g:form name="selectSpecies" action="species_v" params="[Sid: res.id]">	
+      				<input class="smallbuttons" type="button" value="Select" id="process" onclick="submit()" >
+      			</g:form>
+  	 		</div>
   	 		<table>
   	 			<tr>
   	 				<td width=150>

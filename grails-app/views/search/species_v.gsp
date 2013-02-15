@@ -9,15 +9,18 @@
 
 </head>
 <body>
+	<g:form action="species_search" method="get">
 	<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > ${meta.genus[0]} ${meta.species[0]}
 	<table>
 		<tr>
 			<td width=150> 
 				<g:if test="${grailsApplication.mainContext.getResource('images/'+meta.image_file[0]).exists()}"> 
 	    			<img src="${resource(dir: 'images', file: meta.image_file[0])}" width="150" style="float:left;"/>
+	    			<p style="text-align:center;"><input class="smallbuttons" type="button" value="Select" id="process" onclick="submit()">
 	    		</g:if>
 	    		<g:else>
 	    			<img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" width="150" style="float:left;"/>
+	    			<p style="text-align:center;"><input class="smallbuttons" type="button" value="Select" id="process" onclick="submit()">
 	    		</g:else>
 			</td>
 			<td>
@@ -60,5 +63,6 @@
 	</table>
 	<div id="gffSelect">
 	</div>
+	</g:form>
 </body>
 </html>
