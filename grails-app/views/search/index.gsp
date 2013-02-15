@@ -14,9 +14,11 @@ Search
 		<g:if test = "${metaData}" >
 			<tr><td><g:link action="species">${metaData.size()} species</g:link></td><td>Search the data associated with each species.</tr>
 		</g:if>
+		<!--
 		<g:if test = "${grailsApplication.config.o.file}">
 			<tr><td><g:link controller="search" action="ortho">${badger.Ortho.count()} ortholog groups</g:link></td><td>Search data from the OrthoMCL analysis</td></tr>
-		</g:if> 	
+		</g:if>
+		--> 	
   	  	<tr><td><g:link controller="search" action="all_search">Search all by keyword</g:link></td><td>Search all data within the <i>${grailsApplication.config.species}</i> database by keywords.</td></tr>
 
   	</td></tr>
