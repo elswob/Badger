@@ -13,15 +13,12 @@
     <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.pointLabels.min.js')}" type="text/javascript"></script> 
     <script src="${resource(dir: 'js', file: 'jquery.scrollTo-1.4.2-min.js')}" type="text/javascript"></script>  
     <script src="${resource(dir: 'js', file: 'jquery-ui-1.8.min.js')}" type="text/javascript"></script> 
-    <link rel="stylesheet" href="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.css')}" type="text/css"></link>
-    
 	<script src="${resource(dir: 'js', file: 'DataTables-1.9.0/media/js/jquery.dataTables.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/TableTools.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/ZeroClipboard.js')}" type="text/javascript"></script>
-    <style type="text/css">
-            @import "${resource(dir: 'js', file: 'DataTables-1.9.0/media/css/demo_table.css')}";
-            @import "${resource(dir: 'js', file: 'TableTools-2.0.2/media/css/TableTools.css')}";
-    </style>
+    <link rel="stylesheet" href="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.css')}" type="text/css"></link>
+ 	<link rel="stylesheet" href="${resource(dir: 'js', file: 'DataTables-1.9.4/media/css/data_table.css')}" type="text/css"></link>
+    <link rel="stylesheet" href="${resource(dir: 'js', file: 'TableTools-2.0.2/media/css/TableTools.css')}" type="text/css"></link>
     
     <% 	
 	  def iprjsonData = ipr_results.encodeAsJSON();
