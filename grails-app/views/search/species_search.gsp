@@ -564,7 +564,7 @@
  </table>
  </div>
  </div>
- <div id="tab_2" display:none">
+ <div id="tab_2" style="display:none">
  <input type="button" class="tabbuttons" id="show_metrics" onclick="switchTab('1','2')" value="Metrics" />
  <input type="button" class="tabbuttons" id="show_search" value="Search" style="color:#BFBFBF"/>
  <div style="border:2px solid; border-color:#BFBFBF">
