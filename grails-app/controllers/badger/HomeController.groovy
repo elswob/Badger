@@ -167,7 +167,8 @@ class HomeController {
      else{
        	 def sql = new Sql(dataSource)
 		 //def files = FileData.findAll(sort:"meta.genus")
-		 def fileSql = "select file_data.*,genus,species,image_file from file_data,genome_data,meta_data where file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id order by genus,species,file_type;"
+		 def fileSql = "select file_data.*,genus,species,image_file,meta_data.id as sid from file_data,genome_data,meta_data where file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id order by genus,species,file_type;"
+		 println fileSql
 		 def files = sql.rows(fileSql)
 		 def gffAnno = [:]
 		 files.each{

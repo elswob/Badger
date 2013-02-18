@@ -818,5 +818,28 @@ class SearchController {
 	}
 	
 	def ortho = {
+		def sql = new Sql(dataSource)
+		//number
+		def nsql = "select max(group_id) from ortho;"
+		def n = sql.rows(nsql)
+		//overview
+		def osql = "select distinct on (file_name) file_name,genus,species,count(distinct(group_id)) as count_ortho, count(group_id) as count_all from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by file_name,genus,species; ";
+		def o = sql.rows(osql)
+		def gsql = "select file_name,count(mrna_id) from gene_info,file_data where gene_info.file_id = file_data.id group by file_name;";
+		println "g = "+gsql
+		def g = sql.rows(gsql)
+		def gmap = [:]
+		g.each{
+			gmap."${it.file_name}" = it.count
+		}
+		return [o:o, n:n, gmap:gmap]
+		//species info 
+		//select distinct on (file_name) file_name,genus,species from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id; 
+		//counts for each ortho
+		//select group_id,count(group_id) as num from ortho group by group_id
+		//counts for each file
+		//select file_data.file_name,group_id,count(group_id) from ortho,gene_info,file_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id group by group_id,file_data.file_name;
+		//get singletons for a particular file
+		//select mrna_id from gene_info left outer join ortho on (gene_info.id = ortho.gene_id), file_data where ortho.gene_id is NULL and gene_info.file_id = file_data.id and file_data.file_name = 'nAv.1.0.1.aug.blast2go.gff'; 
 	}
 }

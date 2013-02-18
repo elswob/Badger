@@ -16,10 +16,10 @@
     	<g:each var="res" in="${files}">
     		<g:if test = "${res.download == 'pub' && res.loaded == true}">
     		<% if (sp == ""){ 
-    			println "<tr><td colspan=2><h1>${res.genus} ${res.species}</h1></td></tr><tr><td width=120><br><a href = \"/search/species_search?Gid=${res.id}\"><img src=\"${resource(dir: 'images', file: res.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>"
+    			println "<tr><td colspan=2><h1>${res.genus} ${res.species}</h1></td></tr><tr><td width=120><br><a href = \"/search/species_v?Sid=${res.sid}\"><img src=\"${resource(dir: 'images', file: res.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>"
     		}else if (sp != res.species){ 
     			println "</table></td><tr><td colspan=2><h1>${res.genus} ${res.species}</h1></td></tr>"
-    			println "<tr><td width=120><a href = \"/search/species_search?Gid=${res.id}\"><img src=\"${resource(dir: 'images', file: res.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>" 
+    			println "<tr><td width=120><a href = \"/search/species_v?Sid=${res.sid}\"><img src=\"${resource(dir: 'images', file: res.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>" 
     		}%>
 				<tr>
 					<td>${res.file_type}</td><td>Version ${res.file_version}</td>

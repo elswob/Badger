@@ -35,24 +35,26 @@ def addOrtho(orthoFile){
       	def group = splitter[1].trim()
 		//println "group = "+group
         def gList = group.split(" ")
-        //println "gList = "+gList 
-     	gList.each {
-     		def trans_name = it.split("\\|",0)
-     		trans_name = trans_name[1].trim()
-     		orthoMap.group_id = count as int
-          	orthoMap.trans_name = trans_name
-          	
-     		GeneInfo geneFind = GeneInfo.findByMrna_id(trans_name)
-     		def o = new Ortho(orthoMap)
-          	o.gene = geneFind
-          	
-          	if ((count % 1000) ==  0){
-          		//println "orthoMap = "+orthoMap
-          		println count
-            	o.save(flush:true)
-            }else{
-            	o.save()
-            }
+        //ignore singletons
+        if (gList.size() > 1){
+			gList.each {
+				def trans_name = it.split("\\|",0)
+				trans_name = trans_name[1].trim()
+				orthoMap.group_id = count as int
+				orthoMap.trans_name = trans_name
+				
+				GeneInfo geneFind = GeneInfo.findByMrna_id(trans_name)
+				def o = new Ortho(orthoMap)
+				o.gene = geneFind
+				o.size = gList.size()
+				if ((count % 1000) ==  0){
+					//println "orthoMap = "+orthoMap
+					println count
+					o.save(flush:true)
+				}else{
+					o.save()
+				}
+			}
         }  
     }
 }
