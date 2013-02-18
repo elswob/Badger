@@ -98,7 +98,7 @@
          });
          
          var anOpen = [];
-		var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.0/examples/examples_support/')}";
+		var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.4/examples/examples_support/')}";
 		 
 		var oTable = $('#pub_table').dataTable( {
 			"bProcessing": true,

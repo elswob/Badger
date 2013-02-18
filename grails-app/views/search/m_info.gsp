@@ -13,7 +13,7 @@
     <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.pointLabels.min.js')}" type="text/javascript"></script> 
     <script src="${resource(dir: 'js', file: 'jquery.scrollTo-1.4.2-min.js')}" type="text/javascript"></script>  
     <script src="${resource(dir: 'js', file: 'jquery-ui-1.8.min.js')}" type="text/javascript"></script> 
-	<script src="${resource(dir: 'js', file: 'DataTables-1.9.0/media/js/jquery.dataTables.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'js', file: 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/TableTools.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/ZeroClipboard.js')}" type="text/javascript"></script>
     <link rel="stylesheet" href="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.css')}" type="text/css"></link>
@@ -156,7 +156,7 @@
     var drawCount=0;
     $(document).ready(function() {   	
     	var anOpen = [];
-    	var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.0/examples/examples_support/')}";
+    	var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.4/examples/examples_support/')}";
     	
     	if (blast_data.length > 0){
     		var blastTable = $('#blast_table_data').dataTable( {
@@ -321,7 +321,7 @@
      
      //exons
      var anOpen = [];
-  	 var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.0/examples/examples_support/')}";
+  	 var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.4/examples/examples_support/')}";
      
 	 var oTable = $('#exon_table').dataTable( {
 			"bProcessing": true,
