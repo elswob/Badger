@@ -832,7 +832,16 @@ class SearchController {
 		g.each{
 			gmap."${it.file_name}" = it.count
 		}
-		return [o:o, n:n, gmap:gmap]
+		//number of seqs per cluster per gene set
+		def psql = "select size,count(size),file_name from ortho,gene_info,file_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and size > 23 group by size,file_name order by size desc;";
+		println psql
+		def p = sql.rows(psql)
+		//cluster size vs number of seqs
+		def csql = "select size,count(size) from ortho,gene_info,file_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id group by size order by size desc;";
+		println csql
+		def c = sql.rows(csql)
+		
+		return [o:o, n:n, gmap:gmap, c:c, p:p]
 		//species info 
 		//select distinct on (file_name) file_name,genus,species from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id; 
 		//counts for each ortho
