@@ -220,7 +220,19 @@ class AdminController {
 	@Secured(['ROLE_ADMIN'])
 	def editedGenome = {
 		def sql = new Sql(dataSource)
-		def upsql = "update genome_data set date_string = '"+params.genome_date.trim()+"', gversion = '"+params.genome_version.trim()+"', gbrowse = '"+params.gbrowse.trim()+"' where id = '"+params.id+"';";
+		def date
+		if (params.genome_date){
+			def matcher
+			//check the date format is ok
+			if ((matcher = params.genome_date.trim() =~ /^\d{2}\/\d{2}\/\d{4}/)){
+				date = Date.parse("dd/MM/yyyy",params.genome_date.trim())
+			}else{
+				date = null
+			}
+		}else{	 
+			date = new Date()
+		}
+		def upsql = "update genome_data set date_string = '"+date+"', gversion = '"+params.genome_version.trim()+"', gbrowse = '"+params.gbrowse.trim()+"' where id = '"+params.id+"';";
 		println "upsql = "+upsql
 		def update = sql.execute(upsql)
 	}

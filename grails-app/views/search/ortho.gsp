@@ -41,14 +41,18 @@
   		var CArray = []
 		NumData = ${jsonCountData};
 		var size = [], num = [];
-		var tempArray = [];
+		var sizeMap = {};
+		var tempArray1 = [];
+		var tempArray2 = [];
 		for (var j = 0; j < NumData.length; j++) {   		 	 
 			var hit = NumData[j];
 			size.push(hit.size);
 			num.push(hit.count/hit.size)
+			sizeMap[hit.size]=hit.count
 		}
-		tempArray = zip([size,num]);
-		CArray.push(tempArray)
+		tempArray1 = zip([size,num]);
+		tempArray2 = num
+		CArray.push(tempArray1)
 		
 		var plot1 = $.jqplot ('chart1', CArray	,{
 		animate: true,
@@ -102,6 +106,7 @@
 	    
 	    //cluster size vs num per gene set
   		var SArray = []
+  		var test = {}
   		var size = []
   		var legendLabels = []
 		SpeciesData = ${jsonSpeciesData};
@@ -112,49 +117,40 @@
 			count = SpeciesData[i]; 
 			legendLabels.push(count.file_name)	
 		}
+		//get ticks
+		var ticks = [];
+		for (var j = 0; j < SpeciesCountData.length; j++) { 
+			var hit = SpeciesCountData[j];
+			if($.inArray(hit.size, ticks) < 0) {
+				ticks.push(hit.size)
+			}
+		}
 		var old_size = 0
 		var check = {}
-		for (var j = 0; j < SpeciesCountData.length; j++) {  
-			var count
-			var num = [];
-			var tempArray = [];			
-			var hit = SpeciesCountData[j];
-			alert('looking at '+hit.size+": "+hit.file_name) 
-			for (var i = 0; i < SpeciesData.length; i++) {    
-				count = SpeciesData[i]; 
-				//alert('species = '+count.file_name)
-				//alert('old_size = '+old_size+' hit.size = '+hit.size)
+		for (var i = 0; i < SpeciesData.length; i++) {   
+			var count = SpeciesData[i]; 
+			var num
+			var tempArray = [];					
+			for (var j = 0; j < SpeciesCountData.length; j++) { 
+				var hit = SpeciesCountData[j];
 				if (old_size > 0 && old_size != hit.size){
-					alert('checking check!')
+					//alert('checking check!')
 					for (var key in check) {
-    					//alert([key, check[key]].join("\n\n"));
     					if (check[key] == false){
-    						num = []
-    						num.push(0)
-    						num.push(old_size)
+    						num = 0
+    						//num.push(old_size)
     						tempArray.push(num)
     					}else{
     						tempArray.push(check[key])
     					}
 					}
 					check = {}
-					alert('tArray = '+tempArray)
-					SArray.push(tempArray)
-					tempArray = [];	
 				}
 				if (hit.file_name == count.file_name){	
-					//alert(count.file_name+' present = '+hit.size)	
-					num = [] 	 					
-					num.push(hit.count);
-					num.push(hit.size)
-					tempArray.push(num)
-					//check = true;		
-					check[count.file_name] = num
-					//alert(SArray)
+					num = hit.count	
+					check[count.file_name] = num/sizeMap[hit.size]*100
 				}else{
 					if (check[count.file_name]){
-						//alert('l = '+check[count.file_name].length)
-						//alert('p = '+check[count.file_name])
 						if (check[count.file_name].length < 1){
 							check[count.file_name] = false
 						}
@@ -162,81 +158,195 @@
 						check[count.file_name] = false
 					}
 				}
-				//alert('check = '+check[count.file_name])
-
 				old_size = hit.size
 			}
-		}
-		//catch the last one
-		for (var key in check) {
-			//alert([key, check[key]].join("\n\n"));
-			if (check[key] == false){
-				num = []
-				num.push(0)
-				num.push(old_size)
-				tempArray.push(num)
-			}else{
-				tempArray.push(check[key])
+			//catch the last one
+			for (var key in check) {
+				if (check[key] == false){
+					num = 0
+					tempArray.push(num)
+				}else{
+					tempArray.push(check[key])
+				}
 			}
+			check = {}
+			test[count.file_name] = tempArray
+			//SArray = []
+			SArray.push(tempArray)
 		}
-		alert('tArray = '+tempArray)
-		SArray.push(tempArray)
-		alert('final = '+SArray)
 		
-		//var plot2 = $.jqplot('chart2', [[[2,1], [6,2], [7,3], [10,4]], [[7,1], [5,2],[3,3],[2,4]], [[14,1], [9,2], [9,3], [8,4]]], {
 		var plot2 = $.jqplot ('chart2', SArray	,{
 			animate: true,
-			title: 'Cluster size vs frequency per gene set', 
+			title: 'Cluster size vs gene set percentage', 
 			stackSeries: true,
-    		captureRightClick: true,
-    		seriesDefaults:{
-      			renderer:$.jqplot.BarRenderer,
-      			pointLabels: {show: true}
-    		},
-			axes: {
+            captureRightClick: true,
+            seriesDefaults:{
+                renderer:$.jqplot.BarRenderer,
+                rendererOptions: {
+                    highlightMouseDown: true   
+                },
+                //pointLabels:{show:true, stackedValue: true}
+            },
+            axes: {
       			xaxis: {
           			renderer: $.jqplot.CategoryAxisRenderer,
-          			//ticks: size
+          			ticks: ticks,
+          			label: 'Cluster size',
       			},
       			yaxis: {
-        			// Don't pad out the bottom of the data range.  By default,
-        			// axes scaled as if data extended 10% above and below the
-        			// actual range to prevent data points right on grid boundaries.
-        			// Don't want to do that here.
-        			renderer: $.jqplot.LogAxisRenderer,
-        			padMin: 0
-      			}
+					// Don't pad out the bottom of the data range.  By default,
+					// axes scaled as if data extended 10% above and below the
+					// actual range to prevent data points right on grid boundaries.
+					// Don't want to do that here.
+					padMin: 0,
+					max:100,
+					labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+					label: 'Percentage',
+					//renderer: $.jqplot.LogAxisRenderer,
+				  }
     		},
-    		legend: {
+            legend: {
       			renderer: $.jqplot.EnhancedLegendRenderer,
 				rendererOptions: {
 					seriesToggle: 'slow',
 					seriesToggleReplot: { resetAxes: true }
 				},
 				show: true,
-				placement: 'ne',
+				location: 'e',
+                placement: 'outside',
 				labels: legendLabels
-    		}      
-  		});
-  		
-  		$('#chart2').bind('jqplotDataClick',
-            function (ev, seriesIndex, pointIndex, data) {
-            	//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-            	//window.open("/search/gene_link?annoType=Exon_num&val=" + data[0]);
-	    	}
-	    ); 
-	    
+    		}        
+        });
+		
+		var plot3 = $.jqplot ('chart3', [SArray,tempArray2]	,{
+			//animate: true,
+			title: 'Cluster size vs gene set percentage', 
+			stackSeries: true,
+            axesDefaults: {
+			 	tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
+			 	tickOptions: {
+					fontSize: '10pt'
+			 	}
+		 	},
+            series:[
+            	{
+            		renderer:$.jqplot.BarRenderer,
+            		label:legendLabels,
+            		yaxis:'y2axis',
+            		
+            		captureRightClick: true,
+            	}, 
+            	{          		
+            		label:'frequency',	
+            	}
+            ],
+            //seriesDefaults:{
+            //    renderer:$.jqplot.BarRenderer,
+            //    rendererOptions: {
+            //        highlightMouseDown: true   
+            //    },
+                //pointLabels:{show:true, stackedValue: true}
+            //},
+            legend: {
+						renderer: $.jqplot.EnhancedLegendRenderer,
+						rendererOptions: {
+							seriesToggle: 'slow',
+							seriesToggleReplot: { resetAxes: true }
+						},
+						show: true,
+						location: 'e',
+						placement: 'outside',
+					},        
+            axes: {
+      			xaxis: {
+          			renderer: $.jqplot.CategoryAxisRenderer,
+          			ticks: ticks,
+          			label: 'Cluster size',
+      			},
+      			yaxis: {
+					renderer: $.jqplot.LogAxisRenderer,
+					labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+					label: 'Frequency',
+					//autoscale:true
+					//renderer: $.jqplot.LogAxisRenderer,
+				},
+				y2axis: {
+        			padMin: 0,
+					max:100,
+					min:0,
+					labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+					label: 'Percentage',
+					pad:0,
+					//autoscale:true
+      			}	
+    		},
+    		highlighter: {
+				 tooltipAxes: 'yx',
+				 yvalues: 1,
+				 show: true,
+				 sizeAdjust: 7.5,
+				 formatString: 'Frequency: %.2f<br>Cluster size: %.2f'
+		
+			 },
+			 cursor:{
+				 show: true,
+				 zoom:true,
+				 showTooltip: false,
+				 //tooltipLocation:'nw'
+			 }
+        });
+        
+        
+        //var line1 = [['Cup Holder Pinion Bob', 7], ['Generic Fog Lamp', 9], ['HDTV Receiver', 15], ['8 Track Control Module', 12], [' Sludge Pump Fourier Modulator', 3], ['Transcender/Spice Rack', 6], ['Hair Spray Danger Indicator', 18]];
+  		//var line2 = [['Nickle', 28], ['Aluminum', 13], ['Xenon', 54], ['Silver', 47], ['Sulfer', 16], ['Silicon', 14], ['Vanadium', 23]];
+ 		var line1 = [11,12,13,14,15]
+ 		var line2 = [3,6,19,22,23]
+ 		var line3 = [21,2,30,3,19]
+		var test = []
+		test.push(line1)
+		test.push(line2)
+		//test.push(line3)
+		  var plot4 = $.jqplot('chart4', [test,line3], {
+		  	//stackSeries: true,
+			axesDefaults: {
+				tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
+				tickOptions: {
+				  angle: 30
+				}
+			},
+			 //seriesDefaults:{
+             //   renderer:$.jqplot.BarRenderer,
+             //   rendererOptions: {
+             //       highlightMouseDown: true   
+             //   },
+                //pointLabels:{show:true, stackedValue: true}
+            //},
+			axes: {
+			  xaxis: {
+				renderer: $.jqplot.CategoryAxisRenderer
+			  },
+			  x2axis: {
+				renderer: $.jqplot.CategoryAxisRenderer
+			  },
+			  yaxis: {
+				autoscale:true
+			  },
+			  y2axis: {
+				autoscale:true
+			  }
+			}
+		  });
 	}); 
 	</script>
 </head>
 <body>
-${p}
 <g:link action="">Search</g:link> > Search orthologs
      <h1>Search the clusters:</h1>
      
-   		<div id="chart1" class="jqplot-target" style="height: 300px; width: 100%; position: center;"></div>
-		<div id="chart2" class="jqplot-target" style="height: 300px; width: 100%; position: center;"></div>
-		<div id="chart4" class="jqplot-target" style="height: 300px; width: 100%; position: center;"></div>
+   		<div id="chart1" class="jqplot-target" style="height: 200px; width: 100%; position: center;"></div>
+		<div id="chart2" class="jqplot-target" style="height: 200px; width: 80%; position: center;"></div>
+		<div id="chart3" class="jqplot-target" style="height: 200px; width: 80%; position: center;"></div>
+		<div id="chart4" class="jqplot-target" style="height: 200px; width: 80%; position: center;"></div>
  	 <table>
  	 <tr><td><b>Species</b></td><td><b>File</b></td><td><b># clusters</b></td><td><b>Total seqs</b></td><td><b># seqs in clusters</b></td><td><b># singletons</b></td></tr>
  	  	<g:each var="res" in="${o}">
