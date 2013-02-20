@@ -218,8 +218,8 @@
     		}        
         });
 		
-		var plot3 = $.jqplot ('chart3', [SArray,tempArray2]	,{
-			//animate: true,
+		var plot3 = $.jqplot ('chart3', [SArray[0],SArray[1],SArray[2],SArray[3],tempArray2]	,{
+			animate: true,
 			title: 'Cluster size vs gene set percentage', 
 			stackSeries: true,
             axesDefaults: {
@@ -228,16 +228,24 @@
 					fontSize: '10pt'
 			 	}
 		 	},
+		 	seriesDefaults:{
+            	renderer:$.jqplot.BarRenderer,
+            	label:legendLabels,
+            	yaxis:'y2axis',            		
+            	captureRightClick: true,
+            },
             series:[
-            	{
-            		renderer:$.jqplot.BarRenderer,
-            		label:legendLabels,
-            		yaxis:'y2axis',
-            		
-            		captureRightClick: true,
-            	}, 
+            	//{
+            	//	renderer:$.jqplot.BarRenderer,
+            	//	label:legendLabels,
+            	//	yaxis:'y2axis',            		
+            	//	captureRightClick: true,
+            	{label:legendLabels[0],},{label:legendLabels[1],},{label:legendLabels[2],},{label:legendLabels[3],}, 
             	{          		
-            		label:'frequency',	
+            		disableStack: true, 
+            		yaxis:'yaxis',
+            		label:'Cluster frequency',	
+            		renderer:$.jqplot.LineRenderer,
             	}
             ],
             //seriesDefaults:{
@@ -256,12 +264,13 @@
 						show: true,
 						location: 'e',
 						placement: 'outside',
+						marginLeft: '80px',
 					},        
             axes: {
       			xaxis: {
           			renderer: $.jqplot.CategoryAxisRenderer,
           			ticks: ticks,
-          			label: 'Cluster size',
+          			label: 'Size',
       			},
       			yaxis: {
 					renderer: $.jqplot.LogAxisRenderer,
@@ -296,57 +305,15 @@
 			 }
         });
         
-        
-        //var line1 = [['Cup Holder Pinion Bob', 7], ['Generic Fog Lamp', 9], ['HDTV Receiver', 15], ['8 Track Control Module', 12], [' Sludge Pump Fourier Modulator', 3], ['Transcender/Spice Rack', 6], ['Hair Spray Danger Indicator', 18]];
-  		//var line2 = [['Nickle', 28], ['Aluminum', 13], ['Xenon', 54], ['Silver', 47], ['Sulfer', 16], ['Silicon', 14], ['Vanadium', 23]];
- 		var line1 = [11,12,13,14,15]
- 		var line2 = [3,6,19,22,23]
- 		var line3 = [21,2,30,3,19]
-		var test = []
-		test.push(line1)
-		test.push(line2)
-		//test.push(line3)
-		  var plot4 = $.jqplot('chart4', [test,line3], {
-		  	//stackSeries: true,
-			axesDefaults: {
-				tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
-				tickOptions: {
-				  angle: 30
-				}
-			},
-			 //seriesDefaults:{
-             //   renderer:$.jqplot.BarRenderer,
-             //   rendererOptions: {
-             //       highlightMouseDown: true   
-             //   },
-                //pointLabels:{show:true, stackedValue: true}
-            //},
-			axes: {
-			  xaxis: {
-				renderer: $.jqplot.CategoryAxisRenderer
-			  },
-			  x2axis: {
-				renderer: $.jqplot.CategoryAxisRenderer
-			  },
-			  yaxis: {
-				autoscale:true
-			  },
-			  y2axis: {
-				autoscale:true
-			  }
-			}
-		  });
 	}); 
 	</script>
 </head>
 <body>
 <g:link action="">Search</g:link> > Search orthologs
      <h1>Search the clusters:</h1>
-     
-   		<div id="chart1" class="jqplot-target" style="height: 200px; width: 100%; position: center;"></div>
-		<div id="chart2" class="jqplot-target" style="height: 200px; width: 80%; position: center;"></div>
-		<div id="chart3" class="jqplot-target" style="height: 200px; width: 80%; position: center;"></div>
-		<div id="chart4" class="jqplot-target" style="height: 200px; width: 80%; position: center;"></div>
+     	<div id="chart3" class="jqplot-target" style="height: 300px; width: 80%; position: center;"></div>
+   		<div id="chart1" class="jqplot-target" style="height: 300px; width: 100%; position: center;"></div>
+		<div id="chart2" class="jqplot-target" style="height: 300px; width: 80%; position: center;"></div>
  	 <table>
  	 <tr><td><b>Species</b></td><td><b>File</b></td><td><b># clusters</b></td><td><b>Total seqs</b></td><td><b># seqs in clusters</b></td><td><b># singletons</b></td></tr>
  	  	<g:each var="res" in="${o}">
