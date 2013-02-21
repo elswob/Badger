@@ -18,7 +18,12 @@
   	<script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.logAxisRenderer.js')}" type="text/javascript"></script>
   	<script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.barRenderer.min.js')}" type="text/javascript"></script> 
   	<script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.enhancedLegendRenderer.min.js')}" type="text/javascript"></script> 	
-   
+  	<script src="${resource(dir: 'js', file: 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" type="text/javascript"></script>
+  	<script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/TableTools.js')}" type="text/javascript"></script>
+  	<script src="${resource(dir: 'js', file: 'TableTools-2.0.2/media/js/ZeroClipboard.js')}" type="text/javascript"></script>
+  	<link rel="stylesheet" href="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.css')}" type="text/css"></link>
+  	<link rel="stylesheet" href="${resource(dir: 'js', file: 'DataTables-1.9.4/media/css/data_table.css')}" type="text/css"></link>
+  	<link rel="stylesheet" href="${resource(dir: 'js', file: 'TableTools-2.0.2/media/css/TableTools.css')}" type="text/css"></link>
     <link rel="stylesheet" href="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.css')}" type="text/css"></link>
 	<script>
 	<% 
@@ -27,12 +32,17 @@
    		def jsonSpeciesCountData = false
    		if (p) {jsonSpeciesCountData = p.encodeAsJSON(); }
    		def jsonSpeciesData = false
-   		if (p) {jsonSpeciesData = o.encodeAsJSON(); }
+   		if (o) {jsonSpeciesData = o.encodeAsJSON(); }
   	%>	
   	function zip(arrays) {
             return arrays[0].map(function(_,i){
             return arrays.map(function(array){return array[i]})
          });
+    }
+    
+    function switchTab(tabShow,tabHide) {
+		$("#tab_"+tabHide).hide();
+		$("#tab_"+tabShow).show();
     }
         
     $(document).ready(function(){
@@ -42,67 +52,12 @@
 		NumData = ${jsonCountData};
 		var size = [], num = [];
 		var sizeMap = {};
-		var tempArray1 = [];
-		var tempArray2 = [];
 		for (var j = 0; j < NumData.length; j++) {   		 	 
 			var hit = NumData[j];
-			size.push(hit.size);
 			num.push(hit.count/hit.size)
 			sizeMap[hit.size]=hit.count
 		}
-		tempArray1 = zip([size,num]);
-		tempArray2 = num
-		CArray.push(tempArray1)
-		
-		var plot1 = $.jqplot ('chart1', CArray	,{
-		animate: true,
-		title: 'Cluster size vs frequency', 
-		//seriesDefaults:{
-		//	markerOptions: { size: 5, style:"circle"},
-		//},
-		axesDefaults: {
-			 tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
-			 tickOptions: {
-				fontSize: '10pt'
-			 }
-		 },
-		 axes: {
-			xaxis: {
-				renderer: $.jqplot.LogAxisRenderer,
-				label: 'Cluster size',
-				pad: 0
-			},
-			yaxis: {
-				renderer: $.jqplot.LogAxisRenderer,
-				labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-				label: 'Frequency',
-				//pad: 0
-			}
-		 },
-		 //seriesColors: pointcolours,
-		 highlighter: {
-			 tooltipAxes: 'yx',
-			 yvalues: 1,
-			 show: true,
-			 sizeAdjust: 7.5,
-			 formatString: 'Frequency: %.2f<br>Cluster size: %.2f'
-	
-		 },
-		 cursor:{
-			 show: true,
-			 zoom:true,
-			 showTooltip: false,
-			 //tooltipLocation:'nw'
-		 }
-
-		});
-  		
-  		$('#chart1').bind('jqplotDataClick',
-            function (ev, seriesIndex, pointIndex, data) {
-            	//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-            	//window.open("/search/gene_link?annoType=Exon_num&val=" + data[0]);
-	    	}
-	    );  
+		var numArray = num
 	    
 	    //cluster size vs num per gene set
   		var SArray = []
@@ -112,12 +67,19 @@
 		SpeciesData = ${jsonSpeciesData};
 		SpeciesCountData = ${jsonSpeciesCountData};
 		
-		//get legend
+		//get legend and series info
+		var seriesInfo = []
 		for (var i = 0; i < SpeciesData.length; i++) {    
 			count = SpeciesData[i]; 
-			legendLabels.push(count.file_name)	
+			legendLabels.push(count.genus+" "+count.species+"<br>("+count.file_name+")")	
+			//{label:legendLabels[0]},{label:legendLabels[1]},{label:legendLabels[2]},{label:legendLabels[3]},
+			//seriesInfo += "{label:'"+legendLabels[i]+"'};,"
+			seriesInfo.push("{label:'"+count.genus+" "+count.species+"<br>("+count.file_name+")'}")
 		}
-		//get ticks
+		seriesInfo.push("{disableStack:true,yaxis:\'yaxis\',label:\'Cluster frequency\',renderer:$.jqplot.LineRenderer,}")
+		//seriesInfo += '{disableStack: true,yaxis:\'yaxis\',label:\'Cluster frequency\',renderer:$.jqplot.LineRenderer,}'
+		//alert('s = '+seriesInfo)
+		//get ticks for x axis
 		var ticks = [];
 		for (var j = 0; j < SpeciesCountData.length; j++) { 
 			var hit = SpeciesCountData[j];
@@ -134,11 +96,9 @@
 			for (var j = 0; j < SpeciesCountData.length; j++) { 
 				var hit = SpeciesCountData[j];
 				if (old_size > 0 && old_size != hit.size){
-					//alert('checking check!')
 					for (var key in check) {
     					if (check[key] == false){
     						num = 0
-    						//num.push(old_size)
     						tempArray.push(num)
     					}else{
     						tempArray.push(check[key])
@@ -170,57 +130,14 @@
 				}
 			}
 			check = {}
-			test[count.file_name] = tempArray
-			//SArray = []
 			SArray.push(tempArray)
+			
 		}
-		
-		var plot2 = $.jqplot ('chart2', SArray	,{
+		SArray.push(numArray)
+		//var plot3 = $.jqplot ('chart3', [SArray[0],SArray[1],SArray[2],SArray[3],numArray]	,{
+		var plot3 = $.jqplot ('chart1', SArray	,{
 			animate: true,
-			title: 'Cluster size vs gene set percentage', 
-			stackSeries: true,
-            captureRightClick: true,
-            seriesDefaults:{
-                renderer:$.jqplot.BarRenderer,
-                rendererOptions: {
-                    highlightMouseDown: true   
-                },
-                //pointLabels:{show:true, stackedValue: true}
-            },
-            axes: {
-      			xaxis: {
-          			renderer: $.jqplot.CategoryAxisRenderer,
-          			ticks: ticks,
-          			label: 'Cluster size',
-      			},
-      			yaxis: {
-					// Don't pad out the bottom of the data range.  By default,
-					// axes scaled as if data extended 10% above and below the
-					// actual range to prevent data points right on grid boundaries.
-					// Don't want to do that here.
-					padMin: 0,
-					max:100,
-					labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-					label: 'Percentage',
-					//renderer: $.jqplot.LogAxisRenderer,
-				  }
-    		},
-            legend: {
-      			renderer: $.jqplot.EnhancedLegendRenderer,
-				rendererOptions: {
-					seriesToggle: 'slow',
-					seriesToggleReplot: { resetAxes: true }
-				},
-				show: true,
-				location: 'e',
-                placement: 'outside',
-				labels: legendLabels
-    		}        
-        });
-		
-		var plot3 = $.jqplot ('chart3', [SArray[0],SArray[1],SArray[2],SArray[3],tempArray2]	,{
-			animate: true,
-			title: 'Cluster size vs gene set percentage', 
+			//title: 'Cluster size vs gene set percentage', 
 			stackSeries: true,
             axesDefaults: {
 			 	tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
@@ -233,39 +150,35 @@
             	label:legendLabels,
             	yaxis:'y2axis',            		
             	captureRightClick: true,
+            	pointLabels:{show:true, stackedValue: true}
             },
+            
             series:[
-            	//{
-            	//	renderer:$.jqplot.BarRenderer,
-            	//	label:legendLabels,
-            	//	yaxis:'y2axis',            		
-            	//	captureRightClick: true,
-            	{label:legendLabels[0],},{label:legendLabels[1],},{label:legendLabels[2],},{label:legendLabels[3],}, 
+            	//{label:legendLabels[0]},{label:legendLabels[1]},{label:legendLabels[2]},{label:legendLabels[3]}, 
+            	//seriesInfo
+            	{label:'Acanthocheilonema viteae<br>(nAv.1.0.1.aug.blast2go.gff)'},{label:'Dirofilaria immitis<br>(nDi.2.2.2.aug.blast2go.gff)'},{label:'Litomosoides sigmodontis<br>(nLs.2.1.2.aug.gff)'},{label:'Onchocerca ochengi<br>(nOo.2.0.1.aug.gff)'},
+            	//{label:'nAv.1.0.1.aug.blast2go.gff'},{label:'nDi.2.2.2.aug.blast2go.gff'},{label:'nLs.2.1.2.aug.gff'},{label:'nOo.2.0.1.aug.gff'},
             	{          		
             		disableStack: true, 
             		yaxis:'yaxis',
             		label:'Cluster frequency',	
             		renderer:$.jqplot.LineRenderer,
+            		pointLabels:{show:false}
             	}
             ],
-            //seriesDefaults:{
-            //    renderer:$.jqplot.BarRenderer,
-            //    rendererOptions: {
-            //        highlightMouseDown: true   
-            //    },
-                //pointLabels:{show:true, stackedValue: true}
-            //},
+            
+            //series: seriesInfo,
             legend: {
-						renderer: $.jqplot.EnhancedLegendRenderer,
-						rendererOptions: {
-							seriesToggle: 'slow',
-							seriesToggleReplot: { resetAxes: true }
-						},
-						show: true,
-						location: 'e',
-						placement: 'outside',
-						marginLeft: '80px',
-					},        
+				renderer: $.jqplot.EnhancedLegendRenderer,
+				rendererOptions: {
+					seriesToggle: 'slow',
+					seriesToggleReplot: { resetAxes: true }
+				},
+				show: true,
+				location: 'e',
+				placement: 'outside',
+				marginLeft: '80px',
+			},        
             axes: {
       			xaxis: {
           			renderer: $.jqplot.CategoryAxisRenderer,
@@ -289,8 +202,10 @@
 					//autoscale:true
       			}	
     		},
+    		/*
     		highlighter: {
 				 tooltipAxes: 'yx',
+				 useXTickMarks: true, 
 				 yvalues: 1,
 				 show: true,
 				 sizeAdjust: 7.5,
@@ -303,23 +218,84 @@
 				 showTooltip: false,
 				 //tooltipLocation:'nw'
 			 }
+			 */
         });
+        $('#chart1').bind('jqplotDataClick',
+            function (ev, seriesIndex, pointIndex, data) {
+            	//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+ticks[pointIndex]);
+            	window.open("/search/ortho_search?type=bar&val=" + ticks[pointIndex],"_self");
+	    	}
+	    );  
+	    
+
+		var oTable = $('#stats').dataTable( {
+			"bProcessing": true,
+			"sPaginationType": "full_numbers",
+			"iDisplayLength": 10,
+			"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+			"oLanguage": {
+				"sSearch": "Filter records:"
+			},
+			"aaSorting": [[ 0, "asc" ]],
+			"sDom": 'T<"clear">lfrtip',
+			"oTableTools": {
+				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+			}
+		} );
         
 	}); 
 	</script>
 </head>
 <body>
 <g:link action="">Search</g:link> > Search orthologs
-     <h1>Search the clusters:</h1>
-     	<div id="chart3" class="jqplot-target" style="height: 300px; width: 80%; position: center;"></div>
-   		<div id="chart1" class="jqplot-target" style="height: 300px; width: 100%; position: center;"></div>
-		<div id="chart2" class="jqplot-target" style="height: 300px; width: 80%; position: center;"></div>
- 	 <table>
- 	 <tr><td><b>Species</b></td><td><b>File</b></td><td><b># clusters</b></td><td><b>Total seqs</b></td><td><b># seqs in clusters</b></td><td><b># singletons</b></td></tr>
- 	  	<g:each var="res" in="${o}">
- 	 		<tr><td><i>${res.genus} ${res.species}</i></td><td>${res.file_name}</td><td>${sprintf("%,d\n",res.count_ortho)}</td><td>${sprintf("%,d\n",gmap."${res.file_name}")}</td><td>${sprintf("%,d\n",res.count_all)}</td><td>${sprintf("%,d\n",gmap."${res.file_name}" - res.count_all)}</td></tr>
- 	 	</g:each>
- 	 <tr><td>Total</td><td>n/a</td><td>${sprintf("%,d\n",n.max)}</td><td>${sprintf("%,d\n",badger.Ortho.count())}</td></tr>
- 	 </table>
+	<br><br>
+    <div id="tab_1">
+		<input type="button" class="tabbuttons" id="show_metrics" value="Metrics" style="color:#BFBFBF"/>
+		<input type="button" class="tabbuttons" id="show_search" onclick="switchTab('2','1')" value="Search"/>
+		<div style="border:2px solid; border-color:#BFBFBF">
+    
+     		<h3>Click on a bar to view the clusters of that size:</h3><br>
+     		<div id="chart1" class="jqplot-target" style="height: 300px; width: 80%; position: center;"></div>
+     		
+ 	 		<table cellpadding="0" cellspacing="0" border="0" class="display" id="stats">
+ 	 			<thead>
+			 		<tr><td><b>Species</b></td><td><b>File</b></td><td><b># clusters</b></td><td><b>Total seqs</b></td><td><b># seqs in clusters</b></td><td><b># singletons</b></td></tr>
+				</thead>
+				<tbody>	
+					<g:each var="res" in="${o}">
+						<tr><td><i>${res.genus[0]}. ${res.species}</i></td><td>${res.file_name}</td><td>${sprintf("%,d\n",res.count_ortho)}</td><td>${sprintf("%,d\n",gmap."${res.file_name}")}</td><td>${sprintf("%,d\n",res.count_all)}</td><td>${sprintf("%,d\n",gmap."${res.file_name}" - res.count_all)}</td></tr>
+					</g:each>
+			 	</tbody>
+			</table>		
+			<br><br><br>
+ 	 	</div>
+ </div>
+ <div id="tab_2" style="display:none">
+ <input type="button" class="tabbuttons" id="show_metrics" onclick="switchTab('1','2')" value="Metrics" />
+ <input type="button" class="tabbuttons" id="show_search" value="Search" style="color:#BFBFBF"/>
+ <div style="border:2px solid; border-color:#BFBFBF">	
+	<h3>Search the annotation descriptions associated with transcripts marked as orthologs:</h3> 
+	<g:form action="ortho_search" params="${[type:'search']}">
+ 	<table><tr>
+		<td>
+		
+		<h1>Choose what to search:</h1>
+		<label><input type="checkbox" checked="yes" name="pubVal" value="BLAST" /> BLAST similarity</label><br>
+		<label><input type="checkbox" checked="yes" name="pubVal" value="Functional annotations" /> Functional annotations</label><br>
+		<label><input type="checkbox" checked="yes" name="pubVal" value="InterPro domains" /> InterPro domains</label><br>
+		
+	   </td>
+	   <td>
+		<h1>Enter a search term:</h1><br>
+		<div id='selectedResult'></div>
+		<g:textField name="searchId"  size="60"/>
+		<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
+		 </td>
+   </tr>
+   </table>
+   </g:form>
+		
+</div>
+</div>
 </body>
 </html>

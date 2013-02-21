@@ -16,8 +16,13 @@ class SearchController {
     //@Secured(['ROLE_USER'])
     
     def index = {
+    	def sql = new Sql(dataSource)  
+    	def psql = "select count(distinct(pubmed_id)) from publication;";
+    	def p = sql.rows(psql) 
+    	def osql = "select max(group_id) from ortho;";
+    	def o = sql.rows(osql)
     	def metaData = MetaData.findAll()
-    	return [metaData: metaData]
+    	return [metaData: metaData,pub:p,orth:o]
     }
     def species = {
     	def metaData = MetaData.findAll(sort:"genus")
@@ -631,6 +636,7 @@ class SearchController {
 			
 			//get orthomcl info
 			def orthoId = Ortho.findByTrans_name(mrna_id)
+			/*
 			def orthoGet
 			if (orthoId != null){
 				//println "orthoId = "+orthoId.group_id
@@ -639,7 +645,8 @@ class SearchController {
 			}else{
 				println "no orthoog!"
 			}
-			return [orthologs:orthoGet, Gid:Gid, GFFid:GFFid, mrna_id: mrna_id, info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, metaData: metaData]
+			*/
+			return [orthologs:orthoId, Gid:Gid, GFFid:GFFid, mrna_id: mrna_id, info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, metaData: metaData]
     	sql.close()
     	}
     }
@@ -807,6 +814,7 @@ class SearchController {
     }
     def runCluster = {
     	def align 
+    	println "group = "+params.group_id
     	if (params.seq == 'nuc'){
     		println "clustering with "+params.seq+" "+params.fileName+" and "+params.orthoClusterNucFileId
     		align = alignService.runAlign(params.seq,params.fileName,params.orthoClusterNucFileId)
@@ -814,10 +822,12 @@ class SearchController {
     		println "clustering with "+params.seq+" "+params.fileName+" and "+params.orthoClusterPepFileId
     		align = alignService.runAlign(params.seq,params.fileName,params.orthoClusterPepFileId)	
     	}
-    	return [align:align]
+    	return [align:align, group_id:params.group_id]
 	}
 	
-	def ortho = {
+	//@Cacheable('ortho_cache')
+    @CacheEvict(value='ortho_cache', allEntries=true)
+	def ortho() {
 		def sql = new Sql(dataSource)
 		//number
 		def nsql = "select max(group_id) from ortho;"
@@ -850,5 +860,65 @@ class SearchController {
 		//select file_data.file_name,group_id,count(group_id) from ortho,gene_info,file_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id group by group_id,file_data.file_name;
 		//get singletons for a particular file
 		//select mrna_id from gene_info left outer join ortho on (gene_info.id = ortho.gene_id), file_data where ortho.gene_id is NULL and gene_info.file_id = file_data.id and file_data.file_name = 'nAv.1.0.1.aug.blast2go.gff'; 
+	}
+	def ortho_search = {
+		def sql = new Sql(dataSource)
+		def filesql = "select distinct(file_name),genus,species from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id order by file_name;";
+		print filesql
+		def fileData = sql.rows(filesql)
+		def fileCheck = [:]
+		//set all to 0 initially
+		fileData.each{
+			fileCheck."${it.file_name}" = 0
+		}
+		def newFile = [];
+		def bsql;
+		println "type = "+params.type
+		if (params.type == 'bar'){
+			bsql = "select group_id,file_name,count(file_name),genus,species from ortho,gene_info,file_data,genome_data,meta_data where ortho.size = "+params.val+" and ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,genus,species,file_name order by group_id;";
+			println bsql;
+		}
+		if (params.type == 'search'){
+			bsql = "select group_id,file_name,count(distinct(mrna_id)),size,genus,species from ortho,gene_info,gene_blast,file_data,genome_data,meta_data where gene_blast.descr ~ '"+params.searchId+"' and ortho.gene_id = gene_info.id and gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,genus,species,file_name,size order by group_id;";
+			println bsql;
+		}
+		def b = sql.rows(bsql);
+		def old_id = 0
+		def old_size = 0;
+		def newMap = [:]
+		b.each{ line ->
+			if (line.group_id != old_id && old_id != 0){					
+				newMap.group_id = old_id
+				newMap.size = old_size
+				fileCheck.each{
+					newMap."${it.key}" = it.value
+				}
+				newFile.add(newMap)
+				//set all to 0
+				fileData.each{
+					fileCheck."${it.file_name}" = 0
+				}
+				newMap = [:]
+			}
+			fileCheck."${line.file_name}" = line.count
+			old_id = line.group_id
+			old_size = line.size
+		}
+		//catch the last one
+		newMap.group_id = old_id
+		newMap.size = old_size
+		fileCheck.each{
+			newMap."${it.key}" = it.value
+		}
+		newFile.add(newMap)
+		return [bar:newFile, files:fileData]
+	}
+	
+	@Cacheable('cluster_cache')
+    //@CacheEvict(value='cluster_cache', allEntries=true)
+	def cluster() {
+		def data = Ortho.findAllByGroup_id(params.group_id)
+		//println "cluster data = "+data
+		return [data:data]
 	}
 }

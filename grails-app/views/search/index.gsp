@@ -10,15 +10,13 @@
 Search
   <h1>Search the <b>${grailsApplication.config.projectID}</b> data:</h1>
   <table>
-  	    <tr><td><g:link controller="home" action="publications">${sprintf("%,d\n",badger.Publication.count())} publications</g:link></td><td>Publications matching the names of the species in the database.</td></tr>
+  	    <tr><td><g:link controller="home" action="publications">${sprintf("%,d\n",pub.count)} publications</g:link></td><td>Publications matching the names of the species in the database.</td></tr>
 		<g:if test = "${metaData}" >
 			<tr><td><g:link action="species">${metaData.size()} species</g:link></td><td>Search the data associated with each species.</tr>
 		</g:if>
-		<!--
 		<g:if test = "${grailsApplication.config.o.file}">
-			<tr><td><g:link controller="search" action="ortho">${badger.Ortho.count()} ortholog groups</g:link></td><td>Search data from the OrthoMCL analysis</td></tr>
+			<tr><td><g:link controller="search" action="ortho">${sprintf("%,d\n",orth.max)} ortholog groups</g:link></td><td>Search data from the OrthoMCL analysis</td></tr>
 		</g:if>
-		--> 	
   	  	<tr><td><g:link controller="search" action="all_search">Search all by keyword</g:link></td><td>Search all data within the <i>${grailsApplication.config.species}</i> database by keywords.</td></tr>
 
   	</td></tr>

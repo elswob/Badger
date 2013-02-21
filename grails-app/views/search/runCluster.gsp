@@ -8,6 +8,7 @@
     
 </head>
 <body>
+<g:link action="">Search</g:link> > <g:link action="ortho">Search orthologs</g:link> > <g:link action="cluster" params="${[group_id:params.group_id]}">Cluster</g:link> > Alignment
   	 <g:if test = "${align}">
   	 	<h1>Alignment results</h1>
   	 	<div class="inline">

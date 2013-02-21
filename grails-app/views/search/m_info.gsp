@@ -828,75 +828,26 @@
     
     <g:if test = "${grailsApplication.config.o.file}">
 		<div id="ortho_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
-		<h1>Orthologs</h1> 
+		<h1>Orthologs (click cluster ID for more details)</h1> 
 		<g:if test="${orthologs}">
-			<g:if test="${orthologs.size() == 1}">
-				<h3>This transcript is a singleton and therefore has no orthologs</h3>
-			</g:if>
-			<g:else>
-				
-				<div class="inline">
-					Download (sequences in table only): 
-					<g:form name="orthonucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-						<g:hiddenField name="orthoNucFileId" value=""/>
-						<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
-						<g:hiddenField name="seq" value="OrthoNucleotides"/>
-						<a href="javascript:void(0);" onclick="get_table_data('orthoNuc');document.orthonucfileDownload.submit()">Nucleotides</a>
-					</g:form> 
-					|
-					<g:form name="orthopepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-						<g:hiddenField name="orthoPepFileId" value=""/>
-						<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
-						<g:hiddenField name="seq" value="OrthoPeptides"/>
-						<a href="javascript:void(0);" onclick="get_table_data('orthoPep');document.orthopepfileDownload.submit()">Peptides</a>
-					</g:form>
-				</div>	
-				<g:if test = "${grailsApplication.config.musclePath}">
-					<div class="inline">
-						<g:if test="${orthologs.size() < 21}">
-							Cluster (sequences in table only): 
-							<g:form name="orthoNucCluster" url="[action:'runCluster']">
-								<g:hiddenField name="orthoClusterNucFileId" value=""/>
-								<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
-								<g:hiddenField name="seq" value="nuc"/>
-								<a href="javascript:void(0);" onclick="get_table_data('orthoClusterNuc');document.orthoNucCluster.submit()">Nucleotides</a>
-							</g:form> 
-							|
-							<g:form name="orthoPepCluster" url="[action:'runCluster']">
-								<g:hiddenField name="orthoClusterPepFileId" value=""/>
-								<g:hiddenField name="fileName" value="${info_results.mrna_id}.orthologs"/>
-								<g:hiddenField name="seq" value="pep"/>
-								<a href="javascript:void(0);" onclick="get_table_data('orthoClusterPep');document.orthoPepCluster.submit()">Peptides</a>
-							</g:form>					
-						</g:if>
-						<g:else>
-							Clustering only available for groups of 20 or less
-						</g:else>
-					</div>
-				</g:if>
-				<table id="orthomcl_table" class="display" >
-					  <thead>
-						<tr>
-							<th><b>Species</b></th>
-							<th><b>Transcript ID</b></th>
-							<th><b>Length</b></th>
-							<th><b># Exons</b></th>
-					   </tr>
-					  </thead>
-					  <tbody>
-						<g:each var="res" in="${orthologs}">
-							<g:if test="${res.trans_name != params.mid}">
-								<tr>						
-									<td>${res.gene.file.genome.meta.genus} ${res.gene.file.genome.meta.species}</td>
-									<td><a href="m_info?mid=${res.trans_name}">${res.trans_name}</a></td>
-									<td>${sprintf("%,d\n",res.gene.nuc.length())}</td>
-									<td>${sprintf("%,d\n",res.gene.exon.size())}</td>
-								</tr>  
-							</g:if>
-						</g:each>
-					  </tbody>
-				</table>		
-			</g:else>	
+			<table id="orthomcl_table" class="display" >
+				  <thead>
+					<tr>
+						<th><b>Inflation value</b></th>
+						<th><b>Cluster</b></th>
+						<th><b>Size</b></th>
+				   </tr>
+				  </thead>
+				  <tbody>
+					<g:each var="res" in="${orthologs}">
+						<tr>						
+							<td>1.5</td>
+							<td><a href="cluster?group_id=${res.group_id}">${res.group_id}</a></td>
+							<td>${res.size}</td>
+						</tr>  
+					</g:each>
+				  </tbody>
+			</table>		
 		</g:if>
 		<g:else>
 			<h2>This transcript has no orthology information which is due to one of three reasons.</h2>

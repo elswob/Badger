@@ -282,7 +282,7 @@
              <tbody>
                <g:each var="res" in="${geneRes}">
                 <tr>  
-                  <td><g:link action="species_v" params="${[Sid: res.gid]}">${res.genus} ${res.species}</g:link></td>
+                  <td><g:link action="species_v" params="${[Sid: res.gid]}"><i>${res.genus[0]}. ${res.species}</i></g:link></td>
                   <td><g:link action="m_info" params="${[mid: res.mrna_id]}"> ${res.mrna_id}</g:link></td>
                   <!-- <a href="m_info?Gid=${params.Gid}&mid=${res.mrna_id}">${res.mrna_id}</a>-->
                   <td>${res.anno_db}</td>
