@@ -61,24 +61,29 @@
 	    
 	    //cluster size vs num per gene set
   		var SArray = []
-  		var test = {}
   		var size = []
-  		var legendLabels = []
 		SpeciesData = ${jsonSpeciesData};
 		SpeciesCountData = ${jsonSpeciesCountData};
 		
-		//get legend and series info
-		var seriesInfo = []
-		for (var i = 0; i < SpeciesData.length; i++) {    
+		//get legend and series info for gene sets
+		var seriesInfo = []		
+		for (var i = 0; i < SpeciesData.length; i++) {  
+			series=new Object();
 			count = SpeciesData[i]; 
-			legendLabels.push(count.genus+" "+count.species+"<br>("+count.file_name+")")	
-			//{label:legendLabels[0]},{label:legendLabels[1]},{label:legendLabels[2]},{label:legendLabels[3]},
-			//seriesInfo += "{label:'"+legendLabels[i]+"'};,"
-			seriesInfo.push("{label:'"+count.genus+" "+count.species+"<br>("+count.file_name+")'}")
+			series.label = count.genus+" "+count.species+"<br>("+count.file_name+")";
+			seriesInfo.push(series)
 		}
-		seriesInfo.push("{disableStack:true,yaxis:\'yaxis\',label:\'Cluster frequency\',renderer:$.jqplot.LineRenderer,}")
-		//seriesInfo += '{disableStack: true,yaxis:\'yaxis\',label:\'Cluster frequency\',renderer:$.jqplot.LineRenderer,}'
+		//set final series info for line
+		series=new Object();		
+		series.disableStack = true;
+		series.yaxis = 'yaxis';
+		series.label = 'Cluster frequency';
+		series.renderer = $.jqplot.LineRenderer;
+		series.color = 'blue';
+		series.pointLabels = false;
+		seriesInfo.push(series)
 		//alert('s = '+seriesInfo)
+		
 		//get ticks for x axis
 		var ticks = [];
 		for (var j = 0; j < SpeciesCountData.length; j++) { 
@@ -136,7 +141,7 @@
 		SArray.push(numArray)
 		//var plot3 = $.jqplot ('chart3', [SArray[0],SArray[1],SArray[2],SArray[3],numArray]	,{
 		var plot3 = $.jqplot ('chart1', SArray	,{
-			animate: true,
+			//animate: true,
 			//title: 'Cluster size vs gene set percentage', 
 			stackSeries: true,
             axesDefaults: {
@@ -147,27 +152,13 @@
 		 	},
 		 	seriesDefaults:{
             	renderer:$.jqplot.BarRenderer,
-            	label:legendLabels,
             	yaxis:'y2axis',            		
             	captureRightClick: true,
             	pointLabels:{show:true, stackedValue: true}
             },
             
-            series:[
-            	//{label:legendLabels[0]},{label:legendLabels[1]},{label:legendLabels[2]},{label:legendLabels[3]}, 
-            	//seriesInfo
-            	{label:'Acanthocheilonema viteae<br>(nAv.1.0.1.aug.blast2go.gff)'},{label:'Dirofilaria immitis<br>(nDi.2.2.2.aug.blast2go.gff)'},{label:'Litomosoides sigmodontis<br>(nLs.2.1.2.aug.gff)'},{label:'Onchocerca ochengi<br>(nOo.2.0.1.aug.gff)'},
-            	//{label:'nAv.1.0.1.aug.blast2go.gff'},{label:'nDi.2.2.2.aug.blast2go.gff'},{label:'nLs.2.1.2.aug.gff'},{label:'nOo.2.0.1.aug.gff'},
-            	{          		
-            		disableStack: true, 
-            		yaxis:'yaxis',
-            		label:'Cluster frequency',	
-            		renderer:$.jqplot.LineRenderer,
-            		pointLabels:{show:false}
-            	}
-            ],
-            
-            //series: seriesInfo,
+            series:seriesInfo,
+
             legend: {
 				renderer: $.jqplot.EnhancedLegendRenderer,
 				rendererOptions: {

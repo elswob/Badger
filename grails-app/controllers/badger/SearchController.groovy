@@ -875,11 +875,12 @@ class SearchController {
 		def bsql;
 		println "type = "+params.type
 		if (params.type == 'bar'){
-			bsql = "select group_id,file_name,count(file_name),genus,species from ortho,gene_info,file_data,genome_data,meta_data where ortho.size = "+params.val+" and ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,genus,species,file_name order by group_id;";
+			bsql = "select group_id,file_name,count(file_name),genus,species,size from ortho,gene_info,file_data,genome_data,meta_data where ortho.size = "+params.val+" and ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,genus,species,file_name,size order by group_id;";
 			println bsql;
 		}
 		if (params.type == 'search'){
 			bsql = "select group_id,file_name,count(distinct(mrna_id)),size,genus,species from ortho,gene_info,gene_blast,file_data,genome_data,meta_data where gene_blast.descr ~ '"+params.searchId+"' and ortho.gene_id = gene_info.id and gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,genus,species,file_name,size order by group_id;";
+			//select group_id,file_name,count(distinct(mrna_id)),size,genus,species from ortho,gene_info,file_data,genome_data,meta_data where gene_info.id in (select gene_id from gene_blast where descr ~* 'fish') gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,genus,species,file_name,size order by group_id;
 			println bsql;
 		}
 		def b = sql.rows(bsql);
