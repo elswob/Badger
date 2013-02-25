@@ -214,7 +214,7 @@
         $('#chart1').bind('jqplotDataClick',
             function (ev, seriesIndex, pointIndex, data) {
             	//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+ticks[pointIndex]);
-            	window.open("/search/ortho_search?type=bar&val=" + ticks[pointIndex],"_self");
+            	window.open("search/ortho_search?type=bar&val=" + ticks[pointIndex],"_self");
 	    	}
 	    );  
 	    
