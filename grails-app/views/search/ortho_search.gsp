@@ -18,13 +18,13 @@
   <script type="text/javascript"> 
     
    <% 
-    def jsonData = bar.encodeAsJSON(); 
+    def jsonData = searchRes.encodeAsJSON(); 
     println jsonData;
     %>
 	
   $(document).ready(function() {
 
-    var oTable = $('#bar').dataTable( {
+    var oTable = $('#res').dataTable( {
         "bProcessing": true,
         "sPaginationType": "full_numbers",
     	"iDisplayLength": 10,
@@ -46,7 +46,7 @@
 <g:link action="">Search</g:link> > <g:link action="ortho">Search orthologs</g:link> > Search results
 <g:if test="${params.type == 'bar'}">
 	<h1>Clusters with size ${params.val}:</h1>
-	<table cellpadding="0" cellspacing="0" border="0" class="display" id="bar">
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="res">
 		<thead>
 			<tr>
 				<th>Cluster</th>
@@ -56,7 +56,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<g:each var="res" in="${bar}">
+			<g:each var="res" in="${searchRes}">
 				<tr><td><g:link action="cluster" params="${[group_id:res.group_id]}">${res.group_id}</g:link></td>
 					<g:each var="s" in="${files}">
 						<td>${res."${s.file_name}"}</td>
@@ -67,29 +67,34 @@
 	</table>
 </g:if>
 <g:if test="${params.type == 'search'}">
-	<h1>Clusters with a description matching '${params.searchId}'</h1>
-
-	  <table cellpadding="0" cellspacing="0" border="0" class="display" id="bar">
-		<thead>
-			<tr>
-				<th>Cluster</th>
-				<th>Size</th>
-				<g:each var="res" in="${files}">
-					<th>${res.genus[0]}. ${res.species}<br> (${res.file_name})</td>					
+	<g:if test="${searchRes}">
+		<h1>Clusters with a description matching '${params.searchId}'</h1>
+		
+		  <table cellpadding="0" cellspacing="0" border="0" class="display" id="res">
+			<thead>
+				<tr>
+					<th>Cluster</th>
+					<th>Size</th>
+					<th>Species</th>
+					<th>Transcript</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<g:each var="res" in="${searchRes}">
+					<tr><td><g:link action="cluster" params="${[group_id:res.group_id]}">${res.group_id}</g:link></td>
+					<td>${res.size}</td>
+					<td><i>${res.genus[0]}. ${res.species}</i></td>
+					<td><g:link action="m_info" params="${[mid: res.mrna_id]}"> ${res.mrna_id}</g:link></td>
+					<td><span style="color:red">${res.anno_db}: </span><% if (res.descr.size()>200){ res.descr = res.descr[0..200]+" ... "};%>${res.descr} <span style="color:blue">Score: ${res.score}</span></td>
+					</tr>
 				</g:each>
-			</tr>
-		</thead>
-		<tbody>
-			<g:each var="res" in="${bar}">
-				<tr><td><g:link action="cluster" params="${[group_id:res.group_id]}">${res.group_id}</g:link></td>
-				<td>${res.size}</td>
-					<g:each var="s" in="${files}">
-						<td>${res."${s.file_name}"}</td>
-					</g:each>
-				</td>
-			</g:each>
-		</tbody>
-	</table>
+			</tbody>
+		</table>
+	</g:if>
+	<g:else>
+		<h1>There were no results for your search of '${params.searchId}'</h1>
+	</g:else>
 </g:if>
 </body>
 </html>

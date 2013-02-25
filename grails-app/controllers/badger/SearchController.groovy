@@ -825,8 +825,8 @@ class SearchController {
     	return [align:align, group_id:params.group_id]
 	}
 	
-	//@Cacheable('ortho_cache')
-    @CacheEvict(value='ortho_cache', allEntries=true)
+	@Cacheable('ortho_cache')
+    //@CacheEvict(value='ortho_cache', allEntries=true)
 	def ortho() {
 		def sql = new Sql(dataSource)
 		//number
@@ -872,47 +872,90 @@ class SearchController {
 			fileCheck."${it.file_name}" = 0
 		}
 		def newFile = [];
-		def bsql;
 		println "type = "+params.type
 		if (params.type == 'bar'){
-			bsql = "select group_id,file_name,count(file_name),genus,species,size from ortho,gene_info,file_data,genome_data,meta_data where ortho.size = "+params.val+" and ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,genus,species,file_name,size order by group_id;";
+			def bsql = "select group_id,file_name,count(file_name),genus,species,size from ortho,gene_info,file_data,genome_data,meta_data where ortho.size = "+params.val+" and ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,genus,species,file_name,size order by group_id;";
 			println bsql;
+			def b = sql.rows(bsql);
+			def old_id = 0
+			def old_size = 0;
+			def newMap = [:]
+			b.each{ line ->
+				if (line.group_id != old_id && old_id != 0){					
+					newMap.group_id = old_id
+					newMap.size = old_size
+					fileCheck.each{
+						newMap."${it.key}" = it.value
+					}
+					newFile.add(newMap)
+					//set all to 0
+					fileData.each{
+						fileCheck."${it.file_name}" = 0
+					}
+					newMap = [:]
+				}
+				fileCheck."${line.file_name}" = line.count
+				old_id = line.group_id
+				old_size = line.size
+			}
+			//catch the last one
+			newMap.group_id = old_id
+			newMap.size = old_size
+			fileCheck.each{
+				newMap."${it.key}" = it.value
+			}
+			newFile.add(newMap)
+			println "results = "+newFile
+			return [searchRes:newFile, files:fileData, type:"bar"]
 		}
 		if (params.type == 'search'){
-			bsql = "select group_id,file_name,count(distinct(mrna_id)),size,genus,species from ortho,gene_info,gene_blast,file_data,genome_data,meta_data where gene_blast.descr ~ '"+params.searchId+"' and ortho.gene_id = gene_info.id and gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,genus,species,file_name,size order by group_id;";
+			//bsql = "select group_id,file_name,count(distinct(mrna_id)),size,genus,species from ortho,gene_info,gene_blast,file_data,genome_data,meta_data where gene_blast.descr ~ '"+params.searchId+"' and ortho.gene_id = gene_info.id and gene_blast.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,genus,species,file_name,size order by group_id;";
 			//select group_id,file_name,count(distinct(mrna_id)),size,genus,species from ortho,gene_info,file_data,genome_data,meta_data where gene_info.id in (select gene_id from gene_blast where descr ~* 'fish') gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,genus,species,file_name,size order by group_id;
-			println bsql;
-		}
-		def b = sql.rows(bsql);
-		def old_id = 0
-		def old_size = 0;
-		def newMap = [:]
-		b.each{ line ->
-			if (line.group_id != old_id && old_id != 0){					
-				newMap.group_id = old_id
-				newMap.size = old_size
-				fileCheck.each{
-					newMap."${it.key}" = it.value
+			//select distinct on (group_id,anno_db) group_id,size,anno_db,descr,score from ortho,gene_blast,gene_info where gene_blast.descr ~ '"+params.searchId+"' and gene_blast.gene_id = gene_info.id and ortho.gene_id = gene_info.id order by group_id,anno_db,score;
+			//bsql = "select distinct on (group_id,genus,species) group_id,size,anno_db,descr,score,mrna_id,genus,species from ortho,gene_blast,gene_info,file_data,genome_data,meta_data where gene_blast.descr ~ '"+params.searchId+"' and gene_blast.gene_id = gene_info.id and ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id order by group_id,genus,species,score;";
+			def blastsql = "select distinct on (group_id,anno_db) group_id,size,anno_db,descr,score,mrna_id,genus,species from ortho,gene_blast,gene_info,file_data,genome_data,meta_data where gene_blast.descr ~ '"+params.searchId+"' and gene_blast.gene_id = gene_info.id and ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id";
+			def annosql = "select distinct on (group_id,anno_db) group_id,size,anno_db,descr,score,mrna_id,genus,species from ortho,gene_anno,gene_info,file_data,genome_data,meta_data where gene_anno.descr ~ '"+params.searchId+"' and gene_anno.gene_id = gene_info.id and ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id";
+			def intersql = "select distinct on (group_id,anno_db) group_id,size,anno_db,descr,score,mrna_id,genus,species from ortho,gene_interpro,gene_info,file_data,genome_data,meta_data where gene_interpro.descr ~ '"+params.searchId+"' and gene_interpro.gene_id = gene_info.id and ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id";
+			
+			//construct the union search string			
+			//if just one db is passed then the list becomes a string
+			def bsql = ""
+			def oVal = params.oVal
+			if (oVal){
+				if (oVal instanceof String){
+					if (oVal == 'blast'){
+						bsql = blastsql
+					}else if (oVal == 'anno'){
+						bsql = annosql
+					}else if (oVal == 'inter'){
+						bsql = intersql
+					}
+				}else{
+					def annoSelect = oVal		
+					annoSelect.each {
+						if (it == 'blast'){
+							bsql += blastsql+" union ";
+						}
+						if (it == 'anno'){
+							bsql += annosql+" union ";
+						}
+						if (it == 'inter'){
+							bsql += intersql+" union ";
+						}
+					}
+					bsql = bsql[0..-8]			
 				}
-				newFile.add(newMap)
-				//set all to 0
-				fileData.each{
-					fileCheck."${it.file_name}" = 0
-				}
-				newMap = [:]
+				println bsql;
+				bsql += " order by group_id,anno_db,score;"
+				def b = sql.rows(bsql);
+				println bsql;
+				return [searchRes:b, files:fileData, type:"search"]
+				
+			}else{
+				return [searchRes:b, files:fileData, type:"search"]
 			}
-			fileCheck."${line.file_name}" = line.count
-			old_id = line.group_id
-			old_size = line.size
 		}
-		//catch the last one
-		newMap.group_id = old_id
-		newMap.size = old_size
-		fileCheck.each{
-			newMap."${it.key}" = it.value
-		}
-		newFile.add(newMap)
-		return [bar:newFile, files:fileData]
+		
 	}
 	
 	@Cacheable('cluster_cache')

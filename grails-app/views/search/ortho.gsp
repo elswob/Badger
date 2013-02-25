@@ -141,7 +141,7 @@
 		SArray.push(numArray)
 		//var plot3 = $.jqplot ('chart3', [SArray[0],SArray[1],SArray[2],SArray[3],numArray]	,{
 		var plot3 = $.jqplot ('chart1', SArray	,{
-			//animate: true,
+			animate: true,
 			//title: 'Cluster size vs gene set percentage', 
 			stackSeries: true,
             axesDefaults: {
@@ -271,9 +271,9 @@
 		<td>
 		
 		<h1>Choose what to search:</h1>
-		<label><input type="checkbox" checked="yes" name="pubVal" value="BLAST" /> BLAST similarity</label><br>
-		<label><input type="checkbox" checked="yes" name="pubVal" value="Functional annotations" /> Functional annotations</label><br>
-		<label><input type="checkbox" checked="yes" name="pubVal" value="InterPro domains" /> InterPro domains</label><br>
+		<label><input type="checkbox" checked="yes" name="oVal" value="blast" /> BLAST similarity</label><br>
+		<label><input type="checkbox" checked="yes" name="oVal" value="anno" /> Functional annotations</label><br>
+		<label><input type="checkbox" checked="yes" name="oVal" value="inter" /> InterPro domains</label><br>
 		
 	   </td>
 	   <td>
