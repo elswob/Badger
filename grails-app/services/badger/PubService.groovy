@@ -4,14 +4,13 @@ import groovy.sql.Sql
 
 class PubService {
 	def grailsApplication
-	def sql = Sql.newInstance("jdbc:postgresql://localhost:5432/b_anynana", 'ben', '', 'org.postgresql.Driver')
-	
+	javax.sql.DataSource dataSource
 	def matcher
 	def idlist = new File("/tmp/idlist.txt")
 	def pubdata = new File("/tmp/pubdata.txt")
-
 	
 	def runPub(){
+		println "Starting publication update...";
 		def getFiles = MetaData.findAll()
 		getFiles.each {  	
 			println new Date()
@@ -56,8 +55,8 @@ class PubService {
 	}
 	//add info
 	def addPub(pubFile,data_id){
+  		def sql = new Sql(dataSource)
 		MetaData meta = MetaData.findById(data_id)
-		def sql = new Sql(dataSource)
 		println "Deleting old data..."
 		def delsql = "delete from Publication where meta_id = '"+data_id+"';";
 		sql.execute(delsql)

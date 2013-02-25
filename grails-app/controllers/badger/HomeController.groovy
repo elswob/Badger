@@ -7,6 +7,7 @@ import grails.plugin.cache.CacheEvict
 
 class HomeController {
  def grailsApplication
+ def pubService
  javax.sql.DataSource dataSource
 
  //@Secured(['ROLE_ADMIN','ROLE_USER'])
@@ -22,6 +23,9 @@ class HomeController {
  	 	edits = PageEdits.findAllByPage("/home/index",[sort:"dateString", order: "desc", max: 1])
  	 	println "top edit for /home/index = "+edits
  	 }
+ 	 //publication check
+ 	 //println "Running publication updater...";
+ 	 //def pubCheck = pubService.runPub()
  	 return [newsData: newsData, edits:edits] 	 
  }
  
