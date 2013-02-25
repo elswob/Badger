@@ -22,7 +22,7 @@ Search
 			</sec:ifNotLoggedIn>
 			<sec:ifLoggedIn>
 				<tr><td><g:link controller="search" action="ortho">${sprintf("%,d\n",orth.max)} ortholog groups</g:link></td><td>Search data from the OrthoMCL analysis</td></tr>
-			<sec:ifLoggedIn>
+			</sec:ifLoggedIn>
 		</g:if>
   	  	<tr><td><g:link controller="search" action="all_search">Search all by keyword</g:link></td><td>Search all data within the <i>${grailsApplication.config.species}</i> database by keywords.</td></tr>
 
