@@ -176,7 +176,7 @@
           			ticks: ticks,
           			label: 'Size',
           			tickOptions: {
-          				angle: -45,
+          				angle: -90,
           			},
 			 	},
           			
