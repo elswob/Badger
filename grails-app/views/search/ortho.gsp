@@ -175,7 +175,11 @@
           			renderer: $.jqplot.CategoryAxisRenderer,
           			ticks: ticks,
           			label: 'Size',
-      			},
+          			tickOptions: {
+          				angle: -45,
+          			},
+			 	},
+          			
       			yaxis: {
 					renderer: $.jqplot.LogAxisRenderer,
 					labelRenderer: $.jqplot.CanvasAxisLabelRenderer,

@@ -825,8 +825,8 @@ class SearchController {
     	return [align:align, group_id:params.group_id]
 	}
 	
-	@Cacheable('ortho_cache')
-    //@CacheEvict(value='ortho_cache', allEntries=true)
+	//@Cacheable('ortho_cache')
+    @CacheEvict(value='ortho_cache', allEntries=true)
 	def ortho() {
 		def sql = new Sql(dataSource)
 		//number
