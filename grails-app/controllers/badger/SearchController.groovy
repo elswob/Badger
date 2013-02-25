@@ -905,7 +905,7 @@ class SearchController {
 				newMap."${it.key}" = it.value
 			}
 			newFile.add(newMap)
-			println "results = "+newFile
+			//println "results = "+newFile
 			return [searchRes:newFile, files:fileData, type:"bar"]
 		}
 		if (params.type == 'search'){

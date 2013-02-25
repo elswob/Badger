@@ -240,53 +240,58 @@
 <body>
 <g:link action="">Search</g:link> > Search orthologs
 	<br><br>
-    <div id="tab_1">
-		<input type="button" class="tabbuttons" id="show_metrics" value="Metrics" style="color:#BFBFBF"/>
-		<input type="button" class="tabbuttons" id="show_search" onclick="switchTab('2','1')" value="Search"/>
-		<div style="border:2px solid; border-color:#BFBFBF">
-    
-     		<h3>Click on a bar to view the clusters of that size:</h3><br>
-     		<div id="chart1" class="jqplot-target" style="height: 300px; width: 80%; position: center;"></div>
-     		
- 	 		<table cellpadding="0" cellspacing="0" border="0" class="display" id="stats">
- 	 			<thead>
-			 		<tr><td><b>Species</b></td><td><b>File</b></td><td><b># clusters</b></td><td><b>Total seqs</b></td><td><b># seqs in clusters</b></td><td><b># singletons</b></td></tr>
-				</thead>
-				<tbody>	
-					<g:each var="res" in="${o}">
-						<tr><td><i>${res.genus[0]}. ${res.species}</i></td><td>${res.file_name}</td><td>${sprintf("%,d\n",res.count_ortho)}</td><td>${sprintf("%,d\n",gmap."${res.file_name}")}</td><td>${sprintf("%,d\n",res.count_all)}</td><td>${sprintf("%,d\n",gmap."${res.file_name}" - res.count_all)}</td></tr>
-					</g:each>
-			 	</tbody>
-			</table>		
-			<br><br><br>
- 	 	</div>
- </div>
- <div id="tab_2" style="display:none">
- <input type="button" class="tabbuttons" id="show_metrics" onclick="switchTab('1','2')" value="Metrics" />
- <input type="button" class="tabbuttons" id="show_search" value="Search" style="color:#BFBFBF"/>
- <div style="border:2px solid; border-color:#BFBFBF">	
-	<h3>Search the annotation descriptions associated with transcripts marked as orthologs:</h3> 
-	<g:form action="ortho_search" params="${[type:'search']}">
- 	<table><tr>
-		<td>
+	<g:if test="${o}">
+		<div id="tab_1">
+			<input type="button" class="tabbuttons" id="show_metrics" value="Metrics" style="color:#BFBFBF"/>
+			<input type="button" class="tabbuttons" id="show_search" onclick="switchTab('2','1')" value="Search"/>
+			<div style="border:2px solid; border-color:#BFBFBF">
 		
-		<h1>Choose what to search:</h1>
-		<label><input type="checkbox" checked="yes" name="oVal" value="blast" /> BLAST similarity</label><br>
-		<label><input type="checkbox" checked="yes" name="oVal" value="anno" /> Functional annotations</label><br>
-		<label><input type="checkbox" checked="yes" name="oVal" value="inter" /> InterPro domains</label><br>
-		
-	   </td>
-	   <td>
-		<h1>Enter a search term:</h1><br>
-		<div id='selectedResult'></div>
-		<g:textField name="searchId"  size="60"/>
-		<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
-		 </td>
-   </tr>
-   </table>
-   </g:form>
-		
-</div>
-</div>
+				<h3>Click on a bar to view the clusters of that size:</h3><br>
+				<div id="chart1" class="jqplot-target" style="height: 300px; width: 80%; position: center;"></div>
+				
+				<table cellpadding="0" cellspacing="0" border="0" class="display" id="stats">
+					<thead>
+						<tr><td><b>Species</b></td><td><b>File</b></td><td><b># clusters</b></td><td><b>Total seqs</b></td><td><b># seqs in clusters</b></td><td><b># singletons</b></td></tr>
+					</thead>
+					<tbody>	
+						<g:each var="res" in="${o}">
+							<tr><td><i>${res.genus[0]}. ${res.species}</i></td><td>${res.file_name}</td><td>${sprintf("%,d\n",res.count_ortho)}</td><td>${sprintf("%,d\n",gmap."${res.file_name}")}</td><td>${sprintf("%,d\n",res.count_all)}</td><td>${sprintf("%,d\n",gmap."${res.file_name}" - res.count_all)}</td></tr>
+						</g:each>
+					</tbody>
+				</table>		
+				<br><br><br>
+			</div>
+	 </div>
+	 <div id="tab_2" style="display:none">
+	 <input type="button" class="tabbuttons" id="show_metrics" onclick="switchTab('1','2')" value="Metrics" />
+	 <input type="button" class="tabbuttons" id="show_search" value="Search" style="color:#BFBFBF"/>
+	 <div style="border:2px solid; border-color:#BFBFBF">	
+		<h3>Search the annotation descriptions associated with transcripts marked as orthologs:</h3> 
+		<g:form action="ortho_search" params="${[type:'search']}">
+		<table><tr>
+			<td>
+			
+			<h1>Choose what to search:</h1>
+			<label><input type="checkbox" checked="yes" name="oVal" value="blast" /> BLAST similarity</label><br>
+			<label><input type="checkbox" checked="yes" name="oVal" value="anno" /> Functional annotations</label><br>
+			<label><input type="checkbox" checked="yes" name="oVal" value="inter" /> InterPro domains</label><br>
+			
+		   </td>
+		   <td>
+			<h1>Enter a search term:</h1><br>
+			<div id='selectedResult'></div>
+			<g:textField name="searchId"  size="60"/>
+			<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
+			 </td>
+	   </tr>
+	   </table>
+	   </g:form>
+			
+	</div>
+	</div>
+</g:if>
+<g:else>
+	<h1>There is no ortholog information in the database</h1>
+</g:else>
 </body>
 </html>
