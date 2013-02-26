@@ -250,7 +250,7 @@
 			<input type="button" class="tabbuttons" id="show_search" onclick="switchTab('2','1')" value="Search"/>
 			<div style="border:2px solid; border-color:#BFBFBF">
 		
-				<h3>Click on a bar to view the clusters of that size:</h3><br>
+				<h3>Click on a bar or point to view the clusters of that size:</h3><br>
 				<div id="chart1" class="jqplot-target" style="height: 300px; width: 80%; position: center;"></div>
 				
 				<table cellpadding="0" cellspacing="0" border="0" class="display" id="stats">

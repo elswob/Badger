@@ -20,7 +20,8 @@
             var base, interval, xPos;
             this.pixelsPerBase = this.drawingWidth / length;
             var height = 9
-            interval = length/11;
+            interval = length/5;
+            /*
             //blast and functional
             this.drawScoreId(0,interval*5,12,'BLAST and functional annotation bitscores'); 
             this.drawScoreBar(0,interval,height,'red','','>=200');           
@@ -35,6 +36,12 @@
             this.drawScoreBar(interval*8,interval*9,height,'lime','','1e-20 - 1e-50');
             this.drawScoreBar(interval*9,interval*10,height,'blue','','1e-5 - 1e-20');
             this.drawScoreBar(interval*10,interval*11,height,'black','','1 - 1e-5');
+        	*/
+        	this.drawScoreBar(0,interval,height,'red','','<= 1e-100');           
+            this.drawScoreBar(interval,interval*2,height,'magenta','','1e-50 - 1e-100');
+            this.drawScoreBar(interval*2,interval*3,height,'lime','','1e-20 - 1e-50');
+            this.drawScoreBar(interval*3,interval*4,height,'blue','','1e-5 - 1e-20');
+            this.drawScoreBar(interval*4,interval*5,height,'black','','1 - 1e-5');
         };
     	BioDrawing.prototype.drawBlastScale = function(length) {
             var base, interval, xPos;
@@ -191,21 +198,28 @@
         BioDrawing.prototype.drawSpacer = function(pixels) {
             return this.yPos = this.yPos + pixels;
         };
-        BioDrawing.prototype.getBLASTColour = function(bitscore,annoType) {
+        BioDrawing.prototype.getBLASTColour = function(score,annoType) {
         	var hitColour;
+        	/*
         	if (annoType === 'ipr'){
-        		if (bitscore < 1){hitColour = 'black';}
-        		if (bitscore < 1e-5){hitColour = 'blue';}
-        		if (bitscore < 1e-20){hitColour = 'lime';}
-        		if (bitscore < 1e-50){hitColour = 'magenta';}
-        		if (bitscore < 1e-100){hitColour = 'red';}				
+        		if (score < 1){hitColour = 'black';}
+        		if (score < 1e-5){hitColour = 'blue';}
+        		if (score < 1e-20){hitColour = 'lime';}
+        		if (score < 1e-50){hitColour = 'magenta';}
+        		if (score < 1e-100){hitColour = 'red';}				
         	}else{
-				if (bitscore < 1000000){hitColour = 'red';}
-				if (bitscore < 200){hitColour = 'magenta';}
-				if (bitscore < 80){hitColour = 'lime';}
-				if (bitscore < 50){hitColour = 'blue';}
-				if (bitscore < 40){hitColour = 'black';}     
-			}     
+				if (score < 1000000){hitColour = 'red';}
+				if (score < 200){hitColour = 'magenta';}
+				if (score < 80){hitColour = 'lime';}
+				if (score < 50){hitColour = 'blue';}
+				if (score < 40){hitColour = 'black';}     
+			} 
+			*/  
+			if (score < 1){hitColour = 'black';}
+        	if (score < 1e-5){hitColour = 'blue';}
+        	if (score < 1e-20){hitColour = 'lime';}
+        	if (score < 1e-50){hitColour = 'magenta';}
+        	if (score < 1e-100){hitColour = 'red';}	
             return hitColour;
         };
         BioDrawing.prototype.end = function() {

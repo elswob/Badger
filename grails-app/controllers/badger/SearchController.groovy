@@ -227,7 +227,9 @@ class SearchController {
     	//return [n50: n50_list, n90: n90_list, meta: metaData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats]
     	 return [interAnnoData:interAnnoData, inter:inter, annoTypes:annoTypes, geneData: geneData, n50: n50_list, n90: n90_list, genomeFile:genomeData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats, genomeInfo: genomeInfo]
     }
-    def all_search = {
+    @Cacheable('all_cache')
+    //@CacheEvict(value='all_cache', allEntries=true)
+    def all_search() {
          if (grailsApplication.config.i.links.all == 'private' && !isLoggedIn()) {
      		redirect(controller: "home", action: "index")
      	}else{

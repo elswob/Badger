@@ -116,7 +116,7 @@
 				"oLanguage": {
 						 "sSearch": "Filter records:"
 				 },
-				"aaSorting": [[ 5, "desc" ]],
+				"aaSorting": [[ 5, "asc" ]],
 				"sDom": 'T<"clear">lfrtip',
 				"oTableTools": {
 				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
@@ -199,7 +199,7 @@
     	    "oLanguage": {
     	     	     "sSearch": "Filter records:"
     	     },
-    	    "aaSorting": [[ 4, "desc" ]], 
+    	    "aaSorting": [[ 4, "asc" ]], 
     	    "sDom": 'T<"clear">lfrtip',
             "oTableTools": {
         	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"

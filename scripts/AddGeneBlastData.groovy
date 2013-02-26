@@ -74,8 +74,10 @@ def addGeneBlast(anno,blastFile){
         		}                
         }
         //get HSP info
-        if ((matcher = line =~ /<Hsp_score>(.*?)<\/Hsp_score>/)){
-                annoMap.score = matcher[0][1]
+        if ((matcher = line =~ /<Hsp_evalue>(.*?)<\/Hsp_evalue>/)){
+        		def score = matcher[0][1] as Float
+        		score = sprintf("%.3g",score)
+                annoMap.score = score
         }
         if ((matcher = line =~ /<Hsp_query-from>(.*?)<\/Hsp_query-from>/)){
                 annoMap.anno_start = matcher[0][1]
@@ -107,16 +109,12 @@ def addGeneBlast(anno,blastFile){
         if ((matcher = line =~ /<Hsp_midline>(.*?)<\/Hsp_midline>/)){
                 annoMap.midline = matcher[0][1]
         }
-        //if ((matcher = line =~ /<Hsp_evalue>(.*?)<\/Hsp_evalue>/)){
-        //        annoMap.eval = matcher[0][1]
-        //}
         //find an end of an HSP and save data
         if ((matcher = line =~ /<\/Hsp>/)){
             //only add set number of elements from each blast
             if (count_check < 10){
-            	//check for max evalue
-            	def scoreInt = annoMap.score as Integer
-            	if (scoreInt >= 100){
+            	//check for min evalue
+            	//if (annoMap.score <= 1e-5){
             		count_all++
             		GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
             		GeneBlast gb = new GeneBlast(annoMap)
@@ -134,7 +132,7 @@ def addGeneBlast(anno,blastFile){
 					}else{
 						println mrna_id+" does not exist!"
 					}
-            	}
+            	//}
             }
         } 
     }

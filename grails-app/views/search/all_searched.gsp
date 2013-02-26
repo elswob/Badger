@@ -191,7 +191,7 @@
 		<tr><td>
 			Searched all records in ${search_time}.<br>
 			</td><td><center>
-			Download genes:
+			Download genes in table:
 			<!-- download genes form gets fileName value from get_table_data() -->
 			<div class="inline">
 				<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">

@@ -129,6 +129,9 @@ grails.cache.config = {
    cache {
       name 'ortho_cache'
    }
+   cache {
+      name 'all_cache'
+   }
 }
 // Added by the JQuery Validation UI plugin:
 jqueryValidationUi {
