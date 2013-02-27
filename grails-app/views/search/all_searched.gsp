@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="${resource(dir: 'js', file: 'TableTools-2.0.2/media/css/TableTools.css')}" type="text/css"></link>
 
     <script type="text/javascript">
-        /* new sorting functions */
+         /* scientific sorting functions for evalues */
         jQuery.fn.dataTableExt.oSort['scientific-asc']  = function(a,b) {
         	var x = parseFloat(a);
         	var y = parseFloat(b);
@@ -90,7 +90,18 @@
     	    "oLanguage": {
     	     	     "sSearch": "Filter records:"
     	     },
-    	    "aaSorting": [[ 8, "desc" ]],
+    	    "aaSorting": [[ 7, "asc" ]],
+    	    "aoColumns": [
+					 null,
+					 null,
+					 null,
+					 null,
+					 null,
+					 null,
+					 null,
+					 { "sType": "scientific" },
+					 null,
+				],
     	    "sDom": 'T<"clear">lfrtip',
             "oTableTools": {
         	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
