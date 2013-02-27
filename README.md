@@ -227,7 +227,7 @@ If during start up there is a warning about the version of the app being older t
 
 Change the default admin password! To do so go to this address `yourdomain.com/user`, find the admin user and change the password.
 
-Whilst in this section, you can register users for the site giving them access to any areas you have labelled as private
+Whilst in this section, you can register users for the site giving them access to any areas you have labelled as private. This can be done by going to ``yourdomain.com/register` and registering a new user.
 
 ## Load data to database
 
