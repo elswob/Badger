@@ -21,7 +21,20 @@
     def jsonData = searchRes.encodeAsJSON(); 
     println jsonData;
     %>
-	
+
+	/* scientific sorting functions for evalues */
+        jQuery.fn.dataTableExt.oSort['scientific-asc']  = function(a,b) {
+        	var x = parseFloat(a);
+        	var y = parseFloat(b);
+        	return ((x < y) ? -1 : ((x > y) ?  1 : 0));
+        };
+ 
+        jQuery.fn.dataTableExt.oSort['scientific-desc']  = function(a,b) {
+        	var x = parseFloat(a);
+        	var y = parseFloat(b);
+        	return ((x < y) ? 1 : ((x > y) ?  -1 : 0));
+        };
+        	
   $(document).ready(function() {
 
     var oTable = $('#res').dataTable( {
@@ -32,7 +45,15 @@
     	"oLanguage": {
     		"sSearch": "Filter records:"
     	},
-    	"aaSorting": [[ 0, "asc" ]],
+    	"aaSorting": [[ 5, "asc" ]],
+    	"aoColumns": [
+			 null,
+			 null,
+			 null,
+			 null,
+			 null,
+			 { "sType": "scientific" }
+		],
     	"sDom": 'T<"clear">lfrtip',
         "oTableTools": {
         	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
@@ -78,6 +99,7 @@
 					<th>Species</th>
 					<th>Transcript</th>
 					<th>Description</th>
+					<th>Score</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -86,7 +108,8 @@
 					<td>${res.size}</td>
 					<td><i>${res.genus[0]}. ${res.species}</i></td>
 					<td><g:link action="m_info" params="${[mid: res.mrna_id]}"> ${res.mrna_id}</g:link></td>
-					<td><span style="color:red">${res.anno_db}: </span><% if (res.descr.size()>200){ res.descr = res.descr[0..200]+" ... "};%>${res.descr} <span style="color:blue">Evalue: ${res.score}</span></td>
+					<td><span style="color:red">${res.anno_db}: </span><% if (res.descr.size()>200){ res.descr = res.descr[0..200]+" ... "};%>${res.descr}</td>
+					<td>${res.score}</td>
 					</tr>
 				</g:each>
 			</tbody>

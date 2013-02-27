@@ -84,7 +84,7 @@
     }
     </script>
     <script type="text/javascript">
-        /* new sorting functions */
+        /* scientific sorting functions for evalues */
         jQuery.fn.dataTableExt.oSort['scientific-asc']  = function(a,b) {
         	var x = parseFloat(a);
         	var y = parseFloat(b);
