@@ -37,7 +37,7 @@
         	
   $(document).ready(function() {
 
-    var oTable = $('#res').dataTable( {
+    var oTable = $('#search_res').dataTable( {
         "bProcessing": true,
         "sPaginationType": "full_numbers",
     	"iDisplayLength": 10,
@@ -59,6 +59,21 @@
         	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
         }
     } );
+    
+    var oTable = $('#bar_res').dataTable( {
+        "bProcessing": true,
+        "sPaginationType": "full_numbers",
+    	"iDisplayLength": 10,
+    	"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+    	"oLanguage": {
+    		"sSearch": "Filter records:"
+    	},
+    	"aaSorting": [[ 0, "asc" ]],
+    	"sDom": 'T<"clear">lfrtip',
+        "oTableTools": {
+        	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
+        }
+    } );
  });
     </script>
   </head>
@@ -67,12 +82,12 @@
 <g:link action="">Search</g:link> > <g:link action="ortho">Search orthologs</g:link> > Search results
 <g:if test="${params.type == 'bar'}">
 	<h1>Clusters with size ${params.val}:</h1>
-	<table cellpadding="0" cellspacing="0" border="0" class="display" id="res">
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="bar_res">
 		<thead>
 			<tr>
 				<th>Cluster</th>
 				<g:each var="res" in="${files}">
-					<th>${res.genus[0]}. ${res.species}<br> (${res.file_name})</td>					
+					<th><i>${res.genus[0]}. ${res.species}</i><br> (${res.file_name})</td>					
 				</g:each>
 			</tr>
 		</thead>
@@ -91,7 +106,7 @@
 	<g:if test="${searchRes}">
 		<h1>Clusters with a description matching '${params.searchId}'</h1>
 		
-		  <table cellpadding="0" cellspacing="0" border="0" class="display" id="res">
+		  <table cellpadding="0" cellspacing="0" border="0" class="display" id="search_res">
 			<thead>
 				<tr>
 					<th>Cluster</th>
