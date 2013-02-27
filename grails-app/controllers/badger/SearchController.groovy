@@ -595,7 +595,7 @@ class SearchController {
 			def fun_results
 			def ipr_results
 			//if (grailsApplication.config.g.blast.size()>0){			
-				def blastsql = "select gene_info.mrna_id,gene_info.gene_id,gene_blast.* from gene_blast,gene_info where gene_blast.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score desc;";
+				def blastsql = "select gene_info.mrna_id,gene_info.gene_id,gene_blast.* from gene_blast,gene_info where gene_blast.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score;";
 				println blastsql
 				blast_results = sql.rows(blastsql)
 			//}
@@ -605,7 +605,7 @@ class SearchController {
 				ipr_results = sql.rows(iprsql)
 			//}
 			//if (grailsApplication.config.g.fun.size()>0){
-				def funsql = "select gene_anno.* from gene_anno,gene_info where anno_id !~ '^IPR' and gene_anno.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score desc;";
+				def funsql = "select gene_anno.* from gene_anno,gene_info where anno_id !~ '^IPR' and gene_anno.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score;";
 				println funsql
 				fun_results = sql.rows(funsql)
 			//}
