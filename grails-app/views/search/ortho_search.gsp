@@ -86,7 +86,7 @@
 					<td>${res.size}</td>
 					<td><i>${res.genus[0]}. ${res.species}</i></td>
 					<td><g:link action="m_info" params="${[mid: res.mrna_id]}"> ${res.mrna_id}</g:link></td>
-					<td><span style="color:red">${res.anno_db}: </span><% if (res.descr.size()>200){ res.descr = res.descr[0..200]+" ... "};%>${res.descr} <span style="color:blue">Score: ${res.score}</span></td>
+					<td><span style="color:red">${res.anno_db}: </span><% if (res.descr.size()>200){ res.descr = res.descr[0..200]+" ... "};%>${res.descr} <span style="color:blue">Evalue: ${res.score}</span></td>
 					</tr>
 				</g:each>
 			</tbody>

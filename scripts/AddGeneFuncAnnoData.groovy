@@ -67,7 +67,8 @@ def addFunc(anno,annoFile){
 		annoMap.anno_id = splitter[2]
 		annoMap.anno_start = splitter[3]
 		annoMap.anno_stop = splitter[4]
-		def score = splitter[5] as double
+		def score = splitter[5] as Float
+        score = sprintf("%.3g",score)
 		annoMap.score = score
 		annoMap.descr = splitter[6]
 		//println annoMap

@@ -55,14 +55,14 @@
 <g:if test="${genome.files.anno.size() > 1}">
 	<h1>Add / edit / delete gene annotation data:</h1>
 	<table class="compact">
-	<g:each var="f" in="${genome.files}">
+	<g:each var="f" in="${genome.files.sort({it.file_name})}">
 		<g:if test="${f.file_type == 'Genes'}">
 			<g:if test="${f.anno.size() > 0}">
 				<tr><td>GFF file <b>${f.file_name}</b> has ${f.anno.size()} annotation files:</td></tr>
 				<tr><td>Click <g:link action="addAnno" params="${[gid:f.id]}">here</g:link> to add more</td></tr>
 				<tr><td>
 				<table class="compact">
-				<g:each var="a" in="${f.anno.sort({it.type})}">
+				<g:each var="a" in="${f.anno.sort({it.id})}">
 	   				<tr><td>
 	   					<div class="inline">
 	   						<g:form action= "editAnno" params="[gid: a.id]" >
