@@ -320,7 +320,7 @@
 		function (ev, seriesIndex, pointIndex, data) {
 			//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
 			//alert("/search/genome_info?id=${params.Gid}&contig_id=" + data[2])
-			window.open("genome_info?Gid=${params.Gid}&GFFid=${params.GFFid}&contig_id=" + data[2]);
+			window.open("genome_info?Gid=${params.Gid}&GFFid=${params.GFFid}&contig_id=" + data[2],"_self");
 		}
 	);      
                     
@@ -484,7 +484,7 @@
     </script>
 </head>
 <body>
-<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:genomeFile.genome.meta.id]}"><i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i></g:link> > Genome: v${genomeFile.file_version}
+<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:genomeFile.genome.meta.id]}"><i>${genomeFile.genome.meta.genus[0]}. ${genomeFile.genome.meta.species}</i></g:link> > Genome: v${genomeFile.file_version}
 <br><br>
 
 

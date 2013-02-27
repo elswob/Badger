@@ -265,7 +265,7 @@
     <h1>Please select some annotations</h1>
     <g:link action=''>Search Again</g:link>
   </g:if>
-  <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus} ${metaData.genome.meta.species}</i></g:link> > Genome: <g:link action="species_search" params="${[Gid:params.Gid,GFFid:params.GFFid]}">v${metaData.file_version}</g:link> > Search results
+  <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus[0]}. ${metaData.genome.meta.species}</i></g:link> > Genome: <g:link action="species_search" params="${[Gid:params.Gid,GFFid:params.GFFid]}">v${metaData.file_version}</g:link> > Search results
     <h1>Results for gene annotation descriptions matching '<em>${term}</em>'.</h1>
 		<g:if test="${results}">
 		    <table class="table_border" width='100%'>
