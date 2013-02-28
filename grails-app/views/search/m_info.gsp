@@ -841,7 +841,6 @@
 			<table id="orthomcl_table" class="display" >
 				  <thead>
 					<tr>
-						<th><b>Inflation value</b></th>
 						<th><b>Cluster</b></th>
 						<th><b>Size</b></th>
 				   </tr>
@@ -849,7 +848,6 @@
 				  <tbody>
 					<g:each var="res" in="${orthologs}">
 						<tr>						
-							<td>1.5</td>
 							<td><a href="cluster?group_id=${res.group_id}">${res.group_id}</a></td>
 							<td>${res.size}</td>
 						</tr>  
