@@ -200,26 +200,27 @@
         };
         BioDrawing.prototype.getBLASTColour = function(score,annoType) {
         	var hitColour;
-        	/*
-        	if (annoType === 'ipr'){
-        		if (score < 1){hitColour = 'black';}
-        		if (score < 1e-5){hitColour = 'blue';}
-        		if (score < 1e-20){hitColour = 'lime';}
-        		if (score < 1e-50){hitColour = 'magenta';}
-        		if (score < 1e-100){hitColour = 'red';}				
-        	}else{
-				if (score < 1000000){hitColour = 'red';}
+        	
+        	if (annoType === 'blast_res'){
+        		if (score < 1000000){hitColour = 'red';}
 				if (score < 200){hitColour = 'magenta';}
 				if (score < 80){hitColour = 'lime';}
 				if (score < 50){hitColour = 'blue';}
-				if (score < 40){hitColour = 'black';}     
+				if (score < 40){hitColour = 'black';}   					
+        	}else{
+				if (score < 1){hitColour = 'black';}
+        		if (score < 1e-5){hitColour = 'blue';}
+        		if (score < 1e-20){hitColour = 'lime';}
+        		if (score < 1e-50){hitColour = 'magenta';}
+        		if (score < 1e-100){hitColour = 'red';}	     
 			} 
-			*/  
+			/*  
 			if (score < 1){hitColour = 'black';}
         	if (score < 1e-5){hitColour = 'blue';}
         	if (score < 1e-20){hitColour = 'lime';}
         	if (score < 1e-50){hitColour = 'magenta';}
         	if (score < 1e-100){hitColour = 'red';}	
+        	*/
             return hitColour;
         };
         BioDrawing.prototype.end = function() {

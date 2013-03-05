@@ -65,7 +65,7 @@
 						 stop = parseFloat(hit.start)
 					 }
 					 score = parseFloat(hit.score) 
-					 var hitColour = drawing.getBLASTColour(score);
+					 var hitColour = drawing.getBLASTColour(score,'blast_res');
 					 var hit_desc = hit.id+": "+start+" - "+stop;
 					 var blastRect = drawing.drawBar(start, stop, 8, hitColour, hit_desc, '');
 					 blastRect.click(function(id){
