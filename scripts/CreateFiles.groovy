@@ -31,7 +31,7 @@ def createAnnoFile(gff){
   	def gffInfo = FileData.findById(gff)
   	println "### Getting data for "+gffInfo.file_name+" ###"
   	println new Date()
-  	def outfile = new File("data/"+gffInfo.file_dir+"/"+gffInfo.file_name+".anno.csv")
+  	def outfile = new File("data/"+gffInfo.file_dir+"/"+gffInfo.file_name+".anno.tsv")
 	if (outfile.exists()){outfile.delete()}
 	
   	def asql = "select * from anno_data where filedata_id = "+gff+" order by type;"
@@ -94,5 +94,5 @@ def createAnnoFile(gff){
     }
     println "Zipping up for download..."
 	def ant = new AntBuilder()
-	ant.zip(destfile: "data/"+gffInfo.file_dir+"/"+gffInfo.file_name+".anno.csv.zip", basedir: "data/"+gffInfo.file_dir, includes: gffInfo.file_name+".anno.csv)
+	ant.zip(destfile: "data/"+gffInfo.file_dir+"/"+gffInfo.file_name+".anno.tsv.zip", basedir: "data/"+gffInfo.file_dir, includes: gffInfo.file_name+".anno.tsv")
 }
