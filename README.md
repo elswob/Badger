@@ -291,14 +291,6 @@ The naming convention expected is that each transcript ID is preceded by an Orth
 
 If this file is added after the initial data, the ortholog data will need to be loaded into the database. This can be done simply by running `./run_me.sh` again.
 
-#### Annotated csv file
-
-To generate a file of tab delimeted annotations for each GFF data set run:
-
-`grails prod run-script scripts/CreateFiles.groovy`
-
-This may take a while, around 1 hour per 10,000 genes, but when finished there will be a new anno.csv file to download for each gff file
-
 ## Data rules
 
 1. All chromosme/scaffold/contig IDs must be unique, e.g. Mmeles_v1.0_scaffold_1
