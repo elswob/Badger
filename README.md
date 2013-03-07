@@ -42,7 +42,7 @@ sudo apt-get update
 sudo apt-get install grails-ppa
 ```
 
-Set the JAVA_HOME path in .bashrc or .bash_profile
+Download and install either the openjdk-6-jdk or sun-java6-jdk JDK package and install, then set the JAVA_HOME path in .bashrc or .bash_profile, e.g.
 
 `export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-amd64`
 
