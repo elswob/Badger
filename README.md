@@ -249,9 +249,29 @@ As this can take a while it may be wise to run this command using [screen](https
 
 When all the file information is successfully loaded into the database, open a terminal, go to the root directory of Badger, and type:
 
-`./run_me.sh`
+`./runme.sh`
 
-This will run a number of scripts which adds the rest of the data to the database. This step could take a number of hours depending on the size of the files and number of species/genomes involved.
+This will run a number of scripts which adds the actual content of the data files to the database. These scripts are:
+
+```
+AlterTables.groovy - Creates text indices columns for annotation descriptions.
+
+AddFileData.groovy - If required, file data will be loaded from here.
+
+AddPublicationData.groovy - Based on the species data added, all publications from PubMed will be downloaded and added to the database.
+
+AddSequenceData.groovy - All sequence data for the genomes and genes is added.
+
+AddOrthoData.groovy  - If provided the OrthoMCL groups file is loaded.
+
+AddGeneBlastData.groovy - All BLAST XML data is loaded.
+
+AddGeneFuncAnnoData.groovy - All custom annotation and InterProScan data is added.
+
+CreateFiles.groovy - A tab delimited annotaion file for each set of genes is produced and added to the downloads page.
+```
+
+This step could take a number of hours depending on the size of the files and number of species/genomes involved.
 
 #### Subsequent data
 
