@@ -483,7 +483,7 @@ class AdminController {
 				return [error: "duplicate", file:gff]	
 			}else{
 				annoMap.type = "ipr"
-				annoMap.link = "http://www.ebi.ac.uk/interpro/IEntry?ac="
+				annoMap.link = "http://www.ebi.ac.uk/interpro/entry/"
 				annoMap.regex = "(IPR\\d+).*?"
 				annoMap.source = "InteProScan"
 				annoMap.anno_file = params.i_anno_file.trim()
