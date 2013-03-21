@@ -1,6 +1,10 @@
 # Badger
 
-A lightweight genome environment
+A lightweight genome environment 
+
+## Home page
+
+http://badger.bio.ed.ac.uk/
 
 ## Installation requirements
 
