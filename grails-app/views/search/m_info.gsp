@@ -330,7 +330,9 @@
      //exons
      var anOpen = [];
   	 var sImageUrl = "${resource(dir: 'js', file: 'DataTables-1.9.4/examples/examples_support/')}";
-     
+     var exon_start = 1
+     var exon_stop = 0
+     var old_num
 	 var oTable = $('#exon_table').dataTable( {
 			"bProcessing": true,
 			"aaData": ${exonjsonData},
@@ -344,10 +346,23 @@
 					"sType": "num-html",
 					"mDataProp": "exon_number",
 					"fnRender": function ( oObj, sVal ){
+						old_num = sVal
 						return "<a href=\"/home/browse?link=${metaData.genome.gbrowse}&contig_id="+oObj.aData["contig_id"]+"&start="+oObj.aData["start"]+"&stop="+oObj.aData["stop"]+"\">"+sVal+"</a>";
 					}
 				},
 				{ "mDataProp": "length" },
+				{ "mDataProp": "start",
+				"fnRender": function ( oObj, sVal ){
+					if (old_num > 1){
+						exon_start = exon_start + oObj.aData["length"]
+					}
+					return exon_start
+				}},			
+				{ "mDataProp": "stop",
+				"fnRender": function ( oObj, sVal ){
+					exon_stop = exon_stop + oObj.aData["length"]
+					return exon_stop
+				}},		
 				{ "mDataProp": "gc"},
 				{ "mDataProp": "phase"},
 				{ "mDataProp": "score"},
@@ -825,6 +840,8 @@
 				<th></th>
 				<th>Number</th>
 				<th>Length</th>
+				<th>Start</th>
+				<th>End</th>
 				<th>GC</th>
 				<th>Phase</th>
 				<th>Score</th>
