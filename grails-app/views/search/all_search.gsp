@@ -29,8 +29,9 @@
    </g:form>
    <br>
        
-    <p>Keyword search will find related terms, for example searching for 'tolerate' will also match 'tolerance'.</p><br>
-    <p>Query text can contain the Boolean operators & (and), | (or) and ! (not), e.g. 'atpase & zinc', '!metal', 'atpase & zinc | !metal'    </p>
+    <p>Keyword search will find <b>related terms</b>, e.g. searching for 'tolerate' will also match 'tolerance'.</p><br>
+    <p><b>Multiple keywords</b> will search for cases where all words are present, e.g. searching for 'kinase domain' will match only entries that contain both words or their derivatives.</p>
+    <!--p>Query text can contain the Boolean operators & (and), | (or) and ! (not), e.g. 'atpase & zinc', '!metal', 'atpase & zinc | !metal'    </p-->
    <br>
    <h2>Sources of data:</h2>
      
