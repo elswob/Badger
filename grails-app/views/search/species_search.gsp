@@ -570,9 +570,23 @@
  <div style="border:2px solid; border-color:#BFBFBF">
  <g:if test = "${funAnnoData.size() > 1 || blastAnnoData.size() > 1 || interAnnoData.size() > 1}">
 	<div id="content">
-	
 	  <table><tr>
-	  <td><h1>Search annotations:</h1>
+	  <td><h1>Search all the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> data for this genome and gene set by keyword:</h1>
+   		<g:form action="all_searched" params="${[gffId:params.GFFid, sId:genomeFile.genome.meta.id]}">
+    		<table>
+    			<tr><td>
+    				<g:textField name="searchId"  size="102"/>
+    					<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
+    				  <p>Keyword search will find <b>related terms</b>, e.g. searching for 'tolerate' will also match 'tolerance'.</p><br>
+    				  <p><b>Multiple keywords</b> will search for cases where all words are present, e.g. searching for 'kinase domain' will match only entries that contain both words or their derivatives.</p>
+     			</td></tr>
+    		</table>
+	  	  </g:form>
+	  </td></tr>
+	  </table>
+	  
+	  <table><tr>
+	  <td><h1>Search <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> annotations for this genome and gene set:</h1>
 
 		<g:form action="gene_search_results">		
 			<div id = "showAnno">
@@ -642,7 +656,7 @@
 		</td></tr></table>
 	</g:if>
 	<table>
-	 <tr><td><h1>Publications (<i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> only):</h1>
+	 <tr><td><h1>Search <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> publications:</h1>
 	 
 	 <g:form controller="home" action="publication_search">
 	 <table><tr><td>

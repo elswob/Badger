@@ -69,19 +69,6 @@
     def pubjsonData = pubRes.encodeAsJSON(); 
     %>
     $(document).ready(function() {
-            $('#trans_table').dataTable({
-    	    "sPaginationType": "full_numbers",
-    	    "iDisplayLength": 10,
-    	    "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-    	    "oLanguage": {
-    	     	     "sSearch": "Filter records:"
-    	     },
-    	    "aaSorting": [[ 8, "desc" ]],
-    	    "sDom": 'T<"clear">lfrtip',
-            "oTableTools": {
-        	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
-            }
-         });
          
          $('#gene_table').dataTable({
     	    "sPaginationType": "full_numbers",
@@ -223,63 +210,18 @@
 		</td></tr>
 	</table>
   
-  <g:if test="${transRes}">
-  	<h2>${transRes.size()} matches from the transcriptome data:</h2>   
-        <table id="trans_table" class="display">
-            <thead>
-              <tr>
-              	<th><b>Species</b></th>
-                <th><b>Transcript</b></th>
-                <th><b>Database</b></th>
-                <th><b>Hit</b></th>
-                <th><b>Description</b></th>
-                <th><b>Start</b></th>
-                <th><b>Stop</b></th>
-                <th><b>Score</b></th>
-                <th><b>Rank</b></th>
-              </tr>
-             </thead>
-             <tbody>
-               <g:each var="res" in="${transRes}">
-                <tr>  
-                  <td>${res.genus} ${res.species}</td>
-                  <td><g:link action="trans_info" params="${[contig_id: res.contig_id]}"> ${res.contig_id}</g:link></td>
-                  <td>${res.anno_db}</td>
-                  <%
-					//set links
-					annoLinks.each{
-						if (res.anno_db == it.key){
-							res.anno_id = res.anno_id.replaceAll(it.value[0], "<a href=\""+it.value[1]+"\$1\" target=\'_blank\'>\$1</a>") 
-						}
-					}
-				  %>
-                  <td>${res.anno_id}</td>
-                  <%if (res.descr.size()>200){ res.descr = res.descr[0..200]+" ... "};%>
-                  <td>${res.descr}</td>
-                  <td>${res.anno_start}</td>
-                  <td>${res.anno_stop}</td>
-                  <td>${res.score}</td>
-                  <td>${sprintf("%.3f",res.rank)}</td>
-                </tr>                  
-               </g:each>
-              </tbody>
-         </table> 
-         <hr size = 5 color="green" width="100%" style="margin-top:10px"> 
-  </g:if>
-  <g:else>
- 	<g:if test = "${grailsApplication.config.seqData.Transcriptome}">
-  		<h2>0 matches from the transcriptome data.</h2>
-  		<hr size = 5 color="green" width="100%" style="margin-top:10px"> 
-  	</g:if>
-  </g:else>
-  
   <g:if test="${geneRes}">
   <br>
     <h2>${geneRes.size()} matches from the gene data:</h2> 
         <table id="gene_table" class="display">
             <thead>
               <tr>
-              	<th><b>Species</b></th>
+              	<g:if test="${params.sId}">
+              		<th></th>
+                </g:if>
+                <g:else>
+                	<th><b>Species</b></th>
+                </g:else>
                 <th><b>Transcript ID</b></th>
                 <th><b>Database</b></th>
                 <th><b>Hit ID</b></th>
@@ -293,7 +235,12 @@
              <tbody>
                <g:each var="res" in="${geneRes}">
                 <tr>  
-                  <td><g:link action="species_v" params="${[Sid: res.gid]}"><i>${res.genus[0]}. ${res.species}</i></g:link></td>
+                  <g:if test="${!params.sId}">
+                  	<td><g:link action="species_v" params="${[Sid: res.gid]}"><i>${res.genus[0]}. ${res.species}</i></g:link></td>
+                  </g:if>
+                  <g:else>
+                  	<td></td>
+                  </g:else>
                   <td><g:link action="m_info" params="${[mid: res.mrna_id]}"> ${res.mrna_id}</g:link></td>
                   <!-- <a href="m_info?Gid=${params.Gid}&mid=${res.mrna_id}">${res.mrna_id}</a>-->
                   <td>${res.anno_db}</td>
