@@ -59,7 +59,7 @@
 		}else{
 			document.getElementById('nucFileId').value=table_scrape;
 		}
-	    alert(table_scrape)
+	    //alert(table_scrape)
     }
     </script>
     <script>
@@ -180,7 +180,12 @@
     <g:link action=''>Search Again</g:link>
   </g:if>
   
-  <g:link action="">Search</g:link> > <g:link action="all_search">Search all</g:link> > Search results 
+  <g:if test="${params.gffId}">
+  	 <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:genomeData.genome.meta.id]}"><i> ${genomeData.genome.meta.genus[0]}. ${genomeData.genome.meta.species}</i></g:link> > Genome: <g:link action="species_search" params="${[Gid:genomeData.id,GFFid:params.gffId]}">v${genomeData.file_version}</g:link> > Search results
+  </g:if>
+  <g:else>
+ 	 <g:link action="">Search</g:link> > <g:link action="all_search">Search all</g:link> > Search results 
+  </g:else>
   <div class="inline">
   <br><h1>Results for search of '<em>${searchId}</em>' across all data</h1> 
   </div><br>
@@ -216,7 +221,7 @@
         <table id="gene_table" class="display">
             <thead>
               <tr>
-              	<g:if test="${params.sId}">
+              	<g:if test="${params.gffId}">
               		<th></th>
                 </g:if>
                 <g:else>
@@ -235,7 +240,7 @@
              <tbody>
                <g:each var="res" in="${geneRes}">
                 <tr>  
-                  <g:if test="${!params.sId}">
+                  <g:if test="${!params.gffId}">
                   	<td><g:link action="species_v" params="${[Sid: res.gid]}"><i>${res.genus[0]}. ${res.species}</i></g:link></td>
                   </g:if>
                   <g:else>

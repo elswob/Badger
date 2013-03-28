@@ -572,7 +572,7 @@
 	<div id="content">
 	  <table><tr>
 	  <td><h1>Search all the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> data for this genome and gene set by keyword:</h1>
-   		<g:form action="all_searched" params="${[gffId:params.GFFid, sId:genomeFile.genome.meta.id]}">
+   		<g:form action="all_searched" params="${[gffId:params.GFFid, gId:params.Gid]}">
     		<table>
     			<tr><td>
     				<g:textField name="searchId"  size="102"/>

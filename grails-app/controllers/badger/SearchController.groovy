@@ -252,8 +252,11 @@ class SearchController {
 			
 			def geneRes
 			def pubRes
+			def genomeData
 			//if coming from species page
 			if (params.gffId){
+				genomeData = FileData.findById(params.gId)	
+				println "genomeData = "+genomeData
 				//search gene annotations
 				def geneintersearch = "select distinct on (anno_db,mrna_id) mrna_id,anno_id,anno_db,anno_start,anno_stop,descr,score,genus,species,ts_rank_cd(textsearchable_index_col, query,32 /* rank/(rank+1) */) AS rank, meta_data.id as gid FROM gene_interpro,gene_info,file_data,genome_data,meta_data,plainto_tsquery('"+params.searchId+"') AS query WHERE textsearchable_index_col @@ query and gene_interpro.gene_id = gene_info.id and gene_info.file_id = '"+params.gffId+"';"
 				println "Gene inter search = "+geneintersearch
@@ -302,7 +305,7 @@ class SearchController {
 			}
 			println "Anno links =  "+annoLinks
 			
-			return [searchId: params.searchId, search_time: duration, geneRes: geneRes, pubRes: pubRes, annoLinks:annoLinks]
+			return [searchId: params.searchId, search_time: duration, geneRes: geneRes, pubRes: pubRes, annoLinks:annoLinks, genomeData: genomeData]
 		}
 		sql.close()
     }
