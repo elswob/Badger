@@ -21,4 +21,6 @@
 </g:if>
 <g:else>
 	<h1> No GFF3 files are available for this genome</h1>
+	<input type="hidden" name="GFFid" value="0" checked/>
+	<input type="hidden" name="Gid" value="${genome}">
 </g:else>

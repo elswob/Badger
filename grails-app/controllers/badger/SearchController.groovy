@@ -743,6 +743,9 @@ class SearchController {
      		}
      		println "Gid = "+Gid
      		println "GFFid = "+GFFid
+     		if (GFFid == null){
+     			GFFid = 0;
+     		}
      		def metaData = FileData.findById(Gid); 
      		//def gene_results = GeneInfo.findAllByContig_id(params.contig_id)
      		//def genesql = "select gene_info.* from gene_info,file_data,meta_data where gene_info.contig_id = '"+params.contig_id+"' and meta_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
