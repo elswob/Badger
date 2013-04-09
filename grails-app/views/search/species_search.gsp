@@ -495,7 +495,7 @@
 <table width=100%>  
       <tr><td width=30%>
 			 <h1>Genome metrics:</h1>
-			 <g:if test = "${genome_stats.span > 0}">
+		<g:if test = "${genome_stats.span > 0}">
 			<table>
 			 <tr><td><b>Version:</b></td><td>${genome_stats.version}</td></tr>
 			 <tr><td><b>Span (bp):</b></td><td>${sprintf("%,d\n",genome_stats.span)}</td></tr>
@@ -507,32 +507,50 @@
 			 <tr><td><b>Non ATGC (bp)</b></td><td>${sprintf("%,d\n",genome_stats.nonATGC)}</td></tr>
 			  </table>
 		</td>
-		<td>
+		<td>		
+			<g:if test = "${genomeInfo.size > 0}">
 			<table>
-			<tr>
-				<td>
-					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','cum')" value="Cumulative length"/>
-					<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','len_gc')" value="Length vs GC"/>
-					<g:each var="f" in="${genome}">
-      					<g:if test="${f.file_type == 'Genome'}">
-      						<!--${f.file_type} ${f.file_name} ${f.cov}-->
-      						<g:if test="${f.cov == 'y'}">
-      							<input type="button" class="smallbuttons" id="process_graph" onclick="changed('makeArrays','cov_gc')" value="Coverage vs GC"/>
-								<input type="button" class="smallbuttons" id="process_graph" onclick="changed('makeArrays','len_cov')" value="Length vs Coverage"/>
-      						</g:if>
-      					</g:if>
-   					</g:each>
-				</td>
-			</tr>
-			<tr><td><p>Select a scaffold by clicking on a point on the chart.<p>Zoom in by dragging around an area. Reset by double clicking or clicking <font STYLE="cursor: pointer" color="green" class="button-reset">here</font></td></tr>
-		 	</table>   
+				<tr>
+					<td>					
+						<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','cum')" value="Cumulative length"/>
+						<input type="button" class="mybuttons" id="process_graph" onclick="changed('makeArrays','len_gc')" value="Length vs GC"/>
+						<g:each var="f" in="${genome}">
+							<g:if test="${f.file_type == 'Genome'}">
+								<!--${f.file_type} ${f.file_name} ${f.cov}-->
+								<g:if test="${f.cov == 'y'}">
+									<input type="button" class="smallbuttons" id="process_graph" onclick="changed('makeArrays','cov_gc')" value="Coverage vs GC"/>
+									<input type="button" class="smallbuttons" id="process_graph" onclick="changed('makeArrays','len_cov')" value="Length vs Coverage"/>
+								</g:if>
+							</g:if>
+						</g:each>					
+					</td>
+				</tr>
+				<tr><td><p>Select a scaffold by clicking on a point on the chart.<p>Zoom in by dragging around an area. Reset by double clicking or clicking <font STYLE="cursor: pointer" color="green" class="button-reset">here</font></td></tr>
+		 		</table>   
 		 
-		  	<div id="chart" class="jqplot-target" style="height: 300px; width: 100%; position: center;">Loading...<img src="${resource(dir: 'images', file: 'spinner.gif')}"</div>
-		 
-			 </g:if>
+		  		<div id="chart" class="jqplot-target" style="height: 300px; width: 100%; position: center;">Loading...<img src="${resource(dir: 'images', file: 'spinner.gif')}"</div>
+		 	 </g:if>
 			 <g:else>
+				<table>
+				<tr>
+					<td> 
+						<g:if test="${grailsApplication.mainContext.getResource('images/'+geneData.genome.meta.image_file[0]).exists()}"> 
+							<img src="${resource(dir: 'images', file: geneData.genome.meta.image_file[0])}" style="height: 300px;"/>
+						</g:if>
+						<g:else>
+							<img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="height: 300px;"/>
+						</g:else>
+					</td>
+					<td style="vertical-align: middle;">
+						<br><h2>The genome is in over 100,000 pieces, therefore a plot of scaffolds cannot be shown.</h2>
+					</td>
+				</tr>
+			</table>
+			</g:else>
+		</g:if>
+		<g:else>
 			 <h2>No genome data is in the database for this genome</h2>
-			 </g:else>
+		</g:else>
 		 </td></tr>
 		   <tr><td>
 			 <h1>Gene metrics:</h1>

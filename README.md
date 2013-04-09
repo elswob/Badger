@@ -392,3 +392,13 @@ xxxxxxx.xml was added
 ```
 
 Could mean that the GFF Id used in the addAnno() function does not match the GFF file from which this annotation is linked.
+
+#### Loading sequence data
+
+Error:
+
+```
+| Error Error executing script RunScript: java.lang.NullPointerException: Cannot get property 'file_dir' on null object (Use --stacktrace to see the full trace)
+```
+
+If you have loaded file information using the AddFileData.groovy script, check that the FASTA files are linked to the GFF file in the `fileMap.file_link` setting.

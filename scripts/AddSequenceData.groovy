@@ -126,6 +126,7 @@ if (getFiles){
 					def p = comm.execute() 
 				}
 			}
+			//println "fileLoc =  "+fileLoc+" it.file_name = "+it.file_name+" nuc = "+nuc+" pep = "+pep
 			addGeneData(fileLoc, it.file_name, nuc, pep)
 		}
 	}
@@ -438,8 +439,9 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 							gene.save()
 						}
 					}else{
+						println "Missing sequence! - "+mrna_id+" is not found in the FASTA files!"
 						//println "Something is wrong! Perhaps your fasta file headers don't match your gff IDs...?"
-						throw new RuntimeException("Something is wrong! Perhaps your fasta file headers don't match your GFF IDs...?")
+						//throw new RuntimeException("Something is wrong! Perhaps your fasta file headers don't match your GFF IDs...?")
 					}
 				}
 			}
@@ -509,44 +511,61 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 						//println "parent = "+parent
 						//geneFind = GeneInfo.findByMrna_id(parent)
 						gene_nuc = nucData."${parent}"
-						//println "exon = "+exon_id+" - "+exon_count
+						//println "exon = "+exon_count
 					}
 					geneFind = GeneInfo.findByMrna_id(parent)
-					//println dataArray[8]+" parent = "+parent
+					//println dataArray
 					exon_start = exon_marker
 					exon_end = dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()+1
 					//println mrna_id
 					//println gene_nuc
 					//println dataArray[4].toInteger()+"-"+dataArray[3].toInteger()+"+"+exon_marker.toInteger()
-					exon_sequence = gene_nuc[exon_marker..dataArray[4].toInteger()-dataArray[3].toInteger()+exon_marker.toInteger()]
-					exon_count_gc = exon_sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
-					exon_gc = (exon_count_gc/exon_sequence.length())*100
-					exon_gc = sprintf("%.3f",exon_gc)
-					exonMap.sequence = exon_sequence
-					exon_marker = exon_start + dataArray[4].toInteger()-dataArray[3].toInteger()+1
+					def exon_break = (dataArray[4].toInteger()-dataArray[3].toInteger())+exon_marker.toInteger()
+					if (gene_nuc){
+						if (exon_marker < gene_nuc.length()){
+							//println "exon coords = "+exon_marker+" - "+exon_break
+							//println "gene length = "+gene_nuc.length()
+							if (exon_break > gene_nuc.length()-1){
+								exon_break = gene_nuc.length()-1
+							}
+							exon_sequence = gene_nuc[exon_marker..exon_break]
+							//println "seq = "+exon_sequence
+							exon_count_gc = exon_sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
+							exon_gc = (exon_count_gc/exon_sequence.length())*100
+							exon_gc = sprintf("%.3f",exon_gc)
+							exonMap.sequence = exon_sequence
+							exon_marker = exon_start + dataArray[4].toInteger()-dataArray[3].toInteger()+1
 					
-					exonMap.exon_number = exon_count
-					exonMap.start = dataArray[3].toInteger()
-					exonMap.stop = dataArray[4].toInteger()
-					exonMap.score = dataArray[5]
-					exonMap.strand = dataArray[6]
-					exonMap.phase = dataArray[7].toInteger()
-					exonMap.gene = geneFind
-					//exonMap.gene_id = geneFind.id.toBigInteger()
-					exonMap.gc = exon_gc
+							exonMap.exon_number = exon_count
+							exonMap.start = dataArray[3].toInteger()
+							exonMap.stop = dataArray[4].toInteger()
+							exonMap.score = dataArray[5]
+							exonMap.strand = dataArray[6]
+							if (dataArray[7].isNumber()){ 
+								exonMap.phase = dataArray[7].toInteger()
+							}else{
+								exonMap.phase = null
+							}
+							exonMap.gene = geneFind
+							//exonMap.gene_id = geneFind.id.toBigInteger()
+							exonMap.gc = exon_gc
 					
-					ExonInfo exon = new ExonInfo(exonMap)
-					//println exonMap
-					geneFind.addToExon(exon)
+							ExonInfo exon = new ExonInfo(exonMap)
+							//println exonMap
+							geneFind.addToExon(exon)
 					
-					if ((exon_count_all % 1000) ==  0){
-						exon.save(flush:true)
-						cleanUpGorm()
-						//println exonMap
-						//new ExonInfo(exonMap).save(flush:true)
-					}else{
-						//new ExonInfo(exonMap).save()
-						exon.save()
+							if ((exon_count_all % 1000) ==  0){
+								exon.save(flush:true)
+								cleanUpGorm()
+								//println exonMap
+								//new ExonInfo(exonMap).save(flush:true)
+							}else{
+								//new ExonInfo(exonMap).save()
+								exon.save()
+							}
+						}else{
+							println "The start position ("+exon_marker+") for exon "+exon_count+" is greater than the length of the sequence "+mrna_id+" ("+gene_nuc.length()+")" 
+						}
 					}
 				}
 			}

@@ -87,22 +87,17 @@ class SearchController {
     	def inter = sql.rows(interSql)
     	 //get genome info and stats
     	 def genomeInfoSql = "select non_atgc,contig_id,gc,length,coverage from genome_info,file_data where file_id = file_data.id and file_data.id = '"+Gid+"' order by length desc;"
-	 	 //def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"
 	 	 println genomeInfoSql
 	 	 def genomeInfo = sql.rows(genomeInfoSql)
-	 	 //def genomeSeqSql = "select sequence,contig_id,gc,length,coverage from genome_info,file_data,meta_data where file_id = file_data.id and meta_id = meta_data.id and meta_data.id = '"+Gid+"' order by length desc;"
-	 	 //def sqlsearch = "select contig_id,gc,length,coverage from genome_info order by length desc;"
-	 	 //println genomeSeqSql
-	 	 //def genomeSeq = sql.rows(genomeSeqSql) 
-		 int span=0, min=10000000000, max=0, n50=0, halfSpan=0, checkSpan=0, nonATGC=0, num=0, ninetySpan=0, counter=0;
+	 	 def genome_stats = [:]
+	 	 int span=0, min=10000000000, max=0, n50=0, halfSpan=0, checkSpan=0, nonATGC=0, num=0, ninetySpan=0, counter=0;
 		 def n50_list = [], n90_list = [];
 		 float gc
-		 	 
 		 def n50check = false, n90check = false;
-		 def genome_stats = [:]
-	 	 //span
-	 	 genomeInfo.each {
-	 	 	num ++
+			 
+		 //span
+		 genomeInfo.each {
+			num ++
 			span += it.length
 			gc += it.gc
 			nonATGC += it.non_atgc
@@ -117,12 +112,12 @@ class SearchController {
 		 //nonATGC = span-nonATGC
 
 		 gc = gc/genomeInfo.size()
-		 
+	 
 		 //n50
 		 halfSpan = span/2
 		 ninetySpan = span/100*90
 		 genomeInfo.each {
-		 	counter++
+			counter++
 			checkSpan += it.length
 			if (checkSpan >= halfSpan && n50check !=true){
 				def aa = [counter,checkSpan/1000000,it.length]
@@ -136,10 +131,14 @@ class SearchController {
 				n90check = true
 			}
 		 }
-		 
 		 println "n50 = "+n50_list
 		 println "n90 = "+n90_list
 		 
+		 //clear genomeInfo array if too big as plotting it isn't a good idea
+		 if (genomeInfo.size > 100000){
+	 	 	genomeInfo = []
+	 	 	println "Genome is in over 100,000 pieces!"
+	 	 }
 		 def genomeDescSql = "select file_data.description from file_data,genome_data where file_data.id = '"+Gid+"' and file_type = 'Genome';";
 		 println genomeDescSql
 		 def genomeDesc = sql.rows(genomeDescSql)
@@ -153,6 +152,7 @@ class SearchController {
 		 genome_stats.max = max
 		 genome_stats.gc = gc
 		 genome_stats.nonATGC = nonATGC
+		 println "genome_stats = "+genome_stats
 		 
 		 //get gene stats
 		 def geneInfoSql = "select nuc,gc from gene_info,file_data where file_id = file_data.id and file_data.id = '"+params.GFFid+"';";
@@ -309,167 +309,6 @@ class SearchController {
 		}
 		sql.close()
     }
-
-    def trans_search = { 
-    	if (grailsApplication.config.i.links.trans == 'private' && !isLoggedIn()) {
-     		redirect(controller: "home", action: "index")
-     	 }else{  
-			 def blastMap = [:]
-			 if (grailsApplication.config.t.blast.size()>0){
-				for(item in grailsApplication.config.t.blast){
-					item = item.toString()
-					def splitter = item.split("=",2)
-					blastMap[splitter[0]] = splitter[1]
-				}
-			 }
-			 println "blastMap = "+blastMap
-			 
-			 def funMap = [:]
-			 if (grailsApplication.config.t.fun.size()>0){
-				for(item in grailsApplication.config.t.fun){
-					item = item.toString()
-					def splitter = item.split("=",2)
-					funMap[splitter[0]] = splitter[1]
-				}
-			 }
-			 println "funMap = "+funMap
-			 
-			 def iprMap = [:]
-			 if (grailsApplication.config.t.IPR.size()>0){
-				iprMap.IPR = grailsApplication.config.t.IPR
-			 }
-			 println "iprMap = "+iprMap
-			 return [blastMap: blastMap, funMap: funMap, iprMap: iprMap]
-		}
-    }
-    
-    def gene_search = {
-         if (grailsApplication.config.i.links.genes == 'private' && !isLoggedIn()) {
-     		redirect(controller: "home", action: "index")
-     	 }else{  
-			 def blastMap = [:]
-			 if (grailsApplication.config.g.blast.size()>0){
-				for(item in grailsApplication.config.g.blast){
-					item = item.toString()
-					def splitter = item.split("=",2)
-					blastMap[splitter[0]] = splitter[1]
-				}
-			 }
-			 println "blastMap = "+blastMap
-			 
-			 def funMap = [:]
-			 if (grailsApplication.config.g.fun.size()>0){
-				for(item in grailsApplication.config.g.fun){
-					item = item.toString()
-					def splitter = item.split("=",2)
-					funMap[splitter[0]] = splitter[1]
-				}
-			 }
-			 println "funMap = "+funMap
-			 
-			 def iprMap = [:]
-			 if (grailsApplication.config.g.IPR.size()>0){
-				iprMap.IPR = grailsApplication.config.g.IPR
-			 }
-			 println "iprMap = "+iprMap
-			 return [blastMap: blastMap, funMap: funMap, iprMap: iprMap]
-		}
-    }
-
-    def trans_search_results = {
-    	if (grailsApplication.config.i.links.trans == 'private' && !isLoggedIn()) {
-     		redirect(controller: "home", action: "index")
-     	}else{
-			def sql = new Sql(dataSource)
-			//set up some global search things
-			def timeStart = new Date()
-			def table = params.dataSet
-			def searchId = params.searchId   
-			def annoSearch = "(anno_db = "
-			def whatSearch
-			def annoType = params.toggler
-			println "annoType = "+annoType
-			def annoDB
-			if (annoType == '1'){
-				whatSearch = params.tableSelect_1
-				annoDB = params.blastAnno
-				//choose what to search			
-				if (whatSearch == 'e.g. ATPase'){whatSearch = 'descr ~* '}
-				if (whatSearch == 'e.g. 215283796 or P31409'){whatSearch = 'anno_id ~* '}
-				if (whatSearch == 'e.g. contig_1'){whatSearch = 'contig_id = '}
-			}
-			if (annoType == '2'){
-				whatSearch = params.tableSelect_2
-				annoDB = params.funAnno
-				//choose what to search			
-				if (whatSearch == 'e.g. Calcium-transportingATPase'){whatSearch = 'descr ~* '}
-				if (whatSearch == 'e.g. GO:0008094 or 3.6.3.8 or K02147'){whatSearch = 'anno_id ~* '}
-				if (whatSearch == 'e.g. contig_1'){whatSearch = 'contig_id = '}
-			}
-			if (annoType == '3'){
-				whatSearch = params.tableSelect_3
-				annoDB = params.iprAnno
-				//choose what to search			
-				if (whatSearch == 'e.g. Vacuolar (H+)-ATPase G subunit'){whatSearch = 'descr ~* '}
-				if (whatSearch == 'e.g. IPR023298 or PF01813'){whatSearch = 'anno_id ~* '}
-				if (whatSearch == 'e.g. contig_1'){whatSearch = 'contig_id = '}
-			}
-			println "annoDB = "+annoDB
-			//construct the anno_db search string			
-			//if just one db is passed then the list becomes a string
-			if (annoDB){
-				if (annoDB instanceof String){
-					annoSearch += "\'" + annoDB + "\'"
-				}else{
-					def annoSelect = annoDB		
-					annoSelect.each {
-						annoSearch += "\'" + it + "\'" + " or anno_db = "
-					}
-					annoSearch = annoSearch[0..-15]			
-				}
-				annoSearch += ")"
-			}
-			
-			if (!annoDB){
-				return [error: "no_anno"]
-			}
-			//check for single letter searches
-			else if (searchId.size() < 2){
-					return [error: "too_short"]
-			//check for empty searches
-			}else if (searchId ==""){
-				return [error: "empty"]
-			}else{   
-				def sqlsearch
-				println "search = "+params.toggler
-				if (params.toggler == "1"){
-					println "Searching blast data"
-					sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score,gaps,hit_start,hit_stop,hseq,identity,midline,positive,qseq,align from trans_blast where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		        		
-				}else{
-					println "Searching anno data"
-					sqlsearch = "select distinct on (anno_db,contig_id) contig_id,anno_id,anno_db,anno_start,anno_stop,descr,score from trans_anno where "+annoSearch+" and "+whatSearch+ "'${searchId}';"       		
-				}
-				println sqlsearch
-				def results_all = sql.rows(sqlsearch)
-				//count the number of unique hits
-				def hits = []
-				results_all.each {
-					hits.add(it.contig_id)
-				}
-				def uniques = hits.unique()
-				def results
-				if (results_all.size() > 0){
-					results = results_all.sort({-it.score as double})
-				}else{
-					results = results_all
-				}
-				def timeStop = new Date()
-				def TimeDuration duration = TimeCategory.minus(timeStop, timeStart)
-				return [results: results, term : searchId , search_time: duration, uniques:uniques.size(),sql:sqlsearch, annoType: annoType]         
-			}
-			sql.close()	
-		  }		  
-		}
          
     def gene_search_results = {
         if (grailsApplication.config.i.links.genes == 'private' && !isLoggedIn()) {
