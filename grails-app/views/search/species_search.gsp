@@ -593,7 +593,7 @@
    		<g:form action="all_searched" params="${[gffId:params.GFFid, gId:params.Gid]}">
     		<table>
     			<tr><td>
-    				<g:textField name="searchId"  size="102"/>
+    				<g:textField name="searchId"  size="90%"/>
     					<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
     				  <p>Keyword search will find <b>related terms</b>, e.g. searching for 'tolerate' will also match 'tolerance'.</p><br>
     				  <p><b>Multiple keywords</b> will search for cases where all words are present, e.g. searching for 'kinase domain' will match only entries that contain both words or their derivatives.</p>
@@ -602,7 +602,7 @@
 	  	  </g:form>
 	  </td></tr>
 	  </table>
-	  
+	  <hr size = 5 color="green" width="100%" style="margin-top:10px">
 	  <table><tr>
 	  <td><h1>Search <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> annotations for this genome and gene set:</h1>
 
@@ -672,6 +672,19 @@
 
 		 </td></tr>
 		</td></tr></table>
+		<hr size = 5 color="green" width="100%" style="margin-top:10px">
+		<table>
+	 	<tr><td><h1>Search by gene ID:</h1>	 
+			 <g:form controller="search" action="geneID">
+			 <table><tr><td>		 	
+    				Enter a gene ID, e.g. <g:link action="m_info" params="${[mid:geneData.gene.mrna_id[0]]}">${geneData.gene.mrna_id[0]} </g:link> <g:textField name="searchId"  size="50%"/>
+    				<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
+     			</td></tr>
+     		</table>
+			</g:form>
+
+   		</td></tr></table>
+   		<hr size = 5 color="green" width="100%" style="margin-top:10px">
 	</g:if>
 	<table>
 	 <tr><td><h1>Search <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> publications:</h1>

@@ -107,28 +107,45 @@ def addInterProScan(anno,annoFile){
     def annoMap = [:]
     annoFile.eachLine { line ->
 		count++
-		def mrna_id
 		splitter = line.split("\t")
-		if (splitter[11] != 'NULL'){
-			if ((matcher = splitter[0] =~ /(.*)/)){
-				mrna_id = matcher[0][1]
+		def mrna_id, score, anno_db, anno_id, start, stop, descr
+		mrna_id = splitter[0]
+		anno_db = splitter[3]
+		start = splitter[6] as int
+		stop = splitter[7] as int
+		if (splitter.size() == 11){
+			//Assuming this is version 5 output as there are 11 columns
+			anno_id = splitter[4]
+			if (splitter[8] == '-'){
+				score = 0 as float
+			}else{				
+				score = splitter[8] as float;
 			}
-			annoMap.anno_db = splitter[3]
-			annoMap.anno_id = splitter[11]+" - "+splitter[4]
-			def start = splitter[6] as int
-			def stop = splitter[7] as int
+			descr = splitter[5]
+			if (descr.size() < 1){
+				descr = "n/a"
+			}
+		}else if (splitter.size() == 12){
+			//Assuming this is pre version 5 output as there are 12 columns
+			anno_id = splitter[11]+" - "+splitter[4]
+			score = splitter[8] as float;
+			descr = splitter[12]
+		}
+		if (splitter.size() == 12 && splitter[11] == 'NULL'){
+			return;
+		}else{
+			annoMap.anno_db = anno_db
+			annoMap.anno_id = anno_id
 			annoMap.anno_start = start
 			annoMap.anno_stop = stop
-			def score = splitter[8] as float
 			annoMap.score = score
-			//annoMap.descr = iprMap[splitter[11]]
-			annoMap.descr = splitter[12]
+			annoMap.descr = descr
 			//println annoMap
 			if (score < 1e-5){
 				GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
 				GeneInterpro ga = new GeneInterpro(annoMap)
 				if (geneFind){
-				geneFind.addToGinter(ga)
+					geneFind.addToGinter(ga)
 					if ((count % 5000) ==  0){
 						println count
 						//println annoMap

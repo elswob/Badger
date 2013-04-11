@@ -222,7 +222,7 @@
 					if (splitter[0].match(/IPR/g)){ 
 						return "<a href=\"http://www.ebi.ac.uk/interpro/entry/"+splitter[0]+ "\"target='_blank'>"+splitter[0]+"</a>: "+splitter[2]+"";
 					}else{
-						return "<a href=\"http://www.ebi.ac.uk/QuickGO/GTerm?id="+sVal+ "\"target='_blank'>"+sVal+"</a>";
+						return sVal;
 					}
 				}},
 				{ "mDataProp": "descr",
@@ -319,7 +319,7 @@
           </g:if>
           <g:else>
           	<p>Found <strong>0</strong> hits.</p>
-          	<g:link action=''>Search Again</g:link>
+          	<a href="previous.html" onClick="history.back();return false;">Search Again</a>
           </g:else>
 </body>
 </html>

@@ -13,72 +13,7 @@ def sql = new Sql(dataSource)
 
 // This just allows each data set to be turned on and off simply by commenting out the function call
 //M_meles()
-L_rub()
 
-/////// L. rubellus
-def L_rub(){
-	def metaMap = [:]
-	def genomeMap = [:]
-	def fileMap = [:]	
-	def annoMap = [:]
-	
-// --- Species Data ---	
-	metaMap.genus = "Lumbricus";
-	metaMap.species = "rubellus";
-	metaMap.description = "Lumbricus rubellus is a common earthworm, found in many temperate ecosystems, used as a model species by researchers investigating the biology and ecology of the soil, and the effects of pollutants and other chemicals on soil organisms."
-	metaMap.image_file = "lumbricus_rubellus.jpg"
-	metaMap.image_source = "http://www.naturewatch.ca/english/wormwatch/about/key/about_key_lrub.html"
-	addMeta(metaMap)
-	
-// --- Genome Data ---	
-	genomeMap.gbrowse = "http://salmo.bio.ed.ac.uk/fgb2/gbrowse/genome_0_4/"
-	genomeMap.dateString = Date.parse("dd/MM/yyyy","10/11/2011")
-	genomeMap.gversion = "0.4"
-	addGenome(genomeMap)
-	
-// --- File Data --- 	
-	// globals (blast,search,download and cov need to be added to each file type if the values differ)
-	// blast, search and download can be either public (pub) or private (priv)
-	// coverage can be either yes (y) or no (n)
-	// file_link is only required for the mRNA and peptide files and needs to match the name of the GFF3 from which they originated
-	fileMap.file_dir = "L_rubellus"
-	fileMap.loaded = false
-	fileMap.blast = "pub"
-	fileMap.search = "pub"
-	fileMap.download = "pub"
-	fileMap.cov = "n"
-	fileMap.file_link = "n"
-	
-	//genome
-	fileMap.file_type = "Genome"
-	fileMap.file_name = "L_rubellus_genome_0.4.fa"
-	fileMap.file_version = "0.4"
-	fileMap.description = "Mixed and merged assembly of Illumina and 454 data."
-	addFile(fileMap)
-	
-	//gff
-	fileMap.file_type = "Genes"
-	fileMap.file_name = "L_rubellus_0.4.gff"
-	fileMap.file_version = "0.4"
-	fileMap.description = "Merged gene set using MAKER, Exonerate protein2genome, Augustus and manual gene predictions"
-	addFile(fileMap)
-	
-	//mRNA
-	fileMap.file_type = "mRNA"
-	fileMap.file_name = "L_rubellus_transcripts_0.4.fa"
-	fileMap.file_version = "0.4"
-	fileMap.description = "Merged gene set using MAKER, Exonerate protein2genome, Augustus and manual gene predictions"
-	fileMap.file_link = "L_rubellus_0.4.gff"
-	addFile(fileMap)
-	
-	//Peptide
-	fileMap.file_type = "Peptide"
-	fileMap.file_name = "L_rubellus_proteins_0.4.fa"
-	fileMap.file_version = "0.4"
-	fileMap.description = "Merged gene set using MAKER, Exonerate protein2genome, Augustus and manual gene predictions"
-	fileMap.file_link = "L_rubellus_0.4.gff"
-	addFile(fileMap)
-}
 
 /////// M. meles
 def M_meles(){

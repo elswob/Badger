@@ -693,6 +693,7 @@ div.inline *  { display: inline; }
 	margin: 0 0 0 0;
 	border: 0em;
 	height: 22.0px;
+	padding: 2px 0px 5px 0px; 
 }
 
 .mybuttons:hover {
