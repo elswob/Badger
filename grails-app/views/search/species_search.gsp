@@ -675,13 +675,13 @@
 		<hr size = 5 color="green" width="100%" style="margin-top:10px">
 		<table>
 	 	<tr><td><h1>Search by gene ID:</h1>	 
-			 <g:form controller="search" action="geneID">
+			 <form name="input" action="m_info" method="get">
 			 <table><tr><td>		 	
-    				Enter a gene ID, e.g. <g:link action="m_info" params="${[mid:geneData.gene.mrna_id[0]]}">${geneData.gene.mrna_id[0]} </g:link> <g:textField name="searchId"  size="50%"/>
+    				Enter a gene ID, e.g. <g:link action="m_info" params="${[mid:geneData.gene.mrna_id[0]]}">${geneData.gene.mrna_id[0]} </g:link> <g:textField name="mid" size="50%"/>
     				<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
      			</td></tr>
      		</table>
-			</g:form>
+			</form>
 
    		</td></tr></table>
    		<hr size = 5 color="green" width="100%" style="margin-top:10px">

@@ -141,8 +141,18 @@
 					<td><g:link action="m_info" params="${[mid: res.gene.mrna_id]}"> ${res.gene.mrna_id}</g:link></td>
 					<td>${res.gene.nuc.size()}</td>
 					<td>${res.gene.exon.size()}</td>
-					<td><g:if test = "${res.gene.gblast}"><% def top = res.gene.gblast.findAll().sort({-it.score})[0]; if (top.descr.size()>200){ top.descr = top.descr[0..200]+" ... "};%><span style="color:red">${top.anno_db}:</span> ${top.descr} <span style="color:blue">Evalue: ${top.score}</g:if><g:else>No BLAST hits</g:else></td>
-					<td><g:if test = "${res.gene.ginter}"><% def top = res.gene.ginter.findAll().sort({it.score})[0]; if (top.descr.size()>200){ top.descr = top.descr[0..200]+" ... "};%><span style="color:red">${top.anno_db}:</span> ${top.descr} <span style="color:blue">Evalue: ${top.score}</g:if><g:else>No domain hits</g:else></td>
+					<g:if test = "${res.size < 20}">
+							<td><g:if test = "${res.gene.gblast}"><% def top = res.gene.gblast.findAll().sort({-it.score})[0]; if (top.descr.size()>200){ top.descr = top.descr[0..200]+" ... "};%><span style="color:red">${top.anno_db}:</span> ${top.descr} <span style="color:blue">Evalue: ${top.score}</g:if><g:else>No BLAST hits</g:else></td>
+						</g:if>
+						<g:else>
+							<td>n/a for groups of 20 or more</td>
+						</g:else>
+					    <g:if test = "${res.size < 20}">
+							<td><g:if test = "${res.gene.ginter}"><% def top = res.gene.ginter.findAll().sort({it.score})[0]; if (top.descr.size()>200){ top.descr = top.descr[0..200]+" ... "};%><span style="color:red">${top.anno_db}:</span> ${top.descr} <span style="color:blue">Evalue: ${top.score}</g:if><g:else>No domain hits</g:else></td>
+						</g:if>
+						<g:else>
+							<td>n/a for groups of 20 or more</td>
+						</g:else>
 				</tr>
 			</g:each>
 		</tbody>

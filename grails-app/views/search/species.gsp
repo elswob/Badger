@@ -56,7 +56,10 @@
   	  	<td><div id="svgCanvas2"> </div></td>
   	  </g:if>
   	  </tr></table>
-  	 	<br>
+  	  <g:if test="${grailsApplication.config.t.source}">
+  	  	<font size="1">${grailsApplication.config.t.source}</font>
+  	  </g:if>
+  	 	<br><br>
   	 	<g:each var="res" in="${meta}">
   	 		<div class="inline">
   	 			<a name="${res.genus} ${res.species}"><h2><b><i>${res.genus} ${res.species}</i></b></h2></a>	
