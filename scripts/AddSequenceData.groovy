@@ -103,109 +103,37 @@ if (getFiles){
 			def comm = "$blastPath/makeblastdb -in data/"+fileLoc+" -dbtype nucl -out data/"+fileLoc
 			def p = comm.execute()   
 			addGenomeData(fileLoc, it.cov, it.file_name)
-		}else if (it.file_type == "Transcriptome"){
-			println "Creating BLAST database..."
-			def comm = "$blastPath/makeblastdb -in data/"+fileLoc+" -dbtype nucl -out data/"+fileLoc
-			def p = comm.execute()  
-			addTransData(fileLoc, it.cov, it.id)
 		}else if (it.file_type == "Genes"){
 			def getSeqs = FileData.findAllByFile_link(it.file_name)
 			def nuc
 			def pep
 			getSeqs.each{
-				def loc = it.file_dir+"/"+it.file_name
 				if (it.file_type == "mRNA"){
 					nuc = it
 					println "Creating BLAST database..."
-					def comm = "$blastPath/makeblastdb -in data/"+loc+" -dbtype nucl -out data/"+loc
+					def comm = "$blastPath/makeblastdb -in data/"+fileLoc+" -dbtype nucl -out data/"+fileLoc
 					def p = comm.execute()               
 				}else if (it.file_type == "Peptide"){
 					pep = it
 					println "Creating BLAST database..."
-					def comm = "$blastPath/makeblastdb -in data/"+loc+" -dbtype prot -out data/"+loc
+					def comm = "$blastPath/makeblastdb -in data/"+fileLoc+" -dbtype prot -out data/"+fileLoc
 					def p = comm.execute() 
 				}
 			}
 			//println "fileLoc =  "+fileLoc+" it.file_name = "+it.file_name+" nuc = "+nuc+" pep = "+pep
 			addGeneData(fileLoc, it.file_name, nuc, pep)
+		}else if (it.source != "local"){
+			println "Adding external gene info for "+it.file_name+"..."
+			//println "Creating BLAST database..."
+			//def comm = "$blastPath/makeblastdb -in data/"+fileLoc+" -dbtype prot -out data/"+fileLoc
+			//def p = comm.execute() 
+			addExternal(it.file_name,fileLoc)
 		}
 	}
 }else{
 	println "There are no new data files to load into the database"
 	println "Running tree editor just in case..."
 	editTree()
-}
-//add the Transcripts
-def addTransData(fileLoc, cov, data_id, file_id){
-	println "Adding transcript data - "+fileLoc
-	println new Date()
-	def contigFile = new File("data/"+fileLoc)
-	def cov_check = false
-	def header_regex
-	if (cov == 'y'){
-		cov_check = true
-		println "Data has coverage info."
-		header_regex = /^>(\w+)_(.*)/
-	}else{
-		header_regex = /^>(\w+)/
-		println "Data has no coverage info."
-	}
-	def sequence=""
-	def contig_id=""
-	def count=0
-	def count_gc		
-	def contigMap = [:]
-	contigFile.eachLine{
-		if ((matcher = it =~ header_regex)){
-			if (sequence != ""){
-				//println "Adding $contig_id - $count"
-				count++
-				//get gc
-				count_gc = sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
-				def gc = (count_gc/sequence.length())*100
-				gc = sprintf("%.2f",gc)
-				//add data to map
-				contigMap.contig_id = contig_id
-				contigMap.gc = gc
-				if (cov_check == true){
-					coverage = sprintf("%.2f",coverage)
-				}
-				contigMap.coverage = coverage
-				contigMap.length = sequence.length()
-				contigMap.sequence = sequence
-				contigMap.data_id = data_id
-				contigMap.file_id = file_id
-				//println contigMap
-				if ((count % 1000) ==  0){
-					println count
-					new TransInfo(contigMap).save(flush:true)
-					cleanUpGorm()
-				}else{
-					new TransInfo(contigMap).save()
-				}					
-				sequence=""
-			}
-			contig_id = matcher[0][1]
-			if (cov_check == true){
-				coverage = matcher[0][2].toFloat()
-			}else{
-				coverage = 0
-			}
-		}else{
-			sequence += it
-		}
-	} 
-	//catch the last one
-	count_gc = sequence.toUpperCase().findAll({it=='G'|it=='C'}).size()
-	def gc = (count_gc/sequence.length())*100
-	contigMap.contig_id = contig_id
-	contigMap.gc = gc
-	contigMap.length = sequence.length()
-	contigMap.sequence = sequence
-	contigMap.coverage = coverage
-	contigMap.data_id = data_id
-	contigMap.file_id = file_id
-	new TransInfo(contigMap).save(flush:true)
 }
 
 //add the genome data (for coverage info header needs to be in format of >contigID_coverage)
@@ -246,14 +174,14 @@ def addGenomeData(fileLoc, cov, file_name){
 				//println "Adding $contig_id - $count"
 				String seqString = sequence.toString();
 				count++
-				//get gc
-				count_gc = seqString.toUpperCase().findAll({it=='G'|it=='C'}).size()
-				def gc = (count_gc/seqString.length())*100
-				gc = sprintf("%.2f",gc)
-				contigMap.gc = gc
 				//get Ns
 				nonATGC += seqString.toUpperCase().count("N")
 				contigMap.non_atgc = nonATGC
+				//get gc
+				count_gc = seqString.toUpperCase().findAll({it=='G'|it=='C'}).size()
+				def gc = (count_gc/(seqString.length()-nonATGC))*100
+				gc = sprintf("%.2f",gc)
+				contigMap.gc = gc				
 				//add data to map
 				contigMap.contig_id = contig_id.trim()
 				//println "id = "+contig_id
@@ -577,4 +505,45 @@ def addGeneData(fileLoc, file_name, nuc, pep){
     sql.execute(fSql)
 	println gfile.file_name+" is loaded"
     cleanUpGorm()
+}
+
+def addExternal(file_name,fileLoc){
+	def gene_count=0
+	def geneMap = [:]
+	def dataSource = ctx.getBean("dataSource")
+  	def sql = new Sql(dataSource)
+	FileData gfile = FileData.findByFile_name(file_name)
+	dataFile = new File("data/"+fileLoc)
+	GeneInfo geneFind
+	def geneId = ""
+	dataFile.eachLine{
+		if ((matcher = it =~ /^>(.*)/)){
+			geneId = matcher[0][1].trim()
+			gene_count++
+			geneMap.gc = 0
+			geneMap.gene_id = geneId
+			geneMap.mrna_id = geneId
+			geneMap.start = 0
+			geneMap.stop = 0
+			geneMap.source = "n/a"
+			geneMap.contig_id = "n/a"
+			geneMap.strand = "n/a"
+			geneMap.nuc = "n/a"
+			geneMap.pep = "n/a"
+			GeneInfo gene = new GeneInfo(geneMap)
+			gfile.addToGene(gene)
+			if ((gene_count % 5000) ==  0){
+				println gene_count
+				//println geneMap
+				gene.save(flush:true)
+				cleanUpGorm()
+			}else{
+				gene.save()
+			}
+		}
+	}
+	def gSql = "update file_data set loaded = true where file_name = '"+file_name+"'";
+	println gSql
+    sql.execute(gSql)
+	println file_name+" is loaded"
 }

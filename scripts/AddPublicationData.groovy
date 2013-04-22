@@ -51,12 +51,14 @@ def getPub(data_id,query){
 		}
 	}
 	//get the last ones
-	efetch_ids = efetch_ids[0..-2]
-	println "Fetching "+counter			
-	def efetch = "$utils/efetch.fcgi?db=$db&id=$efetch_ids&retmode=xml";
-	println efetch
-	pubdata << new URL(efetch).getText()
-	addPub(pubdata,data_id) 
+	if (efetch_ids != ''){
+		efetch_ids = efetch_ids[0..-2]
+		println "Fetching "+counter			
+		def efetch = "$utils/efetch.fcgi?db=$db&id=$efetch_ids&retmode=xml";
+		println efetch
+		pubdata << new URL(efetch).getText()
+		addPub(pubdata,data_id) 
+	}
 }
 //add info
 def addPub(pubFile,data_id){

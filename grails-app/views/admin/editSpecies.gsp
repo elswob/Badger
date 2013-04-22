@@ -58,7 +58,7 @@
 <h1>Add a genome for <i>${metaData.genus} ${metaData.species}</i></h1>
 <table>
 	<tr>
-		<td width="45%"><b>Date (leave blank for today's date)</b><font color="red">*</font><br>
+		<td width="45%"><b>Date e.g. dd/mm/yyyy (leave blank for today's date)</b><font color="red">*</font><br>
 			<g:textField name="genome_date" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 		</td>
 		<td width="50%"><b>Version (a unique ID for the genome)</b><font color="red">*</font><br>
@@ -66,7 +66,7 @@
 		</td>
 	</tr>
 </table>	
-<p><b>URL of Gbrowse2 instance</b></p>
+<p><b>URL of Gbrowse2 instance (if available)</b></p>
 <g:textField name="gbrowse" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br><br>
 <input type="hidden" name="meta" value="${metaData.id}">	
 	<input class="mybuttons" type="button" value="Add new genome" onclick="submit()" >

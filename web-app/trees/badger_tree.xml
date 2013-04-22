@@ -84,7 +84,14 @@
                             <clade>
                               <branch_length>0.059720592</branch_length>
                               <clade>
-                                <name bgStyle="none">Helobdella robusta</name>
+                                <name bgStyle="bold">Helobdella robusta</name>
+                                <chart>
+                                 <component>bold</component>
+                                </chart>
+                                <annotation>
+                                 <desc>Helobdella robusta</desc>
+                                 <uri>#Helobdella robusta</uri>
+                                </annotation>
                                 <branch_length>0.037350202</branch_length>
                               </clade>
                               <clade>
@@ -154,7 +161,14 @@
                         <branch_length>0.164547133</branch_length>
                       </clade>
                       <clade>
-                        <name bgStyle="none">Capitella teleta</name>
+                        <name bgStyle="bold">Capitella teleta</name>
+                        <chart>
+                         <component>bold</component>
+                        </chart>
+                        <annotation>
+                         <desc>Capitella teleta</desc>
+                         <uri>#Capitella teleta</uri>
+                        </annotation>
                         <branch_length>0.176591873</branch_length>
                       </clade>
                     </clade>

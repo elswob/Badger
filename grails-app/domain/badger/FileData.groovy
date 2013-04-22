@@ -12,6 +12,7 @@ class FileData {
     String search
     String download
     Boolean loaded
+    String source = "local"
 
     static mapping = {
         description type: "text"
