@@ -556,7 +556,7 @@
 			 <h1>Gene metrics:</h1>
 			 <g:if test = "${gene_stats.size() > 0}">
 				 <table>
-				 <tr><td><b>GFF3 version</b></td><td>${geneData.file_version}</td></tr>
+				 <g:if test="${geneData.description != 'fake'}"><tr><td><b>Annotation version</b></td><td>${geneData.file_version}</td></tr></g:if>
 				 <tr><td><b>Number genes</b></td><td>${sprintf("%,d\n",gene_stats.genenum)}</td></tr>
 				 <tr><td><b>Number transcripts</b></td><td>${sprintf("%,d\n",gene_stats.mrnanum)}</td></tr>
 				 <tr><td><b>Frequency (genes per Kb)</b></td><td>${sprintf("%.4g",(gene_stats.genenum/genome_stats.span)*1000)}</td></tr>
@@ -567,12 +567,26 @@
 				 <tr><td><b>Non ATGC (bp)</b></td><td>${sprintf("%,d\n",gene_stats.nonATGC)}</td></tr>
 				 </table>
 			 </td><td>
-				<br>
-				<div id="blast_chart" class="jqplot-target" style="height: 120px; width: 100%; position: center;"></div>
-				<br>
-				<div id="fun_chart" class="jqplot-target" style="height: 120px; width: 100%; position: center;"></div>
-				<br>
-				<div id="ipr_chart" class="jqplot-target" style="height: 120px; width: 100%; position: center;"></div>
+			 	<g:if test="${geneData.description != 'fake'}">
+					<br>
+					<div id="blast_chart" class="jqplot-target" style="height: 120px; width: 100%; position: center;"></div>
+					<br>
+					<div id="fun_chart" class="jqplot-target" style="height: 120px; width: 100%; position: center;"></div>
+					<br>
+					<div id="ipr_chart" class="jqplot-target" style="height: 120px; width: 100%; position: center;"></div>
+				</g:if>
+				<g:else>
+					<br><br><br><h3>These genes are from the genome resource at the ${ext.ext_source[0]} and annotation information can be found there. All sequences will link back to that database.</h3>
+					<br>
+					<div style="text-align: center;">
+						<g:if test="${grailsApplication.mainContext.getResource('images/'+geneData.genome.meta.image_file).exists()}"> 
+							<img src="${resource(dir: 'images', file: geneData.genome.meta.image_file)}" height="250" style="margin: auto;"/>
+						</g:if>
+						<g:else>
+							<img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" height="250" />	    				
+						</g:else>
+	    			</div>
+				</g:else>
 		 	</g:if>
 		 	<g:else>
 		 	<h2>No gene data is in the database for this genome</h2>

@@ -624,7 +624,7 @@
   </head>
   <body>
   <g:if test="${info_results}">
-    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus[0]}. ${metaData.genome.meta.species}</i></g:link> > Genome: <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">v${metaData.file_version}</g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:info_results.contig_id]}"> ${info_results.contig_id}</g:link> > Gene: <g:link action="g_info" params="${[Gid:Gid,GFFid:GFFid,gid:info_results.gene_id]}"> ${info_results.gene_id}</g:link>  > Transcript: ${info_results.mrna_id}
+    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus[0]}. ${metaData.genome.meta.species}</i></g:link> > Genome: <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">v${metaData.file_version}</g:link> > Scaffold:<g:if test="${info_results.contig_id != 'n/a'}"><g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:info_results.contig_id]}"> ${info_results.contig_id}</g:link></g:if><g:else> n/a</g:else> > Gene: <g:link action="g_info" params="${[Gid:Gid,GFFid:GFFid,gid:info_results.gene_id]}"> ${info_results.gene_id}</g:link>  > Transcript: ${info_results.mrna_id}
   	<div id="top_anchor"></div>
     <div id="info_anchor"><h1>Information for transcript ${info_results.mrna_id}:</h1></div>
     <table width=100%>
@@ -632,11 +632,12 @@
 		<table class="compact">
 			<tr><td><b>Length:</b></td><td>${sprintf("%,d\n",info_results.nuc.length())} bp (${sprintf("%,d\n",info_results.pep.length())} aa)</td></tr>
 			<tr><td><b>GC:</b></td><td>${sprintf("%.1f",info_results.gc)}</td></tr>
-			<tr><td><b>Exons:</b></td><td>${exon_results.size()}</td></tr>
-			<tr><td><b>Source:</b></td><td>${info_results.source}</td></tr>
-			<tr><td><b>Scaffold start:</b></td><td>${sprintf("%,d\n",info_results.start)}</td></tr>
-			<tr><td><b>Scaffold end:</b></td><td>${sprintf("%,d\n",info_results.stop)}</td></tr>
-			<tr><td><b>Strand:</b></td><td>${info_results.strand}</td></tr>
+			<g:if test="${exon_results}"><tr><td><b>Exons:</b></td><td>${exon_results.size()}</td></tr></g:if>
+			<tr><td><b>Source:</b></td><td><g:if test="${info_results.source == 'n/a'}">${extInfo.ext_source[0]}</g:if><g:else>${info_results.source}</g:else></td></tr>
+			<g:if test="${info_results.source != 'n/a'}"><tr><td><b>Scaffold start:</b></td><td>${sprintf("%,d\n",info_results.start)}</td></tr></g:if>
+			<g:if test="${info_results.source != 'n/a'}"><tr><td><b>Scaffold end:</b></td><td>${sprintf("%,d\n",info_results.stop)}</td></tr></g:if>
+			<g:if test="${info_results.source != 'n/a'}"><tr><td><b>Strand:</b></td><td>${info_results.strand}</td></tr></g:if>   
+			<g:if test="${info_results.source == 'n/a'}"><tr><td><b>Link:</b></td><td><% def newLink = info_results.mrna_id.replaceAll(extInfo.regex[0], "<a href=\""+extInfo.link[0]+"\$1\" target=\'_blank\'>\$1</a>") %> ${newLink}</td></tr></g:if>
 			<tr><td><b>Download:</b></td>
 					<td>
 				<div class="inline">
@@ -688,7 +689,9 @@
 					<li><a href="javascript:void(0);" onclick="$.scrollTo('#browse_anchor', 800, {offset : -50});">Browse</a></li>
 			   </g:if>
 			   <li><a href="javascript:void(0);" onclick="$.scrollTo('#files_anchor', 800, {offset : -50});">Sequence data</a></li>
-			   <li><a href="javascript:void(0);" onclick="$.scrollTo('#exon_anchor', 800, {offset : -50});">Exons</a></li>
+			   <g:if test="${info_results.source != 'n/a'}">
+			   		<li><a href="javascript:void(0);" onclick="$.scrollTo('#exon_anchor', 800, {offset : -50});">Exons</a></li>
+			   </g:if>
 			   <g:if test = "${grailsApplication.config.o.file}">
 			   	<li><a href="javascript:void(0);" onclick="$.scrollTo('#ortho_anchor', 800, {offset : -50});">Orthologs</a></li>
 			   </g:if>
@@ -824,33 +827,33 @@
 	      </td></tr>
 	      </table>
       </div>      
-     
-    <div id="exon_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
-		<h1>Exons</h1>
-		<div class="inline">
-			Download: 
-			<g:form name="exonDownload" url="[controller:'FileDownload', action:'exon_download']">
-				<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
-				<a href="javascript:void(0);" onclick="document.exonDownload.submit()">exon sequences</a>
-			</g:form>
-		</div>
-		 <table cellpadding="0" cellspacing="0" border="0" class="display" id="exon_table">
-		 <thead>
-			<tr>
-				<th></th>
-				<th>Number</th>
-				<th>Length</th>
-				<th>Start</th>
-				<th>End</th>
-				<th>GC</th>
-				<th>Phase</th>
-				<th>Score</th>
-			</tr>
-		 </thead>
-		 <tbody></tbody>
-	     </table> 
-     <br>
-    
+    <g:if test="${info_results.source != 'n/a'}"> 
+		<div id="exon_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
+			<h1>Exons</h1>
+			<div class="inline">
+				Download: 
+				<g:form name="exonDownload" url="[controller:'FileDownload', action:'exon_download']">
+					<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
+					<a href="javascript:void(0);" onclick="document.exonDownload.submit()">exon sequences</a>
+				</g:form>
+			</div>
+			 <table cellpadding="0" cellspacing="0" border="0" class="display" id="exon_table">
+			 <thead>
+				<tr>
+					<th></th>
+					<th>Number</th>
+					<th>Length</th>
+					<th>Start</th>
+					<th>End</th>
+					<th>GC</th>
+					<th>Phase</th>
+					<th>Score</th>
+				</tr>
+			 </thead>
+			 <tbody></tbody>
+			 </table> 
+		 <br>
+    </g:if>
     <g:if test = "${grailsApplication.config.o.file}">
 		<div id="ortho_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
 		<h1>Orthologs (click cluster ID for more details)</h1> 

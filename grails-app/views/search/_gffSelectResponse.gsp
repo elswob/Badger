@@ -1,5 +1,6 @@
-<g:if test = "${genes}">
-		<input type="hidden" name="Gid" value="${genome}">
+<g:if test = "${genes}" >
+	<input type="hidden" name="Gid" value="${genome}">
+	<g:if test="${genes.description[0] != 'fake'}">	
 		<table>
 		<g:if test = "${genes.size == 1}">
 			<h1>Annotation version</h1>
@@ -18,6 +19,12 @@
 			</g:each>	
 		</g:else>
 		</table>
+	</g:if>
+	<g:else>
+		<h1>Annotation version</h1>
+		<h3>There is no annotation file for this genome, just transcript sequences linking to an external database</h3>
+		<input type="hidden" name="GFFid" id="${genes.id}" value="${genes.id[0]}">
+	</g:else>
 </g:if>
 <g:else>
 	<h1> No GFF3 files are available for this genome</h1>
