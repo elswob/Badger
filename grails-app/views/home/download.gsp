@@ -10,7 +10,6 @@
   <body>
   <div class="bread"><g:link action="">Home</g:link> > Download</div>
     <table class="compact">    
-    <!--tr><td><h1>Domain</h1></td><td><h1>Species</h1></td><td><h1>Data</h1></td><td><h1>Version</h1></td><td><h1>Download</h1></td></tr-->
     <% def sp = ""%>
     <sec:ifNotLoggedIn>
     	<g:each var="res" in="${files}">
@@ -21,17 +20,19 @@
     			println "</table></td><tr><td colspan=2><h1>${res.genus} ${res.species}</h1></td></tr>"
     			println "<tr><td width=120><a href = \"/search/species_v?Sid=${res.sid}\"><img src=\"${resource(dir: 'images', file: res.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>" 
     		}%>
-				<tr>
-					<td>${res.file_type}</td><td>Version ${res.file_version}</td>
-					<td><g:link controller="FileDownload" action="zip_download" params="${[fileName: res.file_name]}">${res.file_name}</g:link></td>
-				</tr>
-				<g:if test="${res.file_type == 'Genes'}">
-					<% if (gffAnno."${res.file_name}" == true){ %>
-    					<tr><td>Genes (annotated file)</td><td>Version ${res.file_version}</td>
-    					<td><g:link controller="FileDownload" action="zip_anno_download" params="${[fileName: res.file_name]}">${res.file_name}.anno.tsv</g:link></td>
-    				<%}%>
-    			</tr>
-    			</g:if>
+    			<g:if test = "${res.description != 'fake'}">
+					<tr>
+						<td>${res.file_type}</td><td>Version ${res.file_version}</td>
+						<td><g:link controller="FileDownload" action="zip_download" params="${[fileName: res.file_name]}">${res.file_name}</g:link></td>
+					</tr>
+					<g:if test="${res.file_type == 'Genes'}">
+						<% if (gffAnno."${res.file_name}" == true){ %>
+							<tr><td>Genes (annotated file)</td><td>Version ${res.file_version}</td>
+							<td><g:link controller="FileDownload" action="zip_anno_download" params="${[fileName: res.file_name]}">${res.file_name}.anno.tsv</g:link></td>
+						<%}%>
+					</tr>
+					</g:if>
+				</g:if>
 			</g:if>
 			<% sp = res.species %>
     	</g:each>
@@ -46,17 +47,19 @@
     			println "</table></td><tr><td colspan=2><h1>${res.genus} ${res.species}</h1></td></tr>"
     			println "<tr><td width=120><a href = \"/search/species_search?Gid=${res.id}\"><img src=\"${resource(dir: 'images', file: res.image_file)}\" width=\"120\" style=\"float:left;\"/></a></td><td><table>" 
     		}%>
-				<tr>
-					<td>${res.file_type}</td><td>Version ${res.file_version}</td>
-					<td><g:link controller="FileDownload" action="zip_download" params="${[fileName: res.file_name]}">${res.file_name}</g:link></td>
-				</tr>
-				<g:if test="${res.file_type == 'Genes'}">
-					<% if (gffAnno."${res.file_name}" == true){ %>
-    					<tr><td>Genes (annotated file)</td><td>Version ${res.file_version}</td>
-    					<td><g:link controller="FileDownload" action="zip_anno_download" params="${[fileName: res.file_name]}">${res.file_name}.anno.tsv</g:link></td>
-    				<%}%>
-    			</tr>
-    			</g:if>
+    			<g:if test = "${res.description != 'fake'}">
+					<tr>
+						<td>${res.file_type}</td><td>Version ${res.file_version}</td>
+						<td><g:link controller="FileDownload" action="zip_download" params="${[fileName: res.file_name]}">${res.file_name}</g:link></td>
+					</tr>
+					<g:if test="${res.file_type == 'Genes'}">
+						<% if (gffAnno."${res.file_name}" == true){ %>
+							<tr><td>Genes (annotated file)</td><td>Version ${res.file_version}</td>
+							<td><g:link controller="FileDownload" action="zip_anno_download" params="${[fileName: res.file_name]}">${res.file_name}.anno.tsv</g:link></td>
+						<%}%>
+					</tr>
+					</g:if>
+				</g:if>
 			</g:if>
 			<% sp = res.species %>
     	</g:each>
