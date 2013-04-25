@@ -3,7 +3,7 @@
 date
 grails prod run-script \
 scripts/AlterTables.groovy \
-scripts/AddFileDataLrub.groovy \
+scripts/AddFileData.groovy \
 scripts/AddPublicationData.groovy \
 scripts/AddSequenceData.groovy \
 scripts/AddOrthoData.groovy \
