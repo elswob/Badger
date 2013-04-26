@@ -230,6 +230,82 @@ def M_meles(){
 
 // To add more annotation data add another 'Annotation Data' section inside the same species function
 
+// Example of external data
+
+/////// C. teleta
+def C_tel(){
+	def metaMap = [:]
+	def genomeMap = [:]
+	def fileMap = [:]	
+	def annoMap = [:]
+	
+// --- Species Data ---	
+	metaMap.genus = "Capitella";
+	metaMap.species = "teleta";
+	metaMap.description = "Capitella teleta is a polychaete worm and representative of the phylum Annelida. C. teleta was formally described by Blake, Grassle and Eckelbarger (2009) and previously known as Capitella sp. I . Polychaete annelids, also known as the segmented worms, are members of the superphylum Lophotrochozoa, and C. teleta is among the first lophotrophozoans to have its genome sequenced. Capitella is a small benthic marine worm with a cosmopolitan distribution. It has many features characteristic of annelids including a segmented body plan, centralized nervous system, continued adult growth by addition of segments from a posterior growth zone, regenerative abilities, a holoblastic spiral cleavage program, and an indirect life cycle. Capitella is currently being developed as a model for evolutionary developmental studies and is one of the major protostome bio-indicators of disturbed marine habitats. As a representative lophotrochozoan, embryological and molecular genetic studies of Capitella will be pivotal for understanding evolution of a speciose and ecologically important, but understudied group of bilaterian animals. The Capitella genome sequence complements current developmental and environmental research programs and will provide opportunities to understand genome evolution and its role in body plan and life history evolution in the Metazoa."
+	metaMap.image_file = "capitella.jpg"
+	metaMap.image_source = "http://genome.jgi-psf.org/Capca1/Capca1.home.html"
+	addMeta(metaMap)
+	
+// --- Genome Data ---	
+	genomeMap.gbrowse = ""
+	genomeMap.dateString = Date.parse("dd/MM/yyyy","23/08/2007")
+	genomeMap.gversion = "cap1"
+	addGenome(genomeMap)
+	
+// --- File Data --- 	
+	// globals (blast,search,download and cov need to be added to each file type if the values differ)
+	// blast, search and download can be either public (pub) or private (priv)
+	// coverage can be either yes (y) or no (n)
+	// file_link is only required for the mRNA and peptide files and needs to match the name of the GFF3 from which they originated
+	fileMap.file_dir = "C_teleta"
+	fileMap.loaded = false
+	fileMap.blast = "pub"
+	fileMap.search = "pub"
+	fileMap.download = "pub"
+	fileMap.cov = "n"
+	fileMap.file_link = "n"
+	
+	//genome
+	fileMap.file_type = "Genome"
+	fileMap.file_name = "Capitella_spI.edit.fasta"
+	fileMap.file_version = "1.0"
+	fileMap.description = "The assembly release version 1.0 of whole genome shotgun reads was constructed with the JGI assembler, Jazz, using paired end sequencing reads at a coverage of ~7.9X. After trimming for vector and quality, 2,335,056 reads assembled into 21,042 main genome scaffolds totaling 333.7 Mb. Roughly half of the genome is contained in 454 scaffolds all at least 188 Kb in length."
+	addFile(fileMap)	
+	
+	//fake gff (very important that the description is fake and the file is just a list of IDs that match the fasta file)
+	fileMap.file_type = "Genes"
+	fileMap.file_name = "Cap.gff"
+	fileMap.file_version = "whatever"
+	fileMap.description = "fake"
+	fileMap.source = "cap"
+	addFile(fileMap)
+	
+	//external peptide
+	fileMap.file_type = "mRNA"
+	fileMap.file_name = "C_teleta_edit.fa"
+	fileMap.file_version = "1.0"
+	fileMap.description = "The current draft release, version 1.0, includes a total of 32,415 gene models predicted and functionally annotated using the JGI annotation pipeline."
+	fileMap.file_link = "Cap.gff"
+	fileMap.source = "cap"
+	addFile(fileMap)
+	
+	//external peptide
+	fileMap.file_type = "Peptide"
+	fileMap.file_name = "C_teleta_edit.aa"
+	fileMap.file_version = "1.0"
+	fileMap.description = "The current draft release, version 1.0, includes a total of 32,415 gene models predicted and functionally annotated using the JGI annotation pipeline."
+	fileMap.file_link = "Cap.gff"
+	fileMap.source = "cap"
+	addFile(fileMap)
+	
+	def extMap = [:]
+	extMap.ext_id = "cap"
+	extMap.link = "http://genome.jgi-psf.org/cgi-bin/dispGeneModel?db=Capca1&id="
+	extMap.regex = "Cap_(\\d+)"
+	extMap.ext_source = "<a href=\"http://genome.jgi-psf.org/Capca1/Capca1.home.html\" target=\"_blank\">JGI</a>"
+	addExt(extMap)
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////// Do not edit below this line /////////////////////////////////////////////

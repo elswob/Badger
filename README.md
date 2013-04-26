@@ -315,6 +315,12 @@ The naming convention expected is that each transcript ID is preceded by an Orth
 
 If this file is added after the initial data, the ortholog data will need to be loaded into the database. This can be done simply by running `./run_me.sh` again.
 
+#### External data
+
+It is possible to add data from an external genome project and link the genes back to the external database. Furthermore this is possible without a GFF3 file and just the three FASTA files. If this file is missing then a fake GFF3 file is needed (a list of transcript IDs that matches those in the FASTA files). In addotion information about the external data source is also required.
+
+Currently the only way to add this data is using the AddFileData.groovy script. For an example see the C. teleta section. 
+
 ## Data rules
 
 1. All chromosme/scaffold/contig IDs must be unique, e.g. Mmeles_v1.0_scaffold_1

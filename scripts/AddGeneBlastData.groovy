@@ -69,7 +69,9 @@ def addGeneBlast(anno,blastFile){
         			if ((matcher = line =~ /<Hit_def>(.*?)\s(.*?)<\/Hit_def>/)){
         				annoMap.anno_id = matcher[0][1]
         			}else{
-        				annoMap.anno_id = "n/a"
+        				//switch the description and IDs for databases with no descriptions, i.e. JGI gene sets
+        				annoMap.anno_id = annoMap.descr
+        				annoMap.descr = "n/a"
         			}
         		}                
         }
