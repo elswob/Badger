@@ -182,7 +182,15 @@
 				}},
 				{ "mDataProp": "descr",
 				"fnRender": function ( oObj, sVal ){
-					if (oObj.aData["descr"].length>200){
+					if (oObj.aData["anno_id"] == "n/a"){
+						var db = oObj.aData["anno_db"]
+						if (AnnoData[db]){
+							var regex = new RegExp(AnnoData[db][0]);
+							var link = sVal.replace(regex,"<a href=\""+AnnoData[db][1]+"$1 \" target='_blank'>$1</a>")
+							//link = "<a name=\"$1\">"+link+"</a>"
+						}
+						return link
+					}else if (oObj.aData["descr"].length>200){
 						return oObj.aData["descr"].substring(0,200)+" ..."
 					}else{
 						return oObj.aData["descr"]

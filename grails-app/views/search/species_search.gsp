@@ -357,7 +357,7 @@
             rendererOptions: {
                 barDirection: 'horizontal',
 				//shadowDepth: 2,
-        		//barMargin: 4,
+        		barMargin: 4,
 		    }
         },
         axes: {
@@ -409,7 +409,7 @@
             rendererOptions: {
                 barDirection: 'horizontal',
 				//shadowDepth: 2,
-        		//barMargin: 4,
+        		barMargin: 4,
 		    }
         },
         axes: {
@@ -464,7 +464,7 @@
             rendererOptions: {
                 barDirection: 'horizontal',
 				//shadowDepth: 2,
-        		barMargin: 6,
+        		barMargin: 4,
 		    }
         },
         axes: {

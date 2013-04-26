@@ -746,10 +746,10 @@ class SearchController {
 					}
 					bsql = bsql[0..-8]			
 				}
-				println bsql;
+				//println bsql;
 				bsql += " order by group_id,anno_db,score;"
 				def b = sql.rows(bsql);
-				println bsql;
+				//println bsql;
 				return [searchRes:b, files:fileData, type:"search"]
 				
 			}else{
