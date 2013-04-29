@@ -239,13 +239,8 @@ Whilst in this section, you can register users for the site giving them access t
 
 Two ways, the first option is ideal for one or two species/genomes, the second is more suitable for buld data.
 
-1. Via the GUI
-
-Log in as admin and fill in the forms as necessary. 
-
-2. Using the AddFileData.groovy script
-
-Edit the script `scripts/AddFileData.groovy` in compliance with the demo data already there, and make sure the data will be loaded by removing the '//' at the start of the section.  
+1. Via the GUI - log in as admin and fill in the forms as necessary. 
+2. Using the AddFileData.groovy script - edit the script `scripts/AddFileData.groovy` in compliance with the demo data already there, and make sure the data will be loaded by removing the '//' at the start of the section.  
 
 #### Load data
 

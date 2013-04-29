@@ -51,21 +51,23 @@
 	    }
 	    //gets table
 	    var rowLength = oTableData.rows.length;
-	    //gets rows of table
-	    for (i = 0; i < rowLength; i++){
-	    //loops through rows
-	       var oCells = oTableData.rows.item(i).cells;
-	       var cellVal = oCells.item(rowNum).innerHTML;
-	       //alert(cellVal)
-	       if (table == 'orthoNuc' || table == 'orthoPep' || table == 'orthoClusterNuc' || table == 'orthoClusterPep'){
-	       		var matcher = cellVal.match(/.*?mid=(.*?)">.*/);
-	       		if (matcher){
-	       	  		table_scrape.push(matcher[1])
-	    		}
-	    	}else{
-	       		table_scrape.push(cellVal)
-	       	}
-	    }
+	    //catch empty tables
+	    if (rowLength > 2){
+			//gets rows of table
+			for (i = 0; i < rowLength; i++){
+			//loops through rows
+			   var oCells = oTableData.rows.item(i).cells;
+			   var cellVal = oCells.item(rowNum).innerHTML;
+			   if (table == 'orthoNuc' || table == 'orthoPep' || table == 'orthoClusterNuc' || table == 'orthoClusterPep'){
+					var matcher = cellVal.match(/.*?mid=(.*?)">.*/);
+					if (matcher){
+						table_scrape.push(matcher[1])
+					}
+				}else{
+					table_scrape.push(cellVal)
+				}
+			}
+		}
 	    
 	    if (table == 'orthoPep'){
 	    	//alert('adding '+table_scrape+' to orthoPepFileId')
@@ -534,12 +536,14 @@
 				 }
 				 //alert('length = '+blast_data.length)
 				 if (blast_data.length > 0){
-					 drawing.drawSpacer(10);
-					 drawing.drawColouredTitle('BLAST','black')
 					 var tableData = get_table_data('blast')
-					 drawBars(blast_data,tableData,'blast')
-					 drawing.drawSpacer(10);
-					 drawing.drawLine(${info_results.pep.length()});
+					 if (tableData.length > 0){
+					 	drawing.drawSpacer(10);
+					 	drawing.drawColouredTitle('BLAST','black')
+					 	drawBars(blast_data,tableData,'blast')
+					 	drawing.drawSpacer(10);
+					 	drawing.drawLine(${info_results.pep.length()});
+					 }
 				 }
 				 if (fun_data.length > 0){
 					 drawing.drawSpacer(10);
