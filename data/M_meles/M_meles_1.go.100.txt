@@ -1,1249 +1,869 @@
-maker-nHd.2.3.scaf01027-snap-gene-0.21-mRNA-1	GO	GO:0070584	32	312	 350	mitochondrion morphogenesis
-maker-nHd.2.3.scaf01027-snap-gene-0.21-mRNA-1	GO	GO:0005739	32	312	 350	mitochondrion
-snap_masked-nHd.2.3.scaf01027-processed-gene-0.15-mRNA-1	GO	GO:0006941	86	239	73.2	striated muscle contraction
-snap_masked-nHd.2.3.scaf01027-processed-gene-0.15-mRNA-1	GO	GO:0007165	86	239	73.2	signal transduction
-snap_masked-nHd.2.3.scaf01027-processed-gene-0.15-mRNA-1	GO	GO:0005515	86	239	73.2	protein binding
-snap_masked-nHd.2.3.scaf01027-processed-gene-0.15-mRNA-1	GO	GO:0007268	86	239	73.2	synaptic transmission
-snap_masked-nHd.2.3.scaf01027-processed-gene-0.15-mRNA-1	GO	GO:0007274	86	239	73.2	neuromuscular synaptic transmission
-genemark-nHd.2.3.scaf01052-processed-gene-0.1-mRNA-1	GO	GO:0006396	8	367	 407	RNA processing
-genemark-nHd.2.3.scaf01052-processed-gene-0.1-mRNA-1	GO	GO:0005654	8	367	 407	nucleoplasm
-genemark-nHd.2.3.scaf01052-processed-gene-0.1-mRNA-1	GO	GO:0005634	8	367	 407	nucleus
-genemark-nHd.2.3.scaf01052-processed-gene-0.1-mRNA-1	GO	GO:0000398	8	367	 407	nuclear mRNA splicing, via spliceosome
-genemark-nHd.2.3.scaf01052-processed-gene-0.1-mRNA-1	GO	GO:0005732	8	367	 407	small nucleolar ribonucleoprotein complex
-genemark-nHd.2.3.scaf01052-processed-gene-0.1-mRNA-1	GO	GO:0005737	8	367	 407	cytoplasm
-genemark-nHd.2.3.scaf01052-processed-gene-0.1-mRNA-1	GO	GO:0000375	8	367	 407	RNA splicing, via transesterification reactions
-genemark-nHd.2.3.scaf01052-processed-gene-0.1-mRNA-1	GO	GO:0071013	8	367	 407	catalytic step 2 spliceosome
-genemark-nHd.2.3.scaf01052-processed-gene-0.1-mRNA-1	GO	GO:0005515	8	367	 407	protein binding
-genemark-nHd.2.3.scaf01052-processed-gene-0.1-mRNA-1	GO	GO:0010467	8	367	 407	gene expression
-genemark-nHd.2.3.scaf01052-processed-gene-0.1-mRNA-1	GO	GO:0005682	8	367	 407	U5 snRNP
-genemark-nHd.2.3.scaf01052-processed-gene-0.1-mRNA-1	GO	GO:0008380	8	367	 407	RNA splicing
-snap_masked-nHd.2.3.scaf01052-processed-gene-0.18-mRNA-1	GO	GO:0004364	4	250	91.7	glutathione transferase activity
-snap_masked-nHd.2.3.scaf01052-processed-gene-0.21-mRNA-1	GO	GO:0035097	566	942	 478	histone methyltransferase complex
-snap_masked-nHd.2.3.scaf01052-processed-gene-0.21-mRNA-1	GO	GO:0005634	566	942	 478	nucleus
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.17-mRNA-1	GO	GO:0015175	45	469	 255	neutral amino acid transmembrane transporter activity
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.17-mRNA-1	GO	GO:0042605	45	469	 255	peptide antigen binding
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.17-mRNA-1	GO	GO:0015804	45	469	 255	neutral amino acid transport
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.22-mRNA-1	GO	GO:0042752	6	160	85.1	regulation of circadian rhythm
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.22-mRNA-1	GO	GO:0008020	6	160	85.1	G-protein coupled photoreceptor activity
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.22-mRNA-1	GO	GO:0007602	6	160	85.1	phototransduction
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.22-mRNA-1	GO	GO:0009584	6	160	85.1	detection of visible light
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.22-mRNA-1	GO	GO:0016021	6	160	85.1	integral to membrane
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.22-mRNA-1	GO	GO:0005502	6	160	85.1	11-cis retinal binding
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.26-mRNA-1	GO	GO:0042752	6	142	75.1	regulation of circadian rhythm
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.26-mRNA-1	GO	GO:0008020	6	142	75.1	G-protein coupled photoreceptor activity
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.26-mRNA-1	GO	GO:0007602	6	142	75.1	phototransduction
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.26-mRNA-1	GO	GO:0009584	6	142	75.1	detection of visible light
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.26-mRNA-1	GO	GO:0016021	6	142	75.1	integral to membrane
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.26-mRNA-1	GO	GO:0005502	6	142	75.1	11-cis retinal binding
-maker-nHd.2.3.scaf01071-snap-gene-0.17-mRNA-1	GO	GO:0005887	22	444	 135	integral to plasma membrane
-maker-nHd.2.3.scaf01071-snap-gene-0.17-mRNA-1	GO	GO:0030169	22	444	 135	low-density lipoprotein particle binding
-maker-nHd.2.3.scaf01071-snap-gene-0.17-mRNA-1	GO	GO:0006898	22	444	 135	receptor-mediated endocytosis
-maker-nHd.2.3.scaf01071-snap-gene-0.17-mRNA-1	GO	GO:0004888	22	444	 135	transmembrane receptor activity
-maker-nHd.2.3.scaf01071-snap-gene-0.18-mRNA-1	GO	GO:0008241	67	621	 461	peptidyl-dipeptidase activity
-maker-nHd.2.3.scaf01071-snap-gene-0.18-mRNA-1	GO	GO:0008237	67	621	 461	metallopeptidase activity
-snap_masked-nHd.2.3.scaf01071-processed-gene-0.9-mRNA-1	GO	GO:0042752	44	124	65.1	regulation of circadian rhythm
-snap_masked-nHd.2.3.scaf01071-processed-gene-0.9-mRNA-1	GO	GO:0008020	44	124	65.1	G-protein coupled photoreceptor activity
-snap_masked-nHd.2.3.scaf01071-processed-gene-0.9-mRNA-1	GO	GO:0007602	44	124	65.1	phototransduction
-snap_masked-nHd.2.3.scaf01071-processed-gene-0.9-mRNA-1	GO	GO:0009584	44	124	65.1	detection of visible light
-snap_masked-nHd.2.3.scaf01071-processed-gene-0.9-mRNA-1	GO	GO:0016021	44	124	65.1	integral to membrane
-snap_masked-nHd.2.3.scaf01071-processed-gene-0.9-mRNA-1	GO	GO:0005502	44	124	65.1	11-cis retinal binding
-snap_masked-nHd.2.3.scaf01071-processed-gene-0.9-mRNA-1	GO	GO:0005886	44	124	65.1	plasma membrane
-snap_masked-nHd.2.3.scaf01071-processed-gene-0.12-mRNA-1	GO	GO:0008241	1	57	70.9	peptidyl-dipeptidase activity
-snap_masked-nHd.2.3.scaf01071-processed-gene-0.12-mRNA-1	GO	GO:0008237	1	57	70.9	metallopeptidase activity
-snap_masked-nHd.2.3.scaf01051-processed-gene-0.13-mRNA-1	GO	GO:0003729	10	225	 211	mRNA binding
-snap_masked-nHd.2.3.scaf01051-processed-gene-0.13-mRNA-1	GO	GO:0005634	10	225	 211	nucleus
-snap_masked-nHd.2.3.scaf01051-processed-gene-0.13-mRNA-1	GO	GO:0003723	10	225	 211	RNA binding
-snap_masked-nHd.2.3.scaf01051-processed-gene-0.13-mRNA-1	GO	GO:0005515	10	225	 211	protein binding
-snap_masked-nHd.2.3.scaf01051-processed-gene-0.13-mRNA-1	GO	GO:0005737	10	225	 211	cytoplasm
-maker-nHd.2.3.scaf01043-snap-gene-0.39-mRNA-1	GO	GO:0014029	147	306	 140	neural crest formation
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	GO	GO:0031146	131	719	 407	SCF-dependent proteasomal ubiquitin-dependent protein catabolic process
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	GO	GO:0016567	131	719	 407	protein ubiquitination
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	GO	GO:0019005	131	719	 407	SCF ubiquitin ligase complex
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	GO	GO:0006915	131	719	 407	apoptosis
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	GO	GO:0004842	131	719	 407	ubiquitin-protein ligase activity
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	GO	GO:0009887	131	719	 407	organ morphogenesis
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	GO	GO:0005515	131	719	 407	protein binding
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	GO	GO:0006511	131	719	 407	ubiquitin-dependent protein catabolic process
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	GO	GO:0008283	131	719	 407	cell proliferation
-maker-nHd.2.3.scaf01073-snap-gene-0.34-mRNA-1	GO	GO:0005669	6	412	 317	transcription factor TFIID complex
-maker-nHd.2.3.scaf01073-snap-gene-0.31-mRNA-1	GO	GO:0070588	84	724	 350	calcium ion transmembrane transport
-maker-nHd.2.3.scaf01073-snap-gene-0.31-mRNA-1	GO	GO:0007399	84	724	 350	nervous system development
-maker-nHd.2.3.scaf01073-snap-gene-0.31-mRNA-1	GO	GO:0006816	84	724	 350	calcium ion transport
-maker-nHd.2.3.scaf01073-snap-gene-0.31-mRNA-1	GO	GO:0015279	84	724	 350	store-operated calcium channel activity
-maker-nHd.2.3.scaf01073-snap-gene-0.31-mRNA-1	GO	GO:0005515	84	724	 350	protein binding
-maker-nHd.2.3.scaf01073-snap-gene-0.31-mRNA-1	GO	GO:0005887	84	724	 350	integral to plasma membrane
-maker-nHd.2.3.scaf01073-snap-gene-0.31-mRNA-1	GO	GO:0034704	84	724	 350	calcium channel complex
-maker-nHd.2.3.scaf01073-snap-gene-0.31-mRNA-1	GO	GO:0005262	84	724	 350	calcium channel activity
-maker-nHd.2.3.scaf01073-snap-gene-0.31-mRNA-1	GO	GO:0007411	84	724	 350	axon guidance
-maker-nHd.2.3.scaf01073-snap-gene-0.33-mRNA-1	GO	GO:0007602	1	623	 487	phototransduction
-maker-nHd.2.3.scaf01073-snap-gene-0.33-mRNA-1	GO	GO:0007608	1	623	 487	sensory perception of smell
-maker-nHd.2.3.scaf01073-snap-gene-0.33-mRNA-1	GO	GO:0016056	1	623	 487	rhodopsin mediated signaling pathway
-maker-nHd.2.3.scaf01073-snap-gene-0.33-mRNA-1	GO	GO:0046488	1	623	 487	phosphatidylinositol metabolic process
-maker-nHd.2.3.scaf01073-snap-gene-0.33-mRNA-1	GO	GO:0008526	1	623	 487	phosphatidylinositol transporter activity
-maker-nHd.2.3.scaf01073-snap-gene-0.33-mRNA-1	GO	GO:0016021	1	623	 487	integral to membrane
-maker-nHd.2.3.scaf01073-snap-gene-0.33-mRNA-1	GO	GO:0016059	1	623	 487	deactivation of rhodopsin mediated signaling
-maker-nHd.2.3.scaf01073-snap-gene-0.33-mRNA-1	GO	GO:0008525	1	623	 487	phosphatidylcholine transmembrane transporter activity
-maker-nHd.2.3.scaf01073-snap-gene-0.33-mRNA-1	GO	GO:0016029	1	623	 487	subrhabdomeral cisterna
-genemark-nHd.2.3.scaf01073-processed-gene-0.14-mRNA-1	GO	GO:0007602	9	237	 239	phototransduction
-genemark-nHd.2.3.scaf01073-processed-gene-0.14-mRNA-1	GO	GO:0007608	9	237	 239	sensory perception of smell
-genemark-nHd.2.3.scaf01073-processed-gene-0.14-mRNA-1	GO	GO:0016056	9	237	 239	rhodopsin mediated signaling pathway
-genemark-nHd.2.3.scaf01073-processed-gene-0.14-mRNA-1	GO	GO:0046488	9	237	 239	phosphatidylinositol metabolic process
-genemark-nHd.2.3.scaf01073-processed-gene-0.14-mRNA-1	GO	GO:0008526	9	237	 239	phosphatidylinositol transporter activity
-genemark-nHd.2.3.scaf01073-processed-gene-0.14-mRNA-1	GO	GO:0016021	9	237	 239	integral to membrane
-genemark-nHd.2.3.scaf01073-processed-gene-0.14-mRNA-1	GO	GO:0016059	9	237	 239	deactivation of rhodopsin mediated signaling
-genemark-nHd.2.3.scaf01073-processed-gene-0.14-mRNA-1	GO	GO:0008525	9	237	 239	phosphatidylcholine transmembrane transporter activity
-genemark-nHd.2.3.scaf01073-processed-gene-0.14-mRNA-1	GO	GO:0016029	9	237	 239	subrhabdomeral cisterna
-genemark-nHd.2.3.scaf01073-processed-gene-0.13-mRNA-1	GO	GO:0007602	33	352	 392	phototransduction
-genemark-nHd.2.3.scaf01073-processed-gene-0.13-mRNA-1	GO	GO:0007608	33	352	 392	sensory perception of smell
-genemark-nHd.2.3.scaf01073-processed-gene-0.13-mRNA-1	GO	GO:0016056	33	352	 392	rhodopsin mediated signaling pathway
-genemark-nHd.2.3.scaf01073-processed-gene-0.13-mRNA-1	GO	GO:0046488	33	352	 392	phosphatidylinositol metabolic process
-genemark-nHd.2.3.scaf01073-processed-gene-0.13-mRNA-1	GO	GO:0008526	33	352	 392	phosphatidylinositol transporter activity
-genemark-nHd.2.3.scaf01073-processed-gene-0.13-mRNA-1	GO	GO:0016021	33	352	 392	integral to membrane
-genemark-nHd.2.3.scaf01073-processed-gene-0.13-mRNA-1	GO	GO:0016059	33	352	 392	deactivation of rhodopsin mediated signaling
-genemark-nHd.2.3.scaf01073-processed-gene-0.13-mRNA-1	GO	GO:0008525	33	352	 392	phosphatidylcholine transmembrane transporter activity
-genemark-nHd.2.3.scaf01073-processed-gene-0.13-mRNA-1	GO	GO:0016029	33	352	 392	subrhabdomeral cisterna
-snap_masked-nHd.2.3.scaf01073-processed-gene-0.18-mRNA-1	GO	GO:0004823	9	80	88.6	leucine-tRNA ligase activity
-snap_masked-nHd.2.3.scaf01073-processed-gene-0.18-mRNA-1	GO	GO:0010467	9	80	88.6	gene expression
-snap_masked-nHd.2.3.scaf01073-processed-gene-0.18-mRNA-1	GO	GO:0005515	9	80	88.6	protein binding
-snap_masked-nHd.2.3.scaf01073-processed-gene-0.18-mRNA-1	GO	GO:0006418	9	80	88.6	tRNA aminoacylation for protein translation
-snap_masked-nHd.2.3.scaf01073-processed-gene-0.18-mRNA-1	GO	GO:0005829	9	80	88.6	cytosol
-maker-nHd.2.3.scaf01083-snap-gene-0.32-mRNA-1	GO	GO:0006363	15	1111	1068	termination of RNA polymerase I transcription
-maker-nHd.2.3.scaf01083-snap-gene-0.32-mRNA-1	GO	GO:0006362	15	1111	1068	transcription elongation from RNA polymerase I promoter
-maker-nHd.2.3.scaf01083-snap-gene-0.32-mRNA-1	GO	GO:0005654	15	1111	1068	nucleoplasm
-maker-nHd.2.3.scaf01083-snap-gene-0.32-mRNA-1	GO	GO:0006361	15	1111	1068	transcription initiation from RNA polymerase I promoter
-maker-nHd.2.3.scaf01083-snap-gene-0.32-mRNA-1	GO	GO:0006360	15	1111	1068	transcription from RNA polymerase I promoter
-snap_masked-nHd.2.3.scaf01083-processed-gene-0.28-mRNA-1	GO	GO:0006626	22	124	64.3	protein targeting to mitochondrion
-snap_masked-nHd.2.3.scaf01083-processed-gene-0.28-mRNA-1	GO	GO:0005742	22	124	64.3	mitochondrial outer membrane translocase complex
-snap_masked-nHd.2.3.scaf01083-processed-gene-0.28-mRNA-1	GO	GO:0045040	22	124	64.3	protein import into mitochondrial outer membrane
-snap_masked-nHd.2.3.scaf01083-processed-gene-0.28-mRNA-1	GO	GO:0008320	22	124	64.3	protein transmembrane transporter activity
-snap_masked-nHd.2.3.scaf01083-processed-gene-0.28-mRNA-1	GO	GO:0005515	22	124	64.3	protein binding
-snap_masked-nHd.2.3.scaf01083-processed-gene-0.28-mRNA-1	GO	GO:0005739	22	124	64.3	mitochondrion
-snap_masked-nHd.2.3.scaf01083-processed-gene-0.28-mRNA-1	GO	GO:0000299	22	124	64.3	integral to membrane of membrane fraction
-snap_masked-nHd.2.3.scaf01083-processed-gene-0.18-mRNA-1	GO	GO:0005219	1	876	1034	ryanodine-sensitive calcium-release channel activity
-snap_masked-nHd.2.3.scaf01083-processed-gene-0.18-mRNA-1	GO	GO:0005875	1	876	1034	microtubule associated complex
-snap_masked-nHd.2.3.scaf01083-processed-gene-0.18-mRNA-1	GO	GO:0006936	1	876	1034	muscle contraction
-snap_masked-nHd.2.3.scaf01083-processed-gene-0.18-mRNA-1	GO	GO:0016021	1	876	1034	integral to membrane
-snap_masked-nHd.2.3.scaf01083-processed-gene-0.18-mRNA-1	GO	GO:0006816	1	876	1034	calcium ion transport
-genemark-nHd.2.3.scaf01068-processed-gene-0.6-mRNA-1	GO	GO:0006474	7	197	 195	N-terminal protein amino acid acetylation
-genemark-nHd.2.3.scaf01068-processed-gene-0.6-mRNA-1	GO	GO:0005515	7	197	 195	protein binding
-genemark-nHd.2.3.scaf01068-processed-gene-0.6-mRNA-1	GO	GO:0005737	7	197	 195	cytoplasm
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	GO	GO:0015909	83	680	 452	long-chain fatty acid transport
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	GO	GO:0005783	83	680	 452	endoplasmic reticulum
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	GO	GO:0000038	83	680	 452	very long-chain fatty acid metabolic process
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	GO	GO:0043588	83	680	 452	skin development
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	GO	GO:0001579	83	680	 452	medium-chain fatty acid transport
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	GO	GO:0031526	83	680	 452	brush border membrane
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	GO	GO:0004467	83	680	 452	long-chain fatty acid-CoA ligase activity
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	GO	GO:0001676	83	680	 452	long-chain fatty acid metabolic process
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	GO	GO:0005902	83	680	 452	microvillus
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	GO	GO:0042760	83	680	 452	very long-chain fatty acid catabolic process
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	GO	GO:0006631	83	680	 452	fatty acid metabolic process
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	GO	GO:0005886	83	680	 452	plasma membrane
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	GO	GO:0031957	83	680	 452	very long-chain fatty acid-CoA ligase activity
-maker-nHd.2.3.scaf01015-snap-gene-0.28-mRNA-1	GO	GO:0007474	41	543	 781	imaginal disc-derived wing vein specification
-maker-nHd.2.3.scaf01015-snap-gene-0.28-mRNA-1	GO	GO:0001664	41	543	 781	G-protein-coupled receptor binding
-maker-nHd.2.3.scaf01015-snap-gene-0.28-mRNA-1	GO	GO:0007603	41	543	 781	phototransduction, visible light
-maker-nHd.2.3.scaf01015-snap-gene-0.28-mRNA-1	GO	GO:0005524	41	543	 781	ATP binding
-maker-nHd.2.3.scaf01015-snap-gene-0.28-mRNA-1	GO	GO:0004674	41	543	 781	protein serine/threonine kinase activity
-maker-nHd.2.3.scaf01015-snap-gene-0.28-mRNA-1	GO	GO:0016060	41	543	 781	metarhodopsin inactivation
-maker-nHd.2.3.scaf01015-snap-gene-0.28-mRNA-1	GO	GO:0006468	41	543	 781	protein phosphorylation
-maker-nHd.2.3.scaf01015-snap-gene-0.28-mRNA-1	GO	GO:0050254	41	543	 781	rhodopsin kinase activity
-maker-nHd.2.3.scaf01015-snap-gene-0.28-mRNA-1	GO	GO:0035091	41	543	 781	phosphatidylinositol binding
-genemark-nHd.2.3.scaf01025-processed-gene-0.5-mRNA-1	GO	GO:0020003	859	1055	86.7	symbiont-containing vacuole
-snap_masked-nHd.2.3.scaf01035-processed-gene-0.27-mRNA-1	GO	GO:0005739	6	125	 140	mitochondrion
-snap_masked-nHd.2.3.scaf01035-processed-gene-0.24-mRNA-1	GO	GO:0006401	27	193	67.0	RNA catabolic process
-snap_masked-nHd.2.3.scaf01035-processed-gene-0.24-mRNA-1	GO	GO:0032299	27	193	67.0	ribonuclease H2 complex
-snap_masked-nHd.2.3.scaf01035-processed-gene-0.21-mRNA-1	GO	GO:0042393	54	155	67.8	histone binding
-snap_masked-nHd.2.3.scaf01035-processed-gene-0.21-mRNA-1	GO	GO:0043130	54	155	67.8	ubiquitin binding
-snap_masked-nHd.2.3.scaf01035-processed-gene-0.21-mRNA-1	GO	GO:0005634	54	155	67.8	nucleus
-snap_masked-nHd.2.3.scaf01035-processed-gene-0.21-mRNA-1	GO	GO:0005829	54	155	67.8	cytosol
-snap_masked-nHd.2.3.scaf01035-processed-gene-0.21-mRNA-1	GO	GO:0003682	54	155	67.8	chromatin binding
-snap_masked-nHd.2.3.scaf01035-processed-gene-0.21-mRNA-1	GO	GO:0045893	54	155	67.8	positive regulation of transcription, DNA-dependent
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	GO	GO:0051537	32	288	 426	2 iron, 2 sulfur cluster binding
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	GO	GO:0048039	32	288	 426	ubiquinone binding
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	GO	GO:0009060	32	288	 426	aerobic respiration
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	GO	GO:0006099	32	288	 426	tricarboxylic acid cycle
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	GO	GO:0005749	32	288	 426	mitochondrial respiratory chain complex II
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	GO	GO:0022904	32	288	 426	respiratory electron transport chain
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	GO	GO:0005515	32	288	 426	protein binding
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	GO	GO:0005743	32	288	 426	mitochondrial inner membrane
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	GO	GO:0051539	32	288	 426	4 iron, 4 sulfur cluster binding
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	GO	GO:0005739	32	288	 426	mitochondrion
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	GO	GO:0051538	32	288	 426	3 iron, 4 sulfur cluster binding
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.19-mRNA-1	GO	GO:0030522	16	100	 106	intracellular receptor mediated signaling pathway
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.19-mRNA-1	GO	GO:0004879	16	100	 106	ligand-dependent nuclear receptor activity
-maker-nHd.2.3.scaf01094-snap-gene-0.33-mRNA-1	GO	GO:0005743	11	106	 145	mitochondrial inner membrane
-maker-nHd.2.3.scaf01094-snap-gene-0.33-mRNA-1	GO	GO:0005739	11	106	 145	mitochondrion
-maker-nHd.2.3.scaf01094-snap-gene-0.35-mRNA-1	GO	GO:0005654	66	500	 242	nucleoplasm
-maker-nHd.2.3.scaf01094-snap-gene-0.35-mRNA-1	GO	GO:0006361	66	500	 242	transcription initiation from RNA polymerase I promoter
-maker-nHd.2.3.scaf01094-snap-gene-0.35-mRNA-1	GO	GO:0006360	66	500	 242	transcription from RNA polymerase I promoter
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0004421	33	435	 492	hydroxymethylglutaryl-CoA synthase activity
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0014070	33	435	 492	response to organic cyclic compound
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0001101	33	435	 492	response to acid
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0007420	33	435	 492	brain development
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0008584	33	435	 492	male gonad development
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0043177	33	435	 492	organic acid binding
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0071407	33	435	 492	cellular response to organic cyclic compound
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0046690	33	435	 492	response to tellurium ion
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0008144	33	435	 492	drug binding
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0005829	33	435	 492	cytosol
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0033197	33	435	 492	response to vitamin E
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0071372	33	435	 492	cellular response to follicle-stimulating hormone stimulus
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0034698	33	435	 492	response to gonadotropin stimulus
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0070723	33	435	 492	response to cholesterol
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0042493	33	435	 492	response to drug
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0001889	33	435	 492	liver development
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0010243	33	435	 492	response to organic nitrogen
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0016853	33	435	 492	isomerase activity
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0014074	33	435	 492	response to purine-containing compound
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0042803	33	435	 492	protein homodimerization activity
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0071397	33	435	 492	cellular response to cholesterol
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0055094	33	435	 492	response to lipoprotein stimulus
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0009725	33	435	 492	response to hormone stimulus
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	GO	GO:0009645	33	435	 492	response to low light intensity stimulus
-snap_masked-nHd.2.3.scaf01094-processed-gene-0.18-mRNA-1	GO	GO:0005515	130	268	 189	protein binding
-snap_masked-nHd.2.3.scaf01094-processed-gene-0.18-mRNA-1	GO	GO:0030133	130	268	 189	transport vesicle
-maker-nHd.2.3.scaf01005-snap-gene-0.36-mRNA-1	GO	GO:0005783	11	582	 340	endoplasmic reticulum
-maker-nHd.2.3.scaf01005-snap-gene-0.34-mRNA-1	GO	GO:0005783	13	546	 295	endoplasmic reticulum
-maker-nHd.2.3.scaf01005-snap-gene-0.34-mRNA-2	GO	GO:0009055	2	351	 197	electron carrier activity
-maker-nHd.2.3.scaf01005-snap-gene-0.34-mRNA-2	GO	GO:0004656	2	351	 197	procollagen-proline 4-dioxygenase activity
-maker-nHd.2.3.scaf01005-snap-gene-0.37-mRNA-1	GO	GO:0010209	28	163	 126	vacuolar sorting signal binding
-maker-nHd.2.3.scaf01005-snap-gene-0.37-mRNA-1	GO	GO:0042127	28	163	 126	regulation of cell proliferation
-maker-nHd.2.3.scaf01005-snap-gene-0.37-mRNA-1	GO	GO:0051726	28	163	 126	regulation of cell cycle
-maker-nHd.2.3.scaf01005-snap-gene-0.37-mRNA-1	GO	GO:0009944	28	163	 126	polarity specification of adaxial/abaxial axis
-maker-nHd.2.3.scaf01021-snap-gene-0.29-mRNA-1	GO	GO:0003723	9	588	 816	RNA binding
-maker-nHd.2.3.scaf01021-snap-gene-0.29-mRNA-1	GO	GO:0005681	9	588	 816	spliceosomal complex
-maker-nHd.2.3.scaf01021-snap-gene-0.29-mRNA-1	GO	GO:0000398	9	588	 816	nuclear mRNA splicing, via spliceosome
-maker-nHd.2.3.scaf01021-snap-gene-0.29-mRNA-1	GO	GO:0000245	9	588	 816	spliceosome assembly
-maker-nHd.2.3.scaf01021-snap-gene-0.29-mRNA-1	GO	GO:0071013	9	588	 816	catalytic step 2 spliceosome
-snap_masked-nHd.2.3.scaf01021-processed-gene-0.19-mRNA-1	GO	GO:0006508	111	526	 355	proteolysis
-snap_masked-nHd.2.3.scaf01021-processed-gene-0.19-mRNA-1	GO	GO:0008235	111	526	 355	metalloexopeptidase activity
-snap_masked-nHd.2.3.scaf01021-processed-gene-0.23-mRNA-1	GO	GO:0005737	37	133	80.9	cytoplasm
-snap_masked-nHd.2.3.scaf01021-processed-gene-0.14-mRNA-1	GO	GO:0006952	1	48	53.5	defense response
-maker-nHd.2.3.scaf01017-snap-gene-0.41-mRNA-1	GO	GO:0008146	15	233	 153	sulfotransferase activity
-maker-nHd.2.3.scaf01017-snap-gene-0.41-mRNA-1	GO	GO:0005887	15	233	 153	integral to plasma membrane
-maker-nHd.2.3.scaf01017-snap-gene-0.41-mRNA-1	GO	GO:0006487	15	233	 153	protein N-linked glycosylation
-maker-nHd.2.3.scaf01017-snap-gene-0.41-mRNA-1	GO	GO:0005624	15	233	 153	membrane fraction
-snap_masked-nHd.2.3.scaf01017-processed-gene-0.35-mRNA-1	GO	GO:0045184	4	280	 250	establishment of protein localization
-snap_masked-nHd.2.3.scaf01017-processed-gene-0.35-mRNA-1	GO	GO:0019060	4	280	 250	intracellular transport of viral proteins in host cell
-snap_masked-nHd.2.3.scaf01017-processed-gene-0.35-mRNA-1	GO	GO:0030970	4	280	 250	retrograde protein transport, ER to cytosol
-snap_masked-nHd.2.3.scaf01017-processed-gene-0.35-mRNA-1	GO	GO:0005783	4	280	 250	endoplasmic reticulum
-snap_masked-nHd.2.3.scaf01017-processed-gene-0.35-mRNA-1	GO	GO:0004872	4	280	 250	receptor activity
-snap_masked-nHd.2.3.scaf01017-processed-gene-0.35-mRNA-1	GO	GO:0030433	4	280	 250	ER-associated protein catabolic process
-snap_masked-nHd.2.3.scaf01017-processed-gene-0.35-mRNA-1	GO	GO:0005515	4	280	 250	protein binding
-snap_masked-nHd.2.3.scaf01017-processed-gene-0.35-mRNA-1	GO	GO:0030176	4	280	 250	integral to endoplasmic reticulum membrane
-snap_masked-nHd.2.3.scaf01017-processed-gene-0.35-mRNA-1	GO	GO:0042288	4	280	 250	MHC class I protein binding
-snap_masked-nHd.2.3.scaf01017-processed-gene-0.35-mRNA-1	GO	GO:0030968	4	280	 250	endoplasmic reticulum unfolded protein response
-maker-nHd.2.3.scaf01009-snap-gene-0.39-mRNA-1	GO	GO:0006406	80	439	 144	mRNA export from nucleus
-maker-nHd.2.3.scaf01009-snap-gene-0.39-mRNA-1	GO	GO:0005634	80	439	 144	nucleus
-maker-nHd.2.3.scaf01009-snap-gene-0.39-mRNA-1	GO	GO:0005515	80	439	 144	protein binding
-maker-nHd.2.3.scaf01009-snap-gene-0.39-mRNA-1	GO	GO:0005737	80	439	 144	cytoplasm
-maker-nHd.2.3.scaf01009-snap-gene-0.39-mRNA-1	GO	GO:0005844	80	439	 144	polysome
-maker-nHd.2.3.scaf01009-snap-gene-0.41-mRNA-1	GO	GO:0018996	1	456	 681	molting cycle, collagen and cuticulin-based cuticle
-maker-nHd.2.3.scaf01009-snap-gene-0.41-mRNA-1	GO	GO:0002119	1	456	 681	nematode larval development
-maker-nHd.2.3.scaf01009-snap-gene-0.41-mRNA-1	GO	GO:0009792	1	456	 681	embryo development ending in birth or egg hatching
-maker-nHd.2.3.scaf01009-snap-gene-0.41-mRNA-2	GO	GO:0018996	1	456	 681	molting cycle, collagen and cuticulin-based cuticle
-maker-nHd.2.3.scaf01009-snap-gene-0.41-mRNA-2	GO	GO:0002119	1	456	 681	nematode larval development
-maker-nHd.2.3.scaf01009-snap-gene-0.41-mRNA-2	GO	GO:0009792	1	456	 681	embryo development ending in birth or egg hatching
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0050663	50	800	 491	cytokine secretion
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0005783	50	800	 491	endoplasmic reticulum
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0050660	50	800	 491	flavin adenine dinucleotide binding
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0055114	50	800	 491	oxidation-reduction process
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0015252	50	800	 491	hydrogen ion channel activity
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0008283	50	800	 491	cell proliferation
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0006917	50	800	 491	induction of apoptosis
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0042554	50	800	 491	superoxide anion generation
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0016175	50	800	 491	superoxide-generating NADPH oxidase activity
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0015992	50	800	 491	proton transport
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0001935	50	800	 491	endothelial cell proliferation
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0010155	50	800	 491	regulation of proton transport
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0020037	50	800	 491	heme binding
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0001525	50	800	 491	angiogenesis
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:2000379	50	800	 491	positive regulation of reactive oxygen species metabolic process
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0000910	50	800	 491	cytokinesis
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0050661	50	800	 491	NADP binding
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	GO	GO:0043012	50	800	 491	regulation of fusion of sperm to egg plasma membrane
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.20-mRNA-1	GO	GO:0042493	135	239	87.8	response to drug
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.20-mRNA-1	GO	GO:0006284	135	239	87.8	base-excision repair
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.20-mRNA-1	GO	GO:0005515	135	239	87.8	protein binding
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.20-mRNA-1	GO	GO:0010033	135	239	87.8	response to organic substance
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.20-mRNA-1	GO	GO:0006974	135	239	87.8	response to DNA damage stimulus
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.20-mRNA-1	GO	GO:0001666	135	239	87.8	response to hypoxia
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.17-mRNA-1	GO	GO:0042493	246	354	 113	response to drug
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.17-mRNA-1	GO	GO:0006284	246	354	 113	base-excision repair
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.17-mRNA-1	GO	GO:0005515	246	354	 113	protein binding
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.17-mRNA-1	GO	GO:0010033	246	354	 113	response to organic substance
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.17-mRNA-1	GO	GO:0006974	246	354	 113	response to DNA damage stimulus
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.17-mRNA-1	GO	GO:0001666	246	354	 113	response to hypoxia
-maker-nHd.2.3.scaf01086-snap-gene-0.43-mRNA-1	GO	GO:0005634	1	631	 869	nucleus
-maker-nHd.2.3.scaf01086-snap-gene-0.46-mRNA-1	GO	GO:0005634	96	460	 281	nucleus
-maker-nHd.2.3.scaf01086-snap-gene-0.46-mRNA-1	GO	GO:0004674	96	460	 281	protein serine/threonine kinase activity
-maker-nHd.2.3.scaf01086-snap-gene-0.46-mRNA-1	GO	GO:0006468	96	460	 281	protein phosphorylation
-maker-nHd.2.3.scaf01086-snap-gene-0.46-mRNA-1	GO	GO:0046777	96	460	 281	protein autophosphorylation
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.41-mRNA-1	GO	GO:0005975	33	81	74.7	carbohydrate metabolic process
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.41-mRNA-1	GO	GO:0004560	33	81	74.7	alpha-L-fucosidase activity
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.34-mRNA-1	GO	GO:0005634	1	60	81.3	nucleus
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.34-mRNA-1	GO	GO:0005730	1	60	81.3	nucleolus
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.34-mRNA-1	GO	GO:0005515	1	60	81.3	protein binding
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.34-mRNA-1	GO	GO:0005737	1	60	81.3	cytoplasm
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.31-mRNA-1	GO	GO:0005768	4	193	 171	endosome
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.31-mRNA-1	GO	GO:0016197	4	193	 171	endosome transport
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.31-mRNA-1	GO	GO:0005829	4	193	 171	cytosol
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.31-mRNA-1	GO	GO:0016044	4	193	 171	cellular membrane organization
-snap_masked-nHd.2.3.scaf01026-processed-gene-0.16-mRNA-1	GO	GO:0050829	38	236	89.4	defense response to Gram-negative bacterium
-snap_masked-nHd.2.3.scaf01026-processed-gene-0.16-mRNA-1	GO	GO:0042832	38	236	89.4	defense response to protozoan
-snap_masked-nHd.2.3.scaf01026-processed-gene-0.16-mRNA-1	GO	GO:0042802	38	236	89.4	identical protein binding
-snap_masked-nHd.2.3.scaf01026-processed-gene-0.16-mRNA-1	GO	GO:0019003	38	236	89.4	GDP binding
-snap_masked-nHd.2.3.scaf01026-processed-gene-0.16-mRNA-1	GO	GO:0006184	38	236	89.4	GTP catabolic process
-snap_masked-nHd.2.3.scaf01026-processed-gene-0.16-mRNA-1	GO	GO:0020005	38	236	89.4	symbiont-containing vacuole membrane
-snap_masked-nHd.2.3.scaf01026-processed-gene-0.16-mRNA-1	GO	GO:0003924	38	236	89.4	GTPase activity
-snap_masked-nHd.2.3.scaf01026-processed-gene-0.16-mRNA-1	GO	GO:0035458	38	236	89.4	cellular response to interferon-beta
-snap_masked-nHd.2.3.scaf01026-processed-gene-0.16-mRNA-1	GO	GO:0019221	38	236	89.4	cytokine-mediated signaling pathway
-snap_masked-nHd.2.3.scaf01026-processed-gene-0.16-mRNA-1	GO	GO:0005525	38	236	89.4	GTP binding
-snap_masked-nHd.2.3.scaf01026-processed-gene-0.16-mRNA-1	GO	GO:0005789	38	236	89.4	endoplasmic reticulum membrane
-snap_masked-nHd.2.3.scaf01026-processed-gene-0.16-mRNA-1	GO	GO:0010506	38	236	89.4	regulation of autophagy
-maker-nHd.2.3.scaf01095-snap-gene-0.35-mRNA-1	GO	GO:0006913	16	258	 127	nucleocytoplasmic transport
-maker-nHd.2.3.scaf01095-snap-gene-0.35-mRNA-1	GO	GO:0005098	16	258	 127	Ran GTPase activator activity
-maker-nHd.2.3.scaf01095-snap-gene-0.35-mRNA-1	GO	GO:0032853	16	258	 127	positive regulation of Ran GTPase activity
-maker-nHd.2.3.scaf01095-snap-gene-0.35-mRNA-1	GO	GO:0045132	16	258	 127	meiotic chromosome segregation
-maker-nHd.2.3.scaf01095-snap-gene-0.36-mRNA-1	GO	GO:0006805	35	488	 294	xenobiotic metabolic process
-maker-nHd.2.3.scaf01095-snap-gene-0.36-mRNA-1	GO	GO:0005789	35	488	 294	endoplasmic reticulum membrane
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.29-mRNA-1	GO	GO:0005634	203	385	 125	nucleus
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.29-mRNA-1	GO	GO:0003677	203	385	 125	DNA binding
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.29-mRNA-1	GO	GO:0007131	203	385	 125	reciprocal meiotic recombination
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0007129	108	303	 154	synapsis
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0000793	108	303	 154	condensed chromosome
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0005654	108	303	 154	nucleoplasm
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0005634	108	303	 154	nucleus
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0045143	108	303	 154	homologous chromosome segregation
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0030983	108	303	 154	mismatched DNA binding
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0001541	108	303	 154	ovarian follicle development
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0007292	108	303	 154	female gamete generation
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0007283	108	303	 154	spermatogenesis
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0007131	108	303	 154	reciprocal meiotic recombination
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0007126	108	303	 154	meiosis
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0000794	108	303	 154	condensed nuclear chromosome
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0051026	108	303	 154	chiasma assembly
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0008094	108	303	 154	DNA-dependent ATPase activity
-snap_masked-nHd.2.3.scaf01095-processed-gene-0.24-mRNA-1	GO	GO:0000795	108	303	 154	synaptonemal complex
-maker-nHd.2.3.scaf01033-snap-gene-0.46-mRNA-1	GO	GO:0005634	185	332	 250	nucleus
-maker-nHd.2.3.scaf01033-snap-gene-0.46-mRNA-1	GO	GO:0035196	185	332	 250	production of miRNAs involved in gene silencing by miRNA
-maker-nHd.2.3.scaf01033-snap-gene-0.46-mRNA-1	GO	GO:0007249	185	332	 250	I-kappaB kinase/NF-kappaB cascade
-maker-nHd.2.3.scaf01033-snap-gene-0.46-mRNA-1	GO	GO:0005515	185	332	 250	protein binding
-maker-nHd.2.3.scaf01033-snap-gene-0.46-mRNA-1	GO	GO:0006355	185	332	 250	regulation of transcription, DNA-dependent
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0031511	195	336	61.2	Mis6-Sim4 complex
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0005634	195	336	61.2	nucleus
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0031055	195	336	61.2	chromatin remodeling at centromere
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0000790	195	336	61.2	nuclear chromatin
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0031066	195	336	61.2	regulation of histone deacetylation at centromere
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0000070	195	336	61.2	mitotic sister chromatid segregation
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0034501	195	336	61.2	protein localization to kinetochore
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0005515	195	336	61.2	protein binding
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0000778	195	336	61.2	condensed nuclear chromosome kinetochore
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0005829	195	336	61.2	cytosol
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0070317	195	336	61.2	negative regulation of G0 to G1 transition
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0034080	195	336	61.2	CenH3-containing nucleosome assembly at centromere
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0016575	195	336	61.2	histone deacetylation
-maker-nHd.2.3.scaf01033-snap-gene-0.48-mRNA-1	GO	GO:0051382	195	336	61.2	kinetochore assembly
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0048662	400	1067	 514	negative regulation of smooth muscle cell proliferation
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0016941	400	1067	 514	natriuretic peptide receptor activity
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0005622	400	1067	 514	intracellular
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0035556	400	1067	 514	intracellular signal transduction
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0007166	400	1067	 514	cell surface receptor linked signaling pathway
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0019901	400	1067	 514	protein kinase binding
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0006182	400	1067	 514	cGMP biosynthetic process
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0005515	400	1067	 514	protein binding
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0042417	400	1067	 514	dopamine metabolic process
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0017046	400	1067	 514	peptide hormone binding
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0005525	400	1067	 514	GTP binding
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0030828	400	1067	 514	positive regulation of cGMP biosynthetic process
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0005886	400	1067	 514	plasma membrane
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	GO	GO:0004383	400	1067	 514	guanylate cyclase activity
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.24-mRNA-1	GO	GO:0044267	8	157	 118	cellular protein metabolic process
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.24-mRNA-1	GO	GO:0043687	8	157	 118	post-translational protein modification
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.24-mRNA-1	GO	GO:0018279	8	157	 118	protein N-linked glycosylation via asparagine
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.24-mRNA-1	GO	GO:0005789	8	157	 118	endoplasmic reticulum membrane
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.24-mRNA-1	GO	GO:0006488	8	157	 118	dolichol-linked oligosaccharide biosynthetic process
-maker-nHd.2.3.scaf01089-snap-gene-0.32-mRNA-1	GO	GO:0005654	31	189	72.8	nucleoplasm
-maker-nHd.2.3.scaf01089-snap-gene-0.32-mRNA-1	GO	GO:0006383	31	189	72.8	transcription from RNA polymerase III promoter
-maker-nHd.2.3.scaf01089-snap-gene-0.34-mRNA-1	GO	GO:0005739	38	304	 360	mitochondrion
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0003774	13	1043	 865	motor activity
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0007310	13	1043	 865	oocyte dorsal/ventral axis specification
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0001754	13	1043	 865	eye photoreceptor cell differentiation
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0005875	13	1043	 865	microtubule associated complex
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0007303	13	1043	 865	cytoplasmic transport, nurse cell to oocyte
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0045451	13	1043	 865	pole plasm oskar mRNA localization
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0035617	13	1043	 865	stress granule disassembly
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0005739	13	1043	 865	mitochondrion
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0008103	13	1043	 865	oocyte microtubule cytoskeleton polarization
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0007411	13	1043	 865	axon guidance
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0008574	13	1043	 865	plus-end-directed microtubule motor activity
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0005871	13	1043	 865	kinesin complex
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0007018	13	1043	 865	microtubule-based movement
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0010970	13	1043	 865	microtubule-based transport
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0008088	13	1043	 865	axon cargo transport
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0047497	13	1043	 865	mitochondrion transport along microtubule
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0048311	13	1043	 865	mitochondrion distribution
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0008017	13	1043	 865	microtubule binding
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0048813	13	1043	 865	dendrite morphogenesis
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0007409	13	1043	 865	axonogenesis
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0007317	13	1043	 865	regulation of pole plasm oskar mRNA localization
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0007315	13	1043	 865	pole plasm assembly
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0003777	13	1043	 865	microtubule motor activity
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.23-mRNA-1	GO	GO:0016482	13	1043	 865	cytoplasmic transport
-genemark-nHd.2.3.scaf01089-processed-gene-0.9-mRNA-1	GO	GO:0060716	107	425	 398	labyrinthine layer blood vessel development
-genemark-nHd.2.3.scaf01089-processed-gene-0.9-mRNA-1	GO	GO:0008203	107	425	 398	cholesterol metabolic process
-genemark-nHd.2.3.scaf01089-processed-gene-0.9-mRNA-1	GO	GO:0007224	107	425	 398	smoothened signaling pathway
-genemark-nHd.2.3.scaf01089-processed-gene-0.9-mRNA-1	GO	GO:0001942	107	425	 398	hair follicle development
-maker-nHd.2.3.scaf01032-snap-gene-0.32-mRNA-1	GO	GO:0007259	257	397	 155	JAK-STAT cascade
-maker-nHd.2.3.scaf01032-snap-gene-0.32-mRNA-1	GO	GO:0006952	257	397	 155	defense response
-maker-nHd.2.3.scaf01032-snap-gene-0.32-mRNA-1	GO	GO:0005737	257	397	 155	cytoplasm
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0001505	44	198	 110	regulation of neurotransmitter levels
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0005615	44	198	 110	extracellular space
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0005102	44	198	 110	receptor binding
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0007420	44	198	 110	brain development
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0005737	44	198	 110	cytoplasm
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0045471	44	198	 110	response to ethanol
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0043025	44	198	 110	neuronal cell body
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0019901	44	198	 110	protein kinase binding
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0043679	44	198	 110	axon terminus
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0043950	44	198	 110	positive regulation of cAMP-mediated signaling
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0009611	44	198	 110	response to wounding
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0042493	44	198	 110	response to drug
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0008021	44	198	 110	synaptic vesicle
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0007286	44	198	 110	spermatid development
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0005625	44	198	 110	soluble fraction
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0009408	44	198	 110	response to heat
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0008289	44	198	 110	lipid binding
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0006979	44	198	 110	response to oxidative stress
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0051592	44	198	 110	response to calcium ion
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0001933	44	198	 110	negative regulation of protein phosphorylation
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0045177	44	198	 110	apical part of cell
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0051412	44	198	 110	response to corticosterone stimulus
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0014070	44	198	 110	response to organic cyclic compound
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0019717	44	198	 110	synaptosome
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0005524	44	198	 110	ATP binding
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0005791	44	198	 110	rough endoplasmic reticulum
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0006950	44	198	 110	response to stress
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0005741	44	198	 110	mitochondrial outer membrane
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0009636	44	198	 110	response to toxin
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0060409	44	198	 110	positive regulation of acetylcholine metabolic process
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0051602	44	198	 110	response to electrical stimulus
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0051019	44	198	 110	mitogen-activated protein kinase binding
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0010033	44	198	 110	response to organic substance
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0019900	44	198	 110	kinase binding
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0005739	44	198	 110	mitochondrion
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0045840	44	198	 110	positive regulation of mitosis
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0000165	44	198	 110	MAPKKK cascade
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0010243	44	198	 110	response to organic nitrogen
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0042755	44	198	 110	eating behavior
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0014823	44	198	 110	response to activity
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0051591	44	198	 110	response to cAMP
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0007568	44	198	 110	aging
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0043409	44	198	 110	negative regulation of MAPKKK cascade
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0009986	44	198	 110	cell surface
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0002026	44	198	 110	regulation of the force of heart contraction
-maker-nHd.2.3.scaf01032-snap-gene-0.34-mRNA-1	GO	GO:0005794	44	198	 110	Golgi apparatus
-genemark-nHd.2.3.scaf01032-processed-gene-0.16-mRNA-1	GO	GO:0009986	46	146	64.7	cell surface
-genemark-nHd.2.3.scaf01032-processed-gene-0.16-mRNA-1	GO	GO:0048240	46	146	64.7	sperm capacitation
-maker-nHd.2.3.scaf01032-snap-gene-0.35-mRNA-1	GO	GO:0008429	64	161	62.0	phosphatidylethanolamine binding
-genemark-nHd.2.3.scaf01032-processed-gene-0.6-mRNA-1	GO	GO:0009986	3	74	63.2	cell surface
-genemark-nHd.2.3.scaf01032-processed-gene-0.6-mRNA-1	GO	GO:0048240	3	74	63.2	sperm capacitation
-snap_masked-nHd.2.3.scaf01088-processed-gene-0.15-mRNA-1	GO	GO:0007213	2	179	60.8	muscarinic acetylcholine receptor signaling pathway
-snap_masked-nHd.2.3.scaf01088-processed-gene-0.15-mRNA-1	GO	GO:0060304	2	179	60.8	regulation of phosphatidylinositol dephosphorylation
-snap_masked-nHd.2.3.scaf01088-processed-gene-0.15-mRNA-1	GO	GO:0004981	2	179	60.8	muscarinic acetylcholine receptor activity
-snap_masked-nHd.2.3.scaf01065-processed-gene-0.27-mRNA-1	GO	GO:0009055	10	324	 485	electron carrier activity
-snap_masked-nHd.2.3.scaf01065-processed-gene-0.27-mRNA-1	GO	GO:0042356	10	324	 485	GDP-4-dehydro-D-rhamnose reductase activity
-snap_masked-nHd.2.3.scaf01065-processed-gene-0.27-mRNA-1	GO	GO:0007159	10	324	 485	leukocyte cell-cell adhesion
-snap_masked-nHd.2.3.scaf01065-processed-gene-0.27-mRNA-1	GO	GO:0019673	10	324	 485	GDP-mannose metabolic process
-snap_masked-nHd.2.3.scaf01065-processed-gene-0.27-mRNA-1	GO	GO:0050577	10	324	 485	GDP-L-fucose synthase activity
-snap_masked-nHd.2.3.scaf01065-processed-gene-0.27-mRNA-1	GO	GO:0042351	10	324	 485	{prime}de novo{prime} GDP-L-fucose biosynthetic process
-snap_masked-nHd.2.3.scaf01065-processed-gene-0.27-mRNA-1	GO	GO:0005737	10	324	 485	cytoplasm
-maker-nHd.2.3.scaf01065-snap-gene-0.34-mRNA-1	GO	GO:0050766	33	290	 382	positive regulation of phagocytosis
-maker-nHd.2.3.scaf01065-snap-gene-0.34-mRNA-1	GO	GO:0043231	33	290	 382	intracellular membrane-bounded organelle
-maker-nHd.2.3.scaf01065-snap-gene-0.34-mRNA-1	GO	GO:0005634	33	290	 382	nucleus
-maker-nHd.2.3.scaf01065-snap-gene-0.34-mRNA-1	GO	GO:0005737	33	290	 382	cytoplasm
-snap_masked-nHd.2.3.scaf01081-processed-gene-0.19-mRNA-1	GO	GO:0005634	1	1000	 814	nucleus
-snap_masked-nHd.2.3.scaf01081-processed-gene-0.26-mRNA-1	GO	GO:0035634	22	164	63.5	response to stilbenoid
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.27-mRNA-1	GO	GO:0008340	67	516	 449	determination of adult lifespan
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.27-mRNA-1	GO	GO:0072347	67	516	 449	response to anesthetic
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	GO	GO:0045842	339	608	 100	positive regulation of mitotic metaphase/anaphase transition
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	GO	GO:0008152	339	608	 100	metabolic process
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	GO	GO:0045875	339	608	 100	negative regulation of sister chromatid cohesion
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	GO	GO:0005813	339	608	 100	centrosome
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	GO	GO:0000910	339	608	 100	cytokinesis
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	GO	GO:0003824	339	608	 100	catalytic activity
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	GO	GO:0006915	339	608	 100	apoptosis
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	GO	GO:0000070	339	608	 100	mitotic sister chromatid segregation
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	GO	GO:0008234	339	608	 100	cysteine-type peptidase activity
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	GO	GO:0005515	339	608	 100	protein binding
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	GO	GO:0040001	339	608	 100	establishment of mitotic spindle localization
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	GO	GO:0005634	141	267	68.9	nucleus
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	GO	GO:0005737	141	267	68.9	cytoplasm
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	GO	GO:0034048	141	267	68.9	negative regulation of protein phosphatase type 2A activity
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	GO	GO:0006915	141	267	68.9	apoptosis
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	GO	GO:0000070	141	267	68.9	mitotic sister chromatid segregation
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	GO	GO:0005515	141	267	68.9	protein binding
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	GO	GO:0004197	141	267	68.9	cysteine-type endopeptidase activity
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	GO	GO:0007096	141	267	68.9	regulation of exit from mitosis
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	GO	GO:0005819	141	267	68.9	spindle
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	GO	GO:0005739	141	267	68.9	mitochondrion
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	GO	GO:0032888	141	267	68.9	regulation of mitotic spindle elongation
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0005856	13	287	 152	cytoskeleton
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0016323	13	287	 152	basolateral plasma membrane
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0005200	13	287	 152	structural constituent of cytoskeleton
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0008093	13	287	 152	cytoskeletal adaptor activity
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0005515	13	287	 152	protein binding
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0014731	13	287	 152	spectrin-associated cytoskeleton
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0005829	13	287	 152	cytosol
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0007010	13	287	 152	cytoskeleton organization
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0005198	13	287	 152	structural molecule activity
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0045199	13	287	 152	maintenance of epithelial cell apical/basal polarity
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0019899	13	287	 152	enzyme binding
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0005886	13	287	 152	plasma membrane
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0007411	13	287	 152	axon guidance
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0030507	13	287	 152	spectrin binding
-maker-nHd.2.3.scaf01040-snap-gene-0.23-mRNA-1	GO	GO:0006887	13	287	 152	exocytosis
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0006406	128	209	84.0	mRNA export from nucleus
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0003723	128	209	84.0	RNA binding
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0031124	128	209	84.0	mRNA 3{prime}-end processing
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0006369	128	209	84.0	termination of RNA polymerase II transcription
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0003730	128	209	84.0	mRNA 3{prime}-UTR binding
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0005737	128	209	84.0	cytoplasm
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0005515	128	209	84.0	protein binding
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0005829	128	209	84.0	cytosol
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0016070	128	209	84.0	RNA metabolic process
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0005634	128	209	84.0	nucleus
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0005654	128	209	84.0	nucleoplasm
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0000398	128	209	84.0	nuclear mRNA splicing, via spliceosome
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0000184	128	209	84.0	nuclear-transcribed mRNA catabolic process, nonsense-mediated decay
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0006351	128	209	84.0	transcription, DNA-dependent
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0006366	128	209	84.0	transcription from RNA polymerase II promoter
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0010467	128	209	84.0	gene expression
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0035145	128	209	84.0	exon-exon junction complex
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0008380	128	209	84.0	RNA splicing
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	GO	GO:0016071	128	209	84.0	mRNA metabolic process
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.18-mRNA-1	GO	GO:0008353	2	131	 171	RNA polymerase II carboxy-terminal domain kinase activity
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.18-mRNA-1	GO	GO:0005675	2	131	 171	holo TFIIH complex
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.18-mRNA-1	GO	GO:0004672	2	131	 171	protein kinase activity
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.18-mRNA-1	GO	GO:0006468	2	131	 171	protein phosphorylation
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.18-mRNA-1	GO	GO:0008094	2	131	 171	DNA-dependent ATPase activity
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.18-mRNA-1	GO	GO:0006366	2	131	 171	transcription from RNA polymerase II promoter
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.11-mRNA-1	GO	GO:0004969	41	247	91.7	histamine receptor activity
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.11-mRNA-1	GO	GO:0045907	41	247	91.7	positive regulation of vasoconstriction
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.11-mRNA-1	GO	GO:0007199	41	247	91.7	G-protein signaling, coupled to cGMP nucleotide second messenger
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.11-mRNA-1	GO	GO:0007268	41	247	91.7	synaptic transmission
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.11-mRNA-1	GO	GO:0045429	41	247	91.7	positive regulation of nitric oxide biosynthetic process
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.11-mRNA-1	GO	GO:0010894	41	247	91.7	negative regulation of steroid biosynthetic process
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.11-mRNA-1	GO	GO:0005624	41	247	91.7	membrane fraction
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.11-mRNA-1	GO	GO:0051381	41	247	91.7	histamine binding
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.11-mRNA-1	GO	GO:0009629	41	247	91.7	response to gravity
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.16-mRNA-1	GO	GO:0035086	12	98	54.7	flagellar axoneme
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.16-mRNA-1	GO	GO:0005634	12	98	54.7	nucleus
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.16-mRNA-1	GO	GO:0005874	12	98	54.7	microtubule
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.16-mRNA-1	GO	GO:0007283	12	98	54.7	spermatogenesis
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.16-mRNA-1	GO	GO:0005737	12	98	54.7	cytoplasm
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.16-mRNA-1	GO	GO:0019901	12	98	54.7	protein kinase binding
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.16-mRNA-1	GO	GO:0042384	12	98	54.7	cilium assembly
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.16-mRNA-1	GO	GO:0005515	12	98	54.7	protein binding
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.16-mRNA-1	GO	GO:0035085	12	98	54.7	cilium axoneme
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.16-mRNA-1	GO	GO:0005930	12	98	54.7	axoneme
-maker-nHd.2.3.scaf01087-snap-gene-0.26-mRNA-1	GO	GO:0005764	66	128	84.3	lysosome
-maker-nHd.2.3.scaf01087-snap-gene-0.26-mRNA-1	GO	GO:0005739	66	128	84.3	mitochondrion
-maker-nHd.2.3.scaf01087-snap-gene-0.29-mRNA-1	GO	GO:0008340	10	193	 119	determination of adult lifespan
-maker-nHd.2.3.scaf01022-snap-gene-0.34-mRNA-1	GO	GO:0040010	46	151	 154	positive regulation of growth rate
-maker-nHd.2.3.scaf01022-snap-gene-0.34-mRNA-1	GO	GO:0040011	46	151	 154	locomotion
-maker-nHd.2.3.scaf01022-snap-gene-0.34-mRNA-1	GO	GO:0006898	46	151	 154	receptor-mediated endocytosis
-maker-nHd.2.3.scaf01022-snap-gene-0.34-mRNA-1	GO	GO:0043066	46	151	 154	negative regulation of apoptosis
-maker-nHd.2.3.scaf01022-snap-gene-0.34-mRNA-1	GO	GO:0040007	46	151	 154	growth
-maker-nHd.2.3.scaf01022-snap-gene-0.34-mRNA-1	GO	GO:0002119	46	151	 154	nematode larval development
-maker-nHd.2.3.scaf01022-snap-gene-0.34-mRNA-1	GO	GO:0009792	46	151	 154	embryo development ending in birth or egg hatching
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.27-mRNA-1	GO	GO:0016941	41	96	62.8	natriuretic peptide receptor activity
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.26-mRNA-1	GO	GO:0004969	18	159	60.8	histamine receptor activity
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.26-mRNA-1	GO	GO:0016021	18	159	60.8	integral to membrane
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.26-mRNA-1	GO	GO:0005886	18	159	60.8	plasma membrane
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.22-mRNA-1	GO	GO:0005638	1	92	68.6	lamin filament
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.22-mRNA-1	GO	GO:0006921	1	92	68.6	cellular component disassembly involved in apoptosis
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.22-mRNA-1	GO	GO:0005635	1	92	68.6	nuclear envelope
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.22-mRNA-1	GO	GO:0005198	1	92	68.6	structural molecule activity
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.22-mRNA-1	GO	GO:0006915	1	92	68.6	apoptosis
-maker-nHd.2.3.scaf01070-snap-gene-0.33-mRNA-1	GO	GO:0005515	223	399	94.7	protein binding
-maker-nHd.2.3.scaf01070-snap-gene-0.33-mRNA-1	GO	GO:0005784	223	399	94.7	Sec61 translocon complex
-maker-nHd.2.3.scaf01070-snap-gene-0.33-mRNA-1	GO	GO:0006613	223	399	94.7	cotranslational protein targeting to membrane
-maker-nHd.2.3.scaf01070-snap-gene-0.33-mRNA-1	GO	GO:0005829	223	399	94.7	cytosol
-maker-nHd.2.3.scaf01070-snap-gene-0.33-mRNA-1	GO	GO:0016021	223	399	94.7	integral to membrane
-maker-nHd.2.3.scaf01070-snap-gene-0.33-mRNA-1	GO	GO:0005737	223	399	94.7	cytoplasm
-snap_masked-nHd.2.3.scaf01069-processed-gene-0.9-mRNA-1	GO	GO:0030317	1	199	 214	sperm motility
-snap_masked-nHd.2.3.scaf01069-processed-gene-0.9-mRNA-1	GO	GO:0019861	1	199	 214	flagellum
-maker-nHd.2.3.scaf01047-snap-gene-0.31-mRNA-1	GO	GO:0005515	332	657	 486	protein binding
-maker-nHd.2.3.scaf01047-snap-gene-0.31-mRNA-1	GO	GO:0005221	332	657	 486	intracellular cyclic nucleotide activated cation channel activity
-maker-nHd.2.3.scaf01047-snap-gene-0.31-mRNA-1	GO	GO:0046549	332	657	 486	retinal cone cell development
-maker-nHd.2.3.scaf01047-snap-gene-0.31-mRNA-1	GO	GO:0001750	332	657	 486	photoreceptor outer segment
-maker-nHd.2.3.scaf01047-snap-gene-0.31-mRNA-1	GO	GO:0005886	332	657	 486	plasma membrane
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0007205	16	364	 407	activation of protein kinase C activity by G-protein coupled receptor protein signaling pathway
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0030666	16	364	 407	endocytic vesicle membrane
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0005102	16	364	 407	receptor binding
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0005737	16	364	 407	cytoplasm
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0005515	16	364	 407	protein binding
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0043046	16	364	 407	DNA methylation involved in gamete generation
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0045161	16	364	 407	neuronal ion channel clustering
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0042734	16	364	 407	presynaptic membrane
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0045202	16	364	 407	synapse
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0015844	16	364	 407	monoamine transport
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0005886	16	364	 407	plasma membrane
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0016887	16	364	 407	ATPase activity
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0043113	16	364	 407	receptor clustering
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0006468	16	364	 407	protein phosphorylation
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0006890	16	364	 407	retrograde vesicle-mediated transport, Golgi to ER
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0043045	16	364	 407	DNA methylation involved in embryo development
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0048471	16	364	 407	perinuclear region of cytoplasm
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0005080	16	364	 407	protein kinase C binding
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0008022	16	364	 407	protein C-terminus binding
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0005794	16	364	 407	Golgi apparatus
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0007268	16	364	 407	synaptic transmission
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0006200	16	364	 407	ATP catabolic process
-maker-nHd.2.3.scaf01047-snap-gene-0.33-mRNA-1	GO	GO:0019899	16	364	 407	enzyme binding
-maker-nHd.2.3.scaf01029-snap-gene-0.20-mRNA-1	GO	GO:0000278	33	220	69.7	mitotic cell cycle
-maker-nHd.2.3.scaf01029-snap-gene-0.20-mRNA-1	GO	GO:0007059	33	220	69.7	chromosome segregation
-maker-nHd.2.3.scaf01029-snap-gene-0.20-mRNA-1	GO	GO:0000087	33	220	69.7	M phase of mitotic cell cycle
-maker-nHd.2.3.scaf01029-snap-gene-0.20-mRNA-1	GO	GO:0005515	33	220	69.7	protein binding
-maker-nHd.2.3.scaf01029-snap-gene-0.20-mRNA-1	GO	GO:0005829	33	220	69.7	cytosol
-maker-nHd.2.3.scaf01029-snap-gene-0.20-mRNA-1	GO	GO:0000776	33	220	69.7	kinetochore
-maker-nHd.2.3.scaf01029-snap-gene-0.20-mRNA-1	GO	GO:0000236	33	220	69.7	mitotic prometaphase
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0035019	4	334	 298	somatic stem cell maintenance
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0007391	4	334	 298	dorsal closure
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0005737	4	334	 298	cytoplasm
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0048100	4	334	 298	wing disc anterior/posterior pattern formation
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0007179	4	334	 298	transforming growth factor beta receptor signaling pathway
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0006357	4	334	 298	regulation of transcription from RNA polymerase II promoter
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0005515	4	334	 298	protein binding
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0008586	4	334	 298	imaginal disc-derived wing vein morphogenesis
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0030718	4	334	 298	germ-line stem cell maintenance
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0043565	4	334	 298	sequence-specific DNA binding
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0007488	4	334	 298	histoblast morphogenesis
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0042078	4	334	 298	germ-line stem cell division
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0001745	4	334	 298	compound eye morphogenesis
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0005634	4	334	 298	nucleus
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0045705	4	334	 298	negative regulation of salivary gland boundary specification
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0007507	4	334	 298	heart development
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0035290	4	334	 298	trunk segmentation
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0030707	4	334	 298	ovarian follicle cell development
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0007480	4	334	 298	imaginal disc-derived leg morphogenesis
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0007476	4	334	 298	imaginal disc-derived wing morphogenesis
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0007424	4	334	 298	open tracheal system development
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0045944	4	334	 298	positive regulation of transcription from RNA polymerase II promoter
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0045749	4	334	 298	negative regulation of S phase of mitotic cell cycle
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0045595	4	334	 298	regulation of cell differentiation
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	GO	GO:0045887	4	334	 298	positive regulation of synaptic growth at neuromuscular junction
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	GO	GO:0001726	2	161	58.2	ruffle
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	GO	GO:0035254	2	161	58.2	glutamate receptor binding
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	GO	GO:0010634	2	161	58.2	positive regulation of epithelial cell migration
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	GO	GO:0005515	2	161	58.2	protein binding
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	GO	GO:0050852	2	161	58.2	T cell receptor signaling pathway
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	GO	GO:0001701	2	161	58.2	in utero embryonic development
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	GO	GO:0030027	2	161	58.2	lamellipodium
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	GO	GO:0071364	2	161	58.2	cellular response to epidermal growth factor stimulus
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	GO	GO:0010468	3	247	 221	regulation of gene expression
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	GO	GO:0043069	3	247	 221	negative regulation of programmed cell death
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	GO	GO:0002316	3	247	 221	follicular B cell differentiation
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	GO	GO:0050852	3	247	 221	T cell receptor signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	GO	GO:0032496	3	247	 221	response to lipopolysaccharide
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	GO	GO:0032959	3	247	 221	inositol trisphosphate biosynthetic process
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	GO	GO:0032237	3	247	 221	activation of store-operated calcium channel activity
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	GO	GO:0004629	3	247	 221	phospholipase C activity
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	GO	GO:0005515	3	247	 221	protein binding
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0007596	2	261	 193	blood coagulation
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0048011	2	261	 193	nerve growth factor receptor signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0005737	2	261	 193	cytoplasm
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0010634	2	261	 193	positive regulation of epithelial cell migration
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0005515	2	261	 193	protein binding
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0005829	2	261	 193	cytosol
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0007173	2	261	 193	epidermal growth factor receptor signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0045766	2	261	 193	positive regulation of angiogenesis
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0008543	2	261	 193	fibroblast growth factor receptor signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0007411	2	261	 193	axon guidance
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0005886	2	261	 193	plasma membrane
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0005057	2	261	 193	receptor signaling protein activity
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0007165	2	261	 193	signal transduction
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0004435	2	261	 193	phosphatidylinositol phospholipase C activity
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0050900	2	261	 193	leukocyte migration
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0050852	2	261	 193	T cell receptor signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0030027	2	261	 193	lamellipodium
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0071364	2	261	 193	cellular response to epidermal growth factor stimulus
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0001726	2	261	 193	ruffle
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0007202	2	261	 193	activation of phospholipase C activity
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	GO	GO:0043536	2	261	 193	positive regulation of blood vessel endothelial cell migration
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	GO	GO:0005509	504	720	 141	calcium ion binding
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	GO	GO:0019722	504	720	 141	calcium-mediated signaling
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	GO	GO:0016021	504	720	 141	integral to membrane
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	GO	GO:0005624	504	720	 141	membrane fraction
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.32-mRNA-1	GO	GO:0051897	755	1199	 301	positive regulation of protein kinase B signaling cascade
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.32-mRNA-1	GO	GO:0019209	755	1199	 301	kinase activator activity
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.32-mRNA-1	GO	GO:0043524	755	1199	 301	negative regulation of neuron apoptosis
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.32-mRNA-1	GO	GO:0030027	755	1199	 301	lamellipodium
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.32-mRNA-1	GO	GO:0005515	755	1199	 301	protein binding
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.32-mRNA-1	GO	GO:0030139	755	1199	 301	endocytic vesicle
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.32-mRNA-1	GO	GO:0042327	755	1199	 301	positive regulation of phosphorylation
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.32-mRNA-1	GO	GO:0007264	755	1199	 301	small GTPase mediated signal transduction
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	GO	GO:0030241	78	2007	2368	skeletal muscle myosin thick filament assembly
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	GO	GO:0006936	78	2007	2368	muscle contraction
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	GO	GO:0031672	78	2007	2368	A band
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	GO	GO:0030239	78	2007	2368	myofibril assembly
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	GO	GO:0007427	78	2007	2368	epithelial cell migration, open tracheal system
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	GO	GO:0042803	78	2007	2368	protein homodimerization activity
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	GO	GO:0030017	78	2007	2368	sarcomere
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	GO	GO:0005859	78	2007	2368	muscle myosin complex
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	GO	GO:0042692	78	2007	2368	muscle cell differentiation
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	GO	GO:0006941	78	2007	2368	striated muscle contraction
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	GO	GO:0040011	78	2007	2368	locomotion
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	GO	GO:0008307	78	2007	2368	structural constituent of muscle
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	GO	GO:0005863	78	2007	2368	striated muscle myosin thick filament
-maker-nHd.2.3.scaf01006-snap-gene-0.29-mRNA-1	GO	GO:0019725	12	589	 430	cellular homeostasis
-maker-nHd.2.3.scaf01006-snap-gene-0.29-mRNA-1	GO	GO:0047497	12	589	 430	mitochondrion transport along microtubule
-maker-nHd.2.3.scaf01006-snap-gene-0.29-mRNA-1	GO	GO:0031307	12	589	 430	integral to mitochondrial outer membrane
-maker-nHd.2.3.scaf01006-snap-gene-0.29-mRNA-1	GO	GO:0006915	12	589	 430	apoptosis
-snap_masked-nHd.2.3.scaf01006-processed-gene-0.17-mRNA-1	GO	GO:0060047	1	191	 227	heart contraction
-snap_masked-nHd.2.3.scaf01006-processed-gene-0.17-mRNA-1	GO	GO:0071203	1	191	 227	WASH complex
-snap_masked-nHd.2.3.scaf01006-processed-gene-0.17-mRNA-1	GO	GO:0007409	1	191	 227	axonogenesis
-snap_masked-nHd.2.3.scaf01006-processed-gene-0.17-mRNA-1	GO	GO:0048666	1	191	 227	neuron development
-maker-nHd.2.3.scaf01016-snap-gene-0.26-mRNA-1	GO	GO:0016605	38	600	 248	PML body
-maker-nHd.2.3.scaf01016-snap-gene-0.26-mRNA-1	GO	GO:0016567	38	600	 248	protein ubiquitination
-maker-nHd.2.3.scaf01016-snap-gene-0.26-mRNA-1	GO	GO:0043066	38	600	 248	negative regulation of apoptosis
-maker-nHd.2.3.scaf01016-snap-gene-0.26-mRNA-1	GO	GO:0004842	38	600	 248	ubiquitin-protein ligase activity
-maker-nHd.2.3.scaf01016-snap-gene-0.26-mRNA-1	GO	GO:0043161	38	600	 248	proteasomal ubiquitin-dependent protein catabolic process
-maker-nHd.2.3.scaf01016-snap-gene-0.26-mRNA-1	GO	GO:0019964	38	600	 248	interferon-gamma binding
-maker-nHd.2.3.scaf01016-snap-gene-0.26-mRNA-1	GO	GO:0031463	38	600	 248	Cul3-RING ubiquitin ligase complex
-maker-nHd.2.3.scaf01016-snap-gene-0.26-mRNA-1	GO	GO:0044444	38	600	 248	cytoplasmic part
-maker-nHd.2.3.scaf01016-snap-gene-0.25-mRNA-1	GO	GO:0005783	10	180	 119	endoplasmic reticulum
-maker-nHd.2.3.scaf01016-snap-gene-0.25-mRNA-1	GO	GO:0005515	10	180	 119	protein binding
-maker-nHd.2.3.scaf01016-snap-gene-0.25-mRNA-1	GO	GO:0045604	10	180	 119	regulation of epidermal cell differentiation
-maker-nHd.2.3.scaf01016-snap-gene-0.25-mRNA-1	GO	GO:0006355	10	180	 119	regulation of transcription, DNA-dependent
-maker-nHd.2.3.scaf01016-snap-gene-0.25-mRNA-1	GO	GO:0001701	10	180	 119	in utero embryonic development
-maker-nHd.2.3.scaf01016-snap-gene-0.25-mRNA-1	GO	GO:0005737	10	180	 119	cytoplasm
-maker-nHd.2.3.scaf01007-snap-gene-0.28-mRNA-1	GO	GO:0042254	3	403	 302	ribosome biogenesis
-maker-nHd.2.3.scaf01007-snap-gene-0.28-mRNA-1	GO	GO:0005634	3	403	 302	nucleus
-maker-nHd.2.3.scaf01007-snap-gene-0.28-mRNA-1	GO	GO:0005730	3	403	 302	nucleolus
-maker-nHd.2.3.scaf01007-snap-gene-0.28-mRNA-1	GO	GO:0043234	3	403	 302	protein complex
-maker-nHd.2.3.scaf01007-snap-gene-0.28-mRNA-1	GO	GO:0005829	3	403	 302	cytosol
-maker-nHd.2.3.scaf01007-snap-gene-0.29-mRNA-1	GO	GO:0042254	52	194	96.3	ribosome biogenesis
-maker-nHd.2.3.scaf01007-snap-gene-0.29-mRNA-1	GO	GO:0005634	52	194	96.3	nucleus
-maker-nHd.2.3.scaf01007-snap-gene-0.29-mRNA-1	GO	GO:0005730	52	194	96.3	nucleolus
-maker-nHd.2.3.scaf01007-snap-gene-0.29-mRNA-1	GO	GO:0043234	52	194	96.3	protein complex
-maker-nHd.2.3.scaf01007-snap-gene-0.29-mRNA-1	GO	GO:0005829	52	194	96.3	cytosol
-snap_masked-nHd.2.3.scaf01007-processed-gene-0.24-mRNA-1	GO	GO:0005634	223	376	63.9	nucleus
-snap_masked-nHd.2.3.scaf01007-processed-gene-0.24-mRNA-1	GO	GO:0006408	223	376	63.9	snRNA export from nucleus
-snap_masked-nHd.2.3.scaf01007-processed-gene-0.24-mRNA-1	GO	GO:0005737	223	376	63.9	cytoplasm
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0007420	8	251	 155	brain development
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0045471	8	251	 155	response to ethanol
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0009636	8	251	 155	response to toxin
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0003858	8	251	 155	3-hydroxybutyrate dehydrogenase activity
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0032355	8	251	 155	response to estradiol stimulus
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0060416	8	251	 155	response to growth hormone stimulus
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0007584	8	251	 155	response to nutrient
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0042493	8	251	 155	response to drug
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0001889	8	251	 155	liver development
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0032868	8	251	 155	response to insulin stimulus
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0060612	8	251	 155	adipose tissue development
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0005543	8	251	 155	phospholipid binding
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0046686	8	251	 155	response to cadmium ion
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0042594	8	251	 155	response to starvation
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0005743	8	251	 155	mitochondrial inner membrane
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0009725	8	251	 155	response to hormone stimulus
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	GO	GO:0051412	8	251	 155	response to corticosterone stimulus
-snap_masked-nHd.2.3.scaf01100-processed-gene-0.20-mRNA-1	GO	GO:0035188	38	177	 126	hatching
-maker-nHd.2.3.scaf01038-snap-gene-0.38-mRNA-1	GO	GO:0000003	96	210	 123	reproduction
-maker-nHd.2.3.scaf01038-snap-gene-0.38-mRNA-1	GO	GO:0009792	96	210	 123	embryo development ending in birth or egg hatching
-maker-nHd.2.3.scaf01038-snap-gene-0.38-mRNA-1	GO	GO:0040010	96	210	 123	positive regulation of growth rate
-maker-nHd.2.3.scaf01038-snap-gene-0.38-mRNA-1	GO	GO:0060465	96	210	 123	pharynx development
-maker-nHd.2.3.scaf01038-snap-gene-0.38-mRNA-1	GO	GO:0040011	96	210	 123	locomotion
-maker-nHd.2.3.scaf01038-snap-gene-0.38-mRNA-1	GO	GO:0010171	96	210	 123	body morphogenesis
-maker-nHd.2.3.scaf01038-snap-gene-0.38-mRNA-1	GO	GO:0040007	96	210	 123	growth
-maker-nHd.2.3.scaf01038-snap-gene-0.38-mRNA-1	GO	GO:0002119	96	210	 123	nematode larval development
-maker-nHd.2.3.scaf01038-snap-gene-0.39-mRNA-1	GO	GO:0005739	58	371	 335	mitochondrion
-snap_masked-nHd.2.3.scaf01045-processed-gene-0.13-mRNA-1	GO	GO:0005739	1	136	 194	mitochondrion
-snap_masked-nHd.2.3.scaf01045-processed-gene-0.14-mRNA-1	GO	GO:0006744	39	135	 103	ubiquinone biosynthetic process
-snap_masked-nHd.2.3.scaf01045-processed-gene-0.14-mRNA-1	GO	GO:0005739	39	135	 103	mitochondrion
-snap_masked-nHd.2.3.scaf01045-processed-gene-0.14-mRNA-1	GO	GO:0043334	39	135	 103	2-hexaprenyl-6-methoxy-1,4-benzoquinone methyltransferase activity
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0035193	1	126	 122	larval central nervous system remodeling
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0032507	1	126	 122	maintenance of protein location in cell
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0007391	1	126	 122	dorsal closure
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0007420	1	126	 122	brain development
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0007283	1	126	 122	spermatogenesis
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0007015	1	126	 122	actin filament organization
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0005515	1	126	 122	protein binding
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0005623	1	126	 122	cell
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0045451	1	126	 122	pole plasm oskar mRNA localization
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0007488	1	126	 122	histoblast morphogenesis
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0030041	1	126	 122	actin filament polymerization
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0007411	1	126	 122	axon guidance
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0000902	1	126	 122	cell morphogenesis
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0051491	1	126	 122	positive regulation of filopodium assembly
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0000915	1	126	 122	cytokinesis, actomyosin contractile ring assembly
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0000910	1	126	 122	cytokinesis
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0030717	1	126	 122	karyosome formation
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	GO	GO:0007300	1	126	 122	ovarian nurse cell to oocyte transport
-maker-nHd.2.3.scaf01058-snap-gene-0.18-mRNA-1	GO	GO:0005615	190	428	 167	extracellular space
-maker-nHd.2.3.scaf01058-snap-gene-0.18-mRNA-1	GO	GO:0032026	190	428	 167	response to magnesium ion
-maker-nHd.2.3.scaf01058-snap-gene-0.18-mRNA-1	GO	GO:0008894	190	428	 167	guanosine-5{prime}-triphosphate,3{prime}-diphosphate diphosphatase activity
-maker-nHd.2.3.scaf01058-snap-gene-0.18-mRNA-1	GO	GO:0051592	190	428	 167	response to calcium ion
-maker-nHd.2.3.scaf01058-snap-gene-0.18-mRNA-1	GO	GO:0009986	190	428	 167	cell surface
-maker-nHd.2.3.scaf01058-snap-gene-0.18-mRNA-1	GO	GO:0005794	190	428	 167	Golgi apparatus
-maker-nHd.2.3.scaf01058-snap-gene-0.18-mRNA-1	GO	GO:0017111	190	428	 167	nucleoside-triphosphatase activity
-maker-nHd.2.3.scaf01058-snap-gene-0.18-mRNA-1	GO	GO:0005624	190	428	 167	membrane fraction
-maker-nHd.2.3.scaf01058-snap-gene-0.18-mRNA-1	GO	GO:0017110	190	428	 167	nucleoside-diphosphatase activity
-maker-nHd.2.3.scaf01050-snap-gene-0.38-mRNA-1	GO	GO:0006397	37	744	 527	mRNA processing
-maker-nHd.2.3.scaf01050-snap-gene-0.38-mRNA-1	GO	GO:0005654	37	744	 527	nucleoplasm
-maker-nHd.2.3.scaf01050-snap-gene-0.38-mRNA-1	GO	GO:0005634	37	744	 527	nucleus
-maker-nHd.2.3.scaf01050-snap-gene-0.38-mRNA-1	GO	GO:0003723	37	744	 527	RNA binding
-maker-nHd.2.3.scaf01050-snap-gene-0.38-mRNA-1	GO	GO:0000398	37	744	 527	nuclear mRNA splicing, via spliceosome
-maker-nHd.2.3.scaf01050-snap-gene-0.38-mRNA-1	GO	GO:0000389	37	744	 527	nuclear mRNA 3{prime}-splice site recognition
-maker-nHd.2.3.scaf01050-snap-gene-0.38-mRNA-1	GO	GO:0071013	37	744	 527	catalytic step 2 spliceosome
-maker-nHd.2.3.scaf01050-snap-gene-0.38-mRNA-1	GO	GO:0005684	37	744	 527	U2-type spliceosomal complex
-maker-nHd.2.3.scaf01050-snap-gene-0.38-mRNA-1	GO	GO:0005681	37	744	 527	spliceosomal complex
-maker-nHd.2.3.scaf01050-snap-gene-0.38-mRNA-1	GO	GO:0005515	37	744	 527	protein binding
-maker-nHd.2.3.scaf01050-snap-gene-0.38-mRNA-1	GO	GO:0010467	37	744	 527	gene expression
-maker-nHd.2.3.scaf01050-snap-gene-0.38-mRNA-1	GO	GO:0008380	37	744	 527	RNA splicing
-snap_masked-nHd.2.3.scaf01050-processed-gene-0.30-mRNA-1	GO	GO:0005515	154	437	67.0	protein binding
-snap_masked-nHd.2.3.scaf01050-processed-gene-0.30-mRNA-1	GO	GO:0042555	154	437	67.0	MCM complex
-snap_masked-nHd.2.3.scaf01050-processed-gene-0.30-mRNA-1	GO	GO:0035101	154	437	67.0	FACT complex
-snap_masked-nHd.2.3.scaf01050-processed-gene-0.30-mRNA-1	GO	GO:0031297	154	437	67.0	replication fork processing
-snap_masked-nHd.2.3.scaf01050-processed-gene-0.30-mRNA-1	GO	GO:0000724	154	437	67.0	double-strand break repair via homologous recombination
-snap_masked-nHd.2.3.scaf01050-processed-gene-0.30-mRNA-1	GO	GO:0043596	154	437	67.0	nuclear replication fork
-maker-nHd.2.3.scaf01039-snap-gene-0.28-mRNA-1	GO	GO:0006357	47	107	63.5	regulation of transcription from RNA polymerase II promoter
-maker-nHd.2.3.scaf01039-snap-gene-0.28-mRNA-1	GO	GO:0005634	47	107	63.5	nucleus
-maker-nHd.2.3.scaf01039-snap-gene-0.28-mRNA-1	GO	GO:0005829	47	107	63.5	cytosol
-genemark-nHd.2.3.scaf01019-processed-gene-0.12-mRNA-1	GO	GO:0035267	8	485	 347	NuA4 histone acetyltransferase complex
-genemark-nHd.2.3.scaf01019-processed-gene-0.12-mRNA-1	GO	GO:0007399	8	485	 347	nervous system development
-genemark-nHd.2.3.scaf01019-processed-gene-0.12-mRNA-1	GO	GO:0016585	8	485	 347	chromatin remodeling complex
-genemark-nHd.2.3.scaf01019-processed-gene-0.12-mRNA-1	GO	GO:0005634	8	485	 347	nucleus
-genemark-nHd.2.3.scaf01019-processed-gene-0.12-mRNA-1	GO	GO:0006338	8	485	 347	chromatin remodeling
-genemark-nHd.2.3.scaf01019-processed-gene-0.12-mRNA-1	GO	GO:0043968	8	485	 347	histone H2A acetylation
-genemark-nHd.2.3.scaf01019-processed-gene-0.12-mRNA-1	GO	GO:0071564	8	485	 347	npBAF complex
-genemark-nHd.2.3.scaf01019-processed-gene-0.12-mRNA-1	GO	GO:0005515	8	485	 347	protein binding
-genemark-nHd.2.3.scaf01019-processed-gene-0.12-mRNA-1	GO	GO:0043967	8	485	 347	histone H4 acetylation
-genemark-nHd.2.3.scaf01019-processed-gene-0.12-mRNA-1	GO	GO:0003682	8	485	 347	chromatin binding
-snap_masked-nHd.2.3.scaf01019-processed-gene-0.21-mRNA-1	GO	GO:0005730	5	97	55.1	nucleolus
-snap_masked-nHd.2.3.scaf01008-processed-gene-0.15-mRNA-1	GO	GO:0051291	1	91	62.0	protein heterooligomerization
-snap_masked-nHd.2.3.scaf01008-processed-gene-0.15-mRNA-1	GO	GO:0016597	1	91	62.0	amino acid binding
-snap_masked-nHd.2.3.scaf01008-processed-gene-0.15-mRNA-1	GO	GO:0030742	1	91	62.0	GTP-dependent protein binding
-snap_masked-nHd.2.3.scaf01008-processed-gene-0.15-mRNA-1	GO	GO:0045428	1	91	62.0	regulation of nitric oxide biosynthetic process
-snap_masked-nHd.2.3.scaf01008-processed-gene-0.15-mRNA-1	GO	GO:0005625	1	91	62.0	soluble fraction
-snap_masked-nHd.2.3.scaf01008-processed-gene-0.15-mRNA-1	GO	GO:0043234	1	91	62.0	protein complex
-snap_masked-nHd.2.3.scaf01008-processed-gene-0.15-mRNA-1	GO	GO:0043105	1	91	62.0	negative regulation of GTP cyclohydrolase I activity
-snap_masked-nHd.2.3.scaf01008-processed-gene-0.15-mRNA-1	GO	GO:0004857	1	91	62.0	enzyme inhibitor activity
-snap_masked-nHd.2.3.scaf01008-processed-gene-0.15-mRNA-1	GO	GO:0019899	1	91	62.0	enzyme binding
-snap_masked-nHd.2.3.scaf01008-processed-gene-0.15-mRNA-1	GO	GO:0043106	1	91	62.0	GTP cyclohydrolase I binding
-snap_masked-nHd.2.3.scaf01008-processed-gene-0.15-mRNA-1	GO	GO:0006461	1	91	62.0	protein complex assembly
-maker-nHd.2.3.scaf01008-snap-gene-0.19-mRNA-1	GO	GO:0010043	2	155	 172	response to zinc ion
-maker-nHd.2.3.scaf01008-snap-gene-0.19-mRNA-1	GO	GO:0005385	2	155	 172	zinc ion transmembrane transporter activity
-maker-nHd.2.3.scaf01008-snap-gene-0.19-mRNA-1	GO	GO:0006829	2	155	 172	zinc ion transport
-maker-nHd.2.3.scaf01008-snap-gene-0.19-mRNA-1	GO	GO:0071577	2	155	 172	zinc ion transmembrane transport
-maker-nHd.2.3.scaf01008-snap-gene-0.20-mRNA-1	GO	GO:0055085	14	66	60.5	transmembrane transport
-genemark-nHd.2.3.scaf01096-processed-gene-0.10-mRNA-1	GO	GO:0005740	1	250	 197	mitochondrial envelope
-genemark-nHd.2.3.scaf01096-processed-gene-0.10-mRNA-1	GO	GO:0010420	1	250	 197	polyprenyldihydroxybenzoate methyltransferase activity
-genemark-nHd.2.3.scaf01096-processed-gene-0.10-mRNA-1	GO	GO:0004395	1	250	 197	hexaprenyldihydroxybenzoate methyltransferase activity
-genemark-nHd.2.3.scaf01096-processed-gene-0.10-mRNA-1	GO	GO:0006744	1	250	 197	ubiquinone biosynthetic process
-maker-nHd.2.3.scaf01096-snap-gene-0.34-mRNA-1	GO	GO:0005730	164	605	 414	nucleolus
-snap_masked-nHd.2.3.scaf01046-processed-gene-0.11-mRNA-1	GO	GO:0000003	8	69	57.0	reproduction
-snap_masked-nHd.2.3.scaf01046-processed-gene-0.11-mRNA-1	GO	GO:0040035	8	69	57.0	hermaphrodite genitalia development
-snap_masked-nHd.2.3.scaf01046-processed-gene-0.11-mRNA-1	GO	GO:0010171	8	69	57.0	body morphogenesis
-snap_masked-nHd.2.3.scaf01046-processed-gene-0.11-mRNA-1	GO	GO:0040007	8	69	57.0	growth
-snap_masked-nHd.2.3.scaf01046-processed-gene-0.11-mRNA-1	GO	GO:0002119	8	69	57.0	nematode larval development
-snap_masked-nHd.2.3.scaf01046-processed-gene-0.11-mRNA-1	GO	GO:0009792	8	69	57.0	embryo development ending in birth or egg hatching
-maker-nHd.2.3.scaf01001-snap-gene-0.28-mRNA-1	GO	GO:0048311	3	560	 265	mitochondrion distribution
-maker-nHd.2.3.scaf01001-snap-gene-0.28-mRNA-1	GO	GO:0005741	3	560	 265	mitochondrial outer membrane
-maker-nHd.2.3.scaf01001-snap-gene-0.28-mRNA-1	GO	GO:0007005	3	560	 265	mitochondrion organization
-maker-nHd.2.3.scaf01001-snap-gene-0.29-mRNA-1	GO	GO:0005654	4	348	 252	nucleoplasm
-maker-nHd.2.3.scaf01001-snap-gene-0.29-mRNA-1	GO	GO:0006281	4	348	 252	DNA repair
-maker-nHd.2.3.scaf01001-snap-gene-0.29-mRNA-1	GO	GO:0050434	4	348	 252	positive regulation of viral transcription
-maker-nHd.2.3.scaf01001-snap-gene-0.29-mRNA-1	GO	GO:0006283	4	348	 252	transcription-coupled nucleotide-excision repair
-maker-nHd.2.3.scaf01001-snap-gene-0.29-mRNA-1	GO	GO:0016032	4	348	 252	viral reproduction
-maker-nHd.2.3.scaf01001-snap-gene-0.29-mRNA-1	GO	GO:0006289	4	348	 252	nucleotide-excision repair
-maker-nHd.2.3.scaf01001-snap-gene-0.29-mRNA-1	GO	GO:0006366	4	348	 252	transcription from RNA polymerase II promoter
-maker-nHd.2.3.scaf01001-snap-gene-0.29-mRNA-1	GO	GO:0006368	4	348	 252	transcription elongation from RNA polymerase II promoter
-maker-nHd.2.3.scaf01001-snap-gene-0.29-mRNA-1	GO	GO:0010467	4	348	 252	gene expression
-snap_masked-nHd.2.3.scaf01001-processed-gene-0.21-mRNA-1	GO	GO:0007186	53	138	58.5	G-protein coupled receptor protein signaling pathway
-snap_masked-nHd.2.3.scaf01001-processed-gene-0.21-mRNA-1	GO	GO:0005887	53	138	58.5	integral to plasma membrane
-snap_masked-nHd.2.3.scaf01001-processed-gene-0.21-mRNA-1	GO	GO:0007267	53	138	58.5	cell-cell signaling
-snap_masked-nHd.2.3.scaf01001-processed-gene-0.21-mRNA-1	GO	GO:0004930	53	138	58.5	G-protein coupled receptor activity
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.8-mRNA-1	GO	GO:0009953	32	978	 568	dorsal/ventral pattern formation
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.8-mRNA-1	GO	GO:0008105	32	978	 568	asymmetric protein localization
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.8-mRNA-1	GO	GO:0007368	32	978	 568	determination of left/right symmetry
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.8-mRNA-1	GO	GO:0031512	32	978	 568	motile primary cilium
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.8-mRNA-1	GO	GO:0030326	32	978	 568	embryonic limb morphogenesis
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.8-mRNA-1	GO	GO:0042384	32	978	 568	cilium assembly
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.8-mRNA-1	GO	GO:0030900	32	978	 568	forebrain development
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.8-mRNA-1	GO	GO:0035085	32	978	 568	cilium axoneme
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.8-mRNA-1	GO	GO:0016485	32	978	 568	protein processing
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.8-mRNA-1	GO	GO:0045177	32	978	 568	apical part of cell
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.9-mRNA-1	GO	GO:0009953	1	193	 145	dorsal/ventral pattern formation
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.9-mRNA-1	GO	GO:0008105	1	193	 145	asymmetric protein localization
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.9-mRNA-1	GO	GO:0007368	1	193	 145	determination of left/right symmetry
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.9-mRNA-1	GO	GO:0031512	1	193	 145	motile primary cilium
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.9-mRNA-1	GO	GO:0030326	1	193	 145	embryonic limb morphogenesis
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.9-mRNA-1	GO	GO:0042384	1	193	 145	cilium assembly
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.9-mRNA-1	GO	GO:0030900	1	193	 145	forebrain development
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.9-mRNA-1	GO	GO:0035085	1	193	 145	cilium axoneme
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.9-mRNA-1	GO	GO:0016485	1	193	 145	protein processing
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.9-mRNA-1	GO	GO:0045177	1	193	 145	apical part of cell
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.11-mRNA-1	GO	GO:0005794	28	128	67.0	Golgi apparatus
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.11-mRNA-1	GO	GO:0003774	28	128	67.0	motor activity
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.11-mRNA-1	GO	GO:0007030	28	128	67.0	Golgi organization
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.12-mRNA-1	GO	GO:0009953	117	269	 123	dorsal/ventral pattern formation
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.12-mRNA-1	GO	GO:0008105	117	269	 123	asymmetric protein localization
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.12-mRNA-1	GO	GO:0007368	117	269	 123	determination of left/right symmetry
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.12-mRNA-1	GO	GO:0031512	117	269	 123	motile primary cilium
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.12-mRNA-1	GO	GO:0030326	117	269	 123	embryonic limb morphogenesis
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.12-mRNA-1	GO	GO:0042384	117	269	 123	cilium assembly
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.12-mRNA-1	GO	GO:0030900	117	269	 123	forebrain development
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.12-mRNA-1	GO	GO:0035085	117	269	 123	cilium axoneme
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.12-mRNA-1	GO	GO:0016485	117	269	 123	protein processing
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.12-mRNA-1	GO	GO:0045177	117	269	 123	apical part of cell
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.7-mRNA-1	GO	GO:0007243	23	291	81.6	intracellular protein kinase cascade
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.7-mRNA-1	GO	GO:0019100	23	291	81.6	male germ-line sex determination
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.7-mRNA-1	GO	GO:0005515	23	291	81.6	protein binding
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.7-mRNA-1	GO	GO:0004672	23	291	81.6	protein kinase activity
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.7-mRNA-1	GO	GO:0006468	23	291	81.6	protein phosphorylation
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.7-mRNA-1	GO	GO:0043507	23	291	81.6	positive regulation of JUN kinase activity
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.7-mRNA-1	GO	GO:0005737	23	291	81.6	cytoplasm
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.12-mRNA-1	GO	GO:0008217	1	236	 169	regulation of blood pressure
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.12-mRNA-1	GO	GO:0016941	1	236	 169	natriuretic peptide receptor activity
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.12-mRNA-1	GO	GO:0007165	1	236	 169	signal transduction
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.12-mRNA-1	GO	GO:0004872	1	236	 169	receptor activity
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.12-mRNA-1	GO	GO:0042562	1	236	 169	hormone binding
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.12-mRNA-1	GO	GO:0007166	1	236	 169	cell surface receptor linked signaling pathway
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.12-mRNA-1	GO	GO:0006182	1	236	 169	cGMP biosynthetic process
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.12-mRNA-1	GO	GO:0004888	1	236	 169	transmembrane receptor activity
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.12-mRNA-1	GO	GO:0005886	1	236	 169	plasma membrane
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.12-mRNA-1	GO	GO:0007168	1	236	 169	receptor guanylyl cyclase signaling pathway
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.12-mRNA-1	GO	GO:0004383	1	236	 169	guanylate cyclase activity
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.14-mRNA-1	GO	GO:0008217	3	116	 134	regulation of blood pressure
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.14-mRNA-1	GO	GO:0016941	3	116	 134	natriuretic peptide receptor activity
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.14-mRNA-1	GO	GO:0007165	3	116	 134	signal transduction
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.14-mRNA-1	GO	GO:0004872	3	116	 134	receptor activity
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.14-mRNA-1	GO	GO:0042562	3	116	 134	hormone binding
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.14-mRNA-1	GO	GO:0007166	3	116	 134	cell surface receptor linked signaling pathway
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.14-mRNA-1	GO	GO:0006182	3	116	 134	cGMP biosynthetic process
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.14-mRNA-1	GO	GO:0004888	3	116	 134	transmembrane receptor activity
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.14-mRNA-1	GO	GO:0005886	3	116	 134	plasma membrane
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.14-mRNA-1	GO	GO:0007168	3	116	 134	receptor guanylyl cyclase signaling pathway
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.14-mRNA-1	GO	GO:0004383	3	116	 134	guanylate cyclase activity
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0015705	13	113	62.4	iodide transport
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0015108	13	113	62.4	chloride transmembrane transporter activity
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0055085	13	113	62.4	transmembrane transport
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0016324	13	113	62.4	apical plasma membrane
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0008272	13	113	62.4	sulfate transport
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0006885	13	113	62.4	regulation of pH
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0006811	13	113	62.4	ion transport
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0006821	13	113	62.4	chloride transport
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0007605	13	113	62.4	sensory perception of sound
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0015116	13	113	62.4	sulfate transmembrane transporter activity
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0032880	13	113	62.4	regulation of protein localization
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0016021	13	113	62.4	integral to membrane
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0015111	13	113	62.4	iodide transmembrane transporter activity
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0005886	13	113	62.4	plasma membrane
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	GO	GO:0015698	13	113	62.4	inorganic anion transport
-genemark-nHd.2.3.scaf01048-processed-gene-0.9-mRNA-1	GO	GO:0006813	8	384	 310	potassium ion transport
-genemark-nHd.2.3.scaf01048-processed-gene-0.9-mRNA-1	GO	GO:0005267	8	384	 310	potassium channel activity
-genemark-nHd.2.3.scaf01048-processed-gene-0.9-mRNA-1	GO	GO:0005251	8	384	 310	delayed rectifier potassium channel activity
-genemark-nHd.2.3.scaf01048-processed-gene-0.9-mRNA-1	GO	GO:0007268	8	384	 310	synaptic transmission
-genemark-nHd.2.3.scaf01048-processed-gene-0.9-mRNA-1	GO	GO:0044224	8	384	 310	juxtaparanode region of axon
-genemark-nHd.2.3.scaf01048-processed-gene-0.9-mRNA-1	GO	GO:0071805	8	384	 310	potassium ion transmembrane transport
-genemark-nHd.2.3.scaf01048-processed-gene-0.9-mRNA-1	GO	GO:0005886	8	384	 310	plasma membrane
-genemark-nHd.2.3.scaf01048-processed-gene-0.9-mRNA-1	GO	GO:0015079	8	384	 310	potassium ion transmembrane transporter activity
-genemark-nHd.2.3.scaf01048-processed-gene-0.9-mRNA-1	GO	GO:0008076	8	384	 310	voltage-gated potassium channel complex
-maker-nHd.2.3.scaf01085-snap-gene-0.27-mRNA-1	GO	GO:0007424	267	441	 191	open tracheal system development
-maker-nHd.2.3.scaf01085-snap-gene-0.27-mRNA-1	GO	GO:0005918	267	441	 191	septate junction
-maker-nHd.2.3.scaf01085-snap-gene-0.27-mRNA-1	GO	GO:0007156	267	441	 191	homophilic cell adhesion
-maker-nHd.2.3.scaf01085-snap-gene-0.27-mRNA-1	GO	GO:0016331	267	441	 191	morphogenesis of embryonic epithelium
-maker-nHd.2.3.scaf01085-snap-gene-0.27-mRNA-1	GO	GO:0035151	267	441	 191	regulation of tube size, open tracheal system
-maker-nHd.2.3.scaf01085-snap-gene-0.27-mRNA-1	GO	GO:0035160	267	441	 191	maintenance of epithelial integrity, open tracheal system
-snap_masked-nHd.2.3.scaf01085-processed-gene-0.16-mRNA-1	GO	GO:0005887	30	206	92.4	integral to plasma membrane
-snap_masked-nHd.2.3.scaf01085-processed-gene-0.16-mRNA-1	GO	GO:0006811	30	206	92.4	ion transport
-snap_masked-nHd.2.3.scaf01085-processed-gene-0.16-mRNA-1	GO	GO:0015267	30	206	92.4	channel activity
-snap_masked-nHd.2.3.scaf01085-processed-gene-0.21-mRNA-1	GO	GO:0043052	17	295	 109	thermotaxis
-snap_masked-nHd.2.3.scaf01085-processed-gene-0.21-mRNA-1	GO	GO:0006812	17	295	 109	cation transport
-snap_masked-nHd.2.3.scaf01085-processed-gene-0.21-mRNA-1	GO	GO:0034605	17	295	 109	cellular response to heat
-snap_masked-nHd.2.3.scaf01085-processed-gene-0.21-mRNA-1	GO	GO:0009408	17	295	 109	response to heat
-snap_masked-nHd.2.3.scaf01085-processed-gene-0.21-mRNA-1	GO	GO:0005261	17	295	 109	cation channel activity
-snap_masked-nHd.2.3.scaf01085-processed-gene-0.21-mRNA-1	GO	GO:0009266	17	295	 109	response to temperature stimulus
-snap_masked-nHd.2.3.scaf01085-processed-gene-0.21-mRNA-1	GO	GO:0007613	17	295	 109	memory
-snap_masked-nHd.2.3.scaf01085-processed-gene-0.21-mRNA-1	GO	GO:0016021	17	295	 109	integral to membrane
-snap_masked-nHd.2.3.scaf01085-processed-gene-0.21-mRNA-1	GO	GO:0042745	17	295	 109	circadian sleep/wake cycle
-snap_masked-nHd.2.3.scaf01036-processed-gene-0.10-mRNA-1	GO	GO:0007243	8	238	92.4	intracellular protein kinase cascade
-snap_masked-nHd.2.3.scaf01036-processed-gene-0.10-mRNA-1	GO	GO:0019100	8	238	92.4	male germ-line sex determination
-snap_masked-nHd.2.3.scaf01036-processed-gene-0.10-mRNA-1	GO	GO:0005515	8	238	92.4	protein binding
-snap_masked-nHd.2.3.scaf01036-processed-gene-0.10-mRNA-1	GO	GO:0004672	8	238	92.4	protein kinase activity
-snap_masked-nHd.2.3.scaf01036-processed-gene-0.10-mRNA-1	GO	GO:0006468	8	238	92.4	protein phosphorylation
-snap_masked-nHd.2.3.scaf01036-processed-gene-0.10-mRNA-1	GO	GO:0043507	8	238	92.4	positive regulation of JUN kinase activity
-snap_masked-nHd.2.3.scaf01036-processed-gene-0.10-mRNA-1	GO	GO:0005737	8	238	92.4	cytoplasm
-snap_masked-nHd.2.3.scaf01079-processed-gene-0.18-mRNA-1	GO	GO:0005783	3	195	 103	endoplasmic reticulum
-snap_masked-nHd.2.3.scaf01079-processed-gene-0.24-mRNA-1	GO	GO:0005515	25	154	71.6	protein binding
-snap_masked-nHd.2.3.scaf01079-processed-gene-0.24-mRNA-1	GO	GO:0005829	25	154	71.6	cytosol
-snap_masked-nHd.2.3.scaf01079-processed-gene-0.24-mRNA-1	GO	GO:0007257	25	154	71.6	activation of JUN kinase activity
-maker-nHd.2.3.scaf01042-snap-gene-0.34-mRNA-1	GO	GO:0035339	34	507	 400	SPOTS complex
-maker-nHd.2.3.scaf01042-snap-gene-0.34-mRNA-1	GO	GO:0005515	34	507	 400	protein binding
-maker-nHd.2.3.scaf01042-snap-gene-0.34-mRNA-1	GO	GO:0046512	34	507	 400	sphingosine biosynthetic process
-maker-nHd.2.3.scaf01042-snap-gene-0.34-mRNA-1	GO	GO:0006686	34	507	 400	sphingomyelin biosynthetic process
-maker-nHd.2.3.scaf01042-snap-gene-0.34-mRNA-1	GO	GO:0046511	34	507	 400	sphinganine biosynthetic process
-maker-nHd.2.3.scaf01042-snap-gene-0.34-mRNA-1	GO	GO:0046513	34	507	 400	ceramide biosynthetic process
-snap_masked-nHd.2.3.scaf01042-processed-gene-0.23-mRNA-1	GO	GO:0009306	79	303	68.9	protein secretion
-snap_masked-nHd.2.3.scaf01042-processed-gene-0.23-mRNA-1	GO	GO:0005783	79	303	68.9	endoplasmic reticulum
-snap_masked-nHd.2.3.scaf01042-processed-gene-0.23-mRNA-1	GO	GO:0005789	79	303	68.9	endoplasmic reticulum membrane
-maker-nHd.2.3.scaf01053-snap-gene-0.31-mRNA-1	GO	GO:0016303	12	829	 822	1-phosphatidylinositol-3-kinase activity
-maker-nHd.2.3.scaf01053-snap-gene-0.31-mRNA-1	GO	GO:0000910	12	829	 822	cytokinesis
-maker-nHd.2.3.scaf01053-snap-gene-0.31-mRNA-1	GO	GO:0030496	12	829	 822	midbody
-maker-nHd.2.3.scaf01082-snap-gene-0.30-mRNA-1	GO	GO:0050661	1	207	 220	NADP binding
-maker-nHd.2.3.scaf01082-snap-gene-0.30-mRNA-1	GO	GO:0005829	1	207	 220	cytosol
-maker-nHd.2.3.scaf01082-snap-gene-0.30-mRNA-1	GO	GO:0003960	1	207	 220	NADPH:quinone reductase activity
-maker-nHd.2.3.scaf01082-snap-gene-0.31-mRNA-1	GO	GO:0016525	238	719	 126	negative regulation of angiogenesis
-maker-nHd.2.3.scaf01082-snap-gene-0.31-mRNA-1	GO	GO:0045026	238	719	 126	plasma membrane fusion
-maker-nHd.2.3.scaf01082-snap-gene-0.31-mRNA-1	GO	GO:0030336	238	719	 126	negative regulation of cell migration
-maker-nHd.2.3.scaf01082-snap-gene-0.31-mRNA-1	GO	GO:0001701	238	719	 126	in utero embryonic development
-maker-nHd.2.3.scaf01082-snap-gene-0.31-mRNA-1	GO	GO:0032526	238	719	 126	response to retinoic acid
-maker-nHd.2.3.scaf01082-snap-gene-0.31-mRNA-1	GO	GO:0005886	238	719	 126	plasma membrane
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	GO	GO:0030424	14	152	 165	axon
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	GO	GO:0005783	14	152	 165	endoplasmic reticulum
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	GO	GO:0043209	14	152	 165	myelin sheath
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	GO	GO:0005789	14	152	 165	endoplasmic reticulum membrane
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	GO	GO:0005737	14	152	 165	cytoplasm
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	GO	GO:0005261	14	152	 165	cation channel activity
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.29-mRNA-1	GO	GO:0005102	22	152	 120	receptor binding
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.26-mRNA-1	GO	GO:0070682	23	79	76.3	proteasome regulatory particle assembly
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.26-mRNA-1	GO	GO:0031398	23	79	76.3	positive regulation of protein ubiquitination
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.26-mRNA-1	GO	GO:0030307	23	79	76.3	positive regulation of cell growth
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.26-mRNA-1	GO	GO:0045737	23	79	76.3	positive regulation of cyclin-dependent protein kinase activity
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.26-mRNA-1	GO	GO:0043066	23	79	76.3	negative regulation of apoptosis
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.26-mRNA-1	GO	GO:0032436	23	79	76.3	positive regulation of proteasomal ubiquitin-dependent protein catabolic process
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.26-mRNA-1	GO	GO:0007253	23	79	76.3	cytoplasmic sequestering of NF-kappaB
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.26-mRNA-1	GO	GO:0090201	23	79	76.3	negative regulation of release of cytochrome c from mitochondria
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.26-mRNA-1	GO	GO:0043409	23	79	76.3	negative regulation of MAPKKK cascade
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.26-mRNA-1	GO	GO:0000122	23	79	76.3	negative regulation of transcription from RNA polymerase II promoter
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.26-mRNA-1	GO	GO:0043518	23	79	76.3	negative regulation of DNA damage response, signal transduction by p53 class mediator
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.26-mRNA-1	GO	GO:0032088	23	79	76.3	negative regulation of NF-kappaB transcription factor activity
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0005838	23	225	 169	proteasome regulatory particle
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0032436	23	225	 169	positive regulation of proteasomal ubiquitin-dependent protein catabolic process
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0007253	23	225	 169	cytoplasmic sequestering of NF-kappaB
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0005737	23	225	 169	cytoplasm
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0090201	23	225	 169	negative regulation of release of cytochrome c from mitochondria
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0005515	23	225	 169	protein binding
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0032088	23	225	 169	negative regulation of NF-kappaB transcription factor activity
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0000209	23	225	 169	protein polyubiquitination
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0005654	23	225	 169	nucleoplasm
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0043066	23	225	 169	negative regulation of apoptosis
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0016032	23	225	 169	viral reproduction
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0000084	23	225	 169	S phase of mitotic cell cycle
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0006915	23	225	 169	apoptosis
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0000075	23	225	 169	cell cycle checkpoint
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0034641	23	225	 169	cellular nitrogen compound metabolic process
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0000082	23	225	 169	G1/S transition of mitotic cell cycle
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0051439	23	225	 169	regulation of ubiquitin-protein ligase activity involved in mitotic cell cycle
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0070682	23	225	 169	proteasome regulatory particle assembly
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0000278	23	225	 169	mitotic cell cycle
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0000502	23	225	 169	proteasome complex
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0006521	23	225	 169	regulation of cellular amino acid metabolic process
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0045737	23	225	 169	positive regulation of cyclin-dependent protein kinase activity
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0030307	23	225	 169	positive regulation of cell growth
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0002474	23	225	 169	antigen processing and presentation of peptide antigen via MHC class I
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0000122	23	225	 169	negative regulation of transcription from RNA polymerase II promoter
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0051437	23	225	 169	positive regulation of ubiquitin-protein ligase activity involved in mitotic cell cycle
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0043518	23	225	 169	negative regulation of DNA damage response, signal transduction by p53 class mediator
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0005829	23	225	 169	cytosol
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0015629	23	225	 169	actin cytoskeleton
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0000216	23	225	 169	M/G1 transition of mitotic cell cycle
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0008540	23	225	 169	proteasome regulatory particle, base subcomplex
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0016070	23	225	 169	RNA metabolic process
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0005634	23	225	 169	nucleus
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0045111	23	225	 169	intermediate filament cytoskeleton
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0031398	23	225	 169	positive regulation of protein ubiquitination
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0043409	23	225	 169	negative regulation of MAPKKK cascade
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0051436	23	225	 169	negative regulation of ubiquitin-protein ligase activity involved in mitotic cell cycle
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0031145	23	225	 169	anaphase-promoting complex-dependent proteasomal ubiquitin-dependent protein catabolic process
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0016071	23	225	 169	mRNA metabolic process
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0006977	23	225	 169	DNA damage response, signal transduction by p53 class mediator resulting in cell cycle arrest
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0008134	23	225	 169	transcription factor binding
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.16-mRNA-1	GO	GO:0042981	23	225	 169	regulation of apoptosis
-genemark-nHd.2.3.scaf01063-processed-gene-0.6-mRNA-1	GO	GO:0000003	77	172	63.9	reproduction
-genemark-nHd.2.3.scaf01063-processed-gene-0.6-mRNA-1	GO	GO:0040035	77	172	63.9	hermaphrodite genitalia development
-genemark-nHd.2.3.scaf01063-processed-gene-0.6-mRNA-1	GO	GO:0010171	77	172	63.9	body morphogenesis
-genemark-nHd.2.3.scaf01063-processed-gene-0.6-mRNA-1	GO	GO:0040007	77	172	63.9	growth
-genemark-nHd.2.3.scaf01063-processed-gene-0.6-mRNA-1	GO	GO:0002119	77	172	63.9	nematode larval development
-genemark-nHd.2.3.scaf01063-processed-gene-0.6-mRNA-1	GO	GO:0009792	77	172	63.9	embryo development ending in birth or egg hatching
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	GO	GO:0005759	51	688	 739	mitochondrial matrix
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	GO	GO:0042645	51	688	 739	mitochondrial nucleoid
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	GO	GO:0005737	51	688	 739	cytoplasm
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	GO	GO:0006635	51	688	 739	fatty acid beta-oxidation
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	GO	GO:0005515	51	688	 739	protein binding
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	GO	GO:0005730	51	688	 739	nucleolus
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	GO	GO:0044255	51	688	 739	cellular lipid metabolic process
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	GO	GO:0003985	51	688	 739	acetyl-CoA C-acetyltransferase activity
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	GO	GO:0005739	51	688	 739	mitochondrion
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	GO	GO:0003857	51	688	 739	3-hydroxyacyl-CoA dehydrogenase activity
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	GO	GO:0004300	51	688	 739	enoyl-CoA hydratase activity
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.23-mRNA-1	GO	GO:0006895	95	196	79.3	Golgi to endosome transport
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.23-mRNA-1	GO	GO:0000139	95	196	79.3	Golgi membrane
-snap_masked-nHd.2.3.scaf01062-processed-gene-0.6-mRNA-1	GO	GO:0004062	47	268	 117	aryl sulfotransferase activity
-snap_masked-nHd.2.3.scaf01062-processed-gene-0.6-mRNA-1	GO	GO:0005829	47	268	 117	cytosol
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0042393	335	388	60.8	histone binding
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0006343	335	388	60.8	establishment of chromatin silencing
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0005703	335	388	60.8	polytene chromosome puff
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0000781	335	388	60.8	chromosome, telomeric region
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0000182	335	388	60.8	rDNA binding
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0003696	335	388	60.8	satellite DNA binding
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0006355	335	388	60.8	regulation of transcription, DNA-dependent
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0035012	335	388	60.8	polytene chromosome, telomeric region
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0000780	335	388	60.8	condensed nuclear chromosome, centromeric region
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0005700	335	388	60.8	polytene chromosome
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0030702	335	388	60.8	chromatin silencing at centromere
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0045893	335	388	60.8	positive regulation of transcription, DNA-dependent
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0034773	335	388	60.8	histone H4-K20 trimethylation
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0005515	335	388	60.8	protein binding
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0003682	335	388	60.8	chromatin binding
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0000792	335	388	60.8	heterochromatin
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0044026	335	388	60.8	DNA hypermethylation
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0005720	335	388	60.8	nuclear heterochromatin
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0000793	335	388	60.8	condensed chromosome
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0045892	335	388	60.8	negative regulation of transcription, DNA-dependent
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0006342	335	388	60.8	chromatin silencing
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0003729	335	388	60.8	mRNA binding
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0005634	335	388	60.8	nucleus
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0051276	335	388	60.8	chromosome organization
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0005694	335	388	60.8	chromosome
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0000775	335	388	60.8	chromosome, centromeric region
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0031060	335	388	60.8	regulation of histone methylation
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0005721	335	388	60.8	centromeric heterochromatin
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0005701	335	388	60.8	polytene chromosome chromocenter
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0042981	335	388	60.8	regulation of apoptosis
-snap_masked-nHd.2.3.scaf01061-processed-gene-0.21-mRNA-1	GO	GO:0000723	335	388	60.8	telomere maintenance
-maker-nHd.2.3.scaf01060-snap-gene-0.24-mRNA-1	GO	GO:0042254	35	324	 223	ribosome biogenesis
-maker-nHd.2.3.scaf01060-snap-gene-0.24-mRNA-1	GO	GO:0030686	35	324	 223	90S preribosome
-maker-nHd.2.3.scaf01060-snap-gene-0.24-mRNA-1	GO	GO:0005634	35	324	 223	nucleus
-maker-nHd.2.3.scaf01060-snap-gene-0.24-mRNA-1	GO	GO:0005681	35	324	 223	spliceosomal complex
-maker-nHd.2.3.scaf01060-snap-gene-0.24-mRNA-1	GO	GO:0004004	35	324	 223	ATP-dependent RNA helicase activity
-maker-nHd.2.3.scaf01060-snap-gene-0.24-mRNA-1	GO	GO:0006364	35	324	 223	rRNA processing
-maker-nHd.2.3.scaf01060-snap-gene-0.24-mRNA-1	GO	GO:0000390	35	324	 223	spliceosome disassembly
-maker-nHd.2.3.scaf01041-snap-gene-0.28-mRNA-1	GO	GO:0016021	10	379	 287	integral to membrane
-maker-nHd.2.3.scaf01041-snap-gene-0.28-mRNA-1	GO	GO:0006686	10	379	 287	sphingomyelin biosynthetic process
-maker-nHd.2.3.scaf01013-snap-gene-0.37-mRNA-1	GO	GO:0070979	153	586	 234	protein K11-linked ubiquitination
-maker-nHd.2.3.scaf01013-snap-gene-0.37-mRNA-1	GO	GO:0005680	153	586	 234	anaphase-promoting complex
-snap_masked-nHd.2.3.scaf01013-processed-gene-0.23-mRNA-1	GO	GO:0030166	79	177	 188	proteoglycan biosynthetic process
-snap_masked-nHd.2.3.scaf01013-processed-gene-0.23-mRNA-1	GO	GO:0005634	79	177	 188	nucleus
-snap_masked-nHd.2.3.scaf01013-processed-gene-0.23-mRNA-1	GO	GO:0003677	79	177	 188	DNA binding
-snap_masked-nHd.2.3.scaf01013-processed-gene-0.23-mRNA-1	GO	GO:0007507	79	177	 188	heart development
-snap_masked-nHd.2.3.scaf01013-processed-gene-0.23-mRNA-1	GO	GO:0006355	79	177	 188	regulation of transcription, DNA-dependent
-snap_masked-nHd.2.3.scaf01013-processed-gene-0.23-mRNA-1	GO	GO:0030111	79	177	 188	regulation of Wnt receptor signaling pathway
-snap_masked-nHd.2.3.scaf01013-processed-gene-0.23-mRNA-1	GO	GO:0006351	79	177	 188	transcription, DNA-dependent
-snap_masked-nHd.2.3.scaf01013-processed-gene-0.23-mRNA-1	GO	GO:0007495	79	177	 188	visceral mesoderm-endoderm interaction involved in midgut development
-snap_masked-nHd.2.3.scaf01013-processed-gene-0.23-mRNA-1	GO	GO:0009887	79	177	 188	organ morphogenesis
-snap_masked-nHd.2.3.scaf01013-processed-gene-0.23-mRNA-1	GO	GO:0007275	79	177	 188	multicellular organismal development
-snap_masked-nHd.2.3.scaf01013-processed-gene-0.23-mRNA-1	GO	GO:0043565	79	177	 188	sequence-specific DNA binding
-snap_masked-nHd.2.3.scaf01013-processed-gene-0.23-mRNA-1	GO	GO:0008301	79	177	 188	DNA bending activity
-snap_masked-nHd.2.3.scaf01013-processed-gene-0.23-mRNA-1	GO	GO:0003700	79	177	 188	sequence-specific DNA binding transcription factor activity
-genemark-nHd.2.3.scaf01013-processed-gene-0.6-mRNA-1	GO	GO:0030166	79	177	 188	proteoglycan biosynthetic process
-genemark-nHd.2.3.scaf01013-processed-gene-0.6-mRNA-1	GO	GO:0005634	79	177	 188	nucleus
-genemark-nHd.2.3.scaf01013-processed-gene-0.6-mRNA-1	GO	GO:0003677	79	177	 188	DNA binding
-genemark-nHd.2.3.scaf01013-processed-gene-0.6-mRNA-1	GO	GO:0007507	79	177	 188	heart development
-genemark-nHd.2.3.scaf01013-processed-gene-0.6-mRNA-1	GO	GO:0006355	79	177	 188	regulation of transcription, DNA-dependent
-genemark-nHd.2.3.scaf01013-processed-gene-0.6-mRNA-1	GO	GO:0030111	79	177	 188	regulation of Wnt receptor signaling pathway
-genemark-nHd.2.3.scaf01013-processed-gene-0.6-mRNA-1	GO	GO:0006351	79	177	 188	transcription, DNA-dependent
-genemark-nHd.2.3.scaf01013-processed-gene-0.6-mRNA-1	GO	GO:0007495	79	177	 188	visceral mesoderm-endoderm interaction involved in midgut development
-genemark-nHd.2.3.scaf01013-processed-gene-0.6-mRNA-1	GO	GO:0009887	79	177	 188	organ morphogenesis
-genemark-nHd.2.3.scaf01013-processed-gene-0.6-mRNA-1	GO	GO:0007275	79	177	 188	multicellular organismal development
-genemark-nHd.2.3.scaf01013-processed-gene-0.6-mRNA-1	GO	GO:0043565	79	177	 188	sequence-specific DNA binding
-genemark-nHd.2.3.scaf01013-processed-gene-0.6-mRNA-1	GO	GO:0008301	79	177	 188	DNA bending activity
-genemark-nHd.2.3.scaf01013-processed-gene-0.6-mRNA-1	GO	GO:0003700	79	177	 188	sequence-specific DNA binding transcription factor activity
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0022625	88	208	 144	cytosolic large ribosomal subunit
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0006414	88	208	 144	translational elongation
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0005737	88	208	 144	cytoplasm
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0019058	88	208	 144	viral infectious cycle
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0044267	88	208	 144	cellular protein metabolic process
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0005730	88	208	 144	nucleolus
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0005829	88	208	 144	cytosol
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0003735	88	208	 144	structural constituent of ribosome
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0016070	88	208	 144	RNA metabolic process
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0003729	88	208	 144	mRNA binding
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0006415	88	208	 144	translational termination
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0031018	88	208	 144	endocrine pancreas development
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0016032	88	208	 144	viral reproduction
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0010467	88	208	 144	gene expression
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0006412	88	208	 144	translation
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0019083	88	208	 144	viral transcription
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	GO	GO:0016071	88	208	 144	mRNA metabolic process
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0005840	44	181	 184	ribosome
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0042274	44	181	 184	ribosomal small subunit biogenesis
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0006414	44	181	 184	translational elongation
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0019058	44	181	 184	viral infectious cycle
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0044267	44	181	 184	cellular protein metabolic process
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0000028	44	181	 184	ribosomal small subunit assembly
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0005829	44	181	 184	cytosol
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0003735	44	181	 184	structural constituent of ribosome
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0016070	44	181	 184	RNA metabolic process
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0034101	44	181	 184	erythrocyte homeostasis
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0006415	44	181	 184	translational termination
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0031018	44	181	 184	endocrine pancreas development
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0006364	44	181	 184	rRNA processing
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0016032	44	181	 184	viral reproduction
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0006413	44	181	 184	translational initiation
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0010467	44	181	 184	gene expression
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0006412	44	181	 184	translation
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0019083	44	181	 184	viral transcription
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0022627	44	181	 184	cytosolic small ribosomal subunit
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	GO	GO:0016071	44	181	 184	mRNA metabolic process
-snap_masked-nHd.2.3.scaf01002-processed-gene-0.9-mRNA-1	GO	GO:0005768	34	473	 103	endosome
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0000003	1	149	 242	reproduction
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0016477	1	149	 242	cell migration
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0051296	1	149	 242	establishment of meiotic spindle orientation
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0043277	1	149	 242	apoptotic cell clearance
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0009792	1	149	 242	embryo development ending in birth or egg hatching
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0006915	1	149	 242	apoptosis
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0040010	1	149	 242	positive regulation of growth rate
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0005515	1	149	 242	protein binding
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0006898	1	149	 242	receptor-mediated endocytosis
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0032880	1	149	 242	regulation of protein localization
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0007052	1	149	 242	mitotic spindle organization
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0009790	1	149	 242	embryo development
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0051726	1	149	 242	regulation of cell cycle
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	GO	GO:0042981	1	149	 242	regulation of apoptosis
-snap_masked-nHd.2.3.scaf01034-processed-gene-0.20-mRNA-1	GO	GO:0005765	542	876	 241	lysosomal membrane
-snap_masked-nHd.2.3.scaf01034-processed-gene-0.17-mRNA-1	GO	GO:0015631	170	472	 292	tubulin binding
-snap_masked-nHd.2.3.scaf01034-processed-gene-0.17-mRNA-1	GO	GO:0035609	170	472	 292	C-terminal protein deglutamylation
-snap_masked-nHd.2.3.scaf01034-processed-gene-0.17-mRNA-1	GO	GO:0005515	170	472	 292	protein binding
-snap_masked-nHd.2.3.scaf01034-processed-gene-0.17-mRNA-1	GO	GO:0004181	170	472	 292	metallocarboxypeptidase activity
-snap_masked-nHd.2.3.scaf01034-processed-gene-0.17-mRNA-1	GO	GO:0035610	170	472	 292	protein side chain deglutamylation
-maker-nHd.2.3.scaf01054-snap-gene-0.30-mRNA-1	GO	GO:0005515	6	484	 388	protein binding
-maker-nHd.2.3.scaf01054-snap-gene-0.30-mRNA-1	GO	GO:0048306	6	484	 388	calcium-dependent protein binding
-maker-nHd.2.3.scaf01054-snap-gene-0.30-mRNA-1	GO	GO:0005737	6	484	 388	cytoplasm
-snap_masked-nHd.2.3.scaf01024-processed-gene-0.18-mRNA-1	GO	GO:0046034	195	759	 776	ATP metabolic process
-snap_masked-nHd.2.3.scaf01024-processed-gene-0.18-mRNA-1	GO	GO:0005758	195	759	 776	mitochondrial intermembrane space
-snap_masked-nHd.2.3.scaf01024-processed-gene-0.18-mRNA-1	GO	GO:0072593	195	759	 776	reactive oxygen species metabolic process
-snap_masked-nHd.2.3.scaf01024-processed-gene-0.18-mRNA-1	GO	GO:0006915	195	759	 776	apoptosis
-snap_masked-nHd.2.3.scaf01024-processed-gene-0.18-mRNA-1	GO	GO:0005747	195	759	 776	mitochondrial respiratory chain complex I
-snap_masked-nHd.2.3.scaf01024-processed-gene-0.18-mRNA-1	GO	GO:0045333	195	759	 776	cellular respiration
-snap_masked-nHd.2.3.scaf01024-processed-gene-0.18-mRNA-1	GO	GO:0051881	195	759	 776	regulation of mitochondrial membrane potential
-snap_masked-nHd.2.3.scaf01024-processed-gene-0.18-mRNA-1	GO	GO:0008137	195	759	 776	NADH dehydrogenase (ubiquinone) activity
-snap_masked-nHd.2.3.scaf01056-processed-gene-0.15-mRNA-1	GO	GO:0070940	68	163	56.2	dephosphorylation of RNA polymerase II C-terminal domain
-snap_masked-nHd.2.3.scaf01056-processed-gene-0.15-mRNA-1	GO	GO:0005829	68	163	56.2	cytosol
-snap_masked-nHd.2.3.scaf01056-processed-gene-0.15-mRNA-1	GO	GO:0008420	68	163	56.2	CTD phosphatase activity
-snap_masked-nHd.2.3.scaf01056-processed-gene-0.15-mRNA-1	GO	GO:0005737	68	163	56.2	cytoplasm
-genemark-nHd.2.3.scaf01084-processed-gene-0.4-mRNA-1	GO	GO:0044255	33	712	 495	cellular lipid metabolic process
-genemark-nHd.2.3.scaf01084-processed-gene-0.4-mRNA-1	GO	GO:0035338	33	712	 495	long-chain fatty-acyl-CoA biosynthetic process
-genemark-nHd.2.3.scaf01084-processed-gene-0.4-mRNA-1	GO	GO:0005789	33	712	 495	endoplasmic reticulum membrane
-genemark-nHd.2.3.scaf01084-processed-gene-0.4-mRNA-1	GO	GO:0019432	33	712	 495	triglyceride biosynthetic process
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0016020	127	377	 163	membrane
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0044328	127	377	 163	canonical Wnt receptor signaling pathway involved in positive regulation of endothelial cell migration
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0008354	127	377	 163	germ cell migration
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0005912	127	377	 163	adherens junction
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0006665	127	377	 163	sphingolipid metabolic process
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0051091	127	377	 163	positive regulation of sequence-specific DNA binding transcription factor activity
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0005515	127	377	 163	protein binding
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0001933	127	377	 163	negative regulation of protein phosphorylation
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0044330	127	377	 163	canonical Wnt receptor signaling pathway involved in positive regulation of wound healing
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0004721	127	377	 163	phosphoprotein phosphatase activity
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0044329	127	377	 163	canonical Wnt receptor signaling pathway involved in positive regulation of cell-cell adhesion
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0034109	127	377	 163	homotypic cell-cell adhesion
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0005886	127	377	 163	plasma membrane
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0050821	127	377	 163	protein stabilization
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	GO	GO:0006629	127	377	 163	lipid metabolic process
-snap_masked-nHd.2.3.scaf01084-processed-gene-0.18-mRNA-1	GO	GO:0006917	1	94	63.2	induction of apoptosis
-snap_masked-nHd.2.3.scaf01084-processed-gene-0.18-mRNA-1	GO	GO:0000209	1	94	63.2	protein polyubiquitination
-snap_masked-nHd.2.3.scaf01084-processed-gene-0.18-mRNA-1	GO	GO:0004842	1	94	63.2	ubiquitin-protein ligase activity
+nAv.1.0.1.t00032-RA	GO	GO:0005634	900	992	5e-11	nucleus
+nAv.1.0.1.t00032-RA	GO	GO:0043565	900	992	5e-11	sequence-specific DNA binding
+nAv.1.0.1.t00237-RA	GO	GO:0042325	38	167	4e-24	regulation of phosphorylation
+nAv.1.0.1.t00237-RA	GO	GO:0005634	38	167	4e-24	nucleus
+nAv.1.0.1.t00237-RA	GO	GO:0046982	38	167	4e-24	protein heterodimerization activity
+nAv.1.0.1.t00237-RA	GO	GO:0043066	38	167	4e-24	negative regulation of apoptosis
+nAv.1.0.1.t00237-RA	GO	GO:0042803	38	167	4e-24	protein homodimerization activity
+nAv.1.0.1.t00237-RA	GO	GO:0005737	38	167	4e-24	cytoplasm
+nAv.1.0.1.t00237-RA	GO	GO:0085020	38	167	4e-24	protein K6-linked ubiquitination
+nAv.1.0.1.t00237-RA	GO	GO:0004842	38	167	4e-24	ubiquitin-protein ligase activity
+nAv.1.0.1.t00237-RA	GO	GO:0043065	38	167	4e-24	positive regulation of apoptosis
+nAv.1.0.1.t00237-RA	GO	GO:0031436	38	167	4e-24	BRCA1-BARD1 complex
+nAv.1.0.1.t00237-RA	GO	GO:0046826	38	167	4e-24	negative regulation of protein export from nucleus
+nAv.1.0.1.t00559-RA	GO	GO:0006396	165	287	2e-13	RNA processing
+nAv.1.0.1.t00559-RA	GO	GO:0010494	165	287	2e-13	stress granule
+nAv.1.0.1.t00559-RA	GO	GO:0033554	165	287	2e-13	cellular response to stress
+nAv.1.0.1.t00559-RA	GO	GO:0003723	165	287	2e-13	RNA binding
+nAv.1.0.1.t00559-RA	GO	GO:0000381	165	287	2e-13	regulation of alternative nuclear mRNA splicing, via spliceosome
+nAv.1.0.1.t00559-RA	GO	GO:0003730	165	287	2e-13	mRNA 3{prime}-UTR binding
+nAv.1.0.1.t00559-RA	GO	GO:0005737	165	287	2e-13	cytoplasm
+nAv.1.0.1.t00559-RA	GO	GO:0045947	165	287	2e-13	negative regulation of translational initiation
+nAv.1.0.1.t00559-RA	GO	GO:0005515	165	287	2e-13	protein binding
+nAv.1.0.1.t00559-RA	GO	GO:0005730	165	287	2e-13	nucleolus
+nAv.1.0.1.t00559-RA	GO	GO:0017148	165	287	2e-13	negative regulation of translation
+nAv.1.0.1.t00559-RA	GO	GO:0032922	165	287	2e-13	circadian regulation of gene expression
+nAv.1.0.1.t00559-RA	GO	GO:0043153	165	287	2e-13	entrainment of circadian clock by photoperiod
+nAv.1.0.1.t00559-RA	GO	GO:0003729	165	287	2e-13	mRNA binding
+nAv.1.0.1.t00559-RA	GO	GO:0005634	165	287	2e-13	nucleus
+nAv.1.0.1.t00559-RA	GO	GO:0005654	165	287	2e-13	nucleoplasm
+nAv.1.0.1.t00559-RA	GO	GO:0016607	165	287	2e-13	nuclear speck
+nAv.1.0.1.t00559-RA	GO	GO:0046822	165	287	2e-13	regulation of nucleocytoplasmic transport
+nAv.1.0.1.t00559-RA	GO	GO:0051149	165	287	2e-13	positive regulation of muscle cell differentiation
+nAv.1.0.1.t00559-RA	GO	GO:0035198	165	287	2e-13	miRNA binding
+nAv.1.0.1.t00559-RA	GO	GO:0032055	165	287	2e-13	negative regulation of translation in response to stress
+nAv.1.0.1.t00559-RA	GO	GO:0035278	165	287	2e-13	negative regulation of translation involved in gene silencing by miRNA
+nAv.1.0.1.t00559-RA	GO	GO:0051403	165	287	2e-13	stress-activated MAPK cascade
+nAv.1.0.1.t00756-RA	GO	GO:0031252	230	551	2e-09	cell leading edge
+nAv.1.0.1.t00756-RA	GO	GO:0045104	230	551	2e-09	intermediate filament cytoskeleton organization
+nAv.1.0.1.t00756-RA	GO	GO:0035371	230	551	2e-09	microtubule plus end
+nAv.1.0.1.t00756-RA	GO	GO:0016023	230	551	2e-09	cytoplasmic membrane-bounded vesicle
+nAv.1.0.1.t00756-RA	GO	GO:0005737	230	551	2e-09	cytoplasm
+nAv.1.0.1.t00756-RA	GO	GO:0005178	230	551	2e-09	integrin binding
+nAv.1.0.1.t00756-RA	GO	GO:0030018	230	551	2e-09	Z disc
+nAv.1.0.1.t00756-RA	GO	GO:0005515	230	551	2e-09	protein binding
+nAv.1.0.1.t00756-RA	GO	GO:0048870	230	551	2e-09	cell motility
+nAv.1.0.1.t00756-RA	GO	GO:0015629	230	551	2e-09	actin cytoskeleton
+nAv.1.0.1.t00756-RA	GO	GO:0051010	230	551	2e-09	microtubule plus-end binding
+nAv.1.0.1.t00756-RA	GO	GO:0007229	230	551	2e-09	integrin-mediated signaling pathway
+nAv.1.0.1.t00756-RA	GO	GO:0033267	230	551	2e-09	axon part
+nAv.1.0.1.t00756-RA	GO	GO:0005604	230	551	2e-09	basement membrane
+nAv.1.0.1.t00756-RA	GO	GO:0009611	230	551	2e-09	response to wounding
+nAv.1.0.1.t00756-RA	GO	GO:0005634	230	551	2e-09	nucleus
+nAv.1.0.1.t00756-RA	GO	GO:0000226	230	551	2e-09	microtubule cytoskeleton organization
+nAv.1.0.1.t00756-RA	GO	GO:0045111	230	551	2e-09	intermediate filament cytoskeleton
+nAv.1.0.1.t00756-RA	GO	GO:0015630	230	551	2e-09	microtubule cytoskeleton
+nAv.1.0.1.t00756-RA	GO	GO:0042803	230	551	2e-09	protein homodimerization activity
+nAv.1.0.1.t00756-RA	GO	GO:0031581	230	551	2e-09	hemidesmosome assembly
+nAv.1.0.1.t00756-RA	GO	GO:0009925	230	551	2e-09	basal plasma membrane
+nAv.1.0.1.t00756-RA	GO	GO:0008022	230	551	2e-09	protein C-terminus binding
+nAv.1.0.1.t00756-RA	GO	GO:0030056	230	551	2e-09	hemidesmosome
+nAv.1.0.1.t00756-RA	GO	GO:0007010	230	551	2e-09	cytoskeleton organization
+nAv.1.0.1.t00756-RA	GO	GO:0030011	230	551	2e-09	maintenance of cell polarity
+nAv.1.0.1.t00988-RA	GO	GO:0045945	1	1304	0.0	positive regulation of transcription from RNA polymerase III promoter
+nAv.1.0.1.t00988-RA	GO	GO:0008286	1	1304	0.0	insulin receptor signaling pathway
+nAv.1.0.1.t00988-RA	GO	GO:0032008	1	1304	0.0	positive regulation of TOR signaling cascade
+nAv.1.0.1.t00988-RA	GO	GO:0007050	1	1304	0.0	cell cycle arrest
+nAv.1.0.1.t00988-RA	GO	GO:0016049	1	1304	0.0	cell growth
+nAv.1.0.1.t00988-RA	GO	GO:0005737	1	1304	0.0	cytoplasm
+nAv.1.0.1.t00988-RA	GO	GO:0019901	1	1304	0.0	protein kinase binding
+nAv.1.0.1.t00988-RA	GO	GO:0071889	1	1304	0.0	14-3-3 protein binding
+nAv.1.0.1.t00988-RA	GO	GO:0005515	1	1304	0.0	protein binding
+nAv.1.0.1.t00988-RA	GO	GO:0071902	1	1304	0.0	positive regulation of protein serine/threonine kinase activity
+nAv.1.0.1.t00988-RA	GO	GO:0005829	1	1304	0.0	cytosol
+nAv.1.0.1.t00988-RA	GO	GO:0001032	1	1304	0.0	RNA polymerase III type 3 promoter DNA binding
+nAv.1.0.1.t00988-RA	GO	GO:0001030	1	1304	0.0	RNA polymerase III type 1 promoter DNA binding
+nAv.1.0.1.t00988-RA	GO	GO:0031669	1	1304	0.0	cellular response to nutrient levels
+nAv.1.0.1.t00988-RA	GO	GO:0001031	1	1304	0.0	RNA polymerase III type 2 promoter DNA binding
+nAv.1.0.1.t00988-RA	GO	GO:0031929	1	1304	0.0	TOR signaling cascade
+nAv.1.0.1.t00988-RA	GO	GO:0008361	1	1304	0.0	regulation of cell size
+nAv.1.0.1.t00988-RA	GO	GO:0005764	1	1304	0.0	lysosome
+nAv.1.0.1.t00988-RA	GO	GO:0071230	1	1304	0.0	cellular response to amino acid stimulus
+nAv.1.0.1.t00988-RA	GO	GO:0031931	1	1304	0.0	TORC1 complex
+nAv.1.0.1.t00988-RA	GO	GO:0001156	1	1304	0.0	TFIIIC-class transcription factor binding
+nAv.1.0.1.t00988-RA	GO	GO:0032403	1	1304	0.0	protein complex binding
+nAv.1.0.1.t01001-RA	GO	GO:0016303	130	965	0.0	1-phosphatidylinositol-3-kinase activity
+nAv.1.0.1.t01001-RA	GO	GO:0004672	130	965	0.0	protein kinase activity
+nAv.1.0.1.t01001-RA	GO	GO:0006468	130	965	0.0	protein phosphorylation
+nAv.1.0.1.t01001-RA	GO	GO:0000910	130	965	0.0	cytokinesis
+nAv.1.0.1.t01001-RA	GO	GO:0030496	130	965	0.0	midbody
+nAv.1.0.1.t01403-RA	GO	GO:0040010	1	646	0.0	positive regulation of growth rate
+nAv.1.0.1.t01403-RA	GO	GO:0010171	1	646	0.0	body morphogenesis
+nAv.1.0.1.t01403-RA	GO	GO:0005743	1	646	0.0	mitochondrial inner membrane
+nAv.1.0.1.t01403-RA	GO	GO:0009792	1	646	0.0	embryo development ending in birth or egg hatching
+nAv.1.0.1.t01404-RA	GO	GO:0000104	34	587	0.0	succinate dehydrogenase activity
+nAv.1.0.1.t01404-RA	GO	GO:0005749	34	587	0.0	mitochondrial respiratory chain complex II
+nAv.1.0.1.t01404-RA	GO	GO:0022904	34	587	0.0	respiratory electron transport chain
+nAv.1.0.1.t01404-RA	GO	GO:0006105	34	587	0.0	succinate metabolic process
+nAv.1.0.1.t01404-RA	GO	GO:0005743	34	587	0.0	mitochondrial inner membrane
+nAv.1.0.1.t01404-RA	GO	GO:0005739	34	587	0.0	mitochondrion
+nAv.1.0.1.t01404-RA	GO	GO:0055114	34	587	0.0	oxidation-reduction process
+nAv.1.0.1.t01405-RA	GO	GO:0005313	156	563	1e-34	L-glutamate transmembrane transporter activity
+nAv.1.0.1.t01405-RA	GO	GO:0008021	156	563	1e-34	synaptic vesicle
+nAv.1.0.1.t01405-RA	GO	GO:0015813	156	563	1e-34	L-glutamate transport
+nAv.1.0.1.t01405-RA	GO	GO:0001504	156	563	1e-34	neurotransmitter uptake
+nAv.1.0.1.t01415-RA	GO	GO:0005783	9	1045	0.0	endoplasmic reticulum
+nAv.1.0.1.t01415-RA	GO	GO:0004559	9	1045	0.0	alpha-mannosidase activity
+nAv.1.0.1.t01416-RA	GO	GO:0040010	67	333	6e-102	positive regulation of growth rate
+nAv.1.0.1.t01416-RA	GO	GO:0040007	67	333	6e-102	growth
+nAv.1.0.1.t01416-RA	GO	GO:0002119	67	333	6e-102	nematode larval development
+nAv.1.0.1.t01417-RA	GO	GO:0005634	1	152	3e-33	nucleus
+nAv.1.0.1.t01417-RA	GO	GO:0005524	1	152	3e-33	ATP binding
+nAv.1.0.1.t01417-RA	GO	GO:0010569	1	152	3e-33	regulation of double-strand break repair via homologous recombination
+nAv.1.0.1.t01417-RA	GO	GO:0004003	1	152	3e-33	ATP-dependent DNA helicase activity
+nAv.1.0.1.t01679-RA	GO	GO:0043687	4	416	1e-76	post-translational protein modification
+nAv.1.0.1.t01679-RA	GO	GO:0018279	4	416	1e-76	protein N-linked glycosylation via asparagine
+nAv.1.0.1.t01679-RA	GO	GO:0004476	4	416	1e-76	mannose-6-phosphate isomerase activity
+nAv.1.0.1.t01679-RA	GO	GO:0006488	4	416	1e-76	dolichol-linked oligosaccharide biosynthetic process
+nAv.1.0.1.t01679-RA	GO	GO:0005737	4	416	1e-76	cytoplasm
+nAv.1.0.1.t01679-RA	GO	GO:0009298	4	416	1e-76	GDP-mannose biosynthetic process
+nAv.1.0.1.t01679-RA	GO	GO:0044267	4	416	1e-76	cellular protein metabolic process
+nAv.1.0.1.t01679-RA	GO	GO:0005829	4	416	1e-76	cytosol
+nAv.1.0.1.t01680-RA	GO	GO:0005768	801	1055	9e-33	endosome
+nAv.1.0.1.t01680-RA	GO	GO:0005969	801	1055	9e-33	serine-pyruvate aminotransferase complex
+nAv.1.0.1.t01680-RA	GO	GO:0005545	801	1055	9e-33	1-phosphatidylinositol binding
+nAv.1.0.1.t01680-RA	GO	GO:0005829	801	1055	9e-33	cytosol
+nAv.1.0.1.t01680-RA	GO	GO:0005769	801	1055	9e-33	early endosome
+nAv.1.0.1.t01680-RA	GO	GO:0019897	801	1055	9e-33	extrinsic to plasma membrane
+nAv.1.0.1.t01742-RA	GO	GO:0005634	1	402	5e-126	nucleus
+nAv.1.0.1.t01742-RA	GO	GO:0005524	1	402	5e-126	ATP binding
+nAv.1.0.1.t01742-RA	GO	GO:0006950	1	402	5e-126	response to stress
+nAv.1.0.1.t01742-RA	GO	GO:0004702	1	402	5e-126	receptor signaling protein serine/threonine kinase activity
+nAv.1.0.1.t01742-RA	GO	GO:0006468	1	402	5e-126	protein phosphorylation
+nAv.1.0.1.t01742-RA	GO	GO:0005737	1	402	5e-126	cytoplasm
+nAv.1.0.1.t01744-RA	GO	GO:0007243	48	382	8e-65	intracellular protein kinase cascade
+nAv.1.0.1.t01744-RA	GO	GO:0006979	48	382	8e-65	response to oxidative stress
+nAv.1.0.1.t01744-RA	GO	GO:0000287	48	382	8e-65	magnesium ion binding
+nAv.1.0.1.t01744-RA	GO	GO:0005524	48	382	8e-65	ATP binding
+nAv.1.0.1.t01744-RA	GO	GO:0005515	48	382	8e-65	protein binding
+nAv.1.0.1.t01744-RA	GO	GO:0004674	48	382	8e-65	protein serine/threonine kinase activity
+nAv.1.0.1.t01744-RA	GO	GO:0006468	48	382	8e-65	protein phosphorylation
+nAv.1.0.1.t01745-RA	GO	GO:0008340	17	446	2e-86	determination of adult lifespan
+nAv.1.0.1.t01745-RA	GO	GO:0006744	17	446	2e-86	ubiquinone biosynthetic process
+nAv.1.0.1.t01784-RA	GO	GO:0000003	5	493	1e-167	reproduction
+nAv.1.0.1.t01784-RA	GO	GO:0002009	5	493	1e-167	morphogenesis of an epithelium
+nAv.1.0.1.t01784-RA	GO	GO:0009792	5	493	1e-167	embryo development ending in birth or egg hatching
+nAv.1.0.1.t01784-RA	GO	GO:0006898	5	493	1e-167	receptor-mediated endocytosis
+nAv.1.0.1.t01784-RA	GO	GO:0040011	5	493	1e-167	locomotion
+nAv.1.0.1.t01784-RA	GO	GO:0040035	5	493	1e-167	hermaphrodite genitalia development
+nAv.1.0.1.t01784-RA	GO	GO:0040007	5	493	1e-167	growth
+nAv.1.0.1.t01784-RA	GO	GO:0002119	5	493	1e-167	nematode larval development
+nAv.1.0.1.t01784-RA	GO	GO:0040002	5	493	1e-167	collagen and cuticulin-based cuticle development
+nAv.1.0.1.t01785-RA	GO	GO:0000003	151	667	4e-76	reproduction
+nAv.1.0.1.t01785-RA	GO	GO:0040010	151	667	4e-76	positive regulation of growth rate
+nAv.1.0.1.t01785-RA	GO	GO:0008340	151	667	4e-76	determination of adult lifespan
+nAv.1.0.1.t01785-RA	GO	GO:0032880	151	667	4e-76	regulation of protein localization
+nAv.1.0.1.t01785-RA	GO	GO:0010171	151	667	4e-76	body morphogenesis
+nAv.1.0.1.t01786-RA	GO	GO:0034641	21	301	6e-59	cellular nitrogen compound metabolic process
+nAv.1.0.1.t01786-RA	GO	GO:0000064	21	301	6e-59	L-ornithine transmembrane transporter activity
+nAv.1.0.1.t01786-RA	GO	GO:0005743	21	301	6e-59	mitochondrial inner membrane
+nAv.1.0.1.t01786-RA	GO	GO:0000050	21	301	6e-59	urea cycle
+nAv.1.0.1.t01786-RA	GO	GO:0000066	21	301	6e-59	mitochondrial ornithine transport
+nAv.1.0.1.t01993-RA	GO	GO:0042589	989	1159	9e-10	zymogen granule membrane
+nAv.1.0.1.t01993-RA	GO	GO:0051637	989	1159	9e-10	Gram-positive bacterial cell surface binding
+nAv.1.0.1.t01993-RA	GO	GO:0019898	989	1159	9e-10	extrinsic to membrane
+nAv.1.0.1.t01993-RA	GO	GO:0035375	989	1159	9e-10	zymogen binding
+nAv.1.0.1.t01993-RA	GO	GO:0051636	989	1159	9e-10	Gram-negative bacterial cell surface binding
+nAv.1.0.1.t02504-RA	GO	GO:0005515	137	279	8e-45	protein binding
+nAv.1.0.1.t02504-RA	GO	GO:0005102	137	279	8e-45	receptor binding
+nAv.1.0.1.t02751-RA	GO	GO:0030540	10	313	2e-81	female genitalia development
+nAv.1.0.1.t02751-RA	GO	GO:0045179	10	313	2e-81	apical cortex
+nAv.1.0.1.t02751-RA	GO	GO:0000003	10	313	2e-81	reproduction
+nAv.1.0.1.t02751-RA	GO	GO:0032350	10	313	2e-81	regulation of hormone metabolic process
+nAv.1.0.1.t02751-RA	GO	GO:0005783	10	313	2e-81	endoplasmic reticulum
+nAv.1.0.1.t02751-RA	GO	GO:0042759	10	313	2e-81	long-chain fatty acid biosynthetic process
+nAv.1.0.1.t02751-RA	GO	GO:0042303	10	313	2e-81	molting cycle
+nAv.1.0.1.t02751-RA	GO	GO:0009792	10	313	2e-81	embryo development ending in birth or egg hatching
+nAv.1.0.1.t02751-RA	GO	GO:0018996	10	313	2e-81	molting cycle, collagen and cuticulin-based cuticle
+nAv.1.0.1.t02751-RA	GO	GO:0006694	10	313	2e-81	steroid biosynthetic process
+nAv.1.0.1.t02751-RA	GO	GO:0008209	10	313	2e-81	androgen metabolic process
+nAv.1.0.1.t02751-RA	GO	GO:0040010	10	313	2e-81	positive regulation of growth rate
+nAv.1.0.1.t02751-RA	GO	GO:0008340	10	313	2e-81	determination of adult lifespan
+nAv.1.0.1.t02751-RA	GO	GO:0040011	10	313	2e-81	locomotion
+nAv.1.0.1.t02751-RA	GO	GO:0009790	10	313	2e-81	embryo development
+nAv.1.0.1.t02751-RA	GO	GO:0040007	10	313	2e-81	growth
+nAv.1.0.1.t02751-RA	GO	GO:0008210	10	313	2e-81	estrogen metabolic process
+nAv.1.0.1.t02751-RA	GO	GO:0050062	10	313	2e-81	long-chain-fatty-acyl-CoA reductase activity
+nAv.1.0.1.t02751-RA	GO	GO:0002119	10	313	2e-81	nematode larval development
+nAv.1.0.1.t02752-RA	GO	GO:0000003	4	175	4e-51	reproduction
+nAv.1.0.1.t02752-RA	GO	GO:0040010	4	175	4e-51	positive regulation of growth rate
+nAv.1.0.1.t02752-RA	GO	GO:0040011	4	175	4e-51	locomotion
+nAv.1.0.1.t02752-RA	GO	GO:0040015	4	175	4e-51	negative regulation of multicellular organism growth
+nAv.1.0.1.t02884-RA	GO	GO:0005515	254	354	4e-09	protein binding
+nAv.1.0.1.t02884-RA	GO	GO:0007264	254	354	4e-09	small GTPase mediated signal transduction
+nAv.1.0.1.t02884-RA	GO	GO:0005829	254	354	4e-09	cytosol
+nAv.1.0.1.t02884-RA	GO	GO:0007601	254	354	4e-09	visual perception
+nAv.1.0.1.t02884-RA	GO	GO:0051056	254	354	4e-09	regulation of small GTPase mediated signal transduction
+nAv.1.0.1.t02884-RA	GO	GO:0016461	254	354	4e-09	unconventional myosin complex
+nAv.1.0.1.t03321-RA	GO	GO:0016323	1	259	2e-58	basolateral plasma membrane
+nAv.1.0.1.t03321-RA	GO	GO:0030321	1	259	2e-58	transepithelial chloride transport
+nAv.1.0.1.t03415-RA	GO	GO:0046966	747	1643	3e-169	thyroid hormone receptor binding
+nAv.1.0.1.t03415-RA	GO	GO:0016567	747	1643	3e-169	protein ubiquitination
+nAv.1.0.1.t03415-RA	GO	GO:0004842	747	1643	3e-169	ubiquitin-protein ligase activity
+nAv.1.0.1.t03773-RA	GO	GO:0000003	32	471	0.0	reproduction
+nAv.1.0.1.t03773-RA	GO	GO:0002009	32	471	0.0	morphogenesis of an epithelium
+nAv.1.0.1.t03773-RA	GO	GO:0005938	32	471	0.0	cell cortex
+nAv.1.0.1.t03773-RA	GO	GO:0005737	32	471	0.0	cytoplasm
+nAv.1.0.1.t03773-RA	GO	GO:0009792	32	471	0.0	embryo development ending in birth or egg hatching
+nAv.1.0.1.t03773-RA	GO	GO:0000281	32	471	0.0	cytokinesis after mitosis
+nAv.1.0.1.t03773-RA	GO	GO:0009880	32	471	0.0	embryonic pattern specification
+nAv.1.0.1.t03773-RA	GO	GO:0005515	32	471	0.0	protein binding
+nAv.1.0.1.t03773-RA	GO	GO:0004672	32	471	0.0	protein kinase activity
+nAv.1.0.1.t03773-RA	GO	GO:0007017	32	471	0.0	microtubule-based process
+nAv.1.0.1.t03773-RA	GO	GO:0043186	32	471	0.0	P granule
+nAv.1.0.1.t03773-RA	GO	GO:0000910	32	471	0.0	cytokinesis
+nAv.1.0.1.t03773-RA	GO	GO:0005813	32	471	0.0	centrosome
+nAv.1.0.1.t03773-RA	GO	GO:0006468	32	471	0.0	protein phosphorylation
+nAv.1.0.1.t03773-RA	GO	GO:0045167	32	471	0.0	asymmetric protein localization involved in cell fate determination
+nAv.1.0.1.t03773-RA	GO	GO:0005694	32	471	0.0	chromosome
+nAv.1.0.1.t03773-RA	GO	GO:0035046	32	471	0.0	pronuclear migration
+nAv.1.0.1.t03773-RA	GO	GO:0004674	32	471	0.0	protein serine/threonine kinase activity
+nAv.1.0.1.t03773-RA	GO	GO:0007126	32	471	0.0	meiosis
+nAv.1.0.1.t03773-RA	GO	GO:0051301	32	471	0.0	cell division
+nAv.1.0.1.t03773-RA	GO	GO:0045732	32	471	0.0	positive regulation of protein catabolic process
+nAv.1.0.1.t03773-RA	GO	GO:0007052	32	471	0.0	mitotic spindle organization
+nAv.1.0.1.t03773-RA	GO	GO:0010171	32	471	0.0	body morphogenesis
+nAv.1.0.1.t03773-RA	GO	GO:0045132	32	471	0.0	meiotic chromosome segregation
+nAv.1.0.1.t03792-RA	GO	GO:0004222	66	656	5e-97	metalloendopeptidase activity
+nAv.1.0.1.t03792-RA	GO	GO:0005515	66	656	5e-97	protein binding
+nAv.1.0.1.t03792-RA	GO	GO:0005886	66	656	5e-97	plasma membrane
+nAv.1.0.1.t03822-RA	GO	GO:0000003	458	837	0.0	reproduction
+nAv.1.0.1.t03822-RA	GO	GO:0008340	458	837	0.0	determination of adult lifespan
+nAv.1.0.1.t03822-RA	GO	GO:0002119	458	837	0.0	nematode larval development
+nAv.1.0.1.t03822-RA	GO	GO:0009792	458	837	0.0	embryo development ending in birth or egg hatching
+nAv.1.0.1.t03875-RA	GO	GO:0005515	17	196	4e-26	protein binding
+nAv.1.0.1.t03875-RA	GO	GO:0043234	17	196	4e-26	protein complex
+nAv.1.0.1.t03875-RA	GO	GO:0006479	17	196	4e-26	protein methylation
+nAv.1.0.1.t03875-RA	GO	GO:0008276	17	196	4e-26	protein methyltransferase activity
+nAv.1.0.1.t03875-RA	GO	GO:0030307	17	196	4e-26	positive regulation of cell growth
+nAv.1.0.1.t03876-RA	GO	GO:0005829	7	212	1e-18	cytosol
+nAv.1.0.1.t03876-RA	GO	GO:0006760	7	212	1e-18	folic acid-containing compound metabolic process
+nAv.1.0.1.t03876-RA	GO	GO:0004146	7	212	1e-18	dihydrofolate reductase activity
+nAv.1.0.1.t04283-RA	GO	GO:0043951	30	369	6e-69	negative regulation of cAMP-mediated signaling
+nAv.1.0.1.t04283-RA	GO	GO:0005515	30	369	6e-69	protein binding
+nAv.1.0.1.t04283-RA	GO	GO:0016567	30	369	6e-69	protein ubiquitination
+nAv.1.0.1.t04283-RA	GO	GO:0045744	30	369	6e-69	negative regulation of G-protein coupled receptor protein signaling pathway
+nAv.1.0.1.t04283-RA	GO	GO:0000209	30	369	6e-69	protein polyubiquitination
+nAv.1.0.1.t04283-RA	GO	GO:0004842	30	369	6e-69	ubiquitin-protein ligase activity
+nAv.1.0.1.t04304-RA	GO	GO:0051233	8	456	3e-127	spindle midzone
+nAv.1.0.1.t04304-RA	GO	GO:0045786	8	456	3e-127	negative regulation of cell cycle
+nAv.1.0.1.t04304-RA	GO	GO:0035335	8	456	3e-127	peptidyl-tyrosine dephosphorylation
+nAv.1.0.1.t04304-RA	GO	GO:0005737	8	456	3e-127	cytoplasm
+nAv.1.0.1.t04304-RA	GO	GO:0060284	8	456	3e-127	regulation of cell development
+nAv.1.0.1.t04304-RA	GO	GO:0030496	8	456	3e-127	midbody
+nAv.1.0.1.t04304-RA	GO	GO:0009792	8	456	3e-127	embryo development ending in birth or egg hatching
+nAv.1.0.1.t04304-RA	GO	GO:0005730	8	456	3e-127	nucleolus
+nAv.1.0.1.t04304-RA	GO	GO:0005819	8	456	3e-127	spindle
+nAv.1.0.1.t04304-RA	GO	GO:0006974	8	456	3e-127	response to DNA damage stimulus
+nAv.1.0.1.t04304-RA	GO	GO:0005634	8	456	3e-127	nucleus
+nAv.1.0.1.t04304-RA	GO	GO:0071850	8	456	3e-127	mitotic cell cycle arrest
+nAv.1.0.1.t04304-RA	GO	GO:0000910	8	456	3e-127	cytokinesis
+nAv.1.0.1.t04304-RA	GO	GO:0005813	8	456	3e-127	centrosome
+nAv.1.0.1.t04304-RA	GO	GO:0004725	8	456	3e-127	protein tyrosine phosphatase activity
+nAv.1.0.1.t04304-RA	GO	GO:0040010	8	456	3e-127	positive regulation of growth rate
+nAv.1.0.1.t04304-RA	GO	GO:0051301	8	456	3e-127	cell division
+nAv.1.0.1.t04304-RA	GO	GO:0000235	8	456	3e-127	astral microtubule
+nAv.1.0.1.t04407-RA	GO	GO:0006457	37	289	8e-32	protein folding
+nAv.1.0.1.t04407-RA	GO	GO:0005783	37	289	8e-32	endoplasmic reticulum
+nAv.1.0.1.t04407-RA	GO	GO:0005509	37	289	8e-32	calcium ion binding
+nAv.1.0.1.t04483-RA	GO	GO:0005792	180	564	2e-79	microsome
+nAv.1.0.1.t04483-RA	GO	GO:0001889	180	564	2e-79	liver development
+nAv.1.0.1.t04483-RA	GO	GO:0071385	180	564	2e-79	cellular response to glucocorticoid stimulus
+nAv.1.0.1.t04483-RA	GO	GO:0006805	180	564	2e-79	xenobiotic metabolic process
+nAv.1.0.1.t04483-RA	GO	GO:0004301	180	564	2e-79	epoxide hydrolase activity
+nAv.1.0.1.t04483-RA	GO	GO:0019899	180	564	2e-79	enzyme binding
+nAv.1.0.1.t04483-RA	GO	GO:0071310	180	564	2e-79	cellular response to organic substance
+nAv.1.0.1.t04616-RA	GO	GO:0051343	64	207	2e-24	positive regulation of cyclic-nucleotide phosphodiesterase activity
+nAv.1.0.1.t04616-RA	GO	GO:0005615	64	207	2e-24	extracellular space
+nAv.1.0.1.t04616-RA	GO	GO:0032781	64	207	2e-24	positive regulation of ATPase activity
+nAv.1.0.1.t04616-RA	GO	GO:0005509	64	207	2e-24	calcium ion binding
+nAv.1.0.1.t04616-RA	GO	GO:0000910	64	207	2e-24	cytokinesis
+nAv.1.0.1.t04616-RA	GO	GO:0043549	64	207	2e-24	regulation of kinase activity
+nAv.1.0.1.t04616-RA	GO	GO:0031013	64	207	2e-24	troponin I binding
+nAv.1.0.1.t04616-RA	GO	GO:0000331	64	207	2e-24	contractile vacuole
+nAv.1.0.1.t04789-RA	GO	GO:0009100	207	340	6e-06	glycoprotein metabolic process
+nAv.1.0.1.t04789-RA	GO	GO:0031647	207	340	6e-06	regulation of protein stability
+nAv.1.0.1.t04789-RA	GO	GO:0055088	207	340	6e-06	lipid homeostasis
+nAv.1.0.1.t04790-RA	GO	GO:0060465	85	696	7e-62	pharynx development
+nAv.1.0.1.t04790-RA	GO	GO:0018991	85	696	7e-62	oviposition
+nAv.1.0.1.t04790-RA	GO	GO:0060581	85	696	7e-62	cell fate commitment involved in pattern specification
+nAv.1.0.1.t04790-RA	GO	GO:0007219	85	696	7e-62	Notch signaling pathway
+nAv.1.0.1.t04790-RA	GO	GO:0048598	85	696	7e-62	embryonic morphogenesis
+nAv.1.0.1.t04790-RA	GO	GO:0005886	85	696	7e-62	plasma membrane
+nAv.1.0.1.t04790-RA	GO	GO:0009792	85	696	7e-62	embryo development ending in birth or egg hatching
+nAv.1.0.1.t04873-RA	GO	GO:0005783	41	191	9e-22	endoplasmic reticulum
+nAv.1.0.1.t04873-RA	GO	GO:0005784	41	191	9e-22	Sec61 translocon complex
+nAv.1.0.1.t04874-RA	GO	GO:0006139	15	445	3e-152	nucleobase, nucleoside, nucleotide and nucleic acid metabolic process
+nAv.1.0.1.t04874-RA	GO	GO:0047710	15	445	3e-152	bis(5{prime}-adenosyl)-triphosphatase activity
+nAv.1.0.1.t04874-RA	GO	GO:0016810	15	445	3e-152	hydrolase activity, acting on carbon-nitrogen (but not peptide) bonds
+nAv.1.0.1.t04929-RA	GO	GO:0043280	3	1188	0.0	positive regulation of caspase activity
+nAv.1.0.1.t04929-RA	GO	GO:0000287	3	1188	0.0	magnesium ion binding
+nAv.1.0.1.t04929-RA	GO	GO:0000165	3	1188	0.0	MAPKKK cascade
+nAv.1.0.1.t04929-RA	GO	GO:0004709	3	1188	0.0	MAP kinase kinase kinase activity
+nAv.1.0.1.t04929-RA	GO	GO:0005524	3	1188	0.0	ATP binding
+nAv.1.0.1.t04929-RA	GO	GO:0008656	3	1188	0.0	caspase activator activity
+nAv.1.0.1.t04929-RA	GO	GO:0019903	3	1188	0.0	protein phosphatase binding
+nAv.1.0.1.t04929-RA	GO	GO:0042803	3	1188	0.0	protein homodimerization activity
+nAv.1.0.1.t04929-RA	GO	GO:0007257	3	1188	0.0	activation of JUN kinase activity
+nAv.1.0.1.t04929-RA	GO	GO:0005515	3	1188	0.0	protein binding
+nAv.1.0.1.t04929-RA	GO	GO:0006919	3	1188	0.0	activation of caspase activity
+nAv.1.0.1.t04929-RA	GO	GO:0008624	3	1188	0.0	induction of apoptosis by extracellular signals
+nAv.1.0.1.t04929-RA	GO	GO:0000186	3	1188	0.0	activation of MAPKK activity
+nAv.1.0.1.t04929-RA	GO	GO:0070301	3	1188	0.0	cellular response to hydrogen peroxide
+nAv.1.0.1.t05000-RA	GO	GO:0000278	8	1671	0.0	mitotic cell cycle
+nAv.1.0.1.t05000-RA	GO	GO:0006521	8	1671	0.0	regulation of cellular amino acid metabolic process
+nAv.1.0.1.t05000-RA	GO	GO:0002474	8	1671	0.0	antigen processing and presentation of peptide antigen via MHC class I
+nAv.1.0.1.t05000-RA	GO	GO:0051437	8	1671	0.0	positive regulation of ubiquitin-protein ligase activity involved in mitotic cell cycle
+nAv.1.0.1.t05000-RA	GO	GO:0005829	8	1671	0.0	cytosol
+nAv.1.0.1.t05000-RA	GO	GO:0000216	8	1671	0.0	M/G1 transition of mitotic cell cycle
+nAv.1.0.1.t05000-RA	GO	GO:0000209	8	1671	0.0	protein polyubiquitination
+nAv.1.0.1.t05000-RA	GO	GO:0016070	8	1671	0.0	RNA metabolic process
+nAv.1.0.1.t05000-RA	GO	GO:0016032	8	1671	0.0	viral reproduction
+nAv.1.0.1.t05000-RA	GO	GO:0006915	8	1671	0.0	apoptosis
+nAv.1.0.1.t05000-RA	GO	GO:0000084	8	1671	0.0	S phase of mitotic cell cycle
+nAv.1.0.1.t05000-RA	GO	GO:0000075	8	1671	0.0	cell cycle checkpoint
+nAv.1.0.1.t05000-RA	GO	GO:0034641	8	1671	0.0	cellular nitrogen compound metabolic process
+nAv.1.0.1.t05000-RA	GO	GO:0031145	8	1671	0.0	anaphase-promoting complex-dependent proteasomal ubiquitin-dependent protein catabolic process
+nAv.1.0.1.t05000-RA	GO	GO:0051439	8	1671	0.0	regulation of ubiquitin-protein ligase activity involved in mitotic cell cycle
+nAv.1.0.1.t05000-RA	GO	GO:0016071	8	1671	0.0	mRNA metabolic process
+nAv.1.0.1.t05000-RA	GO	GO:0006977	8	1671	0.0	DNA damage response, signal transduction by p53 class mediator resulting in cell cycle arrest
+nAv.1.0.1.t05000-RA	GO	GO:0042981	8	1671	0.0	regulation of apoptosis
+nAv.1.0.1.t05001-RA	GO	GO:0005634	4	326	3e-96	nucleus
+nAv.1.0.1.t05001-RA	GO	GO:0000398	4	326	3e-96	nuclear mRNA splicing, via spliceosome
+nAv.1.0.1.t05001-RA	GO	GO:0071013	4	326	3e-96	catalytic step 2 spliceosome
+nAv.1.0.1.t05003-RA	GO	GO:0000003	5	977	0.0	reproduction
+nAv.1.0.1.t05003-RA	GO	GO:0040022	5	977	0.0	feminization of hermaphroditic germ-line
+nAv.1.0.1.t05003-RA	GO	GO:0040020	5	977	0.0	regulation of meiosis
+nAv.1.0.1.t05003-RA	GO	GO:0042127	5	977	0.0	regulation of cell proliferation
+nAv.1.0.1.t05003-RA	GO	GO:0009792	5	977	0.0	embryo development ending in birth or egg hatching
+nAv.1.0.1.t05003-RA	GO	GO:0010172	5	977	0.0	embryonic body morphogenesis
+nAv.1.0.1.t05003-RA	GO	GO:0007281	5	977	0.0	germ cell development
+nAv.1.0.1.t05003-RA	GO	GO:0005515	5	977	0.0	protein binding
+nAv.1.0.1.t05003-RA	GO	GO:0018996	5	977	0.0	molting cycle, collagen and cuticulin-based cuticle
+nAv.1.0.1.t05003-RA	GO	GO:0048589	5	977	0.0	developmental growth
+nAv.1.0.1.t05003-RA	GO	GO:0040035	5	977	0.0	hermaphrodite genitalia development
+nAv.1.0.1.t05003-RA	GO	GO:0040007	5	977	0.0	growth
+nAv.1.0.1.t05003-RA	GO	GO:0002119	5	977	0.0	nematode larval development
+nAv.1.0.1.t05142-RA	GO	GO:0044267	177	488	7e-86	cellular protein metabolic process
+nAv.1.0.1.t05142-RA	GO	GO:0043687	177	488	7e-86	post-translational protein modification
+nAv.1.0.1.t05142-RA	GO	GO:0006506	177	488	7e-86	GPI anchor biosynthetic process
+nAv.1.0.1.t05142-RA	GO	GO:0006501	177	488	7e-86	C-terminal protein lipidation
+nAv.1.0.1.t05142-RA	GO	GO:0005789	177	488	7e-86	endoplasmic reticulum membrane
+nAv.1.0.1.t05142-RA	GO	GO:0016254	177	488	7e-86	preassembly of GPI anchor in ER membrane
+nAv.1.0.1.t05144-RA	GO	GO:0005783	1	232	9e-46	endoplasmic reticulum
+nAv.1.0.1.t05144-RA	GO	GO:0031175	1	232	9e-46	neuron projection development
+nAv.1.0.1.t05144-RA	GO	GO:0046982	1	232	9e-46	protein heterodimerization activity
+nAv.1.0.1.t05144-RA	GO	GO:0008219	1	232	9e-46	cell death
+nAv.1.0.1.t05144-RA	GO	GO:0070972	1	232	9e-46	protein localization in endoplasmic reticulum
+nAv.1.0.1.t05144-RA	GO	GO:0005624	1	232	9e-46	membrane fraction
+nAv.1.0.1.t05325-RA	GO	GO:0020037	2	181	3e-54	heme binding
+nAv.1.0.1.t05325-RA	GO	GO:0005749	2	181	3e-54	mitochondrial respiratory chain complex II
+nAv.1.0.1.t05325-RA	GO	GO:0005743	2	181	3e-54	mitochondrial inner membrane
+nAv.1.0.1.t05485-RA	GO	GO:0061036	399	505	1e-47	positive regulation of cartilage development
+nAv.1.0.1.t05485-RA	GO	GO:2000741	399	505	1e-47	positive regulation of mesenchymal stem cell differentiation
+nAv.1.0.1.t05485-RA	GO	GO:0005634	399	505	1e-47	nucleus
+nAv.1.0.1.t05485-RA	GO	GO:0003677	399	505	1e-47	DNA binding
+nAv.1.0.1.t05485-RA	GO	GO:0006355	399	505	1e-47	regulation of transcription, DNA-dependent
+nAv.1.0.1.t05485-RA	GO	GO:0007517	399	505	1e-47	muscle organ development
+nAv.1.0.1.t05485-RA	GO	GO:0006351	399	505	1e-47	transcription, DNA-dependent
+nAv.1.0.1.t05485-RA	GO	GO:0032332	399	505	1e-47	positive regulation of chondrocyte differentiation
+nAv.1.0.1.t05485-RA	GO	GO:0071560	399	505	1e-47	cellular response to transforming growth factor beta stimulus
+nAv.1.0.1.t05485-RA	GO	GO:0005515	399	505	1e-47	protein binding
+nAv.1.0.1.t05485-RA	GO	GO:0003700	399	505	1e-47	sequence-specific DNA binding transcription factor activity
+nAv.1.0.1.t05512-RA	GO	GO:0016070	37	240	3e-92	RNA metabolic process
+nAv.1.0.1.t05512-RA	GO	GO:0005840	37	240	3e-92	ribosome
+nAv.1.0.1.t05512-RA	GO	GO:0003723	37	240	3e-92	RNA binding
+nAv.1.0.1.t05512-RA	GO	GO:0006415	37	240	3e-92	translational termination
+nAv.1.0.1.t05512-RA	GO	GO:0006414	37	240	3e-92	translational elongation
+nAv.1.0.1.t05512-RA	GO	GO:0031018	37	240	3e-92	endocrine pancreas development
+nAv.1.0.1.t05512-RA	GO	GO:0016032	37	240	3e-92	viral reproduction
+nAv.1.0.1.t05512-RA	GO	GO:0019058	37	240	3e-92	viral infectious cycle
+nAv.1.0.1.t05512-RA	GO	GO:0044267	37	240	3e-92	cellular protein metabolic process
+nAv.1.0.1.t05512-RA	GO	GO:0010467	37	240	3e-92	gene expression
+nAv.1.0.1.t05512-RA	GO	GO:0005829	37	240	3e-92	cytosol
+nAv.1.0.1.t05512-RA	GO	GO:0019083	37	240	3e-92	viral transcription
+nAv.1.0.1.t05512-RA	GO	GO:0006412	37	240	3e-92	translation
+nAv.1.0.1.t05512-RA	GO	GO:0016071	37	240	3e-92	mRNA metabolic process
+nAv.1.0.1.t05512-RA	GO	GO:0003735	37	240	3e-92	structural constituent of ribosome
+nAv.1.0.1.t05513-RA	GO	GO:0042254	11	594	5e-81	ribosome biogenesis
+nAv.1.0.1.t05513-RA	GO	GO:0005634	11	594	5e-81	nucleus
+nAv.1.0.1.t05513-RA	GO	GO:0005730	11	594	5e-81	nucleolus
+nAv.1.0.1.t05513-RA	GO	GO:0004004	11	594	5e-81	ATP-dependent RNA helicase activity
+nAv.1.0.1.t05564-RA	GO	GO:0000003	11	931	0.0	reproduction
+nAv.1.0.1.t05564-RA	GO	GO:0040010	11	931	0.0	positive regulation of growth rate
+nAv.1.0.1.t05564-RA	GO	GO:0008340	11	931	0.0	determination of adult lifespan
+nAv.1.0.1.t05564-RA	GO	GO:0040007	11	931	0.0	growth
+nAv.1.0.1.t05564-RA	GO	GO:0002119	11	931	0.0	nematode larval development
+nAv.1.0.1.t05564-RA	GO	GO:0009792	11	931	0.0	embryo development ending in birth or egg hatching
+nAv.1.0.1.t05565-RA	GO	GO:0042059	56	198	5e-19	negative regulation of epidermal growth factor receptor signaling pathway
+nAv.1.0.1.t05565-RA	GO	GO:0048008	56	198	5e-19	platelet-derived growth factor receptor signaling pathway
+nAv.1.0.1.t05565-RA	GO	GO:0051894	56	198	5e-19	positive regulation of focal adhesion assembly
+nAv.1.0.1.t05565-RA	GO	GO:0043407	56	198	5e-19	negative regulation of MAP kinase activity
+nAv.1.0.1.t05565-RA	GO	GO:0045785	56	198	5e-19	positive regulation of cell adhesion
+nAv.1.0.1.t05565-RA	GO	GO:0016791	56	198	5e-19	phosphatase activity
+nAv.1.0.1.t05565-RA	GO	GO:0050860	56	198	5e-19	negative regulation of T cell receptor signaling pathway
+nAv.1.0.1.t05565-RA	GO	GO:0005911	56	198	5e-19	cell-cell junction
+nAv.1.0.1.t05565-RA	GO	GO:0016311	56	198	5e-19	dephosphorylation
+nAv.1.0.1.t05565-RA	GO	GO:0051898	56	198	5e-19	negative regulation of protein kinase B signaling cascade
+nAv.1.0.1.t05565-RA	GO	GO:0005886	56	198	5e-19	plasma membrane
+nAv.1.0.1.t05644-RA	GO	GO:0000003	13	170	7e-76	reproduction
+nAv.1.0.1.t05644-RA	GO	GO:0018991	13	170	7e-76	oviposition
+nAv.1.0.1.t05644-RA	GO	GO:0040017	13	170	7e-76	positive regulation of locomotion
+nAv.1.0.1.t05644-RA	GO	GO:0006937	13	170	7e-76	regulation of muscle contraction
+nAv.1.0.1.t05644-RA	GO	GO:0040011	13	170	7e-76	locomotion
+nAv.1.0.1.t05644-RA	GO	GO:0040007	13	170	7e-76	growth
+nAv.1.0.1.t05644-RA	GO	GO:0002119	13	170	7e-76	nematode larval development
+nAv.1.0.1.t05644-RA	GO	GO:0043051	13	170	7e-76	regulation of pharyngeal pumping
+nAv.1.0.1.t05757-RA	GO	GO:0000003	435	573	2e-64	reproduction
+nAv.1.0.1.t05757-RA	GO	GO:0005515	435	573	2e-64	protein binding
+nAv.1.0.1.t05757-RA	GO	GO:0018996	435	573	2e-64	molting cycle, collagen and cuticulin-based cuticle
+nAv.1.0.1.t05757-RA	GO	GO:0040007	435	573	2e-64	growth
+nAv.1.0.1.t05757-RA	GO	GO:0002119	435	573	2e-64	nematode larval development
+nAv.1.0.1.t05757-RA	GO	GO:0009792	435	573	2e-64	embryo development ending in birth or egg hatching
+nAv.1.0.1.t05875-RA	GO	GO:0000287	8	261	7e-42	magnesium ion binding
+nAv.1.0.1.t05875-RA	GO	GO:0005634	8	261	7e-42	nucleus
+nAv.1.0.1.t05875-RA	GO	GO:0008969	8	261	7e-42	phosphohistidine phosphatase activity
+nAv.1.0.1.t05875-RA	GO	GO:0005829	8	261	7e-42	cytosol
+nAv.1.0.1.t05875-RA	GO	GO:0004427	8	261	7e-42	inorganic diphosphatase activity
+nAv.1.0.1.t05875-RA	GO	GO:0006470	8	261	7e-42	protein dephosphorylation
+nAv.1.0.1.t05875-RA	GO	GO:0006796	8	261	7e-42	phosphate metabolic process
+nAv.1.0.1.t05876-RA	GO	GO:0006810	52	508	2e-49	transport
+nAv.1.0.1.t05876-RA	GO	GO:0001726	52	508	2e-49	ruffle
+nAv.1.0.1.t05876-RA	GO	GO:0030048	52	508	2e-49	actin filament-based movement
+nAv.1.0.1.t05876-RA	GO	GO:0030426	52	508	2e-49	growth cone
+nAv.1.0.1.t05876-RA	GO	GO:0000146	52	508	2e-49	microfilament motor activity
+nAv.1.0.1.t05876-RA	GO	GO:0005737	52	508	2e-49	cytoplasm
+nAv.1.0.1.t05876-RA	GO	GO:0043005	52	508	2e-49	neuron projection
+nAv.1.0.1.t05895-RA	GO	GO:0006508	10	211	1e-15	proteolysis
+nAv.1.0.1.t05895-RA	GO	GO:0005829	10	211	1e-15	cytosol
+nAv.1.0.1.t05900-RA	GO	GO:0016132	50	421	2e-51	brassinosteroid biosynthetic process
+nAv.1.0.1.t05900-RA	GO	GO:0005886	50	421	2e-51	plasma membrane
+nAv.1.0.1.t05900-RA	GO	GO:0009918	50	421	2e-51	sterol delta7 reductase activity
+nAv.1.0.1.t05902-RA	GO	GO:0000003	47	306	5e-124	reproduction
+nAv.1.0.1.t05902-RA	GO	GO:0040010	47	306	5e-124	positive regulation of growth rate
+nAv.1.0.1.t05902-RA	GO	GO:0040011	47	306	5e-124	locomotion
+nAv.1.0.1.t05902-RA	GO	GO:0040007	47	306	5e-124	growth
+nAv.1.0.1.t05902-RA	GO	GO:0002119	47	306	5e-124	nematode larval development
+nAv.1.0.1.t05902-RA	GO	GO:0009792	47	306	5e-124	embryo development ending in birth or egg hatching
+nAv.1.0.1.t05927-RA	GO	GO:0043687	144	410	2e-53	post-translational protein modification
+nAv.1.0.1.t05927-RA	GO	GO:0000138	144	410	2e-53	Golgi trans cisterna
+nAv.1.0.1.t05927-RA	GO	GO:0016323	144	410	2e-53	basolateral plasma membrane
+nAv.1.0.1.t05927-RA	GO	GO:0009897	144	410	2e-53	external side of plasma membrane
+nAv.1.0.1.t05927-RA	GO	GO:0031526	144	410	2e-53	brush border membrane
+nAv.1.0.1.t05927-RA	GO	GO:0008378	144	410	2e-53	galactosyltransferase activity
+nAv.1.0.1.t05927-RA	GO	GO:0000139	144	410	2e-53	Golgi membrane
+nAv.1.0.1.t05927-RA	GO	GO:0044267	144	410	2e-53	cellular protein metabolic process
+nAv.1.0.1.t05927-RA	GO	GO:0048487	144	410	2e-53	beta-tubulin binding
+nAv.1.0.1.t05927-RA	GO	GO:0043014	144	410	2e-53	alpha-tubulin binding
+nAv.1.0.1.t05927-RA	GO	GO:0009312	144	410	2e-53	oligosaccharide biosynthetic process
+nAv.1.0.1.t05927-RA	GO	GO:0003831	144	410	2e-53	beta-N-acetylglucosaminylglycopeptide beta-1,4-galactosyltransferase activity
+nAv.1.0.1.t05927-RA	GO	GO:0004461	144	410	2e-53	lactose synthase activity
+nAv.1.0.1.t05927-RA	GO	GO:0030057	144	410	2e-53	desmosome
+nAv.1.0.1.t05927-RA	GO	GO:0030112	144	410	2e-53	glycocalyx
+nAv.1.0.1.t05927-RA	GO	GO:0018279	144	410	2e-53	protein N-linked glycosylation via asparagine
+nAv.1.0.1.t05927-RA	GO	GO:0035250	144	410	2e-53	UDP-galactosyltransferase activity
+nAv.1.0.1.t05927-RA	GO	GO:0003945	144	410	2e-53	N-acetyllactosamine synthase activity
+nAv.1.0.1.t05927-RA	GO	GO:0042803	144	410	2e-53	protein homodimerization activity
+nAv.1.0.1.t05927-RA	GO	GO:0005794	144	410	2e-53	Golgi apparatus
+nAv.1.0.1.t05938-RA	GO	GO:0005634	147	789	2e-95	nucleus
+nAv.1.0.1.t05938-RA	GO	GO:0001708	147	789	2e-95	cell fate specification
+nAv.1.0.1.t05938-RA	GO	GO:0030054	147	789	2e-95	cell junction
+nAv.1.0.1.t05938-RA	GO	GO:0005737	147	789	2e-95	cytoplasm
+nAv.1.0.1.t06016-RA	GO	GO:0007268	136	907	0.0	synaptic transmission
+nAv.1.0.1.t06016-RA	GO	GO:0050808	136	907	0.0	synapse organization
+nAv.1.0.1.t06022-RA	GO	GO:0000003	1	849	4e-172	reproduction
+nAv.1.0.1.t06022-RA	GO	GO:0004483	1	849	4e-172	mRNA (nucleoside-2{prime}-O-)-methyltransferase activity
+nAv.1.0.1.t06022-RA	GO	GO:0006370	1	849	4e-172	mRNA capping
+nAv.1.0.1.t06022-RA	GO	GO:0080009	1	849	4e-172	mRNA methylation
+nAv.1.0.1.t06024-RA	GO	GO:0000003	19	230	9e-64	reproduction
+nAv.1.0.1.t06024-RA	GO	GO:0002009	19	230	9e-64	morphogenesis of an epithelium
+nAv.1.0.1.t06024-RA	GO	GO:0016477	19	230	9e-64	cell migration
+nAv.1.0.1.t06024-RA	GO	GO:0040020	19	230	9e-64	regulation of meiosis
+nAv.1.0.1.t06024-RA	GO	GO:0042127	19	230	9e-64	regulation of cell proliferation
+nAv.1.0.1.t06024-RA	GO	GO:0009792	19	230	9e-64	embryo development ending in birth or egg hatching
+nAv.1.0.1.t06024-RA	GO	GO:0008406	19	230	9e-64	gonad development
+nAv.1.0.1.t06024-RA	GO	GO:0007281	19	230	9e-64	germ cell development
+nAv.1.0.1.t06024-RA	GO	GO:0040010	19	230	9e-64	positive regulation of growth rate
+nAv.1.0.1.t06024-RA	GO	GO:0040011	19	230	9e-64	locomotion
+nAv.1.0.1.t06024-RA	GO	GO:0006898	19	230	9e-64	receptor-mediated endocytosis
+nAv.1.0.1.t06024-RA	GO	GO:0040035	19	230	9e-64	hermaphrodite genitalia development
+nAv.1.0.1.t06024-RA	GO	GO:0010171	19	230	9e-64	body morphogenesis
+nAv.1.0.1.t06024-RA	GO	GO:0040007	19	230	9e-64	growth
+nAv.1.0.1.t06024-RA	GO	GO:0002119	19	230	9e-64	nematode larval development
+nAv.1.0.1.t06214-RA	GO	GO:0005743	20	464	0.0	mitochondrial inner membrane
+nAv.1.0.1.t06214-RA	GO	GO:0005739	20	464	0.0	mitochondrion
+nAv.1.0.1.t06284-RA	GO	GO:0006975	100	379	3e-23	DNA damage induced protein phosphorylation
+nAv.1.0.1.t06284-RA	GO	GO:0033261	100	379	3e-23	regulation of S phase
+nAv.1.0.1.t06284-RA	GO	GO:0006468	100	379	3e-23	protein phosphorylation
+nAv.1.0.1.t06284-RA	GO	GO:0071310	100	379	3e-23	cellular response to organic substance
+nAv.1.0.1.t06284-RA	GO	GO:0005515	100	379	3e-23	protein binding
+nAv.1.0.1.t06284-RA	GO	GO:0004672	100	379	3e-23	protein kinase activity
+nAv.1.0.1.t06284-RA	GO	GO:0071313	100	379	3e-23	cellular response to caffeine
+nAv.1.0.1.t06284-RA	GO	GO:0031572	100	379	3e-23	G2/M transition DNA damage checkpoint
+nAv.1.0.1.t06287-RA	GO	GO:0005615	402	668	5e-17	extracellular space
+nAv.1.0.1.t06287-RA	GO	GO:0010951	402	668	5e-17	negative regulation of endopeptidase activity
+nAv.1.0.1.t06287-RA	GO	GO:0007596	402	668	5e-17	blood coagulation
+nAv.1.0.1.t06287-RA	GO	GO:0005576	402	668	5e-17	extracellular region
+nAv.1.0.1.t06287-RA	GO	GO:0004866	402	668	5e-17	endopeptidase inhibitor activity
+nAv.1.0.1.t06287-RA	GO	GO:0007598	402	668	5e-17	blood coagulation, extrinsic pathway
+nAv.1.0.1.t06287-RA	GO	GO:0005886	402	668	5e-17	plasma membrane
+nAv.1.0.1.t06308-RA	GO	GO:0031012	366	709	3e-10	extracellular matrix
+nAv.1.0.1.t06308-RA	GO	GO:0005576	366	709	3e-10	extracellular region
+nAv.1.0.1.t06308-RA	GO	GO:0007411	366	709	3e-10	axon guidance
+nAv.1.0.1.t06382-RA	GO	GO:0016323	1	2374	0.0	basolateral plasma membrane
+nAv.1.0.1.t06382-RA	GO	GO:0005938	1	2374	0.0	cell cortex
+nAv.1.0.1.t06382-RA	GO	GO:0048790	1	2374	0.0	maintenance of presynaptic active zone structure
+nAv.1.0.1.t06382-RA	GO	GO:0031594	1	2374	0.0	neuromuscular junction
+nAv.1.0.1.t06382-RA	GO	GO:0007274	1	2374	0.0	neuromuscular synaptic transmission
+nAv.1.0.1.t06382-RA	GO	GO:0007009	1	2374	0.0	plasma membrane organization
+nAv.1.0.1.t06382-RA	GO	GO:0007026	1	2374	0.0	negative regulation of microtubule depolymerization
+nAv.1.0.1.t06382-RA	GO	GO:0016199	1	2374	0.0	axon midline choice point recognition
+nAv.1.0.1.t06382-RA	GO	GO:0045170	1	2374	0.0	spectrosome
+nAv.1.0.1.t06382-RA	GO	GO:0045169	1	2374	0.0	fusome
+nAv.1.0.1.t06382-RA	GO	GO:0005886	1	2374	0.0	plasma membrane
+nAv.1.0.1.t06382-RA	GO	GO:0050807	1	2374	0.0	regulation of synapse organization
+nAv.1.0.1.t06382-RA	GO	GO:0030721	1	2374	0.0	spectrosome organization
+nAv.1.0.1.t06382-RA	GO	GO:0007294	1	2374	0.0	germarium-derived oocyte fate determination
+nAv.1.0.1.t06382-RA	GO	GO:0048134	1	2374	0.0	germ-line cyst formation
+nAv.1.0.1.t06382-RA	GO	GO:0042062	1	2374	0.0	long-term strengthening of neuromuscular junction
+nAv.1.0.1.t06382-RA	GO	GO:0030707	1	2374	0.0	ovarian follicle cell development
+nAv.1.0.1.t06382-RA	GO	GO:0030727	1	2374	0.0	germarium-derived female germ-line cyst formation
+nAv.1.0.1.t06382-RA	GO	GO:0007308	1	2374	0.0	oocyte construction
+nAv.1.0.1.t06382-RA	GO	GO:0007417	1	2374	0.0	central nervous system development
+nAv.1.0.1.t06382-RA	GO	GO:0008017	1	2374	0.0	microtubule binding
+nAv.1.0.1.t06382-RA	GO	GO:0003779	1	2374	0.0	actin binding
+nAv.1.0.1.t06382-RA	GO	GO:0045478	1	2374	0.0	fusome organization
+nAv.1.0.1.t06382-RA	GO	GO:0005794	1	2374	0.0	Golgi apparatus
+nAv.1.0.1.t06383-RA	GO	GO:0031048	1	351	5e-21	chromatin silencing by small RNA
+nAv.1.0.1.t06383-RA	GO	GO:0005724	1	351	5e-21	nuclear telomeric heterochromatin
+nAv.1.0.1.t06383-RA	GO	GO:0005634	1	351	5e-21	nucleus
+nAv.1.0.1.t06383-RA	GO	GO:0016458	1	351	5e-21	gene silencing
+nAv.1.0.1.t06383-RA	GO	GO:0031934	1	351	5e-21	mating-type region heterochromatin
+nAv.1.0.1.t06383-RA	GO	GO:0003968	1	351	5e-21	RNA-directed RNA polymerase activity
+nAv.1.0.1.t06383-RA	GO	GO:0031380	1	351	5e-21	nuclear RNA-directed RNA polymerase complex
+nAv.1.0.1.t06383-RA	GO	GO:0030702	1	351	5e-21	chromatin silencing at centromere
+nAv.1.0.1.t06383-RA	GO	GO:0045141	1	351	5e-21	meiotic telomere clustering
+nAv.1.0.1.t06383-RA	GO	GO:0000070	1	351	5e-21	mitotic sister chromatid segregation
+nAv.1.0.1.t06383-RA	GO	GO:0031060	1	351	5e-21	regulation of histone methylation
+nAv.1.0.1.t06383-RA	GO	GO:0005829	1	351	5e-21	cytosol
+nAv.1.0.1.t06383-RA	GO	GO:0005721	1	351	5e-21	centromeric heterochromatin
+nAv.1.0.1.t06383-RA	GO	GO:0034613	1	351	5e-21	cellular protein localization
+nAv.1.0.1.t06452-RA	GO	GO:0005739	10	319	2e-47	mitochondrion
+nAv.1.0.1.t06453-RA	GO	GO:0004826	75	566	0.0	phenylalanine-tRNA ligase activity
+nAv.1.0.1.t06453-RA	GO	GO:0010467	75	566	0.0	gene expression
+nAv.1.0.1.t06453-RA	GO	GO:0005515	75	566	0.0	protein binding
+nAv.1.0.1.t06453-RA	GO	GO:0006418	75	566	0.0	tRNA aminoacylation for protein translation
+nAv.1.0.1.t06453-RA	GO	GO:0005829	75	566	0.0	cytosol
+nAv.1.0.1.t06453-RA	GO	GO:0005737	75	566	0.0	cytoplasm
+nAv.1.0.1.t06453-RA	GO	GO:0005625	75	566	0.0	soluble fraction
+nAv.1.0.1.t06618-RA	GO	GO:0035335	55	229	6e-27	peptidyl-tyrosine dephosphorylation
+nAv.1.0.1.t06618-RA	GO	GO:0004725	55	229	6e-27	protein tyrosine phosphatase activity
+nAv.1.0.1.t06620-RA	GO	GO:0031290	6	377	2e-48	retinal ganglion cell axon guidance
+nAv.1.0.1.t06620-RA	GO	GO:0035335	6	377	2e-48	peptidyl-tyrosine dephosphorylation
+nAv.1.0.1.t06620-RA	GO	GO:0010842	6	377	2e-48	retina layer formation
+nAv.1.0.1.t06620-RA	GO	GO:0005737	6	377	2e-48	cytoplasm
+nAv.1.0.1.t06620-RA	GO	GO:0005913	6	377	2e-48	cell-cell adherens junction
+nAv.1.0.1.t06620-RA	GO	GO:0005515	6	377	2e-48	protein binding
+nAv.1.0.1.t06620-RA	GO	GO:0005887	6	377	2e-48	integral to plasma membrane
+nAv.1.0.1.t06620-RA	GO	GO:0005911	6	377	2e-48	cell-cell junction
+nAv.1.0.1.t06620-RA	GO	GO:0031175	6	377	2e-48	neuron projection development
+nAv.1.0.1.t06620-RA	GO	GO:0006470	6	377	2e-48	protein dephosphorylation
+nAv.1.0.1.t06620-RA	GO	GO:0001937	6	377	2e-48	negative regulation of endothelial cell proliferation
+nAv.1.0.1.t06620-RA	GO	GO:0042493	6	377	2e-48	response to drug
+nAv.1.0.1.t06620-RA	GO	GO:0007165	6	377	2e-48	signal transduction
+nAv.1.0.1.t06620-RA	GO	GO:0010596	6	377	2e-48	negative regulation of endothelial cell migration
+nAv.1.0.1.t06620-RA	GO	GO:0005001	6	377	2e-48	transmembrane receptor protein tyrosine phosphatase activity
+nAv.1.0.1.t06620-RA	GO	GO:0016525	6	377	2e-48	negative regulation of angiogenesis
+nAv.1.0.1.t06620-RA	GO	GO:0004725	6	377	2e-48	protein tyrosine phosphatase activity
+nAv.1.0.1.t06620-RA	GO	GO:0030027	6	377	2e-48	lamellipodium
+nAv.1.0.1.t06620-RA	GO	GO:0045296	6	377	2e-48	cadherin binding
+nAv.1.0.1.t06620-RA	GO	GO:0048471	6	377	2e-48	perinuclear region of cytoplasm
+nAv.1.0.1.t06620-RA	GO	GO:0007156	6	377	2e-48	homophilic cell adhesion
+nAv.1.0.1.t06947-RA	GO	GO:0019433	59	381	2e-76	triglyceride catabolic process
+nAv.1.0.1.t06947-RA	GO	GO:0010891	59	381	2e-76	negative regulation of sequestering of triglyceride
+nAv.1.0.1.t06947-RA	GO	GO:0010898	59	381	2e-76	positive regulation of triglyceride catabolic process
+nAv.1.0.1.t06947-RA	GO	GO:0006654	59	381	2e-76	phosphatidic acid biosynthetic process
+nAv.1.0.1.t06947-RA	GO	GO:0042171	59	381	2e-76	lysophosphatidic acid acyltransferase activity
+nAv.1.0.1.t06947-RA	GO	GO:0005829	59	381	2e-76	cytosol
+nAv.1.0.1.t06947-RA	GO	GO:0005811	59	381	2e-76	lipid particle
+nAv.1.0.1.t06947-RA	GO	GO:0006629	59	381	2e-76	lipid metabolic process
+nAv.1.0.1.t06948-RA	GO	GO:0019217	47	288	2e-57	regulation of fatty acid metabolic process
+nAv.1.0.1.t06948-RA	GO	GO:0000003	47	288	2e-57	reproduction
+nAv.1.0.1.t06948-RA	GO	GO:0040017	47	288	2e-57	positive regulation of locomotion
+nAv.1.0.1.t06948-RA	GO	GO:0009792	47	288	2e-57	embryo development ending in birth or egg hatching
+nAv.1.0.1.t06948-RA	GO	GO:0019915	47	288	2e-57	lipid storage
+nAv.1.0.1.t06948-RA	GO	GO:0008340	47	288	2e-57	determination of adult lifespan
+nAv.1.0.1.t06948-RA	GO	GO:0040010	47	288	2e-57	positive regulation of growth rate
+nAv.1.0.1.t06948-RA	GO	GO:0005515	47	288	2e-57	protein binding
+nAv.1.0.1.t06948-RA	GO	GO:0045944	47	288	2e-57	positive regulation of transcription from RNA polymerase II promoter
+nAv.1.0.1.t06948-RA	GO	GO:0040011	47	288	2e-57	locomotion
+nAv.1.0.1.t06948-RA	GO	GO:0006898	47	288	2e-57	receptor-mediated endocytosis
+nAv.1.0.1.t06948-RA	GO	GO:0019216	47	288	2e-57	regulation of lipid metabolic process
+nAv.1.0.1.t06948-RA	GO	GO:0002119	47	288	2e-57	nematode larval development
+nAv.1.0.1.t06994-RA	GO	GO:0005634	55	221	3e-64	nucleus
+nAv.1.0.1.t06994-RA	GO	GO:0016262	55	221	3e-64	protein N-acetylglucosaminyltransferase activity
+nAv.1.0.1.t06994-RA	GO	GO:0045862	55	221	3e-64	positive regulation of proteolysis
+nAv.1.0.1.t06994-RA	GO	GO:0006493	55	221	3e-64	protein O-linked glycosylation
+nAv.1.0.1.t06994-RA	GO	GO:0005829	55	221	3e-64	cytosol
+nAv.1.0.1.t06994-RA	GO	GO:0005622	55	221	3e-64	intracellular
+nAv.1.0.1.t06994-RA	GO	GO:0008080	55	221	3e-64	N-acetyltransferase activity
+nAv.1.0.1.t06994-RA	GO	GO:0005737	55	221	3e-64	cytoplasm
+nAv.1.0.1.t07061-RA	GO	GO:0004135	9	1380	0.0	amylo-alpha-1,6-glucosidase activity
+nAv.1.0.1.t07061-RA	GO	GO:0005980	9	1380	0.0	glycogen catabolic process
+nAv.1.0.1.t07061-RA	GO	GO:0005634	9	1380	0.0	nucleus
+nAv.1.0.1.t07061-RA	GO	GO:0004134	9	1380	0.0	4-alpha-glucanotransferase activity
+nAv.1.0.1.t07061-RA	GO	GO:0005737	9	1380	0.0	cytoplasm
+nAv.1.0.1.t07149-RA	GO	GO:0005615	2	96	3e-08	extracellular space
+nAv.1.0.1.t07149-RA	GO	GO:0010951	2	96	3e-08	negative regulation of endopeptidase activity
+nAv.1.0.1.t07149-RA	GO	GO:0007596	2	96	3e-08	blood coagulation
+nAv.1.0.1.t07149-RA	GO	GO:0005576	2	96	3e-08	extracellular region
+nAv.1.0.1.t07149-RA	GO	GO:0004866	2	96	3e-08	endopeptidase inhibitor activity
+nAv.1.0.1.t07149-RA	GO	GO:0007598	2	96	3e-08	blood coagulation, extrinsic pathway
+nAv.1.0.1.t07149-RA	GO	GO:0005886	2	96	3e-08	plasma membrane
+nAv.1.0.1.t07150-RA	GO	GO:0043687	8	265	1e-51	post-translational protein modification
+nAv.1.0.1.t07150-RA	GO	GO:0005737	8	265	1e-51	cytoplasm
+nAv.1.0.1.t07150-RA	GO	GO:0005515	8	265	1e-51	protein binding
+nAv.1.0.1.t07150-RA	GO	GO:0006914	8	265	1e-51	autophagy
+nAv.1.0.1.t07150-RA	GO	GO:0032480	8	265	1e-51	negative regulation of type I interferon production
+nAv.1.0.1.t07150-RA	GO	GO:0000045	8	265	1e-51	autophagic vacuole assembly
+nAv.1.0.1.t07150-RA	GO	GO:0005776	8	265	1e-51	autophagic vacuole
+nAv.1.0.1.t07150-RA	GO	GO:0034045	8	265	1e-51	pre-autophagosomal structure membrane
+nAv.1.0.1.t07150-RA	GO	GO:0045087	8	265	1e-51	innate immune response
+nAv.1.0.1.t07152-RA	GO	GO:0016757	189	481	4e-11	transferase activity, transferring glycosyl groups
+nAv.1.0.1.t07152-RA	GO	GO:0006493	189	481	4e-11	protein O-linked glycosylation
+nAv.1.0.1.t07268-RA	GO	GO:0034329	301	387	8e-18	cell junction assembly
+nAv.1.0.1.t07268-RA	GO	GO:0005622	301	387	8e-18	intracellular
+nAv.1.0.1.t07268-RA	GO	GO:0035556	301	387	8e-18	intracellular signal transduction
+nAv.1.0.1.t07268-RA	GO	GO:0048471	301	387	8e-18	perinuclear region of cytoplasm
+nAv.1.0.1.t07268-RA	GO	GO:0045216	301	387	8e-18	cell-cell junction organization
+nAv.1.0.1.t07268-RA	GO	GO:0005515	301	387	8e-18	protein binding
+nAv.1.0.1.t07268-RA	GO	GO:0070830	301	387	8e-18	tight junction assembly
+nAv.1.0.1.t07268-RA	GO	GO:0005886	301	387	8e-18	plasma membrane
+nAv.1.0.1.t07326-RA	GO	GO:0005515	1	130	1e-56	protein binding
+nAv.1.0.1.t07328-RA	GO	GO:0030210	12	665	1e-105	heparin biosynthetic process
+nAv.1.0.1.t07328-RA	GO	GO:0008375	12	665	1e-105	acetylglucosaminyltransferase activity
+nAv.1.0.1.t07328-RA	GO	GO:0005783	12	665	1e-105	endoplasmic reticulum
+nAv.1.0.1.t07328-RA	GO	GO:0008101	12	665	1e-105	decapentaplegic receptor signaling pathway
+nAv.1.0.1.t07328-RA	GO	GO:0030206	12	665	1e-105	chondroitin sulfate biosynthetic process
+nAv.1.0.1.t07328-RA	GO	GO:0050508	12	665	1e-105	glucuronosyl-N-acetylglucosaminyl-proteoglycan 4-alpha-N-acetylglucosaminyltransferase activity
+nAv.1.0.1.t07328-RA	GO	GO:0006024	12	665	1e-105	glycosaminoglycan biosynthetic process
+nAv.1.0.1.t07328-RA	GO	GO:0005515	12	665	1e-105	protein binding
+nAv.1.0.1.t07328-RA	GO	GO:0007224	12	665	1e-105	smoothened signaling pathway
+nAv.1.0.1.t07328-RA	GO	GO:0006044	12	665	1e-105	N-acetylglucosamine metabolic process
+nAv.1.0.1.t07328-RA	GO	GO:0015020	12	665	1e-105	glucuronosyltransferase activity
+nAv.1.0.1.t07328-RA	GO	GO:0015014	12	665	1e-105	heparan sulfate proteoglycan biosynthetic process, polysaccharide chain biosynthetic process
+nAv.1.0.1.t07328-RA	GO	GO:0050509	12	665	1e-105	N-acetylglucosaminyl-proteoglycan 4-beta-glucuronosyltransferase activity
+nAv.1.0.1.t07328-RA	GO	GO:0005794	12	665	1e-105	Golgi apparatus
+nAv.1.0.1.t07328-RA	GO	GO:0015012	12	665	1e-105	heparan sulfate proteoglycan biosynthetic process
+nAv.1.0.1.t07328-RA	GO	GO:0016055	12	665	1e-105	Wnt receptor signaling pathway
+nAv.1.0.1.t07339-RA	GO	GO:0006612	1	437	2e-95	protein targeting to membrane
+nAv.1.0.1.t07339-RA	GO	GO:0005068	1	437	2e-95	transmembrane receptor protein tyrosine kinase adaptor activity
+nAv.1.0.1.t07339-RA	GO	GO:0005737	1	437	2e-95	cytoplasm
+nAv.1.0.1.t07339-RA	GO	GO:0005080	1	437	2e-95	protein kinase C binding
+nAv.1.0.1.t07339-RA	GO	GO:0007169	1	437	2e-95	transmembrane receptor protein tyrosine kinase signaling pathway
+nAv.1.0.1.t07339-RA	GO	GO:0005515	1	437	2e-95	protein binding
+nAv.1.0.1.t07339-RA	GO	GO:0005887	1	437	2e-95	integral to plasma membrane
+nAv.1.0.1.t07339-RA	GO	GO:0019904	1	437	2e-95	protein domain specific binding
+nAv.1.0.1.t07373-RA	GO	GO:0031290	9	659	8e-19	retinal ganglion cell axon guidance
+nAv.1.0.1.t07373-RA	GO	GO:0050925	9	659	8e-19	negative regulation of negative chemotaxis
+nAv.1.0.1.t07373-RA	GO	GO:0007420	9	659	8e-19	brain development
+nAv.1.0.1.t07373-RA	GO	GO:0005515	9	659	8e-19	protein binding
+nAv.1.0.1.t07373-RA	GO	GO:0016199	9	659	8e-19	axon midline choice point recognition
+nAv.1.0.1.t07373-RA	GO	GO:0007411	9	659	8e-19	axon guidance
+nAv.1.0.1.t07373-RA	GO	GO:0001656	9	659	8e-19	metanephros development
+nAv.1.0.1.t07373-RA	GO	GO:0042802	9	659	8e-19	identical protein binding
+nAv.1.0.1.t07373-RA	GO	GO:0008046	9	659	8e-19	axon guidance receptor activity
+nAv.1.0.1.t07373-RA	GO	GO:0051964	9	659	8e-19	negative regulation of synapse assembly
+nAv.1.0.1.t07373-RA	GO	GO:0030673	9	659	8e-19	axolemma
+nAv.1.0.1.t07373-RA	GO	GO:0050772	9	659	8e-19	positive regulation of axonogenesis
+nAv.1.0.1.t07373-RA	GO	GO:0007417	9	659	8e-19	central nervous system development
+nAv.1.0.1.t07373-RA	GO	GO:0032870	9	659	8e-19	cellular response to hormone stimulus
+nAv.1.0.1.t07373-RA	GO	GO:0061364	9	659	8e-19	apoptosis involved in luteolysis
+nAv.1.0.1.t07373-RA	GO	GO:0009986	9	659	8e-19	cell surface
+nAv.1.0.1.t07373-RA	GO	GO:0007156	9	659	8e-19	homophilic cell adhesion
+nAv.1.0.1.t07373-RA	GO	GO:0001657	9	659	8e-19	ureteric bud development
+nAv.1.0.1.t07373-RA	GO	GO:0021891	9	659	8e-19	olfactory bulb interneuron development
+nAv.1.0.1.t07479-RA	GO	GO:0071729	163	461	2e-45	beak morphogenesis
+nAv.1.0.1.t07479-RA	GO	GO:0035108	163	461	2e-45	limb morphogenesis
+nAv.1.0.1.t07479-RA	GO	GO:0032526	163	461	2e-45	response to retinoic acid
+nAv.1.0.1.t07480-RA	GO	GO:0031683	26	305	5e-22	G-protein beta/gamma-subunit complex binding
+nAv.1.0.1.t07480-RA	GO	GO:0001664	26	305	5e-22	G-protein-coupled receptor binding
+nAv.1.0.1.t07480-RA	GO	GO:0005834	26	305	5e-22	heterotrimeric G-protein complex
+nAv.1.0.1.t07480-RA	GO	GO:0031234	26	305	5e-22	extrinsic to internal side of plasma membrane
+nAv.1.0.1.t07480-RA	GO	GO:0006184	26	305	5e-22	GTP catabolic process
+nAv.1.0.1.t07480-RA	GO	GO:0007189	26	305	5e-22	activation of adenylate cyclase activity by G-protein signaling pathway
+nAv.1.0.1.t07480-RA	GO	GO:0004871	26	305	5e-22	signal transducer activity
+nAv.1.0.1.t07480-RA	GO	GO:0003924	26	305	5e-22	GTPase activity
+nAv.1.0.1.t07573-RA	GO	GO:0030424	96	906	8e-86	axon
+nAv.1.0.1.t07573-RA	GO	GO:0016337	96	906	8e-86	cell-cell adhesion
+nAv.1.0.1.t07573-RA	GO	GO:0019227	96	906	8e-86	neuronal action potential propagation
+nAv.1.0.1.t07573-RA	GO	GO:0045162	96	906	8e-86	clustering of voltage-gated sodium channels
+nAv.1.0.1.t07573-RA	GO	GO:0007417	96	906	8e-86	central nervous system development
+nAv.1.0.1.t07573-RA	GO	GO:0005515	96	906	8e-86	protein binding
+nAv.1.0.1.t07573-RA	GO	GO:0008104	96	906	8e-86	protein localization
+nAv.1.0.1.t07573-RA	GO	GO:0030506	96	906	8e-86	ankyrin binding
+nAv.1.0.1.t07573-RA	GO	GO:0045202	96	906	8e-86	synapse
+nAv.1.0.1.t07573-RA	GO	GO:0005886	96	906	8e-86	plasma membrane
+nAv.1.0.1.t07573-RA	GO	GO:0007411	96	906	8e-86	axon guidance
+nAv.1.0.1.t07803-RA	GO	GO:0016020	19	638	2e-19	membrane
+nAv.1.0.1.t07803-RA	GO	GO:0031526	19	638	2e-19	brush border membrane
+nAv.1.0.1.t07803-RA	GO	GO:0031232	19	638	2e-19	extrinsic to external side of plasma membrane
+nAv.1.0.1.t07803-RA	GO	GO:0008202	19	638	2e-19	steroid metabolic process
+nAv.1.0.1.t07803-RA	GO	GO:0015889	19	638	2e-19	cobalamin transport
+nAv.1.0.1.t07803-RA	GO	GO:0005829	19	638	2e-19	cytosol
+nAv.1.0.1.t07803-RA	GO	GO:0043202	19	638	2e-19	lysosomal lumen
+nAv.1.0.1.t07803-RA	GO	GO:0042157	19	638	2e-19	lipoprotein metabolic process
+nAv.1.0.1.t07803-RA	GO	GO:0005886	19	638	2e-19	plasma membrane
+nAv.1.0.1.t07803-RA	GO	GO:0006766	19	638	2e-19	vitamin metabolic process
+nAv.1.0.1.t07803-RA	GO	GO:0004872	19	638	2e-19	receptor activity
+nAv.1.0.1.t07803-RA	GO	GO:0042803	19	638	2e-19	protein homodimerization activity
+nAv.1.0.1.t07803-RA	GO	GO:0001894	19	638	2e-19	tissue homeostasis
+nAv.1.0.1.t07803-RA	GO	GO:0006898	19	638	2e-19	receptor-mediated endocytosis
+nAv.1.0.1.t07803-RA	GO	GO:0042359	19	638	2e-19	vitamin D metabolic process
+nAv.1.0.1.t07803-RA	GO	GO:0006629	19	638	2e-19	lipid metabolic process
+nAv.1.0.1.t07803-RA	GO	GO:0005215	19	638	2e-19	transporter activity
+nAv.1.0.1.t07804-RA	GO	GO:0008180	162	424	2e-16	signalosome
+nAv.1.0.1.t07804-RA	GO	GO:0042802	162	424	2e-16	identical protein binding
+nAv.1.0.1.t07804-RA	GO	GO:0030054	162	424	2e-16	cell junction
+nAv.1.0.1.t07804-RA	GO	GO:0005923	162	424	2e-16	tight junction
+nAv.1.0.1.t07804-RA	GO	GO:0005737	162	424	2e-16	cytoplasm
+nAv.1.0.1.t07806-RA	GO	GO:0008286	1	335	8e-129	insulin receptor signaling pathway
+nAv.1.0.1.t07806-RA	GO	GO:0030295	1	335	8e-129	protein kinase activator activity
+nAv.1.0.1.t07806-RA	GO	GO:0007050	1	335	8e-129	cell cycle arrest
+nAv.1.0.1.t07806-RA	GO	GO:0046320	1	335	8e-129	regulation of fatty acid oxidation
+nAv.1.0.1.t07806-RA	GO	GO:0004674	1	335	8e-129	protein serine/threonine kinase activity
+nAv.1.0.1.t07806-RA	GO	GO:0005515	1	335	8e-129	protein binding
+nAv.1.0.1.t07806-RA	GO	GO:0005829	1	335	8e-129	cytosol
+nAv.1.0.1.t07806-RA	GO	GO:0001934	1	335	8e-129	positive regulation of protein phosphorylation
+nAv.1.0.1.t07806-RA	GO	GO:0019900	1	335	8e-129	kinase binding
+nAv.1.0.1.t08012-RA	GO	GO:0042564	29	274	3e-06	NLS-dependent protein nuclear import complex
+nAv.1.0.1.t08012-RA	GO	GO:0005634	29	274	3e-06	nucleus
+nAv.1.0.1.t08012-RA	GO	GO:0006913	29	274	3e-06	nucleocytoplasmic transport
+nAv.1.0.1.t08012-RA	GO	GO:0005730	29	274	3e-06	nucleolus
+nAv.1.0.1.t08012-RA	GO	GO:0043565	29	274	3e-06	sequence-specific DNA binding
+nAv.1.0.1.t08012-RA	GO	GO:0005737	29	274	3e-06	cytoplasm
+nAv.1.0.1.t08267-RA	GO	GO:0008305	1	416	8e-22	integrin complex
+nAv.1.0.1.t08267-RA	GO	GO:0007160	1	416	8e-22	cell-matrix adhesion
+nAv.1.0.1.t08267-RA	GO	GO:0016337	1	416	8e-22	cell-cell adhesion
+nAv.1.0.1.t08267-RA	GO	GO:0005886	1	416	8e-22	plasma membrane
+nAv.1.0.1.t08268-RA	GO	GO:0043022	15	490	1e-54	ribosome binding
+nAv.1.0.1.t08268-RA	GO	GO:0006457	15	490	1e-54	protein folding
+nAv.1.0.1.t08268-RA	GO	GO:0005788	15	490	1e-54	endoplasmic reticulum lumen
+nAv.1.0.1.t08268-RA	GO	GO:0005792	15	490	1e-54	microsome
+nAv.1.0.1.t08268-RA	GO	GO:0005783	15	490	1e-54	endoplasmic reticulum
+nAv.1.0.1.t08268-RA	GO	GO:0005634	15	490	1e-54	nucleus
+nAv.1.0.1.t08268-RA	GO	GO:0051087	15	490	1e-54	chaperone binding
+nAv.1.0.1.t08268-RA	GO	GO:0006417	15	490	1e-54	regulation of translation
+nAv.1.0.1.t08268-RA	GO	GO:0005515	15	490	1e-54	protein binding
+nAv.1.0.1.t08268-RA	GO	GO:0050708	15	490	1e-54	regulation of protein secretion
+nAv.1.0.1.t08268-RA	GO	GO:0016021	15	490	1e-54	integral to membrane
+nAv.1.0.1.t08284-RA	GO	GO:0030241	15	828	3e-136	skeletal muscle myosin thick filament assembly
+nAv.1.0.1.t08284-RA	GO	GO:0006936	15	828	3e-136	muscle contraction
+nAv.1.0.1.t08284-RA	GO	GO:0031672	15	828	3e-136	A band
+nAv.1.0.1.t08284-RA	GO	GO:0030239	15	828	3e-136	myofibril assembly
+nAv.1.0.1.t08284-RA	GO	GO:0007427	15	828	3e-136	epithelial cell migration, open tracheal system
+nAv.1.0.1.t08284-RA	GO	GO:0042803	15	828	3e-136	protein homodimerization activity
+nAv.1.0.1.t08284-RA	GO	GO:0030017	15	828	3e-136	sarcomere
+nAv.1.0.1.t08284-RA	GO	GO:0005859	15	828	3e-136	muscle myosin complex
+nAv.1.0.1.t08284-RA	GO	GO:0042692	15	828	3e-136	muscle cell differentiation
+nAv.1.0.1.t08284-RA	GO	GO:0006941	15	828	3e-136	striated muscle contraction
+nAv.1.0.1.t08284-RA	GO	GO:0040011	15	828	3e-136	locomotion
+nAv.1.0.1.t08284-RA	GO	GO:0008307	15	828	3e-136	structural constituent of muscle
+nAv.1.0.1.t08284-RA	GO	GO:0005863	15	828	3e-136	striated muscle myosin thick filament
+nAv.1.0.1.t08598-RA	GO	GO:0000003	1	873	0.0	reproduction
+nAv.1.0.1.t08598-RA	GO	GO:0040035	1	873	0.0	hermaphrodite genitalia development
+nAv.1.0.1.t08598-RA	GO	GO:0040007	1	873	0.0	growth
+nAv.1.0.1.t08598-RA	GO	GO:0002119	1	873	0.0	nematode larval development
+nAv.1.0.1.t08598-RA	GO	GO:0009792	1	873	0.0	embryo development ending in birth or egg hatching
+nAv.1.0.1.t08742-RA	GO	GO:0006810	172	369	4e-29	transport
+nAv.1.0.1.t08742-RA	GO	GO:0007165	172	369	4e-29	signal transduction
+nAv.1.0.1.t08742-RA	GO	GO:0007601	172	369	4e-29	visual perception
+nAv.1.0.1.t08991-RA	GO	GO:0051287	3	327	2e-113	NAD binding
+nAv.1.0.1.t08991-RA	GO	GO:0019674	3	327	2e-113	NAD metabolic process
+nAv.1.0.1.t08991-RA	GO	GO:0005625	3	327	2e-113	soluble fraction
+nAv.1.0.1.t08991-RA	GO	GO:0006734	3	327	2e-113	NADH metabolic process
+nAv.1.0.1.t08991-RA	GO	GO:0006108	3	327	2e-113	malate metabolic process
+nAv.1.0.1.t08991-RA	GO	GO:0006107	3	327	2e-113	oxaloacetate metabolic process
+nAv.1.0.1.t08991-RA	GO	GO:0016615	3	327	2e-113	malate dehydrogenase activity
+nAv.1.0.1.t08991-RA	GO	GO:0030060	3	327	2e-113	L-malate dehydrogenase activity
+nAv.1.0.1.t09078-RA	GO	GO:0005829	27	358	2e-88	cytosol
+nAv.1.0.1.t09190-RA	GO	GO:0005515	4	455	1e-45	protein binding
+nAv.1.0.1.t09464-RA	GO	GO:0016323	46	763	1e-62	basolateral plasma membrane
+nAv.1.0.1.t09464-RA	GO	GO:0005515	46	763	1e-62	protein binding
+nAv.1.0.1.t09464-RA	GO	GO:0005829	46	763	1e-62	cytosol
+nAv.1.0.1.t09464-RA	GO	GO:0007411	46	763	1e-62	axon guidance
+nAv.1.0.1.t09642-RA	GO	GO:0009986	1	362	8e-82	cell surface
+nAv.1.0.1.t09642-RA	GO	GO:0006590	1	362	8e-82	thyroid hormone generation
+nAv.1.0.1.t09642-RA	GO	GO:0004447	1	362	8e-82	iodide peroxidase activity
+nAv.1.0.1.t09642-RA	GO	GO:0005886	1	362	8e-82	plasma membrane
+nAv.1.0.1.t09860-RA	GO	GO:0005663	372	886	5e-122	DNA replication factor C complex
+nAv.1.0.1.t09860-RA	GO	GO:0000278	372	886	5e-122	mitotic cell cycle
+nAv.1.0.1.t09860-RA	GO	GO:0005524	372	886	5e-122	ATP binding
+nAv.1.0.1.t09860-RA	GO	GO:0006283	372	886	5e-122	transcription-coupled nucleotide-excision repair
+nAv.1.0.1.t09860-RA	GO	GO:0006289	372	886	5e-122	nucleotide-excision repair
+nAv.1.0.1.t09860-RA	GO	GO:0005515	372	886	5e-122	protein binding
+nAv.1.0.1.t09860-RA	GO	GO:0007004	372	886	5e-122	telomere maintenance via telomerase
+nAv.1.0.1.t09860-RA	GO	GO:0043085	372	886	5e-122	positive regulation of catalytic activity
+nAv.1.0.1.t09860-RA	GO	GO:0000722	372	886	5e-122	telomere maintenance via recombination
+nAv.1.0.1.t09860-RA	GO	GO:0005654	372	886	5e-122	nucleoplasm
+nAv.1.0.1.t09860-RA	GO	GO:0006281	372	886	5e-122	DNA repair
+nAv.1.0.1.t09860-RA	GO	GO:0006271	372	886	5e-122	DNA strand elongation involved in DNA replication
+nAv.1.0.1.t09860-RA	GO	GO:0000084	372	886	5e-122	S phase of mitotic cell cycle
+nAv.1.0.1.t09860-RA	GO	GO:0006261	372	886	5e-122	DNA-dependent DNA replication
+nAv.1.0.1.t09860-RA	GO	GO:0006297	372	886	5e-122	nucleotide-excision repair, DNA gap filling
+nAv.1.0.1.t09860-RA	GO	GO:0032201	372	886	5e-122	telomere maintenance via semi-conservative replication
+nAv.1.0.1.t09860-RA	GO	GO:0008047	372	886	5e-122	enzyme activator activity
+nAv.1.0.1.t09860-RA	GO	GO:0000723	372	886	5e-122	telomere maintenance
+nAv.1.0.1.t09862-RA	GO	GO:0005654	73	290	6e-16	nucleoplasm
+nAv.1.0.1.t09862-RA	GO	GO:0005634	73	290	6e-16	nucleus
+nAv.1.0.1.t09862-RA	GO	GO:0006281	73	290	6e-16	DNA repair
+nAv.1.0.1.t09862-RA	GO	GO:0000077	73	290	6e-16	DNA damage checkpoint
+nAv.1.0.1.t09862-RA	GO	GO:0006468	73	290	6e-16	protein phosphorylation
+nAv.1.0.1.t09862-RA	GO	GO:0005515	73	290	6e-16	protein binding
+nAv.1.0.1.t09862-RA	GO	GO:0004672	73	290	6e-16	protein kinase activity
+nAv.1.0.1.t09862-RA	GO	GO:0000086	73	290	6e-16	G2/M transition of mitotic cell cycle
+nAv.1.0.1.t09862-RA	GO	GO:0006974	73	290	6e-16	response to DNA damage stimulus
+nAv.1.0.1.t09862-RA	GO	GO:0005657	73	290	6e-16	replication fork
+nAv.1.0.1.t09887-RA	GO	GO:0017147	12	186	3e-29	Wnt-protein binding
+nAv.1.0.1.t09887-RA	GO	GO:0007420	12	186	3e-29	brain development
+nAv.1.0.1.t09887-RA	GO	GO:0048471	12	186	3e-29	perinuclear region of cytoplasm
+nAv.1.0.1.t09887-RA	GO	GO:0007405	12	186	3e-29	neuroblast proliferation
+nAv.1.0.1.t09887-RA	GO	GO:0008406	12	186	3e-29	gonad development
+nAv.1.0.1.t09887-RA	GO	GO:0001944	12	186	3e-29	vasculature development
+nAv.1.0.1.t09887-RA	GO	GO:0006357	12	186	3e-29	regulation of transcription from RNA polymerase II promoter
+nAv.1.0.1.t09887-RA	GO	GO:0060070	12	186	3e-29	canonical Wnt receptor signaling pathway
+nAv.1.0.1.t09887-RA	GO	GO:0042813	12	186	3e-29	Wnt receptor activity
+nAv.1.0.1.t09887-RA	GO	GO:0009790	12	186	3e-29	embryo development
+nAv.1.0.1.t09887-RA	GO	GO:0030183	12	186	3e-29	B cell differentiation
+nAv.1.0.1.t09887-RA	GO	GO:0030165	12	186	3e-29	PDZ domain binding
+nAv.1.0.1.t09887-RA	GO	GO:0031527	12	186	3e-29	filopodium membrane
+nAv.1.0.1.t09887-RA	GO	GO:0007611	12	186	3e-29	learning or memory
+nAv.1.0.1.t09887-RA	GO	GO:0005886	12	186	3e-29	plasma membrane
+nAv.1.0.1.t10039-RA	GO	GO:0005737	5	420	1e-82	cytoplasm
+nAv.1.0.1.t10041-RA	GO	GO:0008340	23	139	2e-57	determination of adult lifespan
+nAv.1.0.1.t10041-RA	GO	GO:0005515	23	139	2e-57	protein binding
+nAv.1.0.1.t10041-RA	GO	GO:0012501	23	139	2e-57	programmed cell death
+nAv.1.0.1.t10041-RA	GO	GO:0006914	23	139	2e-57	autophagy
+nAv.1.0.1.t10041-RA	GO	GO:0040024	23	139	2e-57	dauer larval development
+nAv.1.0.1.t10041-RA	GO	GO:0005737	23	139	2e-57	cytoplasm
+nAv.1.0.1.t10041-RA	GO	GO:0005776	23	139	2e-57	autophagic vacuole
+nAv.1.0.1.t10041-RA	GO	GO:0009792	23	139	2e-57	embryo development ending in birth or egg hatching
+nAv.1.0.1.t10042-RA	GO	GO:0005652	16	345	2e-12	nuclear lamina
+nAv.1.0.1.t10042-RA	GO	GO:0006997	16	345	2e-12	nucleus organization
+nAv.1.0.1.t10042-RA	GO	GO:0003677	16	345	2e-12	DNA binding
+nAv.1.0.1.t10042-RA	GO	GO:0005634	16	345	2e-12	nucleus
+nAv.1.0.1.t10042-RA	GO	GO:0007095	16	345	2e-12	mitotic cell cycle G2/M transition DNA damage checkpoint
+nAv.1.0.1.t10042-RA	GO	GO:0006355	16	345	2e-12	regulation of transcription, DNA-dependent
+nAv.1.0.1.t10042-RA	GO	GO:0005700	16	345	2e-12	polytene chromosome
+nAv.1.0.1.t10042-RA	GO	GO:0042787	16	345	2e-12	protein ubiquitination involved in ubiquitin-dependent protein catabolic process
+nAv.1.0.1.t10042-RA	GO	GO:0005521	16	345	2e-12	lamin binding
+nAv.1.0.1.t10042-RA	GO	GO:0004842	16	345	2e-12	ubiquitin-protein ligase activity
+nAv.1.0.1.t10042-RA	GO	GO:0005515	16	345	2e-12	protein binding
+nAv.1.0.1.t10042-RA	GO	GO:0000209	16	345	2e-12	protein polyubiquitination
+nAv.1.0.1.t10043-RA	GO	GO:0016020	193	366	8e-15	membrane
+nAv.1.0.1.t10043-RA	GO	GO:0003755	193	366	8e-15	peptidyl-prolyl cis-trans isomerase activity
+nAv.1.0.1.t10043-RA	GO	GO:0005515	193	366	8e-15	protein binding
+nAv.1.0.1.t10043-RA	GO	GO:0005528	193	366	8e-15	FK506 binding
+nAv.1.0.1.t10043-RA	GO	GO:0018208	193	366	8e-15	peptidyl-proline modification
+nAv.1.0.1.t10043-RA	GO	GO:0000413	193	366	8e-15	protein peptidyl-prolyl isomerization
+nAv.1.0.1.t10105-RA	GO	GO:0031624	319	1896	0.0	ubiquitin conjugating enzyme binding

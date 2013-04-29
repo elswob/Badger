@@ -1,398 +1,172 @@
-snap_masked-nHd.2.3.scaf01027-processed-gene-0.10-mRNA-1	KEGG	K10366	36	157	85.1	Hypertrophic cardiomyopathy (HCM)
-snap_masked-nHd.2.3.scaf01027-processed-gene-0.10-mRNA-1	KEGG	K10366	36	157	85.1	Viral myocarditis
-snap_masked-nHd.2.3.scaf01027-processed-gene-0.10-mRNA-1	KEGG	K10366	36	157	85.1	Dilated cardiomyopathy
-snap_masked-nHd.2.3.scaf01027-processed-gene-0.10-mRNA-1	KEGG	K10366	36	157	85.1	Arrhythmogenic right ventricular cardiomyopathy (ARVC)
-snap_masked-nHd.2.3.scaf01066-processed-gene-0.29-mRNA-1	KEGG	K00799	1	188	 103	Glutathione metabolism
-snap_masked-nHd.2.3.scaf01066-processed-gene-0.29-mRNA-1	KEGG	K00799	1	188	 103	Metabolism of xenobiotics by cytochrome P450
-snap_masked-nHd.2.3.scaf01066-processed-gene-0.29-mRNA-1	KEGG	K00799	1	188	 103	Drug metabolism - cytochrome P450
-genemark-nHd.2.3.scaf01052-processed-gene-0.1-mRNA-1	KEGG	K12857	8	367	 410	Spliceosome
-snap_masked-nHd.2.3.scaf01052-processed-gene-0.18-mRNA-1	KEGG	K01830	4	252	88.2	Arachidonic acid metabolism
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.17-mRNA-1	KEGG	K13868	45	469	 255	Protein digestion and absorption
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.22-mRNA-1	KEGG	K13802	6	160	80.9	Phototransduction - fly
-snap_masked-nHd.2.3.scaf01012-processed-gene-0.25-mRNA-1	KEGG	K13802	2	179	96.7	Phototransduction - fly
-maker-nHd.2.3.scaf01071-snap-gene-0.17-mRNA-1	KEGG	K06233	22	420	 128	Hedgehog signaling pathway
-maker-nHd.2.3.scaf01071-snap-gene-0.18-mRNA-1	KEGG	K01283	62	621	 447	Hypertrophic cardiomyopathy (HCM)
-maker-nHd.2.3.scaf01071-snap-gene-0.18-mRNA-1	KEGG	K01283	62	621	 447	Renin-angiotensin system
-maker-nHd.2.3.scaf01071-snap-gene-0.18-mRNA-1	KEGG	K01283	62	621	 447	Chagas disease (American trypanosomiasis)
-maker-nHd.2.3.scaf01043-snap-gene-0.41-mRNA-1	KEGG	K05755	1	165	 301	Shigellosis
-maker-nHd.2.3.scaf01043-snap-gene-0.41-mRNA-1	KEGG	K05755	1	165	 301	Bacterial invasion of epithelial cells
-maker-nHd.2.3.scaf01043-snap-gene-0.41-mRNA-1	KEGG	K05755	1	165	 301	Fc gamma R-mediated phagocytosis
-maker-nHd.2.3.scaf01043-snap-gene-0.41-mRNA-1	KEGG	K05755	1	165	 301	Pathogenic Escherichia coli infection
-maker-nHd.2.3.scaf01043-snap-gene-0.41-mRNA-1	KEGG	K05755	1	165	 301	Regulation of actin cytoskeleton
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	KEGG	K03347	131	719	 407	Protein processing in endoplasmic reticulum
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	KEGG	K03347	131	719	 407	Ubiquitin mediated proteolysis
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	KEGG	K03347	131	719	 407	Cell cycle
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	KEGG	K03347	131	719	 407	TGF-beta signaling pathway
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	KEGG	K03347	131	719	 407	Wnt signaling pathway
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	KEGG	K03347	131	719	 407	Oocyte meiosis
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	KEGG	K03347	131	719	 407	Cell cycle - yeast
-genemark-nHd.2.3.scaf01073-processed-gene-0.6-mRNA-1	KEGG	K03347	131	719	 407	Circadian rhythm - mammal
-maker-nHd.2.3.scaf01073-snap-gene-0.34-mRNA-1	KEGG	K03131	6	412	 317	Basal transcription factors
-snap_masked-nHd.2.3.scaf01073-processed-gene-0.18-mRNA-1	KEGG	K01869	9	80	88.6	Valine, leucine and isoleucine biosynthesis
-snap_masked-nHd.2.3.scaf01073-processed-gene-0.18-mRNA-1	KEGG	K01869	9	80	88.6	Aminoacyl-tRNA biosynthesis
-maker-nHd.2.3.scaf01083-snap-gene-0.32-mRNA-1	KEGG	K03002	15	1111	1068	Purine metabolism
-maker-nHd.2.3.scaf01083-snap-gene-0.32-mRNA-1	KEGG	K03002	15	1111	1068	RNA polymerase
-maker-nHd.2.3.scaf01083-snap-gene-0.32-mRNA-1	KEGG	K03002	15	1111	1068	Pyrimidine metabolism
-snap_masked-nHd.2.3.scaf01083-processed-gene-0.18-mRNA-1	KEGG	K05327	1	876	1034	Calcium signaling pathway
-maker-nHd.2.3.scaf01068-snap-gene-0.26-mRNA-1	KEGG	K08745	83	680	 452	PPAR signaling pathway
-maker-nHd.2.3.scaf01015-snap-gene-0.28-mRNA-1	KEGG	K00910	41	543	 781	Chemokine signaling pathway
-maker-nHd.2.3.scaf01015-snap-gene-0.28-mRNA-1	KEGG	K00910	41	543	 781	Phototransduction - fly
-maker-nHd.2.3.scaf01015-snap-gene-0.28-mRNA-1	KEGG	K00910	41	543	 781	Endocytosis
-maker-nHd.2.3.scaf01035-snap-gene-0.37-mRNA-1	KEGG	K07819	96	356	 106	Glycosphingolipid biosynthesis - lacto and neolacto series
-snap_masked-nHd.2.3.scaf01035-processed-gene-0.24-mRNA-1	KEGG	K10744	27	193	67.0	DNA replication
-maker-nHd.2.3.scaf01010-snap-gene-0.27-mRNA-1	KEGG	K02966	1	144	 179	Ribosome
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	KEGG	K00235	32	288	 426	Huntingtons disease
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	KEGG	K00235	32	288	 426	Oxidative phosphorylation
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	KEGG	K00235	32	288	 426	Alzheimers disease
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	KEGG	K00235	32	288	 426	Citrate cycle (TCA cycle)
-snap_masked-nHd.2.3.scaf01010-processed-gene-0.18-mRNA-1	KEGG	K00235	32	288	 426	Parkinsons disease
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	KEGG	K01641	33	435	 492	Butanoate metabolism
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	KEGG	K01641	33	435	 492	Terpenoid backbone biosynthesis
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	KEGG	K01641	33	435	 492	Synthesis and degradation of ketone bodies
-maker-nHd.2.3.scaf01094-snap-gene-0.36-mRNA-1	KEGG	K01641	33	435	 492	Valine, leucine and isoleucine degradation
-snap_masked-nHd.2.3.scaf01094-processed-gene-0.18-mRNA-1	KEGG	K06082	130	226	64.3	Adherens junction
-maker-nHd.2.3.scaf01005-snap-gene-0.36-mRNA-1	KEGG	K00472	11	582	 340	Arginine and proline metabolism
-maker-nHd.2.3.scaf01005-snap-gene-0.34-mRNA-1	KEGG	K00472	13	546	 295	Arginine and proline metabolism
-maker-nHd.2.3.scaf01005-snap-gene-0.34-mRNA-2	KEGG	K00472	3	351	 183	Arginine and proline metabolism
-maker-nHd.2.3.scaf01005-snap-gene-0.35-mRNA-1	KEGG	K00472	12	462	 202	Arginine and proline metabolism
-maker-nHd.2.3.scaf01021-snap-gene-0.29-mRNA-1	KEGG	K12869	9	588	 816	Spliceosome
-maker-nHd.2.3.scaf01017-snap-gene-0.41-mRNA-1	KEGG	K01019	15	233	 153	Sphingolipid metabolism
-snap_masked-nHd.2.3.scaf01017-processed-gene-0.35-mRNA-1	KEGG	K11519	4	280	 250	Protein processing in endoplasmic reticulum
-snap_masked-nHd.2.3.scaf01017-processed-gene-0.35-mRNA-1	KEGG	K11519	4	280	 250	Amyotrophic lateral sclerosis (ALS)
-snap_masked-nHd.2.3.scaf01017-processed-gene-0.36-mRNA-1	KEGG	K00308	26	326	89.4	Peroxisome
-maker-nHd.2.3.scaf01009-snap-gene-0.41-mRNA-1	KEGG	K00033	1	456	 681	Pentose phosphate pathway
-maker-nHd.2.3.scaf01009-snap-gene-0.41-mRNA-1	KEGG	K00033	1	456	 681	Glutathione metabolism
-maker-nHd.2.3.scaf01009-snap-gene-0.41-mRNA-2	KEGG	K00033	1	456	 681	Pentose phosphate pathway
-maker-nHd.2.3.scaf01009-snap-gene-0.41-mRNA-2	KEGG	K00033	1	456	 681	Glutathione metabolism
-snap_masked-nHd.2.3.scaf01009-processed-gene-0.36-mRNA-1	KEGG	K11726	8	167	 227	Oxidative phosphorylation
-maker-nHd.2.3.scaf01028-snap-gene-0.29-mRNA-1	KEGG	K13447	124	798	 200	Plant-pathogen interaction
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.20-mRNA-1	KEGG	K10803	135	239	87.8	Base excision repair
-snap_masked-nHd.2.3.scaf01028-processed-gene-0.17-mRNA-1	KEGG	K10803	246	354	 124	Base excision repair
-snap_masked-nHd.2.3.scaf01020-processed-gene-0.20-mRNA-1	KEGG	K04285	4	288	74.7	Neuroactive ligand-receptor interaction
-snap_masked-nHd.2.3.scaf01080-processed-gene-0.9-mRNA-1	KEGG	K08375	266	358	55.8	Neuroactive ligand-receptor interaction
-maker-nHd.2.3.scaf01086-snap-gene-0.43-mRNA-1	KEGG	K14521	1	631	 869	Ribosome biogenesis in eukaryotes
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.41-mRNA-1	KEGG	K01206	33	81	74.7	Other glycan degradation
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.34-mRNA-1	KEGG	K04802	1	60	81.3	Mismatch repair
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.34-mRNA-1	KEGG	K04802	1	60	81.3	Cell cycle
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.34-mRNA-1	KEGG	K04802	1	60	81.3	DNA replication
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.34-mRNA-1	KEGG	K04802	1	60	81.3	Base excision repair
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.34-mRNA-1	KEGG	K04802	1	60	81.3	Nucleotide excision repair
-snap_masked-nHd.2.3.scaf01086-processed-gene-0.31-mRNA-1	KEGG	K12190	4	193	 171	Endocytosis
-maker-nHd.2.3.scaf01095-snap-gene-0.35-mRNA-1	KEGG	K14319	16	258	 127	RNA transport
-maker-nHd.2.3.scaf01095-snap-gene-0.36-mRNA-1	KEGG	K07422	35	488	 294	Arachidonic acid metabolism
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	KEGG	K12323	400	1067	 514	Purine metabolism
-maker-nHd.2.3.scaf01033-snap-gene-0.47-mRNA-1	KEGG	K12323	400	1067	 514	Vascular smooth muscle contraction
-snap_masked-nHd.2.3.scaf01033-processed-gene-0.35-mRNA-1	KEGG	K04578	1	82	70.5	Neuroactive ligand-receptor interaction
-snap_masked-nHd.2.3.scaf01033-processed-gene-0.35-mRNA-1	KEGG	K04578	1	82	70.5	Long-term depression
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.24-mRNA-1	KEGG	K07432	8	157	 118	N-Glycan biosynthesis
-snap_masked-nHd.2.3.scaf01089-processed-gene-0.24-mRNA-1	KEGG	K07432	8	157	 118	Various types of N-glycan biosynthesis
-maker-nHd.2.3.scaf01089-snap-gene-0.34-mRNA-1	KEGG	K07511	7	304	 365	Fatty acid metabolism
-maker-nHd.2.3.scaf01089-snap-gene-0.34-mRNA-1	KEGG	K07511	7	304	 365	Aminobenzoate degradation
-maker-nHd.2.3.scaf01089-snap-gene-0.34-mRNA-1	KEGG	K07511	7	304	 365	Lysine degradation
-maker-nHd.2.3.scaf01089-snap-gene-0.34-mRNA-1	KEGG	K07511	7	304	 365	Benzoate degradation
-maker-nHd.2.3.scaf01089-snap-gene-0.34-mRNA-1	KEGG	K07511	7	304	 365	Propanoate metabolism
-maker-nHd.2.3.scaf01089-snap-gene-0.34-mRNA-1	KEGG	K07511	7	304	 365	Butanoate metabolism
-maker-nHd.2.3.scaf01089-snap-gene-0.34-mRNA-1	KEGG	K07511	7	304	 365	Caprolactam degradation
-maker-nHd.2.3.scaf01089-snap-gene-0.34-mRNA-1	KEGG	K07511	7	304	 365	beta-Alanine metabolism
-maker-nHd.2.3.scaf01089-snap-gene-0.34-mRNA-1	KEGG	K07511	7	304	 365	Tryptophan metabolism
-maker-nHd.2.3.scaf01089-snap-gene-0.34-mRNA-1	KEGG	K07511	7	304	 365	Fatty acid elongation in mitochondria
-maker-nHd.2.3.scaf01089-snap-gene-0.34-mRNA-1	KEGG	K07511	7	304	 365	Valine, leucine and isoleucine degradation
-genemark-nHd.2.3.scaf01089-processed-gene-0.9-mRNA-1	KEGG	K07748	107	425	 398	Steroid biosynthesis
-snap_masked-nHd.2.3.scaf01088-processed-gene-0.15-mRNA-1	KEGG	K04133	2	179	60.8	Calcium signaling pathway
-snap_masked-nHd.2.3.scaf01088-processed-gene-0.15-mRNA-1	KEGG	K04133	2	179	60.8	Neuroactive ligand-receptor interaction
-snap_masked-nHd.2.3.scaf01088-processed-gene-0.15-mRNA-1	KEGG	K04133	2	179	60.8	Regulation of actin cytoskeleton
-snap_masked-nHd.2.3.scaf01065-processed-gene-0.27-mRNA-1	KEGG	K02377	10	324	 485	Fructose and mannose metabolism
-snap_masked-nHd.2.3.scaf01065-processed-gene-0.27-mRNA-1	KEGG	K02377	10	324	 485	Amino sugar and nucleotide sugar metabolism
-snap_masked-nHd.2.3.scaf01065-processed-gene-0.30-mRNA-1	KEGG	K02377	9	59	88.6	Fructose and mannose metabolism
-snap_masked-nHd.2.3.scaf01065-processed-gene-0.30-mRNA-1	KEGG	K02377	9	59	88.6	Amino sugar and nucleotide sugar metabolism
-snap_masked-nHd.2.3.scaf01081-processed-gene-0.21-mRNA-1	KEGG	K07422	35	137	87.0	Arachidonic acid metabolism
-snap_masked-nHd.2.3.scaf01081-processed-gene-0.22-mRNA-1	KEGG	K07422	162	313	 155	Arachidonic acid metabolism
-snap_masked-nHd.2.3.scaf01081-processed-gene-0.26-mRNA-1	KEGG	K07412	22	164	60.1	Arachidonic acid metabolism
-snap_masked-nHd.2.3.scaf01081-processed-gene-0.26-mRNA-1	KEGG	K07412	22	164	60.1	Retinol metabolism
-snap_masked-nHd.2.3.scaf01081-processed-gene-0.26-mRNA-1	KEGG	K07412	22	164	60.1	Metabolism of xenobiotics by cytochrome P450
-snap_masked-nHd.2.3.scaf01081-processed-gene-0.26-mRNA-1	KEGG	K07412	22	164	60.1	Drug metabolism - cytochrome P450
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	KEGG	K02365	339	608	 100	Cell cycle
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	KEGG	K02365	339	608	 100	Oocyte meiosis
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	KEGG	K02365	339	608	 100	Cell cycle - yeast
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.22-mRNA-1	KEGG	K02365	339	608	 100	Meiosis - yeast
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	KEGG	K02365	141	267	68.9	Cell cycle
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	KEGG	K02365	141	267	68.9	Oocyte meiosis
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	KEGG	K02365	141	267	68.9	Cell cycle - yeast
-snap_masked-nHd.2.3.scaf01092-processed-gene-0.30-mRNA-1	KEGG	K02365	141	267	68.9	Meiosis - yeast
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	KEGG	K14325	119	209	87.8	mRNA surveillance pathway
-maker-nHd.2.3.scaf01040-snap-gene-0.24-mRNA-1	KEGG	K14325	119	209	87.8	RNA transport
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.18-mRNA-1	KEGG	K03143	2	131	 171	Basal transcription factors
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.18-mRNA-1	KEGG	K03143	2	131	 171	Nucleotide excision repair
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.11-mRNA-1	KEGG	K04149	41	247	91.7	Calcium signaling pathway
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.11-mRNA-1	KEGG	K04149	41	247	91.7	Neuroactive ligand-receptor interaction
-snap_masked-nHd.2.3.scaf01040-processed-gene-0.13-mRNA-1	KEGG	K14406	9	87	54.3	mRNA surveillance pathway
-maker-nHd.2.3.scaf01087-snap-gene-0.27-mRNA-1	KEGG	K01363	32	371	 194	Lysosome
-maker-nHd.2.3.scaf01087-snap-gene-0.27-mRNA-1	KEGG	K01363	32	371	 194	Antigen processing and presentation
-maker-nHd.2.3.scaf01087-snap-gene-0.24-mRNA-1	KEGG	K01363	17	154	91.3	Lysosome
-maker-nHd.2.3.scaf01087-snap-gene-0.24-mRNA-1	KEGG	K01363	17	154	91.3	Antigen processing and presentation
-maker-nHd.2.3.scaf01087-snap-gene-0.28-mRNA-1	KEGG	K01363	1	93	58.9	Lysosome
-maker-nHd.2.3.scaf01087-snap-gene-0.28-mRNA-1	KEGG	K01363	1	93	58.9	Antigen processing and presentation
-maker-nHd.2.3.scaf01087-snap-gene-0.26-mRNA-1	KEGG	K01363	66	128	84.3	Lysosome
-maker-nHd.2.3.scaf01087-snap-gene-0.26-mRNA-1	KEGG	K01363	66	128	84.3	Antigen processing and presentation
-maker-nHd.2.3.scaf01087-snap-gene-0.29-mRNA-1	KEGG	K01363	10	193	 119	Lysosome
-maker-nHd.2.3.scaf01087-snap-gene-0.29-mRNA-1	KEGG	K01363	10	193	 119	Antigen processing and presentation
-maker-nHd.2.3.scaf01022-snap-gene-0.34-mRNA-1	KEGG	K12668	40	151	 167	Protein processing in endoplasmic reticulum
-maker-nHd.2.3.scaf01022-snap-gene-0.34-mRNA-1	KEGG	K12668	40	151	 167	N-Glycan biosynthesis
-maker-nHd.2.3.scaf01022-snap-gene-0.34-mRNA-1	KEGG	K12668	40	151	 167	Various types of N-glycan biosynthesis
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.27-mRNA-1	KEGG	K12324	41	96	62.4	Purine metabolism
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.27-mRNA-1	KEGG	K12324	41	96	62.4	Vascular smooth muscle contraction
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.26-mRNA-1	KEGG	K04152	18	159	60.8	Neuroactive ligand-receptor interaction
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.22-mRNA-1	KEGG	K12641	15	97	65.9	Hypertrophic cardiomyopathy (HCM)
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.22-mRNA-1	KEGG	K12641	15	97	65.9	Dilated cardiomyopathy
-snap_masked-nHd.2.3.scaf01022-processed-gene-0.22-mRNA-1	KEGG	K12641	15	97	65.9	Arrhythmogenic right ventricular cardiomyopathy (ARVC)
-snap_masked-nHd.2.3.scaf01069-processed-gene-0.9-mRNA-1	KEGG	K00008	1	199	 214	Fructose and mannose metabolism
-maker-nHd.2.3.scaf01047-snap-gene-0.31-mRNA-1	KEGG	K04950	332	656	 492	Olfactory transduction
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.28-mRNA-1	KEGG	K04676	4	334	 298	TGF-beta signaling pathway
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	Natural killer cell mediated cytotoxicity
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	Non-small cell lung cancer
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	Leukocyte transendothelial migration
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	Phosphatidylinositol signaling system
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	Calcium signaling pathway
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	Fc gamma R-mediated phagocytosis
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	VEGF signaling pathway
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	Pathways in cancer
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	Inositol phosphate metabolism
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	Neurotrophin signaling pathway
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	Fc epsilon RI signaling pathway
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	ErbB signaling pathway
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	Glioma
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	Vibrio cholerae infection
-genemark-nHd.2.3.scaf01003-processed-gene-0.20-mRNA-1	KEGG	K05859	2	161	58.2	Epithelial cell signaling in Helicobacter pylori infection
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	Natural killer cell mediated cytotoxicity
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	Non-small cell lung cancer
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	Leukocyte transendothelial migration
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	Phosphatidylinositol signaling system
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	Calcium signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	Fc gamma R-mediated phagocytosis
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	VEGF signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	Pathways in cancer
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	Inositol phosphate metabolism
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	Neurotrophin signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	Fc epsilon RI signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	ErbB signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	Glioma
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	Vibrio cholerae infection
-maker-nHd.2.3.scaf01003-snap-gene-0.36-mRNA-1	KEGG	K05859	3	247	 221	Epithelial cell signaling in Helicobacter pylori infection
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	Natural killer cell mediated cytotoxicity
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	Non-small cell lung cancer
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	Leukocyte transendothelial migration
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	Phosphatidylinositol signaling system
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	Calcium signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	Fc gamma R-mediated phagocytosis
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	VEGF signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	Pathways in cancer
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	Inositol phosphate metabolism
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	Neurotrophin signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	Fc epsilon RI signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	ErbB signaling pathway
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	Glioma
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	Vibrio cholerae infection
-maker-nHd.2.3.scaf01003-snap-gene-0.38-mRNA-1	KEGG	K05859	2	261	 192	Epithelial cell signaling in Helicobacter pylori infection
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Natural killer cell mediated cytotoxicity
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Non-small cell lung cancer
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Aldosterone-regulated sodium reabsorption
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Long-term depression
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	African trypanosomiasis
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Melanogenesis
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Phototransduction - fly
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Long-term potentiation
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Calcium signaling pathway
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Fc gamma R-mediated phagocytosis
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Vascular smooth muscle contraction
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Amoebiasis
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	MAPK signaling pathway - yeast
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Gap junction
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Wnt signaling pathway
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Gastric acid secretion
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	ErbB signaling pathway
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Glioma
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Leukocyte transendothelial migration
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Salivary secretion
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Focal adhesion
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Phosphatidylinositol signaling system
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Pancreatic secretion
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	MAPK signaling pathway
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	VEGF signaling pathway
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Tight junction
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Pathways in cancer
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.29-mRNA-1	KEGG	K02677	31	133	73.9	Vibrio cholerae infection
-snap_masked-nHd.2.3.scaf01003-processed-gene-0.32-mRNA-1	KEGG	K13744	761	1082	79.3	Bacterial invasion of epithelial cells
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	KEGG	K10352	78	2007	2368	Viral myocarditis
-maker-nHd.2.3.scaf01006-snap-gene-0.28-mRNA-1	KEGG	K10352	78	2007	2368	Tight junction
-maker-nHd.2.3.scaf01016-snap-gene-0.25-mRNA-1	KEGG	K10456	10	180	 119	Ubiquitin mediated proteolysis
-snap_masked-nHd.2.3.scaf01007-processed-gene-0.24-mRNA-1	KEGG	K14291	223	376	63.9	RNA transport
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	KEGG	K00019	8	251	 155	Butanoate metabolism
-genemark-nHd.2.3.scaf01100-processed-gene-0.7-mRNA-1	KEGG	K00019	8	251	 155	Synthesis and degradation of ketone bodies
-snap_masked-nHd.2.3.scaf01100-processed-gene-0.20-mRNA-1	KEGG	K00621	38	177	 126	Amino sugar and nucleotide sugar metabolism
-maker-nHd.2.3.scaf01059-snap-gene-0.14-mRNA-1	KEGG	K05205	122	290	 120	Neuroactive ligand-receptor interaction
-maker-nHd.2.3.scaf01038-snap-gene-0.38-mRNA-1	KEGG	K11253	96	210	 123	Systemic lupus erythematosus
-maker-nHd.2.3.scaf01038-snap-gene-0.39-mRNA-1	KEGG	K13403	57	372	 341	One carbon pool by folate
-snap_masked-nHd.2.3.scaf01045-processed-gene-0.13-mRNA-1	KEGG	K06127	1	136	 196	Ubiquinone and other terpenoid-quinone biosynthesis
-snap_masked-nHd.2.3.scaf01045-processed-gene-0.14-mRNA-1	KEGG	K06127	39	135	 103	Ubiquinone and other terpenoid-quinone biosynthesis
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	KEGG	K05759	1	126	 122	Shigellosis
-maker-nHd.2.3.scaf01045-snap-gene-0.25-mRNA-1	KEGG	K05759	1	126	 122	Regulation of actin cytoskeleton
-maker-nHd.2.3.scaf01045-snap-gene-0.24-mRNA-1	KEGG	K10418	1	89	 183	Vasopressin-regulated water reabsorption
-snap_masked-nHd.2.3.scaf01058-processed-gene-0.8-mRNA-1	KEGG	K01135	3	346	 148	Lysosome
-snap_masked-nHd.2.3.scaf01058-processed-gene-0.8-mRNA-1	KEGG	K01135	3	346	 148	Glycosaminoglycan degradation
-maker-nHd.2.3.scaf01058-snap-gene-0.18-mRNA-1	KEGG	K01511	190	428	 167	Purine metabolism
-maker-nHd.2.3.scaf01058-snap-gene-0.18-mRNA-1	KEGG	K01511	190	428	 167	Pyrimidine metabolism
-maker-nHd.2.3.scaf01050-snap-gene-0.38-mRNA-1	KEGG	K12825	37	744	 527	Spliceosome
-genemark-nHd.2.3.scaf01096-processed-gene-0.10-mRNA-1	KEGG	K00591	1	250	 197	Ubiquinone and other terpenoid-quinone biosynthesis
-snap_masked-nHd.2.3.scaf01046-processed-gene-0.11-mRNA-1	KEGG	K02130	7	65	82.4	Oxidative phosphorylation
-snap_masked-nHd.2.3.scaf01001-processed-gene-0.21-mRNA-1	KEGG	K04287	53	138	58.9	Neuroactive ligand-receptor interaction
-snap_masked-nHd.2.3.scaf01001-processed-gene-0.25-mRNA-1	KEGG	K04285	38	226	68.2	Neuroactive ligand-receptor interaction
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.13-mRNA-1	KEGG	K04428	19	110	52.4	GnRH signaling pathway
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.13-mRNA-1	KEGG	K04428	19	110	52.4	MAPK signaling pathway
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.8-mRNA-1	KEGG	K10414	32	978	 568	Vasopressin-regulated water reabsorption
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.8-mRNA-1	KEGG	K10414	32	978	 568	Phagosome
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.9-mRNA-1	KEGG	K10414	1	193	 145	Vasopressin-regulated water reabsorption
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.9-mRNA-1	KEGG	K10414	1	193	 145	Phagosome
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.11-mRNA-1	KEGG	K10414	28	128	68.2	Vasopressin-regulated water reabsorption
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.11-mRNA-1	KEGG	K10414	28	128	68.2	Phagosome
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.12-mRNA-1	KEGG	K10414	117	269	 123	Vasopressin-regulated water reabsorption
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.12-mRNA-1	KEGG	K10414	117	269	 123	Phagosome
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.7-mRNA-1	KEGG	K04428	23	291	81.3	GnRH signaling pathway
-snap_masked-nHd.2.3.scaf01078-processed-gene-0.7-mRNA-1	KEGG	K04428	23	291	81.3	MAPK signaling pathway
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.12-mRNA-1	KEGG	K12324	1	236	 169	Purine metabolism
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.12-mRNA-1	KEGG	K12324	1	236	 169	Vascular smooth muscle contraction
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.14-mRNA-1	KEGG	K12324	3	116	 134	Purine metabolism
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.14-mRNA-1	KEGG	K12324	3	116	 134	Vascular smooth muscle contraction
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.9-mRNA-1	KEGG	K14078	13	113	58.2	Pancreatic secretion
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.10-mRNA-1	KEGG	K12324	1	69	57.8	Purine metabolism
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.10-mRNA-1	KEGG	K12324	1	69	57.8	Vascular smooth muscle contraction
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.13-mRNA-1	KEGG	K12324	1	62	57.0	Purine metabolism
-snap_masked-nHd.2.3.scaf01037-processed-gene-0.13-mRNA-1	KEGG	K12324	1	62	57.0	Vascular smooth muscle contraction
-maker-nHd.2.3.scaf01076-snap-gene-0.24-mRNA-1	KEGG	K08056	501	689	68.2	Protein processing in endoplasmic reticulum
-maker-nHd.2.3.scaf01076-snap-gene-0.24-mRNA-1	KEGG	K08056	501	689	68.2	Antigen processing and presentation
-snap_masked-nHd.2.3.scaf01076-processed-gene-0.19-mRNA-1	KEGG	K04157	1	290	80.1	Calcium signaling pathway
-snap_masked-nHd.2.3.scaf01076-processed-gene-0.19-mRNA-1	KEGG	K04157	1	290	80.1	Neuroactive ligand-receptor interaction
-snap_masked-nHd.2.3.scaf01076-processed-gene-0.19-mRNA-1	KEGG	K04157	1	290	80.1	Gap junction
-maker-nHd.2.3.scaf01085-snap-gene-0.27-mRNA-1	KEGG	K06775	267	440	 100	Cell adhesion molecules (CAMs)
-snap_masked-nHd.2.3.scaf01036-processed-gene-0.10-mRNA-1	KEGG	K04428	8	238	91.3	GnRH signaling pathway
-snap_masked-nHd.2.3.scaf01036-processed-gene-0.10-mRNA-1	KEGG	K04428	8	238	91.3	MAPK signaling pathway
-snap_masked-nHd.2.3.scaf01036-processed-gene-0.11-mRNA-1	KEGG	K04226	10	185	74.3	Calcium signaling pathway
-snap_masked-nHd.2.3.scaf01036-processed-gene-0.11-mRNA-1	KEGG	K04226	10	185	74.3	Neuroactive ligand-receptor interaction
-snap_masked-nHd.2.3.scaf01036-processed-gene-0.11-mRNA-1	KEGG	K04226	10	185	74.3	Vascular smooth muscle contraction
-snap_masked-nHd.2.3.scaf01075-processed-gene-0.14-mRNA-1	KEGG	K01869	3	72	76.6	Valine, leucine and isoleucine biosynthesis
-snap_masked-nHd.2.3.scaf01075-processed-gene-0.14-mRNA-1	KEGG	K01869	3	72	76.6	Aminoacyl-tRNA biosynthesis
-snap_masked-nHd.2.3.scaf01079-processed-gene-0.18-mRNA-1	KEGG	K09518	3	195	 103	Protein processing in endoplasmic reticulum
-snap_masked-nHd.2.3.scaf01079-processed-gene-0.24-mRNA-1	KEGG	K04416	25	154	71.2	Ubiquitin mediated proteolysis
-snap_masked-nHd.2.3.scaf01079-processed-gene-0.24-mRNA-1	KEGG	K04416	25	154	71.2	GnRH signaling pathway
-snap_masked-nHd.2.3.scaf01079-processed-gene-0.24-mRNA-1	KEGG	K04416	25	154	71.2	MAPK signaling pathway
-snap_masked-nHd.2.3.scaf01079-processed-gene-0.24-mRNA-1	KEGG	K04416	25	154	71.2	Neurotrophin signaling pathway
-snap_masked-nHd.2.3.scaf01079-processed-gene-0.24-mRNA-1	KEGG	K04416	25	154	71.2	RIG-I-like receptor signaling pathway
-maker-nHd.2.3.scaf01042-snap-gene-0.34-mRNA-1	KEGG	K00654	77	507	 393	Sphingolipid metabolism
-genemark-nHd.2.3.scaf01042-processed-gene-0.12-mRNA-1	KEGG	K05862	15	306	 234	Calcium signaling pathway
-genemark-nHd.2.3.scaf01042-processed-gene-0.12-mRNA-1	KEGG	K05862	15	306	 234	Huntingtons disease
-genemark-nHd.2.3.scaf01042-processed-gene-0.12-mRNA-1	KEGG	K05862	15	306	 234	Parkinsons disease
-maker-nHd.2.3.scaf01053-snap-gene-0.31-mRNA-1	KEGG	K00914	12	829	 822	Inositol phosphate metabolism
-maker-nHd.2.3.scaf01053-snap-gene-0.31-mRNA-1	KEGG	K00914	12	829	 822	Phosphatidylinositol signaling system
-maker-nHd.2.3.scaf01053-snap-gene-0.31-mRNA-1	KEGG	K00914	12	829	 822	Phagosome
-maker-nHd.2.3.scaf01053-snap-gene-0.31-mRNA-1	KEGG	K00914	12	829	 822	Regulation of autophagy
-maker-nHd.2.3.scaf01082-snap-gene-0.31-mRNA-1	KEGG	K04362	432	766	 119	Melanoma
-maker-nHd.2.3.scaf01082-snap-gene-0.31-mRNA-1	KEGG	K04362	432	766	 119	Prostate cancer
-maker-nHd.2.3.scaf01082-snap-gene-0.31-mRNA-1	KEGG	K04362	432	766	 119	MAPK signaling pathway
-maker-nHd.2.3.scaf01082-snap-gene-0.31-mRNA-1	KEGG	K04362	432	766	 119	Pathways in cancer
-maker-nHd.2.3.scaf01082-snap-gene-0.31-mRNA-1	KEGG	K04362	432	766	 119	Regulation of actin cytoskeleton
-maker-nHd.2.3.scaf01082-snap-gene-0.31-mRNA-1	KEGG	K04362	432	766	 119	Adherens junction
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	KEGG	K04959	14	152	 165	Salivary secretion
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	KEGG	K04959	14	152	 165	Long-term depression
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	KEGG	K04959	14	152	 165	Phosphatidylinositol signaling system
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	KEGG	K04959	14	152	 165	Pancreatic secretion
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	KEGG	K04959	14	152	 165	Alzheimers disease
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	KEGG	K04959	14	152	 165	Long-term potentiation
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	KEGG	K04959	14	152	 165	Calcium signaling pathway
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	KEGG	K04959	14	152	 165	GnRH signaling pathway
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	KEGG	K04959	14	152	 165	Vascular smooth muscle contraction
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	KEGG	K04959	14	152	 165	Gap junction
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	KEGG	K04959	14	152	 165	Gastric acid secretion
-snap_masked-nHd.2.3.scaf01082-processed-gene-0.25-mRNA-1	KEGG	K04959	14	152	 165	Oocyte meiosis
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.14-mRNA-1	KEGG	K06496	27	425	 156	Cell adhesion molecules (CAMs)
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.14-mRNA-1	KEGG	K06496	27	425	 156	Malaria
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.14-mRNA-1	KEGG	K06496	27	425	 156	Staphylococcus aureus infection
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.21-mRNA-1	KEGG	K04011	209	334	58.9	Malaria
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.21-mRNA-1	KEGG	K04011	209	334	58.9	Complement and coagulation cascades
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.21-mRNA-1	KEGG	K04011	209	334	58.9	Hematopoietic cell lineage
-snap_masked-nHd.2.3.scaf01018-processed-gene-0.21-mRNA-1	KEGG	K04011	209	334	58.9	Leishmaniasis
-genemark-nHd.2.3.scaf01063-processed-gene-0.6-mRNA-1	KEGG	K02130	75	171	 117	Oxidative phosphorylation
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	KEGG	K07515	51	688	 739	Fatty acid metabolism
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	KEGG	K07515	51	688	 739	Biosynthesis of unsaturated fatty acids
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	KEGG	K07515	51	688	 739	Aminobenzoate degradation
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	KEGG	K07515	51	688	 739	Lysine degradation
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	KEGG	K07515	51	688	 739	Benzoate degradation
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	KEGG	K07515	51	688	 739	Propanoate metabolism
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	KEGG	K07515	51	688	 739	Butanoate metabolism
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	KEGG	K07515	51	688	 739	Caprolactam degradation
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	KEGG	K07515	51	688	 739	Tryptophan metabolism
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	KEGG	K07515	51	688	 739	Valine, leucine and isoleucine degradation
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	KEGG	K07515	51	688	 739	beta-Alanine metabolism
-snap_masked-nHd.2.3.scaf01063-processed-gene-0.21-mRNA-1	KEGG	K07515	51	688	 739	Fatty acid elongation in mitochondria
-maker-nHd.2.3.scaf01063-snap-gene-0.30-mRNA-1	KEGG	K01892	213	587	 485	Aminoacyl-tRNA biosynthesis
-snap_masked-nHd.2.3.scaf01062-processed-gene-0.10-mRNA-1	KEGG	K01014	3	137	85.5	Sulfur metabolism
-snap_masked-nHd.2.3.scaf01062-processed-gene-0.6-mRNA-1	KEGG	K01016	61	269	 114	Sulfur metabolism
-snap_masked-nHd.2.3.scaf01062-processed-gene-0.6-mRNA-1	KEGG	K01016	61	269	 114	Steroid hormone biosynthesis
-snap_masked-nHd.2.3.scaf01062-processed-gene-0.8-mRNA-1	KEGG	K14078	1	103	62.8	Pancreatic secretion
-snap_masked-nHd.2.3.scaf01062-processed-gene-0.7-mRNA-1	KEGG	K13962	2	95	83.2	Gastric acid secretion
-maker-nHd.2.3.scaf01041-snap-gene-0.28-mRNA-1	KEGG	K04714	13	377	 181	Sphingolipid metabolism
-maker-nHd.2.3.scaf01041-snap-gene-0.29-mRNA-1	KEGG	K00907	138	281	69.7	Calcium signaling pathway
-maker-nHd.2.3.scaf01041-snap-gene-0.29-mRNA-1	KEGG	K00907	138	281	69.7	Vascular smooth muscle contraction
-maker-nHd.2.3.scaf01041-snap-gene-0.29-mRNA-1	KEGG	K00907	138	281	69.7	Focal adhesion
-maker-nHd.2.3.scaf01041-snap-gene-0.29-mRNA-1	KEGG	K00907	138	281	69.7	Gastric acid secretion
-maker-nHd.2.3.scaf01041-snap-gene-0.29-mRNA-1	KEGG	K00907	138	281	69.7	Regulation of actin cytoskeleton
-snap_masked-nHd.2.3.scaf01098-processed-gene-0.10-mRNA-1	KEGG	K01330	42	211	60.8	Systemic lupus erythematosus
-snap_masked-nHd.2.3.scaf01098-processed-gene-0.10-mRNA-1	KEGG	K01330	42	211	60.8	Staphylococcus aureus infection
-snap_masked-nHd.2.3.scaf01098-processed-gene-0.10-mRNA-1	KEGG	K01330	42	211	60.8	Complement and coagulation cascades
-snap_masked-nHd.2.3.scaf01098-processed-gene-0.10-mRNA-1	KEGG	K01330	42	211	60.8	Phagosome
-maker-nHd.2.3.scaf01013-snap-gene-0.37-mRNA-1	KEGG	K03355	153	586	 234	Ubiquitin mediated proteolysis
-maker-nHd.2.3.scaf01013-snap-gene-0.37-mRNA-1	KEGG	K03355	153	586	 234	Progesterone-mediated oocyte maturation
-maker-nHd.2.3.scaf01013-snap-gene-0.37-mRNA-1	KEGG	K03355	153	586	 234	Cell cycle
-maker-nHd.2.3.scaf01013-snap-gene-0.37-mRNA-1	KEGG	K03355	153	586	 234	Oocyte meiosis
-maker-nHd.2.3.scaf01013-snap-gene-0.37-mRNA-1	KEGG	K03355	153	586	 234	Cell cycle - yeast
-maker-nHd.2.3.scaf01013-snap-gene-0.37-mRNA-1	KEGG	K03355	153	586	 234	Meiosis - yeast
-maker-nHd.2.3.scaf01055-snap-gene-0.24-mRNA-1	KEGG	K02918	88	208	 146	Ribosome
-genemark-nHd.2.3.scaf01055-processed-gene-0.1-mRNA-1	KEGG	K02962	44	181	 184	Ribosome
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Phototransduction
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Melanogenesis
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Phototransduction - fly
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Long-term potentiation
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Calcium signaling pathway
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Plant-pathogen interaction
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Vascular smooth muscle contraction
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Gastric acid secretion
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Glioma
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Insulin signaling pathway
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Salivary secretion
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Olfactory transduction
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Phosphatidylinositol signaling system
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Alzheimers disease
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	GnRH signaling pathway
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Neurotrophin signaling pathway
-maker-nHd.2.3.scaf01044-snap-gene-0.23-mRNA-1	KEGG	K02183	1	149	 242	Oocyte meiosis
-snap_masked-nHd.2.3.scaf01044-processed-gene-0.16-mRNA-1	KEGG	K03899	142	296	56.2	Complement and coagulation cascades
-maker-nHd.2.3.scaf01054-snap-gene-0.30-mRNA-1	KEGG	K12200	6	484	 388	Endocytosis
-maker-nHd.2.3.scaf01054-snap-gene-0.32-mRNA-1	KEGG	K10604	8	237	 206	Ubiquitin mediated proteolysis
-snap_masked-nHd.2.3.scaf01024-processed-gene-0.18-mRNA-1	KEGG	K03934	195	759	 776	Huntingtons disease
-snap_masked-nHd.2.3.scaf01024-processed-gene-0.18-mRNA-1	KEGG	K03934	195	759	 776	Oxidative phosphorylation
-snap_masked-nHd.2.3.scaf01024-processed-gene-0.18-mRNA-1	KEGG	K03934	195	759	 776	Alzheimers disease
-snap_masked-nHd.2.3.scaf01024-processed-gene-0.18-mRNA-1	KEGG	K03934	195	759	 776	Parkinsons disease
-maker-nHd.2.3.scaf01024-snap-gene-0.40-mRNA-1	KEGG	K04552	3	131	 152	Ubiquitin mediated proteolysis
-maker-nHd.2.3.scaf01024-snap-gene-0.40-mRNA-1	KEGG	K04552	3	131	 152	Parkinsons disease
-genemark-nHd.2.3.scaf01084-processed-gene-0.4-mRNA-1	KEGG	K01897	33	712	 495	Fatty acid metabolism
-genemark-nHd.2.3.scaf01084-processed-gene-0.4-mRNA-1	KEGG	K01897	33	712	 495	Peroxisome
-genemark-nHd.2.3.scaf01084-processed-gene-0.4-mRNA-1	KEGG	K01897	33	712	 495	Adipocytokine signaling pathway
-genemark-nHd.2.3.scaf01084-processed-gene-0.4-mRNA-1	KEGG	K01897	33	712	 495	PPAR signaling pathway
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	KEGG	K01080	127	377	 163	Fc gamma R-mediated phagocytosis
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	KEGG	K01080	127	377	 163	Glycerolipid metabolism
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	KEGG	K01080	127	377	 163	Glycerophospholipid metabolism
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	KEGG	K01080	127	377	 163	Ether lipid metabolism
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	KEGG	K01080	127	377	 163	Fat digestion and absorption
-maker-nHd.2.3.scaf01084-snap-gene-0.23-mRNA-1	KEGG	K01080	127	377	 163	Sphingolipid metabolism
-snap_masked-nHd.2.3.scaf01084-processed-gene-0.18-mRNA-1	KEGG	K11981	1	94	63.2	Endocytosis
-snap_masked-nHd.2.3.scaf01064-processed-gene-0.11-mRNA-1	KEGG	K04194	20	382	70.1	Calcium signaling pathway
-snap_masked-nHd.2.3.scaf01064-processed-gene-0.11-mRNA-1	KEGG	K04194	20	382	70.1	Neuroactive ligand-receptor interaction
-snap_masked-nHd.2.3.scaf01064-processed-gene-0.11-mRNA-1	KEGG	K04194	20	382	70.1	Pancreatic secretion
+nAv.1.0.1.t00756-RA	KEGG	K10366	31	553	3e-45	Hypertrophic cardiomyopathy (HCM)
+nAv.1.0.1.t00756-RA	KEGG	K10366	31	553	3e-45	Viral myocarditis
+nAv.1.0.1.t00756-RA	KEGG	K10366	31	553	3e-45	Dilated cardiomyopathy
+nAv.1.0.1.t00756-RA	KEGG	K10366	31	553	3e-45	Arrhythmogenic right ventricular cardiomyopathy (ARVC)
+nAv.1.0.1.t00988-RA	KEGG	K07204	1	1304	0.0	Insulin signaling pathway
+nAv.1.0.1.t00988-RA	KEGG	K07204	1	1304	0.0	mTOR signaling pathway
+nAv.1.0.1.t01001-RA	KEGG	K00914	130	965	0.0	Inositol phosphate metabolism
+nAv.1.0.1.t01001-RA	KEGG	K00914	130	965	0.0	Phosphatidylinositol signaling system
+nAv.1.0.1.t01001-RA	KEGG	K00914	130	965	0.0	Phagosome
+nAv.1.0.1.t01001-RA	KEGG	K00914	130	965	0.0	Regulation of autophagy
+nAv.1.0.1.t01403-RA	KEGG	K00234	1	646	0.0	Huntingtons disease
+nAv.1.0.1.t01403-RA	KEGG	K00234	1	646	0.0	Oxidative phosphorylation
+nAv.1.0.1.t01403-RA	KEGG	K00234	1	646	0.0	Alzheimers disease
+nAv.1.0.1.t01403-RA	KEGG	K00234	1	646	0.0	Citrate cycle (TCA cycle)
+nAv.1.0.1.t01403-RA	KEGG	K00234	1	646	0.0	Parkinsons disease
+nAv.1.0.1.t01404-RA	KEGG	K00234	34	587	0.0	Huntingtons disease
+nAv.1.0.1.t01404-RA	KEGG	K00234	34	587	0.0	Oxidative phosphorylation
+nAv.1.0.1.t01404-RA	KEGG	K00234	34	587	0.0	Alzheimers disease
+nAv.1.0.1.t01404-RA	KEGG	K00234	34	587	0.0	Citrate cycle (TCA cycle)
+nAv.1.0.1.t01404-RA	KEGG	K00234	34	587	0.0	Parkinsons disease
+nAv.1.0.1.t01415-RA	KEGG	K01191	9	1007	0.0	Other glycan degradation
+nAv.1.0.1.t01416-RA	KEGG	K07511	67	333	1e-101	Fatty acid metabolism
+nAv.1.0.1.t01416-RA	KEGG	K07511	67	333	1e-101	Aminobenzoate degradation
+nAv.1.0.1.t01416-RA	KEGG	K07511	67	333	1e-101	Lysine degradation
+nAv.1.0.1.t01416-RA	KEGG	K07511	67	333	1e-101	Benzoate degradation
+nAv.1.0.1.t01416-RA	KEGG	K07511	67	333	1e-101	Propanoate metabolism
+nAv.1.0.1.t01416-RA	KEGG	K07511	67	333	1e-101	Butanoate metabolism
+nAv.1.0.1.t01416-RA	KEGG	K07511	67	333	1e-101	Caprolactam degradation
+nAv.1.0.1.t01416-RA	KEGG	K07511	67	333	1e-101	beta-Alanine metabolism
+nAv.1.0.1.t01416-RA	KEGG	K07511	67	333	1e-101	Tryptophan metabolism
+nAv.1.0.1.t01416-RA	KEGG	K07511	67	333	1e-101	Fatty acid elongation in mitochondria
+nAv.1.0.1.t01416-RA	KEGG	K07511	67	333	1e-101	Valine, leucine and isoleucine degradation
+nAv.1.0.1.t01679-RA	KEGG	K01809	4	416	3e-76	Fructose and mannose metabolism
+nAv.1.0.1.t01679-RA	KEGG	K01809	4	416	3e-76	Amino sugar and nucleotide sugar metabolism
+nAv.1.0.1.t01680-RA	KEGG	K12478	801	1055	2e-32	Phagosome
+nAv.1.0.1.t01680-RA	KEGG	K12478	801	1055	2e-32	Endocytosis
+nAv.1.0.1.t01745-RA	KEGG	K06126	17	446	4e-86	Ubiquinone and other terpenoid-quinone biosynthesis
+nAv.1.0.1.t01784-RA	KEGG	K10599	5	493	2e-167	Ubiquitin mediated proteolysis
+nAv.1.0.1.t01784-RA	KEGG	K10599	5	493	2e-167	Spliceosome
+nAv.1.0.1.t02751-RA	KEGG	K00100	10	313	4e-81	Butanoate metabolism
+nAv.1.0.1.t02751-RA	KEGG	K00100	10	313	4e-81	Linoleic acid metabolism
+nAv.1.0.1.t02751-RA	KEGG	K00100	10	313	4e-81	Fructose and mannose metabolism
+nAv.1.0.1.t02751-RA	KEGG	K00100	10	313	4e-81	Chloroalkane and chloroalkene degradation
+nAv.1.0.1.t02751-RA	KEGG	K00100	10	313	4e-81	Bisphenol degradation
+nAv.1.0.1.t02752-RA	KEGG	K07208	4	175	8e-51	Insulin signaling pathway
+nAv.1.0.1.t02752-RA	KEGG	K07208	4	175	8e-51	mTOR signaling pathway
+nAv.1.0.1.t03321-RA	KEGG	K13879	1	259	5e-58	Salivary secretion
+nAv.1.0.1.t03415-RA	KEGG	K10590	747	1643	8e-169	Ubiquitin mediated proteolysis
+nAv.1.0.1.t03610-RA	KEGG	K11594	174	719	4e-169	RIG-I-like receptor signaling pathway
+nAv.1.0.1.t03822-RA	KEGG	K03063	458	837	0.0	Proteasome
+nAv.1.0.1.t03876-RA	KEGG	K00287	7	212	2e-18	One carbon pool by folate
+nAv.1.0.1.t03876-RA	KEGG	K00287	7	212	2e-18	Folate biosynthesis
+nAv.1.0.1.t04283-RA	KEGG	K10604	30	384	4e-71	Ubiquitin mediated proteolysis
+nAv.1.0.1.t04304-RA	KEGG	K06639	8	456	5e-127	Cell cycle
+nAv.1.0.1.t04304-RA	KEGG	K06639	8	456	5e-127	Cell cycle - yeast
+nAv.1.0.1.t04304-RA	KEGG	K06639	8	456	5e-127	Meiosis - yeast
+nAv.1.0.1.t04483-RA	KEGG	K01253	185	562	4e-79	Bile secretion
+nAv.1.0.1.t04483-RA	KEGG	K01253	185	562	4e-79	Metabolism of xenobiotics by cytochrome P450
+nAv.1.0.1.t04790-RA	KEGG	K06171	85	696	2e-61	Notch signaling pathway
+nAv.1.0.1.t04790-RA	KEGG	K06171	85	696	2e-61	Alzheimers disease
+nAv.1.0.1.t04873-RA	KEGG	K04571	41	191	2e-21	Protein processing in endoplasmic reticulum
+nAv.1.0.1.t04874-RA	KEGG	K00710	503	1126	0.0	Mucin type O-Glycan biosynthesis
+nAv.1.0.1.t05000-RA	KEGG	K06699	9	1671	0.0	Proteasome
+nAv.1.0.1.t05002-RA	KEGG	K12862	28	467	2e-150	Spliceosome
+nAv.1.0.1.t05003-RA	KEGG	K12813	5	977	0.0	Spliceosome
+nAv.1.0.1.t05142-RA	KEGG	K05288	177	488	2e-85	Glycosylphosphatidylinositol(GPI)-anchor biosynthesis
+nAv.1.0.1.t05144-RA	KEGG	K06096	1	232	2e-45	Tight junction
+nAv.1.0.1.t05325-RA	KEGG	K00236	2	181	5e-54	Huntingtons disease
+nAv.1.0.1.t05325-RA	KEGG	K00236	2	181	5e-54	Oxidative phosphorylation
+nAv.1.0.1.t05325-RA	KEGG	K00236	2	181	5e-54	Alzheimers disease
+nAv.1.0.1.t05325-RA	KEGG	K00236	2	181	5e-54	Citrate cycle (TCA cycle)
+nAv.1.0.1.t05325-RA	KEGG	K00236	2	181	5e-54	Parkinsons disease
+nAv.1.0.1.t05512-RA	KEGG	K02877	37	240	7e-92	Ribosome
+nAv.1.0.1.t05564-RA	KEGG	K01874	11	931	0.0	Selenocompound metabolism
+nAv.1.0.1.t05564-RA	KEGG	K01874	11	931	0.0	Aminoacyl-tRNA biosynthesis
+nAv.1.0.1.t05643-RA	KEGG	K12301	25	479	6e-96	Lysosome
+nAv.1.0.1.t05757-RA	KEGG	K02960	435	573	5e-64	Ribosome
+nAv.1.0.1.t05900-RA	KEGG	K00213	50	421	3e-51	Steroid biosynthesis
+nAv.1.0.1.t05927-RA	KEGG	K07968	167	407	2e-54	Glycosphingolipid biosynthesis - lacto and neolacto series
+nAv.1.0.1.t05927-RA	KEGG	K07968	167	407	2e-54	Glycosaminoglycan biosynthesis - keratan sulfate
+nAv.1.0.1.t05927-RA	KEGG	K07968	167	407	2e-54	N-Glycan biosynthesis
+nAv.1.0.1.t05927-RA	KEGG	K07968	167	407	2e-54	Various types of N-glycan biosynthesis
+nAv.1.0.1.t05927-RA	KEGG	K07968	167	407	2e-54	Other types of O-glycan biosynthesis
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Prostate cancer
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Leukocyte transendothelial migration
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Focal adhesion
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Pathogenic Escherichia coli infection
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Melanogenesis
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Basal cell carcinoma
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Arrhythmogenic right ventricular cardiomyopathy (ARVC)
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Bacterial invasion of epithelial cells
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Pathways in cancer
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Tight junction
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Endometrial cancer
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Colorectal cancer
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Wnt signaling pathway
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Thyroid cancer
+nAv.1.0.1.t05938-RA	KEGG	K02105	147	789	5e-95	Adherens junction
+nAv.1.0.1.t06016-RA	KEGG	K12076	1	907	0.0	T cell receptor signaling pathway
+nAv.1.0.1.t06024-RA	KEGG	K12868	19	230	2e-63	Spliceosome
+nAv.1.0.1.t06214-RA	KEGG	K03942	38	461	0.0	Huntingtons disease
+nAv.1.0.1.t06214-RA	KEGG	K03942	38	461	0.0	Oxidative phosphorylation
+nAv.1.0.1.t06214-RA	KEGG	K03942	38	461	0.0	Alzheimers disease
+nAv.1.0.1.t06214-RA	KEGG	K03942	38	461	0.0	Parkinsons disease
+nAv.1.0.1.t06284-RA	KEGG	K02216	100	379	7e-23	Cell cycle
+nAv.1.0.1.t06284-RA	KEGG	K02216	100	379	7e-23	p53 signaling pathway
+nAv.1.0.1.t06284-RA	KEGG	K02216	100	379	7e-23	Cell cycle - yeast
+nAv.1.0.1.t06284-RA	KEGG	K02216	100	379	7e-23	Meiosis - yeast
+nAv.1.0.1.t06453-RA	KEGG	K01889	75	566	0.0	Aminoacyl-tRNA biosynthesis
+nAv.1.0.1.t07061-RA	KEGG	K01196	9	1380	0.0	Starch and sucrose metabolism
+nAv.1.0.1.t07150-RA	KEGG	K08339	8	265	1e-51	Shigellosis
+nAv.1.0.1.t07150-RA	KEGG	K08339	8	265	1e-51	Regulation of autophagy
+nAv.1.0.1.t07150-RA	KEGG	K08339	8	265	1e-51	RIG-I-like receptor signaling pathway
+nAv.1.0.1.t07326-RA	KEGG	K13758	1	130	3e-56	Purine metabolism
+nAv.1.0.1.t07328-RA	KEGG	K02367	12	665	3e-105	Glycosaminoglycan biosynthesis - heparan sulfate
+nAv.1.0.1.t07339-RA	KEGG	K06057	1	437	5e-95	Notch signaling pathway
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Protein processing in endoplasmic reticulum
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Progesterone-mediated oocyte maturation
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Hepatitis C
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Type II diabetes mellitus
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Chagas disease (American trypanosomiasis)
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Toxoplasmosis
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Wnt signaling pathway
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	ErbB signaling pathway
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Insulin signaling pathway
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Focal adhesion
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Adipocytokine signaling pathway
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Pancreatic cancer
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Shigellosis
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	GnRH signaling pathway
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	NOD-like receptor signaling pathway
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	MAPK signaling pathway
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Osteoclast differentiation
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Toll-like receptor signaling pathway
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Pathways in cancer
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Colorectal cancer
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Neurotrophin signaling pathway
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Fc epsilon RI signaling pathway
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	Epithelial cell signaling in Helicobacter pylori infection
+nAv.1.0.1.t07481-RA	KEGG	K04440	4	306	7e-134	RIG-I-like receptor signaling pathway
+nAv.1.0.1.t07573-RA	KEGG	K06756	96	906	2e-85	Cell adhesion molecules (CAMs)
+nAv.1.0.1.t07803-RA	KEGG	K14616	19	638	5e-19	Vitamin digestion and absorption
+nAv.1.0.1.t07804-RA	KEGG	K06104	162	424	4e-16	Tight junction
+nAv.1.0.1.t07806-RA	KEGG	K08272	1	335	2e-128	mTOR signaling pathway
+nAv.1.0.1.t08267-RA	KEGG	K06584	1	416	6e-22	Cell adhesion molecules (CAMs)
+nAv.1.0.1.t08267-RA	KEGG	K06584	1	416	6e-22	Hypertrophic cardiomyopathy (HCM)
+nAv.1.0.1.t08267-RA	KEGG	K06584	1	416	6e-22	Focal adhesion
+nAv.1.0.1.t08267-RA	KEGG	K06584	1	416	6e-22	ECM-receptor interaction
+nAv.1.0.1.t08267-RA	KEGG	K06584	1	416	6e-22	Regulation of actin cytoskeleton
+nAv.1.0.1.t08267-RA	KEGG	K06584	1	416	6e-22	Dilated cardiomyopathy
+nAv.1.0.1.t08267-RA	KEGG	K06584	1	416	6e-22	Arrhythmogenic right ventricular cardiomyopathy (ARVC)
+nAv.1.0.1.t08268-RA	KEGG	K09521	15	490	3e-54	Protein processing in endoplasmic reticulum
+nAv.1.0.1.t08740-RA	KEGG	K00966	19	424	2e-112	Fructose and mannose metabolism
+nAv.1.0.1.t08740-RA	KEGG	K00966	19	424	2e-112	Amino sugar and nucleotide sugar metabolism
+nAv.1.0.1.t08741-RA	KEGG	K09292	4	118	7e-15	Pathways in cancer
+nAv.1.0.1.t08741-RA	KEGG	K09292	4	118	7e-15	Thyroid cancer
+nAv.1.0.1.t08991-RA	KEGG	K00025	3	330	2e-113	Pyruvate metabolism
+nAv.1.0.1.t08991-RA	KEGG	K00025	3	330	2e-113	Glyoxylate and dicarboxylate metabolism
+nAv.1.0.1.t08991-RA	KEGG	K00025	3	330	2e-113	Carbon fixation in photosynthetic organisms
+nAv.1.0.1.t08991-RA	KEGG	K00025	3	330	2e-113	Citrate cycle (TCA cycle)
+nAv.1.0.1.t08991-RA	KEGG	K00025	3	330	2e-113	Proximal tubule bicarbonate reclamation
+nAv.1.0.1.t09190-RA	KEGG	K14011	4	455	2e-45	Protein processing in endoplasmic reticulum
+nAv.1.0.1.t09201-RA	KEGG	K10428	6	145	8e-28	Vasopressin-regulated water reabsorption
+nAv.1.0.1.t09270-RA	KEGG	K12184	17	178	5e-49	Endocytosis
+nAv.1.0.1.t09861-RA	KEGG	K04698	77	250	8e-58	Jak-STAT signaling pathway
+nAv.1.0.1.t09862-RA	KEGG	K13412	65	290	2e-12	Plant-pathogen interaction
+nAv.1.0.1.t09862-RA	KEGG	K13412	65	290	2e-12	Toxoplasmosis
+nAv.1.0.1.t09887-RA	KEGG	K02842	12	186	7e-29	Pathways in cancer
+nAv.1.0.1.t09887-RA	KEGG	K02842	12	186	7e-29	Wnt signaling pathway
+nAv.1.0.1.t09887-RA	KEGG	K02842	12	186	7e-29	Melanogenesis
+nAv.1.0.1.t09887-RA	KEGG	K02842	12	186	7e-29	Basal cell carcinoma
+nAv.1.0.1.t10041-RA	KEGG	K08341	23	139	4e-57	Regulation of autophagy
