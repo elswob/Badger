@@ -118,45 +118,53 @@ def addInterProScan(anno,annoFile){
 			anno_id = splitter[4]
 			if (splitter[8] == '-'){
 				score = 0 as float
-			}else{				
+			}else if (splitter[8].isNumber()){
 				score = splitter[8] as float;
+			}else{
+				score = 1
 			}
 			descr = splitter[5]
 			if (descr.size() < 1){
 				descr = "n/a"
 			}
-		}else if (splitter.size() == 12){
+		}else if (splitter.size() > 11){
 			//Assuming this is pre version 5 output as there are 12 columns
 			anno_id = splitter[11]+" - "+splitter[4]
-			score = splitter[8] as float;
+			if (splitter[8].isNumber()){
+				score = splitter[8] as float;
+			}else{
+				score = 1
+			}
 			descr = splitter[12]
 		}
 		if (splitter.size() == 12 && splitter[11] == 'NULL'){
 			return;
 		}else{
-			annoMap.anno_db = anno_db
-			annoMap.anno_id = anno_id
-			annoMap.anno_start = start
-			annoMap.anno_stop = stop
-			annoMap.score = score
-			annoMap.descr = descr
-			//println annoMap
-			if (score < 1e-5){
-				GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
-				GeneInterpro ga = new GeneInterpro(annoMap)
-				if (geneFind){
-					geneFind.addToGinter(ga)
-					if ((count % 5000) ==  0){
-						println count
-						//println annoMap
-						println new Date()          			
-						ga.save(flush:true)
-						cleanUpGorm()
+			if (descr != "NULL"){
+				annoMap.anno_db = anno_db
+				annoMap.anno_id = anno_id
+				annoMap.anno_start = start
+				annoMap.anno_stop = stop
+				annoMap.score = score
+				annoMap.descr = descr
+				//println annoMap
+				if (score < 1e-5){
+					GeneInfo geneFind = GeneInfo.findByMrna_id(mrna_id)
+					GeneInterpro ga = new GeneInterpro(annoMap)
+					if (geneFind){
+						geneFind.addToGinter(ga)
+						if ((count % 5000) ==  0){
+							println count
+							println annoMap
+							println new Date()          			
+							ga.save(flush:true)
+							cleanUpGorm()
+						}else{
+							ga.save()
+						}
 					}else{
-						ga.save()
+						println mrna_id+" does not exist!"
 					}
-				}else{
-					println mrna_id+" does not exist!"
 				}
 			}
 		}

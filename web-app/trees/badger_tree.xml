@@ -63,14 +63,7 @@
                                 </clade>
                               </clade>
                               <clade>
-                                <name bgStyle="bold">Lumbricus rubellus</name>
-                                <chart>
-                                 <component>bold</component>
-                                </chart>
-                                <annotation>
-                                 <desc>Lumbricus rubellus</desc>
-                                 <uri>#Lumbricus rubellus</uri>
-                                </annotation>
+                                <name bgStyle="none">Lumbricus rubellus</name>
                                 <branch_length>0.038124108</branch_length>
                               </clade>
                             </clade>
@@ -84,14 +77,7 @@
                             <clade>
                               <branch_length>0.059720592</branch_length>
                               <clade>
-                                <name bgStyle="bold">Helobdella robusta</name>
-                                <chart>
-                                 <component>bold</component>
-                                </chart>
-                                <annotation>
-                                 <desc>Helobdella robusta</desc>
-                                 <uri>#Helobdella robusta</uri>
-                                </annotation>
+                                <name bgStyle="none">Helobdella robusta</name>
                                 <branch_length>0.037350202</branch_length>
                               </clade>
                               <clade>
@@ -161,14 +147,7 @@
                         <branch_length>0.164547133</branch_length>
                       </clade>
                       <clade>
-                        <name bgStyle="bold">Capitella teleta</name>
-                        <chart>
-                         <component>bold</component>
-                        </chart>
-                        <annotation>
-                         <desc>Capitella teleta</desc>
-                         <uri>#Capitella teleta</uri>
-                        </annotation>
+                        <name bgStyle="none">Capitella teleta</name>
                         <branch_length>0.176591873</branch_length>
                       </clade>
                     </clade>
