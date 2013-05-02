@@ -237,6 +237,17 @@
 				"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
 			}
 		} );
+		
+		//auto fill the library search boxes
+		$('.tball').keyup(function(){
+			var content = $('.tball').val();
+			$('.tbfill').val(content);
+		});
+		//auto change the selects
+		$(".selectall").change(function() { //this occurs when select 1 changes
+			$(".selectauto").val($(this).val());
+			//alert(/.*?/+$(this).val())
+		});
         
 	}); 
 	</script>
@@ -270,27 +281,60 @@
 	 <input type="button" class="tabbuttons" id="show_metrics" onclick="switchTab('1','2')" value="Metrics" />
 	 <input type="button" class="tabbuttons" id="show_search" value="Search" style="color:#BFBFBF"/>
 	 <div style="border:2px solid; border-color:#BFBFBF">	
-		<h3>Search the annotation descriptions associated with transcripts marked as orthologs:</h3> 
-		<g:form action="ortho_search" params="${[type:'search']}">
-		<table><tr>
-			<td>
+		<h1>Search by group metric:</h3> 
+		
+		<fieldset id="blast_dbs">	
+			<g:form action="ortho_search" params="${[type:'count']}">
+				<table class="blast">
+					
+					<tr><td></td><td>Select all</td><td>
+					<SELECT NAME=allsign class="selectall">
+        				<OPTION selected="selected" VALUE="=">equal to
+        				<OPTION VALUE=">">greater than
+        				<OPTION VALUE="<">less than     
+       				 </SELECT>
+        			<INPUT TYPE=text NAME=allcount VALUE="" SIZE=3 class="tball">
+					<g:each var="res" in="${o}">
+						<g:if test="${res.file_type == 'Genes' && res.loaded == true}">		
+							<g:if test="${res.search == 'priv' && user == 'user' || res.search == 'pub'}">	
+								<tr><td><input type="hidden" name="orthoCheck" id="orthoCheck" value="${res.file_name}" /></td><td><i>${res.genus} ${res.species} (${res.file_name})</td><td>
+									<SELECT id="orthoSign" NAME="orthoSign" class="selectauto">
+        								<OPTION VALUE="=">equal to
+        								<OPTION VALUE=">">greater than
+        								<OPTION VALUE="<">less than     
+       				 				</SELECT>
+       				 				<INPUT id=orthoCount TYPE=text NAME=orthoCount VALUE="" SIZE=3 class="tbfill">
+								</tr>
+							</g:if>
+						</g:if>
+					</g:each>				
+				</table>
+				<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
+		   </g:form>
+		</fieldset>
+		<hr size = 5 color="green" width="100%" style="margin-top:10px">
+		<h1>Search the annotation descriptions associated with transcripts marked as orthologs:</h3> 
+		<fieldset id="blast_dbs">
+			<g:form action="ortho_search" params="${[type:'search']}">		
+			<table><tr>
+				<td>
 			
-			<h1>Choose what to search:</h1>
-			<label><input type="checkbox" checked="yes" name="oVal" value="blast" /> BLAST similarity</label><br>
-			<label><input type="checkbox" checked="yes" name="oVal" value="anno" /> Functional annotations</label><br>
-			<label><input type="checkbox" checked="yes" name="oVal" value="inter" /> InterPro domains</label><br>
+				<h2>Choose what to search:</h1>
+				<label><input type="checkbox" checked="yes" name="oVal" value="blast" /> BLAST similarity</label><br>
+				<label><input type="checkbox" checked="yes" name="oVal" value="anno" /> Functional annotations</label><br>
+				<label><input type="checkbox" checked="yes" name="oVal" value="inter" /> InterPro domains</label><br>
 			
-		   </td>
-		   <td>
-			<h1>Enter a search term:</h1><br>
-			<div id='selectedResult'></div>
-			<g:textField name="searchId"  size="60"/>
-			<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
-			 </td>
-	   </tr>
-	   </table>
-	   </g:form>
-			
+			   </td>
+			   <td>
+				<h2>Enter a search term:</h1><br>
+				<div id='selectedResult'></div>
+				<g:textField name="searchId"  size="60"/>
+				<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
+				 </td>
+		   </tr>
+		   </table>
+		   </g:form>
+		</fieldset>
 	</div>
 	</div>
 </g:if>

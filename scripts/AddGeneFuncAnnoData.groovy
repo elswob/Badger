@@ -155,7 +155,7 @@ def addInterProScan(anno,annoFile){
 						geneFind.addToGinter(ga)
 						if ((count % 5000) ==  0){
 							println count
-							println annoMap
+							//println annoMap
 							println new Date()          			
 							ga.save(flush:true)
 							cleanUpGorm()

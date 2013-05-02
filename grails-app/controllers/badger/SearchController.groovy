@@ -626,15 +626,15 @@ class SearchController {
     	return [align:align, group_id:params.group_id]
 	}
 	
-	@Cacheable('ortho_cache')
-    //@CacheEvict(value='ortho_cache', allEntries=true)
+	//@Cacheable('ortho_cache')
+    @CacheEvict(value='ortho_cache', allEntries=true)
 	def ortho() {
 		def sql = new Sql(dataSource)
 		//number
 		def nsql = "select max(group_id) from ortho;"
 		def n = sql.rows(nsql)
 		//overview
-		def osql = "select distinct on (file_name) file_name,genus,species,count(distinct(group_id)) as count_ortho, count(group_id) as count_all from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by file_name,genus,species; ";
+		def osql = "select distinct on (file_name) file_name,search,file_type,loaded,genus,species,count(distinct(group_id)) as count_ortho, count(group_id) as count_all from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by file_name,genus,species,search,file_type,loaded; ";
 		def o = sql.rows(osql)
 		def gsql = "select file_name,count(mrna_id) from gene_info,file_data where gene_info.file_id = file_data.id group by file_name;";
 		//println "g = "+gsql
@@ -706,7 +706,7 @@ class SearchController {
 				newMap."${it.key}" = it.value
 			}
 			newFile.add(newMap)
-			//println "results = "+newFile
+			println "results = "+newFile
 			return [searchRes:newFile, files:fileData, type:"bar"]
 		}
 		if (params.type == 'search'){
@@ -756,7 +756,111 @@ class SearchController {
 				return [searchRes:b, files:fileData, type:"search"]
 			}
 		}
-		
+		if (params.type == 'count'){
+			//select group_id,count,file_name,size,genus,species from (select group_id,size,count(file_name),file_name,genus,species from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,size,file_name,genus,species) as foo where (file_name = 'Cap.gff' and count = 1) and (file_name != 'Hel.gff') ;
+			//select group_id,count,file_name,size,genus,species from (select group_id,size,count(file_name),file_name,genus,species from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,size,file_name,genus,species) as foo where (file_name = 'Cap.gff' and count = 1) or (file_name = 'Hel.gff' and count = 1) or (file_name = 'L_rubellus_0.4.gff' and count = 1);
+			def sign = params.orthoSign
+			println "params.orthoSign = "+sign
+			def count = params.orthoCount
+			println "params.orthoCount = "+count
+			def check = params.orthoCheck
+			println "params.orthoCheck = "+check
+			def original_count=0
+			
+			for (int i = 0; i < count.size(); i++) {
+				if (!count[i]){
+					count[i] = 0
+				}else{
+					original_count++
+				}
+			}
+			//println "original count = "+original_count
+			def dbString = "select group_id,count,file_name,size,genus,species from (select group_id,size,count(file_name),file_name,genus,species from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,size,file_name,genus,species) as foo where"
+			def counter = 0
+			def groupSize = [:]
+			if (check instanceof String){
+				def fileInfo = FileData.findByFile_name(select)
+				def dbfile = fileInfo.file_dir+"/"+fileInfo.file_name
+				println "dbfile = "+dbfile
+				dbString = "data/"+dbfile
+			}else{
+
+				for (i in check){
+					if (counter == 0){
+						dbString += " (file_name = '"+i+"' and count "+sign[counter]+count[counter]+")" 
+					}else{					
+						dbString += " or (file_name = '"+i+"' and count "+sign[counter]+count[counter]+")" 
+					}
+					counter++
+				}
+
+			}
+			dbString += ";"
+			println "dbString = "+dbString
+			def countSearch = sql.rows(dbString)
+			def groupMap = [:]
+			def groupFile = []
+			def groups = [:]
+			countSearch.each{
+				groupSize."${it.group_id}" = it.size
+				groupMap.file_name = it.file_name
+				groupMap.group_id = it.group_id
+				groupMap.count = it.count
+				groupFile.add(groupMap)
+				//println groupMap
+				groupMap = [:]
+				if (groups."${it.group_id}"){
+					groups."${it.group_id}".add(it.count)
+				}else{				
+					groups."${it.group_id}" = [it.count]
+				}
+			}
+
+			def groupList = []
+			groups.each{ gid ->
+				//find groups where total matches size
+				if (gid.value.sum() == groupSize."${gid.key}"){
+					if (gid.value.size() == original_count){
+						groupList.add(gid.key) 	
+					}
+				}
+			}
+			println "groupList = "+groupList
+			def finalList = []
+			def finalMap = [:]
+			def old_id = ""
+			groupFile.each{ lid ->
+				if (lid.group_id != old_id && old_id != ""){
+					if (finalMap.size() > 0){
+						fileData.each{
+							if (!finalMap."${it.file_name}"){
+								finalMap."${it.file_name}" = 0
+							}
+						}
+						println finalMap
+						finalList.add(finalMap)
+						finalMap = [:]
+					}
+				}
+				if (groupList.contains(lid.group_id.toString())){
+					finalMap.group_id = lid.group_id
+					fileData.each{
+						if (it.file_name == lid.file_name){
+							finalMap."${it.file_name}" = lid.count
+						}
+					}
+					//println "adding "+finalMap
+				}
+				old_id = lid.group_id
+			}
+			//catch the last one
+			if (finalMap.size > 0){
+				finalList.add(finalMap)
+			}
+			
+			//println groupFile
+			return [searchRes:finalList, files:fileData, type:"count"]
+		}
 	}
 	
 	@Cacheable('cluster_cache')
