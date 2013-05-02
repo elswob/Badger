@@ -673,7 +673,7 @@ class SearchController {
 			fileCheck."${it.file_name}" = 0
 		}
 		def newFile = [];
-		println "type = "+params.type
+		println "ortho search type = "+params.type
 		if (params.type == 'bar'){
 			def bsql = "select group_id,file_name,count(file_name),genus,species,size from ortho,gene_info,file_data,genome_data,meta_data where ortho.size = "+params.val+" and ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,genus,species,file_name,size order by group_id;";
 			//println bsql;
@@ -760,41 +760,35 @@ class SearchController {
 			//select group_id,count,file_name,size,genus,species from (select group_id,size,count(file_name),file_name,genus,species from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,size,file_name,genus,species) as foo where (file_name = 'Cap.gff' and count = 1) and (file_name != 'Hel.gff') ;
 			//select group_id,count,file_name,size,genus,species from (select group_id,size,count(file_name),file_name,genus,species from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,size,file_name,genus,species) as foo where (file_name = 'Cap.gff' and count = 1) or (file_name = 'Hel.gff' and count = 1) or (file_name = 'L_rubellus_0.4.gff' and count = 1);
 			def sign = params.orthoSign
-			println "params.orthoSign = "+sign
+			//println "params.orthoSign = "+sign
 			def count = params.orthoCount
-			println "params.orthoCount = "+count
+			//println "params.orthoCount = "+count
 			def check = params.orthoCheck
-			println "params.orthoCheck = "+check
+			//println "params.orthoCheck = "+check
 			def original_count=0
 			
 			for (int i = 0; i < count.size(); i++) {
 				if (!count[i]){
 					count[i] = 0
-				}else{
+				}else if(count[i] != "0"){
 					original_count++
 				}
 			}
-			//println "original count = "+original_count
 			def dbString = "select group_id,count,file_name,size,genus,species from (select group_id,size,count(file_name),file_name,genus,species from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,size,file_name,genus,species) as foo where"
 			def counter = 0
 			def groupSize = [:]
-			if (check instanceof String){
-				def fileInfo = FileData.findByFile_name(select)
-				def dbfile = fileInfo.file_dir+"/"+fileInfo.file_name
-				println "dbfile = "+dbfile
-				dbString = "data/"+dbfile
-			}else{
-
-				for (i in check){
-					if (counter == 0){
-						dbString += " (file_name = '"+i+"' and count "+sign[counter]+count[counter]+")" 
-					}else{					
-						dbString += " or (file_name = '"+i+"' and count "+sign[counter]+count[counter]+")" 
-					}
-					counter++
+			
+			//generate SQL
+			for (i in check){
+				if (counter == 0){
+					dbString += " (file_name = '"+i+"' and count "+sign[counter]+count[counter]+")" 
+				}else{					
+					dbString += " or (file_name = '"+i+"' and count "+sign[counter]+count[counter]+")" 
 				}
-
+				counter++
 			}
+
+			
 			dbString += ";"
 			println "dbString = "+dbString
 			def countSearch = sql.rows(dbString)
@@ -819,14 +813,13 @@ class SearchController {
 
 			def groupList = []
 			groups.each{ gid ->
-				//find groups where total matches size
+				//find groups where total matches size and number of species is right too
 				if (gid.value.sum() == groupSize."${gid.key}"){
 					if (gid.value.size() == original_count){
 						groupList.add(gid.key) 	
 					}
 				}
 			}
-			println "groupList = "+groupList
 			def finalList = []
 			def finalMap = [:]
 			def old_id = ""
@@ -838,7 +831,7 @@ class SearchController {
 								finalMap."${it.file_name}" = 0
 							}
 						}
-						println finalMap
+						//println finalMap
 						finalList.add(finalMap)
 						finalMap = [:]
 					}
@@ -851,7 +844,6 @@ class SearchController {
 							finalMap."${it.file_name}" = lid.count
 						}
 					}
-					//println "adding "+finalMap
 				}
 				old_id = lid.group_id
 			}
