@@ -806,6 +806,7 @@ class SearchController {
 				groupMap.file_name = it.file_name
 				groupMap.group_id = it.group_id
 				groupMap.count = it.count
+				groupMap.size = it.size
 				groupFile.add(groupMap)
 				//println groupMap
 				groupMap = [:]
@@ -844,6 +845,7 @@ class SearchController {
 				}
 				if (groupList.contains(lid.group_id.toString())){
 					finalMap.group_id = lid.group_id
+					finalMap.size = lid.size
 					fileData.each{
 						if (it.file_name == lid.file_name){
 							finalMap."${it.file_name}" = lid.count

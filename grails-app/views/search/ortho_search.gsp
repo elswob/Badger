@@ -68,7 +68,7 @@
     	"oLanguage": {
     		"sSearch": "Filter records:"
     	},
-    	"aaSorting": [[ 0, "asc" ]],
+    	"aaSorting": [[ 1, "asc" ]],
     	"sDom": 'T<"clear">lfrtip',
         "oTableTools": {
         	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
@@ -84,7 +84,7 @@
     		"sSearch": "Filter records:"
     	},
     	"sType": "num-html",
-    	"aaSorting": [[ 0, "asc" ]],
+    	"aaSorting": [[ 1, "asc" ]],
     	"sDom": 'T<"clear">lfrtip',
         "oTableTools": {
         	"sSwfPath": "${resource(dir: 'js', file: 'TableTools-2.0.2/media/swf/copy_cvs_xls_pdf.swf')}"
@@ -141,6 +141,7 @@
 			<thead>
 				<tr>
 					<th>Cluster</th>
+					<th>Size</th>
 					<g:each var="res" in="${files}">
 						<th><i>${res.genus[0]}. ${res.species}</i><br> (${res.file_name})</td>					
 					</g:each>
@@ -149,6 +150,7 @@
 			<tbody>
 				<g:each var="res" in="${searchRes}">
 					<tr><td><g:link action="cluster" params="${[group_id:res.group_id]}">${res.group_id}</g:link></td>
+						<td>${res.size}</td>
 						<g:each var="s" in="${files}">
 							<td>${res."${s.file_name}"}</td>
 						</g:each>
