@@ -774,7 +774,7 @@ class SearchController {
 					original_count++
 				}
 			}
-			def dbString = "select group_id,count,file_name,size,genus,species from (select group_id,size,count(file_name),file_name,genus,species from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,size,file_name,genus,species) as foo where"
+			def dbString = "select group_id,count,file_name,size,genus,species from (select group_id,size,count(file_name),file_name,genus,species from ortho,gene_info,file_data,genome_data,meta_data where ortho.gene_id = gene_info.id and gene_info.file_id = file_data.id and file_data.genome_id = genome_data.id and genome_data.meta_id = meta_data.id group by group_id,size,file_name,genus,species order by group_id) as foo where"
 			def counter = 0
 			def groupSize = [:]
 			
