@@ -281,39 +281,41 @@
 	 <input type="button" class="tabbuttons" id="show_metrics" onclick="switchTab('1','2')" value="Metrics" />
 	 <input type="button" class="tabbuttons" id="show_search" value="Search" style="color:#BFBFBF"/>
 	 <div style="border:2px solid; border-color:#BFBFBF">	
-		<h1>Search by group metric:</h1>
-		<h3>Search the ortholog groups by the number of sequences per species. Leave blank for zero sequences.<h3> 
+		<g:if test="${o.size()>1}">
+			<h1>Search by group metric:</h1>
+			<h3>Search the ortholog groups by the number of sequences per species. Leave blank for zero sequences.<h3> 
 		
-		<fieldset id="blast_dbs">	
-			<g:form action="ortho_search" params="${[type:'count']}">
-				<table class="blast">
+			<fieldset id="blast_dbs">	
+				<g:form action="ortho_search" params="${[type:'count']}">
+					<table class="blast">
 					
-					<tr><td></td><td>Select all</td><td>
-					<SELECT NAME=allsign class="selectall">
-        				<OPTION selected="selected" VALUE="=">equal to
-        				<OPTION VALUE=">">greater than
-        				<OPTION VALUE="<">less than     
-       				 </SELECT>
-        			<INPUT TYPE=text NAME=allcount VALUE="" SIZE=3 class="tball">
-					<g:each var="res" in="${o}">
-						<g:if test="${res.file_type == 'Genes' && res.loaded == true}">		
-							<g:if test="${res.search == 'priv' && user == 'user' || res.search == 'pub'}">	
-								<tr><td><input type="hidden" name="orthoCheck" id="orthoCheck" value="${res.file_name}" /></td><td><i>${res.genus} ${res.species} (${res.file_name})</td><td>
-									<SELECT id="orthoSign" NAME="orthoSign" class="selectauto">
-        								<OPTION VALUE="=">equal to
-        								<OPTION VALUE=">">greater than
-        								<OPTION VALUE="<">less than     
-       				 				</SELECT>
-       				 				<INPUT id=orthoCount TYPE=text NAME=orthoCount VALUE="" SIZE=3 class="tbfill">
-								</tr>
+						<tr><td></td><td>Select all</td><td>
+						<SELECT NAME=allsign class="selectall">
+							<OPTION selected="selected" VALUE="=">equal to
+							<OPTION VALUE=">">greater than
+							<OPTION VALUE="<">less than     
+						 </SELECT>
+						<INPUT TYPE=text NAME=allcount VALUE="" SIZE=3 class="tball">
+						<g:each var="res" in="${o}">
+							<g:if test="${res.file_type == 'Genes' && res.loaded == true}">		
+								<g:if test="${res.search == 'priv' && user == 'user' || res.search == 'pub'}">	
+									<tr><td><input type="hidden" name="orthoCheck" id="orthoCheck" value="${res.file_name}" /></td><td><i>${res.genus} ${res.species} (${res.file_name})</td><td>
+										<SELECT id="orthoSign" NAME="orthoSign" class="selectauto">
+											<OPTION VALUE="=">equal to
+											<OPTION VALUE=">">greater than
+											<OPTION VALUE="<">less than     
+										</SELECT>
+										<INPUT id=orthoCount TYPE=text NAME=orthoCount VALUE="" SIZE=3 class="tbfill">
+									</tr>
+								</g:if>
 							</g:if>
-						</g:if>
-					</g:each>				
-				</table>
-				<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
-		   </g:form>
-		</fieldset>
-		<hr size = 5 color="green" width="100%" style="margin-top:10px">
+						</g:each>				
+					</table>
+					<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
+			   </g:form>
+			</fieldset>
+			<hr size = 5 color="green" width="100%" style="margin-top:10px">
+		</g:if>
 		<h1>Search the annotation descriptions associated with transcripts marked as orthologs:</h3> 
 		<fieldset id="blast_dbs">
 			<g:form action="ortho_search" params="${[type:'search']}">		
