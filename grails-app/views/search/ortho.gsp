@@ -141,7 +141,7 @@
 		SArray.push(numArray)
 		//var plot3 = $.jqplot ('chart3', [SArray[0],SArray[1],SArray[2],SArray[3],numArray]	,{
 		var plot3 = $.jqplot ('chart1', SArray	,{
-			animate: true,
+			//animate: true,
 			//title: 'Cluster size vs gene set percentage', 
 			stackSeries: true,
             axesDefaults: {
@@ -280,7 +280,7 @@
 	 <div id="tab_2" style="display:none">
 	 <input type="button" class="tabbuttons" id="show_metrics" onclick="switchTab('1','2')" value="Metrics" />
 	 <input type="button" class="tabbuttons" id="show_search" value="Search" style="color:#BFBFBF"/>
-	 <div style="border:2px solid; border-color:#BFBFBF">	
+	 <div style="border:2px solid; border-color:#BFBFBF">
 		<g:if test="${o.size()>1}">
 			<h1>Search by group metric:</h1>
 			<h3>Search the ortholog groups by the number of sequences per species. Leave blank for zero sequences.<h3> 
