@@ -778,12 +778,14 @@ class SearchController {
 			def counter = 0
 			def groupSize = [:]
 			
+			//convert signs
+			def signMap = ['eq':'=', 'lt': '<', 'gt' : '>']
 			//generate SQL
 			for (i in check){
 				if (counter == 0){
-					dbString += " (file_name = '"+i+"' and count "+sign[counter]+count[counter]+")" 
+					dbString += " (file_name = '"+i+"' and count "+signMap.get(sign[counter])+count[counter]+")" 
 				}else{					
-					dbString += " or (file_name = '"+i+"' and count "+sign[counter]+count[counter]+")" 
+					dbString += " or (file_name = '"+i+"' and count "+signMap.get(sign[counter])+count[counter]+")" 
 				}
 				counter++
 			}

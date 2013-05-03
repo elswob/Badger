@@ -141,7 +141,7 @@
 		SArray.push(numArray)
 		//var plot3 = $.jqplot ('chart3', [SArray[0],SArray[1],SArray[2],SArray[3],numArray]	,{
 		var plot3 = $.jqplot ('chart1', SArray	,{
-			//animate: true,
+			animate: true,
 			//title: 'Cluster size vs gene set percentage', 
 			stackSeries: true,
             axesDefaults: {
@@ -285,15 +285,15 @@
 			<h1>Search by group metric:</h1>
 			<h3>Search the ortholog groups by the number of sequences per species. Leave blank for zero sequences.<h3> 
 		
-			<fieldset id="blast_dbs">	
+			<fieldset id="counts">	
 				<g:form action="ortho_search" params="${[type:'count']}">
 					<table class="blast">
 					
 						<tr><td></td><td>Select all</td><td>
 						<SELECT NAME=allsign class="selectall">
-							<OPTION selected="selected" VALUE="=">equal to
-							<OPTION VALUE=">">greater than
-							<OPTION VALUE="<">less than     
+							<OPTION selected="selected" VALUE="eq">equal to
+							<OPTION VALUE="gt">greater than
+							<OPTION VALUE="lt">less than     
 						 </SELECT>
 						<INPUT TYPE=text NAME=allcount VALUE="" SIZE=3 class="tball">
 						<g:each var="res" in="${o}">
@@ -301,11 +301,11 @@
 								<g:if test="${res.search == 'priv' && user == 'user' || res.search == 'pub'}">	
 									<tr><td><input type="hidden" name="orthoCheck" id="orthoCheck" value="${res.file_name}" /></td><td><i>${res.genus} ${res.species} (${res.file_name})</td><td>
 										<SELECT id="orthoSign" NAME="orthoSign" class="selectauto">
-											<OPTION VALUE="=">equal to
-											<OPTION VALUE=">">greater than
-											<OPTION VALUE="<">less than     
+											<OPTION VALUE="eq">equal to
+											<OPTION VALUE="gt">greater than
+											<OPTION VALUE="lt">less than     
 										</SELECT>
-										<INPUT id=orthoCount TYPE=text NAME=orthoCount VALUE="" SIZE=3 class="tbfill">
+										<INPUT id="orthoCount" TYPE="text" NAME="orthoCount" VALUE="" SIZE=3 class="tbfill">
 									</tr>
 								</g:if>
 							</g:if>
