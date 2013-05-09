@@ -14,6 +14,8 @@
     <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.canvasTextRenderer.min.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js')}" type="text/javascript"></script>
+    <script src="${resource(dir: 'js', file: 'Highcharts-3.0.1/js/highcharts.js')}" type="text/javascript"></script>
+    <script src="${resource(dir: 'js', file: 'Highcharts-3.0.1/js/modules/exporting.js')}" type="text/javascript"></script>
     <link rel="stylesheet" href="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.css')}" type="text/css"></link>
   
 
@@ -22,9 +24,11 @@
    // create bar chart
    <% 
    def jsonData = yearData.encodeAsJSON();  
-   //println "loaded data";
+   def highData = newyearData.encodeAsJSON(); 
+   def unYears = unYear.encodeAsJSON();
+   println jsonData;
    %>    
-   yearData = ${jsonData};  	  
+   yearData = ${jsonData};    	  
    var counts = [];
    var year = [];
    for (var i = 0; i < yearData.length; i++) {
@@ -81,6 +85,139 @@
         zIndex: "1"
     })
     .click(function(){ location.href = "http://google.com"; });
+    
+    
+    //new highcharts plot
+    newyearData = ${highData}; 
+    years = ${unYears};
+    var options = {
+		chart: {
+			renderTo: 'container2',
+			defaultSeriesType: 'column'
+		},
+		title: {
+			text: 'Fruit Consumption'
+		},
+		xAxis: {
+			categories: years
+		},
+		yAxis: {
+			min: 0,
+			title: {
+				text: 'Total fruit consumption'
+			},
+			stackLabels: {
+				enabled: true,
+				style: {
+					fontWeight: 'bold',
+					color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+				}
+			}
+		},
+	   plotOptions: {
+			column: {
+				stacking: 'normal',
+				dataLabels: {
+					enabled: true,
+					color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+				}
+			}
+		}, 
+		series: []
+	};
+    
+    var series = {
+    	data: [],
+    	name: []
+    };
+   	//alert(newyearData)
+   	var old_sp = "";
+   	for (var i = 0; i < newyearData.length; i++) {
+   		//alert('i = '+i)
+   		var item = newyearData[i];
+   		series.name = item.sid
+   		series.data = item.data
+   		//alert(series.data)
+   		options.series.push(series)
+   		var series = {
+    		data: [],
+    		name: []
+    	};
+   	}
+   
+   	//alert(series.name)
+   		
+   	// Create the chart
+    var chart = new Highcharts.Chart(options);
+   	
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Stacked column chart'
+            },
+            xAxis: {
+                categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Total fruit consumption'
+                },
+                stackLabels: {
+                    enabled: true,
+                    style: {
+                        fontWeight: 'bold',
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                    }
+                }
+            },
+            legend: {
+                align: 'right',
+                x: -100,
+                verticalAlign: 'top',
+                y: 20,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColorSolid) || 'white',
+                borderColor: '#CCC',
+                borderWidth: 1,
+                shadow: false
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>'+ this.x +'</b><br/>'+
+                        this.series.name +': '+ this.y +'<br/>'+
+                        'Total: '+ this.point.stackTotal;
+                }
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal',
+                    dataLabels: {
+                        enabled: true,
+                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                    }
+                }
+            },
+            
+            series: [{
+         		data: newyearData
+     		}]
+            
+            // series: [{
+//                 name: 'John',
+//                 data: [5, 3, 4, 7, 2]
+//             }, {
+//                 name: 'Jane',
+//                 data: [2, 2, 3, 2, 1]
+//             }, {
+//                 name: 'Joe',
+//                 data: [3, 4, 4, 2, 5]
+//             }]
+        });
+    });
 });	  
  </script>
   
@@ -114,7 +251,9 @@
    
    </tr>
    </table>
-   </g:form>
+   </g:form>	
+   	<div id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+   	<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
     <div id="chart" class="jqplot-target" style="height: 400px; width: 100%; position: center;"></div>
 </body>
 </html>

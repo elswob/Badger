@@ -71,7 +71,83 @@ class HomeController {
 		 def yearData = sql.rows(yearsql)
 		 def dissql = "select count(distinct(pubmed_id)) from publication;"
 		 def dis = sql.rows(dissql)
-		 return [yearData: yearData, distinct: dis]
+		 def tsql = "select count(distinct(pubmed_id)),date_part('year',date_string),meta_id,genus,species from publication,meta_data where publication.meta_id = meta_data.id group by meta_id,genus,species,date_part('year',date_string) order by date_part('year',date_string);";
+		 //select distinct(date_part('year',date_string)) as date_list from publication ;
+		 println tsql
+		 def t = sql.rows(tsql)
+		 
+		 //create map of ids and names
+		 def sNam = [:]
+		 t.each{
+		 	sNam."${it.meta_id}" = it.genus+" "+it.species
+		 }
+		 println sNam
+		 		 
+		  //get unique list of years
+		 def unYear=[]
+		 t.each{
+		 	unYear.add(it.date_part.round())
+		 }
+		 unYear.unique()
+		 
+		 //get unique list of species ids
+		 def sSp = []
+		 t.each{
+		 	sSp.add(it.meta_id)
+		 }
+		 sSp.unique()	
+		 
+		 def idMark = [:]
+		 sSp.each{
+		 	idMark."${it}" = 0
+		 }
+		 
+		 def allMap = [:]
+		 def allList = []
+		 def old_id = ""
+		 t.each{
+		 	if (it.date_part != old_id && old_id != ""){
+		 		println old_id+" = "+idMark
+		 		allMap.year = "${old_id.round()}"
+		 		allMap.data = idMark.values()
+		 		allList.add(allMap)
+		 		allMap = [:]
+		 		//reset the values
+		 		idMark = [:]
+		 		sSp.each{
+		 			idMark."${it}" = 0
+		 		}
+		 	}
+		 	idMark."${it.meta_id}" = it.count
+		 	old_id = it.date_part
+		 }
+		 //catch the last one 
+		 allMap.year = "${old_id.round()}"
+		 allMap.data = idMark.values()
+		 allList.add(allMap)
+		 
+		 def spList = []
+		 def spData = []
+		 def spMap = [:]
+		 def counter = 0
+		 for (i in sSp){
+		 	allList.each{
+		 		//println "data ="+it.data.iterator()[counter]
+		 		spData.add(it.data.iterator()[counter])
+		 		//spData.add(it.data.values[counter])
+		 		//println "spData = "+spData
+		 	}
+		 	spMap.data = spData
+		 	spMap.sid = sNam."${i}"
+		 	spList.add(spMap)
+		 	spData = []
+		 	spMap = [:]
+		 	counter++
+		 }
+		 println sNam
+		 println spList
+		 
+		 return [unYear:unYear, newyearData: spList, yearData: yearData, distinct: dis]
 		 sql.close()
 	 }
  }
