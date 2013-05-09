@@ -96,15 +96,18 @@
 			defaultSeriesType: 'column'
 		},
 		title: {
-			text: 'Fruit Consumption'
+			text: 'PubMed Publications'
 		},
 		xAxis: {
-			categories: years
+			categories: years,
+			labels: {
+                rotation: 90
+            }
 		},
 		yAxis: {
 			min: 0,
 			title: {
-				text: 'Total fruit consumption'
+				text: 'Number of publications'
 			},
 			stackLabels: {
 				enabled: true,
@@ -119,7 +122,11 @@
 				stacking: 'normal',
 				dataLabels: {
 					enabled: true,
-					color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+					color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+					formatter:function(){
+                    	if(this.y > 0)
+                        return this.y;
+                	}
 				}
 			}
 		}, 
@@ -144,7 +151,7 @@
     		name: []
     	};
    	}
-   
+    
    	//alert(series.name)
    		
    	// Create the chart
