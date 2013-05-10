@@ -23,76 +23,16 @@
  $(document).ready(function(){
    // create bar chart
    <% 
-   def jsonData = yearData.encodeAsJSON();  
    def highData = newyearData.encodeAsJSON(); 
    def unYears = unYear.encodeAsJSON();
-   println jsonData;
    %>    
-   yearData = ${jsonData};    	  
-   var counts = [];
-   var year = [];
-   for (var i = 0; i < yearData.length; i++) {
-   		var hit = yearData[i];
-   		counts.push(hit.count);
-   		year.push(hit.date_part);
-   }
-
-    var plot1 = $.jqplot('chart', [counts], {
-        animate: !$.jqplot.use_excanvas,
-        seriesDefaults:{
-            renderer:$.jqplot.BarRenderer,
-            rendererOptions: {
-		fillToZero: true,
-		shadowDepth: 5,
-            	barMargin: 4,
-	    }
-        },
-        seriesColors: [ "green"],
-        axesDefaults: {
-            tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
-            tickOptions: {
-        	angle: -90,
-        	fontSize: '10pt'
-            }
-        },
-	axes: {
-            xaxis: {
-                renderer: $.jqplot.CategoryAxisRenderer,
-                ticks: year,
-                label: 'Year'
-            },
-            yaxis: {
-            	labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-                pad: 1.05,
-		min: 0,
-                label: 'Number of Publications',
-                tickOptions: {
-		    formatString: '%d',
-		    angle: 0
-		},
-            }
-        }
-    });
-    $('#chart').bind('jqplotDataClick',
-		function (ev, seriesIndex, pointIndex, data) {
-			//alert('series: '+seriesIndex+', point: '+pointIndex+', data: '+year[pointIndex]);
-			window.open("publication_search?year=" + year[pointIndex],'_self');
-		}
-	);
-	$(".jqplot-xaxis-label")
-    .css({
-        cursor: "pointer",
-        zIndex: "1"
-    })
-    .click(function(){ location.href = "http://google.com"; });
-    
     
     //new highcharts plot
     newyearData = ${highData}; 
     years = ${unYears};
     var options = {
 		chart: {
-			renderTo: 'container2',
+			renderTo: 'container',
 			defaultSeriesType: 'column'
 		},
 		title: {
@@ -101,7 +41,7 @@
 		xAxis: {
 			categories: years,
 			labels: {
-                rotation: 90
+                rotation: -90
             }
 		},
 		yAxis: {
@@ -128,7 +68,18 @@
                         return this.y;
                 	}
 				}
-			}
+			},
+			series: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function() {
+                        	//console.log(this); alert('Category: '+ this.category +', value: '+ this.y + 'Series: ' +  this.series.name + ' ID: ')
+                            location.href = "publication_search?year=" + this.category+"&sp="+this.series.name;
+                        }
+                    }
+                }
+            }
 		}, 
 		series: []
 	};
@@ -143,6 +94,7 @@
    		//alert('i = '+i)
    		var item = newyearData[i];
    		series.name = item.sid
+   		var dataStore = item.data
    		series.data = item.data
    		//alert(series.data)
    		options.series.push(series)
@@ -151,80 +103,10 @@
     		name: []
     	};
    	}
-    
-   	//alert(series.name)
-   		
+
    	// Create the chart
     var chart = new Highcharts.Chart(options);
    	
-    $(function () {
-        $('#container').highcharts({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Stacked column chart'
-            },
-            xAxis: {
-                categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Total fruit consumption'
-                },
-                stackLabels: {
-                    enabled: true,
-                    style: {
-                        fontWeight: 'bold',
-                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                    }
-                }
-            },
-            legend: {
-                align: 'right',
-                x: -100,
-                verticalAlign: 'top',
-                y: 20,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColorSolid) || 'white',
-                borderColor: '#CCC',
-                borderWidth: 1,
-                shadow: false
-            },
-            tooltip: {
-                formatter: function() {
-                    return '<b>'+ this.x +'</b><br/>'+
-                        this.series.name +': '+ this.y +'<br/>'+
-                        'Total: '+ this.point.stackTotal;
-                }
-            },
-            plotOptions: {
-                column: {
-                    stacking: 'normal',
-                    dataLabels: {
-                        enabled: true,
-                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
-                    }
-                }
-            },
-            
-            series: [{
-         		data: newyearData
-     		}]
-            
-            // series: [{
-//                 name: 'John',
-//                 data: [5, 3, 4, 7, 2]
-//             }, {
-//                 name: 'Jane',
-//                 data: [2, 2, 3, 2, 1]
-//             }, {
-//                 name: 'Joe',
-//                 data: [3, 4, 4, 2, 5]
-//             }]
-        });
-    });
 });	  
  </script>
   
@@ -259,8 +141,6 @@
    </tr>
    </table>
    </g:form>	
-   	<div id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
    	<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
-    <div id="chart" class="jqplot-target" style="height: 400px; width: 100%; position: center;"></div>
 </body>
 </html>

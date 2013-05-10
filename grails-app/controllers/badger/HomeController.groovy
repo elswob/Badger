@@ -107,7 +107,7 @@ class HomeController {
 		 def old_id = ""
 		 t.each{
 		 	if (it.date_part != old_id && old_id != ""){
-		 		println old_id+" = "+idMark
+		 		//println old_id+" = "+idMark
 		 		allMap.year = "${old_id.round()}"
 		 		allMap.data = idMark.values()
 		 		allList.add(allMap)
@@ -144,8 +144,8 @@ class HomeController {
 		 	spMap = [:]
 		 	counter++
 		 }
-		 println sNam
-		 println spList
+		 //println sNam
+		 //println spList
 		 
 		 return [unYear:unYear, newyearData: spList, yearData: yearData, distinct: dis]
 		 sql.close()
@@ -159,6 +159,9 @@ class HomeController {
 		def sql = new Sql(dataSource)
 		//get the year from the bar chart 
 		if (params.year){
+			def sp = params.sp
+			def sp_split = sp.split(" ")
+			println "genus = "+sp_split[0]
 			def searchDate = "01/01/" +params.year
 			searchDate = Date.parse("dd/MM/yyyy",searchDate)
 			println "searchDate = "+searchDate
@@ -166,10 +169,10 @@ class HomeController {
 			use(TimeCategory) {
 				yearafter = searchDate + 1.year
 			}
-			def yearsql = "select distinct on (pubmed_id,date_out) pubmed_id,abstract_text,title,authors,journal_short,to_char(date_string,'yyyy Mon dd') as date_out from publication where date_string between \'01/01/" +params.year+ "\' and \'"+yearafter+"\' order by date_out,pubmed_id;"
+			def yearsql = "select distinct on (pubmed_id,date_out) pubmed_id,abstract_text,title,authors,journal_short,to_char(date_string,'yyyy Mon dd') as date_out,genus,species from publication,meta_data where date_string between \'01/01/" +params.year+ "\' and \'"+yearafter+"\' and meta_id = meta_data.id and genus = '"+sp_split[0]+"' and species = '"+sp_split[1]+"' order by date_out,pubmed_id;"
 			println yearsql
 			def pub_results = sql.rows(yearsql)
-			return [ pub_results: pub_results, searchId: params.year]
+			return [ sp:sp, pub_results: pub_results, searchId: params.year]
 		}else{	
 			def pubSearch = "("
 			def searchId = params.searchId

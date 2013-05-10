@@ -97,7 +97,12 @@ function fnFormatDetails( oTable, nTr )
   <body>
 <div class="bread"><g:link action="">Home</g:link> > <g:link action="publications">Publications</g:link> > Search results </div>
 <g:if test="${pub_results}">
-<h1>Your search for '<b>${searchId}</b>' returned ${sprintf("%,d\n",pub_results.size())} publications</h1>
+<g:if test="${sp}">
+	<h1>Your search for '<b>${sp} ${searchId}</b>' returned ${sprintf("%,d\n",pub_results.size())} publications</h1>
+</g:if>
+<g:else>
+	<h1>Your search for '<b>${searchId}</b>' returned ${sprintf("%,d\n",pub_results.size())} publications</h1>
+</g:else>
   <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
     <thead>
         <tr>
