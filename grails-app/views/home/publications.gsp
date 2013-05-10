@@ -61,7 +61,7 @@
 			column: {
 				stacking: 'normal',
 				dataLabels: {
-					enabled: true,
+					enabled: false,
 					color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
 					formatter:function(){
                     	if(this.y > 0)
