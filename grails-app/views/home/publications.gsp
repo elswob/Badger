@@ -4,7 +4,7 @@
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name='layout' content='main'/>
-  <title>${grailsApplication.config.projectID} publications</title>
+  <title>${grailsApplication.config.projectID} | Publications</title>
   <parameter name="publications" value="selected"></parameter>
     <script src="${resource(dir: 'js', file: 'jqplot/jquery.min.js')}" type="text/javascript"></script>
     <script src="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.js')}" type="text/javascript"></script>

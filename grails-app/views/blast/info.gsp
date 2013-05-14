@@ -3,7 +3,7 @@
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
    <meta name='layout' content='main'/>
-   <title>${grailsApplication.config.projectID} BLAST</title>
+   <title>${grailsApplication.config.projectID} | BLAST parameters</title>
    <parameter name="blast" value="selected"></parameter>
 </head>
 <body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#FF0000">

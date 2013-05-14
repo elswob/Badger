@@ -11,7 +11,7 @@
     <parameter name="blast" value="selected"></parameter>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="${resource(dir: 'js', file: 'jquery.scrollTo-1.4.2-min.js')}" type="text/javascript"></script>   
-    <title>${grailsApplication.config.projectID} BLAST</title>
+    <title>${grailsApplication.config.projectID} | BLAST results</title>
     
   </head>
   <body>

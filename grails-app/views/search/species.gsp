@@ -3,7 +3,7 @@
 <head>
     <meta name='layout' content='main'/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${grailsApplication.config.projectID} species</title>
+    <title>${grailsApplication.config.projectID} | Species</title>
     <parameter name="search" value="selected"></parameter>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'raphael-min.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'jsphylosvg-1.55/jsphylosvg-min.js')}"></script>   

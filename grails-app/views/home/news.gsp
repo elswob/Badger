@@ -4,7 +4,7 @@
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name='layout' content='main'/>
-  <title>${grailsApplication.config.projectID} news</title>
+  <title>${grailsApplication.config.projectID} | News</title>
   <parameter name="home" value="selected"></parameter>
   </head>
 

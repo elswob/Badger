@@ -4,7 +4,7 @@
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name='layout' content='main'/>
-  <title>${grailsApplication.config.projectID} download</title>
+  <title>${grailsApplication.config.projectID} | Download</title>
   <parameter name="download" value="selected"></parameter>
   </head>
   <body>

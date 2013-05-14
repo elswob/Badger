@@ -2,7 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name='layout' content='main'/>
-    <title>${grailsApplication.config.projectID} BLAST</title>
+    <title>${grailsApplication.config.projectID} | BLAST</title>
     <parameter name="blast" value="selected"></parameter>
     <script src="${resource(dir: 'js', file: 'jquery.loadmask.min.js')}" type="text/javascript"></script>
     <link rel="stylesheet" href="${resource(dir: 'js', file: 'jquery.loadmask.css')}" type="text/css"></link>

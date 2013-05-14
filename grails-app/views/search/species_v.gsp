@@ -3,7 +3,7 @@
 <head>
     <meta name='layout' content='main'/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${grailsApplication.config.projectID} versions</title>
+    <title>${grailsApplication.config.projectID} | Versions</title>
     <parameter name="search" value="selected"></parameter>   
     <g:javascript library="prototype" />
 

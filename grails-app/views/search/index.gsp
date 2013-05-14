@@ -3,7 +3,7 @@
 <head>
     <meta name='layout' content='main'/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${grailsApplication.config.projectID} search</title>
+    <title>${grailsApplication.config.projectID} | Search</title>
     <parameter name="search" value="selected"></parameter>
 </head>
 <body>

@@ -9,7 +9,7 @@
   <head>
     <meta name='layout' content='main'/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${grailsApplication.config.projectID} gene detail</title>
+    <title>${grailsApplication.config.projectID} | Gene details</title>
     <parameter name="search" value="selected"></parameter>
     <script src="${resource(dir: 'js', file: 'DataTables-1.9.4/media/js/jquery.js')}" type="text/javascript"></script> 
     <script src="${resource(dir: 'js', file: 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" type="text/javascript"></script>

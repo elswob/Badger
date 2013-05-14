@@ -10,7 +10,7 @@
     <meta name='layout' content='main'/>
     <parameter name="blast" value="selected"></parameter>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Bicyclus anynana BLAST results</title>
+    <title>${grailsApplication.config.projectID} | BLAST error</title>
   </head>
   <body>
   <br>

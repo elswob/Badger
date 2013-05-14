@@ -4,7 +4,7 @@
   <head>
     <meta name='layout' content='main'/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${grailsApplication.config.projectID} transcript info</title>
+    <title>${grailsApplication.config.projectID} | Transcript details</title>
     <parameter name="search" value="selected"></parameter>
   
     <script src="${resource(dir: 'js', file: 'jqplot/jquery.jqplot.js')}" type="text/javascript"></script>
