@@ -167,8 +167,9 @@ class HomeController {
 			println "searchDate = "+searchDate
 			def yearafter
 			use(TimeCategory) {
-				yearafter = searchDate + 1.year
+				yearafter = searchDate + 1.year - 1.day
 			}
+			println "test data = "+test
 			def yearsql = "select distinct on (pubmed_id,date_out) pubmed_id,abstract_text,title,authors,journal_short,to_char(date_string,'yyyy Mon dd') as date_out,genus,species from publication,meta_data where date_string between \'01/01/" +params.year+ "\' and \'"+yearafter+"\' and meta_id = meta_data.id and genus = '"+sp_split[0]+"' and species = '"+sp_split[1]+"' order by date_out,pubmed_id;"
 			println yearsql
 			def pub_results = sql.rows(yearsql)
