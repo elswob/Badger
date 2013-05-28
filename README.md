@@ -110,11 +110,11 @@ Edit your pg_hba.conf file to allow local and host md5 authentication.
 
 #### Badger config
 
-Create a badger.config.properties file and edit where necessary, e.g. the paths to the executables...
+Create a **badger.config.properties** file and edit where necessary, e.g. the paths to the executables... 
 
 ```
 /*** project name (used in page titles) ***/
-projectID = Nematode genomes
+projectID = name of your project
 
 /*** database ***/
 dataSource.driverClassName = org.postgresql.Driver
