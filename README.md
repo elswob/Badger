@@ -246,9 +246,13 @@ Two ways, the first option is ideal for one or two species/genomes, the second i
 
 As this can take a while it may be wise to run this command using [screen](https://help.ubuntu.com/community/Screen).
 
-When all the file information is successfully loaded into the database, open a terminal, go to the root directory of Badger, and type:
+Again, there are two options depending on how the file data was added. If it was added using the GUI, open a terminal, go to the root directory of Badger, and type:
 
 `./runme.sh`
+
+If file data is being added using the `AddFileData.groovy` script:
+
+`./runme_data.sh
 
 This will run a number of scripts which adds the actual content of the data files to the database. These scripts are:
 
@@ -274,7 +278,7 @@ This step could take a number of hours depending on the size of the files and nu
 
 #### Subsequent data
 
-If you need to add more data just follow one of the two steps above and run the same command `./run_me.sh`. This will identify the new files and add the data accordingly.
+If you need to add more data just follow one of the two steps above and run the same command `runme`. This will identify the new files and add the data accordingly.
 
 ## Additional features
 
