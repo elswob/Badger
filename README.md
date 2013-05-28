@@ -252,7 +252,7 @@ Again, there are two options depending on how the file data was added. If it was
 
 If file data is being added using the `AddFileData.groovy` script:
 
-`./runme_data.sh
+`./runme_data.sh`
 
 This will run a number of scripts which adds the actual content of the data files to the database. These scripts are:
 
