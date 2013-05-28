@@ -110,9 +110,10 @@ Edit your pg_hba.conf file to allow local and host md5 authentication.
 
 #### Badger config
 
-Create a **badger.config.properties** file and edit where necessary (all red text).
+Create a **badger.config.properties** file and edit where necessary (red text). 
+**Note, your text should not contain apostrophes!**
 
-```javascript
+```bash
 /*** project name (used in page titles) ***/
 projectID = 'name of your project'
 
@@ -151,14 +152,14 @@ e.links.pub.4 = 'OpenWorm, http://www.openworm.org/'
 
 /*** project members (a place to list details of the people associated with the project)***/
 /*** takes three comma separated values 1: a name with optional html link 2: email address 3: location Id (matches the mem.location I) ***/         
-mem.person.1 = 'Your name, your_email_address, Location1,'
-mem.person.2 = '<a href ="http://www.badger.bio.org">Ben Elsworth</a>, ben.elsworth.ed.ac.uk, Edinburgh,' 
+mem.person.1 = 'Your name, your_email_address, Location1'
+mem.person.2 = '<a href ="http://www.badger.bio.org">Ben Elsworth</a>, ben.elsworth.ed.ac.uk, Edinburgh' 
 mem.location.Location1 = 'homecrest.gif, http://www.ed.ac.uk'
 
 /*** news feed (set to public or private)***/
 news.status = 'public'
 
-/*** orthomcl (location of optional orthomcl file) ***/
+/*** orthomcl (location of optional OrthoMCL file) ***/
 o.file = 'orthomcl/groups_1.5.txt'
 
 /*** tree (location of optional phyloxml file) ***/
