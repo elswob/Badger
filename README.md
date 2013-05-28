@@ -77,7 +77,11 @@ tar zxvf muscle3.8.31_i86linux64.tar.gz
 
 #### PostGreSQL
 
-Download the postgres [driver](http://jdbc.postgresql.org/download/postgresql-9.2-1002.jdbc4.jar) to place in the grails lib directory later on
+Download the postgres [driver](http://jdbc.postgresql.org/download/postgresql-9.2-1002.jdbc4.jar) and place it in the lib directory of the Badger application:
+
+
+`cp postgresql-9.2-1002.jdbc4.jar Badger/lib/`
+
 
 Create a postgres user with superuser rights and password
 
@@ -119,7 +123,7 @@ dataSource.password = yourpassword
 dataSource.url = jdbc:postgresql://127.0.0.1:5432/Badger
 
 /*** executables ***/
-blastPath = /usr/local/bin/
+blastPath = /path/to/blast+/bin
 musclePath = /path/to/muscle/muscle3.8.31_i86linux64
 
 /*** web images for front page and favicon (need to be in grails web-app/images) ***/
