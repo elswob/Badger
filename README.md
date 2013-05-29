@@ -63,7 +63,7 @@ Make project directory and download badger
 ```
 mkdir myProject
 cd myProject
-git clone https://github.com/elswob/Badger.git`
+git clone https://github.com/elswob/Badger.git
 ```
 
 Download BLAST+
@@ -114,12 +114,12 @@ Edit your pg_hba.conf file to allow local and host md5 authentication.
 
 #### Badger config
 
-Create a **badger.config.properties** file and edit where necessary (red text). 
+Create a **badger.config.properties** file inside `myProject/Badger` and edit where necessary (red text). 
 **Note, your text should not contain apostrophes!**
 
 ```bash
 /*** project name (used in page titles) ***/
-projectID = 'name of your project'
+projectID = 'name_of_your_project'
 
 /*** database ***/
 dataSource.driverClassName = org.postgresql.Driver
@@ -182,15 +182,15 @@ Add all images to the web-app/images directory
 
 Create a data directory at the root level of where you installed Badger
 
-`mkdir /home/user/Badger/data`
+`mkdir myProject/Badger/data`
 
-Create directory for each species/genome
+Create directory for each species/genome, e.g for M. meles
 
-`mkdir /home/user/Badger/data/M_meles`
+`mkdir myProject/Badger/data/M_meles`
 
 Note, all data must adhere to the [data rules](https://github.com/elswob/Badger/blob/master/README.md#data-rules)
 
-Add all files for M. meles in here, e.g:
+Add all unzipped files for M. meles into `myProject/Badger/data/M_meles`, e.g:
 
 * Genome FASTA files
 * GFF3 files 
@@ -198,6 +198,8 @@ Add all files for M. meles in here, e.g:
 * BLAST XML files
 * InterProScan RAW files
 * Custom tabular annotation files
+
+Note, the only way to do this is by manually copying the files to the server.
 
 Custom tabular format is defined as 6 tab delimited columns:
 
@@ -224,7 +226,7 @@ nAv.1.0.1.t00021-RA     EC      3.1.3.16        4       316      295    Phosphop
 
 For ease of control it may be wise to run this command using [screen](https://help.ubuntu.com/community/Screen).
 
-To run on port 8080, run the following command as normal user from within root directory of Badger:
+To run on port 8080, run the following command as normal user from within root directory of Badger, e.g. `myProject/Badger`:
 
 `grails prod run-app`
 
@@ -238,9 +240,9 @@ If during start up there is a warning about the version of the app being older t
 
 #### Important security update !!!!
 
-Change the default admin password! To do so go to this address `yourdomain.com/user`, find the admin user and change the password.
+Change the default admin password! To do so, login in as user `admin` using the password `badger` and go to this address `name_of_your_project/user`, find the admin user and change the password.
 
-Whilst in this section, you can register users for the site giving them access to any areas you have labelled as private. This can be done by going to ``yourdomain.com/register` and registering a new user.
+Whilst in this section, you can register users for the site giving them access to any areas you have labelled as private. This can be done by going to `name_of_your_project/register` and registering a new user.
 
 ## Load data to database
 
@@ -248,18 +250,18 @@ Whilst in this section, you can register users for the site giving them access t
 
 Two ways, the first option is ideal for one or two species/genomes, the second is more suitable for buld data.
 
-1. Via the GUI - log in as admin and fill in the forms as necessary. 
+1. Via the GUI - log in as admin, click on the admin tab and fill in the forms as necessary. 
 2. Using the AddFileData.groovy script - edit the script `scripts/AddFileData.groovy` in compliance with the demo data already there, and make sure the data will be loaded by removing the '//' at the start of the section.  
 
 #### Load data
 
 As this can take a while it may be wise to run this command using [screen](https://help.ubuntu.com/community/Screen).
 
-Again, there are two options depending on how the file data was added. If it was added using the GUI, open a terminal, go to the root directory of Badger, and type:
+Again, there are two options depending on how the file data was added. If it was added using the GUI, open a terminal, go to the project root directory of Badger, e.g. `myProject/Badger` and type:
 
 `./runme.sh`
 
-If file data is being added using the `AddFileData.groovy` script:
+If file data is being added using the `AddFileData.groovy`, or if you just want to load the test data set, use this command:
 
 `./runme_data.sh`
 
@@ -416,3 +418,18 @@ Error:
 ```
 
 If you have loaded file information using the AddFileData.groovy script, check that the FASTA files are linked to the GFF file in the `fileMap.file_link` setting.
+
+#### Missing sequence!
+
+If there is an error saying something like this:
+
+```
+Missing sequence! - augustus_masked-nMf.1.1.scaf40720-processed-gene-0.0-mRNA-1 is not found in the FASTA files!
+Missing sequence! - augustus_masked-nMf.1.1.scaf24728-processed-gene-0.0-mRNA-1 is not found in the FASTA files!
+Missing sequence! - snap_masked-nMf.1.1.scaf09457-processed-gene-0.3-mRNA-1 is not found in the FASTA files!
+Missing sequence! - snap_masked-nMf.1.1.scaf43196-processed-gene-0.2-mRNA-1 is not found in the FASTA files!
+Missing sequence! - maker-nMf.1.1.scaf13556-augustus-gene-0.5-mRNA-1 is not found in the FASTA files!
+Missing sequence! - genemark-nMf.1.1.scaf41595-processed-gene-0.0-mRNA-1 is not found in the FASTA files!
+```
+
+during the GFF3 loading, perhaps the ID of the gene/transcript does not match the header on the FASTA files. 
