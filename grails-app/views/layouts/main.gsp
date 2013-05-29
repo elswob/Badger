@@ -9,7 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><g:layoutTitle default="Grails"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" type="image/x-icon">
+    <g:if test = "${grailsApplication.config.headerImage}">
+  	  <link rel="shortcut icon" href="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" type="image/x-icon">
+   	</g:if>
+   	<g:else>
+   		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'badgeryellereye_white.png')}" type="image/x-icon">
+   	</g:else>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>   
@@ -20,7 +25,12 @@
 </head>
 <body>
  <div class="header" role="banner">
+ 	<g:if test = "${grailsApplication.config.headerImage}">
   	  <g:link controller="home" action="index"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="padding:10px;" align="left" height="100px"/></g:link>
+   	</g:if>
+   	<g:else>
+   		<g:link controller="home" action="index"><img src="${resource(dir: 'images', file: 'badgeryellereye_white.png')}" style="padding:10px;" align="left" height="100px"/></g:link>
+   	</g:else>
    	  <font size="6"><br><font size="7">${grailsApplication.config.projectID}</font></font>
  </div>    	  
   <div class="footer" role="contentinfo">

@@ -65,8 +65,15 @@
 				<g:else>
 					<h1>Welcome to the home of <b>${grailsApplication.config.projectID}</b></h1>	
 					<table><tr><td>
-						<img src="${resource(dir: 'images', file: grailsApplication.config.mainImage)}"/>
-						<br><br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
+						<g:if test = "${grailsApplication.config.headerImage}">
+							<img src="${resource(dir: 'images', file: grailsApplication.config.mainImage)}" height="300px"/>
+   						</g:if>
+   						<g:else>
+   							<img src="${resource(dir: 'images', file: 'badgeryellereye_white.png')}" height="300px"/>
+					   	</g:else>						
+					   	<g:if test = "${grailsApplication.config.mainImageSource}">
+							<br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
+						</g:if>
 						</td><td>
 						This is the home page for your project. If you are the admin user you can login and edit this page using the built in editor, and add items to the news section on the right.
 					</td></tr></table>
@@ -119,8 +126,15 @@
 		<g:else>
 			<h1>Welcome to the home of <b>${grailsApplication.config.projectID}</b></h1>	
 			<table><tr><td>
-				<img src="${resource(dir: 'images', file: grailsApplication.config.mainImage)}"/>
-				<br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
+				<g:if test = "${grailsApplication.config.headerImage}">
+					<img src="${resource(dir: 'images', file: grailsApplication.config.mainImage)}" height="300px"/>
+				</g:if>
+				<g:else>
+					<img src="${resource(dir: 'images', file: 'badgeryellereye_white.png')}" height="300px"/>
+				</g:else>	
+				<g:if test = "${grailsApplication.config.mainImageSource}">
+					<br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
+				</g:if>
 				</td><td><br><br>
 				This is the home page for your project. If you are the admin user you can login and edit this page using the built in editor, and add items to the news section on the right.
 			</td></tr></table>
