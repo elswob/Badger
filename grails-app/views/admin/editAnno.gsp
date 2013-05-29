@@ -38,7 +38,7 @@
 	<g:textArea value="${annoData.regex}" name="f_regex" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>	
 </g:if>
 <g:if test = "${annoData.type == 'ipr'}"> 		
-	<h2><b>InterProScan</b></h2>
+	<h2><b>InterProScan (RAW/TSV format)</b></h2>
 	<select id="iprSelect" name="iprSelect">
 		<option value="ipr_raw">Raw</option>
 		<option value="ipr_xml">XML</option>

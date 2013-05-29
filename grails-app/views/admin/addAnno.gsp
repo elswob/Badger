@@ -136,7 +136,7 @@
 	
 	<div id="ipr" style="display:none"> 
 		<div class="inline">	
-			<h2><b>InterProScan</b></h2>
+			<h2><b>InterProScan (RAW/TSV format)</b></h2>
 			<p>Examples: <a href = "javascript:void(0)" onclick="demoData('ipr_raw')">Meles meles</a><br>
 		</div>
 			<p>File name<font color="red">*</font></p>

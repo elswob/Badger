@@ -20,7 +20,7 @@
 		<tr><td><b>Date:</b></td><td>${dataMap.dateString}</td></tr>
 		</table>
 		<!--p>Go <g:link action="home">back</g:link> and add or edit data</p-->
-		<p>Now <g:link action="editGenome" params="${[gid:genome.id]}">add</g:link> some genes to this genome</p> 
+		<p>Now <g:link action="editGenome" params="${[gid:genome.id]}">add</g:link> some data files to this genome</p> 
 	</g:else>	
 </body>
 </html>
