@@ -58,9 +58,13 @@ Install PostGreSQL
 
 `sudo apt-get install postgresql`
 
-Download Badger
+Make project directory and download badger
 
-`git clone https://github.com/elswob/Badger.git`
+```
+mkdir myProject
+cd myProject
+git clone https://github.com/elswob/Badger.git`
+```
 
 Download BLAST+
 
