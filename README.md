@@ -4,22 +4,14 @@ An accessible genome exploration environment
 
 # Contents
 
-[Home page](#home-page)
-
-[Installation](#installation-requirements)
-
-[Configuration](#configure)
-
-[Uploading file data](#upload-data)
-
-[Starting the application](#start-it-up)
-
-[Loading data into the database](#load-data-to-database)
-
-[Additional features](#additional-features)
-
-[Data rules](#data-rules)
-
+[Home page](#home-page)  
+[Installation](#installation-requirements)  
+[Configuration](#configure)  
+[Uploading file data](#upload-data)  
+[Starting the application](#start-it-up)  
+[Loading data into the database](#load-data-to-database)  
+[Additional features](#additional-features)  
+[Data rules](#data-rules)  
 [Troubleshooting](#troubleshooting)
 
 ## Home page
