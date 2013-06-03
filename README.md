@@ -1,6 +1,18 @@
 # Badger
 
-A lightweight genome environment 
+An accessible genome exploration environment 
+
+# Contents
+
+[Home page](#home-page)  
+[Installation](#installation-requirements)  
+[Configuration](#configure)  
+[Uploading file data](#upload-data)  
+[Starting the application](#start-it-up)  
+[Loading data into the database](#load-data-to-database)  
+[Additional features](#additional-features)  
+[Data rules](#data-rules)  
+[Troubleshooting](#troubleshooting)
 
 ## Home page
 
@@ -330,6 +342,148 @@ If this file is added after the initial data, the ortholog data will need to be 
 It is possible to add data from an external genome project and link the genes back to the external database. Furthermore this is possible without a GFF3 file and just the three FASTA files. If this file is missing then a fake GFF3 file is needed (a list of transcript IDs that matches those in the FASTA files). In addotion information about the external data source is also required.
 
 Currently the only way to add this data is using the AddFileData.groovy script. For an example see the C. teleta section. 
+
+#### Running multiple instances
+
+It is possible to run multiple versions of Badger on the same machine, however it does require a little bit of work. One solution is to install [lighttpd|http://www.lighttpd.net/] and configure this to point unique url links to separate port numbers. An example of how to do this on a Ubuntu 12.04 install is shown below.
+
+###### Step 1 -  install lighttpd
+
+First if it is installed, you may need to either stop or remove apache:
+
+```
+#stop
+sudo service apache2 stop
+
+#Remove apache2 packages and dependencies:
+sudo apt-get purge apache2 apache2-utils apache2.2-bin apache2-common
+sudo apt-get autoremove
+
+#If you manually modified or installed stuff, apt might not remove it. Check what's left:
+whereis apache2
+
+#Have a look whats inside these directories, and if you're confident you want to trash it, manually remove the directories. 
+sudo rm -Rf /etc/apache2 /usr/lib/apache2 /usr/include/apache2
+```
+
+Next, install lighttpd:
+
+```
+sudo apt-get install lighttpd
+sudo /etc/init.d/lighttpd start
+```
+
+###### Step 2 - configure ligttpd
+
+Each instance needs a unique URL and two ports assigning to it. To do this edit the lighttpd.conf file. The Badger version looks like this:
+
+```
+server.modules = (
+	"mod_access",
+	"mod_alias",
+	"mod_compress",
+ 	"mod_redirect",
+#       "mod_rewrite",
+	"mod_proxy",
+	"mod_accesslog"
+)
+
+
+$HTTP["url"] =~ "/demo*"{
+           proxy.server = (
+                "" => (
+                        "grails" => (
+                                "host" => "127.0.0.1",
+                                "port" => 8082,
+                                "fix-redirects" => 1
+                        )
+                )
+        )
+
+}
+
+$HTTP["url"] =~ "/filarial*"{
+           proxy.server = (
+                "" => (
+                        "grails" => (
+                                "host" => "127.0.0.1",
+                                "port" => 8084,
+                                "fix-redirects" => 1
+                        )
+                )
+        )
+
+}
+
+server.document-root        = "/var/www"
+server.upload-dirs          = ( "/var/cache/lighttpd/uploads" )
+server.errorlog             = "/var/log/lighttpd/error.log"
+accesslog.filename	        = "/var/log/lighttpd/access.log"	
+server.pid-file             = "/var/run/lighttpd.pid"
+server.username             = "www-data"
+server.groupname            = "www-data"
+server.errorfile-prefix     = "/var/www/html/errors/status-" 
+
+index-file.names            = ( "index.php", "index.html",
+                                "index.htm", "default.htm",
+                               " index.lighttpd.html" )
+
+url.access-deny             = ( "~", ".inc" )
+
+static-file.exclude-extensions = ( ".php", ".pl", ".fcgi" )
+
+## Use ipv6 if available
+#include_shell "/usr/share/lighttpd/use-ipv6.pl"
+
+dir-listing.encoding        = "utf-8"
+server.dir-listing          = "enable"
+
+compress.cache-dir          = "/var/cache/lighttpd/compress/"
+compress.filetype           = ( "application/x-javascript", "text/css", "text/html", "text/plain" )
+
+include_shell "/usr/share/lighttpd/create-mime.assign.pl"
+include_shell "/usr/share/lighttpd/include-conf-enabled.pl"
+```
+
+Once edited, lighttpd needs restarting:
+
+`sudo /etc/init.d/lighttpd restart`
+
+###### Step 3 - set the grails root 
+
+Each Grails instance has a root application context, this is the root directory of the app. By default it is set to /, however we need to set each instance to match the URL we assigned it in the lighttpd.config file. To do this, go into each of your Grails application, and edit the Config.groovy file (found within `Badger/grails-app/conf/`). Edit the grails.app.context line to match the URL set in the lighttpd.config file, e.g.
+
+`grails.app.context = "/demo"`
+
+###### Step 4 - set Grails working directory
+
+To avoid any confusion Grails may encounter when running multiple instances, it is important to set the working directory for each application. To do this, each time a Grails command is run, a parameter needs to be set to state where the working directory is. For example, when running the application, an extra statement is required:
+
+```
+#instead of just
+grails prod -Dserver.port=8082 run-app
+#you need
+grails prod -Dgrails.work.dir='/path/to/grails/demo/' -Dserver.port=8082 run-app
+```
+
+This also needs to be done for the run_me.sh scripts, e.g.
+
+```
+#!/bin/bash
+
+date
+grails prod -Dgrails.work.dir='/path/to/grails/demo/' run-script \
+scripts/AlterTables.groovy \
+scripts/AddPublicationData.groovy \
+scripts/AddSequenceData.groovy \
+scripts/AddOrthoData.groovy \
+scripts/AddGeneBlastData.groovy \
+scripts/AddGeneFuncAnnoData.groovy \
+scripts/CreateFiles.groovy
+date
+```
+
+Now, each of your instances should run without affecting the other. There may be some issues with the auto publication updates which i'm looking into and you also need to be aware that each instance will require at least 1 CPU and 2-4 GB RAM.
 
 ## Data rules
 
