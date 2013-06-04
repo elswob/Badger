@@ -109,7 +109,7 @@ createuser -P -s -e yourname
 
 Create a database
 
-```
+```bash
 su postgres
 createdb Badger -O 'xxx' -E UTF8 --locale=en_GB.utf8 -T template0;
 ```
