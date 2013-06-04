@@ -264,7 +264,7 @@ Whilst in this section, you can register users for the site giving them access t
 
 #### Add file information
 
-Two ways, the first option is ideal for one or two species/genomes, the second is more suitable for buld data. For the demo data use option 2.
+Two ways, the first option is ideal for one or two species/genomes, the second is more suitable for buld data. For the demo data use option 2 with no changes to the file.
 
 1. Via the GUI - log in as admin, click on the admin tab and fill in the forms as necessary. 
 2. Using the AddFileData.groovy script - edit the script `scripts/AddFileData.groovy` in compliance with the demo data already there, and make sure the data will be loaded by removing the '//' at the start of the section.  
