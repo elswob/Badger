@@ -271,7 +271,7 @@ Two ways, the first option is ideal for one or two species/genomes, the second i
 
 #### Load data
 
-As this can take a while it may be wise to run this command using [screen](https://help.ubuntu.com/community/Screen).
+As this can take a while it may be wise to run this command using another [screen](https://help.ubuntu.com/community/Screen).
 
 Again, there are two options depending on how the file data was added. If it was added using the GUI, open a terminal, go to the project root directory of Badger, e.g. `myProject/Badger` and type:
 
