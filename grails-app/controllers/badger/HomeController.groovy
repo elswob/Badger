@@ -122,9 +122,11 @@ class HomeController {
 		 	old_id = it.date_part
 		 }
 		 //catch the last one 
-		 allMap.year = "${old_id.round()}"
-		 allMap.data = idMark.values()
-		 allList.add(allMap)
+		 if (old_id != ""){
+			 allMap.year = "${old_id.round()}"
+			 allMap.data = idMark.values()
+			 allList.add(allMap)
+		 }
 		 
 		 def spList = []
 		 def spData = []
