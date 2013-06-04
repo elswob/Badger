@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phyloxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.phyloxml.org http://www.phyloxml.org/1.10/phyloxml.xsd" xmlns="http://www.phyloxml.org">
+<phylogeny rooted="false">
+  <clade>
+    <clade>
+      <branch_length>1.0</branch_length>
+      <clade>
+        <branch_length>1.0</branch_length>
+        <clade>
+          <name>Arctonyx collaris</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name>Meles meles</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name>Meles leucurus</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name>Meles sp.</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name>Meles anakuma</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+      </clade>
+      <clade>
+        <branch_length>1.0</branch_length>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name>Mustela frenata</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name>Mustela africana</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name>Mustela felipei</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+        <clade>
+          <name>Lyncodon patagonicus</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <name>Neovison vison</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+      </clade>
+      <clade>
+        <branch_length>1.0</branch_length>
+        <clade>
+          <name>Gulo gulo</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name>Martes zibellina</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name>Martes americana</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name>Martes martes</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+        <clade>
+          <name>Eira barbara</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+      </clade>
+      <clade>
+        <branch_length>1.0</branch_length>
+        <clade>
+          <name>Pteronura brasiliensis</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <name>Lutra sumatrana</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <name>Lutrogale perspicillata</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <name>Hydrictis maculicollis</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name>Enhydra lutris kenyoni</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name>Enhydra lutris nereis</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name>Lontra provocax</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name>Lontra longicaudis</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name>Aonyx capensis</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name>Aonyx cinerea</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+      </clade>
+      <clade>
+        <branch_length>1.0</branch_length>
+        <clade>
+          <name>Melogale cucphuongensis</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <name>Melogale personata</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <name>Melogale moschata</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+      </clade>
+      <clade>
+        <name>Taxidea taxus</name>
+        <branch_length>1.0</branch_length>
+      </clade>
+      <clade>
+        <branch_length>1.0</branch_length>
+        <clade>
+          <name>Vormela peregusna</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name>Galictis vittata</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name>Galictis cuja</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+        <clade>
+          <name>Poecilogale albinucha</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name>Ictonyx libyca</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name>Ictonyx striatus</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+      </clade>
+      <clade>
+        <name>Mellivora capensis</name>
+        <branch_length>1.0</branch_length>
+      </clade>
+    </clade>
+  </clade>
+</phylogeny>
+
+</phyloxml>

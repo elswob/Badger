@@ -126,8 +126,8 @@ Edit your pg_hba.conf file to allow local and host md5 authentication.
 
 #### Badger config
 
-Create a **badger.config.properties** file inside `myProject/Badger` and edit where necessary (red text). 
-**Note, your text should not contain apostrophes!**
+Edit the **badger.config.properties** file inside `myProject/Badger` where necessary (red text). 
+**Note, your text should not contain apostrophes!**. If using the demo data just fill in the missing information.
 
 ```bash
 /*** project name (used in page titles) ***/
@@ -170,7 +170,7 @@ e.links.pub.4 = 'OpenWorm, http://www.openworm.org/'
 /*** takes three comma separated values 1: a name with optional html link 2: email address 3: location Id (matches the mem.location I) ***/         
 mem.person.1 = 'Your name, your_email_address, Location1'
 mem.person.2 = '<a href ="http://www.badger.bio.org">Ben Elsworth</a>, ben.elsworth.ed.ac.uk, Edinburgh' 
-mem.location.Location1 = 'homecrest.gif, http://www.ed.ac.uk'
+mem.location.Location1 = 'university_edinburgh.jpg, http://www.ed.ac.uk'
 
 /*** news feed (set to public or private)***/
 news.status = 'public'
@@ -185,6 +185,8 @@ t.file = 'trees/your_phyloXML_tree.xml'
 Note, any changes made to this file will only be updated by restarting the `grails prod run-app` command (see below)
 
 ## Upload data
+
+Skip this section if using the demo data.
 
 #### Images
 
@@ -260,7 +262,7 @@ Whilst in this section, you can register users for the site giving them access t
 
 #### Add file information
 
-Two ways, the first option is ideal for one or two species/genomes, the second is more suitable for buld data.
+Two ways, the first option is ideal for one or two species/genomes, the second is more suitable for buld data. For the demo data use option 2.
 
 1. Via the GUI - log in as admin, click on the admin tab and fill in the forms as necessary. 
 2. Using the AddFileData.groovy script - edit the script `scripts/AddFileData.groovy` in compliance with the demo data already there, and make sure the data will be loaded by removing the '//' at the start of the section.  
@@ -273,7 +275,7 @@ Again, there are two options depending on how the file data was added. If it was
 
 `./runme.sh`
 
-If file data is being added using the `AddFileData.groovy`, or if you just want to load the test data set, use this command:
+If file data is being added using the `AddFileData.groovy`, or if you just want to load the demo data set, use this command:
 
 `./runme_data.sh`
 
