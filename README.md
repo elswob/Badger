@@ -111,7 +111,7 @@ Create a database
 
 ```
 su postgres
-createdb Badger -O xxx -E UTF8 --locale=en_GB.utf8 -T template0;
+createdb Badger -O 'xxx' -E UTF8 --locale=en_GB.utf8 -T template0;
 ```
 
 If this fails with this error?
