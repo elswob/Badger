@@ -1,0 +1,68 @@
+G_1: Mmel|nHd.2.3.1.t12449-RA Mmel|nHd.2.3.1.t12450-RA Mmel|nHd.2.3.1.t12764-RA Mmel|nHd.2.3.1.t12726-RA Mmel|nHd.2.3.1.t12818-RA Mmel|nHd.2.3.1.t12453-RA
+G_2: Mmel|nHd.2.3.1.t12537-RA Mmel|nHd.2.3.1.t12539-RA Mmel|nHd.2.3.1.t12538-RA Mmel|nHd.2.3.1.t12717-RA Mmel|nHd.2.3.1.t12819-RA Mmel|nHd.2.3.1.t12817-RA
+G_3: Mmel|nHd.2.3.1.t12330-RA Mmel|nHd.2.3.1.t12436-RA Mmel|nHd.2.3.1.t12876-RA Mmel|nHd.2.3.1.t12434-RA Mmel|nHd.2.3.1.t12435-RA
+G_4: Mmel|nHd.2.3.1.t12340-RA Mmel|nHd.2.3.1.t12503-RA Mmel|nHd.2.3.1.t12498-RA Mmel|nHd.2.3.1.t12342-RA Mmel|nHd.2.3.1.t12500-RA
+G_5: Mmel|nHd.2.3.1.t12452-RA Mmel|nHd.2.3.1.t12821-RA Mmel|nHd.2.3.1.t12614-RA Mmel|nHd.2.3.1.t12873-RA Mmel|nHd.2.3.1.t12872-RA
+G_6: Mmel|nHd.2.3.1.t12505-RA Mmel|nHd.2.3.1.t12508-RA Mmel|nHd.2.3.1.t12507-RA Mmel|nHd.2.3.1.t12886-RA Mmel|nHd.2.3.1.t12888-RA
+G_7: Mmel|nHd.2.3.1.t12564-RA Mmel|nHd.2.3.1.t12628-RA Mmel|nHd.2.3.1.t12629-RA Mmel|nHd.2.3.1.t12631-RA Mmel|nHd.2.3.1.t12630-RA
+G_8: Mmel|nHd.2.3.1.t12512-RA Mmel|nHd.2.3.1.t12544-RA Mmel|nHd.2.3.1.t12543-RA Mmel|nHd.2.3.1.t12732-RA
+G_9: Mmel|nHd.2.3.1.t12540-RA Mmel|nHd.2.3.1.t12760-RA Mmel|nHd.2.3.1.t12761-RA Mmel|nHd.2.3.1.t12763-RA
+G_10: Mmel|nHd.2.3.1.t12348-RA Mmel|nHd.2.3.1.t12353-RA Mmel|nHd.2.3.1.t12349-RA
+G_11: Mmel|nHd.2.3.1.t12384-RA Mmel|nHd.2.3.1.t12386-RA Mmel|nHd.2.3.1.t12385-RA
+G_12: Mmel|nHd.2.3.1.t12398-RA Mmel|nHd.2.3.1.t12400-RA Mmel|nHd.2.3.1.t12399-RA
+G_13: Mmel|nHd.2.3.1.t12418-RA Mmel|nHd.2.3.1.t12560-RA Mmel|nHd.2.3.1.t12805-RA
+G_14: Mmel|nHd.2.3.1.t12595-RA Mmel|nHd.2.3.1.t12690-RA Mmel|nHd.2.3.1.t12598-RA
+G_15: Mmel|nHd.2.3.1.t12597-RA Mmel|nHd.2.3.1.t12686-RA Mmel|nHd.2.3.1.t12600-RA
+G_16: Mmel|nHd.2.3.1.t12707-RA Mmel|nHd.2.3.1.t12674-RA Mmel|nHd.2.3.1.t12675-RA
+G_17: Mmel|nHd.2.3.1.t12633-RA Mmel|nHd.2.3.1.t12634-RA Mmel|nHd.2.3.1.t12635-RA
+G_18: Mmel|nHd.2.3.1.t12766-RA Mmel|nHd.2.3.1.t12771-RA Mmel|nHd.2.3.1.t12770-RA
+G_19: Mmel|nHd.2.3.1.t12833-RA Mmel|nHd.2.3.1.t12835-RA Mmel|nHd.2.3.1.t12834-RA
+G_20: Mmel|nHd.2.3.1.t12339-RA Mmel|nHd.2.3.1.t12736-RA
+G_21: Mmel|nHd.2.3.1.t12343-RA Mmel|nHd.2.3.1.t12344-RA
+G_22: Mmel|nHd.2.3.1.t12351-RA Mmel|nHd.2.3.1.t12352-RA
+G_23: Mmel|nHd.2.3.1.t12355-RA Mmel|nHd.2.3.1.t12356-RA
+G_24: Mmel|nHd.2.3.1.t12358-RA Mmel|nHd.2.3.1.t12781-RA
+G_25: Mmel|nHd.2.3.1.t12394-RA Mmel|nHd.2.3.1.t12395-RA
+G_26: Mmel|nHd.2.3.1.t12409-RA Mmel|nHd.2.3.1.t12410-RA
+G_27: Mmel|nHd.2.3.1.t12456-RA Mmel|nHd.2.3.1.t12460-RA
+G_28: Mmel|nHd.2.3.1.t12457-RA Mmel|nHd.2.3.1.t12459-RA
+G_29: Mmel|nHd.2.3.1.t12464-RA Mmel|nHd.2.3.1.t12465-RA
+G_30: Mmel|nHd.2.3.1.t12467-RA Mmel|nHd.2.3.1.t12468-RA
+G_31: Mmel|nHd.2.3.1.t12477-RA Mmel|nHd.2.3.1.t12478-RA
+G_32: Mmel|nHd.2.3.1.t12489-RA Mmel|nHd.2.3.1.t12490-RA
+G_33: Mmel|nHd.2.3.1.t12491-RA Mmel|nHd.2.3.1.t12586-RA
+G_34: Mmel|nHd.2.3.1.t12516-RA Mmel|nHd.2.3.1.t12517-RA
+G_35: Mmel|nHd.2.3.1.t12530-RA Mmel|nHd.2.3.1.t12531-RA
+G_36: Mmel|nHd.2.3.1.t12532-RA Mmel|nHd.2.3.1.t12533-RA
+G_37: Mmel|nHd.2.3.1.t12534-RA Mmel|nHd.2.3.1.t12535-RA
+G_38: Mmel|nHd.2.3.1.t12829-RA Mmel|nHd.2.3.1.t12830-RA
+G_39: Mmel|nHd.2.3.1.t12547-RA Mmel|nHd.2.3.1.t12548-RA
+G_40: Mmel|nHd.2.3.1.t12550-RA Mmel|nHd.2.3.1.t12551-RA
+G_41: Mmel|nHd.2.3.1.t12558-RA Mmel|nHd.2.3.1.t12638-RA
+G_42: Mmel|nHd.2.3.1.t12574-RA Mmel|nHd.2.3.1.t12575-RA
+G_43: Mmel|nHd.2.3.1.t12585-RA Mmel|nHd.2.3.1.t12845-RA
+G_44: Mmel|nHd.2.3.1.t12609-RA Mmel|nHd.2.3.1.t12735-RA
+G_45: Mmel|nHd.2.3.1.t12667-RA Mmel|nHd.2.3.1.t12670-RA
+G_46: Mmel|nHd.2.3.1.t12676-RA Mmel|nHd.2.3.1.t12677-RA
+G_47: Mmel|nHd.2.3.1.t12681-RA Mmel|nHd.2.3.1.t12682-RA
+G_48: Mmel|nHd.2.3.1.t12683-RA Mmel|nHd.2.3.1.t12685-RA
+G_49: Mmel|nHd.2.3.1.t12689-RA Mmel|nHd.2.3.1.t12826-RA
+G_50: Mmel|nHd.2.3.1.t12696-RA Mmel|nHd.2.3.1.t12697-RA
+G_51: Mmel|nHd.2.3.1.t12701-RA Mmel|nHd.2.3.1.t12702-RA
+G_52: Mmel|nHd.2.3.1.t12709-RA Mmel|nHd.2.3.1.t12710-RA
+G_53: Mmel|nHd.2.3.1.t12715-RA Mmel|nHd.2.3.1.t12812-RA
+G_54: Mmel|nHd.2.3.1.t12722-RA Mmel|nHd.2.3.1.t12723-RA
+G_55: Mmel|nHd.2.3.1.t12724-RA Mmel|nHd.2.3.1.t12725-RA
+G_56: Mmel|nHd.2.3.1.t12727-RA Mmel|nHd.2.3.1.t12731-RA
+G_57: Mmel|nHd.2.3.1.t12729-RA Mmel|nHd.2.3.1.t12757-RA
+G_58: Mmel|nHd.2.3.1.t12745-RA Mmel|nHd.2.3.1.t12746-RA
+G_59: Mmel|nHd.2.3.1.t12773-RA Mmel|nHd.2.3.1.t12774-RA
+G_60: Mmel|nHd.2.3.1.t12776-RA Mmel|nHd.2.3.1.t12777-RA
+G_61: Mmel|nHd.2.3.1.t12780-RA Mmel|nHd.2.3.1.t12856-RA
+G_62: Mmel|nHd.2.3.1.t12782-RA Mmel|nHd.2.3.1.t12783-RA
+G_63: Mmel|nHd.2.3.1.t12784-RA Mmel|nHd.2.3.1.t12785-RA
+G_64: Mmel|nHd.2.3.1.t12815-RA Mmel|nHd.2.3.1.t12816-RA
+G_65: Mmel|nHd.2.3.1.t12820-RA Mmel|nHd.2.3.1.t12822-RA
+G_66: Mmel|nHd.2.3.1.t12843-RA Mmel|nHd.2.3.1.t12844-RA
+G_67: Mmel|nHd.2.3.1.t12874-RA Mmel|nHd.2.3.1.t12875-RA
+G_68: Mmel|nHd.2.3.1.t12881-RA Mmel|nHd.2.3.1.t12883-RA
