@@ -99,19 +99,19 @@ Download the postgres [driver](http://jdbc.postgresql.org/download/postgresql-9.
 `cp postgresql-9.2-1002.jdbc4.jar Badger/lib/`
 
 
-Create a postgres user with superuser rights and password
+Create a postgres user with superuser rights and password (edit the red text and remove apostrophes).
 
-```
+```bash
 su
 su postgres
-createuser -P -s -e yourname
+createuser -P -s -e 'your_user_name'
 ```
 
 Create a database
 
-```
+```bash
 su postgres
-createdb Badger -O 'xxx' -E UTF8 --locale=en_GB.utf8 -T template0;
+createdb Badger -O 'your_user_name' -E UTF8 --locale=en_GB.utf8 -T template0;
 ```
 
 If this fails with this error?
@@ -120,9 +120,11 @@ If this fails with this error?
 
 Try this:
 
-`createdb Badger -O xxx -E UTF8 -T template0;`
+```bash
+createdb Badger -O 'your_user_name' -E UTF8 -T template0;`
+```
 
-Edit your pg_hba.conf file to allow local and host md5 authentication.
+Set the PostGreSQL permissions - edit your `pg_hba.conf` file to allow local and host md5 authentication.
 
 #### Badger config
 
