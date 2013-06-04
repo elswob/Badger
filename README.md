@@ -101,7 +101,7 @@ Download the postgres [driver](http://jdbc.postgresql.org/download/postgresql-9.
 
 Create a postgres user with superuser rights and password (edit the red text and remove apostrophes).
 
-```
+```bash
 su
 su postgres
 createuser -P -s -e 'your_user_name'
