@@ -214,7 +214,7 @@ class HomeController {
 
  def members = {
       //check the privacy setting
-     if (grailsApplication.config.i.links.priv.members && !isLoggedIn()) {
+     if (grailsApplication.config.i.links.members == "private" && !isLoggedIn()) {
      	redirect(controller: "home", action: "index")
      }else{
 		 def memberData = [:]
@@ -246,7 +246,7 @@ class HomeController {
  }
  def download = {
      //check the privacy setting
-     if (grailsApplication.config.i.links.priv.download && !isLoggedIn()) {
+     if (grailsApplication.config.i.links.download == "private" && !isLoggedIn()) {
      	redirect(controller: "home", action: "index")
      }
      else{

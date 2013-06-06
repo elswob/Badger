@@ -12,15 +12,20 @@ class BlastController {
     def info = {
     }
     def index() { 
-    	def roles = springSecurityService.getPrincipal()
-    	def user
-    	if (roles == 'anonymousUser'){
-    		user = "anon"
-    	}else{
-    		user = "user"
-    	}
-    	def blastFiles = FileData.findAllByFile_typeInList(["mRNA","Peptide","Genome"],[sort:"genome.meta.genus"])
-    	return [blastFiles:blastFiles, roles:roles]
+    	//check the privacy setting
+     	if (grailsApplication.config.i.links.blast == "private" && !isLoggedIn()) {
+     		redirect(controller: "home", action: "index")
+     	}else{
+			def roles = springSecurityService.getPrincipal()
+			def user
+			if (roles == 'anonymousUser'){
+				user = "anon"
+			}else{
+				user = "user"
+			}
+			def blastFiles = FileData.findAllByFile_typeInList(["mRNA","Peptide","Genome"],[sort:"genome.meta.genus"])
+			return [blastFiles:blastFiles, roles:roles]
+		}
     }
     def blastError = {
     }

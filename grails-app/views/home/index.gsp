@@ -72,7 +72,7 @@
    							<img src="${resource(dir: 'images', file: 'badgeryellereye_white.png')}" height="300px"/>
 					   	</g:else>						
 					   	<g:if test = "${grailsApplication.config.mainImageSource}">
-							<br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
+							<br><font size="1">Picture: ${grailsApplication.config.mainImageSource}</font>
 						</g:if>
 						</td><td>
 						This is the home page for your project. If you are the admin user you can login and edit this page using the built in editor, and add items to the news section on the right.
@@ -133,7 +133,7 @@
 					<img src="${resource(dir: 'images', file: 'badgeryellereye_white.png')}" height="300px"/>
 				</g:else>	
 				<g:if test = "${grailsApplication.config.mainImageSource}">
-					<br><font size="1">Picture supplied by ${grailsApplication.config.mainImageSource}</font>
+					<br><font size="1">Picture: ${grailsApplication.config.mainImageSource}</font>
 				</g:if>
 				</td><td><br><br>
 				This is the home page for your project. If you are the admin user you can login and edit this page using the built in editor, and add items to the news section on the right.
