@@ -66,64 +66,71 @@
 
   <div id="content">
     <g:uploadForm action="runBlast" method="post">
-	<h1>Choose a database:</h1>
-    <table><tr><td>
-    <label><input name="blastDB" type="radio" id="genomeRadio" value="1" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_1');$('#blk_2').hide();$('#blk_3').hide();">Genomes</label>
-	<label><input name="blastDB" type="radio" id="transRadio" value="2" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_2');$('#blk_1').hide();$('#blk_3').hide();">Transcripts</label>
-	<label><input name="blastDB" type="radio" id="proteinRadio" checked="checked" value="3" STYLE="cursor: pointer" onclick="programCheck('pep');toggleDiv('blk_3');$('#blk_1').hide();$('#blk_2').hide();">Proteins</label>
-	(click to show/hide available data sets)
-	<fieldset id="blast_dbs">	
-		<div class="toHide" id="blk_1" style="display:none">
-		<table><tr><td>
-		Select <a rel="blast_dbs" href="#select_all">All</a> | 
-		<a rel="blast_dbs" href="#select_none">None</a> | 
-		<a rel="blast_dbs" href="#invert_selection">Invert</a>
-			<table class="blast"><tr>
-				<g:each var="res" in="${blastFiles}">
-					<g:if test="${res.file_type == 'Genome' && res.loaded == true}">		
-						<g:if test="${res.blast == 'priv' && user == 'user' || res.blast == 'pub'}">	
-							<td><g:checkBox name="genomeCheck" value="${res.file_name}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</td><td>Version ${res.file_version}</td></tr>
-						</g:if>
-					</g:if>
-				</g:each>
-			</table>
-		</td></tr></table>
-		</div>
-		
-		<div class="toHide" id="blk_2" style="display:none">
-		<table><tr><td>
-		Select <a rel="blast_dbs" href="#select_all">All</a> | 
-		<a rel="blast_dbs" href="#select_none">None</a> | 
-		<a rel="blast_dbs" href="#invert_selection">Invert</a>
-			<table class="blast"><tr>
-				<g:each var="res" in="${blastFiles}">
-					<g:if test="${res.file_type == 'mRNA' && res.loaded == true}">
-						<g:if test="${res.blast == 'priv' && user == 'user' || res.blast == 'pub'}">
-							<td><g:checkBox name="transCheck" value="${res.file_name}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</i></td><td>Version ${res.file_version}</td></tr>
-						</g:if>
-					</g:if>
-				</g:each>
-			</table>
-		</td></tr></table>
-		</div>
-		
-		<div class="toHide" id="blk_3" style="display:none">
-		<table><tr><td>
-		Select <a rel="blast_dbs" href="#select_all">All</a> | 
-		<a rel="blast_dbs" href="#select_none">None</a> | 
-		<a rel="blast_dbs" href="#invert_selection">Invert</a>
-			<table class="blast"><tr>
-				<g:each var="res" in="${blastFiles}">
-					<g:if test="${res.file_type == 'Peptide' && res.loaded == true}">
-						<g:if test="${res.blast == 'priv' && user == 'user' || res.blast == 'pub'}">
-							<td><g:checkBox name="protCheck" value="${res.file_name}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</i></td><td>Version ${res.file_version}</td></tr>
-						</g:if>
-					</g:if>
-				</g:each>
-			</table>
-		</td></tr></table>	
-		</div>
-	
+	<h1>Choose a database: (click to show/hide available data sets)</h1>
+	<g:if test="${blastFiles.size == 0}">
+		<h2>There are currently no data to search!</h2>
+	</g:if>
+    <table><tr><td>	
+	<fieldset id="blast_dbs">
+		<g:each var="type" in="${blastFiles}">
+			<g:if test="${type.file_type == 'Genome' && type.loaded == true}">	
+				<label><input name="blastDB" type="radio" id="genomeRadio" value="1" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_1');$('#blk_2').hide();$('#blk_3').hide();">Genomes</label>
+				<div class="toHide" id="blk_1" style="display:none">
+				<table><tr><td>
+				Select <a rel="blast_dbs" href="#select_all">All</a> | 
+				<a rel="blast_dbs" href="#select_none">None</a> | 
+				<a rel="blast_dbs" href="#invert_selection">Invert</a>
+					<table class="blast"><tr>
+						<g:each var="res" in="${blastFiles}">
+							<g:if test="${res.file_type == 'Genome' && res.loaded == true}">		
+								<g:if test="${res.blast == 'priv' && user == 'user' || res.blast == 'pub'}">	
+									<td><g:checkBox name="genomeCheck" value="${res.file_name}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</td><td>Version ${res.file_version}</td></tr>
+								</g:if>
+							</g:if>
+						</g:each>
+					</table>
+				</td></tr></table>
+				</div>
+			</g:if>
+			<g:if test="${type.file_type == 'mRNA' && type.loaded == true}">
+				<label><input name="blastDB" type="radio" id="transRadio" value="2" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_2');$('#blk_1').hide();$('#blk_3').hide();">Transcripts</label>
+				<div class="toHide" id="blk_2" style="display:none">
+				<table><tr><td>
+				Select <a rel="blast_dbs" href="#select_all">All</a> | 
+				<a rel="blast_dbs" href="#select_none">None</a> | 
+				<a rel="blast_dbs" href="#invert_selection">Invert</a>
+					<table class="blast"><tr>
+						<g:each var="res" in="${blastFiles}">
+							<g:if test="${res.file_type == 'mRNA' && res.loaded == true}">
+								<g:if test="${res.blast == 'priv' && user == 'user' || res.blast == 'pub'}">
+									<td><g:checkBox name="transCheck" value="${res.file_name}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</i></td><td>Version ${res.file_version}</td></tr>
+								</g:if>
+							</g:if>
+						</g:each>
+					</table>
+				</td></tr></table>
+				</div>
+			</g:if>
+			<g:if test="${type.file_type == 'Peptide' && type.loaded == true}">
+				<label><input name="blastDB" type="radio" id="proteinRadio" checked="checked" value="3" STYLE="cursor: pointer" onclick="programCheck('pep');toggleDiv('blk_3');$('#blk_1').hide();$('#blk_2').hide();">Proteins</label>
+				<div class="toHide" id="blk_3" style="display:none">
+				<table><tr><td>
+				Select <a rel="blast_dbs" href="#select_all">All</a> | 
+				<a rel="blast_dbs" href="#select_none">None</a> | 
+				<a rel="blast_dbs" href="#invert_selection">Invert</a>
+					<table class="blast"><tr>
+						<g:each var="res" in="${blastFiles}">
+							<g:if test="${res.file_type == 'Peptide' && res.loaded == true}">
+								<g:if test="${res.blast == 'priv' && user == 'user' || res.blast == 'pub'}">
+									<td><g:checkBox name="protCheck" value="${res.file_name}" /></td><td><i>${res.genome.meta.genus} ${res.genome.meta.species}</i></td><td>Version ${res.file_version}</td></tr>
+								</g:if>
+							</g:if>
+						</g:each>
+					</table>
+				</td></tr></table>	
+				</div>
+			</g:if>
+		</g:each>
 	</fieldset>
     </td></tr></table>
     
