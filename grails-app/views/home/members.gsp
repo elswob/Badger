@@ -14,7 +14,7 @@
     <table class="table_basic">
     <g:each var="loc" in="${memberLoc}">  
     	<tr>
-    	<td><table>
+    	<td><table border=0>
     		<g:each var="mem" in="${memberData}">
     			<g:if test="${mem.value[2] == loc.key}"> 
     				<tr>
@@ -26,6 +26,7 @@
     		</table></td>
     		<td><a href = "${loc.value[1]}" target='_blank'><img src="${resource(dir: 'images', file: loc.value[0])}" height="60"/></a></td>
     	</tr>
+    	<tr><hr size=2 color="green" width="100%" style="margin-top:10px"></tr>
     </g:each>
     </table>
   </body>
