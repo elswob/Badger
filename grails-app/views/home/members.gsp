@@ -12,12 +12,18 @@
   <div class="bread"><g:link action="">Home</g:link> > Members</div>
     <h1>Project members:</h1>
     <table class="table_basic">
-    <g:each var="res" in="${memberData}">  
-    	<tr>
-    		<td><a href = "${memberLoc."${res.value[2]}"[1]}" target='_blank'><img src="${resource(dir: 'images', file: memberLoc."${res.value[2]}"[0])}" height="70"/></a></td>
-    		<td><img src="${resource(dir: 'images', file: res.value[3])}" height="70"/></td>
-    		<td>${res.value[0]}</td>
-    		<td><a href="mailto:${res.value[1]}">${res.value[1]}</a></td>
+    <g:each var="loc" in="${memberLoc}">  
+    	<tr><td><a href = "loc.key" target='_blank'><img src="${resource(dir: 'images', file: loc.key)}" height="70"/></a></td>
+    	<td><table>
+    		<g:each var="mem" in="${memberData}">
+    			<g:if test="${mem.value[2] == loc.key}"> 
+    				<tr>
+    					<td>${mem.value[0]}</td>
+    					<td><a href="mailto:${mem.value[1]}">${mem.value[1]}</a></td>
+    				</tr>
+    			</g:if>
+    		</g:each>
+    		</table></td>
     	</tr>
     </g:each>
     </table>
