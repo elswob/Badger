@@ -13,7 +13,7 @@
     <h1>Project members:</h1>
     <table class="table_basic">
     <g:each var="loc" in="${memberLoc}">  
-    	<tr><td><a href = "loc.key" target='_blank'><img src="${resource(dir: 'images', file: loc.key)}" height="70"/></a></td>
+    	<tr><td><a href = "loc.key" target='_blank'><img src="${resource(dir: 'images', file: loc.value[0])}" height="70"/></a></td>
     	<td><table>
     		<g:each var="mem" in="${memberData}">
     			<g:if test="${mem.value[2] == loc.key}"> 
