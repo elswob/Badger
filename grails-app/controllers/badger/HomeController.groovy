@@ -223,11 +223,7 @@ class HomeController {
 			 grailsApplication.config.mem.person.each {
 				 if (it.value.size() >0){
 					 def dataSplit = it.value.split(",")
-					 if (dataSplit[3].trim()){
-						 memberData."${it.key}" = [dataSplit[0].trim(),dataSplit[1].trim(),dataSplit[2].trim(),dataSplit[3].trim()]
-					 }else{
-						 memberData."${it.key}" = [dataSplit[0].trim(),dataSplit[1].trim(),dataSplit[2].trim(),grailsApplication.config.headerImage]
-					 }
+					 memberData."${it.key}" = [dataSplit[0].trim(),dataSplit[1].trim(),dataSplit[2].trim()]
 				}
 			}
 		}
