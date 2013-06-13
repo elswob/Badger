@@ -50,11 +50,11 @@
 			<h1>Choose a genome version</h1>
 			<g:each var="g" in="${genomes}">
 				<g:if test="${genomes.search[0] == 'priv' && user == 'user' || genomes.search[0] == 'pub'}">
-					<!--g:javascript>var genomeId = ${genomes.id[0]}; ${remoteFunction(action:'ajax_gff',update:'gffSelect',params:'\'link=\' + genomeId ')};</g:javascript-->
 					<tr>
 						<td><input type="radio" name="genomeSelect" id="${g.id}" value="${g.id}" onclick="${remoteFunction(action:'ajax_gff',update:'gffSelect',params:'\'link=\' + this.value')};"/></td>
 						<td><label for="${g.id}"><b>${g.file_version}</b></label></td><td><label for="${g.id}"><g:formatDate format="yyyy MMM d" date="${g.date_string}"/></label></td><td><label for="${g.id}">${g.description}</label></td></td>
 					</tr>	
+						<g:javascript>var genomeId = ${genomes.id[0]}; ${remoteFunction(action:'ajax_gff',update:'gffSelect',params:'\'link=\' + genomeId ')};</g:javascript>
 				</g:if>
 				<g:else>
 					<tr><td><b>${genomes.file_version}</b> is only available to search by registered users</td></tr>
