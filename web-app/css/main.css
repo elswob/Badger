@@ -520,6 +520,14 @@ table.compact td {
     padding:3px 7px 2px 7px;
 }
 
+table.members {
+  	border-collapse:collapse;
+}
+table.members td {
+    padding:1px;
+    vertical-align:middle;
+}
+
 /* jqplot highlight table */
 table.jqplot-highlighter {
 	font-size: 15px;

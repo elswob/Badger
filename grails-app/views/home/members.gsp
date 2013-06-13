@@ -11,11 +11,12 @@
   <body>
   <div class="bread"><g:link action="">Home</g:link> > Members</div>
     <!--h1>Project members:</h1-->
-    <table class="blast">
+    <br>
+    <table class="members">
     <g:each var="loc" in="${memberLoc}">  
-    	<tr><td colspan=2><hr size=2 color="green" width="100%" style="margin-top:10px"></td></tr>
+    	<tr><td colspan=2><hr size=2 color="green" width="100%"></td></tr>
     	<tr><td>
-    	<table border=0>
+    	<table>
     		<g:each var="mem" in="${memberData}">
     			<g:if test="${mem.value[2] == loc.key}"> 
     				<tr>
