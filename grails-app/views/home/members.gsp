@@ -14,14 +14,14 @@
     <br>
     <table class="members">
     <g:each var="loc" in="${memberLoc}">  
-    	<tr><td colspan=2><hr size=2 color="green" width="100%"></td></tr>
+    	<tr><td colspan=2><hr size=1 color="green" width="100%"></td></tr>
     	<tr><td>
     	<table>
     		<g:each var="mem" in="${memberData}">
     			<g:if test="${mem.value[2] == loc.key}"> 
     				<tr>
-    					<td>${mem.value[0]}</td>
-    					<td><a href="mailto:${mem.value[1]}">${mem.value[1]}</a></td>
+    					<td width="150px">${mem.value[0]}</td>
+    					<td width="200px"><a href="mailto:${mem.value[1]}">${mem.value[1]}</a></td>
     				</tr>
     			</g:if>
     		</g:each>
