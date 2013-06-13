@@ -11,7 +11,7 @@
   <body>
   <div class="bread"><g:link action="">Home</g:link> > Members</div>
     <!--h1>Project members:</h1-->
-    <table class="table_basic">
+    <table class="blast">
     <g:each var="loc" in="${memberLoc}">  
     	<tr><td colspan=2><hr size=2 color="green" width="100%" style="margin-top:10px"></td></tr>
     	<tr><td>
@@ -25,7 +25,7 @@
     			</g:if>
     		</g:each>
     		</table></td>
-    		<td><a href = "${loc.value[1]}" target='_blank'><img src="${resource(dir: 'images', file: loc.value[0])}" height="60"/></a></td>
+    		<td><a href = "${loc.value[1]}" target='_blank'><img src="${resource(dir: 'images', file: loc.value[0])}" height="50"/></a></td>
     	</tr>
     </g:each>
     </table>
