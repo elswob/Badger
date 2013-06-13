@@ -10,9 +10,10 @@
 
   <body>
   <div class="bread"><g:link action="">Home</g:link> > Members</div>
-    <h1>Project members:</h1>
+    <!--h1>Project members:</h1-->
     <table class="table_basic">
     <g:each var="loc" in="${memberLoc}">  
+    	<tr><td colspan=2><hr size=2 color="green" width="100%" style="margin-top:10px"></td></tr>
     	<tr><td>
     	<table border=0>
     		<g:each var="mem" in="${memberData}">
@@ -26,7 +27,6 @@
     		</table></td>
     		<td><a href = "${loc.value[1]}" target='_blank'><img src="${resource(dir: 'images', file: loc.value[0])}" height="60"/></a></td>
     	</tr>
-    	<tr><td colspan=2><hr size=2 color="green" width="100%" style="margin-top:10px"></td></tr>
     </g:each>
     </table>
   </body>
