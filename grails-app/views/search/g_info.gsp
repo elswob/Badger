@@ -70,19 +70,41 @@
 			<!-- download genes form gets fileName value from get_table_data() -->		    		
 			 <div style="right:0px;">
 				 Download transcript sequences:
+				<sec:ifNotLoggedIn>
+					<g:if test="${geneData.download == 'pub'}" >
+						<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+							<g:hiddenField name="nucFileId" value=""/>
+							<g:hiddenField name="fileName" value="${results.contig_id[0]}.genes"/>
+							<g:hiddenField name="seq" value="Nucleotides"/>
+							<a href="#" onclick="get_table_data('nucFileId');document.nucfileDownload.submit()">Nucleotides</a>
+						</g:form> 
+						|
+						<g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+							<g:hiddenField name="pepFileId" value=""/>
+							<g:hiddenField name="fileName" value="${results.contig_id[0]}.genes"/>
+							<g:hiddenField name="seq" value="Peptides"/>
+							<a href="#" onclick="get_table_data('pepFileId');document.pepfileDownload.submit()">Peptides</a>
+						</g:form>
+					</g:if>
+					<g:else>
+						not available
+					</g:else>
+				</sec:ifNotLoggedIn>
+				<sec:ifLoggedIn>
 					<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-					<g:hiddenField name="nucFileId" value=""/>
-					<g:hiddenField name="fileName" value="${results.contig_id[0]}.genes"/>
-					<g:hiddenField name="seq" value="Nucleotides"/>
-					<a href="#" onclick="get_table_data('nucFileId');document.nucfileDownload.submit()">Nucleotides</a>
-				</g:form> 
-				|
-				<g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-					<g:hiddenField name="pepFileId" value=""/>
-					<g:hiddenField name="fileName" value="${results.contig_id[0]}.genes"/>
-					<g:hiddenField name="seq" value="Peptides"/>
-					<a href="#" onclick="get_table_data('pepFileId');document.pepfileDownload.submit()">Peptides</a>
-				</g:form>
+						<g:hiddenField name="nucFileId" value=""/>
+						<g:hiddenField name="fileName" value="${results.contig_id[0]}.genes"/>
+						<g:hiddenField name="seq" value="Nucleotides"/>
+						<a href="#" onclick="get_table_data('nucFileId');document.nucfileDownload.submit()">Nucleotides</a>
+					</g:form> 
+					|
+					<g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+						<g:hiddenField name="pepFileId" value=""/>
+						<g:hiddenField name="fileName" value="${results.contig_id[0]}.genes"/>
+						<g:hiddenField name="seq" value="Peptides"/>
+						<a href="#" onclick="get_table_data('pepFileId');document.pepfileDownload.submit()">Peptides</a>
+					</g:form>
+				</sec:ifLoggedIn>
 			</div>   	
 		 </div>	
 		    		

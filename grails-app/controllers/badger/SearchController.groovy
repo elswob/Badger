@@ -445,6 +445,7 @@ class SearchController {
 			}	
 			println "Looking at transcript "+mrna_id
 			def metaData = FileData.findById(Gid);
+			def geneData = FileData.findById(GFFid);
 			def blast_results
 			def fun_results
 			def ipr_results
@@ -497,7 +498,7 @@ class SearchController {
 				println "no orthoog!"
 			}
 			*/
-			return [extInfo:extInfo, orthologs:orthoId, Gid:Gid, GFFid:GFFid, mrna_id: mrna_id, info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, metaData: metaData]
+			return [geneData: geneData, extInfo:extInfo, orthologs:orthoId, Gid:Gid, GFFid:GFFid, mrna_id: mrna_id, info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, metaData: metaData]
     	sql.close()
     	}
     }
@@ -561,6 +562,7 @@ class SearchController {
 				GFFid = params.GFFid
 			}	
      		def metaData = FileData.findById(Gid); 
+     		def geneData = FileData.findById(GFFid);
      		//def results = GeneInfo.findAllByGene_id(params.gid)
      		def genesql = "select gene_info.* from gene_info,file_data where gene_info.gene_id = '"+params.gid+"' and file_data.id = "+GFFid+" and gene_info.file_id = file_data.id;"
      		//println genesql
@@ -569,7 +571,7 @@ class SearchController {
      		if (gene_results.size() == 1){
      			redirect(action: "m_info", params: [Gid: Gid, GFFid: GFFid, mid:gene_results.mrna_id])
      		}else{	
-				return [ Gid:Gid, GFFid:GFFid, results: gene_results, metaData:metaData]
+				return [ geneData: geneData, Gid:Gid, GFFid:GFFid, results: gene_results, metaData:metaData]
 			}
 		}
     }

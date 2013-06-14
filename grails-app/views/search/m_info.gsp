@@ -651,22 +651,46 @@
 			<g:if test="${info_results.source != 'n/a'}"><tr><td><b>Strand:</b></td><td>${info_results.strand}</td></tr></g:if>   
 			<g:if test="${info_results.source == 'n/a'}"><tr><td><b>Link:</b></td><td><% def newLink = info_results.mrna_id.replaceAll(extInfo.regex[0], "<a href=\""+extInfo.link[0]+"\$1\" target=\'_blank\'>\$1</a>") %> ${newLink}</td></tr></g:if>
 			<tr><td><b>Download:</b></td>
-					<td>
-				<div class="inline">
-				<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-					<g:hiddenField name="nucFileId" value="${info_results.mrna_id}"/>
-					<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
-					<g:hiddenField name="seq" value="Nucleotides"/>
-					<a href="javascript:void(0);" onclick="document.nucfileDownload.submit()">Nucleotides</a>
-				</g:form> 
-				|
-				<g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-					<g:hiddenField name="pepFileId" value="${info_results.mrna_id}"/>
-					<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
-					<g:hiddenField name="seq" value="Peptides"/>
-					<a href="javascript:void(0);" onclick="document.pepfileDownload.submit()">Peptides</a>
-				</g:form>
-				</div>
+			<td>
+				<sec:ifNotLoggedIn>
+					<g:if test="${geneData.download == 'pub'}" >					
+						<div class="inline">
+						<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+							<g:hiddenField name="nucFileId" value="${info_results.mrna_id}"/>
+							<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
+							<g:hiddenField name="seq" value="Nucleotides"/>
+							<a href="javascript:void(0);" onclick="document.nucfileDownload.submit()">Nucleotides</a>
+						</g:form> 
+						|
+						<g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+							<g:hiddenField name="pepFileId" value="${info_results.mrna_id}"/>
+							<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
+							<g:hiddenField name="seq" value="Peptides"/>
+							<a href="javascript:void(0);" onclick="document.pepfileDownload.submit()">Peptides</a>
+						</g:form>
+						</div>
+					</g:if>
+					<g:else>
+					Not available
+					</g:else>
+				</sec:ifNotLoggedIn>
+				<sec:ifLoggedIn>
+					<div class="inline">
+						<g:form name="nucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+							<g:hiddenField name="nucFileId" value="${info_results.mrna_id}"/>
+							<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
+							<g:hiddenField name="seq" value="Nucleotides"/>
+							<a href="javascript:void(0);" onclick="document.nucfileDownload.submit()">Nucleotides</a>
+						</g:form> 
+						|
+						<g:form name="pepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+							<g:hiddenField name="pepFileId" value="${info_results.mrna_id}"/>
+							<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
+							<g:hiddenField name="seq" value="Peptides"/>
+							<a href="javascript:void(0);" onclick="document.pepfileDownload.submit()">Peptides</a>
+						</g:form>
+					</div>
+				</sec:ifLoggedIn>
 			</td>
 			</tr>
 		</table> 
@@ -844,10 +868,23 @@
 			<h1>Exons</h1>
 			<div class="inline">
 				Download: 
-				<g:form name="exonDownload" url="[controller:'FileDownload', action:'exon_download']">
-					<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
-					<a href="javascript:void(0);" onclick="document.exonDownload.submit()">exon sequences</a>
-				</g:form>
+				<sec:ifNotLoggedIn>
+					<g:if test="${geneData.download == 'pub'}" >	
+						<g:form name="exonDownload" url="[controller:'FileDownload', action:'exon_download']">
+							<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
+							<a href="javascript:void(0);" onclick="document.exonDownload.submit()">exon sequences</a>
+						</g:form>
+					</g:if>
+					<g:else>
+						not available
+					</g:else>
+				</sec:ifNotLoggedIn>
+				<sec:ifLoggedIn>
+					<g:form name="exonDownload" url="[controller:'FileDownload', action:'exon_download']">
+							<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
+							<a href="javascript:void(0);" onclick="document.exonDownload.submit()">exon sequences</a>
+					</g:form>
+				</sec:ifLoggedIn>
 			</div>
 			 <table cellpadding="0" cellspacing="0" border="0" class="display" id="exon_table">
 			 <thead>

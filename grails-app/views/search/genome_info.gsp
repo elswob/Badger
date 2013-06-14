@@ -83,12 +83,26 @@
       	<td>${info_results.coverage[0]}</td>
       </g:if>
       <td>${sprintf("%.2f",info_results.gc[0])}</td>
-      <td>        
-      	<g:form name="fileDownload" url="[controller:'FileDownload', action:'genome_contig_download']" style="display: inline" >
-        	<g:hiddenField name="fileId" value="${info_results.contig_id[0]}"/>
-			<g:hiddenField name="fileName" value="${info_results.contig_id[0]}"/>
-			<a href="#" onclick="document.fileDownload.submit()">Download</a>
-		</g:form>
+      <td>
+      <sec:ifNotLoggedIn>
+		  <g:if test="${metaData.download == 'pub'}" >     
+			<g:form name="fileDownload" url="[controller:'FileDownload', action:'genome_contig_download']" style="display: inline" >
+				<g:hiddenField name="fileId" value="${info_results.contig_id[0]}"/>
+				<g:hiddenField name="fileName" value="${info_results.contig_id[0]}"/>
+				<a href="#" onclick="document.fileDownload.submit()">Download</a>
+			</g:form>
+		   </g:if>
+		   <g:else>
+			 Download not available
+		   </g:else>
+		</sec:ifNotLoggedIn>
+		<sec:ifLoggedIn>
+			<g:form name="fileDownload" url="[controller:'FileDownload', action:'genome_contig_download']" style="display: inline" >
+				<g:hiddenField name="fileId" value="${info_results.contig_id[0]}"/>
+				<g:hiddenField name="fileName" value="${info_results.contig_id[0]}"/>
+				<a href="#" onclick="document.fileDownload.submit()">Download</a>
+			</g:form>
+		</sec:ifLoggedIn>
 	  </td>
 	  </tr>
     </table>
