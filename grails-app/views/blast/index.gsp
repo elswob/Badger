@@ -72,9 +72,15 @@
 	</g:if>
 	<g:else>
 		<table><tr><td>	
-			<label><input name="blastDB" type="radio" id="genomeRadio" value="1" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_1');$('#blk_2').hide();$('#blk_3').hide();">Genomes</label>
-			<label><input name="blastDB" type="radio" id="transRadio" value="2" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_2');$('#blk_1').hide();$('#blk_3').hide();">Transcripts</label>
-			<label><input name="blastDB" type="radio" id="proteinRadio" checked="checked" value="3" STYLE="cursor: pointer" onclick="programCheck('pep');toggleDiv('blk_3');$('#blk_1').hide();$('#blk_2').hide();">Proteins</label>
+			<g:each var="d" in="${dataTypes}">
+				<g:if test="${d.file_type == 'Genome'}">
+					<label><input name="blastDB" type="radio" id="genomeRadio" checked="checked" value="1" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_1');$('#blk_2').hide();$('#blk_3').hide();">Genomes</label>
+				</g:if>
+				<g:if test="${d.file_type == 'Genes'}">
+					<label><input name="blastDB" type="radio" id="transRadio" checked="checked" value="2" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_2');$('#blk_1').hide();$('#blk_3').hide();">Transcripts</label>
+					<label><input name="blastDB" type="radio" id="proteinRadio" checked="checked" value="3" STYLE="cursor: pointer" onclick="programCheck('pep');toggleDiv('blk_3');$('#blk_1').hide();$('#blk_2').hide();">Proteins</label>
+				</g:if>
+			</g:each>
 			(click to show/hide available data sets)
 		<fieldset id="blast_dbs">
 			<div class="toHide" id="blk_1" style="display:none">

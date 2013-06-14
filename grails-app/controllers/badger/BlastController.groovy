@@ -3,12 +3,13 @@ import grails.plugins.springsecurity.Secured
 //@Secured(['ROLE_USER','ROLE_ADMIN'])
 import javax.xml.parsers.SAXParserFactory
 import org.xml.sax.InputSource
+import groovy.sql.Sql
 
 class BlastController { 
 	def grailsApplication
 	def configDataService
 	def springSecurityService
-	
+	javax.sql.DataSource dataSource
     def info = {
     }
     def index() { 
@@ -16,6 +17,7 @@ class BlastController {
      	if (grailsApplication.config.i.links.blast == "private" && !isLoggedIn()) {
      		redirect(controller: "home", action: "index")
      	}else{
+     		def sql = new Sql(dataSource)
 			def roles = springSecurityService.getPrincipal()
 			def user
 			if (roles == 'anonymousUser'){
@@ -24,7 +26,10 @@ class BlastController {
 				user = "user"
 			}
 			def blastFiles = FileData.findAllByFile_typeInList(["mRNA","Peptide","Genome"],[sort:"genome.meta.genus"])
-			return [blastFiles:blastFiles, roles:roles]
+			def dataTypesSql = "select distinct(file_type) from file_data order by file_type desc;"
+			def dataTypes = sql.rows(dataTypesSql)
+			//println "dataTypes = "+dataTypes
+			return [blastFiles:blastFiles, roles:roles, dataTypes:dataTypes]
 		}
     }
     def blastError = {

@@ -26,271 +26,200 @@
  </render>
   <clade>
     <clade>
-      <branch_length>0.146419041</branch_length>
+      <branch_length>1.0</branch_length>
       <clade>
-        <branch_length>0.043142914</branch_length>
+        <branch_length>1.0</branch_length>
         <clade>
-          <branch_length>0.013799361</branch_length>
-          <clade>
-            <branch_length>0.017261782</branch_length>
-            <clade>
-              <branch_length>0.012898557</branch_length>
-              <clade>
-                <branch_length>0.011342588</branch_length>
-                <clade>
-                  <branch_length>0.010402422</branch_length>
-                  <clade>
-                    <branch_length>0.008537603</branch_length>
-                    <clade>
-                      <branch_length>0.007459794</branch_length>
-                      <clade>
-                        <branch_length>0.068859346</branch_length>
-                        <clade>
-                          <branch_length>0.022513654</branch_length>
-                          <clade>
-                            <branch_length>0.070533174</branch_length>
-                            <clade>
-                              <branch_length>0.035123751</branch_length>
-                              <clade>
-                                <branch_length>0.043751755</branch_length>
-                                <clade>
-                                  <name bgStyle="none">Eisenia andrei</name>
-                                  <branch_length>0.011439312</branch_length>
-                                </clade>
-                                <clade>
-                                  <name bgStyle="none">Eisenia fetida</name>
-                                  <branch_length>0.018407631</branch_length>
-                                </clade>
-                              </clade>
-                              <clade>
-                                <name bgStyle="none">Lumbricus rubellus</name>
-                                <branch_length>0.038124108</branch_length>
-                              </clade>
-                            </clade>
-                            <clade>
-                              <name bgStyle="none">Perionyx excavatus</name>
-                              <branch_length>0.072245876</branch_length>
-                            </clade>
-                          </clade>
-                          <clade>
-                            <branch_length>0.083836015</branch_length>
-                            <clade>
-                              <branch_length>0.059720592</branch_length>
-                              <clade>
-                                <name bgStyle="none">Helobdella robusta</name>
-                                <branch_length>0.037350202</branch_length>
-                              </clade>
-                              <clade>
-                                <name bgStyle="none">Haementeria depressa</name>
-                                <branch_length>0.037483556</branch_length>
-                              </clade>
-                            </clade>
-                            <clade>
-                              <name bgStyle="none">Hirudo medicinalis</name>
-                              <branch_length>0.145229702</branch_length>
-                            </clade>
-                          </clade>
-                        </clade>
-                        <clade>
-                          <name bgStyle="none">Tubifex tubifex</name>
-                          <branch_length>0.140418925</branch_length>
-                        </clade>
-                      </clade>
-                      <clade>
-                        <branch_length>0.018547723</branch_length>
-                        <clade>
-                          <branch_length>0.027493172</branch_length>
-                          <clade>
-                            <branch_length>0.031653983</branch_length>
-                            <clade>
-                              <name bgStyle="none">Pectinaria koreni</name>
-                              <branch_length>0.278384225</branch_length>
-                            </clade>
-                            <clade>
-                              <name bgStyle="none">Lanice conchilega</name>
-                              <branch_length>0.144386831</branch_length>
-                            </clade>
-                          </clade>
-                          <clade>
-                            <name bgStyle="none">Alvinella pompejana</name>
-                            <branch_length>0.137221038</branch_length>
-                          </clade>
-                        </clade>
-                        <clade>
-                          <name bgStyle="none">Arenicola marina</name>
-                          <branch_length>0.144566202</branch_length>
-                        </clade>
-                      </clade>
-                    </clade>
-                    <clade>
-                      <name bgStyle="none">Ophelia limacina</name>
-                      <branch_length>0.179716831</branch_length>
-                    </clade>
-                  </clade>
-                  <clade>
-                    <branch_length>0.014244597</branch_length>
-                    <clade>
-                      <branch_length>0.03589716</branch_length>
-                      <clade>
-                        <name bgStyle="none">Malacoceros fuliginosus</name>
-                        <branch_length>0.177338418</branch_length>
-                      </clade>
-                      <clade>
-                        <name bgStyle="none">Pomatoceros lamarckii</name>
-                        <branch_length>0.233344371</branch_length>
-                      </clade>
-                    </clade>
-                    <clade>
-                      <branch_length>0.031982669</branch_length>
-                      <clade>
-                        <name bgStyle="none">Urechis caupo</name>
-                        <branch_length>0.164547133</branch_length>
-                      </clade>
-                      <clade>
-                        <name bgStyle="none">Capitella teleta</name>
-                        <branch_length>0.176591873</branch_length>
-                      </clade>
-                    </clade>
-                  </clade>
-                </clade>
-                <clade>
-                  <branch_length>0.015924825</branch_length>
-                  <clade>
-                    <branch_length>0.032205592</branch_length>
-                    <clade>
-                      <name bgStyle="none">Flabelligera affinis</name>
-                      <branch_length>0.16291125</branch_length>
-                    </clade>
-                    <clade>
-                      <name bgStyle="none">Cirratulus sp.</name>
-                      <branch_length>0.130139812</branch_length>
-                    </clade>
-                  </clade>
-                  <clade>
-                    <name bgStyle="none">Ridgeia piscesae</name>
-                    <branch_length>0.204437319</branch_length>
-                  </clade>
-                </clade>
-              </clade>
-              <clade>
-                <branch_length>0.016268815</branch_length>
-                <clade>
-                  <branch_length>0.010736097</branch_length>
-                  <clade>
-                    <branch_length>0.013847651</branch_length>
-                    <clade>
-                      <branch_length>0.015418452</branch_length>
-                      <clade>
-                        <branch_length>0.021457383</branch_length>
-                        <clade>
-                          <name bgStyle="none">Glycera tridactyla</name>
-                          <branch_length>0.15053791</branch_length>
-                        </clade>
-                        <clade>
-                          <name bgStyle="none">Eulalia clavigera</name>
-                          <branch_length>0.122007593</branch_length>
-                        </clade>
-                      </clade>
-                      <clade>
-                        <name bgStyle="none">Platynereis dumerilii</name>
-                        <branch_length>0.141538678</branch_length>
-                      </clade>
-                    </clade>
-                    <clade>
-                      <name bgStyle="none">Typosyllis pigmentata</name>
-                      <branch_length>0.180634027</branch_length>
-                    </clade>
-                  </clade>
-                  <clade>
-                    <branch_length>0.035485368</branch_length>
-                    <clade>
-                      <name bgStyle="none">Lumbrineris zonata</name>
-                      <branch_length>0.122703685</branch_length>
-                    </clade>
-                    <clade>
-                      <name bgStyle="none">Onuphis iridescens</name>
-                      <branch_length>0.11590488</branch_length>
-                    </clade>
-                  </clade>
-                </clade>
-                <clade>
-                  <branch_length>0.03212653</branch_length>
-                  <clade>
-                    <branch_length>0.017365526</branch_length>
-                    <clade>
-                      <name bgStyle="none">Sthenelais boa</name>
-                      <branch_length>0.154740047</branch_length>
-                    </clade>
-                    <clade>
-                      <name bgStyle="none">Scoloplos armiger</name>
-                      <branch_length>0.205612719</branch_length>
-                    </clade>
-                  </clade>
-                  <clade>
-                    <name bgStyle="none">Eurythoe complanata</name>
-                    <branch_length>0.159711784</branch_length>
-                  </clade>
-                </clade>
-              </clade>
-            </clade>
-            <clade>
-              <branch_length>0.019787292</branch_length>
-              <clade>
-                <branch_length>0.04325004</branch_length>
-                <clade>
-                  <name bgStyle="none">Themiste lageniformes</name>
-                  <branch_length>0.130975873</branch_length>
-                </clade>
-                <clade>
-                  <name bgStyle="none">Sipunculus nudus</name>
-                  <branch_length>0.143024586</branch_length>
-                </clade>
-              </clade>
-              <clade>
-                <name bgStyle="none">Chaetopterus variopedatus</name>
-                <branch_length>0.170580693</branch_length>
-              </clade>
-            </clade>
-          </clade>
-          <clade>
-            <branch_length>0.024316453</branch_length>
-            <clade>
-              <name bgStyle="none">Terebratalia transversa</name>
-              <branch_length>0.194839647</branch_length>
-            </clade>
-            <clade>
-              <name bgStyle="none">Cerebratulus lacteus</name>
-              <branch_length>0.213499853</branch_length>
-            </clade>
-          </clade>
+          <name bgStyle="none">Arctonyx collaris</name>
+          <branch_length>1.0</branch_length>
         </clade>
         <clade>
-          <branch_length>0.044178674</branch_length>
+          <branch_length>1.0</branch_length>
           <clade>
-            <name bgStyle="none">Crassostrea gigas</name>
-            <branch_length>0.206353073</branch_length>
+            <name bgStyle="bold">Meles meles</name>
+            <chart>
+             <component>bold</component>
+            </chart>
+            <annotation>
+             <desc>Meles meles</desc>
+             <uri>#Meles meles</uri>
+            </annotation>
+            <branch_length>1.0</branch_length>
           </clade>
           <clade>
-            <name bgStyle="none">Lottia gigantea</name>
-            <branch_length>0.256087749</branch_length>
+            <name bgStyle="none">Meles leucurus</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name bgStyle="none">Meles sp.</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name bgStyle="none">Meles anakuma</name>
+            <branch_length>1.0</branch_length>
           </clade>
         </clade>
       </clade>
       <clade>
-        <branch_length>0.492003497</branch_length>
+        <branch_length>1.0</branch_length>
         <clade>
-          <name bgStyle="none">Myzostoma cirriferum</name>
-          <branch_length>0.071205145</branch_length>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name bgStyle="none">Mustela frenata</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name bgStyle="none">Mustela africana</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name bgStyle="none">Mustela felipei</name>
+            <branch_length>1.0</branch_length>
+          </clade>
         </clade>
         <clade>
-          <name bgStyle="none">Myzostoma seymourcollegiorum</name>
-          <branch_length>0.07030815</branch_length>
+          <name bgStyle="none">Lyncodon patagonicus</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <name bgStyle="none">Neovison vison</name>
+          <branch_length>1.0</branch_length>
         </clade>
       </clade>
-    </clade>
-    <clade>
-      <name bgStyle="none">Bugula neritina</name>
-      <branch_length>0.146419041</branch_length>
+      <clade>
+        <branch_length>1.0</branch_length>
+        <clade>
+          <name bgStyle="none">Gulo gulo</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name bgStyle="none">Martes zibellina</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name bgStyle="none">Martes americana</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name bgStyle="none">Martes martes</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+        <clade>
+          <name bgStyle="none">Eira barbara</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+      </clade>
+      <clade>
+        <branch_length>1.0</branch_length>
+        <clade>
+          <name bgStyle="none">Pteronura brasiliensis</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <name bgStyle="none">Lutra sumatrana</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <name bgStyle="none">Lutrogale perspicillata</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <name bgStyle="none">Hydrictis maculicollis</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name bgStyle="none">Enhydra lutris kenyoni</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name bgStyle="none">Enhydra lutris nereis</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name bgStyle="none">Lontra provocax</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name bgStyle="none">Lontra longicaudis</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name bgStyle="none">Aonyx capensis</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name bgStyle="none">Aonyx cinerea</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+      </clade>
+      <clade>
+        <branch_length>1.0</branch_length>
+        <clade>
+          <name bgStyle="none">Melogale cucphuongensis</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <name bgStyle="none">Melogale personata</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <name bgStyle="none">Melogale moschata</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+      </clade>
+      <clade>
+        <name bgStyle="none">Taxidea taxus</name>
+        <branch_length>1.0</branch_length>
+      </clade>
+      <clade>
+        <branch_length>1.0</branch_length>
+        <clade>
+          <name bgStyle="none">Vormela peregusna</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name bgStyle="none">Galictis vittata</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name bgStyle="none">Galictis cuja</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+        <clade>
+          <name bgStyle="none">Poecilogale albinucha</name>
+          <branch_length>1.0</branch_length>
+        </clade>
+        <clade>
+          <branch_length>1.0</branch_length>
+          <clade>
+            <name bgStyle="none">Ictonyx libyca</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+          <clade>
+            <name bgStyle="none">Ictonyx striatus</name>
+            <branch_length>1.0</branch_length>
+          </clade>
+        </clade>
+      </clade>
+      <clade>
+        <name bgStyle="none">Mellivora capensis</name>
+        <branch_length>1.0</branch_length>
+      </clade>
     </clade>
   </clade>
 </phylogeny>

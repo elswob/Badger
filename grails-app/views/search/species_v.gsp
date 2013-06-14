@@ -16,11 +16,9 @@
 			<td width=150> 
 				<g:if test="${grailsApplication.mainContext.getResource('images/'+meta.image_file[0]).exists()}"> 
 	    			<img src="${resource(dir: 'images', file: meta.image_file[0])}" width="150" style="float:left;"/>
-	    			<p style="text-align:center;"><input class="smallbuttons" type="button" value="Select" id="process" onclick="submit()">
 	    		</g:if>
 	    		<g:else>
 	    			<img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" width="150" style="float:left;"/>
-	    			<p style="text-align:center;"><input class="smallbuttons" type="button" value="Select" id="process" onclick="submit()">
 	    		</g:else>
 			</td>
 			<td>
