@@ -71,14 +71,14 @@
 		<h2>There are currently no data to search! Please add some data to the database.</h2>
 	</g:if>
 	<g:else>
-		<table><tr><td>	
+		<table class="compact"><tr><td>	
 			<g:each var="d" in="${dataTypes}">
 				<g:if test="${d.file_type == 'Genome'}">
-					<label><input name="blastDB" type="radio" id="genomeRadio" checked="checked" value="1" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_1');$('#blk_2').hide();$('#blk_3').hide();">Genomes</label>
+					<label><input name="blastDB" type="radio" id="genomeRadio" checked="checked" value="1" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_1');$('#blk_2').hide();$('#blk_3').hide();"> Genomes</label>
 				</g:if>
 				<g:if test="${d.file_type == 'Genes'}">
-					<label><input name="blastDB" type="radio" id="transRadio" checked="checked" value="2" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_2');$('#blk_1').hide();$('#blk_3').hide();">Transcripts</label>
-					<label><input name="blastDB" type="radio" id="proteinRadio" checked="checked" value="3" STYLE="cursor: pointer" onclick="programCheck('pep');toggleDiv('blk_3');$('#blk_1').hide();$('#blk_2').hide();">Proteins</label>
+					<label><input name="blastDB" type="radio" id="transRadio" checked="checked" value="2" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_2');$('#blk_1').hide();$('#blk_3').hide();"> Transcripts</label>
+					<label><input name="blastDB" type="radio" id="proteinRadio" checked="checked" value="3" STYLE="cursor: pointer" onclick="programCheck('pep');toggleDiv('blk_3');$('#blk_1').hide();$('#blk_2').hide();"> Proteins</label>
 				</g:if>
 			</g:each>
 			(click to show/hide available data sets)

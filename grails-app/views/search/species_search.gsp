@@ -203,7 +203,7 @@
 		 //seriesColors: pointcolours,
 		 highlighter: {
 			 tooltipAxes: 'yx',
-			 tooltipLocation: 'ne',
+			 tooltipLocation: 'se',
 			 yvalues: 5,
 			 show: true,
 			 sizeAdjust: 7.5,
@@ -549,7 +549,7 @@
 			</g:else>
 		</g:if>
 		<g:else>
-			 <h2>No genome data is in the database for this genome</h2>
+			 <h2>No genome data are in the database for this genome</h2>
 		</g:else>
 		 </td></tr>
 		   <tr><td>
@@ -589,7 +589,7 @@
 				</g:else>
 		 	</g:if>
 		 	<g:else>
-		 	<h2>No gene data is in the database for this genome</h2>
+		 	<h2>No gene data are in the database for this genome</h2>
 		 	</g:else>
 		 </td></tr>
 		
