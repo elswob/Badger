@@ -532,14 +532,24 @@ class AdminController {
 	}
 	@Secured(['ROLE_ADMIN'])
 	def deletedAnno = {
+		def sql = new Sql(dataSource)
 		def annoData = AnnoData.findById(params.id)
 		def gff = annoData.filedata
 		def source = annoData.source
 		def file = annoData.anno_file
-		println "Deleting "+source+" "+file		
-		//runAsync {
-	 		annoData.delete()
-	 	//}
+		println "Deleting "+source+" "+file
+		println "id = "+params.id
+		def asql;
+		if (annoData.type == 'blast'){
+			asql = "select gene_blast.id from gene_blast,gene_info,anno_data where gene_blast.gene_id = gene_info.id and gene_info.file_id = anno_data.filedata_id and anno_data.id = "+params.id+" and gene_blast.anno_db = anno_data.source;";		
+		}else if (annoData.type == 'fun'){
+			asql = "select gene_anno.id from gene_anno,gene_info,anno_data where gene_anno.gene_id = gene_info.id and gene_info.file_id = anno_data.filedata_id and anno_data.id = "+params.id+" and gene_blast.anno_db = anno_data.source;";		
+		}else if (annoData.type == 'ipr'){
+			asql = "select gene_interpro.id from gene_interpro,gene_info,anno_data where gene_interpro.gene_id = gene_info.id and gene_info.file_id = anno_data.filedata_id and anno_data.id = "+params.id+" and gene_blast.anno_db = anno_data.source;";		
+		}
+		sql.execute(asql)
+		def fsql = "delete from anno_data where id = "+params.id+";";
+		sql.execute(fsql)
 	 	return [source:source, file:file, gff:gff]
 	 	
 	}
