@@ -59,6 +59,21 @@
     //}
     
     });
+    
+    function programCheck(){
+    	//alert($('input[@name="genomeRadio"]:checked').val());
+    	var type = $('input[@name="genomeRadio"]:checked').val()
+		$("#program").empty();
+		var select = $("#program")[0];	
+		if (type < 3){
+			select.add(new Option("BLASTN (DNA vs DNA)", "blastn"));
+			select.add(new Option("TBLASTN (protein vs translated DNA)", "tblastn"));
+			select.add(new Option("TBLASTX (translated DNA vs translated DNA)", "tblastx"));
+		}else{
+			select.add(new Option("BLASTP (protein vs protein)", "blastp"));
+			select.add(new Option("BLASTX (translated DNA vs protein)", "blastx"));		
+		}
+    }
     </script>
     
 </head>
