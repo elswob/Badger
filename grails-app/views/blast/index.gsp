@@ -38,14 +38,17 @@
             return false;
         });
  
-    });
+    
     function demoSeq(){
 		$("#blastId").val(">example\nMALCMHPNVVMYHTSFVVGEELWVVMRLLNCGSMLDILKRRIKAMGKEAASSGVLDEVTIATVLKEVLRGLEYFHSSGQIHRDIKAGNILIADDGTVQIADFGVSGWLAASQGDLSRQKVRHTFVGTPCWMAPEVMEQVSGYDFKADIWSFGILAIELATGTAPYHKFPPMKVLMLTLQNDPPGLDTNAERKDQYKAYGKSFRHVIKDCLQKDPSKRPTASELLKYSFFKKAKDKKYLVHALIENLASMPLPSHHQTDAPKKVASGKLKKNSEGNWEFEPEETESEEEGEKMDLPTTSTAVATTSETINLVLRVRNAQKELNDIKFDYTPSVDTVEGIAHELVAAELIDGHDLVVVAANLKKLVDAALSKSDKKSVTFALSSVPPQEMPDERALIGFAQISLIDSSNAQVD");
     }
-    function programCheck(type){
+    
+    //function programCheck(type){
+    	//alert($('input[@name="genomeRadio"]:checked').val());
+    	var type = $('input[@name="genomeRadio"]:checked').val()
 		$("#program").empty();
 		var select = $("#program")[0];	
-		if (type == 'nuc'){
+		if (type < 3){
 			select.add(new Option("BLASTN (DNA vs DNA)", "blastn"));
 			select.add(new Option("TBLASTN (protein vs translated DNA)", "tblastn"));
 			select.add(new Option("TBLASTX (translated DNA vs translated DNA)", "tblastx"));
@@ -53,7 +56,9 @@
 			select.add(new Option("BLASTP (protein vs protein)", "blastp"));
 			select.add(new Option("BLASTX (translated DNA vs protein)", "blastx"));		
 		}
-    }
+    //}
+    
+    });
     </script>
     
 </head>
@@ -140,11 +145,18 @@
 		<h1>Set parameters:</h1>
 		<table><tr><td>
 		<g:link controller="blast" action="info" fragment="program">Program</g:link>
-		<select name = "PROGRAM" id = "program">
-			<option value="blastp">BLASTP (protein vs protein)</option>
-			<option value="blastx">BLASTX (translated DNA vs protein)</option>
-		</select>	
-
+		<g:if test="${blastFiles.size == 1}">
+			<select name = "PROGRAM" id = "program">
+				<option value="blastn">BLASTN (protein vs protein)</option>
+				<option value="tblastx">TBLASTX (translated DNA vs protein)</option>
+			</select>	
+		</g:if>
+		<g:else>
+			<select name = "PROGRAM" id = "program">
+				<option value="blastp">BLASTP (protein vs protein)</option>
+				<option value="blastx">BLASTX (translated DNA vs protein)</option>
+			</select>	
+		</g:else>
 		<g:link controller="blast" action="info" fragment="out">Output</g:link>
 		<select name = "ALIGNMENT_VIEW">
 		<option value=0 selected> Full

@@ -410,6 +410,14 @@ class AdminController {
 		def genome = fileData.genome
 		def dir = fileData.file_dir
 		def name = fileData.file_name
+		//delete annotations
+		
+		def bsql = "delete from gene_blast where gene_id in (select gene_info.id from gene_info,file_data where file_id = file_data.id and file_data.id = "+params.id+");";
+		sql.execute(bsql)
+		def asql = "delete from gene_anno where gene_id in (select gene_info.id from gene_info,file_data where file_id = file_data.id and file_data.id = "+params.id+");";
+		sql.execute(asql)
+		def isql = "delete from gene_interpro where gene_id in (select gene_info.id from gene_info,file_data where file_id = file_data.id and file_data.id = "+params.id+");";
+		sql.execute(isql)
 		println "Deleting "+dir+"/"+name
 		//runAsync {
 		fileData.delete()
