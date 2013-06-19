@@ -14,7 +14,7 @@
 
 <g:form action="deletedFile" controller="admin">
 
-<h2>Are you sure you wish to delete the following data file? This will delete all associated files!</h2>
+<h2>Are you sure you wish to delete the following data file? This will delete all associated files! If this is a gene file, this includes exons, annotations, and all the ortholog data.</h2>
 
 <b>Location (directory within data folder)</b><font color="red">*</font></p>
 	<g:textField value="${fileData.file_dir}" name="dir" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br>

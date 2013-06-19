@@ -12,7 +12,7 @@
  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > Delete data set > Deleted data set</div>  
 <h1>The following genome and all dependencies are being deleted</h1>
 
-<h2>${genomeV}</h2>
+<h2>${del.genomeV}</h2>
 
 </body>
 </html>

@@ -6,6 +6,7 @@ import grails.plugin.cache.Cacheable
 
 class AdminController {
 	def grailsApplication
+	def deleteService
 	javax.sql.DataSource dataSource
 	
 	//news
@@ -162,15 +163,9 @@ class AdminController {
 	}
 	@Secured(['ROLE_ADMIN'])
 	def deletedSpecies = {
-		def metaData = MetaData.findById(params.Gid)
-		def genus = metaData.genus
-		def species = metaData.species
-		println "Deleting "+genus+" "+species		
-		//runAsync {
-	 		metaData.delete()
-	 	//}
-	 	return [genus:genus, species:species]
-	 	
+		println "Run deleteService with species id "+params.id
+		def del = deleteService.deleteSpecies(params.Gid)
+	 	return [del:del]		 	
 	}
 	
 	@Secured(['ROLE_ADMIN'])
@@ -245,12 +240,9 @@ class AdminController {
 	
 	@Secured(['ROLE_ADMIN'])
 	def deletedGenome = {
-		def genomeData = GenomeData.findById(params.gid)
-		def genomeV = genomeData.gversion
-		//runAsync {
-	 		genomeData.delete()
-	 	//}
-	 	return [genomeV:genomeV] 	
+		println "Run deleteService with genome id "+params.id
+		def del = deleteService.deleteGenome(params.id)
+	 	return [del:del]	
 	}
 	
 	@Secured(['ROLE_ADMIN'])
@@ -405,24 +397,10 @@ class AdminController {
 	}
 	
 	@Secured(['ROLE_ADMIN'])
-	def deletedFile = {
-		def fileData = FileData.findById(params.id)
-		def genome = fileData.genome
-		def dir = fileData.file_dir
-		def name = fileData.file_name
-		//delete annotations
-		
-		def bsql = "delete from gene_blast where gene_id in (select gene_info.id from gene_info,file_data where file_id = file_data.id and file_data.id = "+params.id+");";
-		sql.execute(bsql)
-		def asql = "delete from gene_anno where gene_id in (select gene_info.id from gene_info,file_data where file_id = file_data.id and file_data.id = "+params.id+");";
-		sql.execute(asql)
-		def isql = "delete from gene_interpro where gene_id in (select gene_info.id from gene_info,file_data where file_id = file_data.id and file_data.id = "+params.id+");";
-		sql.execute(isql)
-		println "Deleting "+dir+"/"+name
-		//runAsync {
-		fileData.delete()
-		//}
-		return [dir:dir,name:name, genome:genome]
+	def deletedFile = {	
+		println "Run deleteService with file id "+params.id
+		def del = deleteService.deleteFile(params.id)
+	 	return [del:del]
 	}
 	
 	@Secured(['ROLE_ADMIN'])
@@ -540,25 +518,9 @@ class AdminController {
 	}
 	@Secured(['ROLE_ADMIN'])
 	def deletedAnno = {
-		def sql = new Sql(dataSource)
-		def annoData = AnnoData.findById(params.id)
-		def gff = annoData.filedata
-		def source = annoData.source
-		def file = annoData.anno_file
-		println "Deleting "+source+" "+file
-		def asql;
-		if (annoData.type == 'blast'){
-			asql = "delete from gene_blast where id in (select gene_blast.id from gene_blast,gene_info,anno_data where gene_blast.gene_id = gene_info.id and gene_info.file_id = anno_data.filedata_id and anno_data.id = "+params.id+" and gene_blast.anno_db = anno_data.source);";		
-			println asql
-		}else if (annoData.type == 'fun'){
-			asql = "delete from gene_anno where id in (select gene_anno.id from gene_anno,gene_info,anno_data where gene_anno.gene_id = gene_info.id and gene_info.file_id = anno_data.filedata_id and anno_data.id = "+params.id+" and gene_anno.anno_db = anno_data.source);";		
-		}else if (annoData.type == 'ipr'){
-			asql = "delete from gene_interpro where id in (select gene_interpro.id from gene_interpro,gene_info,anno_data where gene_interpro.gene_id = gene_info.id and gene_info.file_id = anno_data.filedata_id and anno_data.id = "+params.id+" and gene_interpro.anno_db = anno_data.source);";		
-		}
-		sql.execute(asql)
-		def fsql = "delete from anno_data where id = "+params.id+";";
-		sql.execute(fsql)
-	 	return [source:source, file:file, gff:gff]
+		println "Run deleteService with annotaion id "+params.id
+		def del = deleteService.deleteAnno(params.id)
+	 	return [del:del]
 	 	
 	}
 }

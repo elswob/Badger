@@ -30,7 +30,7 @@
 <p><b>URL of Gbrowse2 instance</b></p>
 <g:textField value="${genome.gbrowse}" name="gbrowse" style="width: 98%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/><br><br>
 <br>
-<input type = "hidden" name="gid" value="${genome.id}">
+<input type = "hidden" name="id" value="${genome.id}">
 <input class="mybuttons" type="button" value="Delete genome" onclick="submit()" >
 <hr size = 5 color="green" width="100%" style="margin-top:10px"><br>
 

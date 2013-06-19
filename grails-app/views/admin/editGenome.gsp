@@ -96,9 +96,11 @@
 	   		<g:form action= "editFile" params="[fid: f.id]" >
 	    		<a href="#" onclick="parentNode.submit()" title="Edit file"><img src="${resource(dir: 'images', file: 'edit-icon.png')}" width="15px"/></a>
 	    	</g:form>  	
-	    	<g:form action="deleteFile" params="[fid: f.id]" >
-	    		<a href="#" onclick="parentNode.submit()" title="Delete file"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
-	    	</g:form> 	
+	    	<g:if test="${f.file_type == 'Genes' || f.file_type == 'Genome'}">
+				<g:form action="deleteFile" params="[fid: f.id]" >
+					<a href="#" onclick="parentNode.submit()" title="Delete file"><img src="${resource(dir: 'images', file: 'delete-icon.png')}" width="15px"/></a>
+				</g:form> 
+			</g:if>	
 	    </div>
       		</td><td>${f.file_type}:</td><td><b>${f.file_name}</b></td></tr>
    	   </g:each>

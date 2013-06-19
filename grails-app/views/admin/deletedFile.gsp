@@ -9,11 +9,11 @@
   </head>
 
   <body>
-  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editSpecies" params="${[Gid:genome.meta.id]}"><i>${genome.meta.genus} ${genome.meta.species}</i></g:link> > <g:link action="editGenome" params="${[gid:genome.id]}">Edit genome</g:link> > Deleted file </div>
+  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editSpecies" params="${[Gid:del.genome.meta.id]}"><i>${del.genome.meta.genus} ${del.genome.meta.species}</i></g:link> > <g:link action="editGenome" params="${[gid:del.genome.id]}">Edit genome</g:link> > Deleted file </div>
   
 <h1>The following data file and all dependencies are being deleted</h1>
 
-<h2>${dir} / ${name}</h2>
+<h2>${del.dir} / ${del.name}</h2>
 
 </body>
 </html>

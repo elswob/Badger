@@ -12,7 +12,7 @@
  <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > Delete species > Deleted species</div>  
 <h1>The following species and all dependencies are being deleted</h1>
 
-<h2>${params.genus} ${params.species}</h2>
+<h2>${del.genus} ${del.species}</h2>
 
 </body>
 </html>

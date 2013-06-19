@@ -9,11 +9,11 @@
   </head>
 
   <body>
-   <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editSpecies" params="${[Gid:gff.genome.meta.id]}"><i>${gff.genome.meta.genus} ${gff.genome.meta.species}</i></g:link> > <g:link action="editGenome" params="${[gid:gff.genome.id]}">Edit genome</g:link> > Delete annotation > Deleted annotation</div>
+   <div class="bread"><g:link action="home">Admin</g:link> > <g:link action="home">Home</g:link> > <g:link action="editSpecies" params="${[Gid:del.gff.genome.meta.id]}"><i>${del.gff.genome.meta.genus} ${del.gff.genome.meta.species}</i></g:link> > <g:link action="editGenome" params="${[gid:del.gff.genome.id]}">Edit genome</g:link> > Delete annotation > Deleted annotation</div>
 
 <h1>The following annotation file and all dependencies are being deleted</h1>
 
-<h2>${source} ${file}</h2>
+<h2>${del.source} ${del.file}</h2>
 
 </body>
 </html>
