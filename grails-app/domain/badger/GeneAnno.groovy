@@ -17,6 +17,7 @@ class GeneAnno {
     }
     static mapping = {
         descr type: "text"
+        gene(index: "gene_info_anno")
     }
     static belongsTo = [ gene: GeneInfo ]
 }

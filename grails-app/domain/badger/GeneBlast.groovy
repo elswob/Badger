@@ -29,6 +29,7 @@ class GeneBlast {
         qseq type: "text"
         hseq type: "text"
         midline type: "text"
+        gene(index: "gene_blast_anno")
     }
     static belongsTo = [ gene: GeneInfo ]
 }

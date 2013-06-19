@@ -15,6 +15,7 @@ class ExonInfo {
     }
     static mapping = {
         sequence  type: "text"
+        gene(index: "exon_info_anno")
     }
     static belongsTo = [ gene: GeneInfo ]
 }

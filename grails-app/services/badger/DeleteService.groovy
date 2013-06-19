@@ -57,7 +57,7 @@ class DeleteService {
 			println esql
 			sql.execute(esql)
 			
-			def osql = "delete from ortho";
+			def osql = "delete from ortho;";
 			println "Deleting ortholog data..."
 			println osql
 			sql.execute(osql)
