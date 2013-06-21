@@ -10,7 +10,6 @@
     	$(window).unload(function() {});
     	
 		function toggleDiv(divId) {
-			//$('.toHide').hide();
             $("#"+divId).slideToggle(400);
     	}
 
@@ -22,7 +21,10 @@
     }
     
      $(document).ready( function() {
- 
+ 		
+ 		var type = $('input[@name="genomeRadio"]:checked').val()
+        $("#blk_"+type).slideToggle(400);
+ 		
         // Select all
         $("A[href='#select_all']").click( function() {
             $("#" + $(this).attr('rel') + " INPUT[type='checkbox']").attr('checked', true);
@@ -43,10 +45,6 @@
             return false;
         });
  
-    
-    //function programCheck(type){
-    	//alert($('input[@name="genomeRadio"]:checked').val());
-    	var type = $('input[@name="genomeRadio"]:checked').val()
 		$("#program").empty();
 		var select = $("#program")[0];	
 		if (type < 3){
@@ -57,7 +55,6 @@
 			select.add(new Option("BLASTP (protein vs protein)", "blastp"));
 			select.add(new Option("BLASTX (translated DNA vs protein)", "blastx"));		
 		}
-    //}
     
     });
     
