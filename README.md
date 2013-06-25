@@ -183,7 +183,7 @@ o.file = 'orthomcl/groups_1.5.txt'
 /*** tree (location of optional phyloxml file) ***/
 t.file = 'trees/your_phyloXML_tree.xml'
 
-/*** database backup (the number of weekly backups of the database to keep) ***/
+/*** database backup (the number of nightly backups of the database to keep) ***/
 d.number = 10
 ```
 

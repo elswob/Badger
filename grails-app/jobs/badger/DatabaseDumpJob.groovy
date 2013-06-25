@@ -5,8 +5,8 @@ class DatabaseDumpJob {
 	def grailsApplication
     static triggers = {
       //simple repeatInterval: 5000l // execute job once in 5 seconds
-      //run once a week (0=seconds, 0=minutes, 1=hour[01:00], ?=any day of month, * = everyday month, 1 = on Sunday)
-      cron name: 'dumpTrigger', cronExpression: "0 0 1 ? * 1" 
+      //run once a week (0=seconds, 0=minutes, 1=hour[01:00], ?=any day of month, * = everyday month, * = everyday)
+      cron name: 'dumpTrigger', cronExpression: "0 0 * ? * *" 
     }
 
     def execute(){
