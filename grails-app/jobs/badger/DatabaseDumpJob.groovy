@@ -16,7 +16,7 @@ class DatabaseDumpJob {
 		new File("data/db_dump").eachFileRecurse{file->
 			fileMap."${file}" = new Date(file.lastModified()).format('EEE MMM dd hh:mm:ss a yyyy')
 		}
-		println "There are already "+fileMap.size()+" backups"
+		println "There are "+fileMap.size()+" database backups"
 		println "The limit is set to "+grailsApplication.config.d.number.trim()
 		def fileMapSort = fileMap.sort {a, b -> b.value <=> a.value}
 		def oldest = ""

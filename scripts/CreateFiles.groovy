@@ -103,3 +103,43 @@ def createAnnoFile(gff){
 	def ant = new AntBuilder()
 	ant.zip(destfile: "data/"+gffInfo.file_dir+"/"+gffInfo.file_name+".anno.tsv.zip", basedir: "data/"+gffInfo.file_dir, includes: gffInfo.file_name+".anno.tsv")
 }
+
+DBDump()
+
+def DBDump(){
+	println "Create postgres database dump..."
+	def today = new Date()
+		
+	def fileMap = [:]
+	new File("data/db_dump").eachFileRecurse{file->
+		fileMap."${file}" = new Date(file.lastModified()).format('EEE MMM dd hh:mm:ss a yyyy')
+	}
+	println "There are "+fileMap.size()+" database backups"
+	println "The limit is set to "+grailsApplication.config.d.number.trim()
+	def fileMapSort = fileMap.sort {a, b -> b.value <=> a.value}
+	def oldest = ""
+	fileMapSort.each{
+		//println it
+		oldest = it.key
+	}
+	if (fileMap.size() >= grailsApplication.config.d.number.trim().toInteger()){
+		//delete the oldest file
+		println "The maximum number of backups is reached, deleting "+oldest+" ..."
+		def del = "rm "+oldest
+		del.execute()
+	}
+	def fileDate = String.format('%tY_%<tm_%<td:%<tH:%<tM:%<tS', today)
+	
+	println "Dumping database..."
+	def dbString = grailsApplication.config.dataSource.url.trim()
+	def matcher
+	def db
+	if ((matcher = dbString =~ /jdbc:postgresql:\/\/.*?\/(.*)$/)){
+		db = matcher[0][1]
+	}
+	String[] comm = ["pg_dump", "-a", "${db}","-f", "data/db_dump/${db}_${fileDate}.pgsql"]
+	ProcessBuilder dumpProcess = new ProcessBuilder(comm)  
+	dumpProcess.redirectErrorStream(true)
+	Process p = dumpProcess.start()
+	p.waitFor()
+}
