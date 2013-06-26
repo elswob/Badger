@@ -142,4 +142,5 @@ def DBDump(){
 	dumpProcess.redirectErrorStream(true)
 	Process p = dumpProcess.start()
 	p.waitFor()
+	println "Database dumped."
 }

@@ -6,7 +6,7 @@ class DatabaseDumpJob {
     static triggers = {
       //simple repeatInterval: 5000l // execute job once in 5 seconds
       //run once a week (0=seconds, 0=minutes, 1=hour[01:00], ?=any day of month, * = everyday month, * = everyday)
-      cron name: 'dumpTrigger', cronExpression: "0 0 * ? * *" 
+      cron name: 'dumpTrigger', cronExpression: "0 0 1 ? * *" 
     }
 
     def execute(){
@@ -44,6 +44,7 @@ class DatabaseDumpJob {
 		dumpProcess.redirectErrorStream(true)
         Process p = dumpProcess.start()
 		p.waitFor()
+		println "Database dumped."
 		//println "Error = "+p.text
     }
 }
