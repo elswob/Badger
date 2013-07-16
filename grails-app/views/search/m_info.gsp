@@ -44,10 +44,6 @@
 	    }else if (table == 'ipr'){ 
 	    	var oTableData = document.getElementById('ipr_table_data');
 	    	rowNum = 1
-	    }else if (table == 'orthoNuc' || table == 'orthoPep' || table == 'orthoClusterNuc' || table == 'orthoClusterPep'){
-	    	table_scrape.push("${info_results.mrna_id}")
-	    	var oTableData = document.getElementById('orthomcl_table');
-	    	rowNum = 1
 	    }
 	    //gets table
 	    var rowLength = oTableData.rows.length;
@@ -58,26 +54,8 @@
 			//loops through rows
 			   var oCells = oTableData.rows.item(i).cells;
 			   var cellVal = oCells.item(rowNum).innerHTML;
-			   if (table == 'orthoNuc' || table == 'orthoPep' || table == 'orthoClusterNuc' || table == 'orthoClusterPep'){
-					var matcher = cellVal.match(/.*?mid=(.*?)">.*/);
-					if (matcher){
-						table_scrape.push(matcher[1])
-					}
-				}else{
-					table_scrape.push(cellVal)
-				}
+			   table_scrape.push(cellVal)
 			}
-		}
-	    
-	    if (table == 'orthoPep'){
-	    	//alert('adding '+table_scrape+' to orthoPepFileId')
-		    document.getElementById('orthoPepFileId').value=table_scrape;
-		}else if (table == 'orthoNuc'){
-			document.getElementById('orthoNucFileId').value=table_scrape;
-		}else if (table == 'orthoClusterNuc'){
-			document.getElementById('orthoClusterNucFileId').value=table_scrape;
-		}else if (table == 'orthoClusterPep'){
-			document.getElementById('orthoClusterPepFileId').value=table_scrape;
 		}
 	    
 	    //alert(table_scrape)
@@ -496,6 +474,8 @@
     
     </script>
     
+    <g:if test="${info_results}">
+    
     <script type="text/javascript" src="${resource(dir: 'js', file: 'raphael-min.js')}"></script>
 	 <script type="text/javascript" src="${resource(dir: 'js', file: 'g.raphael-min.js')}"></script>
 	 <script type="text/javascript" src="${resource(dir: 'js', file: 'g.line-min.js')}"></script>
@@ -504,7 +484,8 @@
 	 	function drawAnno(){
 	 		blast_data = ${blastjsonData};	
 			ipr_data = ${iprjsonData};
-			fun_data = ${funjsonData}; 		
+			fun_data = ${funjsonData}; 	
+			var length = ${info_results.pep.length()};	
 			var drawing = new BioDrawing(); 
 			$('#blast_fig').empty();
 			drawCount++;
@@ -515,9 +496,9 @@
 				 drawing.start(paperWidth, 'blast_fig');
 				 drawing.drawSpacer(40);
 				 //add scale bars
-				 drawing.drawScoreScale(${info_results.pep.length()});	
+				 drawing.drawScoreScale(length);	
 				 drawing.drawSpacer(20);
-				 drawing.drawScale(${info_results.pep.length()});			 
+				 drawing.drawScale(length);			 
 				 drawing.drawSpacer(10);
 				 
 				 // add exon boundaries
@@ -527,12 +508,12 @@
 					var marker=0
 					for (var i = 0; i < exon_data.length; i++) {   		 	 
 						var exon = exon_data[i];
-						drawing.drawExon(${info_results.pep.length()},exon.length/3,marker,exon.exon_number)
+						drawing.drawExon(length,exon.length/3,marker,exon.exon_number)
 						marker = marker + exon.length/3
 						//alert('marker='+marker)
 					}
 					drawing.drawSpacer(20);
-					drawing.drawLine(${info_results.pep.length()});
+					drawing.drawLine(length);
 				 }
 				 //alert('length = '+blast_data.length)
 				 if (blast_data.length > 0){
@@ -542,7 +523,7 @@
 					 	drawing.drawColouredTitle('BLAST','black')
 					 	drawBars(blast_data,tableData,'blast')
 					 	drawing.drawSpacer(10);
-					 	drawing.drawLine(${info_results.pep.length()});
+					 	drawing.drawLine(length);
 					 }
 				 }
 				 if (fun_data.length > 0){
@@ -551,7 +532,7 @@
 					 var tableData = get_table_data('fun')
 					 drawBars(fun_data,tableData,'fun')
 					 drawing.drawSpacer(10);
-					 drawing.drawLine(${info_results.pep.length()});
+					 drawing.drawLine(length);
 				 }
 				 if (ipr_data.length > 0){
 					 drawing.drawSpacer(10);
@@ -630,8 +611,8 @@
 		 		}
 		 	}
 		 }
-
 	 </script>	  
+    </g:if>
     
   </head>
   <body>
@@ -941,7 +922,8 @@
 	</g:else>
   </g:if>
   <g:else>
-    <h1>The gene ID has no information</h1>
+  	<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus[0]}. ${metaData.genome.meta.species}</i></g:link> > Genome: <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">v${metaData.file_version}</g:link> 
+    <h1>There is no match for <b>${mrna_id}</b></h1>
   </g:else>
 	 </body>		 
 </html>

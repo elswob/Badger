@@ -687,12 +687,17 @@
 		 </td></tr>
 		</td></tr></table>
 		<hr size = 5 color="green" width="100%" style="margin-top:10px">
-		<table>
+	</g:if>
+	
+	<g:if test="${geneData.gene}">
+			<table>
 	 	<tr><td><h1>Search by gene ID:</h1>	 
 			 <form name="input" action="m_info" method="get">
 			 <table><tr><td>		 	
     				Enter a gene ID, e.g. <g:link action="m_info" params="${[mid:geneData.gene.mrna_id[0]]}">${geneData.gene.mrna_id[0]} </g:link> <g:textField name="mid" size="50%"/>
     				<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
+    				<input type="hidden" name="Gid" value="${params.Gid}">
+					<input type="hidden" name="GFFid" value="${params.GFFid}">
      			</td></tr>
      		</table>
 			</form>
@@ -700,6 +705,24 @@
    		</td></tr></table>
    		<hr size = 5 color="green" width="100%" style="margin-top:10px">
 	</g:if>
+	
+	<g:if test="${genomeData.scaffold}">
+			<table>
+	 	<tr><td><h1>Search by scaffold ID:</h1>	 
+			 <form name="input" action="genome_info" method="get">
+			 <table><tr><td>		 	
+    				Enter a scaffold ID, e.g. <g:link action="genome_info" params="${[contig_id:genomeData.scaffold.contig_id[0]]}">${genomeData.scaffold.contig_id[0]} </g:link> <g:textField name="contig_id" size="50%"/>
+    				<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
+    				<input type="hidden" name="Gid" value="${params.Gid}">
+					<input type="hidden" name="GFFid" value="${params.GFFid}">
+     			</td></tr>
+     		</table>
+			</form>
+
+   		</td></tr></table>
+   		<hr size = 5 color="green" width="100%" style="margin-top:10px">
+	</g:if>
+	
 	<table>
 	 <tr><td><h1>Search <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> publications:</h1>
 	 

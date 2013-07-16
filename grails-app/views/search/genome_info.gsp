@@ -169,7 +169,8 @@
 		</g:if>
     </g:if>
     <g:else>
-	    <h1>There is no information for <b>${info_results.contig_id[0]}</b></h1>
+    	<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus[0]}. ${metaData.genome.meta.species}</i></g:link> > Genome: <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">v${metaData.file_version}</g:link>
+	    <h1>There is no match for <b>${contig_id}</b></h1>
     </g:else>
   </body>
 </html>

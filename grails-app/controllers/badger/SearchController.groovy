@@ -225,7 +225,7 @@ class SearchController {
 		 def blastAnnoSql = "select anno_db,count(distinct(gene_info.gene_id)) from gene_info left outer join gene_blast on (gene_info.id = gene_blast.gene_id),file_data where gene_info.file_id = file_data.id and file_data.id = '"+params.GFFid+"'group by anno_db;";		
 		 //println blastAnnoSql
 		 def blastAnnoData = sql.rows(blastAnnoSql)
-    	 return [ext:ext, interAnnoData:interAnnoData, inter:inter, annoTypes:annoTypes, geneData: geneData, n50: n50_list, n90: n90_list, genomeFile:genomeData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats, genomeInfo: genomeInfo]
+    	 return [ext:ext, interAnnoData:interAnnoData, inter:inter, annoTypes:annoTypes, geneData: geneData, genomeData: genomeData, n50: n50_list, n90: n90_list, genomeFile:genomeData, stats: stats, funAnnoData: funAnnoData, blastAnnoData: blastAnnoData, gene_stats: gene_stats, genome_stats: genome_stats, genomeInfo: genomeInfo]
     }
     @Cacheable('all_cache')
     //@CacheEvict(value='all_cache', allEntries=true)
@@ -435,71 +435,80 @@ class SearchController {
 			//coming in from blast results
 			if (!params.Gid){
 				def mrna_details = GeneInfo.findByMrna_id(mrna_id)
-				GFFid = mrna_details.file.id
-				def genomeSql = "select file_data.id from file_data where file_type = 'Genome' and genome_id = "+mrna_details.file.genome.id+";";
-				//println genomeSql
-				Gid = sql.rows(genomeSql).id[0]
+				if (mrna_details){
+					GFFid = mrna_details.file.id
+					def genomeSql = "select file_data.id from file_data where file_type = 'Genome' and genome_id = "+mrna_details.file.genome.id+";";
+					//println genomeSql
+					Gid = sql.rows(genomeSql).id[0]
+				}else{
+					GFFid = null;
+					Gid = null;
+				}
 			}else{
 				Gid = params.Gid
 				GFFid = params.GFFid
 			}	
-			println "Looking at transcript "+mrna_id
-			def metaData = FileData.findById(Gid);
-			def geneData = FileData.findById(GFFid);
-			def blast_results
-			def fun_results
-			def ipr_results
-			//if (grailsApplication.config.g.blast.size()>0){			
-				def blastsql = "select gene_info.mrna_id,gene_info.gene_id,gene_blast.* from gene_blast,gene_info where gene_blast.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score;";
-				//println blastsql
-				blast_results = sql.rows(blastsql)
-			//}
-			//if (grailsApplication.config.g.IPR){
-				def iprsql = "select gene_interpro.* from gene_interpro,gene_info where gene_interpro.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score;";
-				//println iprsql
-				ipr_results = sql.rows(iprsql)
-			//}
-			//if (grailsApplication.config.g.fun.size()>0){
-				def funsql = "select gene_anno.* from gene_anno,gene_info where gene_anno.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score;";
-				//println funsql
-				fun_results = sql.rows(funsql)
-			//}
-			//get exon info
-			def exonsql = "select contig_id,exon_info.*,length(exon_info.sequence) as length from exon_info,gene_info where exon_info.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by exon_number;"
-			def exon_results = sql.rows(exonsql)
-			//println exonsql
-			
-			def annoLinksSql = "select source,regex,link from anno_data";
-			//println annoLinksSql
-			def annoLinksAll = sql.rows(annoLinksSql)
-			def annoLinks = [:]
-			annoLinksAll.each{
-				annoLinks."${it.source}" = [it.regex,it.link]
-			}
-			//println "Anno links =  "+annoLinks
-
-			//get amino acid info`
-			def info_results = GeneInfo.findByMrna_id(mrna_id)
-			def aaData
-			info_results.each {
-				aaData = peptideService.getComp(it.pep)
-				//println "service = "+service
-			}	
-			
-			//get orthomcl info
-			def orthoId = Ortho.findByTrans_name(mrna_id)
-			/*
-			def orthoGet
-			if (orthoId != null){
-				//println "orthoId = "+orthoId.group_id
-				orthoGet = Ortho.findAllByGroup_id(orthoId.group_id)
-				//println "ortho = "+orthoGet
+			if (Gid == null){
+				return [error: "no_match", mrna_id:mrna_id]
 			}else{
-				println "no orthoog!"
-			}
-			*/
-			return [geneData: geneData, extInfo:extInfo, orthologs:orthoId, Gid:Gid, GFFid:GFFid, mrna_id: mrna_id, info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, metaData: metaData]
-    	sql.close()
+				println "Looking at transcript "+mrna_id
+				def metaData = FileData.findById(Gid);
+				def geneData = FileData.findById(GFFid);
+				def blast_results
+				def fun_results
+				def ipr_results
+				//if (grailsApplication.config.g.blast.size()>0){			
+					def blastsql = "select gene_info.mrna_id,gene_info.gene_id,gene_blast.* from gene_blast,gene_info where gene_blast.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score;";
+					//println blastsql
+					blast_results = sql.rows(blastsql)
+				//}
+				//if (grailsApplication.config.g.IPR){
+					def iprsql = "select gene_interpro.* from gene_interpro,gene_info where gene_interpro.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score;";
+					//println iprsql
+					ipr_results = sql.rows(iprsql)
+				//}
+				//if (grailsApplication.config.g.fun.size()>0){
+					def funsql = "select gene_anno.* from gene_anno,gene_info where gene_anno.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by score;";
+					//println funsql
+					fun_results = sql.rows(funsql)
+				//}
+				//get exon info
+				def exonsql = "select contig_id,exon_info.*,length(exon_info.sequence) as length from exon_info,gene_info where exon_info.gene_id = gene_info.id and mrna_id = '"+mrna_id+"' order by exon_number;"
+				def exon_results = sql.rows(exonsql)
+				//println exonsql
+			
+				def annoLinksSql = "select source,regex,link from anno_data";
+				//println annoLinksSql
+				def annoLinksAll = sql.rows(annoLinksSql)
+				def annoLinks = [:]
+				annoLinksAll.each{
+					annoLinks."${it.source}" = [it.regex,it.link]
+				}
+				//println "Anno links =  "+annoLinks
+
+				//get amino acid info`
+				def info_results = GeneInfo.findByMrna_id(mrna_id)
+				def aaData
+				info_results.each {
+					aaData = peptideService.getComp(it.pep)
+					//println "service = "+service
+				}	
+			
+				//get orthomcl info
+				def orthoId = Ortho.findByTrans_name(mrna_id)
+				/*
+				def orthoGet
+				if (orthoId != null){
+					//println "orthoId = "+orthoId.group_id
+					orthoGet = Ortho.findAllByGroup_id(orthoId.group_id)
+					//println "ortho = "+orthoGet
+				}else{
+					println "no orthoog!"
+				}
+				*/
+				return [geneData: geneData, extInfo:extInfo, orthologs:orthoId, Gid:Gid, GFFid:GFFid, mrna_id: mrna_id, info_results: info_results, ipr_results: ipr_results, blast_results: blast_results, fun_results: fun_results, annoLinks: annoLinks, exon_results: exon_results, aaData:aaData, metaData: metaData]
+    		}
+    		sql.close()
     	}
     }
     
@@ -516,33 +525,36 @@ class SearchController {
      			GFFid = params.GFFid
      		}else{
      			def genome_details = GenomeInfo.findByContig_id(params.contig_id)
-				Gid = genome_details.file.id
-				//GFFid = genome_details.file.id[0]
-				
-				def geneSql = "select file_data.id from file_data where file_type = 'Genes' and genome_id = "+genome_details.file.genome.id+";";
-				//println geneSql
-				GFFid = sql.rows(geneSql).id[0]
-				
-				//println "g = "+genome_details.file.file_name[0]
-				//GFFid = FileData.findAllByFile_link(genome_details.file_name[0]).id[0]
+     			if (genome_details){
+					Gid = genome_details.file.id
+					def geneSql = "select file_data.id from file_data where file_type = 'Genes' and genome_id = "+genome_details.file.genome.id+";";
+					//println geneSql
+					GFFid = sql.rows(geneSql).id[0]
+				}else{
+					Gid = null
+				}
      		}
      		println "Gid = "+Gid
      		println "GFFid = "+GFFid
      		if (GFFid == null){
      			GFFid = 0;
      		}
-     		def metaData = FileData.findById(Gid); 
-     		//def gene_results = GeneInfo.findAllByContig_id(params.contig_id)
-     		//def genesql = "select gene_info.* from gene_info,file_data,meta_data where gene_info.contig_id = '"+params.contig_id+"' and meta_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
-     		def genesql = "select gene_info.gene_id, count(mrna_id), avg(length(nuc)) as a_nuc, avg(start) as a_start, avg(stop) as a_stop from gene_info,file_data where gene_info.contig_id = '"+params.contig_id+"' and file_data.id = '"+GFFid+"' and gene_info.file_id = file_data.id group by gene_info.gene_id order by a_start;";
-     		//println genesql
-     		def gene_results = sql.rows(genesql)
-     		//println genesql
-     		//println "contig_id ="+params.contig_id
-			//def info_results = GenomeInfo.findAllByContig_id(params.contig_id)
-			def infosql = "select genome_info.* from genome_info,file_data where genome_info.contig_id = '"+params.contig_id+"' and file_data.id = '"+Gid+"' and genome_info.file_id = file_data.id;";
-			def info_results = sql.rows(infosql)
-			return [ Gid:Gid, GFFid:GFFid, info_results: info_results, gene_results: gene_results, metaData:metaData, Gid:Gid]
+     		if (Gid == null){
+     			return [error: "no_match", contig_id: params.contig_id]
+     		}else{
+				def metaData = FileData.findById(Gid); 
+				//def gene_results = GeneInfo.findAllByContig_id(params.contig_id)
+				//def genesql = "select gene_info.* from gene_info,file_data,meta_data where gene_info.contig_id = '"+params.contig_id+"' and meta_data.id = '"+Gid+"' and gene_info.file_id = file_data.id and file_data.meta_id = meta_data.id;"
+				def genesql = "select gene_info.gene_id, count(mrna_id), avg(length(nuc)) as a_nuc, avg(start) as a_start, avg(stop) as a_stop from gene_info,file_data where gene_info.contig_id = '"+params.contig_id+"' and file_data.id = '"+GFFid+"' and gene_info.file_id = file_data.id group by gene_info.gene_id order by a_start;";
+				//println genesql
+				def gene_results = sql.rows(genesql)
+				//println genesql
+				//println "contig_id ="+params.contig_id
+				//def info_results = GenomeInfo.findAllByContig_id(params.contig_id)
+				def infosql = "select genome_info.* from genome_info,file_data where genome_info.contig_id = '"+params.contig_id+"' and file_data.id = '"+Gid+"' and genome_info.file_id = file_data.id;";
+				def info_results = sql.rows(infosql)
+				return [ contig_id: params.contig_id, Gid:Gid, GFFid:GFFid, info_results: info_results, gene_results: gene_results, metaData:metaData]
+			}
 		}
     }
     def g_info = {

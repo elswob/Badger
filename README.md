@@ -48,7 +48,9 @@ Each set of gene predictions can be decorated with annotation data
 * RAW InterProScan output
 * Custom tabular annotation data files
 
-## Installation (Ubuntu 12.04 and above)
+## Installation 
+
+The following guide is for _Ubuntu 12.04_ and above. For other OS please follow the instructions [here](http://grails.org/doc/latest/guide/gettingStarted.html#requirements). There is a known issues with Mac OS and the latest version of Grails causing errors whilst upgrading the project. To avoid this please use an earlier version of Grails, e.g. 2.1.*
 
 Install Grails and the JDK
 
@@ -142,7 +144,7 @@ dataSource.password = 'your postgres password'
 dataSource.url = jdbc:postgresql://127.0.0.1:5432/Badger
 
 /*** executables ***/
-blastPath = '/path/to/blast+/bin'
+blastPath = '/path/to/blast+/bin/'
 musclePath = '/path/to/muscle/muscle3.8.31_i86linux64'
 
 /*** web images for front page and favicon (need to be in grails web-app/images) ***/
@@ -352,7 +354,7 @@ Currently the only way to add this data is using the AddFileData.groovy script. 
 
 #### Running multiple instances
 
-It is possible to run multiple versions of Badger on the same machine, however it does require a little bit of work. One solution is to install [lighttpd|http://www.lighttpd.net/] and configure this to point unique url links to separate port numbers. An example of how to do this on a Ubuntu 12.04 install is shown below.
+It is possible to run multiple versions of Badger on the same machine, however it does require a little bit of work. One solution is to install [lighttpd](http://www.lighttpd.net/) and configure this to point unique url links to separate port numbers. An example of how to do this on a Ubuntu 12.04 install is shown below.
 
 ###### Step 1 -  install lighttpd
 
