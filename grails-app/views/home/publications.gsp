@@ -113,8 +113,9 @@
   </head>
 
   <body>
+ <div class="introjs-home-publications"> 
  <div class="bread"><g:link action="">Home</g:link> > Publications</div>
- <table><tr><td>
+ <table><tr><td data-intro='All publications with matches to the species in the database are here' data-step='1'>
  <h1>Publication search</h1>
  Search the ${sprintf("%,d\n",distinct.count[0])} unique publications from PubMed which contain terms matching the species present in the <b>${grailsApplication.config.projectID}</b> project (updated weekly):<br>
  - To search by year click on a bar in the chart below<br>
@@ -122,7 +123,7 @@
  </td>
 
    <g:form action="publication_search">
- <td>
+ <td data-intro='Choose which aspects of the publications to search' data-step='2'>
     
     <h1>Choose what to search:</h1>
     <label><input type="checkbox" checked="yes" name="pubVal" value="title" /> Title</label><br>
@@ -131,7 +132,7 @@
     <label><input type="checkbox" checked="yes" name="pubVal" value="journal" /> Journal</label><br>
     
    </td>
-   <td>
+   <td data-intro='Search for an exact match' data-step='3'>
     <h1>Enter a search term:</h1>(To see all publications leave the box blank)<br>
     <div id='selectedResult'></div>
     <g:textField name="searchId"  size="30"/>
@@ -141,6 +142,7 @@
    </tr>
    </table>
    </g:form>	
-   	<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+   	<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto" data-intro='Alternatively, search publications by species and year by clicking on a bar for the year and selecting species at the bottom' data-step='4'></div>
+   	</div>
 </body>
 </html>

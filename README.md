@@ -50,7 +50,7 @@ Each set of gene predictions can be decorated with annotation data
 
 ## Installation 
 
-The following guide is for _Ubuntu 12.04_ and above. For other OS please follow the instructions [here](http://grails.org/doc/latest/guide/gettingStarted.html#requirements). There is a known issues with Mac OS and the latest version of Grails causing errors whilst upgrading the project. To avoid this please use an earlier version of Grails, e.g. 2.1.*
+The following guide is for **Ubuntu 12.04** and above. For other OS please follow the instructions [here](http://grails.org/doc/latest/guide/gettingStarted.html#requirements). There is a known issues with Mac OS and the latest version of Grails causing errors whilst upgrading the project. To avoid this please use an earlier version of Grails, e.g. 2.1.*
 
 Install Grails and the JDK
 
@@ -342,7 +342,7 @@ Change to my_orthomcl_dir and run:
   orthomclMclToGroups my_prefix 1000 < mclOutput > groups.txt
 ```
 
-The naming convention expected is that each transcript ID is preceded by an OrthoMCL ID, e.g. Mmeles|gene1234
+The naming convention expected is that each transcript ID is preceded by an OrthoMCL ID, e.g. Mmeles|gene1234, and the transcript ID matches that of the other files.
 
 If this file is added after the initial data, the ortholog data will need to be loaded into the database. This can be done simply by running `./run_me.sh` again.
 
@@ -496,7 +496,14 @@ Now, each of your instances should run without affecting the other. There may be
 
 ## Data rules
 
-1. All chromosme/scaffold/contig IDs must be unique, e.g. Mmeles_v1.0_scaffold_1
+1. All chromosme/scaffold/contig IDs must be unique, e.g. Mmeles_v1.0_scaffold_1. This is true across all data sets. A script is provided to generate unique headers for each sequence:
+
+```bash
+rename_fasta.pl -f 'xxx.fa' -p 'unique_prefix' 
+``` 
+
+This will create a new version of the fasta file called `xxx.fa.renamed` which should be used in place of the original file. Note, that these new IDs also need to match those in column 1 of the GFF3 file. If 
+
 2. GFF3 files should follow this format:
 
 ```
@@ -531,7 +538,7 @@ ctg123 . CDS             3301  3902  .  +  0  Parent=mRNA0003
 ctg123 . CDS	     5000  5500	 .  +  2  Parent=mRNA0003
 ctg123 . CDS	     7000  7600	 .  +  2  Parent=mRNA0003
 ```
-3. All gene IDs must be unique, e.g. Mmeles_v_1.0_g_1 / Mmeles_v_1.0_t_1 and match the ID in the GFF3 file
+3. All gene IDs must be unique, e.g. Mmeles_v_1.0_g_1 / Mmeles_v_1.0_t_1 and match the ID in the GFF3 file. 
 4. Alternate transcripts are fine as long as names are unique and CDS follows mRNA
 5. GFF3 files need to be sorted with respect to the proteins, e.g. gene -> mRNA -> CDS. This can be achieved with gffsort.pl (see wormbase section below).
 6. GFF3 files are for gene predictions only, any term matching gene, mRNA or CDS in the third column will be picked up, so remove anything that isn't a gene, e.g. ncRNA in some of the wormbase files

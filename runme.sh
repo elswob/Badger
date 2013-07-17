@@ -2,11 +2,11 @@
 
 date
 grails prod run-script \
-scripts/AlterTables.groovy \
-scripts/AddPublicationData.groovy \
-scripts/AddSequenceData.groovy \
-scripts/AddOrthoData.groovy \
-scripts/AddGeneBlastData.groovy \
-scripts/AddGeneFuncAnnoData.groovy \
-scripts/CreateFiles.groovy
+scripts/groovy/AlterTables.groovy \
+scripts/groovy/AddPublicationData.groovy \
+scripts/groovy/AddSequenceData.groovy \
+scripts/groovy/AddOrthoData.groovy \
+scripts/groovy/AddGeneBlastData.groovy \
+scripts/groovy/AddGeneFuncAnnoData.groovy \
+scripts/groovy/CreateFiles.groovy
 date

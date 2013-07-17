@@ -10,6 +10,7 @@
   </head>
 
   <body>
+  <div class="introjs-home-index">
   	  <sec:ifAnyGranted roles="ROLE_ADMIN">
   	  <div class="inline">
   	  Edit page:
@@ -24,7 +25,7 @@
       </div>
       
 	  <g:if test="${params.edit == 'y'}">
-		<div class="sidebar">  
+		<div class="sidebar" data-intro='News feed' data-step='5'>  
 			<div class="inline">  
 				<h1>Latest News</h1>
 				<sec:ifAnyGranted roles="ROLE_ADMIN">
@@ -86,7 +87,7 @@
 	  </sec:ifAnyGranted>
 	  
       <g:if test="${params.edit != 'y'}">
-		<div class="sidebar">  
+		<div class="sidebar" data-intro='News feed' data-step='5'>  
 			<div class="inline">  
 				<h1>Latest News</h1>
 				<sec:ifAnyGranted roles="ROLE_ADMIN">
@@ -140,5 +141,6 @@
 			</td></tr></table>
 		</g:else>
 	 </g:if>
+  </div>	
   </body>
 </html>

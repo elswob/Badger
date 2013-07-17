@@ -259,7 +259,7 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 	def sequence=""
 	def count=0
 	nucFile.eachLine{
-		if ((matcher = it =~ /^>(.*)/)){
+		if ((matcher = it =~ /^>(\S+)/)){
 			if (sequence != ""){
 				nucData."${geneId}" = sequence.toUpperCase()
 				sequence=""
@@ -277,7 +277,7 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 	def pepFile = new File("data/"+pep.file_dir+"/"+pep.file_name)
 	sequence=""
 	pepFile.eachLine{
-		if ((matcher = it =~ /^>(.*)/)){
+		if ((matcher = it =~ /^>(\S+)/)){
 			if (sequence != ""){
 				pepData."${geneId}" = sequence.toUpperCase()
 				sequence=""
@@ -472,13 +472,17 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 						exon_count++
 						exon_count_all++
 						if ((matcher = dataArray[8] =~ /Parent=(\S+)/)){
+							def parent_match = matcher[0][1]
+							parent_match = parent_match.replaceAll(/;$/,"")
 							//check for alternative splicing
-							if (parent != matcher[0][1] && exon_marker != 0){
+							if (parent != parent_match && exon_marker != 0){
 								//println "alt trans: "+parent+" - "+matcher[0][1]
 								exon_marker = 0
 								exon_count = 1
 							}
 							parent = matcher[0][1]
+							//some cases will have a ; at the end, remove it!
+							parent = parent.replaceAll(/;$/,"")
 							//println "parent = "+parent
 							//geneFind = GeneInfo.findByMrna_id(parent)
 							gene_nuc = nucData."${parent}"
