@@ -142,7 +142,7 @@
    </tr>
    </table>
    </g:form>	
-   	<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto" data-intro='Alternatively, search publications by species and year by clicking on a bar for the year and selecting species at the bottom' data-step='4'></div>
+   	<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto" data-position='top' data-intro='Alternatively, search publications by species and year by clicking on a bar for the year and selecting species at the bottom' data-step='4'></div>
    	</div>
 </body>
 </html>

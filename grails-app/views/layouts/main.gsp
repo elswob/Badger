@@ -91,7 +91,7 @@
     		println "</ul></li>"
     	}
     	%>
-		<li style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="login">Log in</g:link></li>
+		<li data-position='left' data-intro='Log in to access private secions of the site' data-step='6' style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="login">Log in</g:link></li>
     	<li style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><a href="javascript:void(0);" onclick="introJs('.introjs-${params.controller}-${params.action}').start();">Help</a> ${params.controller} ${params.action}</li>
 	   </sec:ifNotLoggedIn>
 	   
