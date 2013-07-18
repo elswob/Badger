@@ -41,13 +41,19 @@
 <body>
 <div class="introjs-home-index">
  <div class="header" role="banner">
+ 	<div class="inline">
  	<g:if test = "${grailsApplication.config.headerImage}">
-  	  <g:link controller="home" action="index"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="padding:10px;" align="left" height="100px"/></g:link>
+  	  <g:link controller="home" action="index"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="padding:10px;" align="left" height="80px"/></g:link>
    	</g:if>
    	<g:else>
-   		<g:link controller="home" action="index"><img src="${resource(dir: 'images', file: 'Badger.png')}" style="padding:10px;" align="left" height="100px"/></g:link>
+   		<g:link controller="home" action="index"><img src="${resource(dir: 'images', file: 'Badger.png')}" style="padding:10px;" align="left" height="80px"/></g:link>
    	</g:else>
-   	  <font size="6"><br><font size="7">${grailsApplication.config.projectID}</font></font>
+   	  <br><font size="7">${grailsApplication.config.projectID}</font></font>
+   	<g:form controller="search" action="all_searched" style="float:right; position:relative; top:10px" data-intro='Search all the data by keyword' data-step='8'>
+    		Quick Search <g:textField name="searchId" size="20"/>
+    		<input type="image" src="${resource(dir: 'images', file: 'search.jpg')}" height="25" onclick="submit()" style="border-style: none; right:5px; top:8px; position: relative">
+   </g:form>
+  </div>
  </div>    	  
   <div class="footer" role="contentinfo">
     <div class="navbar">
@@ -105,7 +111,7 @@
     	}
     	%>
 		<li data-position='left' data-intro='Log in to access private secions of the site' data-step='7' style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="login">Log in</g:link></li>
-    	<li data-position='left' data-intro='This <b>Help</b> button provides page specific information throughout the website.<br><br>It can be controlled with the <b>mouse</b> or via the keyboard using the <b>arrows and escape key</b>.<br><br>Select <b>Next</b> to see the information for this page.' data-step='1' style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><a href="javascript:void(0);" onclick="runintroJs();">Help</a> ${params.controller} ${params.action}</li>
+    	<li data-position='left' data-intro='This <b>Help</b> button provides page specific information throughout the website.<br><br>It can be controlled with the <b>mouse</b> or via the keyboard using the <b>arrows and escape key</b>.<br><br>Select <b>Next</b> to see the information for this page.' data-step='1' style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><a href="javascript:void(0);" onclick="runintroJs();">Help</a></li>
 	   </sec:ifNotLoggedIn>
 	   
 	   <sec:ifLoggedIn>		
