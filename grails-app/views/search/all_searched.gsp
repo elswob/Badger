@@ -273,31 +273,31 @@
          <br>
   </g:if>
   <g:else>
-    	<hr size = 5 color="green" width="100%" style="margin-top:10px">
-  		<h2>0 matches from the gene data.</h2>
+  		<br><h2>0 matches from the gene data.</h2>
   </g:else>
-  
-    <g:if test="${pubRes}">
-    <hr size = 5 color="green" width="100%" style="margin-top:10px">  
-  	<h2>${pubRes.size()} matches from the publication data:</h2> 
-    	<table cellpadding="0" cellspacing="0" border="0" class="display" id="pub_table">
-			<thead>
-				<tr>
-					<th></th>
-					<th width="40%">Title</th>
-					<th>Authors</th>
-					<th>Journal</th>
-					<th>Date</th>
-					<th><b>Rank</b></th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
-    </g:if>
-    <g:else>
-     <hr size = 5 color="green" width="100%" style="margin-top:10px">
-  	 <h2>0 matches from the publication data.</h2>
-    </g:else>
+    <g:if test="${sp == false}">
+		<g:if test="${pubRes}">
+		<hr size = 5 color="green" width="100%" style="margin-top:10px">  
+		<h2>${pubRes.size()} matches from the publication data:</h2> 
+			<table cellpadding="0" cellspacing="0" border="0" class="display" id="pub_table">
+				<thead>
+					<tr>
+						<th></th>
+						<th width="40%">Title</th>
+						<th>Authors</th>
+						<th>Journal</th>
+						<th>Date</th>
+						<th><b>Rank</b></th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</g:if>
+		<g:else>
+		 <hr size = 5 color="green" width="100%" style="margin-top:10px">
+		 <h2>0 matches from the publication data.</h2>
+		</g:else>
+	</g:if>
   
 </body>
 </html>

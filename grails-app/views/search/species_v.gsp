@@ -5,10 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${grailsApplication.config.projectID} | Versions</title>
     <parameter name="search" value="selected"></parameter>   
-    <g:javascript library="prototype" />
 
 </head>
 <body>
+<div class="introjs-search-species_v">
 	<g:form action="species_search" method="get">
 	<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > ${meta.genus[0]} ${meta.species[0]}
 	<table>
@@ -29,7 +29,7 @@
 			</td>
 		</tr>
 	</table>
-	<table>
+	<table data-intro='Select a genome version' data-step='1'>
 		<g:if test="${genomes.size == 1}">
 		 <h1>Genome version</h1>
 			<g:if test="${genomes.search[0] == 'priv' && user == 'user' || genomes.search[0] == 'pub'}">		

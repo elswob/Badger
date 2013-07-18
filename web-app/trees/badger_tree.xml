@@ -36,7 +36,14 @@
         <clade>
           <branch_length>1.0</branch_length>
           <clade>
-            <name bgStyle="none">Meles meles</name>
+            <name bgStyle="bold">Meles meles</name>
+            <chart>
+             <component>bold</component>
+            </chart>
+            <annotation>
+             <desc>Meles meles</desc>
+             <uri>#Meles meles</uri>
+            </annotation>
             <branch_length>1.0</branch_length>
           </clade>
           <clade>

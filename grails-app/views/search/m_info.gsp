@@ -48,7 +48,7 @@
 	    //gets table
 	    var rowLength = oTableData.rows.length;
 	    //catch empty tables
-	    if (rowLength > 2){
+	    if (rowLength > 1){
 			//gets rows of table
 			for (i = 0; i < rowLength; i++){
 			//loops through rows

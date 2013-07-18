@@ -46,16 +46,17 @@
     
 </head>
 <body>
-	
+	<div class="introjs-search-species">
   	 <g:if test = "${meta}">
   	 <g:link action="">Search</g:link> > Species
   	 	  	 	
   	 <table class="table_100" align="center"><tr>
   	 <g:if test="${grailsApplication.config.t.file}">
-  	 	<td><div id="svgCanvas1"> </div></td>
-  	  	<td><div id="svgCanvas2"> </div></td>
+  	 	<td data-intro='Click on the highlighted species to see details, in either this cladogram...' data-step='1'><div id="svgCanvas1"> </div></td>
+  	  	<td data-intro='or this one' data-step='2'><div id="svgCanvas2"> </div></td>
   	  </g:if>
   	  </tr></table>
+  	  <div data-position='top' data-intro='Click on the image or the button to load the data for that species' data-step='3'>
   	  <g:if test="${grailsApplication.config.t.source}">
   	  	<font size="1">${grailsApplication.config.t.source}</font>
   	  </g:if>
@@ -89,8 +90,10 @@
 		</table>	
   	 </g:if>
   	 <g:else>
-  	 	<h2>There are no species in the database at present, please add some</h2>
+  	 	<h2 data-intro='Add some data to the database' data-step='1'>There are no species in the database at present, please add some</h2>
   	 </g:else>
+  	 </div>
   </table>
+  </div>
 </body>
 </html>

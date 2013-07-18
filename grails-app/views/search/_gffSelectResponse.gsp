@@ -1,7 +1,7 @@
 <g:if test = "${genes}" >
 	<input type="hidden" name="Gid" value="${genome}">
 	<g:if test="${genes.description[0] != 'fake'}">	
-		<table>
+		<table data-intro='Select an annotation version' data-step='2'>
 		<g:if test = "${genes.size == 1}">
 			<h1>Annotation version</h1>
 			<tr>
@@ -19,18 +19,18 @@
 			</g:each>	
 		</g:else>
 		</table>
-		<div class="inline"><h1>View genome</h1> <input class="smallbuttons" type="button" value="Select" id="process" onclick="submit()"></div>
+		<div class="inline"><h1>View genome</h1> <input data-intro='Then hit Select' data-step='3' class="smallbuttons" type="button" value="Select" id="process" onclick="submit()"></div>
 	</g:if>
 	<g:else>
 		<h1>Annotation version</h1>
 		<h3>There is no annotation file for this genome, just transcript sequences linking to an external database</h3>
 		<input type="hidden" name="GFFid" id="${genes.id}" value="${genes.id[0]}">
-		<p><input class="smallbuttons" type="button" value="Select" id="process" onclick="submit()">
+		<p><input data-intro='Then hit Select' data-step='2' class="smallbuttons" type="button" value="Select" id="process" onclick="submit()">
 	</g:else>
 </g:if>
 <g:else>
 	<h1> No annotation files are available for this genome</h1>
-	<p><input class="smallbuttons" type="button" value="Select" id="process" onclick="submit()">
+	<p><input data-intro='Then hit Select' data-step='2' class="smallbuttons" type="button" value="Select" id="process" onclick="submit()">
 	<input type="hidden" name="GFFid" value="0" checked/>
 	<input type="hidden" name="Gid" value="${genome}">
 </g:else>

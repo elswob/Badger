@@ -95,6 +95,7 @@ function fnFormatDetails( oTable, nTr )
   </head>
 
   <body>
+<div class="introjs-home-publication_search"> 
 <div class="bread"><g:link action="">Home</g:link> > <g:link action="publications">Publications</g:link> > Search results </div>
 <g:if test="${pub_results}">
 <g:if test="${sp}">
@@ -104,7 +105,7 @@ function fnFormatDetails( oTable, nTr )
 	<h1>Your search for '<b>${searchId}</b>' returned ${sprintf("%,d\n",pub_results.size())} publications</h1>
 </g:else>
   <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
-    <thead>
+    <thead data-position='top' data-intro='Results can be sorted by each column header, downloaded or filtered<br><br>Press the <img src="${resource(dir: 'js', file: 'DataTables-1.9.4/examples/examples_support/details_open.png')}"> symbols to see the abstracts' data-step='1'>
         <tr>
             <th></th>
             <th width="30%">Title</th>
@@ -119,5 +120,6 @@ function fnFormatDetails( oTable, nTr )
 <g:else>
 <h1>Your search for '<b>${searchId}</b>' returned no results in the publications. Please go back and try again.</h1>
 </g:else>
+</div>
 </body>
 </html>

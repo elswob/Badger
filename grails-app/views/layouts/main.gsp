@@ -20,6 +20,19 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>   
 	<link rel="stylesheet" href="${resource(dir: 'js', file: 'intro.js/introjs.css')}" type="text/css"></link>	  
 	<script src="${resource(dir: 'js', file: 'intro.js/intro.js')}" type="text/javascript"></script>
+	<script>
+		function runintroJs() {
+			if ('${params.controller}-${params.action}' == 'search-species_search'){
+				if ($(show_metrics).is(":visible")) {
+					introJs('.introjs-${params.controller}-${params.action}-1').start();
+				}else{
+					introJs('.introjs-${params.controller}-${params.action}-2').start();
+				}
+			}else{
+            	introJs('.introjs-${params.controller}-${params.action}').start();
+            }
+		}		
+	</script>
 	
   <g:layoutHead/>
   <r:layoutResources />
@@ -48,8 +61,8 @@
 		<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link></li-->
 		
 		<!--% //add public internal links to navigation bar -->
-		<li data-intro='Search the publications with matches to the species in the database' data-step='1'><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li> 
-		<li data-intro='Search the genome and gene data' data-step='2'><g:link controller="search" class="${pageProperty(name:'page.search')}">Search</g:link>
+		<li data-intro='Search the publications with matches to all the species in the database' data-step='2'><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li> 
+		<li data-intro='Search the genome and gene data' data-step='3'><g:link controller="search" class="${pageProperty(name:'page.search')}">Search</g:link>
 			<ul>
 				<g:if test = "${grailsApplication.config.i.links.species == 'public'}">
 			    	<li><g:link controller="search" action="species" class="${pageProperty(name:'page.search')}">Species</g:link></li>
@@ -66,13 +79,13 @@
 			</ul>
 		</li>
 		<g:if test = "${grailsApplication.config.i.links.blast == 'public'}">
-			<li data-intro='Run a BLAST analysis' data-step='3'><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link></li> 
+			<li data-intro='Run a BLAST analysis' data-step='4'><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link></li> 
 		</g:if>
 		<g:if test = "${grailsApplication.config.i.links.members == 'public'}">
 			<li><g:link controller="home" action="members" class="${pageProperty(name:'page.members')}">Members</g:link></li> 
 		</g:if>
 		<g:if test = "${grailsApplication.config.i.links.download == 'public'}">
-			<li data-intro='Download data' data-step='4'><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link></li> 
+			<li data-intro='Download data' data-step='5'><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link></li> 
 		</g:if>
 		<!--li><g:link controller="home" action="browse" class="${pageProperty(name:'page.browse')}">Browse</g:link></li-->
 		<g:if test = "${grailsApplication.config.i.links.stats == 'public'}">
@@ -91,13 +104,13 @@
     		println "</ul></li>"
     	}
     	%>
-		<li data-position='left' data-intro='Log in to access private secions of the site' data-step='6' style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="login">Log in</g:link></li>
-    	<li style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><a href="javascript:void(0);" onclick="introJs('.introjs-${params.controller}-${params.action}').start();">Help</a> ${params.controller} ${params.action}</li>
+		<li data-position='left' data-intro='Log in to access private secions of the site' data-step='7' style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="login">Log in</g:link></li>
+    	<li data-position='left' data-intro='This <b>Help</b> button provides page specific information throughout the website.<br><br>It can be controlled with the <b>mouse</b> or via the keyboard using the <b>arrows and escape key</b>.<br><br>Select <b>Next</b> to see the information for this page.' data-step='1' style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><a href="javascript:void(0);" onclick="runintroJs();">Help</a> ${params.controller} ${params.action}</li>
 	   </sec:ifNotLoggedIn>
 	   
 	   <sec:ifLoggedIn>		
-		<li data-intro='Search the publications with matches to the species in the database' data-step='1'><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link>
-		<li data-intro='Search the genome and gene data' data-step='2'><g:link controller="search" class="${pageProperty(name:'page.search')}">Search</g:link>
+		<li data-intro='Search the publications with matches to all the species in the database' data-step='2'><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link>
+		<li data-intro='Search the genome and gene data' data-step='3'><g:link controller="search" class="${pageProperty(name:'page.search')}">Search</g:link>
 			<ul>
 				<li><g:link controller="search" action="species" class="${pageProperty(name:'page.search')}">Species</g:link></li>
 				<li><g:link controller="home" action="publications" class="${pageProperty(name:'page.publications')}">Publications</g:link></li>				
@@ -107,8 +120,8 @@
 				<li><g:link controller="search" action="all_search" class="${pageProperty(name:'page.search')}">All</g:link></li>
 			</ul>
 		</li> 
-		<li data-intro='Run a BLAST analysis' data-step='3'><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link>
-		<li data-intro='Download data' data-step='4'><g:link controller="home" action="members" class="${pageProperty(name:'page.members')}">Members</g:link>
+		<li data-intro='Run a BLAST analysis' data-step='4'><g:link controller="blast" class="${pageProperty(name:'page.blast')}">BLAST</g:link>
+		<li data-intro='Download data' data-step='5'><g:link controller="home" action="members" class="${pageProperty(name:'page.members')}">Members</g:link>
 		<li><g:link controller="home" action="download" class="${pageProperty(name:'page.download')}">Download</g:link>
 		<!--li><g:link controller="home" action="browse" class="${pageProperty(name:'page.browse')}">Browse</g:link></li-->
 		<!--li><g:link controller="home" action="stats" class="${pageProperty(name:'page.stats')}">Statistics</g:link></li-->
@@ -142,9 +155,8 @@
     		<li><g:link controller="admin" action="home" class="${pageProperty(name:'page.admin')}">Admin</g:link></li>
     	</sec:ifAnyGranted>
     	
-    	<!--li><g:link controller="logout">Log out</g:link></li-->
 		<li style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="logout">Log out</g:link></li>
-		<li style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><a href="javascript:void(0);" onclick="introJs('.introjs-${params.controller}-${params.action}').start();">Help</a></li>
+    	<li data-position='left' data-intro='This <b>Help</b> button provides page specific information throughout the website.<br><br>It can be controlled with the <b>mouse</b> or via the keyboard using the <b>arrows and escape key</b>.<br><br>Select <b>Next</b> to see the information for this page.' data-step='1' style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><a href="javascript:void(0);" onclick="runintroJs();">Help</a> ${params.controller} ${params.action}</li>
 	   </sec:ifLoggedIn>
 	   
 	</ul>

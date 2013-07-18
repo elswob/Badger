@@ -25,7 +25,7 @@
       </div>
       
 	  <g:if test="${params.edit == 'y'}">
-		<div class="sidebar" data-intro='News feed' data-step='5'>  
+		<div class="sidebar" data-intro='News feed' data-step='6'>  
 			<div class="inline">  
 				<h1>Latest News</h1>
 				<sec:ifAnyGranted roles="ROLE_ADMIN">
@@ -87,7 +87,7 @@
 	  </sec:ifAnyGranted>
 	  
       <g:if test="${params.edit != 'y'}">
-		<div class="sidebar" data-intro='News feed' data-step='5'>  
+		<div class="sidebar" data-intro='News feed' data-step='6'>  
 			<div class="inline">  
 				<h1>Latest News</h1>
 				<sec:ifAnyGranted roles="ROLE_ADMIN">

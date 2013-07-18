@@ -484,16 +484,17 @@
     </script>
 </head>
 <body>
+<div class="introjs-search-species_search-1">
 <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:genomeFile.genome.meta.id]}"><i>${genomeFile.genome.meta.genus[0]}. ${genomeFile.genome.meta.species}</i></g:link> > Genome: v${genomeFile.file_version}
 <br><br>
 
 
 <div id="tab_1">
 <input type="button" class="tabbuttons" id="show_metrics" value="Metrics" style="color:#BFBFBF"/>
-<input type="button" class="tabbuttons" id="show_search" onclick="switchTab('2','1')" value="Search"/>
+<input type="button" class="tabbuttons" id="show_search" onclick="switchTab('2','1')" value="Search" data-intro='Switch to the search tab - to get information on this page, press the help button again' data-step='5'/>
 <div style="border:2px solid; border-color:#BFBFBF">
 <table width=100%>  
-      <tr><td width=30%>
+      <tr><td width='30%'  data-intro='Statistics for the genome' data-step='1'>
 			 <h1>Genome metrics:</h1>
 		<g:if test = "${genome_stats.span > 0}">
 			<table>
@@ -507,7 +508,7 @@
 			 <tr><td><b>Non ATGC (bp)</b></td><td>${sprintf("%,d\n",genome_stats.nonATGC)}</td></tr>
 			  </table>
 		</td>
-		<td>		
+		<td  data-intro='A plot of the scaffolds. Switch between plots by clicking the boxes at the top and select a scaffold by clicking a point on the chart.' data-step='2'>		
 			<g:if test = "${genomeInfo.size > 0}">
 			<table>
 				<tr>
@@ -552,7 +553,7 @@
 			 <h2>No genome data are in the database for this genome</h2>
 		</g:else>
 		 </td></tr>
-		   <tr><td>
+		   <tr><td  data-position='top' data-intro='Statistics for the genes' data-step='3'>
 			 <h1>Gene metrics:</h1>
 			 <g:if test = "${gene_stats.size() > 0}">
 				 <table>
@@ -566,7 +567,7 @@
 				 <tr><td><b>GC (%)</b></td><td>${sprintf("%.4g",gene_stats.gc)}</td></tr>
 				 <tr><td><b>Non ATGC (bp)</b></td><td>${sprintf("%,d\n",gene_stats.nonATGC)}</td></tr>
 				 </table>
-			 </td><td>
+			 </td><td data-position='top' data-intro='Annotation plots' data-step='4'>
 			 	<g:if test="${geneData.description != 'fake'}">
 					<br>
 					<div id="blast_chart" class="jqplot-target" style="height: 120px; width: 100%; position: center;"></div>
@@ -596,14 +597,16 @@
  </table>
  </div>
  </div>
+ </div>
+ <div class="introjs-search-species_search-2">
  <div id="tab_2" style="display:none">
  <input type="button" class="tabbuttons" id="show_metrics" onclick="switchTab('1','2')" value="Metrics" />
- <input type="button" class="tabbuttons" id="show_search" value="Search" style="color:#BFBFBF"/>
+ <input type="button" class="tabbuttons" id="show_search" value="Search" style="color:#BFBFBF" data-intro='This is the detailed search page for the gene and genome data. There are multiple options:' data-step='1'/>
  <div style="border:2px solid; border-color:#BFBFBF">
  <g:if test = "${funAnnoData.size() > 1 || blastAnnoData.size() > 1 || interAnnoData.size() > 1}">
 	<div id="content">
 	  <table><tr>
-	  <td><h1>Search all the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> data for this genome and gene set by keyword:</h1>
+	  <td data-intro='Search all the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> data for this particular genome and gene set by keyword' data-step='2'><h1>Search all the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> data for this genome and gene set by keyword:</h1>
    		<g:form action="all_searched" params="${[gffId:params.GFFid, gId:params.Gid]}">
     		<table>
     			<tr><td>
@@ -618,12 +621,12 @@
 	  </table>
 	  <hr size = 5 color="green" width="100%" style="margin-top:10px">
 	  <table><tr>
-	  <td><h1>Search <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> annotations for this genome and gene set:</h1>
+	  <td data-intro='A more detailed search of the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> annotation data by exact word' data-step='3'><h1>Search <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> annotations for this genome and gene set:</h1>
 
 		<g:form action="gene_search_results">		
 			<div id = "showAnno">
 			<table>
-			<tr><td>
+			<tr><td data-intro='First choose the annotation type' data-step='3'>
 			<h1>Choose an annotation:</h1>
 				<g:if test="${'blast' in annoTypes.type}">
 					<label><input name="toggler" type="radio" id="blast" checked="checked" value="1"> 1. BLAST homology</label><br>
@@ -654,7 +657,7 @@
 					</div> 
 				</g:if>
 		
-			<td>  
+			<td data-intro='Then choose to search either the description or the ID' data-step='3'>  
 			<h1>Choose what to search:</h1>
 			<select class="toHide" name = "tableSelect_1" id ="sel_1" onChange='showSelected(this.value)'>
 			  <option value="e.g. ATPase">Description</option>
@@ -670,7 +673,7 @@
 			</select>
 			  </td>
 			  
-			  <td>
+			  <td data-intro='Finally, enter your search term' data-step='3'>
 			<h1>Enter a search term:</h1>
 			<div id='selectedResult'></div>
 			<g:textField name="searchId"  size="30"/>
@@ -691,7 +694,7 @@
 	
 	<g:if test="${geneData.gene}">
 			<table>
-	 	<tr><td><h1>Search by gene ID:</h1>	 
+	 	<tr><td data-intro='Search the gene data by gene ID' data-step='4'><h1>Search by gene ID:</h1>	 
 			 <form name="input" action="m_info" method="get">
 			 <table><tr><td>		 	
     				Enter a gene ID, e.g. <g:link action="m_info" params="${[mid:geneData.gene.mrna_id[0]]}">${geneData.gene.mrna_id[0]} </g:link> <g:textField name="mid" size="50%"/>
@@ -708,7 +711,7 @@
 	
 	<g:if test="${genomeData.scaffold}">
 			<table>
-	 	<tr><td><h1>Search by scaffold ID:</h1>	 
+	 	<tr><td data-intro='Search the genome data by scaffold ID' data-step='5'><h1>Search by scaffold ID:</h1>	 
 			 <form name="input" action="genome_info" method="get">
 			 <table><tr><td>		 	
     				Enter a scaffold ID, e.g. <g:link action="genome_info" params="${[contig_id:genomeData.scaffold.contig_id[0]]}">${genomeData.scaffold.contig_id[0]} </g:link> <g:textField name="contig_id" size="50%"/>
@@ -724,7 +727,7 @@
 	</g:if>
 	
 	<table>
-	 <tr><td><h1>Search <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> publications:</h1>
+	 <tr><td data-position='top' data-intro='Search the publication data for publications matching <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> only' data-step='6'><h1>Search <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> publications:</h1>
 	 
 	 <g:form controller="home" action="publication_search">
 	 <table><tr><td>
@@ -751,6 +754,6 @@
    </td></tr></table>
    </div>
    </div>
-        
+</div>        
 </body>
 </html>

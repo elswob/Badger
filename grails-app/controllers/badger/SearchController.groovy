@@ -251,8 +251,10 @@ class SearchController {
 			def geneRes
 			def pubRes
 			def genomeData
+			def sp = false
 			//if coming from species page
 			if (params.gffId){
+				sp = true
 				genomeData = FileData.findById(params.gId)	
 				println "genomeData = "+genomeData
 				//search gene annotations
@@ -302,7 +304,7 @@ class SearchController {
 			}
 			//println "Anno links =  "+annoLinks
 			
-			return [searchId: params.searchId, search_time: duration, geneRes: geneRes, pubRes: pubRes, annoLinks:annoLinks, genomeData: genomeData]
+			return [sp:sp, searchId: params.searchId, search_time: duration, geneRes: geneRes, pubRes: pubRes, annoLinks:annoLinks, genomeData: genomeData]
 		}
 		sql.close()
     }
