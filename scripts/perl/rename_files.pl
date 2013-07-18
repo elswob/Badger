@@ -3,8 +3,7 @@ use strict;
 use warnings;
 use Getopt::Long;
 
-my ($genome,$genomeID,$gff,$gffID,$trans,$prot) = "";
-
+my ($genome,$genomeID,$gff,$gffID,$trans,$prot) = ("")x6;
 GetOptions (
     "genome=s"      => \$genome,
     "genomeID=s"      => \$genomeID,

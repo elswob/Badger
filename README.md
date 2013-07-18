@@ -499,10 +499,10 @@ Now, each of your instances should run without affecting the other. There may be
 1. All chromosme/scaffold/contig IDs must be unique, e.g. Mmeles_v1.0_scaffold_1. This is true across all data sets. A script is provided to generate unique headers for each sequence:
 
 ```bash
-rename_fasta.pl -f 'xxx.fa' -p 'unique_prefix' 
+/path/to/Badger/scripts/perl/rename_files.pl --genome 'xxx.fa' --genomeID 'unique_prefix' 
 ``` 
 
-This will create a new version of the fasta file called `xxx.fa.renamed` which should be used in place of the original file. Note, that these new IDs also need to match those in column 1 of the GFF3 file. If 
+This will create a new version of the fasta file called `xxx.fa.renamed` which should be used in place of the original file. Note, that these new IDs also need to match those in column 1 of the GFF3 file (see rule 3).
 
 2. GFF3 files should follow this format:
 
@@ -538,7 +538,14 @@ ctg123 . CDS             3301  3902  .  +  0  Parent=mRNA0003
 ctg123 . CDS	     5000  5500	 .  +  2  Parent=mRNA0003
 ctg123 . CDS	     7000  7600	 .  +  2  Parent=mRNA0003
 ```
-3. All gene IDs must be unique, e.g. Mmeles_v_1.0_g_1 / Mmeles_v_1.0_t_1 and match the ID in the GFF3 file. 
+3. All gene IDs must be unique, e.g. Mmeles_v_1.0_g_1 / Mmeles_v_1.0_t_1 and match the ID in the GFF3 file. To rename the gene IDs use `rename_files.pl`:
+
+```bash
+/path/to/Badger/scripts/perl/rename_files.pl --genome 'genome.fa' --genomeID 'unique_prefix' --gff 'genes.gff' --gffID 'unique_prefix' --trans 'transcripts.fa' --prot 'proteins.fa'
+```
+
+Note, that all annotations must now be performed using the renamed proteins fasta files.
+
 4. Alternate transcripts are fine as long as names are unique and CDS follows mRNA
 5. GFF3 files need to be sorted with respect to the proteins, e.g. gene -> mRNA -> CDS. This can be achieved with gffsort.pl (see wormbase section below).
 6. GFF3 files are for gene predictions only, any term matching gene, mRNA or CDS in the third column will be picked up, so remove anything that isn't a gene, e.g. ncRNA in some of the wormbase files
