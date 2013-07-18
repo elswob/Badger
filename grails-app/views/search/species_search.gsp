@@ -560,7 +560,7 @@
 				 <g:if test="${geneData.description != 'fake'}"><tr><td><b>Annotation version</b></td><td>${geneData.file_version}</td></tr></g:if>
 				 <tr><td><b>Number genes</b></td><td>${sprintf("%,d\n",gene_stats.genenum)}</td></tr>
 				 <tr><td><b>Number transcripts</b></td><td>${sprintf("%,d\n",gene_stats.mrnanum)}</td></tr>
-				 <tr><td><b>Frequency (genes per Kb)</b></td><td>${sprintf("%.4g",(gene_stats.genenum/genome_stats.span)*1000)}</td></tr>
+				 <tr><td><b>Frequency (genes per Mb)</b></td><td>${sprintf("%.3g",(gene_stats.genenum/genome_stats.span)*1000000)}</td></tr>
 				 <tr><td><b>Mean transcript length (bp)</b></td><td>${sprintf("%,d\n",gene_stats.mean)}</td></tr>
 				 <tr><td><b>Smallest (bp)</b></td><td>${sprintf("%,d\n",gene_stats.min)}</td></tr>
 				 <tr><td><b>Largest (bp)</b></td><td>${sprintf("%,d\n",gene_stats.max)}</td></tr>
@@ -606,10 +606,10 @@
  <g:if test = "${funAnnoData.size() > 1 || blastAnnoData.size() > 1 || interAnnoData.size() > 1}">
 	<div id="content">
 	  <table><tr>
-	  <td data-intro='Search all the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> data for this particular genome and gene set by keyword' data-step='2'><h1>Search all the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> data for this genome and gene set by keyword:</h1>
+	  <td><h1>Search all the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> data for this genome and gene set by keyword:</h1>
    		<g:form action="all_searched" params="${[gffId:params.GFFid, gId:params.Gid]}">
     		<table>
-    			<tr><td>
+    			<tr data-intro='Search all the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> data for this particular genome and gene set by keyword' data-step='2'><td>
     				<g:textField name="searchId"  size="90%"/>
     					<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
     				  <p>Keyword search will find <b>related terms</b>, e.g. searching for 'tolerate' will also match 'tolerance'.</p><br>
@@ -621,11 +621,11 @@
 	  </table>
 	  <hr size = 5 color="green" width="100%" style="margin-top:10px">
 	  <table><tr>
-	  <td data-intro='A more detailed search of the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> annotation data by exact word' data-step='3'><h1>Search <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> annotations for this genome and gene set:</h1>
+	  <td><h1>Search <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> annotations for this genome and gene set:</h1>
 
 		<g:form action="gene_search_results">		
 			<div id = "showAnno">
-			<table>
+			<table data-intro='A more detailed search of the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> annotation data by exact word' data-step='3'>
 			<tr><td data-intro='First choose the annotation type' data-step='3'>
 			<h1>Choose an annotation:</h1>
 				<g:if test="${'blast' in annoTypes.type}">
@@ -694,9 +694,9 @@
 	
 	<g:if test="${geneData.gene}">
 			<table>
-	 	<tr><td data-intro='Search the gene data by gene ID' data-step='4'><h1>Search by gene ID:</h1>	 
+	 	<tr><td><h1>Search by gene ID:</h1>	 
 			 <form name="input" action="m_info" method="get">
-			 <table><tr><td>		 	
+			 <table data-intro='Search the gene data by gene ID' data-step='4'><tr><td>		 	
     				Enter a gene ID, e.g. <g:link action="m_info" params="${[mid:geneData.gene.mrna_id[0]]}">${geneData.gene.mrna_id[0]} </g:link> <g:textField name="mid" size="50%"/>
     				<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
     				<input type="hidden" name="Gid" value="${params.Gid}">
@@ -711,9 +711,9 @@
 	
 	<g:if test="${genomeData.scaffold}">
 			<table>
-	 	<tr><td data-intro='Search the genome data by scaffold ID' data-step='5'><h1>Search by scaffold ID:</h1>	 
+	 	<tr><td><h1>Search by scaffold ID:</h1>	 
 			 <form name="input" action="genome_info" method="get">
-			 <table><tr><td>		 	
+			 <table data-intro='Search the genome data by scaffold ID' data-step='5'><tr><td>		 	
     				Enter a scaffold ID, e.g. <g:link action="genome_info" params="${[contig_id:genomeData.scaffold.contig_id[0]]}">${genomeData.scaffold.contig_id[0]} </g:link> <g:textField name="contig_id" size="50%"/>
     				<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
     				<input type="hidden" name="Gid" value="${params.Gid}">
@@ -727,10 +727,10 @@
 	</g:if>
 	
 	<table>
-	 <tr><td data-position='top' data-intro='Search the publication data for publications matching <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> only' data-step='6'><h1>Search <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> publications:</h1>
+	 <tr><td><h1>Search <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> publications:</h1>
 	 
 	 <g:form controller="home" action="publication_search">
-	 <table><tr><td>
+	 <table data-position='top' data-intro='Search the publication data for publications matching <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> only' data-step='6'><tr><td>
 
 		<h1>Choose what to search:</h1>
 		<label><input type="checkbox" checked="yes" name="pubVal" value="title" /> Title</label><br>

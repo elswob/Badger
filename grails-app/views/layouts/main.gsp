@@ -13,7 +13,7 @@
   	  <link rel="shortcut icon" href="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" type="image/x-icon">
    	</g:if>
    	<g:else>
-   		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'badgeryellereye_white.png')}" type="image/x-icon">
+   		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'Badger.png')}" type="image/x-icon">
    	</g:else>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
@@ -22,7 +22,7 @@
 	<script src="${resource(dir: 'js', file: 'intro.js/intro.js')}" type="text/javascript"></script>
 	<script>
 		function runintroJs() {
-			if ('${params.controller}-${params.action}' == 'search-species_search'){
+			if ('${params.controller}-${params.action}' == 'search-species_search' || '${params.controller}-${params.action}' == 'search-ortho'){
 				if ($(show_metrics).is(":visible")) {
 					introJs('.introjs-${params.controller}-${params.action}-1').start();
 				}else{
@@ -45,7 +45,7 @@
   	  <g:link controller="home" action="index"><img src="${resource(dir: 'images', file: grailsApplication.config.headerImage)}" style="padding:10px;" align="left" height="100px"/></g:link>
    	</g:if>
    	<g:else>
-   		<g:link controller="home" action="index"><img src="${resource(dir: 'images', file: 'badgeryellereye_white.png')}" style="padding:10px;" align="left" height="100px"/></g:link>
+   		<g:link controller="home" action="index"><img src="${resource(dir: 'images', file: 'Badger.png')}" style="padding:10px;" align="left" height="100px"/></g:link>
    	</g:else>
    	  <font size="6"><br><font size="7">${grailsApplication.config.projectID}</font></font>
  </div>    	  

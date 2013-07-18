@@ -256,16 +256,17 @@
 <g:link action="">Search</g:link> > Search orthologs
 	<br><br>
 	<g:if test="${o}">
+	<div class="introjs-search-ortho-1">
 		<div id="tab_1">
 			<input type="button" class="tabbuttons" id="show_metrics" value="Metrics" style="color:#BFBFBF"/>
-			<input type="button" class="tabbuttons" id="show_search" onclick="switchTab('2','1')" value="Search"/>
+			<input type="button" class="tabbuttons" id="show_search" onclick="switchTab('2','1')" value="Search" data-position='top' data-intro='Search the ortholog data in more detail.' data-step='3'/>
 			<div style="border:2px solid; border-color:#BFBFBF">
 		
 				<h3>Click on a bar or point to view the clusters of that size:</h3><br>
-				<div id="chart1" class="jqplot-target" style="height: 300px; width: 80%; position: center;"></div>
+				<div id="chart1" class="jqplot-target" style="height: 300px; width: 80%; position: center;" data-position='top' data-intro='Plot of ortholog groups showing size and frequencey of each group and the percentage of each species per group.<br><br>Click on a bar or point on the line to get details for that group.' data-step='1'></div>
 				
 				<table cellpadding="0" cellspacing="0" border="0" class="display" id="stats">
-					<thead>
+					<thead data-position='top' data-intro='Ortholog statistics for each species.' data-step='2'>
 						<tr><td><b>Species</b></td><td><b>File</b></td><td><b># clusters</b></td><td><b>Total seqs</b></td><td><b># seqs in clusters</b></td><td><b># singletons</b></td></tr>
 					</thead>
 					<tbody>	
@@ -276,7 +277,9 @@
 				</table>		
 				<br><br><br>
 			</div>
+	    </div>
 	 </div>
+	 <div class="introjs-search-ortho-2">
 	 <div id="tab_2" style="display:none">
 	 <input type="button" class="tabbuttons" id="show_metrics" onclick="switchTab('1','2')" value="Metrics" />
 	 <input type="button" class="tabbuttons" id="show_search" value="Search" style="color:#BFBFBF"/>
@@ -287,7 +290,7 @@
 		
 			<fieldset id="counts">	
 				<g:form action="ortho_search" params="${[type:'count']}">
-					<table class="blast">
+					<table class="blast" data-position='top' data-intro='Search the ortholog groups by member distribution.' data-step='1'>
 					
 						<tr><td></td><td>Select all</td><td>
 						<SELECT NAME=allsign class="selectall">
@@ -299,7 +302,7 @@
 						<g:each var="res" in="${o}">
 							<g:if test="${res.file_type == 'Genes' && res.loaded == true}">		
 								<g:if test="${res.search == 'priv' && user == 'user' || res.search == 'pub'}">	
-									<tr><td><input type="hidden" name="orthoCheck" id="orthoCheck" value="${res.file_name}" /></td><td><i>${res.genus} ${res.species} (${res.file_name})</td><td>
+									<tr><td><input type="hidden" name="orthoCheck" id="orthoCheck" value="${res.file_name}" /></td><td><i>${res.genus} ${res.species}</i> (${res.file_name})</td><td>
 										<SELECT id="orthoSign" NAME="orthoSign" class="selectauto">
 											<OPTION VALUE="eq">equal to
 											<OPTION VALUE="gt">greater than
@@ -316,10 +319,11 @@
 			</fieldset>
 			<hr size = 5 color="green" width="100%" style="margin-top:10px">
 		</g:if>
+
 		<h1>Search the annotation descriptions associated with transcripts marked as orthologs:</h3> 
 		<fieldset id="blast_dbs">
 			<g:form action="ortho_search" params="${[type:'search']}">		
-			<table><tr>
+			<table data-position='top' data-intro='Search the ortholog groups by annotation text.' data-step='2'><tr>
 				<td>
 			
 				<h2>Choose what to search:</h1>
@@ -338,6 +342,7 @@
 		   </table>
 		   </g:form>
 		</fieldset>
+	</div>
 	</div>
 	</div>
 </g:if>
