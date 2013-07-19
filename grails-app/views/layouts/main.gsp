@@ -112,7 +112,7 @@
     	}
     	%>
 		<li data-position='left' data-intro='Log in to access private secions of the site' data-step='7' style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="login">Log in</g:link></li>
-    	<li data-position='left' data-intro='This <b>Help</b> button provides page specific information throughout the website.<br><br>It can be controlled with the <b>mouse</b> or via the keyboard using the <b>arrows and escape key</b>.<br><br>Select <b>Next</b> to see the information for this page.' data-step='1' style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><input type="image" src="${resource(dir: 'images', file: 'green_info.png')}" height="40" onclick="runintroJs();" style="border-style: none; background:none; right:3px; top:-8px; position: relative"></li>
+    	<li data-position='left' data-intro='This <b>information</b> button provides page specific information throughout the website.<br><br>It can be controlled with the <b>mouse</b> or via the keyboard using the <b>arrows and escape key</b>.<br><br>Select <b>Next</b> to see the information for this page.' data-step='1' style="float:right;border-left:1px solid #abbf78;;border-right:0px; height: 23px"><input type="image" src="${resource(dir: 'images', file: 'green_info.png')}" height="28px" onclick="runintroJs();" style="border-style: none; background:none; left: 1px; top:-5px; position: relative;"></li>
 	   </sec:ifNotLoggedIn>
 	   
 	   <sec:ifLoggedIn>		
@@ -163,7 +163,7 @@
     	</sec:ifAnyGranted>
     	
 		<li style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><g:link controller="logout">Log out</g:link></li>
-    	<li data-position='left' data-intro='This <b>Help</b> button provides page specific information throughout the website.<br><br>It can be controlled with the <b>mouse</b> or via the keyboard using the <b>arrows and escape key</b>.<br><br>Select <b>Next</b> to see the information for this page.' data-step='1' style="float:right;border-left:1px solid #abbf78;;border-right:0px;"><a href="javascript:void(0);" onclick="runintroJs();">Help</a> ${params.controller} ${params.action}</li>
+    	<li data-position='left' data-intro='This <b>information</b> button provides page specific information throughout the website.<br><br>It can be controlled with the <b>mouse</b> or via the keyboard using the <b>arrows and escape key</b>.<br><br>Select <b>Next</b> to see the information for this page.' data-step='1' style="float:right;border-left:1px solid #abbf78;;border-right:0px; height: 23px"><input type="image" src="${resource(dir: 'images', file: 'green_info.png')}" height="28px" onclick="runintroJs();" style="border-style: none; background:none; left: 1px; top:-5px; position: relative;"></li>
 	   </sec:ifLoggedIn>
 	   
 	</ul>
