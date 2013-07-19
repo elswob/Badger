@@ -112,8 +112,10 @@
   </head>
 
   <body>
+  <div class="introjs-search-ortho_search">
 <g:link action="">Search</g:link> > <g:link action="ortho">Search orthologs</g:link> > Search results
 <g:if test="${params.type == 'bar'}">
+<div data-intro='Results can be sorted by sequence frequency per species. Select a cluster ID to see more details' data-step='1'>
 	<h1>Clusters with size ${params.val}:</h1>
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="bar_res">
 		<thead>
@@ -134,9 +136,11 @@
 			</g:each>
 		</tbody>
 	</table>
+</div>
 </g:if>
 <g:if test="${params.type == 'count'}">
 	<g:if test="${searchRes}">
+	<div data-intro='Results can be sorted by sequence frequency per species. Select a cluster ID to see more details' data-step='1'>
 		<table cellpadding="0" cellspacing="0" border="0" class="display" id="count_res">
 			<thead>
 				<tr>
@@ -158,6 +162,7 @@
 				</g:each>
 			</tbody>
 		</table>
+	</div>
 	</g:if>
 	<g:else>
 		<br><br><h3>There are no ortholog groups with those numbers, please go <a href="previous.html" onClick="history.back();return false;">back</a> and try again</h3>
@@ -165,8 +170,8 @@
 </g:if>
 <g:if test="${params.type == 'search'}">
 	<g:if test="${searchRes}">
-		<h1>Clusters with a description matching '${params.searchId}'</h1>
-		
+	<div data-intro='Search results show all ortholog clusters with a match to the search term in the annotation text. The highest scoring annotation per group is listed in the <b>Description</b> column. Select a transcript ID or cluster ID to see more details.' data-step='1'>
+		<h1>Clusters with a description matching '${params.searchId}'</h1>		
 		  <table cellpadding="0" cellspacing="0" border="0" class="display" id="search_res">
 			<thead>
 				<tr>
@@ -190,11 +195,13 @@
 				</g:each>
 			</tbody>
 		</table>
+	</div>
 	</g:if>
 	<g:else>
 		<br><br><h3>There were no results for your search of '${params.searchId}'. Please go <a href="previous.html" onClick="history.back();return false;">back</a> and try again</h3>
 	</g:else>
 </g:if>
+</div>
 </body>
 </html>
 

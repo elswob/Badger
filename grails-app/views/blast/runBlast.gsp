@@ -15,6 +15,7 @@
     
   </head>
   <body>
+  <div class="introjs-blast-runBlast">
   <div class="bread"><g:link action="">BLAST</g:link> > BLAST result</div>
   <script type="text/javascript">
   var contig_list=[];
@@ -28,7 +29,7 @@
       <!--p>${command}</p><br-->
       <h1>BLAST result for <em>${term}</em></h1>
       
-      <div id = "blast_fig">
+      <div id = "blast_fig" data-intro='Overview of the BLAST result. Click on a bar to see more details' data-step='1'>
          <script type="text/javascript" src="${resource(dir: 'js', file: 'raphael-min.js')}"></script>
       	 <script type="text/javascript" src="${resource(dir: 'js', file: 'g.raphael-min.js')}"></script>
       	 <script type="text/javascript" src="${resource(dir: 'js', file: 'g.line-min.js')}"></script>
@@ -107,7 +108,7 @@
       <!--p>${jsonData.size()}</p-->
       <!--p>${queryInfo}</p-->
       <g:if test="${jsonData.size() > 2}"> 
-		  <table><tr><td><b>Download:</b></td><td> 
+		  <table data-intro='Download the raw BLAST result or FASTA files of all the sequences.' data-step='2'><tr><td><b>Download:</b></td><td> 
 		  <div class="inline">
 		  <g:form name="resultsDownload" url="[controller:'FileDownload', action:'blast_download']">
 					<g:hiddenField name="fileName" value='blast_result.txt'/>
@@ -133,7 +134,7 @@
 			</g:if>
 		</div>
 	  </table>
-	  <hr size = 5 color="green" width="100%" style="margin-top:10px">
+	  <hr size = 5 color="green" width="100%" style="margin-top:10px" data-position='top' data-intro='See the details for each match. Click on the links for more information.' data-step='3'>
       <div class="blast_res">
           <g:each var="line" in="${blast_result}">
 ${line}<br>
@@ -144,6 +145,7 @@ ${line}<br>
     <h1>Your BLAST produced no results</h1>
     <p>Perhaps you used the wrong BLAST program, please go <a href="previous.html" onClick="history.back();return false;">back</a> and try again.</p>  
   </g:else>
+  </div>
   </body>
   
 

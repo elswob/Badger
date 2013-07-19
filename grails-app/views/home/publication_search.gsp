@@ -105,7 +105,7 @@ function fnFormatDetails( oTable, nTr )
 	<h1>Your search for '<b>${searchId}</b>' returned ${sprintf("%,d\n",pub_results.size())} publications</h1>
 </g:else>
   <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
-    <thead data-position='top' data-intro='Results can be sorted by each column header, downloaded or filtered<br><br>Press the <img src="${resource(dir: 'js', file: 'DataTables-1.9.4/examples/examples_support/details_open.png')}"> symbols to see the abstracts' data-step='1'>
+    <thead data-intro='Results can be sorted by each column header, downloaded or filtered<br><br>Press the <img src="${resource(dir: 'js', file: 'DataTables-1.9.4/examples/examples_support/details_open.png')}"> symbols to see the abstracts' data-step='1'>
         <tr>
             <th></th>
             <th width="30%">Title</th>

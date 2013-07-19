@@ -312,6 +312,10 @@ This step could take a number of hours depending on the size of the files and nu
 
 If you need to add more data just follow one of the two steps above and run the same command `runme`. This will identify the new files and add the data accordingly.
 
+#### Site navigation
+
+On every page there is an **info** button in the navigation bar. This provides useful information on the key features of each page and overview of the site on the home page.
+
 ## Additional features
 
 #### Customise home page

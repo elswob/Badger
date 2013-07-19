@@ -14,12 +14,13 @@
 	
 </head>
 <body>
+<div class="introjs-search-all_search">
 <g:link action="">Search</g:link> > Search all
   <div id="content">
      <h1>Search all the data by keyword:</h1>
  
    <g:form action="all_searched">
-    <table>
+    <table data-intro='Search all the data in the database by keyword' data-step='1'>
     	<tr><td>
     		<g:textField name="searchId"  size="100"/>
     		<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
@@ -63,5 +64,6 @@
             });               
           });
         </script>
+ </div>
 </body>
 </html>

@@ -80,27 +80,31 @@
   </head>
 
   <body>
+  <div class="introjs-search-cluster">
 <g:link action="">Search</g:link> > <g:link action="ortho">Search orthologs</g:link> > Cluster
 	<h1>Cluster data:</h1>
-	<div class="inline">
-		Download (sequences in table only): 
-		<g:form name="orthonucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-			<g:hiddenField name="orthoNucFileId" value=""/>
-			<g:hiddenField name="fileName" value="cluster.${params.group_id}.orthologs"/>
-			<g:hiddenField name="seq" value="OrthoNucleotides"/>
-			<a href="javascript:void(0);" onclick="get_table_data('orthoNuc');document.orthonucfileDownload.submit()">Nucleotides</a>
-		</g:form> 
-		|
-		<g:form name="orthopepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
-			<g:hiddenField name="orthoPepFileId" value=""/>
-			<g:hiddenField name="fileName" value="cluster.${params.group_id}.orthologs"/>
-			<g:hiddenField name="seq" value="OrthoPeptides"/>
-			<a href="javascript:void(0);" onclick="get_table_data('orthoPep');document.orthopepfileDownload.submit()">Peptides</a>
-		</g:form>
-	</div>	
+	<div data-intro='Download the nucleotide or peptide sequences from the ortholog cluster (sequences in table only)' data-step='1'</div>
+		<div class="inline">
+			Download (sequences in table only): 
+			<g:form name="orthonucfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+				<g:hiddenField name="orthoNucFileId" value=""/>
+				<g:hiddenField name="fileName" value="cluster.${params.group_id}.orthologs"/>
+				<g:hiddenField name="seq" value="OrthoNucleotides"/>
+				<a href="javascript:void(0);" onclick="get_table_data('orthoNuc');document.orthonucfileDownload.submit()">Nucleotides</a>
+			</g:form> 
+			|
+			<g:form name="orthopepfileDownload" url="[controller:'FileDownload', action:'gene_download']">
+				<g:hiddenField name="orthoPepFileId" value=""/>
+				<g:hiddenField name="fileName" value="cluster.${params.group_id}.orthologs"/>
+				<g:hiddenField name="seq" value="OrthoPeptides"/>
+				<a href="javascript:void(0);" onclick="get_table_data('orthoPep');document.orthopepfileDownload.submit()">Peptides</a>
+			</g:form>
+		</div>	
+	</div>
 	<g:if test = "${grailsApplication.config.musclePath}">
 		<div class="inline">
 			<g:if test="${data.size() < 21}">
+			<div data-intro='Cluster the nucleotide or peptide sequences from the ortholog cluster (sequences in table only)' data-step='1'</div>
 				Cluster (sequences in table only): 
 				<g:form name="orthoNucCluster" url="[action:'runCluster']">
 					<g:hiddenField name="orthoClusterNucFileId" value=""/>
@@ -116,7 +120,8 @@
 					<g:hiddenField name="seq" value="pep"/>
 					<g:hiddenField name="group_id" value="${params.group_id}"/>
 					<a href="javascript:void(0);" onclick="get_table_data('orthoClusterPep');document.orthoPepCluster.submit()">Peptides</a>
-				</g:form>					
+				</g:form>	
+			</div>				
 			</g:if>
 			<g:else>
 				Clustering only available for groups of 20 or less
@@ -157,7 +162,7 @@
 			</g:each>
 		</tbody>
 	</table>
-
+</div>
 </body>
 </html>
 

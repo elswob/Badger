@@ -167,6 +167,7 @@
     </script>
   </head>
   <body>
+  <div class="introjs-search-all_searched">
   <!-- check for errors -->
   <g:if test="${error == "empty"}">
     <h1>Please enter a search term</h1>
@@ -189,11 +190,11 @@
   <div class="inline">
   <br><h1>Results for search of '<em>${searchId}</em>' across all data</h1> 
   </div><br>
-  
+  <g:if test="${geneRes || pubRes}">
 	<table class="table_border" width='100%'>
 		<tr><td>
 			Searched all records in ${search_time}.<br>
-			</td><td><center>
+			</td><td data-intro='Download the sequence data for the transcripts and proteins in the table<br><br>To download all the search results, change the number in the <b>Show entries</b> box' data-step='4'><center>
 			Download genes in table:
 			<!-- download genes form gets fileName value from get_table_data() -->
 			<div class="inline">
@@ -214,10 +215,10 @@
 			</center>
 		</td></tr>
 	</table>
-  
+  </g:if>
   <g:if test="${geneRes}">
   <br>
-    <h2>${geneRes.size()} matches from the gene data:</h2> 
+    <h2 data-position='top' data-intro='Search results from the gene data' data-step='1'>${geneRes.size()} matches from the gene data:</h2> 
         <table id="gene_table" class="display">
             <thead>
               <tr>
@@ -227,9 +228,9 @@
                 <g:else>
                 	<th><b>Species</b></th>
                 </g:else>
-                <th><b>Transcript ID</b></th>
+                <th data-position='top' data-intro='Click on a transcript ID to see details of the transcript' data-step='2'><b>Transcript ID</b></th>
                 <th><b>Database</b></th>
-                <th><b>Hit ID</b></th>
+                <th data-position='top' data-intro='Click on a hit ID to see details of the annotation match' data-step='3'><b>Hit ID</b></th>
                 <th width="40%"><b>Description</b></th>
                 <th><b>Start</b></th>
                 <th><b>Stop</b></th>
@@ -295,10 +296,10 @@
 		</g:if>
 		<g:else>
 		 <hr size = 5 color="green" width="100%" style="margin-top:10px">
-		 <h2>0 matches from the publication data.</h2>
+		 <br><h2>0 matches from the publication data.</h2>
 		</g:else>
 	</g:if>
-  
+</div>
 </body>
 </html>
 

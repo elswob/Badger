@@ -253,6 +253,7 @@
     </script>
   </head>
   <body>
+  <div class="introjs-search-gene_search_results">
   <!-- check for errors -->
   <g:if test="${error == "empty"}">
     <h1>Please enter a search term</h1>
@@ -272,7 +273,7 @@
 		    	<tr><td>
 		    		Searched ${sprintf("%,d\n",badger.GeneBlast.count() + badger.GeneAnno.count())} records in ${search_time}.<br>
 		    		Found ${uniques} genes with ${results.size()} top hits from distinct databases
-		    		</td><td><center>
+		    		</td><td data-intro='Download the sequence data for the transcripts and proteins in the table<br><br>To download all the search results, change the number in the <b>Show entries</b> box' data-step='4'><center>
 		    		Download genes:
 		    		<!-- download genes form gets fileName value from get_table_data() -->
 		    		<div class="inline">
@@ -300,14 +301,14 @@
 			    <% }else if (annoType == "3"){ %>
 			    <table id='ipr_table_data' class="display">  
 			    <% } %>   
-			    <thead>
+			    <thead data-intro='Results can be sorted by each column header, downloaded or filtered<br><br>Press the <img src="${resource(dir: 'js', file: 'DataTables-1.9.4/examples/examples_support/details_open.png')}"> symbols to see the BLAST alignment' data-step='1'>
 				<tr>
 				<% if (annoType == "1"){ %>
 				  <th></th>
 				<% } %>
-				  <th><b>Transcript ID</b></th>
+				  <th data-position='top' data-intro='Click on a transcript ID to see details of the transcript' data-step='2'><b>Transcript ID</b></th>
 				  <th><b>Database</b></th>
-				  <th><b>Hit ID</b></th>
+				  <th data-position='top' data-intro='Click on a hit ID to see details of the annotation match' data-step='3'><b>Hit ID</b></th>
 				  <th width=50%><b>Description</b></th>
 				  <th><b>Score</b></th>
 				</tr>
@@ -321,6 +322,7 @@
           	<p>Found <strong>0</strong> hits.</p>
           	<a href="previous.html" onClick="history.back();return false;">Search Again</a>
           </g:else>
+</div>
 </body>
 </html>
 

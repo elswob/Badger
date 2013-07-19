@@ -26,6 +26,7 @@ class BlastController {
 				user = "user"
 			}
 			def blastFiles = FileData.findAllByFile_typeInList(["mRNA","Peptide","Genome"],[sort:"genome.meta.genus"])
+			//println "blastFiles = "+blastFiles
 			def dataTypesSql = "select distinct(file_type) from file_data order by file_type desc;"
 			def dataTypes = sql.rows(dataTypesSql)
 			//println "dataTypes = "+dataTypes

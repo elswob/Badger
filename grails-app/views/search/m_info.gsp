@@ -616,13 +616,14 @@
     
   </head>
   <body>
+  <div class="introjs-search-m_info">
   <g:if test="${info_results}">
-    <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus[0]}. ${metaData.genome.meta.species}</i></g:link> > Genome: <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">v${metaData.file_version}</g:link> > Scaffold:<g:if test="${info_results.contig_id != 'n/a'}"><g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:info_results.contig_id]}"> ${info_results.contig_id}</g:link></g:if><g:else> n/a</g:else> > Gene: <g:link action="g_info" params="${[Gid:Gid,GFFid:GFFid,gid:info_results.gene_id]}"> ${info_results.gene_id}</g:link>  > Transcript: ${info_results.mrna_id}
+    <div data-intro='Breadcrumbs show complete origins of the transcript' data-step='1'><g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus[0]}. ${metaData.genome.meta.species}</i></g:link> > Genome: <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">v${metaData.file_version}</g:link> > Scaffold:<g:if test="${info_results.contig_id != 'n/a'}"><g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:info_results.contig_id]}"> ${info_results.contig_id}</g:link></g:if><g:else> n/a</g:else> > Gene: <g:link action="g_info" params="${[Gid:Gid,GFFid:GFFid,gid:info_results.gene_id]}"> ${info_results.gene_id}</g:link>  > Transcript: ${info_results.mrna_id} </div>
   	<div id="top_anchor"></div>
     <div id="info_anchor"><h1>Information for transcript ${info_results.mrna_id}:</h1></div>
     <table width=100%>
       <tr><td width=40%>
-		<table class="compact">
+		<table class="compact" data-intro='Detailed metrics of the transcript including sequence downloads (where available)' data-step='2'>
 			<tr><td><b>Length:</b></td><td>${sprintf("%,d\n",info_results.nuc.length())} bp (${sprintf("%,d\n",info_results.pep.length())} aa)</td></tr>
 			<tr><td><b>GC:</b></td><td>${sprintf("%.1f",info_results.gc)}</td></tr>
 			<g:if test="${exon_results}"><tr><td><b>Exons:</b></td><td>${exon_results.size()}</td></tr></g:if>
@@ -677,13 +678,13 @@
 		</table> 
     </td>
     
-    <td width=60%>
+    <td width="60%" data-intro='Bar chart of amino acid frequencies' data-step='3'>
 		<div id="aa_chart" class="jqplot-target" style="height: 230px;"></div>
     </td>
     </tr>
     </table>
     
-    <div id="nav_float">
+    <div id="nav_float" data-intro='Floating navigation bar helps movement through the page' data-step='4'>
 		<div class="mid" role="contentinfo">
 			<div class="nav_float">
 			<ul>
@@ -719,11 +720,12 @@
     <g:if test="${blast_results || ipr_results || fun_results}">
         <div id="anno_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>  
 		  <h1>Annotation overview</h1>  
-			  <div id="blast_fig"></div>
+			  <div id="blast_fig" data-intro='Interactive annotation overview showing the transcript, its exons and the positions of the annotations in the tables below.' data-step='5'></div>
       </g:if>
       
       <g:if test="${blast_results}">
 		  <div id="blast_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
+		  	<div data-position='top' data-intro='Details of the BLAST matches. <br><br>Press the <img src="${resource(dir: 'js', file: 'DataTables-1.9.4/examples/examples_support/details_open.png')}"> symbols to see the BLAST alignment' data-step='6'>
 			   <h1>BLAST results</h1>
 		   <table id="blast_table_data" class="display">
 			  <thead>
@@ -740,11 +742,13 @@
 			  <tbody>
 			  </tbody>
 			</table>
+			</div>
 	   </g:if>
 	   
 	   <g:if test="${fun_results}">
 	   <br>
 	   <div id="fun_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
+	   <div data-position='top' data-intro='Details of matches to functional annotations.' data-step='7'>
 	   <h1>Functional annotation results</h1>
 	   <table id="fun_table_data" class="display">
 	      <thead>
@@ -779,6 +783,7 @@
 	     </g:each>
 	      </tbody>
 	    </table>
+	    </div>
 	    </g:if>
 	   
 	    
@@ -786,6 +791,7 @@
 	   
 	   <g:if test="${ipr_results}">
 		   <div id="ipr_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
+		   <div data-position='top' data-intro='Details of the matches to InterPro domains.' data-step='8'>
 		   <h1>InterProScan results</h1>
 		   <table id="ipr_table_data" class="display">
 			 <thead>
@@ -815,102 +821,113 @@
 			 </g:each>
 			 </tbody>
 			</table>
+			</div>
 	   </g:if> 
      <br>
     
    <g:if test ="${metaData.genome.gbrowse}">
-     	<div id="browse_anchor"><div></div>
+     	<div id="browse_anchor"></div>
          	<hr size = 5 color="green" width="100%" style="margin-top:10px">
 		 	<h1>Browse on the genome <a href="${metaData.genome.gbrowse}?name=${info_results.contig_id.trim()}:${info_results.start}..${info_results.stop}" target='_blank'>(go to genome browser)</a>:</h1>
-		 	<iframe src="${metaData.genome.gbrowse}?name=${info_results.contig_id.trim()}:${info_results.start}..${info_results.stop}" width="100%" height="700" frameborder="0">
-				<img src="${metaData.genome.gbrowse}?name=${info_results.contig_id.trim()}:${info_results.start}..${info_results.stop}"/>
-		 	</iframe>
-		 </div>
+		 	<div data-position='top' data-intro='Embedded GBrowse instance showing further details of the region on the scaffold containing the transcript.' data-step='9'>
+		 		<iframe src="${metaData.genome.gbrowse}?name=${info_results.contig_id.trim()}:${info_results.start}..${info_results.stop}" width="100%" height="700" frameborder="0">
+					<img src="${metaData.genome.gbrowse}?name=${info_results.contig_id.trim()}:${info_results.start}..${info_results.stop}"/>
+		 		</iframe>
+		 	</div>
      </g:if>
 
       <div id="files_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
-      <h1>FASTA files</h1>
-      <div style="overflow:auto; max-height:200px;">
-	      <table style="table-layout: fixed; width:100%">
-	      <tr><td style="word-wrap: break-word">
-	      >${info_results.gene_id}<br>${info_results.pep}
-	      </td></tr>
-	      </table>
-      </div>    
-      <div style="overflow:auto; max-height:200px;">
-	      <table style="table-layout: fixed; width:100%">
-	      <tr><td style="word-wrap: break-word">
-	      >${info_results.gene_id}<br>${info_results.nuc}
-	      </td></tr>
-	      </table>
-      </div>      
+      <div data-position='top' data-intro='Nucleotide and amino acid FASTA files of the transcript.' data-step='10'>
+		  <h1>FASTA files</h1>
+		  <div style="overflow:auto; max-height:200px;">
+			  <table style="table-layout: fixed; width:100%">
+			  <tr><td style="word-wrap: break-word">
+			  >${info_results.gene_id}<br>${info_results.pep}
+			  </td></tr>
+			  </table>
+		  </div>    
+		  <div style="overflow:auto; max-height:200px;">
+			  <table style="table-layout: fixed; width:100%">
+			  <tr><td style="word-wrap: break-word">
+			  >${info_results.gene_id}<br>${info_results.nuc}
+			  </td></tr>
+			  </table>
+		  </div>    
+    </div>  
+    
+    
     <g:if test="${info_results.source != 'n/a'}"> 
 		<div id="exon_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
-			<h1>Exons</h1>
-			<div class="inline">
-				Download: 
-				<sec:ifNotLoggedIn>
-					<g:if test="${geneData.download == 'pub'}" >	
+			<div data-position='top' data-intro='Details of each exon including a download option.' data-step='11'>
+				<h1>Exons</h1>
+				<div class="inline">
+					Download: 
+					<sec:ifNotLoggedIn>
+						<g:if test="${geneData.download == 'pub'}" >	
+							<g:form name="exonDownload" url="[controller:'FileDownload', action:'exon_download']">
+								<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
+								<a href="javascript:void(0);" onclick="document.exonDownload.submit()">exon sequences</a>
+							</g:form>
+						</g:if>
+						<g:else>
+							not available
+						</g:else>
+					</sec:ifNotLoggedIn>
+					<sec:ifLoggedIn>
 						<g:form name="exonDownload" url="[controller:'FileDownload', action:'exon_download']">
-							<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
-							<a href="javascript:void(0);" onclick="document.exonDownload.submit()">exon sequences</a>
+								<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
+								<a href="javascript:void(0);" onclick="document.exonDownload.submit()">exon sequences</a>
 						</g:form>
-					</g:if>
-					<g:else>
-						not available
-					</g:else>
-				</sec:ifNotLoggedIn>
-				<sec:ifLoggedIn>
-					<g:form name="exonDownload" url="[controller:'FileDownload', action:'exon_download']">
-							<g:hiddenField name="fileName" value="${info_results.mrna_id}"/>
-							<a href="javascript:void(0);" onclick="document.exonDownload.submit()">exon sequences</a>
-					</g:form>
-				</sec:ifLoggedIn>
-			</div>
-			 <table cellpadding="0" cellspacing="0" border="0" class="display" id="exon_table">
-			 <thead>
-				<tr>
-					<th></th>
-					<th>Number</th>
-					<th>Length</th>
-					<th>Start</th>
-					<th>End</th>
-					<th>GC</th>
-					<th>Phase</th>
-					<th>Score</th>
-				</tr>
-			 </thead>
-			 <tbody></tbody>
-			 </table> 
+					</sec:ifLoggedIn>
+				</div>
+				 <table cellpadding="0" cellspacing="0" border="0" class="display" id="exon_table">
+				 <thead>
+					<tr>
+						<th></th>
+						<th>Number</th>
+						<th>Length</th>
+						<th>Start</th>
+						<th>End</th>
+						<th>GC</th>
+						<th>Phase</th>
+						<th>Score</th>
+					</tr>
+				 </thead>
+				 <tbody></tbody>
+				 </table> 
+			 </div>
 		 <br>
     </g:if>
     <g:if test = "${grailsApplication.config.o.file}">
 		<div id="ortho_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
-		<h1>Orthologs (click cluster ID for more details)</h1> 
-		<g:if test="${orthologs}">
-			<table id="orthomcl_table" class="display" >
-				  <thead>
-					<tr>
-						<th><b>Cluster</b></th>
-						<th><b>Size</b></th>
-				   </tr>
-				  </thead>
-				  <tbody>
-					<g:each var="res" in="${orthologs}">
-						<tr>						
-							<td><a href="cluster?group_id=${res.group_id}">${res.group_id}</a></td>
-							<td>${res.size}</td>
-						</tr>  
-					</g:each>
-				  </tbody>
-			</table>		
-		</g:if>
-		<g:else>
-			<h2>This transcript has no orthology information which is due to one of three reasons.</h2>
-			1. It has no orthologs with any of the other transcripts.<br>
-			2. The transcript was not included in the ortholog analysis.<br>
-			3. The protein sequence was not good enough.
-		</g:else>
+		<div data-position='top' data-intro='Ortholog information - click on the Cluster link to see details of the ortholog group.' data-step='12'>
+			<h1>Orthologs (click cluster ID for more details)</h1> 
+			<g:if test="${orthologs}">
+				<table id="orthomcl_table" class="display" >
+					  <thead>
+						<tr>
+							<th><b>Cluster</b></th>
+							<th><b>Size</b></th>
+					   </tr>
+					  </thead>
+					  <tbody>
+						<g:each var="res" in="${orthologs}">
+							<tr>						
+								<td><a href="cluster?group_id=${res.group_id}">${res.group_id}</a></td>
+								<td>${res.size}</td>
+							</tr>  
+						</g:each>
+					  </tbody>
+				</table>		
+			</g:if>
+			<g:else>
+				<h2>This transcript has no orthology information which is due to one of three reasons.</h2>
+				1. It has no orthologs with any of the other transcripts.<br>
+				2. The transcript was not included in the ortholog analysis.<br>
+				3. The protein sequence was not good enough.
+			</g:else>
+			
+		</div>
 	</g:if>
     
 	<g:if test="${blast_results || ipr_results || fun_results}">
@@ -925,5 +942,6 @@
   	<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus[0]}. ${metaData.genome.meta.species}</i></g:link> > Genome: <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">v${metaData.file_version}</g:link> 
     <h1>There is no match for <b>${mrna_id}</b></h1>
   </g:else>
+  </div>
 	 </body>		 
 </html>

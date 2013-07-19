@@ -78,6 +78,7 @@
 
 <!--body onload="stopSpin();"-->
 <body>
+<div class="introjs-blast-index">
 <div class="bread">BLAST</div>  
 
 <!--body onunload=""-->
@@ -89,7 +90,7 @@
 		<h2>There are currently no data to search! Please add some data to the database.</h2>
 	</g:if>
 	<g:else>
-		<table class="compact"><tr><td>	
+		<table class="compact" data-intro='Choose which databases to BLAST against' data-step='1'><tr><td>	
 			<g:each var="d" in="${dataTypes}">
 				<g:if test="${d.file_type == 'Genome'}">
 					<label><input name="blastDB" type="radio" id="genomeRadio" checked="checked" value="1" STYLE="cursor: pointer" onclick="programCheck('nuc');toggleDiv('blk_1');$('#blk_2').hide();$('#blk_3').hide();"> Genomes</label>
@@ -156,7 +157,7 @@
 		</td></tr></table>
 	
 		<h1>Set parameters:</h1>
-		<table><tr><td>
+		<table data-intro='Set the BLAST parameters' data-step='2'><tr><td>
 		<g:link controller="blast" action="info" fragment="program">Program</g:link>
 		<g:if test="${blastFiles.size == 1}">
 			<select name = "PROGRAM" id = "program">
@@ -211,7 +212,7 @@
 		</td></tr></table>
 	
 		<h1>Enter a sequence:</h1>
-		<table><tr><td>
+		<table data-position='top' data-intro='Either enter a sequence in the box or upload a file. Only one sequence can run at a time, so multi-FASTA files will only use the first sequence. For an example FASTA file click the link.' data-step='3'><tr><td>
 		<p>The query sequence is&nbsp;<input TYPE="checkbox" NAME="FILTER" VALUE="L" CHECKED>
 		<g:link controller="blast" action="info" fragment="filt">filtered</g:link>
 		for low complexity regions by default.
@@ -222,7 +223,7 @@
 		</td></tr></table>
 	
 		<h1>BLAST:</h1>
-		<table><tr><td>
+		<table data-position='top' data-intro='Click <b>Search</b> or hit return to start the BLAST job' data-step='4'><tr><td>
 		<!--input TYPE="submit" VALUE="Search" id="button"-->
 		<!--input TYPE="RESET" VALUE="Reset" id="button"-->
 		<div id="buttons">
@@ -240,5 +241,6 @@
             });
           });
    </script>
+</div>
 </body>
 </html>

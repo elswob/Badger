@@ -8,10 +8,11 @@
     
 </head>
 <body>
+<div class="introjs-search-runCluster">
 <g:link action="">Search</g:link> > <g:link action="ortho">Search orthologs</g:link> > <g:link action="cluster" params="${[group_id:params.group_id]}">Cluster</g:link> > Alignment
   	 <g:if test = "${align}">
   	 	<h1>Alignment results</h1>
-  	 	<div class="inline">
+  	 	<div class="inline" data-intro='Download the clustering results in either <b>Clustal</b> or HTML format.' data-step='1'>
   	 	  Download: 
 		  <g:form name="alnDownload" url="[controller:'FileDownload', action:'align_download']">
 				<g:hiddenField name="fileId" value="${align.OutFile}"/>
@@ -32,5 +33,6 @@
 	  	 	${align.htmlOut}<br>
 	  	<!--/div-->
   	 </g:if>
+</div>
 </body>
 </html>

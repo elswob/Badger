@@ -22,7 +22,12 @@
     <script type="text/javascript"> 
     	$(window).unload(function() {});
     </script>
-    
+    <script>
+		var p1 = true
+		function page(a){
+			p1 = a
+		}
+	</script>
     <% 
   	def jsonAnnoData = funAnnoData.encodeAsJSON(); 
   	def jsonInterData = interAnnoData.encodeAsJSON();
@@ -491,7 +496,7 @@
 
 <div id="tab_1">
 <input type="button" class="tabbuttons" id="show_metrics" value="Metrics" style="color:#BFBFBF"/>
-<input type="button" class="tabbuttons" id="show_search" onclick="switchTab('2','1')" value="Search" data-intro='Switch to the search tab - to get information on this page, press the help button again' data-step='5'/>
+<input type="button" class="tabbuttons" id="show_search" onclick="switchTab('2','1');page(false);" value="Search" data-intro='Switch to the search tab - to get information on this page, press the help button again' data-step='5'/>
 <div style="border:2px solid; border-color:#BFBFBF">
 <table width=100%>  
       <tr><td width='30%'  data-intro='Statistics for the genome' data-step='1'>
@@ -600,7 +605,7 @@
  </div>
  <div class="introjs-search-species_search-2">
  <div id="tab_2" style="display:none">
- <input type="button" class="tabbuttons" id="show_metrics" onclick="switchTab('1','2')" value="Metrics" />
+ <input type="button" class="tabbuttons" id="show_metrics" onclick="switchTab('1','2');page(true);"" value="Metrics" />
  <input type="button" class="tabbuttons" id="show_search" value="Search" style="color:#BFBFBF" data-intro='This is the detailed search page for the gene and genome data. There are multiple options:' data-step='1'/>
  <div style="border:2px solid; border-color:#BFBFBF">
  <g:if test = "${funAnnoData.size() > 1 || blastAnnoData.size() > 1 || interAnnoData.size() > 1}">
@@ -608,8 +613,8 @@
 	  <table><tr>
 	  <td><h1>Search all the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> data for this genome and gene set by keyword:</h1>
    		<g:form action="all_searched" params="${[gffId:params.GFFid, gId:params.Gid]}">
-    		<table>
-    			<tr data-intro='Search all the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> data for this particular genome and gene set by keyword' data-step='2'><td>
+    		<table data-intro='Search all the <i>${genomeFile.genome.meta.genus} ${genomeFile.genome.meta.species}</i> data for this particular genome and gene set by keyword' data-step='2'>
+    			<tr><td>
     				<g:textField name="searchId"  size="90%"/>
     					<input class="mybuttons" type="button" value="Search" id="process" onclick="submit()" >
     				  <p>Keyword search will find <b>related terms</b>, e.g. searching for 'tolerate' will also match 'tolerance'.</p><br>
