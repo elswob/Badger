@@ -320,7 +320,7 @@ img {
 fieldset,
 .property-list {
 	margin: 0.6em 1.25em 0 1.25em;
-	padding: 0.3em 1.8em 1.25em;
+	padding: 0.3em 1.8em 0;
 	position: relative;
 	zoom: 1;
 	border: none;

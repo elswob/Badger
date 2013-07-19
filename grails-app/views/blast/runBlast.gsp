@@ -134,7 +134,7 @@
 			</g:if>
 		</div>
 	  </table>
-	  <hr size = 5 color="green" width="100%" style="margin-top:10px" data-position='top' data-intro='See the details for each match. Click on the links for more information.' data-step='3'>
+	  <hr size = 5 color="green" width="100%" style="margin-top:10px" data-position='top' data-intro='See the details for each match below this line. Click on the links for more information.' data-step='3'>
       <div class="blast_res">
           <g:each var="line" in="${blast_result}">
 ${line}<br>

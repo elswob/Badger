@@ -218,7 +218,7 @@
   </g:if>
   <g:if test="${geneRes}">
   <br>
-    <h2 data-position='top' data-intro='Search results from the gene data' data-step='1'>${geneRes.size()} matches from the gene data:</h2> 
+    <h2 data-position='top' data-intro='Search results from matches to the gene annotation data' data-step='1'>${geneRes.size()} matches from the gene data:</h2> 
         <table id="gene_table" class="display">
             <thead>
               <tr>
@@ -279,7 +279,7 @@
     <g:if test="${sp == false}">
 		<g:if test="${pubRes}">
 		<hr size = 5 color="green" width="100%" style="margin-top:10px">  
-		<h2>${pubRes.size()} matches from the publication data:</h2> 
+		<h2 data-position='top' data-intro='Search results from matches to the publication abstracts' data-step='5'>${pubRes.size()} matches from the publication data:</h2> 
 			<table cellpadding="0" cellspacing="0" border="0" class="display" id="pub_table">
 				<thead>
 					<tr>
