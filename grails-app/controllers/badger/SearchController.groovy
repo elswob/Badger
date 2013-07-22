@@ -579,7 +579,7 @@ class SearchController {
      		def geneData = FileData.findById(GFFid);
      		//def results = GeneInfo.findAllByGene_id(params.gid)
      		def genesql = "select gene_info.* from gene_info,file_data where gene_info.gene_id = '"+params.gid+"' and file_data.id = "+GFFid+" and gene_info.file_id = file_data.id;"
-     		//println genesql
+     		println genesql
      		def gene_results = sql.rows(genesql)
      		println "only one transcript, skipping the gene page!"
      		if (gene_results.size() == 1){

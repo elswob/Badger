@@ -62,10 +62,11 @@
   </head>
  
   <body>
+  <div class="introjs-search-g_info">
     <g:if test="${results}">
     <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus[0]}. ${metaData.genome.meta.species}</i></g:link> > Genome: <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">v${metaData.file_version}</g:link> > Scaffold:<g:link action="genome_info" params="${[Gid:Gid,GFFid:GFFid,contig_id:results.contig_id[0]]}"> ${results.contig_id[0]}</g:link> > Gene: ${results.gene_id[0]}
     	<g:if test="${results}">
-    	<div class="inline">
+    	<div class="inline" data-intro='Download sequence data (where available)' data-step='1'>
     	<br>
 			<!-- download genes form gets fileName value from get_table_data() -->		    		
 			 <div style="right:0px;">
@@ -108,7 +109,7 @@
 			</div>   	
 		 </div>	
 		    		
-    		<table id="gene_table_data" class="display">
+    		<table id="gene_table_data" class="display" data-intro='Information on the transcripts associated with this gene' data-step='2'>
 			  <thead>
 			  	<tr>
 					<th><b>Transcript ID</b></th>
@@ -132,14 +133,17 @@
     	<br>
 			<g:if test ="${metaData.genome.gbrowse}">
 				<hr size = 5 color="green" width="100%" style="margin-top:10px">
-		 		<h1>Browse on the genome <a href="${metaData.genome.gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
-		 		<iframe src="${metaData.genome.gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}" width="100%" height="700" frameborder="0">
-					<img src="${metaData.genome.gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}"/>
-		 		</iframe>
+				<div data-position='top' data-intro='View the gene on GBrowse' data-step='3'>
+		 			<h1>Browse on the genome <a href="${metaData.genome.gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}" target='_blank'>(go to genome browser)</a>:</h1>
+		 			<iframe src="${metaData.genome.gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}" width="100%" height="700" frameborder="0">
+						<img src="${metaData.genome.gbrowse}?name=${results.contig_id[0].trim()}:${results.start[0]}..${results.stop[0]}"/>
+		 			</iframe>
+		 		</div>
 			</g:if>
     </g:if>
     <g:else>
 	    <h1>There is no information for <b>${results.contig_id[0]}</b></h1>
     </g:else>
+  </div>
   </body>
 </html>

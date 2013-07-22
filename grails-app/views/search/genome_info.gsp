@@ -163,8 +163,8 @@
     	</g:else>    	
     	<br>
 		<g:if test ="${metaData.genome.gbrowse}"> 
+		<hr size = 5 color="green" width="100%" style="margin-top:10px">
 		  <div data-position='top' data-intro='View the scaffold on GBrowse' data-step='3'>
-			<hr size = 5 color="green" width="100%" style="margin-top:10px">
 			<h1>Browse on the genome <a href="${metaData.genome.gbrowse}?name=${info_results.contig_id[0].trim()}" target='_blank'>(go to genome browser)</a>:</h1>
 			 <iframe src="${metaData.genome.gbrowse}?name=${info_results.contig_id[0].trim()}" width="100%" height="700" frameborder="0">
 				<img src="${metaData.genome.gbrowse}?name=${info_results.contig_id[0].trim()}"/>
