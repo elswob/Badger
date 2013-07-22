@@ -8,7 +8,9 @@
   <parameter name="download" value="selected"></parameter>
   </head>
   <body>
+  <div class="introjs-home-download">
   <div class="bread"><g:link action="">Home</g:link> > Download</div>
+  <div data-intro='Download the raw data files. Downloads may be restricted depending on the settings of the project.' data-step='1'></div>
     <table class="compact">    
     <% def sp = ""%>
     <sec:ifNotLoggedIn>

@@ -64,11 +64,12 @@
   
   
   <body>
+  <div class="introjs-search-genome_info">
     <g:if test="${info_results}">
     <g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus[0]}. ${metaData.genome.meta.species}</i></g:link> > Genome: <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">v${metaData.file_version}</g:link> > Scaffold: ${info_results.contig_id[0]}
     
     <h1>Information for <b>${info_results.contig_id[0]}</b>:</h1>
-    <table>
+    <table data-intro='Overview of the scaffold and link to sequence download (where permitted)' data-step='1'>
       <tr>
         <td><b>Length:</b> </td>
         <g:if test = "${grailsApplication.config.coverage.Genome == 'y'}">
@@ -131,7 +132,7 @@
 				)	 
 			</div-->   	
 		 </div>	
-		    		
+		    <div data-intro='Information about the genes on the scaffold' data-step='2'>		
     		<table id="gene_table_data" class="display">
 			  <thead>
 			  	<tr>
@@ -153,7 +154,8 @@
 			  		</tr>  
 			 	</g:each>
 			  </tbody>
-			</table>			
+			</table>	
+			</div>		
     	</g:if>
     	<g:else>
     		<hr size = 5 color="green" width="100%" style="margin-top:10px">
@@ -161,16 +163,19 @@
     	</g:else>    	
     	<br>
 		<g:if test ="${metaData.genome.gbrowse}"> 
+		  <div data-position='top' data-intro='View the scaffold on GBrowse' data-step='3'>
 			<hr size = 5 color="green" width="100%" style="margin-top:10px">
 			<h1>Browse on the genome <a href="${metaData.genome.gbrowse}?name=${info_results.contig_id[0].trim()}" target='_blank'>(go to genome browser)</a>:</h1>
 			 <iframe src="${metaData.genome.gbrowse}?name=${info_results.contig_id[0].trim()}" width="100%" height="700" frameborder="0">
 				<img src="${metaData.genome.gbrowse}?name=${info_results.contig_id[0].trim()}"/>
 			 </iframe>
+		  </div>
 		</g:if>
     </g:if>
     <g:else>
     	<g:link action="">Search</g:link> > <g:link action="species">Species</g:link> > <g:link action="species_v" params="${[Sid:metaData.genome.meta.id]}"><i> ${metaData.genome.meta.genus[0]}. ${metaData.genome.meta.species}</i></g:link> > Genome: <g:link action="species_search" params="${[Gid:Gid,GFFid:GFFid]}">v${metaData.file_version}</g:link>
 	    <h1>There is no match for <b>${contig_id}</b></h1>
     </g:else>
+    </div>
   </body>
 </html>

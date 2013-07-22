@@ -900,7 +900,7 @@
     </g:if>
     <g:if test = "${grailsApplication.config.o.file}">
 		<div id="ortho_anchor"><hr size = 5 color="green" width="100%" style="margin-top:10px"></div>
-		<div data-position='top' data-intro='Ortholog information - click on the Cluster link to see details of the ortholog group.' data-step='12'>
+		<div data-position='top' data-intro='Ortholog information - click on the Cluster link (if available) to see details of the ortholog group.' data-step='12'>
 			<h1>Orthologs (click cluster ID for more details)</h1> 
 			<g:if test="${orthologs}">
 				<table id="orthomcl_table" class="display" >
