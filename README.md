@@ -500,13 +500,15 @@ Now, each of your instances should run without affecting the other. There may be
 
 ## Data rules
 
-1. All chromosme/scaffold/contig IDs must be unique, e.g. Mmeles_v1.0_scaffold_1. This is true across all data sets. A script is provided to generate unique headers for each sequence:
+1. All chromosome/scaffold/contig IDs must be unique across all data sets, e.g. Mmeles_v1.0_scaffold_1. A script is provided to generate unique headers for each sequence:
 
 ```bash
 /path/to/Badger/scripts/perl/rename_files.pl --genome 'xxx.fa' --genomeID 'unique_prefix' 
 ``` 
 
-This will create a new version of the fasta file called `xxx.fa.renamed` which should be used in place of the original file. Note, that these new IDs also need to match those in column 1 of the GFF3 file (see rule 3).
+This will create a new version of the fasta file called `xxx.fa.renamed` which should be used in place of the original file. Note, that these new IDs also need to match those in column 1 of the GFF3 file (see rule 3). 
+
+This script uses three perl scripts (`map_fasta_ids`, `maker_map_ids` and `map_gff_ids`) which are originally from MAKER2 - [MAKER2: an annotation pipeline and genome-database management tool for second-generation genome projects](http://www.biomedcentral.com/1471-2105/12/491).  
 
 2. GFF3 files should follow this format:
 
@@ -542,7 +544,7 @@ ctg123 . CDS             3301  3902  .  +  0  Parent=mRNA0003
 ctg123 . CDS	     5000  5500	 .  +  2  Parent=mRNA0003
 ctg123 . CDS	     7000  7600	 .  +  2  Parent=mRNA0003
 ```
-3. All gene IDs must be unique, e.g. Mmeles_v_1.0_g_1 / Mmeles_v_1.0_t_1 and match the ID in the GFF3 file. To rename the gene IDs use `rename_files.pl`:
+3. All gene IDs must be unique across all data sets, e.g. Mmeles_v_1.0_g_1 / Mmeles_v_1.0_t_1 and match the ID in the GFF3 file. To rename the gene IDs use `rename_files.pl`:
 
 ```bash
 /path/to/Badger/scripts/perl/rename_files.pl --genome 'genome.fa' --genomeID 'unique_prefix' --gff 'genes.gff' --gffID 'unique_prefix' --trans 'transcripts.fa' --prot 'proteins.fa'
