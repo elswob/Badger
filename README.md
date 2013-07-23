@@ -10,6 +10,7 @@ An accessible genome exploration environment
 [Uploading file data](#upload-data)  
 [Starting the application](#start-it-up)  
 [Loading data into the database](#load-data-to-database)  
+[Site navigation](#site-navigation)  
 [Additional features](#additional-features)  
 [Data rules](#data-rules)  
 [Troubleshooting](#troubleshooting)
@@ -312,9 +313,57 @@ This step could take a number of hours depending on the size of the files and nu
 
 If you need to add more data just follow one of the two steps above and run the same command `runme`. This will identify the new files and add the data accordingly.
 
-#### Site navigation
+## Site navigation
 
-On every page there is an **info** button in the navigation bar. This provides useful information on the key features of each page and overview of the site on the home page.
+On every page there is an **info** button in the navigation bar. This provides useful information on the key features of each page and an overview of the site on the home page. This information is summarised below: 
+
+#### Home page
+
+The aim of the home page is to give an overview of the project, up-to-date news and links to the main sections of the site. The default layout of the page is an image and text describing the project. However, using the inbuilt text editor the admin user can customise the page to their own liking, uploading images, adding text, tables, etc.
+
+The news box is again, by default, only editable by the admin user. It is a simple blog style news feed which links to a page where more details of each of the entries can be viewed.
+
+The navigation bar at the top of the page links to the main sections of the site, these include:
+
+#### Publications
+
+By default, all PubMed publications that match the species names in the database are downloaded to the site and automatically updated every week. The data can be searched by author, year, journal, abstract keyword and species. 
+
+#### Search
+
+Clicking on the search link itself will provide an overview of all the data in the database. The dropdown options include:
+
+###### Species
+
+The first option, **Species**, opens a page which displays meta data on all the species present in the database. If only one species is present and no phyloXML files, then this link skips straight to the genome and gene selection page. Once a species is selected, a page with available genome and annotation versions is displayed. This then links to a genome/gene overview page for the selected version, including interactive graphs and a tab controlled search page. The search page has numerous options to search the data from searching everything with a keyword to searching by gene ID.   
+
+Search results then provide links to gene IDs, which when clicked will either open a gene page, or go straight to the more detailed transcript page if only one transcript exists for that particular gene. This page contains all information for the gene, including sequence downloads, annotations, exons, GBrowse (where available) and ortholog information.
+
+###### Publications
+
+Links to the publications page as mentioned above.
+
+###### Orthologs
+
+If an ortholog file is provided, this link will open up a page displaying an overview of the data. This includes an interactive plot showing the distribution of ortholog groups as well as a tab controlled search page for the ortholog data. Once an ortholog group has been selected there is an option to download the sequences from that group or align them to see immediately how the sequences in the cluster align.
+
+###### All
+
+This page provides the same service as the search box in the top right hand corner of the site. It is a keyword based search that searches all the publication and gene annotation data using related terms and multiple word options.
+
+#### BLAST
+
+Another method of searching the data is by alignment. This is achieved using the inbuilt BLAST server which search the genome and gene data. Results from this can be downloaded or used to obtain more information on the transcripts that have successfully matched.
+
+#### Download
+
+The main data files and a tab delimited annotation file can be downloaded from this page. Access to this data can be restricted to users that are logged in to the site.  
+
+#### Login
+
+The admin user is installed by default, and this user then has the ability to create users for the site. This then allows certain aspects of the data to be available to logged in users only, e.g. search, BLAST and download.
+
+The admin user can also add data to the site by clicking the admin button that appears when logged in as the admin user.
 
 ## Additional features
 
