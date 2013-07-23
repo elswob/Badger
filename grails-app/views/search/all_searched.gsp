@@ -190,7 +190,7 @@
   <div class="inline">
   <br><h1>Results for search of '<em>${searchId}</em>' across all data</h1> 
   </div><br>
-  <g:if test="${geneRes || pubRes}">
+  <g:if test="${geneRes}">
 	<table class="table_border" width='100%'>
 		<tr><td>
 			Searched all records in ${search_time}.<br>
