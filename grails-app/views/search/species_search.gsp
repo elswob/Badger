@@ -697,7 +697,7 @@
 		<hr size = 5 color="green" width="100%" style="margin-top:10px">
 	</g:if>
 	
-	<g:if test="${geneData.gene}">
+	<g:if test="${geneData}">
 			<table>
 	 	<tr><td><h1>Search by gene ID:</h1>	 
 			 <form name="input" action="m_info" method="get">
@@ -713,8 +713,7 @@
    		</td></tr></table>
    		<hr size = 5 color="green" width="100%" style="margin-top:10px">
 	</g:if>
-	
-	<g:if test="${genomeData.scaffold}">
+	<g:if test="${genomeData}">
 			<table>
 	 	<tr><td><h1>Search by scaffold ID:</h1>	 
 			 <form name="input" action="genome_info" method="get">

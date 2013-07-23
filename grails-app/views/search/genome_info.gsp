@@ -159,7 +159,7 @@
     	</g:if>
     	<g:else>
     		<hr size = 5 color="green" width="100%" style="margin-top:10px">
-    		<h1>There are no genes on this scaffold</h1>
+    		<h1>There is no gene data for this scaffold</h1>
     	</g:else>    	
     	<br>
 		<g:if test ="${metaData.genome.gbrowse}"> 
