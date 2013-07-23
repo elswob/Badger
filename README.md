@@ -315,7 +315,7 @@ If you need to add more data just follow one of the two steps above and run the 
 
 ## Site navigation
 
-On every page there is an **info** button in the navigation bar. This provides useful information on the key features of each page and an overview of the site on the home page. This information is summarised below: 
+On every page there is an **info** button in the navigation bar. This provides useful information on the key features of each page and an overview of the site on the home page. This information is described in more detail below: 
 
 #### Home page
 
