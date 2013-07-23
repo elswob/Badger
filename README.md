@@ -335,7 +335,7 @@ Clicking on the search link itself will provide an overview of all the data in t
 
 ###### Species
 
-The first option, **Species**, opens a page which displays meta data on all the species present in the database. If only one species is present and no phyloXML files, then this link skips straight to the genome and gene selection page. Once a species is selected, a page with available genome and annotation versions is displayed. This then links to a genome/gene overview page for the selected version, including interactive graphs and a tab controlled search page. The search page has numerous options to search the data from searching everything with a keyword to searching by gene ID.   
+The first option opens a page which displays meta data on all the species present in the database. If only one species is present and no phyloXML files, then this link skips straight to the genome and gene selection page. Once a species is selected, a page with available genome and annotation versions is displayed. This then links to a genome/gene overview page for the selected version, including interactive graphs and a tab controlled search page. The search page has numerous options to search the data from searching everything with a keyword to searching by gene ID.   
 
 Search results then provide links to gene IDs, which when clicked will either open a gene page, or go straight to the more detailed transcript page if only one transcript exists for that particular gene. This page contains all information for the gene, including sequence downloads, annotations, exons, GBrowse (where available) and ortholog information.
 
