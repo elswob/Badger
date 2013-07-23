@@ -51,7 +51,7 @@
    	</g:else>
    	  <br><font size="7">${grailsApplication.config.projectID}</font></font>
    	<g:form controller="search" action="all_searched" style="float:right; position:relative; top:10px" data-intro='Search all the data by keyword' data-step='8'>
-    		Quick Search <g:textField name="searchId" size="20"/>
+    		Search <g:textField name="searchId" size="20"/>
     		<input type="image" src="${resource(dir: 'images', file: 'search.jpg')}" height="25" onclick="submit()" style="border-style: none; right:5px; top:8px; position: relative">
    </g:form>
   </div>
