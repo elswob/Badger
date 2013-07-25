@@ -89,14 +89,24 @@
 	}
   }
   </script>
+  <script>
+  function loading(){
+  	$("#pubSelect").html('Loading...<img src="${resource(dir: 'images', file: 'spinner.gif')}" />');
+  }
+  </script>
   </head>
   
   <body>
   <g:link action="home">Admin</g:link> > Home 
-<p>This is where the administrator adds, edits and deletes the information for each of the data sets in the database.
+<br><br>This is where the administrator adds, edits and deletes the information for each of the data sets in the database.
 <br>
 <h1>Edit the home page</h1>
 Click <g:link controller="home" action="index" params="${[edit: 'y']}">here</g:link>.
+<br>
+<h1>Check for new publications</h1>
+Click <a href="#" onclick="${remoteFunction(action:'ajax_pub',update:'pubSelect',onLoading:'loading()')};">here</a>.
+<div id="publoading"></div>
+<div id="pubSelect"></div>
 <br>
 <h1>Edit or delete a data set:</h1>
 <g:if test = "${metaData}">	
