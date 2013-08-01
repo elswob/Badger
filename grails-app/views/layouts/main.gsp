@@ -50,7 +50,7 @@
    		<g:link controller="home" action="index"><img src="${resource(dir: 'images', file: 'Badger.png')}" style="padding:10px;" align="left" height="80px"/></g:link>
    	</g:else>
    	  <br><font size="7">${grailsApplication.config.projectID}</font></font>
-   	<g:form controller="search" action="all_searched" style="float:right; position:relative; top:10px" data-intro='Search all the data by keyword' data-step='8'>
+   	<g:form controller="search" action="all_searched" style="float:right; position:relative; top:10px" data-intro='Search all the data by keyword(s). If multiple words are used, each word (or its derivative) will have to be matched.' data-step='8'>
     		Search <g:textField name="searchId" size="20"/>
     		<input type="image" src="${resource(dir: 'images', file: 'search.jpg')}" height="25" onclick="submit()" style="border-style: none; right:5px; top:8px; position: relative">
    </g:form>

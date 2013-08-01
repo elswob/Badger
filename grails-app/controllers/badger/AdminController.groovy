@@ -528,14 +528,14 @@ class AdminController {
 	def ajax_pub = {
     	def sql = new Sql(dataSource)
     	def pubnumsql1 = "select count(distinct(pubmed_id)) from publication;"
-    	print pubnumsql1
+    	//print pubnumsql1
     	def pubnum1 = sql.rows(pubnumsql1)
-    	println "p1 = "+pubnum1
+    	//println "p1 = "+pubnum1
     	pubService.runPub()
     	def pubnumsql2 = "select count(distinct(pubmed_id)) from publication;"
-    	print pubnumsql2
+    	//print pubnumsql2
     	def pubnum2 = sql.rows(pubnumsql2)
-    	println "p2 = "+pubnum2
+    	//println "p2 = "+pubnum2
     	render(template:"pubSelectResponse", model: [pubnum1:pubnum1,pubnum2:pubnum2])
     }
 }

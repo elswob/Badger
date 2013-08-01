@@ -166,7 +166,7 @@ class PubService {
 					//println pubMap
 					println "Adding "+count_all
 					pub.save(flush:true)
-					println "pub = "+pub
+					//println "pub = "+pub
 				}else{
 					pub.save()
 					//println "pub = "+pub
