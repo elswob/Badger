@@ -17,8 +17,8 @@ class PubService {
 		}
 	}	
 	def getPub(data_id,query){
-		def idlist = new File("/tmp/idlist.txt")
-		def pubdata = new File("/tmp/pubdata.txt")
+		def idlist = new File("/tmp/"+data_id+"_idlist.txt")
+		def pubdata = new File("/tmp/"+data_id+"_pubdata.txt")
 		if (idlist.exists()){println "idlist already exists - deleting..."; idlist.delete()}
 		if (pubdata.exists()){println "pubdata already exists - deleting..."; pubdata.delete()}
 		//get the pubmed data
