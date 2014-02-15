@@ -127,7 +127,7 @@ Try this:
 createdb Badger -O 'your_user_name' -E UTF8 -T template0;`
 ```
 
-Set the PostGreSQL permissions - edit your `pg_hba.conf` file to allow local and host md5 authentication.
+Set the PostGreSQL permissions - edit your `pg_hba.conf` file to allow local and host md5 authentication and restart postgres.
 
 #### Badger config
 
@@ -622,7 +622,7 @@ If either the species_search or m_info pages appear to be wrong, it may be becau
 
 #### Errors on start up
 
-Errors relating to the postgres indexing such as:
+1) Errors relating to the postgres indexing such as:
 
 ```
 | Error 2013-01-24 15:35:53,254 [localhost-startStop-1] ERROR context.GrailsContextLoader  - Error executing bootstraps: org.h2.jdbc.JdbcSQLException: Unkno
@@ -631,6 +631,19 @@ ALTER TABLE trans_anno ADD COLUMN textsearchable_index_col tsvector; [50004-164]
 ```
 
 Generally means grails can't link to the postgres database, so check your badger.config.properties file carefully
+
+2) Errors with this:
+
+```
+org.codehaus.groovy.grails.orm.hibernate.exceptions.CouldNotDetermineHibernateDialectException: Could not determine Hibernate dialect for database name [PostgreSQL]!
+```
+
+Could be related to the version of open JDK, if using v 1.6 try installing v 1.7, e.g.
+
+```
+sudo apt-get install openjdk-7-jre
+```
+
 
 #### Loading file data
 
