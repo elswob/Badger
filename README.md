@@ -260,6 +260,8 @@ If during start up there is a warning about the version of the app being older t
 
 `grails upgrade`
 
+Note, running in production mode will not pick up any code changes to config files or controllers. To add these changes to the running instance stop grails and start it up again with `grails prod run-app`.
+
 #### Important security update !!!!
 
 Change the default admin password! To do so, login in as user `admin` using the password `badger` and go to this address `name_of_your_project/user`, find the admin user and change the password.
@@ -680,3 +682,7 @@ Missing sequence! - genemark-nMf.1.1.scaf41595-processed-gene-0.0-mRNA-1 is not 
 ```
 
 during the GFF3 loading, perhaps the ID of the gene/transcript does not match the header on the FASTA files. 
+
+#### Unknown
+
+Any changes to a config file or controller will only take effect once grails has been stopped and restarted, so maybe give that a go :) 
