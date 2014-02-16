@@ -69,7 +69,7 @@ class BlastController {
 		//dbString = dbString[0..-3]
         dbString = dbString.trim()
         println "dbString = "+dbString
-        def program = grailsApplication.config.blastPath.trim()+params.PROGRAM
+        def program = grailsApplication.config.blastPath.trim()+"/"+params.PROGRAM
         def eval = params.EXPECT
         def blastSeq = params.blastId
 
