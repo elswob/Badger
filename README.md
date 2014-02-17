@@ -668,6 +668,18 @@ Error:
 
 If you have loaded file information using the AddFileData.groovy script, check that the FASTA files are linked to the GFF file in the `fileMap.file_link` setting.
 
+Error:
+
+```
+| Error Error executing script RunScript: Java heap space (Use --stacktrace to see the full trace)
+```
+
+Java may require more memory, add this to your .bashrc/profile and edit according to how much memory you need/have.
+
+```
+export GRAILS_OPTS="-XX:MaxPermSize=8192M -Xmx8192M -server"
+```
+
 #### Missing sequence!
 
 If there is an error saying something like this:
