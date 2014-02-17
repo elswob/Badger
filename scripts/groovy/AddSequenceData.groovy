@@ -514,7 +514,8 @@ def addGeneData(fileLoc, file_name, nuc, pep){
 								exonMap.exon_number = exon_count
 								exonMap.start = dataArray[3].toInteger()
 								exonMap.stop = dataArray[4].toInteger()
-								exonMap.score = dataArray[5]
+								//maker can produce data with no score
+								exonMap.score = (dataArray[5] == ".") ? 0 : dataArray[5];
 								exonMap.strand = dataArray[6]
 								if (dataArray[7].isNumber()){ 
 									exonMap.phase = dataArray[7].toInteger()
