@@ -231,6 +231,7 @@ Custom tabular format is defined as 6 tab delimited columns:
 4 = the start base of annotation on transcript  
 5 = the end base of annotation on transctipt  
 6 = the score  
+7 = notes
 
 e.g.
 
