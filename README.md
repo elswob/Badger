@@ -223,7 +223,7 @@ Add all unzipped files for M. meles into `myProject/Badger/data/M_meles`, e.g:
 
 Note, the only way to do this is by manually copying the files to the server.
 
-Custom tabular format is defined as 6 tab delimited columns:
+Custom tabular format is defined as 7 tab delimited columns:
 
 1 = the transcript ID  
 2 = the source of the annotation  
