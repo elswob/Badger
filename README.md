@@ -265,9 +265,9 @@ Note, running in production mode will not pick up any code changes to config fil
 
 #### Important security update !!!!
 
-Change the default admin password! To do so, login in as user `admin` using the password `badger` and go to this address `name_of_your_project/user`, find the admin user and change the password.
+Change the default admin password! To do so, login in as user `admin` using the password `badger` and type  `/user` after then address of your website, e.g. www.mygenome.com/user, find the admin user and change the password. If you have edited the grails root to add a name for your project be sure to include that in the path.
 
-Whilst in this section, you can register users for the site giving them access to any areas you have labelled as private. This can be done by going to `name_of_your_project/register` and registering a new user.
+Whilst in this section, you can register users for the site giving them access to any areas you have labelled as private. This can be done by going to `/register` and registering a new user.
 
 ## Load data to database
 
