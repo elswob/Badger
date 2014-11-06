@@ -733,11 +733,13 @@ div.inline *  { display: inline; }
 	border-color:#3278BE;
 }
  
+/* 
 .smallbuttons:focus 
  {
      border:0.5em solid #00c; /* here configure as your needs */
      color:#00c;
   }
+ */
 
 .tabbuttons {
 	background-color: #efefef;

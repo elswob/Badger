@@ -11,7 +11,10 @@ class BootStrap {
                 servletContext.setAttribute("env", "prod")
                 //create some indexes
             	def sql = new Sql(dataSource)
-
+				
+				//url column
+				sql.execute("alter table file_data alter column url drop not null;")
+				
                 servletContext.setAttribute("env", "dev")
                 def userRole = Security.SecRole.findByAuthority('ROLE_USER') ?: new Security.SecRole(authority: 'ROLE_USER').save(failOnError: true)
                 def adminRole = Security.SecRole.findByAuthority('ROLE_ADMIN') ?: new Security.SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)     
@@ -23,7 +26,10 @@ class BootStrap {
             }
             development {
             	def sql = new Sql(dataSource)
-             
+				
+				//url column
+				sql.execute("alter table file_data alter column url drop not null;")
+				
              	//gene_inter
                 sql.execute("ALTER TABLE gene_interpro ADD COLUMN textsearchable_index_col tsvector;")
                 sql.execute("CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON gene_interpro FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(textsearchable_index_col, 'pg_catalog.english', descr);")
