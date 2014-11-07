@@ -20,7 +20,7 @@
 		<tr><td><b>Description:</b></td><td>${dataMap.description}</td></tr>
 		</table>
 		<!--p>Go <g:link action="home">back</g:link> and add or edit data</p-->
-		<p>Now <g:link action="editSpecies" params="${[Gid:Gid]}">add</g:link> a genome for this species</p> 
+		<h2>Now <g:link action="editSpecies" params="${[Gid:Gid]}"><b>add</b></g:link> a genome for this species</h2> 
 	</g:else>	
 </body>
 </html>

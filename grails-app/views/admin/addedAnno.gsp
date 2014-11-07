@@ -23,7 +23,7 @@
 			<tr><td><b>File:</b></td><td>${annoMap.anno_file}</td></tr>
 			<tr><td><b>Source:</b></td><td>${annoMap.source}</td></tr>
 		</table>
-		<p>Now <g:link action="addAnno" params="${[gid:file.id]}">add</g:link> some more annotations</p> 
+		<h2>Now <g:link action="addAnno" params="${[gid:file.id]}"><b>add</b></g:link> some more annotations or load them up by running the "runme.sh" script</h2> 
 	</g:else>	
 </body>
 </html>

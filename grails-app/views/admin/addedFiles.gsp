@@ -18,6 +18,7 @@
 	</g:elseif>
 	<g:else>
 		<h1>You have successfully added the file data:</h1>
+		<h2>To load the data in the files into the database run the run script "runme.sh"</h2>
 	</g:else>	
 </body>
 </html>

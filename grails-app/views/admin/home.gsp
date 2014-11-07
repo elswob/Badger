@@ -16,8 +16,8 @@
 		$("#version").val("1.0");
 		$("#description").val("The badger is the king of all animals.");
 		$("#gbrowse").val("http://salmo.bio.ed.ac.uk/cgi-bin/gbrowse/gbrowse/nAv.1.0.1/");
-		$("#image_f").val("badger.jpg");
-		$("#image_s").val("Taken from google");
+		$("#image_f").val("BadgerSilhouette.jpg");
+		$("#image_s").val("FreeVectors.net");
 		
 		$("#dir").val("test");
 		//$("#trans").val("trans.fa"); $("#trans_v").val("1.1"); $("#trans_d").val("UniGenes"); $("select[name='trans_c']").val("n");
