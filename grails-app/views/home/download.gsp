@@ -24,13 +24,13 @@
     		}%>
     			<g:if test = "${res.description != 'fake'}">
 					<tr>
-						<td>${res.file_type}</td><td>Version ${res.file_version}</td>
+						<td>${res.file_type}</td><td>${res.file_version}</td>
 						<td><g:link controller="FileDownload" action="zip_download" params="${[fileName: res.file_name]}">${res.file_name}</g:link></td>
 						<g:if test="${res.url}"><td><a href=${res.url}>${res.url}</a></td></g:if><g:else><td>N/A</td></g:else>
 					</tr>
 					<g:if test="${res.file_type == 'Genes'}">
 						<% if (gffAnno."${res.file_name}" == true){ %>
-							<tr><td>Genes (annotated file)</td><td>Version ${res.file_version}</td>
+							<tr><td>Genes (annotated file)</td><td>${res.file_version}</td>
 							<td><g:link controller="FileDownload" action="zip_anno_download" params="${[fileName: res.file_name]}">${res.file_name}.anno.tsv</g:link></td>
 						<%}%>
 						<g:if test="${res.url}"><td><a href=${res.url}>${res.url}</a></td></g:if><g:else><td>N/A</td></g:else>
