@@ -709,11 +709,11 @@ div.inline *  { display: inline; }
 	border-color:#3278BE;
 }
  
-.mybuttons:focus 
+/* .mybuttons:focus 
  {
-     border:0.5em solid #00c; /* here configure as your needs */
+     border:0.5em solid #00c; here configure as your needs
      color:#00c;
-  }
+  } */
 
 .smallbuttons {
 	background-color: #efefef;

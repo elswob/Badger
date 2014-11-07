@@ -39,26 +39,29 @@
 	</g:if>
 	<g:if test = "${fileData.file_type == 'Genome'}">
 		<tr>
-			<td width="40%"><b>Genome (FASTA file)</b><font color="red">*</font><br>
+			<td width="30%"><b>Genome (FASTA file)</b><font color="red">*</font><br>
 				<g:textField value="${fileData.file_name}" name="genome" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
 			<td width="10%"><b>Version</b><font color="red">*</font><br>
 				<g:textField value="${fileData.file_version}" name="genome_v" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
-			<td><b>Coverage</b><br>
+			<td width="5%"><b>Coverage</b><br>
 				<select name="genome_c">
 					<option selected="selected" value="n">No</option>
 					<option value="y">Yes</option>				
 				</select>
 			</td>
-			<td><b>Description</b><font color="red">*</font><br>
+			<td width="30%"><b>Description</b><font color="red">*</font><br>
 				<g:textField value="${fileData.description}" name="genome_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
+			</td>
+			<td width="25%"><b>Data URL</b><font color="red">*</font><br>
+				<g:textField value="${fileData.url}" name="genome_url" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
 		</tr>
 	</g:if>
 	<g:if test = "${fileData.file_type == 'Genes'}">
 		<tr>
-			<td width="40%"><b>Genes (GFF3 file)</b><font color="red">*</font><br>
+			<td width="30%"><b>Genes (GFF3 file)</b><font color="red">*</font><br>
 				<g:textField value="${fileData.file_name}" name="genes" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
 			<td width="10%"><b>Version</b><font color="red">*</font><br>
@@ -67,11 +70,14 @@
 			<td colspan=2><b>Description</b><font color="red">*</font><br>
 				<g:textField value="${fileData.description}" name="genes_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
+			<td width="25%"><b>Data URL</b><font color="red">*</font><br>
+				<g:textField value="${fileData.url}" name="genes_url" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
+			</td>
 		</tr>
 	</g:if>
 	<g:if test = "${fileData.file_type == 'mRNA'}">
 		<tr>
-			<td width="40%"><b>mRNA transcripts (FASTA file)</b><font color="red">*</font><br>
+			<td width="30%"><b>mRNA transcripts (FASTA file)</b><font color="red">*</font><br>
 				<g:textField value="${fileData.file_name}" name="mrna_trans" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
 			<td width="10%"><b>Version</b><font color="red">*</font><br>
@@ -79,6 +85,9 @@
 			</td>
 			<td colspan=2><b>Description</b><font color="red">*</font><br>
 				<g:textField value="${fileData.description}" name="mrna_trans_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
+			</td>
+			<td width="25%"><b>Data URL</b><font color="red">*</font><br>
+				<g:textField value="${fileData.url}" name="mrna_trans_url" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
 		</tr>
 	</g:if>
@@ -92,6 +101,9 @@
 			</td>
 			<td colspan=2><b>Description</b><font color="red">*</font><br>
 				<g:textField value="${fileData.description}" name="mrna_pep_d" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
+			</td>
+			<td width="25%"><b>Data URL</b><font color="red">*</font><br>
+				<g:textField value="${fileData.url}" name="mrna_pep_url" style="width:100%; height: 18px; border: 3px solid #cccccc; padding: 2px;"/>
 			</td>
 		</tr>
 	</g:if>

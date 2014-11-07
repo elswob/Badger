@@ -276,6 +276,7 @@ class AdminController {
 			fileMap.description = params.genome_d.trim()
 			fileMap.cov = params.genome_c.trim()		
 			fileMap.file_link = "n"
+			fileMap.url = params.genome_url.trim()
 			def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
 			if (check){
 				println "file name "+fileMap.file_name+" type "+fileMap.file_type+" already exists - "+check
@@ -297,6 +298,7 @@ class AdminController {
 			fileMap.download = params.down_genes
 			fileMap.file_version = params.genes_v.trim()
 			fileMap.description = params.genes_d.trim()
+			fileMap.url = params.genes_url.trim()
 			//check for extra gene sets and get the genome id
 			if (params.extra){
 				fileMap.file_link = extraGff.file_name.trim()
@@ -325,6 +327,7 @@ class AdminController {
 			fileMap.file_version = params.mrna_trans_v.trim()
 			fileMap.description = params.mrna_trans_d.trim()
 			fileMap.file_link = params.genes.trim()
+			fileMap.url = params.mrna_trans_url.trim()
 			def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
 			if (check){
 				println "file name "+fileMap.file_name+" type "+fileMap.file_type+" already exists - "+check
@@ -347,6 +350,7 @@ class AdminController {
 			fileMap.file_version = params.mrna_pep_v.trim()
 			fileMap.description = params.mrna_pep_d.trim()
 			fileMap.file_link = params.genes.trim()
+			fileMap.url = params.mrna_pep_url.trim()
 			def check = FileData.findByFile_nameAndFile_type(fileMap.file_name, fileMap.file_type)
 			if (check){
 				println "file name "+fileMap.file_name+" type "+fileMap.file_type+" already exists - "+check
@@ -378,13 +382,13 @@ class AdminController {
 		if (params.trans){
 			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.trans.trim()+"', blast = '"+params.blast_trans+"', search = '"+params.search_trans+"', download = '"+params.down_trans+"', file_version = '"+params.trans_v.trim()+"', description = '"+params.trans_d.trim()+"', cov = '"+params.trans_c.trim()+"' where id = '"+params.id+"';";
 		}else if (params.genome){
-			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.genome.trim()+"', blast = '"+params.blast_genome+"', search = '"+params.search_genome+"', download = '"+params.down_genome+"', file_version = '"+params.genome_v.trim()+"', description = '"+params.genome_d.trim()+"', cov = '"+params.genome_c.trim()+"' where id = '"+params.id+"';";
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.genome.trim()+"', blast = '"+params.blast_genome+"', search = '"+params.search_genome+"', download = '"+params.down_genome+"', file_version = '"+params.genome_v.trim()+"', description = '"+params.genome_d.trim()+"', cov = '"+params.genome_c.trim()+"', url = '"+params.genome_url.trim()+"' where id = '"+params.id+"';";
 		}else if (params.genes){
-			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.genes.trim()+"', search = '"+params.search_genes+"', download = '"+params.down_genes+"', file_version = '"+params.genes_v.trim()+"', description = '"+params.genes_d.trim()+"' where id = '"+params.id+"';";
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.genes.trim()+"', search = '"+params.search_genes+"', download = '"+params.down_genes+"', file_version = '"+params.genes_v.trim()+"', description = '"+params.genes_d.trim()+"', url = '"+params.genes_url.trim()+"' where id = '"+params.id+"';";
 		}else if (params.mrna_trans){
-			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.mrna_trans.trim()+"', blast = '"+params.blast_mrna+"', download = '"+params.down_mrna+"', file_version = '"+params.mrna_trans_v.trim()+"', description = '"+params.mrna_trans_d.trim()+"' where id = '"+params.id+"';";	
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.mrna_trans.trim()+"', blast = '"+params.blast_mrna+"', download = '"+params.down_mrna+"', file_version = '"+params.mrna_trans_v.trim()+"', description = '"+params.mrna_trans_d.trim()+"', url = '"+params.mrna_trans_url.trim()+"' where id = '"+params.id+"';";	
 		}else if (params.mrna_pep){
-			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.mrna_pep.trim()+"', blast = '"+params.blast_pep+"', download = '"+params.down_pep+"', file_version = '"+params.mrna_pep_v.trim()+"', description = '"+params.mrna_pep_d.trim()+"' where id = '"+params.id+"';";	
+			upsql = "update file_data set file_dir = '"+params.dir.trim()+"', file_name = '"+params.mrna_pep.trim()+"', blast = '"+params.blast_pep+"', download = '"+params.down_pep+"', file_version = '"+params.mrna_pep_v.trim()+"', description = '"+params.mrna_pep_d.trim()+"', url = '"+params.mrna_pep_url.trim()+"' where id = '"+params.id+"';";	
 		}
 		println "upsql = "+upsql
 		def update = sql.execute(upsql)

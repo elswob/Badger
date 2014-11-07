@@ -17,9 +17,10 @@
    	</g:else>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>   
-	<link rel="stylesheet" href="${resource(dir: 'js', file: 'intro.js/introjs.css')}" type="text/css"></link>	  
+    <!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script-->   
 	<script src="${resource(dir: 'js', file: 'intro.js/intro.js')}" type="text/javascript"></script>
+	<link rel="stylesheet" href="${resource(dir: 'js', file: 'intro.js/introjs.css')}" type="text/css"></link>	  
+	<script src="${resource(dir: 'js', file: 'jqplot/jquery.min.js')}" type="text/javascript"></script>
 	<script>
 		function runintroJs() {
 			//alert('${params.controller}-${params.action}')
